@@ -9,6 +9,7 @@
 import { getStorageAdapter } from '../adapters/storage/index.js';
 import { getSupabaseClient, supaQuery } from '../adapters/db/supabaseClient.js';
 import * as crypto from '../contracts/crypto.contract.js';
+import * as backup from '../contracts/backup.contract.js';
 import { isCanaryPath } from '../detection/canary.js';
 import logger from '../utils/logger.js';
 import { NotFoundError } from '../utils/errors.js';
@@ -68,6 +69,13 @@ export async function createBaseline(bucket, options = {}) {
         baseline_version: nextVersion,
         is_canary: isCanary,
       });
+
+      try {
+        const rawBuf = await adapter.read(bucket, entry.path);
+        backup.storeBackup(bucket, entry.path, rawBuf);
+      } catch {
+        // non-fatal in baseline
+      }
     } catch (err) {
       logger.error({ bucket, path: entry.path, err: err.message }, 'baselineService: failed to hash file');
       throw err;

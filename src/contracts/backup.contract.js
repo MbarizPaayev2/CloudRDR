@@ -22,13 +22,13 @@
  *   - Return { bytes: Buffer, aeadVerified: true } on success.
  *   - Return { bytes: Buffer, aeadVerified: false } if the tag check fails
  *     (caller will treat the file as MODIFIED and will NOT write it back).
- *   - Throw ExternalServiceError if the backup is unreachable or missing.
+ *   - Return { bytes: null, aeadVerified: false } when the backup is missing.
  *
  * STUB BEHAVIOUR
  * ---------------
- * - Returns the current live file content from the local storage adapter.
- * - Always sets aeadVerified: true (no real decryption).
- * - If the file does not exist in storage, returns { bytes: null, aeadVerified: false }.
+ * - Stores copies in an in-memory backup cache (`_backupStore`).
+ * - If not in cache, attempts reading from storage adapter as a fallback.
+ * - Supports `_setBackupProviderForTests` to simulate AEAD failure, corrupted bytes, or missing files.
  * ===========================================================================
  */
 
@@ -36,38 +36,46 @@ import logger from '../utils/logger.js';
 import { getStorageAdapter } from '../adapters/storage/index.js';
 import { NotFoundError } from '../utils/errors.js';
 
-// ---------------------------------------------------------------------------
-// restoreFile
-// ---------------------------------------------------------------------------
+/** In-memory backup store for stub */
+const _backupStore = new Map();
+
+/** Custom test provider hook */
+let _customBackupProvider = null;
 
 /**
- * @typedef {Object} RestoreResult
- * @property {Buffer | null} bytes        - Decrypted file bytes, or null if missing.
- * @property {boolean}       aeadVerified - Whether the AEAD tag was valid.
+ * Store an encrypted backup representation for testing and stub use.
+ * @param {string} bucket
+ * @param {string} path
+ * @param {Buffer | string} data
  */
+export function storeBackup(bucket, path, data) {
+  const buf = Buffer.isBuffer(data) ? data : Buffer.from(data);
+  _backupStore.set(`${bucket}:${path}`, buf);
+}
 
 /**
  * Restore a file from encrypted backup.
  *
- * CONTRACT (real implementation must match):
- *   - Decrypt and AEAD-verify before returning bytes.
- *   - Never return unverified plaintext with aeadVerified: true.
- *   - Return { bytes: null, aeadVerified: false } when the backup is missing.
- *   - Throw ExternalServiceError for infrastructure failures.
- *
  * @param {string} bucket      Storage bucket name.
  * @param {string} path        Object path within the bucket.
- * @param {string} [versionRef] Backup version reference (e.g. snapshot ID, timestamp).
- * @returns {Promise<RestoreResult>}
+ * @param {string} [versionRef] Backup version reference.
+ * @returns {Promise<{ bytes: Buffer | null, aeadVerified: boolean }>}
  */
-export async function restoreFile(bucket, path, versionRef) {
-  // STUB — reads from the live local storage adapter instead of a real backup.
-  // Replace with real AES-256-GCM decryption + AEAD verification.
-  logger.warn(
-    { bucket, path, versionRef },
-    'backup.restoreFile: using STUB — reading live file, no real decryption'
-  );
+export async function restoreFile(bucket, path, versionRef = null) {
+  if (_customBackupProvider) {
+    return _customBackupProvider(bucket, path, versionRef);
+  }
 
+  const key = `${bucket}:${path}`;
+  if (_backupStore.has(key)) {
+    logger.debug({ bucket, path }, 'backup.restoreFile: retrieved from stub backup store');
+    return {
+      bytes: _backupStore.get(key),
+      aeadVerified: true,
+    };
+  }
+
+  // Fallback: read live storage if not yet in backup store
   try {
     const adapter = await getStorageAdapter();
     const bytes = await adapter.read(bucket, path);
@@ -78,4 +86,20 @@ export async function restoreFile(bucket, path, versionRef) {
     }
     throw err;
   }
+}
+
+/**
+ * Set custom handler for tests (e.g. simulate corrupted bytes, AEAD invalid, or missing).
+ * @param {Function | null} fn
+ */
+export function _setBackupProviderForTests(fn) {
+  _customBackupProvider = fn;
+}
+
+/**
+ * Clear test backup store.
+ */
+export function _resetBackupStoreForTests() {
+  _backupStore.clear();
+  _customBackupProvider = null;
 }

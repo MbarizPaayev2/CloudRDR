@@ -7,10 +7,10 @@
  */
 
 /**
- * Default pattern matching canary files:
- * e.g., 'canaries/canary_1.docx', 'test.canary', '.canary.txt', 'canary-file.dat'
+ * Pattern matching canary files and folders:
+ * Matches 'canary', 'canaries', '.canary', 'trap.canary.txt', etc.
  */
-const CANARY_REGEX = /(?:^|\/|\.)canary(?:[._\-/]|$)/i;
+const CANARY_REGEX = /(?:^|[._\-/])canar(?:y|ies)(?:[._\-/]|$)/i;
 
 /**
  * Determine if a file path is a designated canary file based on naming pattern.
@@ -28,7 +28,7 @@ export function isCanaryPath(path) {
  *
  * @param {Array<{ path: string, event_type: string }>} events
  * @param {Set<string> | string[]} [knownCanaries] Set or array of known canary paths.
- * @returns {boolean} true if any canary file was modified or deleted.
+ * @returns {boolean}
  */
 export function isCanaryTriggered(events, knownCanaries = null) {
   if (!events || events.length === 0) return false;
