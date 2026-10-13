@@ -24,6 +24,7 @@ import { baselineRoutes } from './routes/baseline.js';
 import { detectionRoutes } from './routes/detection.js';
 import { incidentRoutes } from './routes/incidents.js';
 import { restoreRoutes } from './routes/restore.js';
+import { dashboardRoutes } from './routes/dashboard.js';
 
 /**
  * Build and configure the Fastify application.
@@ -53,8 +54,16 @@ export async function buildServer(options = {}) {
 
   // 3. API Key Authentication Hook (except /health)
   app.addHook('onRequest', async (request, reply) => {
-    // Whitelist /health and OPTIONS pre-flight
-    if (request.routerPath === '/health' || request.method === 'OPTIONS') {
+    // Whitelist /health, /dashboard, / and OPTIONS pre-flight
+    const isPublicRoute =
+      request.routerPath === '/health' ||
+      request.routerPath === '/dashboard' ||
+      request.routerPath === '/' ||
+      request.url === '/' ||
+      request.url.startsWith('/dashboard') ||
+      request.method === 'OPTIONS';
+
+    if (isPublicRoute) {
       return;
     }
 
@@ -113,6 +122,7 @@ export async function buildServer(options = {}) {
   await app.register(detectionRoutes);
   await app.register(incidentRoutes);
   await app.register(restoreRoutes);
+  await app.register(dashboardRoutes);
 
   return app;
 }

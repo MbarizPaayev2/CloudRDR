@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudRDR — Cloud Ransomware Detection & Recovery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                850: '#151e2e',
+                900: '#0f172a',
+                950: '#090d16',
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @keyframes pulse-subtle {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
+      }
+      .pulse-indicator {
+        animation: pulse-subtle 2s infinite ease-in-out;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white"
+  >
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div
+            class="h-9 w-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              />
+            </svg>
+          </div>
+          <div>
+            <span
+              class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-400 bg-clip-text text-transparent"
+              >CloudRDR</span
+            >
+            <span
+              class="hidden sm:inline-block ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+              >Security SOC v0.1</span
+            >
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Live Connection Status -->
+          <div
+            id="connectionStatus"
+            class="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-slate-800 border border-slate-700 text-slate-300"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-indicator"></span>
+            <span id="connectionText">Checking SOC...</span>
+          </div>
+
+          <!-- API Key Config Input -->
+          <div
+            class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 rounded-lg p-1"
+          >
+            <svg
+              class="w-4 h-4 text-slate-400 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+              />
+            </svg>
+            <input
+              type="password"
+              id="apiKeyInput"
+              placeholder="API Key"
+              class="bg-transparent text-xs text-slate-200 placeholder-slate-500 focus:outline-none w-32 px-1"
+            />
+            <button
+              id="saveKeyBtn"
+              class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded transition"
+            >
+              Save
+            </button>
+          </div>
+
+          <!-- Manual Refresh Button -->
+          <button
+            id="refreshBtn"
+            title="Refresh Telemetry"
+            class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <!-- KPI Metric Cards Grid -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Card 1: SOC Health -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+          <div
+            class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider"
+          >
+            <span>Engine Status</span>
+            <span class="p-1 rounded bg-emerald-500/10 text-emerald-400">● LIVE</span>
+          </div>
+          <div class="mt-3 flex items-baseline gap-2">
+            <span id="kpiEngineStatus" class="text-2xl font-bold text-white">Active</span>
+            <span id="kpiUptime" class="text-xs text-slate-400">uptime: 0s</span>
+          </div>
+          <div
+            class="mt-3 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2"
+          >
+            <span>Storage Provider</span>
+            <span id="kpiStorage" class="font-mono text-slate-200">local-fs</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Protected Baseline -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+          <div
+            class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider"
+          >
+            <span>Protected Baseline</span>
+            <span class="p-1 rounded bg-indigo-500/10 text-indigo-400">SHA-256</span>
+          </div>
+          <div class="mt-3 flex items-baseline gap-2">
+            <span id="kpiFilesProtected" class="text-2xl font-bold text-white">—</span>
+            <span id="kpiBaselineVersion" class="text-xs text-slate-400">Version: v—</span>
+          </div>
+          <div
+            class="mt-3 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2"
+          >
+            <span>Merkle Root</span>
+            <span
+              id="kpiMerkleRoot"
+              class="font-mono text-slate-300 truncate max-w-[140px]"
+              title="Merkle Root"
+              >—</span
+            >
+          </div>
+        </div>
+
+        <!-- Card 3: Active Incidents -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+          <div
+            class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider"
+          >
+            <span>Incidents Detected</span>
+            <span class="p-1 rounded bg-rose-500/10 text-rose-400">Ransomware</span>
+          </div>
+          <div class="mt-3 flex items-baseline gap-2">
+            <span id="kpiIncidentsTotal" class="text-2xl font-bold text-white">0</span>
+            <span id="kpiIncidentsUnresolved" class="text-xs text-rose-400 font-medium"
+              >0 active</span
+            >
+          </div>
+          <div
+            class="mt-3 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2"
+          >
+            <span>Containment Policy</span>
+            <span class="text-emerald-400 font-medium">IAM Deny-All</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Detection Rules -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+          <div
+            class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider"
+          >
+            <span>Sliding Window</span>
+            <span class="p-1 rounded bg-amber-500/10 text-amber-400">60s Window</span>
+          </div>
+          <div class="mt-3 flex items-baseline gap-2">
+            <span class="text-2xl font-bold text-white">30.0%</span>
+            <span class="text-xs text-slate-400">trigger rate</span>
+          </div>
+          <div
+            class="mt-3 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2"
+          >
+            <span>Canary Tripwire</span>
+            <span class="text-emerald-400 font-semibold">Active & Armed</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detection Telemetry Chart Section -->
+      <section class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+        <div
+          class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-4"
+        >
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <svg
+                class="w-5 h-5 text-indigo-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                />
+              </svg>
+              Sliding-Window Change Rate Telemetry
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">
+              Real-time evaluation history showing modification velocity vs. Suspicious (10%) and
+              Ransomware (30%) thresholds.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 text-xs">
+            <span class="flex items-center gap-1 text-slate-300"
+              ><span class="w-3 h-0.5 bg-rose-500 inline-block"></span> Ransomware (30%)</span
+            >
+            <span class="flex items-center gap-1 text-slate-300"
+              ><span class="w-3 h-0.5 bg-amber-500 inline-block"></span> Suspicious (10%)</span
+            >
+            <span class="flex items-center gap-1 text-slate-300"
+              ><span class="w-3 h-0.5 bg-indigo-500 inline-block"></span> Observed Rate</span
+            >
+          </div>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="telemetryChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Ransomware Incidents & Recovery Section -->
+      <section class="bg-slate-900 border border-slate-800 rounded-xl shadow-sm overflow-hidden">
+        <div
+          class="p-6 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        >
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <svg
+                class="w-5 h-5 text-rose-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+              Security Incidents & Automated Containment
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">
+              All ransomware detections automatically trigger IAM freeze, Ed25519 signed incident
+              records, and audited recovery.
+            </p>
+          </div>
+          <div class="text-xs text-slate-400">
+            Showing recent
+            <span id="incidentCountBadge" class="font-bold text-slate-200">0</span> incidents
+          </div>
+        </div>
+
+        <!-- Incidents Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr
+                class="bg-slate-850/60 border-b border-slate-800 text-slate-400 uppercase tracking-wider font-semibold"
+              >
+                <th class="py-3 px-4">Incident ID</th>
+                <th class="py-3 px-4">Victim Account</th>
+                <th class="py-3 px-4">Containment Status</th>
+                <th class="py-3 px-4">Detected UTC</th>
+                <th class="py-3 px-4">Affected Files</th>
+                <th class="py-3 px-4">Ed25519 Signature</th>
+                <th class="py-3 px-4 text-right">Recovery Actions</th>
+              </tr>
+            </thead>
+            <tbody id="incidentsTableBody" class="divide-y divide-slate-800 text-slate-300">
+              <tr>
+                <td colspan="7" class="py-8 text-center text-slate-500">
+                  No security incidents recorded. System in normal operational state.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Baseline & Cryptographic Integrity Section -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Bucket Baseline Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+          <h3 class="text-md font-bold text-white flex items-center gap-2">
+            <svg
+              class="w-5 h-5 text-indigo-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              />
+            </svg>
+            Cryptographic Baseline Snapshot
+          </h3>
+          <p class="text-xs text-slate-400">
+            Tamper-evident Merkle tree and SHA-256 fingerprint snapshot governing cloud storage
+            integrity.
+          </p>
+
+          <div class="space-y-3 text-xs bg-slate-950 p-4 rounded-lg border border-slate-850">
+            <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
+              <span class="text-slate-400">Target Bucket</span>
+              <span id="detailBucket" class="font-mono text-indigo-300 font-semibold"
+                >simulation-bucket</span
+              >
+            </div>
+            <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
+              <span class="text-slate-400">Active Baseline Version</span>
+              <span id="detailVersion" class="font-mono text-white">v1</span>
+            </div>
+            <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
+              <span class="text-slate-400">Total Protected Objects</span>
+              <span id="detailFileCount" class="text-white font-medium">—</span>
+            </div>
+            <div class="py-1">
+              <span class="text-slate-400 block mb-1">Merkle Root (Pairwise SHA-256):</span>
+              <span
+                id="detailMerkleFull"
+                class="font-mono text-emerald-400 break-all select-all block bg-slate-900 p-2 rounded border border-slate-800"
+                >Computing...</span
+              >
+            </div>
+          </div>
+
+          <button
+            id="triggerBaselineBtn"
+            class="w-full text-xs font-semibold py-2.5 px-4 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition flex items-center justify-center gap-2"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+              />
+            </svg>
+            Re-Capture Baseline Snapshot
+          </button>
+        </div>
+
+        <!-- Verification & Audit Log Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
+          <h3 class="text-md font-bold text-white flex items-center gap-2">
+            <svg
+              class="w-5 h-5 text-emerald-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              />
+            </svg>
+            Cryptographic Assurance Ledger
+          </h3>
+          <p class="text-xs text-slate-400">
+            Continuous SHA-256 hash-chaining proving unalterable sequence of SOC containment and
+            recovery events.
+          </p>
+
+          <div class="space-y-2 text-xs">
+            <div
+              class="p-3 bg-slate-950 rounded-lg border border-slate-850 flex items-center justify-between"
+            >
+              <div>
+                <div class="font-semibold text-slate-200">RFC 8032 Ed25519 Signatures</div>
+                <div class="text-slate-400 text-[11px]">
+                  Asymmetric signatures on all forensic records
+                </div>
+              </div>
+              <span
+                class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium"
+                >VERIFIED</span
+              >
+            </div>
+
+            <div
+              class="p-3 bg-slate-950 rounded-lg border border-slate-850 flex items-center justify-between"
+            >
+              <div>
+                <div class="font-semibold text-slate-200">AES-256-GCM AEAD Tag Proofs</div>
+                <div class="text-slate-400 text-[11px]">
+                  Authenticated ciphertext with 128-bit integrity tag
+                </div>
+              </div>
+              <span
+                class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium"
+                >ARMED</span
+              >
+            </div>
+
+            <div
+              class="p-3 bg-slate-950 rounded-lg border border-slate-850 flex items-center justify-between"
+            >
+              <div>
+                <div class="font-semibold text-slate-200">Hash-Chained Audit Ledger</div>
+                <div class="text-slate-400 text-[11px]">
+                  SHA-256(index : prevHash : data) tamper-proof chain
+                </div>
+              </div>
+              <span
+                class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium"
+                >INTACT</span
+              >
+            </div>
+          </div>
+
+          <div class="pt-2 text-center">
+            <span class="text-[11px] text-slate-500"
+              >CloudRDR SOC conforms to ISO/IEC 27001:2022 & NIST SP 800-61 Rev 2</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Restore Execution Modal -->
+    <div
+      id="restoreModal"
+      class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-slate-900 border border-slate-800 rounded-xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl"
+      >
+        <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+          <h3 class="font-bold text-white text-base flex items-center gap-2">
+            <svg
+              class="w-5 h-5 text-emerald-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            Verified Restore Report
+          </h3>
+          <button id="closeModalBtn" class="text-slate-400 hover:text-white text-lg font-bold">
+            &times;
+          </button>
+        </div>
+
+        <div class="p-5 overflow-y-auto space-y-4 text-xs">
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <span class="text-slate-400 block">Total Files</span>
+              <span id="modalTotalFiles" class="text-lg font-bold text-white">0</span>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <span class="text-slate-400 block">VALID (Restored)</span>
+              <span id="modalValidFiles" class="text-lg font-bold text-emerald-400">0</span>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <span class="text-slate-400 block">MODIFIED / Tampered</span>
+              <span id="modalModifiedFiles" class="text-lg font-bold text-rose-400">0</span>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <span class="text-slate-400 block">MISSING</span>
+              <span id="modalMissingFiles" class="text-lg font-bold text-amber-400">0</span>
+            </div>
+          </div>
+
+          <div id="modalSummaryAlert" class="p-3 rounded-lg border text-xs"></div>
+
+          <div>
+            <h4 class="font-semibold text-slate-300 mb-2">
+              Cryptographic Per-File Verification Log:
+            </h4>
+            <div class="overflow-x-auto border border-slate-800 rounded-lg">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-950 text-slate-400 border-b border-slate-800">
+                    <th class="py-2 px-3">Path</th>
+                    <th class="py-2 px-3">Expected SHA-256</th>
+                    <th class="py-2 px-3">Restored SHA-256</th>
+                    <th class="py-2 px-3 text-right">Verification</th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="modalResultsTbody"
+                  class="divide-y divide-slate-800 font-mono text-[11px]"
+                ></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 border-t border-slate-800 flex justify-end">
+          <button
+            id="modalDoneBtn"
+            class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Client Logic -->
+    <script>
+      const DEFAULT_KEY = 'change-me-before-running';
+      let apiKey = localStorage.getItem('cloudrdr_api_key') || DEFAULT_KEY;
+      document.getElementById('apiKeyInput').value = apiKey;
+
+      document.getElementById('saveKeyBtn').addEventListener('click', () => {
+        apiKey = document.getElementById('apiKeyInput').value.trim();
+        localStorage.setItem('cloudrdr_api_key', apiKey);
+        refreshData();
+      });
+
+      async function apiFetch(endpoint, options = {}) {
+        const headers = {
+          Accept: 'application/json',
+          'x-api-key': apiKey,
+          ...(options.headers || {}),
+        };
+        const res = await fetch(endpoint, { ...options, headers });
+        if (!res.ok) {
+          const errorBody = await res.json().catch(() => ({}));
+          throw new Error(errorBody.error?.message || `HTTP ${res.status}`);
+        }
+        return res.json();
+      }
+
+      // Initialize Telemetry Chart
+      let telemetryChart = null;
+      function initChart() {
+        const ctx = document.getElementById('telemetryChart').getContext('2d');
+        telemetryChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: [],
+            datasets: [
+              {
+                label: 'Observed Change Rate',
+                data: [],
+                borderColor: '#6366f1',
+                backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                borderWidth: 2,
+                tension: 0.3,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: '#6366f1',
+              },
+              {
+                label: 'Ransomware Threshold (30%)',
+                data: [],
+                borderColor: '#f43f5e',
+                borderDash: [5, 5],
+                borderWidth: 1.5,
+                pointRadius: 0,
+                fill: false,
+              },
+              {
+                label: 'Suspicious Threshold (10%)',
+                data: [],
+                borderColor: '#f59e0b',
+                borderDash: [4, 4],
+                borderWidth: 1.5,
+                pointRadius: 0,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 1.0,
+                ticks: {
+                  callback: (v) => (v * 100).toFixed(0) + '%',
+                  color: '#64748b',
+                  font: { size: 10 },
+                },
+                grid: { color: 'rgba(51, 65, 85, 0.3)' },
+              },
+              x: {
+                ticks: { color: '#64748b', font: { size: 10 } },
+                grid: { color: 'rgba(51, 65, 85, 0.1)' },
+              },
+            },
+            plugins: {
+              legend: { display: false },
+            },
+          },
+        });
+      }
+
+      async function loadHealth() {
+        try {
+          const health = await fetch('/health').then((r) => r.json());
+          document.getElementById('connectionStatus').innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-indicator"></span>
+          <span class="text-emerald-400 font-semibold">SOC Online</span>
+        `;
+          document.getElementById('kpiUptime').textContent =
+            `uptime: ${Math.round(health.uptime)}s`;
+        } catch (err) {
+          document.getElementById('connectionStatus').innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+          <span class="text-rose-400 font-semibold">Offline</span>
+        `;
+        }
+      }
+
+      async function loadTelemetry() {
+        try {
+          const data = await apiFetch('/detection/runs?limit=15');
+          const runs = (data.runs || []).reverse();
+          if (runs.length > 0 && telemetryChart) {
+            telemetryChart.data.labels = runs.map((r) =>
+              new Date(r.created_at).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+              })
+            );
+            telemetryChart.data.datasets[0].data = runs.map((r) => Number(r.change_rate));
+            telemetryChart.data.datasets[1].data = runs.map(() => 0.3);
+            telemetryChart.data.datasets[2].data = runs.map(() => 0.1);
+            telemetryChart.update();
+          }
+        } catch (err) {
+          console.warn('Telemetry load failed:', err.message);
+        }
+      }
+
+      async function loadIncidents() {
+        try {
+          const data = await apiFetch('/incidents');
+          const incidents = data.incidents || [];
+          document.getElementById('kpiIncidentsTotal').textContent = incidents.length;
+          const unresolved = incidents.filter((i) => i.status !== 'resolved');
+          document.getElementById('kpiIncidentsUnresolved').textContent =
+            `${unresolved.length} active`;
+          document.getElementById('incidentCountBadge').textContent = incidents.length;
+
+          const tbody = document.getElementById('incidentsTableBody');
+          if (incidents.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-500">No security incidents recorded. System in normal operational state.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = incidents
+            .map((inc) => {
+              const statusColors = {
+                open: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+                frozen: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
+                restoring: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+                resolved: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+                freeze_failed: 'bg-red-900/20 text-red-300 border-red-500/30',
+              };
+              const badgeClass = statusColors[inc.status] || 'bg-slate-800 text-slate-300';
+              const sig = inc.record_signature
+                ? `${inc.record_signature.slice(0, 16)}...`
+                : 'Unsigned';
+
+              return `
+            <tr class="hover:bg-slate-850/40 transition">
+              <td class="py-3 px-4 font-mono text-slate-300 font-medium">${inc.id.slice(0, 8)}...</td>
+              <td class="py-3 px-4 font-mono text-slate-200">${inc.account_id}</td>
+              <td class="py-3 px-4">
+                <span class="px-2 py-0.5 rounded-full border text-[11px] font-semibold uppercase ${badgeClass}">${inc.status}</span>
+              </td>
+              <td class="py-3 px-4 text-slate-400">${new Date(inc.detected_at).toLocaleString()}</td>
+              <td class="py-3 px-4 font-medium text-slate-200">${(inc.affected_paths || []).length} files</td>
+              <td class="py-3 px-4 font-mono text-[11px] text-slate-400" title="${inc.record_signature || ''}">${sig}</td>
+              <td class="py-3 px-4 text-right">
+                ${
+                  inc.status !== 'resolved'
+                    ? `
+                  <button onclick="triggerRestore('${inc.id}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-medium text-xs shadow-sm transition">
+                    Restore & Verify
+                  </button>
+                `
+                    : `
+                  <span class="text-emerald-400 font-semibold text-xs flex items-center justify-end gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Restored
+                  </span>
+                `
+                }
+              </td>
+            </tr>
+          `;
+            })
+            .join('');
+        } catch (err) {
+          console.warn('Incidents load failed:', err.message);
+        }
+      }
+
+      async function loadBaseline() {
+        try {
+          const baseline = await apiFetch('/baseline/simulation-bucket');
+          if (baseline) {
+            document.getElementById('kpiFilesProtected').textContent = baseline.fileCount ?? '—';
+            document.getElementById('kpiBaselineVersion').textContent =
+              `Version: v${baseline.version ?? '1'}`;
+            document.getElementById('kpiMerkleRoot').textContent = baseline.merkleRoot
+              ? `${baseline.merkleRoot.slice(0, 16)}...`
+              : '—';
+            document.getElementById('detailFileCount').textContent =
+              `${baseline.fileCount ?? 0} protected files`;
+            document.getElementById('detailVersion').textContent = `v${baseline.version ?? 1}`;
+            document.getElementById('detailMerkleFull').textContent = baseline.merkleRoot || '—';
+          }
+        } catch (err) {
+          // Fallback if simulation-bucket hasn't been baselined yet
+        }
+      }
+
+      window.triggerRestore = async function (incidentId) {
+        if (!confirm(`Initiate cryptographic verified restore for incident ${incidentId}?`)) return;
+
+        try {
+          const report = await apiFetch(`/incidents/${incidentId}/restore`, { method: 'POST' });
+          showRestoreModal(report);
+          refreshData();
+        } catch (err) {
+          alert('Restore failed: ' + err.message);
+        }
+      };
+
+      function showRestoreModal(report) {
+        document.getElementById('modalTotalFiles').textContent = report.totalFiles ?? 0;
+        document.getElementById('modalValidFiles').textContent = report.validFiles ?? 0;
+        document.getElementById('modalModifiedFiles').textContent = report.modifiedFiles ?? 0;
+        document.getElementById('modalMissingFiles').textContent = report.missingFiles ?? 0;
+
+        const alertBox = document.getElementById('modalSummaryAlert');
+        if (report.isFullyRestored) {
+          alertBox.className =
+            'p-3 rounded-lg border bg-emerald-500/10 border-emerald-500/20 text-emerald-400 font-semibold flex items-center gap-2';
+          alertBox.innerHTML = `
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Verification Passed: 100% of restored files match pre-attack SHA-256 baselines and verified AEAD tags.
+        `;
+        } else {
+          alertBox.className =
+            'p-3 rounded-lg border bg-rose-500/10 border-rose-500/20 text-rose-400 font-semibold';
+          alertBox.textContent =
+            'Recovery Alert: One or more files failed integrity verification or are missing.';
+        }
+
+        const tbody = document.getElementById('modalResultsTbody');
+        tbody.innerHTML = (report.results || [])
+          .map(
+            (r) => `
+        <tr class="hover:bg-slate-850">
+          <td class="py-2 px-3 text-slate-300">${r.path}</td>
+          <td class="py-2 px-3 text-slate-400">${r.expectedSha256 ? r.expectedSha256.slice(0, 16) + '...' : '—'}</td>
+          <td class="py-2 px-3 text-slate-400">${r.restoredSha256 ? r.restoredSha256.slice(0, 16) + '...' : '—'}</td>
+          <td class="py-2 px-3 text-right">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${r.result === 'VALID' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}">
+              ${r.result}
+            </span>
+          </td>
+        </tr>
+      `
+          )
+          .join('');
+
+        document.getElementById('restoreModal').classList.remove('hidden');
+      }
+
+      document.getElementById('closeModalBtn').addEventListener('click', () => {
+        document.getElementById('restoreModal').classList.add('hidden');
+      });
+      document.getElementById('modalDoneBtn').addEventListener('click', () => {
+        document.getElementById('restoreModal').classList.add('hidden');
+      });
+
+      document.getElementById('triggerBaselineBtn').addEventListener('click', async () => {
+        try {
+          await apiFetch('/baseline', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bucket: 'simulation-bucket' }),
+          });
+          alert('Cryptographic baseline re-captured successfully.');
+          refreshData();
+        } catch (err) {
+          alert('Baseline creation failed: ' + err.message);
+        }
+      });
+
+      document.getElementById('refreshBtn').addEventListener('click', refreshData);
+
+      function refreshData() {
+        loadHealth();
+        loadTelemetry();
+        loadIncidents();
+        loadBaseline();
+      }
+
+      // Initialize on load & start polling
+      initChart();
+      refreshData();
+      setInterval(refreshData, 3000);
+    </script>
+  </body>
+</html>

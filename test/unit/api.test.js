@@ -79,4 +79,22 @@ describe('HTTP API - Authentication and Endpoints', () => {
     assert.equal(body.error.code, 'validation_error');
     assert.ok(body.error.message);
   });
+
+  it('GET / and GET /dashboard render HTML web dashboard unauthenticated', async () => {
+    const resRoot = await app.inject({
+      method: 'GET',
+      url: '/',
+    });
+    assert.equal(resRoot.statusCode, 200);
+    assert.ok(resRoot.headers['content-type']?.includes('text/html'));
+    assert.ok(resRoot.body.includes('CloudRDR'));
+
+    const resDash = await app.inject({
+      method: 'GET',
+      url: '/dashboard',
+    });
+    assert.equal(resDash.statusCode, 200);
+    assert.ok(resDash.headers['content-type']?.includes('text/html'));
+    assert.ok(resDash.body.includes('CloudRDR'));
+  });
 });
