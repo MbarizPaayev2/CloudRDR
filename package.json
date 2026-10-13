@@ -12,6 +12,8 @@
     "monitor": "node scripts/run-monitor.js",
     "seed": "node scripts/seed-baseline.js",
     "simulate": "node scripts/dev-simulate-attack.js",
+    "sweep": "node scripts/run-threshold-sweep.js",
+    "metrics": "node scripts/run-metrics-harness.js",
     "test": "node --experimental-vm-modules --test test/**/*.js test/**/**/*.js",
     "lint": "eslint src scripts test",
     "lint:fix": "eslint src scripts test --fix",
