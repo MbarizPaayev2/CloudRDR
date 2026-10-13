@@ -41,13 +41,11 @@ export class SupabaseStorage {
     let offset = 0;
 
     while (true) {
-      const { data, error } = await this._db.storage
-        .from(bucket)
-        .list(prefix || undefined, {
-          limit: PAGE_SIZE,
-          offset,
-          sortBy: { column: 'name', order: 'asc' },
-        });
+      const { data, error } = await this._db.storage.from(bucket).list(prefix || undefined, {
+        limit: PAGE_SIZE,
+        offset,
+        sortBy: { column: 'name', order: 'asc' },
+      });
 
       if (error) {
         throw new ExternalServiceError(
@@ -125,9 +123,7 @@ export class SupabaseStorage {
   async write(bucket, path, data) {
     const buffer = Buffer.isBuffer(data) ? data : Buffer.from(data);
 
-    const { error } = await this._db.storage
-      .from(bucket)
-      .upload(path, buffer, { upsert: true });
+    const { error } = await this._db.storage.from(bucket).upload(path, buffer, { upsert: true });
 
     if (error) {
       throw new ExternalServiceError(
@@ -150,12 +146,10 @@ export class SupabaseStorage {
     const folder = lastSlash >= 0 ? path.slice(0, lastSlash) : '';
     const name = lastSlash >= 0 ? path.slice(lastSlash + 1) : path;
 
-    const { data, error } = await this._db.storage
-      .from(bucket)
-      .list(folder || undefined, {
-        limit: 1,
-        search: name,
-      });
+    const { data, error } = await this._db.storage.from(bucket).list(folder || undefined, {
+      limit: 1,
+      search: name,
+    });
 
     if (error) {
       logger.warn(

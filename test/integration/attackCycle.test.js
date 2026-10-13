@@ -13,7 +13,10 @@ import os from 'node:os';
 import { LocalFsStorage } from '../../src/adapters/storage/localFsStorage.js';
 import { _setAdapterForTests } from '../../src/adapters/storage/index.js';
 import { _resetClientForTests } from '../../src/adapters/db/supabaseClient.js';
-import { _resetFreezeStateForTests, _isFrozenForTests } from '../../src/contracts/freeze.contract.js';
+import {
+  _resetFreezeStateForTests,
+  _isFrozenForTests,
+} from '../../src/contracts/freeze.contract.js';
 import { _resetBackupStoreForTests } from '../../src/contracts/backup.contract.js';
 import { createBaseline } from '../../src/baseline/baselineService.js';
 import { MonitorAgent } from '../../src/monitor/monitorAgent.js';
@@ -38,7 +41,11 @@ describe('Integration - Full Attack, Detection, Freeze, and Restore Cycle', () =
   it('runs complete lifecycle: seed 100 files, attack 40 files, detect, freeze, restore 100% VALID', async () => {
     // 1. Seed 100 files (100 protected documents)
     for (let i = 1; i <= 100; i++) {
-      await storage.write(bucket, `documents/doc_${i}.txt`, `Original document content for file #${i}`);
+      await storage.write(
+        bucket,
+        `documents/doc_${i}.txt`,
+        `Original document content for file #${i}`
+      );
     }
 
     // 2. Capture initial baseline

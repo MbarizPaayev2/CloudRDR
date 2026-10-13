@@ -140,7 +140,10 @@ export function merkleRoot(hashes) {
 export function signRecord(record) {
   // STUB — NOT cryptographically secure. Replace with real Ed25519.
   const json = JSON.stringify(record, Object.keys(record).sort());
-  const signature = crypto.createHash('sha256').update('stub-key:' + json).digest('hex');
+  const signature = crypto
+    .createHash('sha256')
+    .update('stub-key:' + json)
+    .digest('hex');
   logger.warn({ keyId: 'stub-v0' }, 'crypto.signRecord: using STUB signature — not secure');
   return { signature, keyId: 'stub-v0' };
 }
@@ -204,8 +207,7 @@ const _auditLog = []; // STUB — in-memory only; resets on restart.
 export function appendAuditLog(entry) {
   // STUB — in-memory, non-persistent. Replace with real hash-chained store.
   const index = _auditLog.length;
-  const prevHash =
-    index === 0 ? '0'.repeat(64) : _auditLog[index - 1].hash;
+  const prevHash = index === 0 ? '0'.repeat(64) : _auditLog[index - 1].hash;
   const timestamp = new Date().toISOString();
   const payload = JSON.stringify({ index, prevHash, timestamp, data: entry });
   const hash = crypto.createHash('sha256').update(payload).digest('hex');

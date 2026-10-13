@@ -61,7 +61,10 @@ export async function getStorageAdapter() {
   if (provider === 'local') {
     const { LocalFsStorage } = await import('./localFsStorage.js');
     _adapter = new LocalFsStorage(cfg.storage.localPath);
-    logger.info({ provider: 'local', root: cfg.storage.localPath }, 'Storage adapter: local filesystem');
+    logger.info(
+      { provider: 'local', root: cfg.storage.localPath },
+      'Storage adapter: local filesystem'
+    );
   } else if (provider === 'supabase') {
     const { SupabaseStorage } = await import('./supabaseStorage.js');
     _adapter = new SupabaseStorage();

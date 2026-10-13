@@ -78,14 +78,14 @@ export class LocalFsStorage {
         try {
           stat = await fs.stat(abs);
         } catch (err) {
-          logger.warn({ path: abs, err: err.message }, 'local-storage: could not stat file, skipping');
+          logger.warn(
+            { path: abs, err: err.message },
+            'local-storage: could not stat file, skipping'
+          );
           continue;
         }
         // Compute a cheap content fingerprint for change detection.
-        const etag = crypto
-          .createHash('md5')
-          .update(`${stat.size}:${stat.mtimeMs}`)
-          .digest('hex');
+        const etag = crypto.createHash('md5').update(`${stat.size}:${stat.mtimeMs}`).digest('hex');
 
         // Strip the base path prefix and normalise separators to forward slashes
         const rel = nodePath.relative(base, abs).split(nodePath.sep).join('/');

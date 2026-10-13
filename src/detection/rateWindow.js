@@ -46,9 +46,8 @@ export function computeChangeMetrics(eventsInWindow, totalProtectedFiles) {
 
   const uniqueChangedPaths = Array.from(uniqueChanged).sort();
   const changedCount = uniqueChangedPaths.length;
-  const changeRate = totalProtectedFiles > 0
-    ? Number((changedCount / totalProtectedFiles).toFixed(4))
-    : 0;
+  const changeRate =
+    totalProtectedFiles > 0 ? Number((changedCount / totalProtectedFiles).toFixed(4)) : 0;
 
   return {
     uniqueChangedPaths,

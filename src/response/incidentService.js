@@ -34,7 +34,10 @@ export async function createIncident({ detectionRunId, accountId, affectedPaths 
     })
   );
 
-  logger.info({ incidentId: incident.id, accountId }, 'incidentService: created new incident (open)');
+  logger.info(
+    { incidentId: incident.id, accountId },
+    'incidentService: created new incident (open)'
+  );
   return incident;
 }
 
@@ -50,7 +53,8 @@ export async function updateIncidentStatus(incidentId, status, updates = {}) {
   const db = getSupabaseClient();
 
   const [updated] = await supaQuery(
-    db.from('incidents')
+    db
+      .from('incidents')
       .update({
         status,
         ...updates,
@@ -75,12 +79,7 @@ export async function updateIncidentStatus(incidentId, status, updates = {}) {
 export async function getIncident(incidentId) {
   const db = getSupabaseClient();
 
-  const incidents = await supaQuery(
-    db.from('incidents')
-      .select('*')
-      .eq('id', incidentId)
-      .limit(1)
-  );
+  const incidents = await supaQuery(db.from('incidents').select('*').eq('id', incidentId).limit(1));
 
   if (!incidents || incidents.length === 0) {
     throw new NotFoundError(`Incident not found: ${incidentId}`);

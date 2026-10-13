@@ -61,7 +61,8 @@ export async function startRestore(incidentId) {
     try {
       // Find expected baseline hash from protected_files
       const protectedRows = await supaQuery(
-        db.from('protected_files')
+        db
+          .from('protected_files')
           .select('baseline_sha256')
           .eq('bucket', bucket)
           .eq('path', path)
@@ -120,7 +121,10 @@ export async function startRestore(incidentId) {
       });
     } catch (err) {
       modifiedCount++;
-      logger.error({ bucket, path, err: err.message }, 'restoreService: unexpected error restoring file');
+      logger.error(
+        { bucket, path, err: err.message },
+        'restoreService: unexpected error restoring file'
+      );
       fileResults.push({
         path,
         expectedSha256: '',
@@ -132,16 +136,14 @@ export async function startRestore(incidentId) {
   }
 
   // 5. Finalise restore job status
-  const is100PercentValid =
-    affectedPaths.length > 0
-      ? validCount === affectedPaths.length
-      : true;
+  const is100PercentValid = affectedPaths.length > 0 ? validCount === affectedPaths.length : true;
 
   const jobFinalStatus = is100PercentValid ? 'verified' : 'failed';
   const finishedAt = nowISO();
 
   await supaQuery(
-    db.from('restore_jobs')
+    db
+      .from('restore_jobs')
       .update({
         status: jobFinalStatus,
         valid_files: validCount,
@@ -199,12 +201,7 @@ export async function startRestore(incidentId) {
 export async function getRestoreJob(jobId) {
   const db = getSupabaseClient();
 
-  const jobs = await supaQuery(
-    db.from('restore_jobs')
-      .select('*')
-      .eq('id', jobId)
-      .limit(1)
-  );
+  const jobs = await supaQuery(db.from('restore_jobs').select('*').eq('id', jobId).limit(1));
 
   if (!jobs || jobs.length === 0) {
     throw new NotFoundError(`Restore job not found: ${jobId}`);
@@ -213,7 +210,8 @@ export async function getRestoreJob(jobId) {
   const job = jobs[0];
 
   const results = await supaQuery(
-    db.from('restore_results')
+    db
+      .from('restore_results')
       .select('*')
       .eq('restore_job_id', jobId)
       .order('path', { ascending: true })

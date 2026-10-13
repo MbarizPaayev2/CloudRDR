@@ -92,7 +92,8 @@ export class MonitorAgent {
           // Check against protected_files latest baseline
           if (observedSha256) {
             const baselineRows = await supaQuery(
-              db.from('protected_files')
+              db
+                .from('protected_files')
                 .select('baseline_sha256')
                 .eq('bucket', raw.bucket)
                 .eq('path', raw.path)

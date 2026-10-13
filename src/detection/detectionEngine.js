@@ -95,12 +95,11 @@ export async function evaluateEvents(accountId, bucket = null, options = {}) {
   }
   const protectedRows = (await supaQuery(query)) || [];
   const totalFiles = protectedRows.length;
-  const canaryPaths = new Set(
-    protectedRows.filter((r) => r.is_canary).map((r) => r.path)
-  );
+  const canaryPaths = new Set(protectedRows.filter((r) => r.is_canary).map((r) => r.path));
 
   // 2. Fetch recent change events in the sliding window
-  let eventQuery = db.from('change_events')
+  let eventQuery = db
+    .from('change_events')
     .select('*')
     .eq('account_id', accountId)
     .gte('observed_at', windowCutoff);

@@ -27,7 +27,10 @@ import logger from '../utils/logger.js';
 export async function freezeWithRetry(accountId, maxAttempts = 3) {
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
     try {
-      logger.info({ accountId, attempt: attempt + 1 }, 'responseService: attempting account freeze');
+      logger.info(
+        { accountId, attempt: attempt + 1 },
+        'responseService: attempting account freeze'
+      );
       const res = await freezeClient.freezeAccount(accountId);
       return { success: true, frozenAt: res.at };
     } catch (err) {
@@ -80,7 +83,10 @@ export async function handleRansomwareVerdict({
 
   if (freezeResult.success) {
     frozenAt = freezeResult.frozenAt || nowISO();
-    logger.info({ incidentId: incident.id, accountId, frozenAt }, 'responseService: account frozen successfully');
+    logger.info(
+      { incidentId: incident.id, accountId, frozenAt },
+      'responseService: account frozen successfully'
+    );
   } else {
     status = 'freeze_failed';
     logger.fatal(
@@ -94,7 +100,8 @@ export async function handleRansomwareVerdict({
   let snapshot = null;
   if (bucket) {
     const snapshots = await supaQuery(
-      db.from('baseline_snapshots')
+      db
+        .from('baseline_snapshots')
         .select('*')
         .eq('bucket', bucket)
         .order('created_at', { ascending: false })

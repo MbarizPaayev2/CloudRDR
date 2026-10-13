@@ -112,8 +112,10 @@ try {
 
   // Cross-field validation: if provider is supabase, credentials must be present
   if (cfg.storage.provider === 'supabase') {
-    if (!cfg.supabase.url) throw new Error('[config] SUPABASE_URL is required when STORAGE_PROVIDER=supabase');
-    if (!cfg.supabase.serviceKey) throw new Error('[config] SUPABASE_SERVICE_KEY is required when STORAGE_PROVIDER=supabase');
+    if (!cfg.supabase.url)
+      throw new Error('[config] SUPABASE_URL is required when STORAGE_PROVIDER=supabase');
+    if (!cfg.supabase.serviceKey)
+      throw new Error('[config] SUPABASE_SERVICE_KEY is required when STORAGE_PROVIDER=supabase');
   }
 
   const validProviders = ['supabase', 'local'];

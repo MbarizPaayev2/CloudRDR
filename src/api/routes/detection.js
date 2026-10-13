@@ -17,10 +17,7 @@ export async function detectionRoutes(fastify) {
 
     const db = getSupabaseClient();
     const runs = await supaQuery(
-      db.from('detection_runs')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(limit)
+      db.from('detection_runs').select('*').order('created_at', { ascending: false }).limit(limit)
     );
 
     return reply.status(200).send({

@@ -16,7 +16,7 @@ describe('Detection - Thresholds & Boundary Values', () => {
   });
 
   it('classifies 0.10 as suspicious (exact lower threshold)', () => {
-    assert.equal(classifyRate(0.10), 'suspicious');
+    assert.equal(classifyRate(0.1), 'suspicious');
   });
 
   it('classifies 0.2999 as suspicious (just below 0.30)', () => {
@@ -24,7 +24,7 @@ describe('Detection - Thresholds & Boundary Values', () => {
   });
 
   it('classifies 0.30 as ransomware (exact upper threshold)', () => {
-    assert.equal(classifyRate(0.30), 'ransomware');
+    assert.equal(classifyRate(0.3), 'ransomware');
   });
 
   it('classifies 0.75 as ransomware', () => {
@@ -84,7 +84,7 @@ describe('Detection - rateWindow & Sliding Window', () => {
     ];
     const metrics = computeChangeMetrics(events, 10);
     assert.equal(metrics.changedCount, 2);
-    assert.equal(metrics.changeRate, 0.20);
+    assert.equal(metrics.changeRate, 0.2);
     assert.deepEqual(metrics.uniqueChangedPaths, ['a.txt', 'b.txt']);
   });
 });
@@ -94,9 +94,24 @@ describe('Detection - Synthetic Evaluations', () => {
 
   it('evaluates ransomware when change rate >= 0.30', () => {
     const events = [
-      { path: '1.txt', matched_baseline: false, observed_at: now.toISOString(), event_type: 'modified' },
-      { path: '2.txt', matched_baseline: false, observed_at: now.toISOString(), event_type: 'modified' },
-      { path: '3.txt', matched_baseline: false, observed_at: now.toISOString(), event_type: 'modified' },
+      {
+        path: '1.txt',
+        matched_baseline: false,
+        observed_at: now.toISOString(),
+        event_type: 'modified',
+      },
+      {
+        path: '2.txt',
+        matched_baseline: false,
+        observed_at: now.toISOString(),
+        event_type: 'modified',
+      },
+      {
+        path: '3.txt',
+        matched_baseline: false,
+        observed_at: now.toISOString(),
+        event_type: 'modified',
+      },
     ];
     const res = evaluateSynthetic({
       events,
@@ -104,7 +119,7 @@ describe('Detection - Synthetic Evaluations', () => {
       now,
     });
 
-    assert.equal(res.changeRate, 0.30);
+    assert.equal(res.changeRate, 0.3);
     assert.equal(res.verdict, 'ransomware');
   });
 

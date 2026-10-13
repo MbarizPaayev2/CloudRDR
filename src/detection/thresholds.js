@@ -11,8 +11,8 @@ import cfg from '../config/index.js';
  */
 export const DEFAULT_THRESHOLDS = {
   windowSeconds: 60,
-  suspiciousRate: 0.10,
-  ransomwareRate: 0.30,
+  suspiciousRate: 0.1,
+  ransomwareRate: 0.3,
   allowlistedAccounts: [],
 };
 
@@ -25,7 +25,8 @@ export function getThresholds() {
     windowSeconds: cfg.detection.windowSeconds ?? DEFAULT_THRESHOLDS.windowSeconds,
     suspiciousRate: cfg.detection.suspiciousRate ?? DEFAULT_THRESHOLDS.suspiciousRate,
     ransomwareRate: cfg.detection.ransomwareRate ?? DEFAULT_THRESHOLDS.ransomwareRate,
-    allowlistedAccounts: cfg.detection.allowlistedAccounts ?? DEFAULT_THRESHOLDS.allowlistedAccounts,
+    allowlistedAccounts:
+      cfg.detection.allowlistedAccounts ?? DEFAULT_THRESHOLDS.allowlistedAccounts,
   };
 }
 

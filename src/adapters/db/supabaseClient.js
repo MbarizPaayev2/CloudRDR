@@ -42,7 +42,7 @@ const _memoryDb = {
 export function createInMemorySupabaseClient() {
   function createBuilder(tableName) {
     const table = _memoryDb[tableName] || (_memoryDb[tableName] = []);
-    let filters = [];
+    const filters = [];
     let isSingle = false;
     let isMaybeSingle = false;
     let orderSpec = null;
@@ -159,7 +159,7 @@ export function createInMemorySupabaseClient() {
           });
         }
 
-        if (limitCount != null) {
+        if (limitCount !== null && limitCount !== undefined) {
           result = result.slice(0, limitCount);
         }
 
@@ -205,10 +205,16 @@ export function getSupabaseClient() {
         detectSessionInUrl: false,
       },
     });
-    logger.info({ provider: 'supabase', url: cfg.supabase.url }, 'Supabase client initialised (cloud)');
+    logger.info(
+      { provider: 'supabase', url: cfg.supabase.url },
+      'Supabase client initialised (cloud)'
+    );
   } else {
     _client = createInMemorySupabaseClient();
-    logger.info({ provider: 'in-memory' }, 'Supabase client initialised (in-memory offline fallback)');
+    logger.info(
+      { provider: 'in-memory' },
+      'Supabase client initialised (in-memory offline fallback)'
+    );
   }
 
   return _client;
@@ -226,10 +232,7 @@ export function getSupabaseClient() {
 export async function supaQuery(queryPromise) {
   const { data, error } = await queryPromise;
   if (error) {
-    throw new ExternalServiceError(
-      `Supabase query failed: ${error.message}`,
-      error
-    );
+    throw new ExternalServiceError(`Supabase query failed: ${error.message}`, error);
   }
   return /** @type {T} */ (data);
 }

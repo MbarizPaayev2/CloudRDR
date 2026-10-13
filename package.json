@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Cloud Ransomware Detection & Recovery — backend",
   "type": "module",
-  "engines": { "node": ">=18.0.0" },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "node --watch src/api/server.js",
     "start": "node src/api/server.js",

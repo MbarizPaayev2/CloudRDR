@@ -33,11 +33,12 @@ export function isCanaryPath(path) {
 export function isCanaryTriggered(events, knownCanaries = null) {
   if (!events || events.length === 0) return false;
 
-  const canarySet = knownCanaries instanceof Set
-    ? knownCanaries
-    : Array.isArray(knownCanaries)
-    ? new Set(knownCanaries)
-    : null;
+  const canarySet =
+    knownCanaries instanceof Set
+      ? knownCanaries
+      : Array.isArray(knownCanaries)
+        ? new Set(knownCanaries)
+        : null;
 
   for (const evt of events) {
     if (evt.event_type === 'modified' || evt.event_type === 'deleted') {
