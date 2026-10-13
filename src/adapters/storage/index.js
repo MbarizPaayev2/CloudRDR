@@ -28,19 +28,15 @@
  *   Download the object at `path` and return its full content as a Buffer.
  *   Throws NotFoundError if the object does not exist.
  *
+ * @property {(bucket: string, path: string) => Promise<import('node:stream').Readable>} readStream
+ *   Stream the object at `path` for low-memory consumption.
+ *   Throws NotFoundError if the object does not exist.
+ *
  * @property {(bucket: string, path: string, data: Buffer | string) => Promise<void>} write
  *   Upload `data` to `path` in `bucket`, overwriting if it exists.
  *
  * @property {(bucket: string, path: string) => Promise<boolean>} exists
  *   Return true if the object exists, false otherwise.
- *
- * ---------------------------------------------------------------------------
- *
- * To add a new backend (e.g. MinIO, S3):
- *   1. Create src/adapters/storage/minioStorage.js implementing the four methods.
- *   2. Add a case to the factory below.
- *   3. Set STORAGE_PROVIDER=minio in .env.
- *   No other file needs to change.
  */
 
 import cfg from '../../config/index.js';
@@ -77,6 +73,14 @@ export async function getStorageAdapter() {
   }
 
   return _adapter;
+}
+
+/**
+ * Override the adapter for tests.
+ * @param {StorageAdapter} adapter
+ */
+export function _setAdapterForTests(adapter) {
+  _adapter = adapter;
 }
 
 /**

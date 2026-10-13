@@ -15,6 +15,7 @@
  */
 
 import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import nodePath from 'node:path';
 import crypto from 'node:crypto';
 import { NotFoundError, ExternalServiceError } from '../../utils/errors.js';
@@ -81,8 +82,6 @@ export class LocalFsStorage {
           continue;
         }
         // Compute a cheap content fingerprint for change detection.
-        // We use a fast hash of (size + mtime) — full content hash is done
-        // by the monitor agent when a change is detected.
         const etag = crypto
           .createHash('md5')
           .update(`${stat.size}:${stat.mtimeMs}`)
@@ -130,6 +129,25 @@ export class LocalFsStorage {
         throw new NotFoundError(`Object not found: ${bucket}/${path}`, err);
       }
       throw new ExternalServiceError(`Failed to read ${bucket}/${path}: ${err.message}`, err);
+    }
+  }
+
+  /**
+   * Read an object as a Node.js Readable stream.
+   * @param {string} bucket
+   * @param {string} path
+   * @returns {Promise<import('node:stream').Readable>}
+   */
+  async readStream(bucket, path) {
+    const abs = this._resolve(bucket, path);
+    try {
+      await fs.access(abs);
+      return fsSync.createReadStream(abs);
+    } catch (err) {
+      if (err.code === 'ENOENT') {
+        throw new NotFoundError(`Object not found: ${bucket}/${path}`, err);
+      }
+      throw new ExternalServiceError(`Failed to stream ${bucket}/${path}: ${err.message}`, err);
     }
   }
 

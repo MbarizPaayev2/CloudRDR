@@ -66,6 +66,8 @@ function optList(key) {
 
 // ── build config ─────────────────────────────────────────────────────────────
 
+const isTest = process.env.NODE_ENV === 'test';
+
 let cfg;
 try {
   cfg = {
@@ -97,14 +99,14 @@ try {
 
     // HTTP API
     api: {
-      key: requireString('API_KEY'),
+      key: isTest ? optString('API_KEY', 'test-api-key') : requireString('API_KEY'),
       dashboardOrigin: optString('DASHBOARD_ORIGIN', 'http://localhost:3001'),
       port: optNumber('PORT', 3000),
     },
 
     // Logging
     log: {
-      level: optString('LOG_LEVEL', 'info'),
+      level: isTest ? 'silent' : optString('LOG_LEVEL', 'info'),
     },
   };
 
@@ -119,7 +121,7 @@ try {
     throw new Error(`[config] STORAGE_PROVIDER must be one of: ${validProviders.join(', ')}`);
   }
 
-  const validLogLevels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
+  const validLogLevels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal', 'silent'];
   if (!validLogLevels.includes(cfg.log.level)) {
     throw new Error(`[config] LOG_LEVEL must be one of: ${validLogLevels.join(', ')}`);
   }

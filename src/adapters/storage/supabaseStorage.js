@@ -9,6 +9,7 @@
  * handle buckets with more than 1 000 objects.
  */
 
+import { Readable } from 'node:stream';
 import { getSupabaseClient } from '../db/supabaseClient.js';
 import { NotFoundError, ExternalServiceError } from '../../utils/errors.js';
 import logger from '../../utils/logger.js';
@@ -58,8 +59,6 @@ export class SupabaseStorage {
       if (!data || data.length === 0) break;
 
       for (const item of data) {
-        // Supabase returns both files and folder pseudo-objects;
-        // folder objects have id === null — skip them.
         if (!item.id) continue;
 
         const fullPath = prefix ? `${prefix}/${item.name}` : item.name;
@@ -71,7 +70,7 @@ export class SupabaseStorage {
         });
       }
 
-      if (data.length < PAGE_SIZE) break; // last page
+      if (data.length < PAGE_SIZE) break;
       offset += PAGE_SIZE;
     }
 
@@ -88,7 +87,6 @@ export class SupabaseStorage {
     const { data, error } = await this._db.storage.from(bucket).download(path);
 
     if (error) {
-      // Supabase returns a generic error for missing objects
       if (error.message?.toLowerCase().includes('not found')) {
         throw new NotFoundError(`Object not found: ${bucket}/${path}`, error);
       }
@@ -102,9 +100,19 @@ export class SupabaseStorage {
       throw new NotFoundError(`Object not found: ${bucket}/${path}`);
     }
 
-    // data is a Blob in the Supabase JS SDK
     const arrayBuffer = await data.arrayBuffer();
     return Buffer.from(arrayBuffer);
+  }
+
+  /**
+   * Stream an object content as a Node.js Readable stream.
+   * @param {string} bucket
+   * @param {string} path
+   * @returns {Promise<import('node:stream').Readable>}
+   */
+  async readStream(bucket, path) {
+    const buf = await this.read(bucket, path);
+    return Readable.from(buf);
   }
 
   /**
@@ -117,7 +125,6 @@ export class SupabaseStorage {
   async write(bucket, path, data) {
     const buffer = Buffer.isBuffer(data) ? data : Buffer.from(data);
 
-    // upsert: true overwrites an existing object
     const { error } = await this._db.storage
       .from(bucket)
       .upload(path, buffer, { upsert: true });
@@ -134,13 +141,11 @@ export class SupabaseStorage {
 
   /**
    * Check if an object exists in `bucket`.
-   * Uses a lightweight head-only list rather than downloading the object.
    * @param {string} bucket
    * @param {string} path
    * @returns {Promise<boolean>}
    */
   async exists(bucket, path) {
-    // Split path into folder prefix and filename
     const lastSlash = path.lastIndexOf('/');
     const folder = lastSlash >= 0 ? path.slice(0, lastSlash) : '';
     const name = lastSlash >= 0 ? path.slice(lastSlash + 1) : path;
@@ -153,7 +158,6 @@ export class SupabaseStorage {
       });
 
     if (error) {
-      // Treat list errors as "does not exist" rather than crashing
       logger.warn(
         { bucket, path, err: error.message },
         'supabase-storage: exists check failed, assuming false'
