@@ -72,12 +72,9 @@ export async function startRestore(incidentId) {
 
       const expectedSha256 = protectedRows?.[0]?.baseline_sha256 || '';
 
+      const versionRef = incident.record_json?.baselineVersion || 'v1';
       // Call backup service (decrypts & verifies AEAD tag)
-      const { bytes, aeadVerified } = await backup.restoreFile(
-        bucket,
-        path,
-        incident.record_json?.baselineSnapshotId
-      );
+      const { bytes, aeadVerified } = await backup.restoreFile(bucket, path, versionRef);
 
       // Verify restored content against baseline hash
       const verification = verifyFileBytes({

@@ -72,7 +72,7 @@ export async function createBaseline(bucket, options = {}) {
 
       try {
         const rawBuf = await adapter.read(bucket, entry.path);
-        backup.storeBackup(bucket, entry.path, rawBuf);
+        await backup.storeBackup(bucket, entry.path, rawBuf, `v${nextVersion}`);
       } catch {
         // non-fatal in baseline
       }

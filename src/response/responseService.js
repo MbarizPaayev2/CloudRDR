@@ -98,6 +98,7 @@ export async function handleRansomwareVerdict({
   // 3. Fetch current baseline snapshot for Merkle root and snapshot reference
   const db = getSupabaseClient();
   let snapshot = null;
+  let baselineVersion = 'v1';
   if (bucket) {
     const snapshots = await supaQuery(
       db
@@ -108,6 +109,18 @@ export async function handleRansomwareVerdict({
         .limit(1)
     );
     snapshot = snapshots?.[0] || null;
+
+    const versionRows = await supaQuery(
+      db
+        .from('protected_files')
+        .select('baseline_version')
+        .eq('bucket', bucket)
+        .order('baseline_version', { ascending: false })
+        .limit(1)
+    );
+    if (versionRows && versionRows.length > 0) {
+      baselineVersion = `v${versionRows[0].baseline_version}`;
+    }
   }
 
   // 4. Build the incident record JSON
@@ -122,6 +135,7 @@ export async function handleRansomwareVerdict({
     frozenAt,
     freezeStatus: freezeResult.success ? 'frozen' : 'failed',
     baselineSnapshotId: snapshot?.id || null,
+    baselineVersion,
     merkleRoot: snapshot?.merkle_root || null,
   };
 
