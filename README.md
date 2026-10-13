@@ -77,17 +77,23 @@ npm run seed
 # Run the full end-to-end ransomware attack simulation
 npm run simulate
 
-# Start the Fastify API server
+# Start the Fastify API server & SOC Web Dashboard (open http://localhost:3000/dashboard)
 npm run dev
 
 # Start the background monitoring agent
 npm run monitor
+
+# Run threshold sweep experiment (generates docs/qa/01_THRESHOLD_SWEEP_EXPERIMENT.md)
+npm run sweep
+
+# Run formal benchmark metrics harness M1-M9 (generates docs/qa/02_BENCHMARK_METRICS_REPORT.md)
+npm run metrics
 ```
 
 ### 5. Run Test Suite
 
 ```bash
-# Run unit & integration tests
+# Run all 46 unit & integration tests across 14 test suites
 npm test
 
 # Run ESLint and Prettier
@@ -151,10 +157,10 @@ Errors follow a consistent structure:
 }
 ```
 
-### Endpoints:
-
 | Method | Endpoint                   | Auth    | Description                                                             |
 | ------ | -------------------------- | ------- | ----------------------------------------------------------------------- |
+| `GET`  | `/`                        | None    | Web Dashboard (Security SOC GUI)                                        |
+| `GET`  | `/dashboard`               | None    | Web Dashboard (Security SOC GUI)                                        |
 | `GET`  | `/health`                  | None    | Service liveness and uptime check                                       |
 | `POST` | `/baseline`                | API Key | Initiate baseline creation (Body: `{ "bucket": "protected" }`)          |
 | `GET`  | `/baseline/:bucket`        | API Key | Retrieve latest snapshot, Merkle root, and files                        |
