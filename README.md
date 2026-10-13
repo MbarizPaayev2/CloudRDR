@@ -166,21 +166,40 @@ Errors follow a consistent structure:
 
 ---
 
+## Cryptography & Integrity Modules (`src/crypto/`, `src/log/`, `src/backup/`)
+
+The cryptographic layer is implemented with high security standards:
+
+### 1. RFC 8032 Ed25519 Signatures (`src/crypto/ed25519.js`)
+
+- `generateEd25519KeyPair()`: Produces PKCS#8 / SPKI DER keys with deterministic `keyId`.
+- `signRecordEd25519(record)`: Serializes object using deterministic recursive canonical JSON (RFC 8785) before Ed25519 signing.
+- `verifyRecordEd25519(record, signature)`: Validates signature using constant-time comparison to eliminate timing side-channels.
+
+### 2. Hash-Chained Audit Ledger & Chain Verifier (`src/log/`)
+
+- `AuditLog` (`src/log/auditLog.js`): Genesis block starts with `prevHash = 00...00`. Each block links cryptographically: `hash = SHA256(index : prevHash : timestamp : canonicalJson(data))`. Supports append-only persistence to `data/audit-log/audit.jsonl`.
+- `verifyAuditChain(entries)` (`src/log/chainVerifier.js`): Walks the chain from genesis to head, validates every link and recomputes hashes. Detects any tampered block or broken link (QA Tampering test M7).
+
+### 3. AES-256-GCM Authenticated Encryption (`src/backup/backupService.js`)
+
+- Encrypts protected backup files using `aes-256-gcm` with random 96-bit IV and 128-bit authentication tag.
+- Binds `bucket : path : versionRef` as Additional Authenticated Data (AAD).
+- Any corrupted ciphertext byte, modified tag, or mismatched metadata causes AEAD verification to immediately fail (`aeadVerified: false`) and suppresses plaintext output.
+
+---
+
 ## Teammate Contract Interfaces
 
-To allow concurrent development across teammates, contracts with functioning stubs are defined under `src/contracts/`. Swapping a stub for a production implementation requires changing **one import line only**:
+To allow concurrent development across teammates, contracts are defined under `src/contracts/`:
 
-### 1. Crypto Developer (`src/contracts/crypto.contract.js`)
+### 1. Crypto Modules (`src/contracts/crypto.contract.js`)
 
-- `hashStream(stream)` ➔ Returns SHA-256 lowercase hex string via streaming.
-- `merkleRoot(hashes[])` ➔ Pairwise SHA-256 Merkle tree calculation.
-- `signRecord(record)` ➔ Signs incident payload using Ed25519 (returns `{ signature, keyId }`).
-- `verifyRecord(record, signature)` ➔ Validates signature.
-- `appendAuditLog(entry)` ➔ Appends entry to tamper-evident hash-chained audit log.
+- Exports production SHA-256 streaming, Merkle tree root, Ed25519 signing, and hash-chained audit logging.
 
-### 2. Backup Developer (`src/contracts/backup.contract.js`)
+### 2. Backup Service (`src/contracts/backup.contract.js`)
 
-- `restoreFile(bucket, path, versionRef)` ➔ Decrypts AES-256-GCM backup, validates AEAD tag, returns `{ bytes, aeadVerified }`.
+- Exports production AES-256-GCM authenticated encryption and decryption with AEAD tag validation.
 
 ### 3. DevOps Engineer (`src/contracts/freeze.contract.js`)
 
@@ -190,3 +209,4 @@ To allow concurrent development across teammates, contracts with functioning stu
 ### 4. QA Engineer
 
 - Run `npm run simulate` to test ransomware behavior, canary triggers, and recovery verification.
+- Run `npm test` to execute all 45 unit and integration tests across 14 test suites.
