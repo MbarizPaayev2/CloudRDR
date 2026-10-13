@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Environment – NEVER commit real secrets
+.env
+
+# Local storage data (generated at runtime)
+data/
+
+# Build / cache
+.eslintcache
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
