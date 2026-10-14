@@ -344,8 +344,58 @@
             </div>
           </div>
 
+          <!-- Incident Popover Alert Card -->
+          <div id="socIncidentAlertCard" class="soc-incident-card" style="display:none;" role="alert">
+            <div class="soc-incident-header">
+              <div class="soc-incident-title">
+                <span class="soc-incident-pulse-dot"></span>
+                <span>CRITICAL ALERT // INCIDENT #CR-8032 GENERATED</span>
+              </div>
+              <button type="button" id="dismissIncidentCardBtn" class="soc-incident-btn dismiss" title="Acknowledge Alert">Dismiss ✕</button>
+            </div>
+            <div class="soc-incident-grid">
+              <div class="soc-incident-field">
+                <span class="field-lbl">Compromised Credential</span>
+                <span class="field-val" style="color:#FF8080;">svc-backup-agent (IAM Role)</span>
+              </div>
+              <div class="soc-incident-field">
+                <span class="field-lbl">SLA Response Time</span>
+                <span class="field-val" style="color:#38BDF8;">8.2 seconds (&lt;10.0s SLA)</span>
+              </div>
+              <div class="soc-incident-field">
+                <span class="field-lbl">Ed25519 Signature</span>
+                <span class="field-val" style="color:#CBD5E1;">3a9f01bc...481d (RFC 8032)</span>
+              </div>
+              <div class="soc-incident-field">
+                <span class="field-lbl">Restore Integrity</span>
+                <span class="field-val" style="color:#10B981;">100% AEAD VALID (AES-256-GCM)</span>
+              </div>
+            </div>
+            <div class="soc-incident-actions">
+              <button type="button" id="viewIncidentProofBtn" class="soc-incident-btn" style="background:#0284C7;color:#FFF;">Inspect Cryptographic Proof 🔍</button>
+            </div>
+          </div>
+
           <div class="soc-terminal-body" id="socTerminalBody" role="log" aria-live="polite">
             <!-- Dynamic stream logs injected here -->
+          </div>
+
+          <!-- Interactive CLI Input & Command Pills -->
+          <div class="soc-terminal-cli-bar">
+            <div class="soc-cli-pills" id="socCliPills">
+              <span class="soc-cli-pills-label">Quick Commands:</span>
+              <button type="button" class="soc-cli-pill" data-cmd="cloudrdr status">> cloudrdr status</button>
+              <button type="button" class="soc-cli-pill" data-cmd="test-canary-tripwire">> test-canary-tripwire</button>
+              <button type="button" class="soc-cli-pill" data-cmd="curl /baseline/protected">> curl /baseline/protected</button>
+              <button type="button" class="soc-cli-pill" data-cmd="verify-merkle-proof">> verify-merkle-proof</button>
+              <button type="button" class="soc-cli-pill" data-cmd="help">> help</button>
+              <button type="button" class="soc-cli-pill" data-cmd="clear">> clear</button>
+            </div>
+            <form id="socCliForm" class="soc-cli-input-form" autocomplete="off">
+              <span class="soc-cli-prompt">cloudrdr@edge:~$</span>
+              <input type="text" id="socCliInput" class="soc-cli-input" placeholder="Type a command (e.g. status, test-canary-tripwire, help)..." spellcheck="false" />
+              <button type="submit" class="soc-cli-submit-btn">Run ↵</button>
+            </form>
           </div>
         </div>
       </div>
@@ -444,6 +494,7 @@
     import { initSharedNav } from './js/components/nav.js';
     import { initMerkleTree } from './js/components/merkleTree.js';
     import { startPresentationTour, endPresentationTour } from './js/components/tour.js';
+    import { openMerkleInspector } from './js/components/merkleInspector.js';
 
     initSharedNav({ activePage: 'home', basePath: '' });
 
@@ -1209,28 +1260,136 @@ if (isValid) await storage.write(bucket, path, bytes);`,
       });
     });
 
-    // Spike attack simulation in terminal
-    triggerSocSpike?.addEventListener('click', () => {
-      appendSocLog('ALERT', 'alert', '⚠️ THREAT SPIKE: High-frequency PUT requests detected from account "svc-api-compromised"', 'alert');
+    // Spike attack simulation in terminal with Laser Threat Flash & Incident Popover
+    const socContainer = document.querySelector('.soc-terminal-container');
+    const incidentCard = document.getElementById('socIncidentAlertCard');
+    const dismissIncidentBtn = document.getElementById('dismissIncidentCardBtn');
+    const viewIncidentProofBtn = document.getElementById('viewIncidentProofBtn');
+
+    function triggerTerminalAttackSequence() {
+      // Engage red laser hazard border on terminal
+      socContainer?.classList.add('threat-spike-laser');
+
+      appendSocLog('ALERT', 'alert', '⚠️ THREAT SPIKE: High-frequency PUT requests detected from account "svc-backup-agent"', 'alert');
+      
       setTimeout(() => {
         appendSocLog('CANARY', 'alert', '🚨 TRIPWIRE TRIGGERED: Object ".canary/decoy_tokens.docx" modified! Instant RANSOMWARE verdict!', 'canary');
-      }, 400);
+      }, 350);
+
       setTimeout(() => {
-        appendSocLog('RESPONSE', 'alert', '🔒 IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-api-compromised" [8.2s SLA]', 'alert');
-      }, 900);
+        appendSocLog('RESPONSE', 'alert', '🔒 IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-backup-agent" [8.2s SLA]', 'alert');
+      }, 750);
+
       setTimeout(() => {
         appendSocLog('CRYPTO', 'crypto', '🔏 Ed25519 SIGNATURE: Incident record signed with key ID "ed25519-v1" (RFC 8032)', 'crypto');
-      }, 1400);
+        // Reveal Incident Alert Popover Card inside terminal
+        if (incidentCard) {
+          incidentCard.style.display = 'block';
+          incidentCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 1200);
+
       setTimeout(() => {
-        appendSocLog('RESTORE', 'restore', '🛡️ AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED', 'restore');
-      }, 1900);
+        appendSocLog('RESTORE', 'restore', '🛡️ AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED (100%)', 'restore');
+      }, 1800);
+
       setTimeout(() => {
         appendSocLog('AUDIT', 'crypto', '⛓️ IMMUTABLE CHAIN: Audit block #043 appended with SHA-256 hash continuity', 'crypto');
-      }, 2400);
+      }, 2300);
 
-      // Trigger Merkle tree attack mode as well
+      // Trigger Merkle tree attack scenario in sync
       const attackBtn = document.querySelector('[data-scenario="attack"]');
       attackBtn?.click();
+    }
+
+    triggerSocSpike?.addEventListener('click', triggerTerminalAttackSequence);
+
+    dismissIncidentBtn?.addEventListener('click', () => {
+      if (incidentCard) incidentCard.style.display = 'none';
+      socContainer?.classList.remove('threat-spike-laser');
+    });
+
+    viewIncidentProofBtn?.addEventListener('click', () => {
+      openMerkleInspector(0, { isCorrupted: true });
+    });
+
+    // ── Interactive CLI Input & Command Handler ─────────────────────────────
+    const socCliForm = document.getElementById('socCliForm');
+    const socCliInput = document.getElementById('socCliInput');
+    const socCliPills = document.querySelectorAll('.soc-cli-pill');
+
+    function runTerminalCommand(cmdText) {
+      if (!cmdText || !cmdText.trim()) return;
+      const trimmed = cmdText.trim();
+
+      // Log prompt command into terminal body
+      appendSocLog('CLI', 'info', `<span class="soc-log-cmd">$ ${trimmed}</span>`, 'info');
+
+      const cmd = trimmed.toLowerCase();
+
+      if (cmd === 'clear') {
+        if (socBody) socBody.innerHTML = '';
+        return;
+      }
+
+      if (cmd === 'cloudrdr status' || cmd === 'status') {
+        const statusJson = JSON.stringify({
+          status: "OPERATIONAL",
+          engine: "autonomous-containment-v1",
+          storage_provider: "local_fs",
+          protected_bucket: "protected",
+          monitored_objects: 16,
+          canary_tripwires: 2,
+          sliding_window: "60s (ransomware_threshold: 30%)",
+          iam_freeze_sla: "<10.0s (achieved: 2.1s)",
+          recovery_cipher: "AES-256-GCM / Ed25519"
+        }, null, 2);
+        appendSocLog('STATUS', 'crypto', `<pre class="soc-log-json">${statusJson}</pre>`, 'crypto');
+      } else if (cmd === 'test-canary-tripwire' || cmd === 'canary') {
+        triggerTerminalAttackSequence();
+      } else if (cmd === 'curl /baseline/protected' || cmd === 'baseline') {
+        const baselineJson = JSON.stringify({
+          bucket: "protected",
+          merkle_root: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          file_count: 16,
+          hash_algorithm: "SHA-256 (RFC 6962)",
+          snapshot_id: "snap-98a4d7e1-2026",
+          created_at: new Date().toISOString()
+        }, null, 2);
+        appendSocLog('API', 'crypto', `<pre class="soc-log-json">${baselineJson}</pre>`, 'crypto');
+      } else if (cmd === 'verify-merkle-proof' || cmd === 'merkle') {
+        appendSocLog('CRYPTO', 'crypto', '🔬 RFC 6962 AUDIT PATH: Leaf #0 -> Pair(L0, L1) -> Pair(H01, H23) -> ROOT', 'crypto');
+        appendSocLog('CRYPTO', 'crypto', '✓ Cryptographic Proof: e3b0c442...7852b855 (100% INVARIANT MATCH)', 'crypto');
+        setTimeout(() => openMerkleInspector(0, { isCorrupted: false }), 400);
+      } else if (cmd === 'help') {
+        const helpText = `Available commands:
+  • cloudrdr status          - Query system health & parameters
+  • test-canary-tripwire     - Simulate decoy breach & trigger sub-10s IAM freeze
+  • curl /baseline/protected - Fetch current baseline Merkle Root JSON
+  • verify-merkle-proof      - Verify cryptographic leaf-to-root RFC 6962 proof
+  • clear                    - Clear terminal console`;
+        appendSocLog('HELP', 'info', `<pre class="soc-log-json">${helpText}</pre>`, 'info');
+      } else {
+        appendSocLog('ERROR', 'alert', `Command not recognized: "${trimmed}". Type "help" for available commands.`, 'alert');
+      }
+
+      if (socCliInput) socCliInput.value = '';
+    }
+
+    socCliForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      runTerminalCommand(socCliInput?.value);
+    });
+
+    socCliPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        let cmd = pill.getAttribute('data-cmd');
+        if (cmd) {
+          if (cmd.startsWith('> ')) cmd = cmd.slice(2);
+          if (socCliInput) socCliInput.value = cmd;
+          runTerminalCommand(cmd);
+        }
+      });
     });
 
     // ── 6. Cursor Spotlight & Bento Glow Pointer Tracking ────────────────────
