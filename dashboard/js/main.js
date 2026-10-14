@@ -5,6 +5,7 @@ import { initBaselinePanel, updateBaselinePanel } from './components/baselinePan
 import { updateDetectionChart } from './components/detectionChart.js';
 import { updateIncidentList } from './components/incidentList.js';
 import { updateIncidentDetail } from './components/incidentDetail.js';
+import { updateRestorePanel } from './components/restorePanel.js';
 
 // ── Theme Manager ────────────────────────────────────────────────────────────
 
@@ -152,10 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDetectionChart(state.detectionRuns);
     updateIncidentList(state);
     updateIncidentDetail(state);
+    updateRestorePanel(state);
   });
 
   refreshAll();
   console.info(
-    '[CloudRDR] Security Operations Dashboard initialised (Step 5 Incidents Connected).'
+    '[CloudRDR] Security Operations Dashboard initialised (Step 6 Restore Panel Connected).'
   );
 });
