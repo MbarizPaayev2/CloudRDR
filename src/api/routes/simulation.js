@@ -62,7 +62,7 @@ export async function simulationRoutes(fastify) {
 
     // 3. Insert into incidents table with 'frozen' status
     const incidentId = crypto.randomUUID();
-    const [incident] = await supaQuery(
+    const [_incident] = await supaQuery(
       db.from('incidents').insert({
         id: incidentId,
         detection_run_id: detectionRunId,
@@ -155,7 +155,7 @@ export async function simulationRoutes(fastify) {
     const { signature, keyId } = signRecord(incidentPayload);
 
     const incidentId = crypto.randomUUID();
-    const [incident] = await supaQuery(
+    const [_incident] = await supaQuery(
       db.from('incidents').insert({
         id: incidentId,
         detection_run_id: detectionRunId,

@@ -591,11 +591,11 @@
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
               "
-              >Avtomatlaşdırılmış Müdafiə Konveyeri</span
+              >Automated Defense Pipeline</span
             >
-            <h2 class="section-title">Canlı Aşkarlama, Təcrid &amp; Bərpa Konveyeri</h2>
+            <h2 class="section-title">Live Detection, Containment &amp; Recovery Pipeline</h2>
             <p class="section-desc">
-              Hücumun başladığı andan tam bərpaya qədər olan 4 kritik təhlükəsizlik mərhələsini real vaxtda izləyin və ya canlı simulyasiyanı işə salın.
+              Track all 4 critical security stages in real time from initial breach to cryptographic recovery, or trigger live simulation.
             </p>
           </div>
 
@@ -604,9 +604,9 @@
             <div class="pipeline-header-bar">
               <div class="pipeline-header-titles">
                 <h3>
-                  <span>🛡️ 4-Mərhələli Avtonom Müdafiə Zənciri</span>
+                  <span>4-Stage Autonomous Defense Chain</span>
                 </h3>
-                <p>Kriptoqrafik bütövlük, sürət analitikası, sub-second IAM kilidi və sıfır-etibarlı bərpa</p>
+                <p>Cryptographic integrity, sliding-window velocity, sub-second IAM lock, and zero-trust recovery</p>
               </div>
 
               <div class="pipeline-btn-group">
@@ -631,7 +631,7 @@
                       box-shadow: 0 0 8px #10b981;
                     "
                   ></span>
-                  STREAM AKTİV
+                  STREAM ACTIVE
                 </span>
 
                 <button
@@ -647,7 +647,7 @@
                     font-weight: 600;
                   "
                 >
-                  ⚔️ Hücum Simulyasiyasını Başlat
+                  Simulate Ransomware Attack
                 </button>
 
                 <button
@@ -656,7 +656,7 @@
                   class="btn btn-secondary"
                   style="font-size: 0.8rem; padding: 8px 14px;"
                 >
-                  🔄 Sıfırla
+                  Reset Pipeline
                 </button>
               </div>
             </div>
@@ -666,75 +666,75 @@
               <!-- Stage 1: Baseline & Canary -->
               <div class="pipeline-stage-box" id="stage1Box">
                 <div class="stage-step-num">
-                  <span>Mərhələ 01</span>
-                  <span>🛡️</span>
+                  <span>Stage 01</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">DAG</span>
                 </div>
-                <div class="stage-name">Baseline &amp; Tələlər</div>
-                <span class="stage-badge-chip green" id="stage1Badge">ARMED (TƏMİZ)</span>
+                <div class="stage-name">Baseline &amp; Tripwires</div>
+                <span class="stage-badge-chip green" id="stage1Badge">ARMED (CLEAN)</span>
                 <ul class="stage-points-list">
-                  <li><span>•</span> <strong>Merkle DAG Ağacı:</strong> 50 faylın O(1) tam təsdiqi</li>
-                  <li><span>•</span> <strong>2 Decoy Tripwire:</strong> <code>canary/tripwire.docx</code></li>
-                  <li><span>•</span> <strong>Zero-Touch Decoys:</strong> Giriş anında həyəcan</li>
+                  <li><span>•</span> <strong>Merkle DAG Tree:</strong> O(1) full verification of 50 objects</li>
+                  <li><span>•</span> <strong>2 Decoy Tripwires:</strong> <code>canary/tripwire.docx</code></li>
+                  <li><span>•</span> <strong>Zero-Touch Decoys:</strong> Instant alarm on modification</li>
                 </ul>
                 <div class="stage-metric-footer">
-                  <span class="text-secondary">Vəziyyət:</span>
-                  <span class="mono font-semibold text-green" id="stage1Metric">50/50 Qorunur</span>
+                  <span class="text-secondary">Status:</span>
+                  <span class="mono font-semibold text-green" id="stage1Metric">50/50 Protected</span>
                 </div>
               </div>
 
               <!-- Stage 2: Velocity & Detection -->
               <div class="pipeline-stage-box" id="stage2Box">
                 <div class="stage-step-num">
-                  <span>Mərhələ 02</span>
-                  <span>⚡</span>
+                  <span>Stage 02</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">RATE</span>
                 </div>
-                <div class="stage-name">Sürət &amp; Aşkarlama</div>
-                <span class="stage-badge-chip green" id="stage2Badge">NORMAL İZLƏMƏ</span>
+                <div class="stage-name">Velocity &amp; Detection</div>
+                <span class="stage-badge-chip green" id="stage2Badge">NORMAL MONITORING</span>
                 <ul class="stage-points-list">
-                  <li><span>•</span> <strong>Sürüşən Pəncərə:</strong> 30s intervallar üzrə analiz</li>
-                  <li><span>•</span> <strong>Təhlükə Həddi:</strong> &gt; 30% kütləvi dəyişiklik</li>
-                  <li><span>•</span> <strong>Hevristik Filtr:</strong> Adi dəyişiklikləri ayırır</li>
+                  <li><span>•</span> <strong>Sliding Window:</strong> 30s interval threat analysis</li>
+                  <li><span>•</span> <strong>Threat Threshold:</strong> &gt; 30% mass modification</li>
+                  <li><span>•</span> <strong>Heuristic Filter:</strong> Distinguishes legitimate bulk jobs</li>
                 </ul>
                 <div class="stage-metric-footer">
-                  <span class="text-secondary">Dəyişiklik Sürəti:</span>
-                  <span class="mono font-semibold text-teal" id="stage2Metric">0.0% (Hədd: 30%)</span>
+                  <span class="text-secondary">Change Rate:</span>
+                  <span class="mono font-semibold text-teal" id="stage2Metric">0.0% (Threshold: 30%)</span>
                 </div>
               </div>
 
               <!-- Stage 3: Automated IAM Freeze -->
               <div class="pipeline-stage-box" id="stage3Box">
                 <div class="stage-step-num">
-                  <span>Mərhələ 03</span>
-                  <span>🔒</span>
+                  <span>Stage 03</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">IAM</span>
                 </div>
-                <div class="stage-name">Ani Bloklama (Freeze)</div>
-                <span class="stage-badge-chip green" id="stage3Badge">STANDBY (HAZIR)</span>
+                <div class="stage-name">Instant Containment (Freeze)</div>
+                <span class="stage-badge-chip green" id="stage3Badge">STANDBY (READY)</span>
                 <ul class="stage-points-list">
-                  <li><span>•</span> <strong>Sub-Second SLA:</strong> &lt; 4.0s dərhal təcrid</li>
-                  <li><span>•</span> <strong>IAM Siyasəti:</strong> Deny-All Write-Lock aktiv</li>
-                  <li><span>•</span> <strong>Ed25519 İmza:</strong> RFC 8032 HSM sübut zənciri</li>
+                  <li><span>•</span> <strong>Sub-Second SLA:</strong> &lt; 4.0s immediate containment</li>
+                  <li><span>•</span> <strong>IAM Policy:</strong> Deny-All Write-Lock enforced</li>
+                  <li><span>•</span> <strong>Ed25519 Signature:</strong> RFC 8032 HSM evidence chain</li>
                 </ul>
                 <div class="stage-metric-footer">
-                  <span class="text-secondary">Giriş Nəzarəti:</span>
-                  <span class="mono font-semibold text-green" id="stage3Metric">Yazma Aktiv</span>
+                  <span class="text-secondary">Access Control:</span>
+                  <span class="mono font-semibold text-green" id="stage3Metric">Write Active</span>
                 </div>
               </div>
 
               <!-- Stage 4: Zero-Trust Recovery -->
               <div class="pipeline-stage-box" id="stage4Box">
                 <div class="stage-step-num">
-                  <span>Mərhələ 04</span>
-                  <span>🔄</span>
+                  <span>Stage 04</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">RESTORE</span>
                 </div>
-                <div class="stage-name">Sıfır-Etibarlı Bərpa</div>
-                <span class="stage-badge-chip green" id="stage4Badge">100% TƏSDİQLƏNİB</span>
+                <div class="stage-name">Zero-Trust Recovery</div>
+                <span class="stage-badge-chip green" id="stage4Badge">100% VERIFIED</span>
                 <ul class="stage-points-list">
-                  <li><span>•</span> <strong>AES-256-GCM AEAD:</strong> Kriptoqrafik teq yoxlaması</li>
-                  <li><span>•</span> <strong>SHA-256 Baseline:</strong> Bayt-bayt bərabərlik</li>
-                  <li><span>•</span> <strong>Karantin Sahəsi:</strong> Təsdiqsiz fayl ötürülmür</li>
+                  <li><span>•</span> <strong>AES-256-GCM AEAD:</strong> Cryptographic tag check</li>
+                  <li><span>•</span> <strong>SHA-256 Baseline:</strong> Byte-for-byte identity match</li>
+                  <li><span>•</span> <strong>Quarantine Sandbox:</strong> Zero unverified data promoted</li>
                 </ul>
                 <div class="stage-metric-footer" id="stage4MetricFooter">
-                  <span class="text-secondary">Bərpa Qapıları:</span>
+                  <span class="text-secondary">Recovery Gates:</span>
                   <span class="mono font-semibold text-green" id="stage4Metric">4/4 Valid</span>
                 </div>
                 <button
@@ -752,7 +752,7 @@
                     font-weight: 600;
                   "
                 >
-                  🛡️ Bərpanı Təsdiqlə (1-Click)
+                  Authorize Restore (1-Click)
                 </button>
               </div>
             </div>
@@ -760,24 +760,24 @@
             <!-- Live Event Feed Cards -->
             <div class="pipeline-journal-box">
               <div class="pipeline-journal-header">
-                <span>🔴 Canlı Hadisə Jurnalı (Real-Time Security Feed)</span>
+                <span>Live Security Event Feed</span>
                 <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #10b981;">● FASTIFY BACKEND CONNECTED</span>
               </div>
               <div class="pipeline-journal-list" id="pipelineJournalList">
                 <div class="pipeline-journal-item">
-                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">KRİPTO</span>
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">CRYPTO</span>
                   <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:31:16</span>
-                  <span style="color: var(--text-secondary);">Merkle Root təsdiqləndi: <code>e3b0c442...7852b855</code> (Snapshot #1 ilə 100% uyğundur).</span>
+                  <span style="color: var(--text-secondary);">Merkle Root verified: <code>e3b0c442...7852b855</code> (Matches Snapshot #1 100%).</span>
                 </div>
                 <div class="pipeline-journal-item">
-                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">TƏLƏ</span>
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">TRIPWIRE</span>
                   <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:31:16</span>
-                  <span style="color: var(--text-secondary);">Canary tripwire aktivdir: <code>canary/tripwire.docx</code> tam bütöv vəziyyətdədir.</span>
+                  <span style="color: var(--text-secondary);">Canary tripwire active: <code>canary/tripwire.docx</code> intact and untampered.</span>
                 </div>
                 <div class="pipeline-journal-item">
-                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">İZLƏMƏ</span>
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">MONITOR</span>
                   <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:31:20</span>
-                  <span style="color: var(--text-secondary);">30s sürüşən pəncərə analizi: Anomaliya dərəcəsi = 0.00% &lt; 30.0% (VERDİKT: NORMAL).</span>
+                  <span style="color: var(--text-secondary);">30s sliding window analysis: Anomaly rate = 0.00% &lt; 30.0% (VERDICT: NORMAL).</span>
                 </div>
               </div>
             </div>
@@ -1878,40 +1878,40 @@
         if (stage1Box) stage1Box.classList.remove('active-threat');
         if (stage1Badge) {
           stage1Badge.className = 'stage-badge-chip green';
-          stage1Badge.textContent = 'ARMED (TƏMİZ)';
+          stage1Badge.textContent = 'ARMED (CLEAN)';
         }
         if (stage1Metric) {
           stage1Metric.className = 'mono font-semibold text-green';
-          stage1Metric.textContent = '50/50 Qorunur';
+          stage1Metric.textContent = '50/50 Protected';
         }
 
         // Stage 2 Clean
         if (stage2Box) stage2Box.classList.remove('active-threat');
         if (stage2Badge) {
           stage2Badge.className = 'stage-badge-chip green';
-          stage2Badge.textContent = 'NORMAL İZLƏMƏ';
+          stage2Badge.textContent = 'NORMAL MONITORING';
         }
         if (stage2Metric) {
           stage2Metric.className = 'mono font-semibold text-teal';
-          stage2Metric.textContent = '0.0% (Hədd: 30%)';
+          stage2Metric.textContent = '0.0% (Threshold: 30%)';
         }
 
         // Stage 3 Clean
         if (stage3Box) stage3Box.classList.remove('active-threat');
         if (stage3Badge) {
           stage3Badge.className = 'stage-badge-chip green';
-          stage3Badge.textContent = 'STANDBY (HAZIR)';
+          stage3Badge.textContent = 'STANDBY (READY)';
         }
         if (stage3Metric) {
           stage3Metric.className = 'mono font-semibold text-green';
-          stage3Metric.textContent = 'Yazma Aktiv';
+          stage3Metric.textContent = 'Write Active';
         }
 
         // Stage 4 Clean
         if (stage4Box) stage4Box.classList.remove('active-threat');
         if (stage4Badge) {
           stage4Badge.className = 'stage-badge-chip green';
-          stage4Badge.textContent = '100% TƏSDİQLƏNİB';
+          stage4Badge.textContent = '100% VERIFIED';
         }
         if (stage4Metric) {
           stage4Metric.className = 'mono font-semibold text-green';
@@ -1921,7 +1921,7 @@
           btnAuthorizePipelineRestore.style.display = 'none';
         }
 
-        appendPipelineEvent('SİSTEM', 'green', 'Bütün müdafiə mərhələləri ilkin təmiz vəziyyətə sıfırlandı. Monitorinq aktivdir.');
+        appendPipelineEvent('SYSTEM', 'green', 'All defense stages reset to clean baseline. Active monitoring resumed.');
       }
 
       function runPipelineAttackSequence() {
@@ -1937,20 +1937,20 @@
         if (stage4Box) stage4Box.classList.remove('active-threat');
         if (btnAuthorizePipelineRestore) btnAuthorizePipelineRestore.style.display = 'none';
 
-        appendPipelineEvent('HÜCUM', 'red', 'Kütləvi şifrələyici zərərverici (Ransomware) simulyasiyası başladıldı...');
+        appendPipelineEvent('ATTACK', 'red', 'Mass ransomware encryption simulation initiated across storage bucket...');
 
         // Step 1: Canary Tripwire breached (350ms)
         const t1 = setTimeout(() => {
           if (stage1Box) stage1Box.classList.add('active-threat');
           if (stage1Badge) {
             stage1Badge.className = 'stage-badge-chip red';
-            stage1Badge.textContent = '🚨 CANARY POZULDU';
+            stage1Badge.textContent = 'CANARY BREACHED';
           }
           if (stage1Metric) {
             stage1Metric.className = 'mono font-semibold text-red';
-            stage1Metric.textContent = 'canary/tripwire.docx Dəyişdirildi!';
+            stage1Metric.textContent = 'canary/tripwire.docx Modified!';
           }
-          appendPipelineEvent('TƏLƏ', 'red', 'CANARY TƏLƏSİ POZULDU: "canary/tripwire.docx" modifikasiya olundu. Təcili reaksiya triggerləndi!');
+          appendPipelineEvent('TRIPWIRE', 'red', 'CANARY TRIPWIRE TRIPPED: "canary/tripwire.docx" modified. Automated defense triggered!');
         }, 350);
         attackTimeouts.push(t1);
 
@@ -1959,13 +1959,13 @@
           if (stage2Box) stage2Box.classList.add('active-threat');
           if (stage2Badge) {
             stage2Badge.className = 'stage-badge-chip red';
-            stage2Badge.textContent = 'HÜCUM TƏSDİQLƏNDİ';
+            stage2Badge.textContent = 'ATTACK CONFIRMED';
           }
           if (stage2Metric) {
             stage2Metric.className = 'mono font-semibold text-red';
-            stage2Metric.textContent = '44.0% Sürət (> 30% Hədd)';
+            stage2Metric.textContent = '44.0% Velocity (> 30% Threshold)';
           }
-          appendPipelineEvent('AŞKARLAMA', 'red', 'Kütləvi şifrələmə sürəti təsdiqləndi: 30s pəncərədə 44.0% dəyişiklik (> 30% kritik hədd). VERDİKT: RANSOMWARE!');
+          appendPipelineEvent('DETECTION', 'red', 'Mass modification velocity confirmed: 44.0% in 30s window (> 30% critical threshold). VERDICT: RANSOMWARE!');
         }, 850);
         attackTimeouts.push(t2);
 
@@ -1974,13 +1974,13 @@
           if (stage3Box) stage3Box.classList.add('active-threat');
           if (stage3Badge) {
             stage3Badge.className = 'stage-badge-chip amber';
-            stage3Badge.textContent = '🔒 IAM FREEZE (3.8s SLA)';
+            stage3Badge.textContent = 'IAM FREEZE (3.8s SLA)';
           }
           if (stage3Metric) {
             stage3Metric.className = 'mono font-semibold text-amber';
-            stage3Metric.textContent = 'Yazma Bloklandı (Deny-All)';
+            stage3Metric.textContent = 'Write Blocked (Deny-All)';
           }
-          appendPipelineEvent('TƏCRİD', 'amber', 'Sub-second IAM Freeze tətbiq edildi (3.8s). "svc-backup-agent" üçün bütün yazma/silmə hüquqları donduruldu. Ed25519 sübut aktı imzalandı.');
+          appendPipelineEvent('CONTAINMENT', 'amber', 'Sub-second IAM write-freeze applied (3.8s). Deny-All policy enforced on "svc-backup-agent". Ed25519 record signed.');
         }, 1400);
         attackTimeouts.push(t3);
 
@@ -1989,16 +1989,16 @@
           if (stage4Box) stage4Box.classList.add('active-threat');
           if (stage4Badge) {
             stage4Badge.className = 'stage-badge-chip amber';
-            stage4Badge.textContent = 'BƏRPA GÖZLƏYİR';
+            stage4Badge.textContent = 'AWAITING RESTORE';
           }
           if (stage4Metric) {
             stage4Metric.className = 'mono font-semibold text-amber';
-            stage4Metric.textContent = 'AES-256-GCM Hazır';
+            stage4Metric.textContent = 'AES-256-GCM Ready';
           }
           if (btnAuthorizePipelineRestore) {
             btnAuthorizePipelineRestore.style.display = 'block';
           }
-          appendPipelineEvent('BƏRPA', 'amber', 'AES-256-GCM şifrələnmiş ehtiyat nüsxələr hazırlandı. İcazə gözlənilir: Aşağıdakı "Bərpanı Təsdiqlə" düyməsinə klikləyin.');
+          appendPipelineEvent('RECOVERY', 'amber', 'AES-256-GCM encrypted backup staged in quarantine. Awaiting authorization: Click "Authorize Restore" below.');
         }, 1950);
         attackTimeouts.push(t4);
       }
@@ -2009,59 +2009,59 @@
         }
         if (stage4Badge) {
           stage4Badge.className = 'stage-badge-chip green';
-          stage4Badge.textContent = '🔄 BƏRPA EDİLİR...';
+          stage4Badge.textContent = 'RESTORING...';
         }
         if (stage4Metric) {
           stage4Metric.className = 'mono font-semibold text-teal';
-          stage4Metric.textContent = 'AEAD Teq Yoxlanılır...';
+          stage4Metric.textContent = 'Verifying AEAD Tag...';
         }
-        appendPipelineEvent('BƏRPA', 'teal', 'AES-256-GCM AEAD teq təsdiqi başladı. Bayt-bayt bütövlük yoxlanılır...');
+        appendPipelineEvent('RECOVERY', 'teal', 'AES-256-GCM AEAD tag verification initiated. Byte-for-byte baseline integrity checking...');
 
         setTimeout(() => {
           if (stage4Badge) {
             stage4Badge.className = 'stage-badge-chip green';
-            stage4Badge.textContent = '100% TƏSDİQLƏNDİ';
+            stage4Badge.textContent = '100% VERIFIED';
           }
           if (stage4Metric) {
             stage4Metric.className = 'mono font-semibold text-green';
-            stage4Metric.textContent = '50/50 Valid (0 İtgi)';
+            stage4Metric.textContent = '50/50 Valid (0 Losses)';
           }
-          appendPipelineEvent('AEAD TƏSDİQ', 'green', 'Bütün fayllar 100% AEAD ilə təsdiqləndi. SHA-256 baseline ilə Merkle invariantı tam bərpa olundu!');
+          appendPipelineEvent('AEAD VERIFIED', 'green', 'All objects 100% verified via AEAD tags. SHA-256 baseline Merkle invariant fully restored!');
 
           setTimeout(() => {
             // Calm reset of stages
             if (stage1Box) stage1Box.classList.remove('active-threat');
             if (stage1Badge) {
               stage1Badge.className = 'stage-badge-chip green';
-              stage1Badge.textContent = 'ARMED (TƏMİZ)';
+              stage1Badge.textContent = 'ARMED (CLEAN)';
             }
             if (stage1Metric) {
               stage1Metric.className = 'mono font-semibold text-green';
-              stage1Metric.textContent = '50/50 Qorunur';
+              stage1Metric.textContent = '50/50 Protected';
             }
 
             if (stage2Box) stage2Box.classList.remove('active-threat');
             if (stage2Badge) {
               stage2Badge.className = 'stage-badge-chip green';
-              stage2Badge.textContent = 'NORMAL İZLƏMƏ';
+              stage2Badge.textContent = 'NORMAL MONITORING';
             }
             if (stage2Metric) {
               stage2Metric.className = 'mono font-semibold text-teal';
-              stage2Metric.textContent = '0.0% (Hədd: 30%)';
+              stage2Metric.textContent = '0.0% (Threshold: 30%)';
             }
 
             if (stage3Box) stage3Box.classList.remove('active-threat');
             if (stage3Badge) {
               stage3Badge.className = 'stage-badge-chip green';
-              stage3Badge.textContent = 'STANDBY (HAZIR)';
+              stage3Badge.textContent = 'STANDBY (READY)';
             }
             if (stage3Metric) {
               stage3Metric.className = 'mono font-semibold text-green';
-              stage3Metric.textContent = 'Yazma Aktiv';
+              stage3Metric.textContent = 'Write Active';
             }
 
             pipelineAttackInProgress = false;
-            appendPipelineEvent('SİSTEM', 'green', 'Sistem tam şəkildə ilkin təmiz vəziyyətə qayıtdı. İnsident uğurla aradan qaldırıldı.');
+            appendPipelineEvent('SYSTEM', 'green', 'System fully restored to clean operational baseline. Security incident closed.');
           }, 1200);
         }, 800);
       }
@@ -2074,9 +2074,9 @@
       setInterval(() => {
         if (pipelineAttackInProgress) return;
         const telemetryEvents = [
-          { tag: 'KRİPTO', cls: 'green', text: 'RFC 6962 Merkle DAG: 50/50 fayl bütövlüyü təsdiqləndi.' },
-          { tag: 'TƏLƏ', cls: 'green', text: 'Canary tripwire sağlamdır: "canary/tripwire.docx" modifikasiya olunmayıb.' },
-          { tag: 'İZLƏMƏ', cls: 'green', text: 'Sürüşən pəncərə analizi: dəyişiklik dərəcəsi 0.00% (Anomaliya yoxdur).' }
+          { tag: 'CRYPTO', cls: 'green', text: 'RFC 6962 Merkle DAG: 50/50 object integrity verified.' },
+          { tag: 'TRIPWIRE', cls: 'green', text: 'Canary tripwire intact: "canary/tripwire.docx" unmodified.' },
+          { tag: 'MONITOR', cls: 'green', text: 'Sliding window analysis: 0.00% change rate (Normal baseline).' }
         ];
         const randomEvt = telemetryEvents[Math.floor(Math.random() * telemetryEvents.length)];
         appendPipelineEvent(randomEvt.tag, randomEvt.cls, randomEvt.text);

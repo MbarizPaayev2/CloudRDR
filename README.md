@@ -70,7 +70,7 @@ Modern cloud ransomware attacks rarely announce themselves with desktop ransom n
 
 ---
 
-## 🧠 Codebase Knowledge Graph & AST Architecture
+## Codebase Knowledge Graph & AST Architecture
 
 CloudRDR maintains a continuous Abstract Syntax Tree (AST) knowledge graph mapping all 680+ structural symbols, modules, cryptographic boundaries, and operational controllers across 32 topological clusters.
 
@@ -79,11 +79,11 @@ CloudRDR maintains a continuous Abstract Syntax Tree (AST) knowledge graph mappi
   <p><em>Interactive Graphify Knowledge Graph visualizing 683 nodes, 1,603 dependency edges, and 32 domain clusters across detection engine, cryptographic contracts, and SOC frontend.</em></p>
 </div>
 
-> 💡 **Canlı İnteraktiv Baxış**: Layihənin bütün arxitektura qrafını brauzerdə interaktiv (böyüdüb-kiçiltmə, axtarış, klaster filtri) şəkildə açmaq üçün birbaşa [`graphify-out/graph.html`](graphify-out/graph.html) faylını istənilən brauzerdə aça bilərsiniz.
+> **Interactive Architecture Inspection**: To interactively explore the complete architecture graph (pan, zoom, search, cluster filtering), open [`graphify-out/graph.html`](graphify-out/graph.html) directly in any web browser.
 
 ---
 
-## 📋 ISMS (ISO/IEC 27001:2022) Governance & Task Tracking
+## ISMS (ISO/IEC 27001:2022) Governance & Task Tracking
 
 The project operates under a formal **Information Security Management System (ISMS)** aligned with **ISO/IEC 27001:2022**, led by **Mübariz Paşayev (Project Manager & GRC Specialist)**. All security objectives, technological controls, incident response procedures, and testing gates are systematically tracked across work weeks (W1–W12) via a centralized project tracking board.
 
@@ -266,13 +266,13 @@ All protected endpoints require authentication via session cookie or `Authorizat
 
 ## Quality & Verification Benchmarks
 
-| Metric                       | Target        | Verified Value                        | Status      |
-| ---------------------------- | ------------- | ------------------------------------- | ----------- |
-| **Unit & Integration Tests** | 100% Pass     | **74 / 74 Passing** (23 Suites)       | ✅ Verified |
-| **ESLint Quality**           | 0 Errors      | **0 Errors, 0 Warnings**              | ✅ Verified |
-| **Tamper Detection (M7)**    | Instant       | 100% Detected (Broken chain rejected) | ✅ Verified |
-| **AEAD Authentication**      | Unconditional | 100% Corrupted blocks rejected        | ✅ Verified |
-| **Baseline Accuracy (M9)**   | Deterministic | 100% Pre-attack SHA-256 match gate    | ✅ Verified |
+| Metric                       | Target        | Verified Value                        | Status   |
+| ---------------------------- | ------------- | ------------------------------------- | -------- |
+| **Unit & Integration Tests** | 100% Pass     | **74 / 74 Passing** (23 Suites)       | Verified |
+| **ESLint Quality**           | 0 Errors      | **0 Errors, 0 Warnings**              | Verified |
+| **Tamper Detection (M7)**    | Instant       | 100% Detected (Broken chain rejected) | Verified |
+| **AEAD Authentication**      | Unconditional | 100% Corrupted blocks rejected        | Verified |
+| **Baseline Accuracy (M9)**   | Deterministic | 100% Pre-attack SHA-256 match gate    | Verified |
 
 ---
 
