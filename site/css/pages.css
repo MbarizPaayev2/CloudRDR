@@ -776,6 +776,17 @@
   line-height: 1.4;
 }
 
+/* Light mode terminal exception: Keep telemetry banner dark like an authentic terminal monitor */
+:root[data-theme="light"] .hero-telemetry-banner {
+  background: #090C15;
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="light"] .hero-telemetry-banner .telemetry-text {
+  color: #E2E8F0;
+}
+
 @keyframes alertBlink {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.3; transform: scale(0.85); }
@@ -1703,7 +1714,7 @@ body.ambient-threat-active .site-header {
 
 /* ── 4. Micro-Parallax Dotted Grid ───────────────────────────────────────── */
 .bg-grid-dots {
-  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-image: radial-gradient(var(--grid-dots, rgba(100, 116, 139, 0.03)) 1px, transparent 1px);
   background-size: 24px 24px;
   transition: background-position 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }

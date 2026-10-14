@@ -83,6 +83,11 @@
   --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.02);
   --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
 
+  --grid-dots: rgba(255, 255, 255, 0.04);
+  --merkle-link-stroke: rgba(255, 255, 255, 0.14);
+  --merkle-link-width: 1.5px;
+  --icon-stroke-width: 1.5px;
+
   /* ── Motion & Spring Physics Tokens (Framer Motion / Motion v11+) ───────── */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -95,42 +100,48 @@
   --dur-slow: 480ms;
 }
 
-/* ── Eye-Care Light Mode Palette (Soft Matte Paper — No Blinding Glare) ───── */
+/* ── Eye-Care Light Mode Palette (Warm Matte Paper — Zero Glare) ─────────── */
 :root[data-theme="light"] {
-  --bg: #F5F6F9;
+  --bg: #F6F7F9;
   --surface: #FFFFFF;
-  --surface-subtle: #EBEEF4;
+  --surface-subtle: #EDF0F5;
   
   --text: #1E293B;
-  --text-muted: #526075;
-  --border: #D8DFE9;
+  --text-muted: #475569;
+  --border: #CBD5E1;
 
-  --brand: #2563EB;
-  --brand-hover: #1D4ED8;
-  --brand-subtle: rgba(37, 99, 235, 0.08);
+  /* High contrast saturated brand & status colors for light mode */
+  --brand: #1D4ED8; /* Deep sapphire blue */
+  --brand-hover: #1E40AF;
+  --brand-subtle: rgba(29, 78, 216, 0.08);
 
-  --status-healthy: #0D9488;
-  --status-healthy-subtle: rgba(13, 148, 136, 0.12);
+  --status-healthy: #047857; /* Deep emerald green */
+  --status-healthy-subtle: rgba(4, 120, 87, 0.12);
 
-  --status-suspicious: #D97706;
-  --status-suspicious-subtle: rgba(217, 119, 6, 0.12);
+  --status-suspicious: #B45309; /* Deep amber */
+  --status-suspicious-subtle: rgba(180, 83, 9, 0.12);
 
-  --status-ransomware: #DC2626;
-  --status-ransomware-subtle: rgba(220, 38, 38, 0.12);
+  --status-ransomware: #B91C1C; /* Deep ruby crimson */
+  --status-ransomware-subtle: rgba(185, 28, 28, 0.12);
 
-  --status-frozen: #0284C7;
-  --status-frozen-subtle: rgba(2, 132, 199, 0.12);
+  --status-frozen: #0369A1; /* Deep ocean */
+  --status-frozen-subtle: rgba(3, 105, 161, 0.12);
+
+  --grid-dots: rgba(30, 41, 59, 0.03); /* Tranquil 0.03 opacity */
+  --merkle-link-stroke: #94A3B8;
+  --merkle-link-width: 1.8px;
+  --icon-stroke-width: 1.8px;
 
   --logo-shackle: #1E293B;
-  --rail-bg: rgba(245, 246, 249, 0.92);
-  --diagram-bg: #EDF1F7;
-  --diagram-border: #D8DFE9;
-  --code-bg: #E7EDF5;
+  --rail-bg: rgba(246, 247, 249, 0.94);
+  --diagram-bg: #F1F4F9;
+  --diagram-border: #CBD5E1;
+  --code-bg: #EAEFF6;
   --code-border: #CBD5E1;
   --code-text: #0F172A;
   --modal-bg: #FFFFFF;
   --modal-header-bg: #F1F5F9;
-  --modal-text: #0F172A;
+  --modal-text: #1E293B;
   --modal-border: #CBD5E1;
 
   --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);

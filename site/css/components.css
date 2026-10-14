@@ -319,14 +319,24 @@
 }
 
 .merkle-link {
-  stroke: var(--border);
-  stroke-width: 1.5;
-  transition: stroke var(--dur-mid) var(--ease);
+  stroke: var(--merkle-link-stroke, var(--border));
+  stroke-width: var(--merkle-link-width, 1.8);
+  transition: stroke var(--dur-mid) var(--ease), stroke-width var(--dur-fast) var(--ease);
 }
 
 .merkle-link.compromised {
   stroke: var(--status-ransomware);
   stroke-dasharray: 4;
+  stroke-width: 2.2;
+}
+
+/* ── SVG Icon & Line Contrast Adaptivity ─────────────────────────────────── */
+:root[data-theme="light"] svg:not([data-no-boost]) {
+  stroke-width: var(--icon-stroke-width, 1.8);
+}
+
+:root[data-theme="light"] .status-chip {
+  font-weight: 700;
 }
 
 .merkle-root-info {

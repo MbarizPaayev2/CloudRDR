@@ -161,9 +161,9 @@ main:focus {
   padding: 0 var(--space-6);
 }
 
-/* Dotted grid for hero background */
+/* Dotted grid for hero background with tranquil opacity */
 .bg-grid-dots {
-  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-image: radial-gradient(var(--grid-dots, rgba(100, 116, 139, 0.03)) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
