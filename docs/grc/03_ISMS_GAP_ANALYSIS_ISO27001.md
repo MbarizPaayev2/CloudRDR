@@ -113,3 +113,56 @@ Below is the detailed gap analysis for all controls pertinent to CloudRDR's rans
 ## 5. Conclusion & Auditor Statement
 
 The CloudRDR project achieves an exceptionally high degree of alignment with **ISO/IEC 27001:2022**, particularly within the technological controls (A.8.7, A.8.13, A.8.15, A.8.16, A.8.24) and incident management controls (A.5.24–A.5.28). The automated detection and cryptographically verified restore pipeline addresses the most severe compliance failure points identified in contemporary ransomware incidents.
+
+---
+
+## 6. ISMS Governance, Project Management & Control Task Tracking
+
+In compliance with **ISO/IEC 27001:2022 Clause 5.3 (Organizational roles, responsibilities, and authorities)** and **Clause 6.2 (Information security objectives and planning to achieve them)**, the CloudRDR project enforces structured control governance through a centralized project tracking board.
+
+Every security requirement, cryptographic primitive, defensive mechanism, and testing milestone is mapped to specific work weeks (W1–W12) and assigned to designated role owners (PM-GRC, Backend, Crypto, DevOps, QA, Frontend) to prevent duty conflicts and guarantee complete auditability.
+
+### 6.1 Issue Tracking Board — In Progress & Backlog Control Tasks
+
+The screenshot below displays the operational ISMS issue backlog and active sprint items, including experimental threshold sweeps (`CRDR-21`), Statement of Applicability (SoA) control mapping (`CRDR-44`), incident response planning (`CRDR-43`), BCP/DRP plans (`CRDR-42`), and key management protocols (`CRDR-33`):
+
+<div align="center">
+  <img src="../assets/isms-issue-tracking-board-1.png" alt="CloudRDR ISMS Issue Tracking Board - In Progress & Backlog" width="100%" />
+  <p><em>Figure 6.1: CloudRDR ISMS Task Tracking Board — Active sprint and backlog control items mapped across work weeks (W1–W12) and security engineering domains.</em></p>
+</div>
+
+### 6.2 Issue Tracking Board — Completed (Done) Verification Milestones
+
+The screenshot below validates the completion of core technical controls, including verified restore (`CRDR-34`), automated IAM account freeze (`CRDR-24`), real-time monitoring agent (`CRDR-16`), SHA-256 cryptographic baseline module (`CRDR-11`), and automated testing suites (`CRDR-36`, `CRDR-15`):
+
+<div align="center">
+  <img src="../assets/isms-issue-tracking-board-2.png" alt="CloudRDR ISMS Issue Tracking Board - Completed Verification Milestones" width="100%" />
+  <p><em>Figure 6.2: CloudRDR ISMS Task Tracking Board — Verified milestones in 'Done' status confirming successful implementation of Annex A technological and incident response controls.</em></p>
+</div>
+
+### 6.3 Mapping of Tracked Control Tickets to ISO 27001:2022 Controls
+
+The following register provides the cryptographic and organizational traceability matrix for project reporting:
+
+| Ticket Key | Task Summary | Phase / Week | Owner Role | ISO 27001:2022 Mapping | Control Status |
+|---|---|---|---|---|---|
+| **CRDR-11** | SHA-256 baseline module | W3-4 | Crypto | A.8.24 (Use of Cryptography) | **Done** |
+| **CRDR-15** | Baseline unit tests | W3-4 | QA | Clause 9.1 (Monitoring & Measurement) | **Done** |
+| **CRDR-16** | Monitoring agent daemon | W5 | Backend | A.8.16 (Monitoring Activities) | **Done** |
+| **CRDR-24** | Account freeze (IAM read-only) | W8 | DevOps | A.5.26 (Response to Incidents) & A.5.29 | **Done** |
+| **CRDR-34** | Verified restore | W10 | Backend | A.8.13 (Information Backup) & A.5.28 | **Done** |
+| **CRDR-36** | Backup & restore tests (M5, M6) | W10 | QA | A.8.13 (Backup Testing & Verification) | **Done** |
+| **CRDR-21** | Threshold sweep experiment | W6-7 | QA | Clause 9.1 (Performance Evaluation) | **In Progress** |
+| **CRDR-19** | Change-rate detector | W6-7 | Backend | A.8.7 (Protection Against Malware) | **Backlog** |
+| **CRDR-28** | Hash-chained audit log | W9 | Crypto | A.8.15 (Logging) & A.5.28 (Evidence) | **Backlog** |
+| **CRDR-32** | AES-256-GCM backup | W10 | Crypto | A.8.24 (Cryptography) & A.8.13 | **Backlog** |
+| **CRDR-33** | Key management | W10 | Crypto | A.8.24 (Cryptographic Key Management) | **Backlog** |
+| **CRDR-38** | Metrics M1–M9 measurement | W11 | QA | Clause 9.1 (Evaluation & Measurement) | **Backlog** |
+| **CRDR-39** | Negative tests | W11 | QA | Clause 9.2 (Internal Audit / Testing) | **Backlog** |
+| **CRDR-37** | End-to-end demo script | W11 | QA | Clause 8.1 (Operational Planning) | **Backlog** |
+| **CRDR-42** | BCP/DRP plan | W12 | PM-GRC | A.5.29 & A.5.30 (ICT Readiness for BCP) | **Backlog** |
+| **CRDR-43** | Incident response plan | W12 | PM-GRC | A.5.24 & A.5.25 (Incident Management) | **Backlog** |
+| **CRDR-44** | SoA and control mapping | W12 | PM-GRC | Clause 6.1.3 (Statement of Applicability) | **Backlog** |
+| **CRDR-46** | Final report | W12 | PM-GRC | Clause 9.3 (Management Review) | **Backlog** |
+| **CRDR-47** | Presentation slides & rehearsal | W12 | PM-GRC | Clause 7.4 (Communication) | **Backlog** |
+

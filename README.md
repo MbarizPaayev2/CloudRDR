@@ -83,6 +83,24 @@ CloudRDR maintains a continuous Abstract Syntax Tree (AST) knowledge graph mappi
 
 ---
 
+## 📋 ISMS (ISO/IEC 27001:2022) Governance & Task Tracking
+
+The project operates under a formal **Information Security Management System (ISMS)** aligned with **ISO/IEC 27001:2022**, led by **Mübariz Paşayev (Project Manager & GRC Specialist)**. All security objectives, technological controls, incident response procedures, and testing gates are systematically tracked across work weeks (W1–W12) via a centralized project tracking board.
+
+Complete ISMS Gap Analysis & Traceability: [`docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md`](docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md)
+
+<div align="center">
+  <img src="docs/assets/isms-issue-tracking-board-1.png" alt="CloudRDR ISMS Issue Tracking Board - In Progress & Backlog" width="100%" />
+  <p><em>Figure: ISMS Control Tasks — In Progress & Backlog items (CRDR-21 threshold sweep, CRDR-44 SoA mapping, CRDR-43 incident response, CRDR-42 BCP/DRP).</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/assets/isms-issue-tracking-board-2.png" alt="CloudRDR ISMS Issue Tracking Board - Done Tasks" width="100%" />
+  <p><em>Figure: Completed ISMS Milestones — Verified restore (CRDR-34), IAM freeze containment (CRDR-24), monitoring agent (CRDR-16), baseline hashing (CRDR-11), and test harnesses (CRDR-36, CRDR-15).</em></p>
+</div>
+
+---
+
 ## Quick Start (Local Demo in Under 3 Minutes)
 
 CloudRDR is preconfigured to run out of the box with zero external cloud dependencies using its built-in local filesystem adapter and in-memory persistence layer.
