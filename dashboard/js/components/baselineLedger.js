@@ -10,6 +10,7 @@
 
 import { api } from '../api.js';
 import { setState, getState } from '../state.js';
+import { createIcon, setButtonContent } from '../icons.js';
 
 /**
  * Format an ISO date string to a readable archival format.
@@ -113,8 +114,12 @@ export function initBaselineLedger() {
       navigator.clipboard?.writeText(hash).then(() => {
         const icon = chip.querySelector('.copy-icon');
         if (icon) {
-          icon.textContent = '✓';
-          setTimeout(() => { icon.textContent = '⎘'; }, 1200);
+          icon.textContent = '';
+          icon.appendChild(createIcon('check', { size: 12 }));
+          setTimeout(() => {
+            icon.textContent = '';
+            icon.appendChild(createIcon('copy', { size: 12 }));
+          }, 1200);
         }
       });
     };
@@ -127,10 +132,12 @@ export function initBaselineLedger() {
   // Create baseline button
   const btn = document.getElementById('createBaselineBtn');
   if (btn) {
+    setButtonContent(btn, 'Capture New Baseline', 'sign', { leading: true });
     btn.addEventListener('click', async () => {
       if (!window.confirm('Create a new baseline snapshot now?\nThis will seal all current files as the new reference.')) return;
       btn.disabled = true;
-      btn.textContent = 'Sealing…';
+      btn.setAttribute('aria-busy', 'true');
+      setButtonContent(btn, 'Sealing…', 'loader', { spin: true, leading: true });
       try {
         const result = await api.createBaseline();
         setState({ baseline: result });
@@ -139,7 +146,8 @@ export function initBaselineLedger() {
         alert(`Baseline creation failed: [${err.code}] ${err.message}`);
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Create New Baseline';
+        btn.removeAttribute('aria-busy');
+        setButtonContent(btn, 'Capture New Baseline', 'sign', { leading: true });
       }
     });
   }

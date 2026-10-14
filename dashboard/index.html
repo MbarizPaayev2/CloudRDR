@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CloudRDR — Enterprise Security Operations Center (SOC)</title>
 
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <!-- Google Fonts: Geist & Geist Mono (Linear / Vercel Tier) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" />
 
   <!-- Corporate Design System -->
   <link rel="stylesheet" href="css/tokens.css" />
@@ -27,13 +28,18 @@
 <body>
 <div id="app">
 
+  <!-- Accessible Skip Link (WCAG 2.2 AA) -->
+  <a href="#merkle-hero" class="skip-link">Skip to main console content</a>
+
   <!-- ── Global Error Banner ─────────────────────────────────────────── -->
   <div id="global-error-banner" role="alert" aria-live="assertive">
     <span id="global-error-text"></span>
-    <button class="err-dismiss" id="global-error-dismiss" aria-label="Dismiss notification">✕</button>
+    <button class="err-dismiss" id="global-error-dismiss" aria-label="Dismiss notification">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
   </div>
 
-  <!-- ── Enterprise Navbar ───────────────────────────────────────────── -->
+  <!-- ── Enterprise Floating Island Navbar ───────────────────────────── -->
   <header class="site-header" role="banner">
     <div style="display:flex; align-items:center; gap:var(--space-4);">
       <div class="wordmark" aria-label="CloudRDR Enterprise SOC">
@@ -43,7 +49,8 @@
       </div>
 
       <a href="/landing" class="nav-link-btn" title="View Project Overview & Educational Guide">
-        ← Project Overview
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        <span>Project Overview</span>
       </a>
     </div>
 
@@ -60,15 +67,21 @@
 
       <label class="demo-toggle-wrap" title="Toggle between synthetic simulation and live backend API">
         <input type="checkbox" id="demoModeToggle" aria-label="Demo mode toggle" checked />
-        <span id="demoModeLabel">Demo Mode</span>
+        <span id="demoModeLabel">Demo</span>
       </label>
 
-      <button class="header-btn play-story" id="playStoryBtn" aria-label="Simulate full attack containment & verified recovery">
-        ▶ Run Attack Simulation
+      <button class="header-btn play-story" id="playStoryBtn" aria-label="Simulate full attack containment and verified recovery">
+        <span class="btn-label">Run Attack Simulation</span>
+        <span class="btn-icon-wrapper" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.5v15l12-7.5-12-7.5z"/></svg>
+        </span>
       </button>
 
       <button class="header-btn" id="manualRefreshBtn" aria-label="Refresh telemetry now">
-        ↻ Refresh
+        <span class="btn-icon-wrapper" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></svg>
+        </span>
+        <span class="btn-label">Refresh</span>
       </button>
     </nav>
   </header>
@@ -77,7 +90,7 @@
   <main class="workspace" role="main">
 
     <!-- ── LEFT SIDEBAR: Cryptographic Ledger & Sentinel ────────────── -->
-    <aside class="sidebar" aria-label="Cryptographic baseline & tripwire status">
+    <aside class="sidebar" aria-label="Cryptographic baseline and tripwire status">
 
       <!-- Real-time Threat Verdict Widget -->
       <div class="sidebar-section" id="verdict-zone" aria-live="polite" aria-label="Real-time threat verdict">
@@ -139,7 +152,9 @@
                   <div class="hash-chip" id="merkleRootChip" role="button" tabindex="0"
                        aria-label="Copy Merkle root hash">
                     <span class="hash-text" id="merkleRootText">—</span>
-                    <span class="copy-icon" aria-hidden="true">⎘</span>
+                    <span class="copy-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </span>
                   </div>
                 </td>
               </tr>
@@ -250,9 +265,9 @@
 
   </main>
 
-  <!-- ── Footer ──────────────────────────────────────────────────────── -->
+  <!-- ── Footer: Honest Telemetry Status (ui-ux-pro-max Real-Time Pattern) ─ -->
   <footer class="updated-line" aria-live="polite">
-    Telemetry Status: <strong style="color:var(--normal);">CONNECTED</strong> &nbsp;·&nbsp;
+    Telemetry Status: <strong id="footerStatus" class="telemetry-status simulated">SIMULATED</strong> &nbsp;·&nbsp;
     Last verified: <time id="footerUpdated">—</time> &nbsp;·&nbsp;
     <span id="footerMode">Demo mode (simulated attack vectors)</span>
   </footer>

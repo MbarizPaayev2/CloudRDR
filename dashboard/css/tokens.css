@@ -1,52 +1,64 @@
 /**
  * @file dashboard/css/tokens.css
- * CloudRDR Enterprise SOC — Corporate Security Design Tokens
- * Typography: Inter (UI) + JetBrains Mono (Hashes & Telemetry)
- * Palette: Deep Slate / Obsidian Midnight with Emerald / Crimson / Cobalt accents
+ * CloudRDR Enterprise Design Tokens — High-End Agency / Awwwards-Tier Design System
+ * Engineered with: high-end-visual-design, design-taste-frontend, minimalist-ui, industrial-brutalist-ui
+ * 
+ * Typography: Geist (Display & UI) + Geist Mono (Telemetry & Cryptographic Hashes)
+ * Surfaces: Deep OLED Canvas with Doppelrand (Double-Bezel) Nested Architecture
+ * Motion: Custom Cubic-Bezier Physics with Spring Damping
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* ── Canvas & Surface Hierarchy ─────────────────────────────────────── */
-  --bg-app:          #090D16;   /* obsidian deepest background */
-  --bg-surface:      #101726;   /* primary cards & panels */
-  --bg-surface-elev: #172136;   /* elevated interactive panels */
-  --bg-subtle:       #1E2B45;   /* inputs, chips, borders */
-  --bg-glass:        rgba(16, 23, 38, 0.85);
+  /* ── Canvas & Surface Hierarchy (Deep OLED Slate) ────────────────────────── */
+  --bg-app:          #050811;   /* deep OLED black canvas */
+  --bg-surface:      #0B101D;   /* primary container core */
+  --bg-surface-elev: #11182B;   /* elevated interactive panels */
+  --bg-subtle:       #18223B;   /* inputs, chips, borders */
+  --bg-glass:        rgba(11, 16, 29, 0.82);
 
-  /* Border Tones */
-  --border-subtle:   rgba(255, 255, 255, 0.08);
-  --border-medium:   rgba(255, 255, 255, 0.14);
+  /* Doppelrand (Double-Bezel Nested Architecture) */
+  --doppel-outer-bg:      rgba(255, 255, 255, 0.025);
+  --doppel-outer-border:  1px solid rgba(255, 255, 255, 0.08);
+  --doppel-outer-radius:  20px;
+  --doppel-outer-padding: 6px;
+  --doppel-inner-bg:      #0B101D;
+  --doppel-inner-radius:  14px;
+  --doppel-inner-shadow:  inset 0 1px 1px rgba(255, 255, 255, 0.08);
+
+  /* Border Tones (Ultra-Fine Hairlines) */
+  --border-subtle:   rgba(255, 255, 255, 0.07);
+  --border-medium:   rgba(255, 255, 255, 0.12);
   --border-active:   #3B82F6;
 
   /* Typography Colors */
-  --text-primary:    #F8FAFC;   /* 98% contrast pure heading white */
-  --text-secondary:  #94A3B8;   /* slate-400 clear body */
-  --text-muted:      #64748B;   /* slate-500 subtle labels */
-  --text-inverse:    #0B0F19;
+  --text-primary:    #F8FAFC;   /* 98% pure heading white */
+  --text-secondary:  #94A3B8;   /* crisp slate body */
+  --text-muted:      #64748B;   /* slate-500 subtle telemetry */
+  --text-inverse:    #050811;
 
-  /* Security Status Accents */
-  --threat:          #EF4444;   /* Crimson - Ransomware / Attack */
+  /* Security Status Accents (Calibrated Saturation < 80%) */
+  --threat:          #EF4444;   /* Laser Crimson - Ransomware */
   --threat-bg:       rgba(239, 68, 68, 0.12);
   --threat-border:   rgba(239, 68, 68, 0.35);
   --threat-glow:     rgba(239, 68, 68, 0.35);
 
-  --normal:          #10B981;   /* Emerald - Normal / Verified / Baseline */
+  --normal:          #10B981;   /* Cyber Emerald - Normal / Verified */
   --normal-bg:       rgba(16, 185, 129, 0.12);
   --normal-border:   rgba(16, 185, 129, 0.35);
   --normal-glow:     rgba(16, 185, 129, 0.35);
 
-  --warning:         #F59E0B;   /* Amber - Suspicious rate */
+  --warning:         #F59E0B;   /* Amber - Suspicious */
   --warning-bg:      rgba(245, 158, 11, 0.14);
   --warning-border:  rgba(245, 158, 11, 0.35);
 
-  --brand:           #3B82F6;   /* Cobalt Electric Blue */
+  --brand:           #3B82F6;   /* Electric Cobalt */
   --brand-hover:     #2563EB;
   --brand-bg:        rgba(59, 130, 246, 0.14);
   --brand-border:    rgba(59, 130, 246, 0.35);
 
-  --frost:           #06B6D4;   /* Cyan - Cryo IAM Lock */
+  --frost:           #06B6D4;   /* Cryo Cyan - IAM Account Lock */
   --frost-bg:        rgba(6, 182, 212, 0.14);
   --frost-border:    rgba(6, 182, 212, 0.35);
 
@@ -67,10 +79,10 @@
   --frost-mid:       var(--frost);
   --frost-light:     var(--frost-bg);
 
-  /* ── Typography Families ─────────────────────────────────────────────── */
-  --font-display:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono:       'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  --font-stamp:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* ── Typography Families ─────────────────────────────────────────────────── */
+  --font-display:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:       'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+  --font-stamp:      'Geist Mono', monospace;
 
   /* Typography Scale */
   --text-xs:    0.72rem;
@@ -82,7 +94,7 @@
   --text-2xl:   2.8rem;
   --text-hero:  3.6rem;
 
-  /* ── Spacing Scale ───────────────────────────────────────────────────── */
+  /* ── Spacing Scale ───────────────────────────────────────────────────────── */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -91,32 +103,35 @@
   --space-8: 2rem;
   --space-12: 3rem;
 
-  /* ── Structural Radii ────────────────────────────────────────────────── */
+  /* ── Structural Radii ────────────────────────────────────────────────────── */
   --radius-xs:   4px;
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   14px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
   --radius-full: 9999px;
 
-  /* ── Shadows & Elevation ─────────────────────────────────────────────── */
-  --shadow-sm:   0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md:   0 4px 14px -1px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
-  --shadow-lg:   0 12px 30px -4px rgba(0, 0, 0, 0.65), 0 4px 10px -2px rgba(0, 0, 0, 0.5);
+  /* ── Elevation & Colored Ambient Shadows ─────────────────────────────────── */
+  --shadow-sm:   0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md:   0 6px 20px -2px rgba(0, 0, 0, 0.55), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg:   0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 6px 14px -2px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px -4px rgba(59, 130, 246, 0.25);
   --shadow-doc:  var(--shadow-md);
   --shadow-lift: var(--shadow-lg);
 
-  /* ── Motion ──────────────────────────────────────────────────────────── */
-  --dur-fast:   140ms;
-  --dur-mid:    240ms;
-  --dur-slow:   380ms;
-  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+  /* ── Motion & Fluid Dynamic Physics ──────────────────────────────────────── */
+  --dur-fast:   150ms;
+  --dur-mid:    280ms;
+  --dur-slow:   500ms;
+  /* Agency-grade custom cubic-bezier (simulating physical spring mass) */
+  --ease:       cubic-bezier(0.32, 0.72, 0, 1);
   --ease-desk:  var(--ease);
   --ease-stamp: var(--ease);
 
-  /* ── Dimensions ──────────────────────────────────────────────────────── */
-  --sidebar-w:    320px;
-  --right-rail-w: 320px;
-  --header-h:     56px;
+  /* ── Dimensions ──────────────────────────────────────────────────────────── */
+  --sidebar-w:    330px;
+  --right-rail-w: 330px;
+  --header-h:     64px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -12,6 +12,7 @@ import { api } from '../api.js';
 import { setState, getState, selectIncident } from '../state.js';
 import { createSealChip } from './sealChip.js';
 import { showFrost, removeFrost } from './frostOverlay.js';
+import { createIcon, setButtonContent } from '../icons.js';
 
 /* ─── Formatting helpers ──────────────────────────────────────────────────── */
 
@@ -67,7 +68,7 @@ export function renderIncidentList(incidents, selectedId) {
     empty.className = 'empty-state';
     const icon = document.createElement('span');
     icon.className = 'empty-state-icon'; icon.setAttribute('aria-hidden', 'true');
-    icon.textContent = '📁';
+    icon.appendChild(createIcon('file', { size: 22 }));
     const lbl = document.createElement('div');
     lbl.className = 'empty-state-label'; lbl.textContent = 'No incidents on record';
     empty.appendChild(icon); empty.appendChild(lbl);
@@ -80,10 +81,10 @@ export function renderIncidentList(incidents, selectedId) {
     item.className = `case-file-item doc-enter${inc.id === selectedId ? ' selected' : ''}`;
     item.style.setProperty('--doc-tilt', '0deg');
     item.style.animationDelay = `${i * 0.05}s`;
-    item.setAttribute('role', 'listitem');
+    item.setAttribute('role', 'button');
     item.setAttribute('tabindex', '0');
     item.setAttribute('aria-label', `Case file: ${inc.account_id}, status ${inc.status}`);
-    item.setAttribute('aria-selected', inc.id === selectedId ? 'true' : 'false');
+    item.setAttribute('aria-pressed', inc.id === selectedId ? 'true' : 'false');
     item.dataset.incidentId = inc.id;
 
     // ID line
@@ -260,10 +261,10 @@ function buildTimelinePane(inc) {
   pane.id = 'pane-tab-timeline';
 
   const steps = [
-    { label: 'Ransomware Detected',  time: inc.detected_at,  done: true,  icon: '⚠' },
-    { label: 'Account Frozen',       time: inc.frozen_at,     done: !!inc.frozen_at, icon: '❄' },
-    { label: 'Restore Initiated',    time: _restoreJob?.started_at || null, done: !!_restoreJob, icon: '↺' },
-    { label: 'Verified & Resolved',  time: inc.resolved_at,   done: !!inc.resolved_at, icon: '✓' },
+    { label: 'Ransomware Detected',  time: inc.detected_at,  done: true,  icon: 'alert' },
+    { label: 'Account Frozen',       time: inc.frozen_at,     done: !!inc.frozen_at, icon: 'freeze' },
+    { label: 'Restore Initiated',    time: _restoreJob?.started_at || null, done: !!_restoreJob, icon: 'restore' },
+    { label: 'Verified & Resolved',  time: inc.resolved_at,   done: !!inc.resolved_at, icon: 'check' },
   ];
 
   const timeline = document.createElement('div');
@@ -278,7 +279,7 @@ function buildTimelinePane(inc) {
     const isActive = !step.done && (i === 0 || steps[i - 1]?.done);
     dot.className = `timeline-dot ${step.done ? 'done' : isActive ? 'active-step' : ''}`;
     dot.setAttribute('aria-hidden', 'true');
-    dot.textContent = step.done ? step.icon : '';
+    if (step.done) dot.appendChild(createIcon(step.icon, { size: 12 }));
     stepEl.appendChild(dot);
 
     const textBlock = document.createElement('div');
@@ -329,14 +330,19 @@ function buildEvidencePane(inc) {
       item.className = `scroll-list-item${isCanaryPath(p) ? ' canary-path' : ''}`;
       item.setAttribute('role', 'listitem');
 
-      const icon = document.createElement('span');
-      icon.setAttribute('aria-hidden', 'true');
-      icon.textContent = isCanaryPath(p) ? '⚠' : '·';
+      const icon = createIcon(isCanaryPath(p) ? 'alert' : 'file', { size: 13 });
       item.appendChild(icon);
 
       const pathSpan = document.createElement('span');
       pathSpan.textContent = p; // textContent: XSS-safe
       item.appendChild(pathSpan);
+
+      if (isCanaryPath(p)) {
+        const tag = document.createElement('span');
+        tag.className = 'canary-tag';
+        tag.textContent = 'canary';
+        item.appendChild(tag);
+      }
 
       list.appendChild(item);
     });
@@ -443,7 +449,7 @@ function renderRestoreConfirmForm(pane, inc) {
 
   const restoreBtn = document.createElement('button');
   restoreBtn.className = 'btn btn-restore';
-  restoreBtn.textContent = '✍ Authorise Restore';
+  setButtonContent(restoreBtn, 'Authorise Restore', 'sign', { leading: true });
   restoreBtn.setAttribute('aria-label', 'Authorise verified file restore');
   restoreBtn.addEventListener('click', () => handleRestoreClick(inc, pane));
   btnRow.appendChild(restoreBtn);
@@ -459,7 +465,11 @@ async function handleRestoreClick(inc, pane) {
   if (!confirmed) return;
 
   const btn = pane.querySelector('.btn-restore');
-  if (btn) { btn.disabled = true; btn.textContent = 'Dispatching…'; }
+  if (btn) {
+    btn.disabled = true;
+    btn.setAttribute('aria-busy', 'true');
+    setButtonContent(btn, 'Dispatching…', 'loader', { spin: true, leading: true });
+  }
 
   try {
     const job = await api.restoreIncident(inc.id);
@@ -477,7 +487,11 @@ async function handleRestoreClick(inc, pane) {
     msg.textContent = err.message || 'Restore request failed';
     errEl.appendChild(msg);
     pane.appendChild(errEl);
-    if (btn) { btn.disabled = false; btn.textContent = '✍ Authorise Restore'; }
+    if (btn) {
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+      setButtonContent(btn, 'Authorise Restore', 'sign', { leading: true });
+    }
   }
 }
 
@@ -566,9 +580,12 @@ function renderRestoreComplete(pane, job) {
   banner.className = `result-banner ${pct === 100 ? 'verified' : 'failed'}`;
   banner.setAttribute('role', 'status');
   banner.setAttribute('aria-live', 'polite');
-  banner.textContent = pct === 100
-    ? '100% VERIFIED ✓'
+  banner.appendChild(createIcon(pct === 100 ? 'check' : 'alert', { size: 15 }));
+  const bannerText = document.createElement('span');
+  bannerText.textContent = pct === 100
+    ? '100% verified against baseline'
     : `${modified} file${modified !== 1 ? 's' : ''} failed verification`;
+  banner.appendChild(bannerText);
   pane.appendChild(banner);
 }
 

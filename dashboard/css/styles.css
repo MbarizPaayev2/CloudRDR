@@ -37,20 +37,84 @@ body {
   z-index: 1;
 }
 
-/* ── Enterprise Navbar ──────────────────────────────────────────────────── */
+/* ── Accessibility & Focus Rings (WCAG 2.2 AA / ui-ux-pro-max) ────────── */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -80px;
+  left: 20px;
+  background: var(--brand);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: var(--text-xs);
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.2s var(--ease);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.skip-link:focus {
+  top: 14px;
+}
+
+/* ── Icon Utilities & Button-in-Button Architecture ─────────────────────── */
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.icon-spin {
+  animation: iconSpin 1s linear infinite;
+}
+
+@keyframes iconSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.btn-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  transition: transform 0.2s var(--ease);
+  flex-shrink: 0;
+}
+
+.header-btn:hover .btn-icon-wrapper {
+  transform: scale(1.12);
+}
+
+.header-btn:active, .btn-baseline:active, .btn-restore:active {
+  transform: scale(0.98);
+}
+
+/* ── Enterprise Floating Island Navbar ─────────────────────────────────── */
 .site-header {
+  margin: 14px 20px 0 20px;
   height: var(--header-h);
-  background: rgba(16, 23, 38, 0.95);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-medium);
+  background: rgba(11, 16, 29, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--space-6);
   position: sticky;
-  top: 0;
+  top: 14px;
   z-index: 100;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 
 .site-header .wordmark {
@@ -259,7 +323,8 @@ body {
   flex: 1;
   display: grid;
   grid-template-columns: var(--sidebar-w) 1fr var(--right-rail-w);
-  gap: 0;
+  gap: 14px;
+  padding: 14px 20px 20px 20px;
   min-height: 0;
   background: var(--bg-app);
 }
@@ -267,10 +332,12 @@ body {
 /* ── Left Sidebar: Sealed Ledger & Sentinel ─────────────────────────────── */
 .sidebar {
   background: var(--bg-surface);
-  border-right: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  box-shadow: var(--shadow-sm);
 }
 
 .sidebar-section {
@@ -579,7 +646,10 @@ body {
   flex-direction: column;
   overflow-y: auto;
   min-width: 0;
-  background: var(--bg-app);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Hero Merkle Tree */
@@ -1098,10 +1168,12 @@ body {
 /* ── Right Rail: Incident Response Queue ────────────────────────────────── */
 .right-rail {
   background: var(--bg-surface);
-  border-left: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  box-shadow: var(--shadow-sm);
 }
 
 .rail-header {
@@ -1200,8 +1272,46 @@ body {
   background: none;
   border: none;
   color: #FFFFFF;
-  font-size: 1rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+/* ── Telemetry & Tag Status Styles (ui-ux-pro-max Real-Time Pattern) ────── */
+.telemetry-status {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.telemetry-status.online { color: var(--normal); }
+.telemetry-status.simulated { color: #38BDF8; }
+.telemetry-status.loading { color: var(--warning); }
+.telemetry-status.offline { color: var(--threat); }
+
+.canary-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid var(--warning-border);
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  margin-left: auto;
+}
+
+.chain-broken-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--threat);
+  margin-top: 2px;
 }
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
@@ -1209,7 +1319,7 @@ body {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-muted);
-  padding: 8px var(--space-6);
+  padding: 10px var(--space-6);
   border-top: 1px solid var(--border-subtle);
   background: var(--bg-surface);
   text-align: right;
@@ -1235,21 +1345,53 @@ body {
   background: var(--text-muted);
 }
 
-/* ── Responsive ─────────────────────────────────────────────────────────── */
-@media (max-width: 1100px) {
+/* ── Systematic Responsive Breakpoints (375 / 768 / 1024 / 1440) ────────── */
+@media (max-width: 1200px) {
   :root {
-    --sidebar-w: 280px;
-    --right-rail-w: 280px;
+    --sidebar-w: 290px;
+    --right-rail-w: 290px;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .site-header {
+    margin: 10px 14px 0 14px;
+    height: auto;
+    padding: var(--space-3) var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    border-radius: var(--radius-lg);
+  }
   .workspace {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
+    padding: 10px 14px 14px 14px;
   }
-  .sidebar, .right-rail {
-    border: none;
-    border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 768px) {
+  .header-controls {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .header-meta {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .updated-line {
+    text-align: center;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .site-header .wordmark em {
+    display: none;
+  }
+  .header-btn {
+    padding: 6px 10px;
+    font-size: 0.72rem;
   }
 }

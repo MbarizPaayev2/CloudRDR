@@ -1,12 +1,25 @@
 /**
  * @file dashboard/css/animations.css
- * CloudRDR Enterprise SOC — High-Tech Cyber Telemetry Animations
+ * CloudRDR Enterprise SOC — High-End Motion & Spring Physics
+ * Engineered with: high-end-visual-design, gpt-taste, stitch-design-taste
  */
+
+/* ── Fluid Spatial Entry (Cubic-Bezier Spring Mass) ─────────────────────── */
+@keyframes fluidFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @keyframes slideOnDesk {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -23,10 +36,10 @@
 @keyframes radarPing {
   0% {
     transform: scale(0.9);
-    opacity: 0.8;
+    opacity: 0.85;
   }
-  70%, 100% {
-    transform: scale(2.5);
+  60%, 100% {
+    transform: scale(2.6);
     opacity: 0;
   }
 }
@@ -34,10 +47,10 @@
 /* ── Threat Badge Laser Pulse ─────────────────────────────────────────── */
 @keyframes badgeAlertPulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
   }
 }
 
@@ -47,7 +60,7 @@
     box-shadow: inset 0 0 0px rgba(239, 68, 68, 0);
   }
   50% {
-    box-shadow: inset 0 0 75px rgba(239, 68, 68, 0.25);
+    box-shadow: inset 0 0 90px rgba(239, 68, 68, 0.3);
   }
 }
 
@@ -59,21 +72,27 @@
   }
   to {
     opacity: 1;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(4px);
   }
 }
 
 /* ── Metric Increment Count-up ─────────────────────────────────────────── */
 @keyframes countUp {
-  from { opacity: 0.3; transform: translateY(3px); }
-  to   { opacity: 1;   transform: translateY(0); }
+  from { 
+    opacity: 0.2; 
+    transform: translateY(4px); 
+  }
+  to { 
+    opacity: 1;   
+    transform: translateY(0); 
+  }
 }
 
 /* ── Verification Banner Reveal ────────────────────────────────────────── */
 @keyframes bannerReveal {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(10px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -87,32 +106,42 @@
   100% { background-position: 400px 0; }
 }
 
+/* ── Ambient Radial Mesh Orb Float ─────────────────────────────────────── */
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+}
+
 /* ── Standard Pulse ────────────────────────────────────────────────────── */
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50%      { opacity: 0.45; }
+  50%      { opacity: 0.4; }
 }
 
-/* ── Hook Classes ──────────────────────────────────────────────────────── */
+/* ── Staggered Staging Classes ─────────────────────────────────────────── */
 .doc-enter {
   opacity: 0;
 }
+
 .doc-enter.entered {
-  animation: slideOnDesk var(--dur-mid) var(--ease) both;
+  animation: fluidFadeUp 0.6s var(--ease) forwards;
 }
 
-body.verdict-ransomware {
-  animation: redWash 2.2s ease-in-out infinite;
+.doc-enter:nth-child(1) { animation-delay: 0.05s; }
+.doc-enter:nth-child(2) { animation-delay: 0.12s; }
+.doc-enter:nth-child(3) { animation-delay: 0.18s; }
+.doc-enter:nth-child(4) { animation-delay: 0.24s; }
+.doc-enter:nth-child(5) { animation-delay: 0.30s; }
+
+/* ── Kinetic Micro-Interactions ────────────────────────────────────────── */
+.kinetic-btn {
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 
-.skeleton {
-  border-radius: var(--radius-xs);
-  background: linear-gradient(
-    90deg,
-    #131B2B 25%,
-    #1F2B44 50%,
-    #131B2B 75%
-  );
-  background-size: 400px 100%;
-  animation: shimmer 1.5s linear infinite;
+.kinetic-btn:active {
+  transform: scale(0.98);
 }

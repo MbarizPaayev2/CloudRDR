@@ -9,6 +9,7 @@
  */
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
+import { createIcon } from '../icons.js';
 
 /**
  * Build an SVG chain-link connector between two nodes.
@@ -109,7 +110,7 @@ export function renderHashChain(entries) {
     const icon = document.createElement('span');
     icon.className = 'empty-state-icon';
     icon.setAttribute('aria-hidden', 'true');
-    icon.textContent = '⛓';
+    icon.appendChild(createIcon('link', { size: 22 }));
     empty.appendChild(icon);
     const lbl = document.createElement('div');
     lbl.className = 'empty-state-label';
@@ -155,8 +156,11 @@ export function renderHashChain(entries) {
     // Broken indicator
     if (isBroken) {
       const brkSpan = document.createElement('div');
-      brkSpan.style.cssText = `font-family:var(--font-stamp);font-size:0.58rem;color:var(--seal);margin-top:2px;letter-spacing:0.06em;`;
-      brkSpan.textContent = '⚠ BROKEN';
+      brkSpan.className = 'chain-broken-tag';
+      brkSpan.appendChild(createIcon('alert', { size: 11 }));
+      const brkText = document.createElement('span');
+      brkText.textContent = 'Broken';
+      brkSpan.appendChild(brkText);
       node.appendChild(brkSpan);
     }
 

@@ -7,6 +7,8 @@
  * Security: uses textContent only, no innerHTML.
  */
 
+import { createIcon } from '../icons.js';
+
 const VERDICT_CONFIG = {
   normal: {
     word: 'NORMAL',
@@ -20,14 +22,16 @@ const VERDICT_CONFIG = {
     sub: 'Elevated change rate detected — monitoring',
     bodyClass: 'verdict-suspicious',
     stampClass: 'restoring',
-    stampText: '⚡ SUSPICIOUS',
+    stampText: 'Suspicious',
+    stampIcon: 'zap',
   },
   ransomware: {
     word: 'RANSOMWARE',
     sub: 'Attack in progress — account frozen',
     bodyClass: 'verdict-ransomware',
     stampClass: 'open',
-    stampText: '⚠ RANSOMWARE',
+    stampText: 'Ransomware',
+    stampIcon: 'alert',
   },
 };
 
@@ -62,9 +66,13 @@ export function updateVerdictStamp(verdict, canaryTriggered = false) {
   const stampEl = document.getElementById('verdictStampEl');
   if (stampEl) {
     if (cfg.stampText) {
-      stampEl.textContent = cfg.stampText;
+      stampEl.textContent = '';
+      if (cfg.stampIcon) stampEl.appendChild(createIcon(cfg.stampIcon, { size: 12 }));
+      const word = document.createElement('span');
+      word.textContent = cfg.stampText;
+      stampEl.appendChild(word);
       stampEl.className = `status-stamp ${cfg.stampClass || ''}`;
-      stampEl.style.display = 'inline-block';
+      stampEl.style.display = 'inline-flex';
       // Trigger stamp animation if verdict changed
       if (verdict !== _lastVerdict) {
         stampEl.classList.remove('stamped');

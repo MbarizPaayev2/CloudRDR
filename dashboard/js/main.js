@@ -20,6 +20,7 @@ import { initDetectionChart, updateDetectionChart } from './components/detection
 import { updateCanaryCage } from './components/canaryCage.js';
 import { renderCaseFile } from './components/caseFile.js';
 import { renderHashChain } from './components/hashChain.js';
+import { setButtonContent } from './icons.js';
 
 /* ─── State ─────────────────────────────────────────────────────────────── */
 let _pollTimer    = null;
@@ -43,21 +44,31 @@ function updateUI(state) {
   // 1. Verdict stamp + body class
   updateVerdictStamp(state.currentVerdict, state.canaryTriggered);
 
-  // 2. Health indicator
+  // 2. Health indicator + footer telemetry status.
+  // Rule (ui-ux-pro-max, Real-Time pattern): only label telemetry "live" when a
+  // real source backs it; demo data is labelled as simulated.
   const dot  = document.getElementById('healthDot');
   const text = document.getElementById('healthText');
+  const footerStatus = document.getElementById('footerStatus');
+  const h = state.health;
+  let statusWord = 'OFFLINE';
+  let statusClass = 'offline';
+  if (h?.status === 'ok') {
+    statusWord = CONFIG.USE_MOCK ? 'SIMULATED' : 'LIVE';
+    statusClass = CONFIG.USE_MOCK ? 'simulated' : 'online';
+  } else if (h?.status === 'loading') {
+    statusWord = 'CONNECTING';
+    statusClass = 'loading';
+  }
   if (dot && text) {
-    const h = state.health;
-    if (h?.status === 'ok') {
-      dot.className  = 'health-dot online';
-      text.textContent = `Online ${h.uptime ? `(${Math.round(h.uptime)}s)` : ''}`;
-    } else if (h?.status === 'loading') {
-      dot.className  = 'health-dot loading';
-      text.textContent = 'Connecting…';
-    } else {
-      dot.className  = 'health-dot offline';
-      text.textContent = 'Offline';
-    }
+    dot.className = `health-dot ${statusClass === 'simulated' ? 'online' : statusClass}`;
+    text.textContent = h?.status === 'ok'
+      ? `${CONFIG.USE_MOCK ? 'Simulated' : 'Online'}${h.uptime ? ` · ${Math.round(h.uptime)}s` : ''}`
+      : h?.status === 'loading' ? 'Connecting…' : 'Offline';
+  }
+  if (footerStatus) {
+    footerStatus.textContent = statusWord;
+    footerStatus.className = `telemetry-status ${statusClass}`;
   }
 
   // 3. Baseline ledger
@@ -187,10 +198,12 @@ function initManualRefresh() {
   if (!btn) return;
   btn.addEventListener('click', async () => {
     btn.disabled = true;
-    btn.textContent = '↻ …';
+    btn.setAttribute('aria-busy', 'true');
+    setButtonContent(btn, 'Refreshing…', 'loader', { spin: true, leading: true });
     await refreshAll();
     btn.disabled = false;
-    btn.textContent = '↻ Refresh';
+    btn.removeAttribute('aria-busy');
+    setButtonContent(btn, 'Refresh', 'refresh', { leading: true });
   });
 }
 
@@ -245,7 +258,11 @@ async function playStory() {
   _storyPlaying = true;
 
   const btn = document.getElementById('playStoryBtn');
-  if (btn) { btn.disabled = true; btn.textContent = '▶ Playing…'; }
+  if (btn) {
+    btn.disabled = true;
+    btn.setAttribute('aria-busy', 'true');
+    setButtonContent(btn, 'Simulating…', 'loader', { spin: true });
+  }
 
   stopPolling();
 
@@ -338,7 +355,11 @@ async function playStory() {
   await sleep(500);
 
   // ── Done ────────────────────────────────────────────────────────────
-  if (btn) { btn.disabled = false; btn.textContent = '▶ Play Story'; }
+  if (btn) {
+    btn.disabled = false;
+    btn.removeAttribute('aria-busy');
+    setButtonContent(btn, 'Run Attack Simulation', 'play');
+  }
   _storyPlaying = false;
 
   // Resume normal polling
