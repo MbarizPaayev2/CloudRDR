@@ -237,6 +237,14 @@ export async function dashboardRoutes(fastify) {
   fastify.get('/admin/', handleDashboard);
   fastify.get('/admin/index.html', handleDashboard);
 
+  // Dashboard-only static assets. Kept separate from /css and /js, which prefer
+  // site/ files with identical names (tokens.css, main.js...) and broke styling.
+  fastify.get('/dashboard/*', async (request, reply) => {
+    const file = request.params['*'];
+    if (!/^(css|js|assets)\//.test(file)) return reply.status(404).send('Not Found');
+    return serveFile(file, reply);
+  });
+
   fastify.get('/landing', async (_request, reply) => {
     return serveFile('landing.html', reply);
   });
