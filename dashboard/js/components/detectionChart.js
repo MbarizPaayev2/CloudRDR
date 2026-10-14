@@ -1,170 +1,198 @@
 /**
  * @file dashboard/js/components/detectionChart.js
  *
- * Sliding-Window Detection Telemetry Chart for CloudRDR.
- * Renders a high-contrast time-series chart via Chart.js:
- *   - Observed Change Rate (%)
- *   - Configured Ransomware Threshold (30% horizontal guide)
- *   - Suspicious Warning Threshold (10% horizontal guide)
- *   - Prominent red alert markers for canary-triggered evaluation runs
+ * Detection chart: Chart.js line chart styled as an ink-pen trace on
+ * ledger paper, with a horizontal wax-line threshold and canary markers.
+ *
+ * Style decisions:
+ *   - Paper-toned background, thin ink-dark line for change_rate
+ *   - Threshold shown as a dashed horizontal red wax line (annotation plugin
+ *     not available → drawn as a second dataset with constant value)
+ *   - Canary events: red diamond point markers via pointStyle array
  */
 
-let chartInstance = null;
+/** @type {import('Chart').Chart|null} */
+let _chart = null;
 
 /**
- * Format ISO timestamp to HH:MM:SS for the chart X-axis.
- * @param {string} isoString
- * @returns {string}
+ * Map of verdict → line color for the trace segments.
+ * We use a uniform ink-dark line for simplicity (verdict shown elsewhere).
  */
-function formatTime(isoString) {
-  if (!isoString) return '';
-  try {
-    const d = new Date(isoString);
-    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  } catch (_e) {
-    return '';
+const TRACE_COLOR   = '#1B1A17';
+const THRESHOLD_CLR = '#B3261E';
+const CANARY_CLR    = '#B3261E';
+
+/**
+ * Build Chart.js data structure from detection runs.
+ * @param {Array} runs
+ */
+function buildChartData(runs) {
+  const labels        = [];
+  const rateData      = [];
+  const threshData    = [];
+  const pointColors   = [];
+  const pointRadius   = [];
+  const pointStyles   = [];
+
+  for (const run of runs) {
+    const t = run.created_at
+      ? new Date(run.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      : '—';
+    labels.push(t);
+    rateData.push(+(run.change_rate * 100).toFixed(1)); // percentage
+    threshData.push(+(run.threshold * 100).toFixed(1));
+
+    // Canary: red diamond, larger radius
+    const isCanary = Boolean(run.canary_triggered);
+    pointColors.push(isCanary ? CANARY_CLR : TRACE_COLOR);
+    pointRadius.push(isCanary ? 7 : 3);
+    pointStyles.push(isCanary ? 'rectRot' : 'circle'); // rectRot = diamond
   }
+
+  return { labels, rateData, threshData, pointColors, pointRadius, pointStyles };
 }
 
 /**
- * Initialize or update the Chart.js instance.
- * @param {Array<any>} detectionRuns
+ * Initialise (or re-init) the detection chart.
+ * @param {HTMLCanvasElement} canvas
+ * @param {Array} runs
  */
-export function updateDetectionChart(detectionRuns = []) {
-  const canvas = document.getElementById('detectionChartCanvas');
-  if (!canvas || typeof Chart === 'undefined') return;
+export function initDetectionChart(canvas, runs) {
+  if (_chart) { _chart.destroy(); _chart = null; }
 
-  const runs = [...detectionRuns];
-  const labels = runs.map((r) => formatTime(r.created_at));
-  const changeRates = runs.map((r) => Number(r.change_rate || 0));
-  const ransomwareThresholds = runs.map(() => 0.3);
-  const suspiciousThresholds = runs.map(() => 0.1);
+  const { labels, rateData, threshData, pointColors, pointRadius, pointStyles } = buildChartData(runs);
 
-  // Dynamic point colors and sizes to highlight canary triggers
-  const pointBackgroundColors = runs.map((r) => (r.canary_triggered ? '#ef4444' : '#6366f1'));
-  const pointBorderColors = runs.map((r) => (r.canary_triggered ? '#ffffff' : '#4f46e5'));
-  const pointRadii = runs.map((r) => (r.canary_triggered ? 7 : 4));
-  const pointHoverRadii = runs.map((r) => (r.canary_triggered ? 9 : 6));
-
-  if (!chartInstance) {
-    const ctx = canvas.getContext('2d');
-    chartInstance = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Observed Change Rate',
-            data: changeRates,
-            borderColor: '#6366f1',
-            backgroundColor: 'rgba(99, 102, 241, 0.12)',
-            borderWidth: 2.5,
-            tension: 0.25,
-            fill: true,
-            pointBackgroundColor: pointBackgroundColors,
-            pointBorderColor: pointBorderColors,
-            pointBorderWidth: 2,
-            pointRadius: pointRadii,
-            pointHoverRadius: pointHoverRadii,
-          },
-          {
-            label: 'Ransomware Threshold (30%)',
-            data: ransomwareThresholds,
-            borderColor: '#ef4444',
-            borderWidth: 2,
-            borderDash: [6, 6],
-            pointRadius: 0,
-            fill: false,
-          },
-          {
-            label: 'Suspicious Threshold (10%)',
-            data: suspiciousThresholds,
-            borderColor: '#f59e0b',
-            borderWidth: 1.5,
-            borderDash: [4, 4],
-            pointRadius: 0,
-            fill: false,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: { duration: 400 },
-        interaction: {
-          mode: 'index',
-          intersect: false,
+  _chart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          // Threshold — constant horizontal wax line
+          label: 'Threshold',
+          data: threshData,
+          borderColor: THRESHOLD_CLR,
+          borderWidth: 1.5,
+          borderDash: [6, 4],
+          pointRadius: 0,
+          fill: false,
+          tension: 0,
+          order: 1,
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 1.0,
-            ticks: {
-              callback: (val) => `${(val * 100).toFixed(0)}%`,
-              color: '#94a3b8',
-              font: { family: 'ui-monospace, SFMono-Regular, monospace', size: 10 },
-            },
-            grid: {
-              color: 'rgba(148, 163, 184, 0.12)',
-            },
-          },
-          x: {
-            ticks: {
-              color: '#94a3b8',
-              font: { family: 'ui-monospace, SFMono-Regular, monospace', size: 10 },
-              maxRotation: 0,
-            },
-            grid: {
-              color: 'rgba(148, 163, 184, 0.08)',
-            },
-          },
+        {
+          // Change rate trace
+          label: 'Change Rate %',
+          data: rateData,
+          borderColor: TRACE_COLOR,
+          borderWidth: 2,
+          backgroundColor: 'rgba(27,26,23,0.06)',
+          fill: 'origin',
+          tension: 0.35,
+          pointBackgroundColor: pointColors,
+          pointBorderColor: pointColors,
+          pointRadius,
+          pointStyle: pointStyles,
+          pointHoverRadius: 8,
+          order: 2,
         },
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            backgroundColor: '#0f172a',
-            titleColor: '#f8fafc',
-            bodyColor: '#cbd5e1',
-            borderColor: '#334155',
-            borderWidth: 1,
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 400, easing: 'easeOutQuart' },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          align: 'end',
+          labels: {
+            font: { family: "'Special Elite', 'Courier New', monospace", size: 10 },
+            color: '#5A5040',
+            boxWidth: 20,
             padding: 10,
-            boxPadding: 4,
-            callbacks: {
-              label(context) {
-                const run = runs[context.dataIndex];
-                if (context.datasetIndex === 0) {
-                  const pct = `${(context.parsed.y * 100).toFixed(1)}%`;
-                  const canaryTxt = run?.canary_triggered ? ' [CANARY TRIPPED]' : '';
-                  return ` Rate: ${pct} (${run?.verdict?.toUpperCase() || 'NORMAL'})${canaryTxt}`;
-                }
-                return ` ${context.dataset.label}`;
-              },
-              afterBody(contexts) {
-                const run = runs[contexts[0].dataIndex];
-                if (!run) return [];
-                return [
-                  `Account: ${run.account_id || 'unknown'}`,
-                  `Files: ${run.changed_files || 0} / ${run.total_files || 0}`,
-                  `Window: ${run.window_seconds || 60}s`,
-                ];
-              },
+          },
+        },
+        tooltip: {
+          backgroundColor: '#1B1A17',
+          titleColor: '#EFE6D2',
+          bodyColor: '#D5C5A8',
+          borderColor: '#5A5040',
+          borderWidth: 1,
+          titleFont: { family: "'Martian Mono', monospace", size: 10 },
+          bodyFont: { family: "'Martian Mono', monospace", size: 10 },
+          padding: 8,
+          callbacks: {
+            label: (ctx) => {
+              if (ctx.datasetIndex === 1) {
+                const run = runs[ctx.dataIndex];
+                const suffix = run?.canary_triggered ? ' ⚠ CANARY' : '';
+                return ` Change rate: ${ctx.raw}%${suffix}`;
+              }
+              return ` Threshold: ${ctx.raw}%`;
             },
           },
         },
       },
-    });
-  } else {
-    // Update data without rebuilding instance
-    chartInstance.data.labels = labels;
-    chartInstance.data.datasets[0].data = changeRates;
-    chartInstance.data.datasets[0].pointBackgroundColor = pointBackgroundColors;
-    chartInstance.data.datasets[0].pointBorderColor = pointBorderColors;
-    chartInstance.data.datasets[0].pointRadius = pointRadii;
-    chartInstance.data.datasets[0].pointHoverRadius = pointHoverRadii;
-    chartInstance.data.datasets[1].data = ransomwareThresholds;
-    chartInstance.data.datasets[2].data = suspiciousThresholds;
-    chartInstance.update();
+      scales: {
+        x: {
+          grid: {
+            color: 'rgba(27,26,23,0.06)',
+            lineWidth: 1,
+          },
+          ticks: {
+            font: { family: "'Martian Mono', monospace", size: 9 },
+            color: '#9C8F78',
+            maxRotation: 0,
+            maxTicksLimit: 8,
+          },
+          border: { color: '#D5C5A8' },
+        },
+        y: {
+          beginAtZero: true,
+          min: 0,
+          suggestedMax: 60,
+          grid: {
+            color: 'rgba(27,26,23,0.06)',
+            lineWidth: 1,
+          },
+          ticks: {
+            font: { family: "'Martian Mono', monospace", size: 9 },
+            color: '#9C8F78',
+            callback: (v) => `${v}%`,
+          },
+          border: { color: '#D5C5A8' },
+        },
+      },
+    },
+  });
+}
+
+/**
+ * Update an existing chart with new runs data.
+ * @param {Array} runs
+ */
+export function updateDetectionChart(runs) {
+  if (!_chart) return;
+  const { labels, rateData, threshData, pointColors, pointRadius, pointStyles } = buildChartData(runs);
+
+  _chart.data.labels = labels;
+  _chart.data.datasets[0].data = threshData;
+  _chart.data.datasets[1].data = rateData;
+  _chart.data.datasets[1].pointBackgroundColor = pointColors;
+  _chart.data.datasets[1].pointBorderColor     = pointColors;
+  _chart.data.datasets[1].pointRadius          = pointRadius;
+  _chart.data.datasets[1].pointStyle           = pointStyles;
+  _chart.update();
+
+  // Update latest rate display
+  const latestRateEl = document.getElementById('chartLatestRate');
+  if (latestRateEl && rateData.length) {
+    const last = rateData[rateData.length - 1];
+    latestRateEl.textContent = `${last}%`;
   }
 }
+
+/** Return the chart instance (for story player). */
+export function getChartInstance() { return _chart; }

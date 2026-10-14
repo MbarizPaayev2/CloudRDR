@@ -1,240 +1,390 @@
+/**
+ * @file dashboard/js/main.js
+ *
+ * CloudRDR Dashboard — The Notary's Archive
+ * Main entry point: wires all components together, manages polling,
+ * page-load entrance, demo toggle, and the "Play Story" narrative.
+ *
+ * Security: no API data via innerHTML. All component APIs use textContent.
+ */
+
 import { CONFIG, updateConfig } from './config.js';
-import { refreshAll, subscribe } from './state.js';
-import { updateStatusBar } from './components/statusBar.js';
-import { initBaselinePanel, updateBaselinePanel } from './components/baselinePanel.js';
-import { updateDetectionChart } from './components/detectionChart.js';
-import { updateIncidentList } from './components/incidentList.js';
-import { updateIncidentDetail } from './components/incidentDetail.js';
-import { updateRestorePanel } from './components/restorePanel.js';
-import { updateAuditLog } from './components/auditLog.js';
+import { api } from './api.js';
+import { getState, setState, subscribe, refreshAll } from './state.js';
+import { mockApi } from './mock/mockApi.js';
 
-// ── Theme Manager ────────────────────────────────────────────────────────────
+import { initMerkleTree, setLeafState, animateCorruption, animateRestore, setRootHash, getLeafCount } from './components/merkleTree.js';
+import { updateVerdictStamp } from './components/verdictStamp.js';
+import { renderBaseline, initBaselineLedger } from './components/baselineLedger.js';
+import { initDetectionChart, updateDetectionChart } from './components/detectionChart.js';
+import { updateCanaryCage } from './components/canaryCage.js';
+import { renderCaseFile } from './components/caseFile.js';
+import { renderHashChain } from './components/hashChain.js';
 
-function initTheme() {
-  const html = document.documentElement;
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themeToggleIcon = document.getElementById('themeToggleIcon');
+/* ─── State ─────────────────────────────────────────────────────────────── */
+let _pollTimer    = null;
+let _storyPlaying = false;
 
-  function applyTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    updateConfig('THEME', theme);
-    if (themeToggleIcon) {
-      themeToggleIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
-    if (themeToggleBtn) {
-      themeToggleBtn.setAttribute(
-        'title',
-        `Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`
-      );
-    }
-  }
+/* ─── Merkle tree sizing ─────────────────────────────────────────────────── */
+let _treeInited = false;
+const LEAF_COUNT = 20; // illustrative
 
-  // Apply stored or default theme
-  applyTheme(CONFIG.THEME || 'dark');
-
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-    });
+function ensureMerkleTree(fileCount) {
+  const svg = document.getElementById('merkle-svg');
+  if (!svg) return;
+  if (!_treeInited) {
+    initMerkleTree(svg, Math.min(fileCount || LEAF_COUNT, 32));
+    _treeInited = true;
   }
 }
 
-// ── Demo Mode Toggle & Manual Refresh ────────────────────────────────────────
+/* ─── UI update (called on every state change) ──────────────────────────── */
+function updateUI(state) {
+  // 1. Verdict stamp + body class
+  updateVerdictStamp(state.currentVerdict, state.canaryTriggered);
 
-function initDemoMode() {
-  const toggle = document.getElementById('demoModeToggle');
-  if (toggle) {
-    toggle.checked = CONFIG.USE_MOCK;
-    toggle.addEventListener('change', (e) => {
-      updateConfig('USE_MOCK', e.target.checked);
-      const label = e.target.nextElementSibling;
-      if (label) {
-        label.textContent = e.target.checked ? 'Demo Mock' : 'Live API';
-      }
-      console.info(`[CloudRDR] Mode switched to: ${e.target.checked ? 'MOCK DATA' : 'LIVE API'}`);
-      refreshAll();
-    });
-  }
-
-  const manualRefreshBtn = document.getElementById('manualRefreshBtn');
-  if (manualRefreshBtn) {
-    manualRefreshBtn.addEventListener('click', async () => {
-      manualRefreshBtn.disabled = true;
-      const originalText = manualRefreshBtn.textContent;
-      manualRefreshBtn.textContent = '⏳ Refreshing...';
-      try {
-        await refreshAll();
-      } finally {
-        manualRefreshBtn.disabled = false;
-        manualRefreshBtn.textContent = originalText;
-      }
-    });
-  }
-}
-
-// ── System Error Banner ──────────────────────────────────────────────────────
-
-function initErrorBanner() {
-  const banner = document.getElementById('systemErrorBanner');
-  const codeEl = document.getElementById('errorBannerCode');
-  const messageEl = document.getElementById('errorBannerMessage');
-  const dismissBtn = document.getElementById('errorBannerDismissBtn');
-
-  if (dismissBtn && banner) {
-    dismissBtn.addEventListener('click', () => {
-      banner.style.display = 'none';
-    });
-  }
-
-  // Reactive subscription for error handling
-  subscribe((state) => {
-    if (!banner || !codeEl || !messageEl) return;
-
-    if (state.error) {
-      codeEl.textContent = state.error.code || 'ERROR';
-      messageEl.textContent = state.error.message || 'Operation failed';
-      banner.style.display = 'flex';
+  // 2. Health indicator
+  const dot  = document.getElementById('healthDot');
+  const text = document.getElementById('healthText');
+  if (dot && text) {
+    const h = state.health;
+    if (h?.status === 'ok') {
+      dot.className  = 'health-dot online';
+      text.textContent = `Online ${h.uptime ? `(${Math.round(h.uptime)}s)` : ''}`;
+    } else if (h?.status === 'loading') {
+      dot.className  = 'health-dot loading';
+      text.textContent = 'Connecting…';
     } else {
-      banner.style.display = 'none';
+      dot.className  = 'health-dot offline';
+      text.textContent = 'Offline';
     }
-  });
+  }
+
+  // 3. Baseline ledger
+  renderBaseline(state);
+
+  // 4. Canary cage
+  updateCanaryCage(state.canaryTriggered, state.currentVerdict);
+
+  // 5. Merkle tree: init on first baseline, then update leaf states
+  if (state.baseline) {
+    ensureMerkleTree(state.baseline.file_count || LEAF_COUNT);
+
+    // Update root hash display
+    const hashState = state.currentVerdict === 'ransomware'
+      ? 'compromised'
+      : state.currentVerdict === 'normal'
+        ? 'normal'
+        : 'normal';
+    setRootHash(state.baseline.merkle_root, hashState);
+
+    // Update tree leaf/corrupt counters
+    const leafCountEl   = document.getElementById('treeLeafCount');
+    const corruptCountEl = document.getElementById('treeCorruptCount');
+    if (leafCountEl) leafCountEl.textContent = state.baseline.file_count || LEAF_COUNT;
+
+    const affectedCount = state.selectedIncident?.affected_paths?.length || 0;
+    if (corruptCountEl) {
+      corruptCountEl.textContent = `${affectedCount} corrupt`;
+      corruptCountEl.style.display = affectedCount > 0 ? '' : 'none';
+    }
+
+    // Update merkle root also in sidebar ledger
+    const merkleRootDisplay = document.getElementById('merkleRootDisplay');
+    if (merkleRootDisplay && state.baseline.merkle_root) {
+      const h = state.baseline.merkle_root;
+      merkleRootDisplay.textContent = `${h.slice(0, 8)}…${h.slice(-8)}`;
+    }
+  }
+
+  // 6. Detection chart
+  const canvas   = document.getElementById('detectionChartCanvas');
+  const skeleton = document.getElementById('chartSkeleton');
+  if (canvas && state.detectionRuns?.length) {
+    if (skeleton) skeleton.style.display = 'none';
+    canvas.style.display = 'block';
+    updateDetectionChart(state.detectionRuns);
+  }
+
+  // 7. Case files (right rail + detail panel)
+  renderCaseFile(state);
+
+  // 8. Hash chain
+  if (state.auditLog?.length) {
+    renderHashChain(state.auditLog);
+  }
+
+  // 9. Header timestamps + bucket
+  const updated = document.getElementById('headerUpdated');
+  if (updated && state.lastUpdated) {
+    const t = new Date(state.lastUpdated).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    updated.textContent = t;
+    updated.setAttribute('datetime', state.lastUpdated);
+  }
+  const footerUpdated = document.getElementById('footerUpdated');
+  if (footerUpdated && state.lastUpdated) {
+    footerUpdated.textContent = new Date(state.lastUpdated).toLocaleString();
+    footerUpdated.setAttribute('datetime', state.lastUpdated);
+  }
+
+  // 10. Global error banner
+  const banner  = document.getElementById('global-error-banner');
+  const errText = document.getElementById('global-error-text');
+  if (banner && errText) {
+    if (state.error) {
+      errText.textContent = `[${state.error.code}] ${state.error.message}`;
+      banner.classList.add('visible');
+    } else {
+      banner.classList.remove('visible');
+    }
+  }
 }
 
-// ── Background Polling with Tab Visibility Lifecycle ─────────────────────────
-
-let pollTimer = null;
-
+/* ─── Polling ────────────────────────────────────────────────────────────── */
 function startPolling() {
   stopPolling();
-  const interval = CONFIG.POLL_INTERVAL_MS || 5000;
-  pollTimer = setInterval(() => {
-    // Only poll when browser tab is actively visible to conserve client/server resources
-    if (document.visibilityState !== 'hidden') {
-      refreshAll({ background: true });
-    }
-  }, interval);
+  _pollTimer = setInterval(async () => {
+    if (document.hidden) return; // pause when tab hidden
+    await refreshAll({ background: true });
+  }, CONFIG.POLL_INTERVAL_MS);
 }
 
 function stopPolling() {
-  if (pollTimer) {
-    clearInterval(pollTimer);
-    pollTimer = null;
-  }
+  if (_pollTimer) { clearInterval(_pollTimer); _pollTimer = null; }
 }
 
-function initPolling() {
-  startPolling();
+// Pause/resume on visibility change
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopPolling(); else startPolling();
+});
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      console.info('[CloudRDR] Tab visible — polling resumed');
-      refreshAll();
-      startPolling();
-    } else {
-      console.info('[CloudRDR] Tab hidden — polling paused');
-      stopPolling();
-    }
+/* ─── Demo mode toggle ──────────────────────────────────────────────────── */
+function initDemoToggle() {
+  const toggle    = document.getElementById('demoModeToggle');
+  const modeLabel = document.getElementById('demoModeLabel');
+  const footerMode = document.getElementById('footerMode');
+
+  const applyMode = (useMock) => {
+    updateConfig('USE_MOCK', useMock);
+    if (modeLabel) modeLabel.textContent = useMock ? 'Demo' : 'Live API';
+    if (footerMode) footerMode.textContent = useMock ? 'Demo mode (mock data)' : 'Live API mode';
+    // Reset tree on mode switch
+    _treeInited = false;
+    refreshAll();
+  };
+
+  if (toggle) {
+    toggle.checked = CONFIG.USE_MOCK;
+    toggle.addEventListener('change', (e) => applyMode(e.target.checked));
+  }
+
+  applyMode(CONFIG.USE_MOCK); // set initial label
+}
+
+/* ─── Manual refresh button ─────────────────────────────────────────────── */
+function initManualRefresh() {
+  const btn = document.getElementById('manualRefreshBtn');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    btn.textContent = '↻ …';
+    await refreshAll();
+    btn.disabled = false;
+    btn.textContent = '↻ Refresh';
   });
 }
 
-// ── Copy Button Helper ───────────────────────────────────────────────────────
-
-function initCopyButtons() {
-  const copyMerkleBtn = document.getElementById('copyMerkleBtn');
-  const merkleText = document.getElementById('baselineMerkleRoot');
-
-  if (copyMerkleBtn && merkleText) {
-    copyMerkleBtn.addEventListener('click', async () => {
-      const fullText = merkleText.getAttribute('title') || merkleText.textContent;
-      if (!fullText || fullText === '—') return;
-      try {
-        await navigator.clipboard.writeText(fullText);
-        const originalText = copyMerkleBtn.textContent;
-        copyMerkleBtn.textContent = 'Copied!';
-        setTimeout(() => {
-          copyMerkleBtn.textContent = originalText;
-        }, 1500);
-      } catch (_err) {
-        console.warn('Clipboard write failed');
-      }
+/* ─── Global error banner dismiss ─────────────────────────────────────────── */
+function initErrorBanner() {
+  const btn = document.getElementById('global-error-dismiss');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      setState({ error: null });
     });
   }
 }
 
-// ── Initial Skeleton Placeholders ────────────────────────────────────────────
+/* ─── Page-load entrance animations ────────────────────────────────────────── */
+function runEntranceAnimations() {
+  const docs = document.querySelectorAll('.doc-enter');
+  docs.forEach((el, i) => {
+    el.style.animationDelay = `${i * 0.08}s`;
+    requestAnimationFrame(() => el.classList.add('entered'));
+  });
+}
 
-function renderInitialSkeletons() {
-  // Incident Table Placeholder
-  const incidentsTbody = document.getElementById('incidentsTableBody');
-  if (incidentsTbody) {
-    incidentsTbody.innerHTML = `
-      <tr>
-        <td colspan="4" class="empty-state">
-          No security incidents recorded. System in normal operational state.
-        </td>
-      </tr>
-    `;
+/* ─── Chart initialisation (needs DOM + Chart.js loaded) ──────────────────── */
+function initChart(runs) {
+  const canvas   = document.getElementById('detectionChartCanvas');
+  const skeleton = document.getElementById('chartSkeleton');
+  if (!canvas) return;
+
+  if (!runs || runs.length === 0) {
+    if (skeleton) skeleton.style.display = 'block';
+    canvas.style.display = 'none';
+    return;
   }
 
-  // Incident Detail Placeholder
-  const detailBody = document.getElementById('incidentDetailBody');
-  if (detailBody) {
-    detailBody.innerHTML = `
-      <div class="empty-state">
-        Select an incident from the security incidents list to inspect forensic timeline, affected paths, and signature verification.
-      </div>
-    `;
+  if (skeleton) skeleton.style.display = 'none';
+  canvas.style.display = 'block';
+
+  // Dynamic import of chart component (Chart.js must be loaded as global)
+  if (typeof Chart === 'undefined') {
+    console.warn('[main] Chart.js not yet loaded, retrying in 500ms');
+    setTimeout(() => initChart(runs), 500);
+    return;
   }
 
-  // Restore Panel Placeholder
-  const restoreBody = document.getElementById('restorePanelBody');
-  if (restoreBody) {
-    restoreBody.innerHTML = `
-      <div class="empty-state">
-        Restore pipeline is on standby. Automated verified recovery activates when an incident is selected for remediation.
-      </div>
-    `;
-  }
+  const { initDetectionChart: init } = { initDetectionChart };
+  initDetectionChart(canvas, runs);
+}
 
-  // Audit Log Table Placeholder
-  const auditTbody = document.getElementById('auditLogTableBody');
-  if (auditTbody) {
-    auditTbody.innerHTML = `
-      <tr>
-        <td colspan="5" class="empty-state">
-          Awaiting cryptographic ledger synchronization...
-        </td>
-      </tr>
-    `;
+/* ─── "Play Story" — full narrative animation ──────────────────────────────── */
+async function playStory() {
+  if (_storyPlaying) return;
+  _storyPlaying = true;
+
+  const btn = document.getElementById('playStoryBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '▶ Playing…'; }
+
+  stopPolling();
+
+  const svg = document.getElementById('merkle-svg');
+  const leafCount = 20;
+
+  // ── Phase 1: Calm baseline ──────────────────────────────────────────
+  const baseline = await mockApi.getBaseline('protected');
+  setState({
+    baseline,
+    currentVerdict: 'normal',
+    canaryTriggered: false,
+    detectionRuns: (await mockApi.getDetectionRuns(4)).slice(0, 4),
+    auditLog: (await mockApi.getAuditLog()).slice(0, 2),
+    selectedIncident: null,
+    selectedIncidentId: null,
+    incidents: [],
+  });
+
+  // Ensure tree is initialised
+  if (!_treeInited) {
+    initMerkleTree(svg, leafCount);
+    _treeInited = true;
+  }
+  // All leaves healthy
+  for (let i = 0; i < leafCount; i++) setLeafState(i, 'healthy');
+  setRootHash(baseline.merkle_root, 'normal');
+  updateVerdictStamp('normal', false);
+
+  await sleep(2000);
+
+  // ── Phase 2: Suspicious activity ───────────────────────────────────
+  const allRuns = await mockApi.getDetectionRuns(50);
+  setState({ currentVerdict: 'suspicious', detectionRuns: allRuns.slice(0, 5) });
+  updateVerdictStamp('suspicious', false);
+
+  // Corrupt 3 leaves
+  animateCorruption([2, 7, 15], 0);
+
+  await sleep(2000);
+
+  // ── Phase 3: Ransomware — corruption climbs the tree ───────────────
+  setState({ currentVerdict: 'ransomware', canaryTriggered: true, detectionRuns: allRuns });
+  updateVerdictStamp('ransomware', true);
+  updateCanaryCage(true, 'ransomware');
+  setRootHash(baseline.merkle_root, 'compromised');
+
+  // Corrupt many leaves — staggered
+  const corruptIdx = [0,1,3,4,5,6,8,9,10,11,12,13,14,16,17,18];
+  animateCorruption(corruptIdx, 0);
+
+  await sleep(3000);
+
+  // ── Phase 4: Incident created & frozen ─────────────────────────────
+  const incidents = await mockApi.getIncidents();
+  const frozen = incidents.find((i) => i.status === 'frozen') || incidents[0];
+  setState({
+    incidents,
+    selectedIncident: frozen,
+    selectedIncidentId: frozen?.id,
+    auditLog: await mockApi.getAuditLog(),
+  });
+  renderHashChain(getState().auditLog);
+
+  await sleep(2000);
+
+  // ── Phase 5: Restore — leaves re-seal one by one ───────────────────
+  const restoreJob = await mockApi.restoreIncident(frozen?.id);
+  setState({ currentVerdict: 'normal', canaryTriggered: false });
+  updateVerdictStamp('normal', false);
+  updateCanaryCage(false, 'normal');
+
+  // Restore leaves
+  const allLeaves = [...corruptIdx, 2, 7, 15];
+  animateRestore(allLeaves, 0);
+  setRootHash(baseline.merkle_root, 'restored');
+
+  await sleep(allLeaves.length * 100 + 800);
+
+  // Show resolved incident with restore results
+  const resolvedInc = { ...frozen, status: 'resolved', resolved_at: new Date().toISOString() };
+  setState({
+    incidents: incidents.map((i) => i.id === frozen?.id ? resolvedInc : i),
+    selectedIncident: resolvedInc,
+  });
+
+  // Manually trigger restore pane render by switching to restore tab
+  renderCaseFile({ ...getState(), selectedIncident: resolvedInc, selectedIncidentId: resolvedInc.id });
+
+  await sleep(500);
+
+  // ── Done ────────────────────────────────────────────────────────────
+  if (btn) { btn.disabled = false; btn.textContent = '▶ Play Story'; }
+  _storyPlaying = false;
+
+  // Resume normal polling
+  startPolling();
+}
+
+function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+
+/* ─── Bootstrap ─────────────────────────────────────────────────────────── */
+async function boot() {
+  // Wire up UI controls
+  initDemoToggle();
+  initManualRefresh();
+  initErrorBanner();
+  initBaselineLedger();
+
+  // Subscribe to state changes for reactive UI
+  subscribe(updateUI);
+
+  // Initial data load
+  await refreshAll();
+
+  // Init chart (needs Chart.js from CDN to be loaded)
+  setTimeout(() => {
+    const state = getState();
+    if (state.detectionRuns?.length) {
+      initChart(state.detectionRuns);
+    }
+  }, 300);
+
+  // Entrance animations after first paint
+  requestAnimationFrame(runEntranceAnimations);
+
+  // Start polling
+  startPolling();
+
+  // Play story button
+  const storyBtn = document.getElementById('playStoryBtn');
+  if (storyBtn) {
+    storyBtn.addEventListener('click', playStory);
   }
 }
 
-// ── Main Initialization ──────────────────────────────────────────────────────
-
-document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  initDemoMode();
-  initErrorBanner();
-  initCopyButtons();
-  initBaselinePanel();
-  renderInitialSkeletons();
-  initPolling();
-
-  // Subscribe components to state store
-  subscribe((state) => {
-    updateStatusBar(state);
-    updateBaselinePanel(state);
-    updateDetectionChart(state.detectionRuns);
-    updateIncidentList(state);
-    updateIncidentDetail(state);
-    updateRestorePanel(state);
-    updateAuditLog(state);
-  });
-
-  refreshAll();
-  console.info(
-    '[CloudRDR] Security Operations Dashboard initialised (Step 8 Polling & Error Lifecycle Active).'
-  );
-});
+// Run on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
