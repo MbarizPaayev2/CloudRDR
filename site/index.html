@@ -712,30 +712,30 @@ await db.from('baseline_snapshots').insert({
         renderSandbox: (box) => {
           box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Merkle Leaves (4 Sample Blocks)</span>
                 <span id="merkleStatusText" style="color:#27C93F;">● 100% Invariant Match</span>
               </div>
               <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;">
-                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:#718096;">f1.pdf</div>
-                  <div id="leafHash0" style="color:#E2E8F0;font-size:0.68rem;">a4f1..</div>
+                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">f1.pdf</div>
+                  <div id="leafHash0" style="color:var(--text);font-size:0.68rem;">a4f1..</div>
                 </div>
-                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:#718096;">f2.db</div>
-                  <div id="leafHash1" style="color:#E2E8F0;font-size:0.68rem;">98e2..</div>
+                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">f2.db</div>
+                  <div id="leafHash1" style="color:var(--text);font-size:0.68rem;">98e2..</div>
                 </div>
-                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:#718096;">f3.key</div>
-                  <div id="leafHash2" style="color:#E2E8F0;font-size:0.68rem;">0b7c..</div>
+                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">f3.key</div>
+                  <div id="leafHash2" style="color:var(--text);font-size:0.68rem;">0b7c..</div>
                 </div>
-                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:#718096;">f4.env</div>
-                  <div id="leafHash3" style="color:#E2E8F0;font-size:0.68rem;">c3d9..</div>
+                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">f4.env</div>
+                  <div id="leafHash3" style="color:var(--text);font-size:0.68rem;">c3d9..</div>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
-                <div style="font-size:0.7rem;color:#718096;">Root: <span id="merkleRootVal" style="color:#27C93F;font-weight:600;">e3b0c44298fc1c149afb7852b855</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:8px 10px;border-radius:4px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);">Root: <span id="merkleRootVal" style="color:#27C93F;font-weight:600;">e3b0c44298fc1c149afb7852b855</span></div>
                 <button type="button" id="recalcMerkleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Mutate Leaf ⚡</button>
               </div>
             </div>
@@ -789,23 +789,23 @@ await db.from('change_events').insert(changes.map(c => ({
         renderSandbox: (box) => {
           box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Heartbeat Polling Agent</span>
                 <span style="color:#27C93F;">● Polling Active</span>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-                <div style="background:#111624;padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
-                  <div style="font-size:0.65rem;color:#718096;">Bucket Monitored</div>
-                  <div style="color:#E2E8F0;font-weight:600;">"protected" (16 objects)</div>
+                <div style="background:var(--surface-subtle);padding:8px;border-radius:4px;border:1px solid var(--border);">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">Bucket Monitored</div>
+                  <div style="color:var(--text);font-weight:600;">"protected" (16 objects)</div>
                 </div>
-                <div style="background:#111624;padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
-                  <div style="font-size:0.65rem;color:#718096;">Next Poll Interval</div>
+                <div style="background:var(--surface-subtle);padding:8px;border-radius:4px;border:1px solid var(--border);">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">Next Poll Interval</div>
                   <div id="nextPollCount" style="color:#2F4BFF;font-weight:600;">9.4s remaining</div>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
-                <span id="monitorEventStatus" style="font-size:0.7rem;color:#A0AEC0;">Delta: 0 events in current window</span>
-                <button type="button" id="emitChangeEventBtn" style="background:rgba(255,255,255,0.08);color:#FFF;border:1px solid rgba(255,255,255,0.15);padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Simulate Write Event ⚡</button>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:8px 10px;border-radius:4px;border:1px solid var(--border);">
+                <span id="monitorEventStatus" style="font-size:0.7rem;color:var(--text-muted);">Delta: 0 events in current window</span>
+                <button type="button" id="emitChangeEventBtn" style="background:var(--surface-subtle);color:var(--text);border:1px solid var(--border);padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Simulate Write Event ⚡</button>
               </div>
             </div>
           `;
@@ -823,7 +823,7 @@ await db.from('change_events').insert(changes.map(c => ({
               const status = box.querySelector('#monitorEventStatus');
               status.innerHTML = '<span style="color:#E0A100;">+1 modified: docs/contract.pdf (sha256 diff)</span>';
               setTimeout(() => {
-                if (status) status.innerHTML = '<span style="color:#A0AEC0;">Delta: 0 events in current window</span>';
+                if (status) status.innerHTML = '<span style="color:var(--text-muted);">Delta: 0 events in current window</span>';
               }, 3000);
             });
           }
@@ -848,19 +848,19 @@ const verdict = canaryTripped || rate >= 0.30
         renderSandbox: (box) => {
           box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Heuristic Threshold Simulator</span>
                 <span id="verdictBadgeText" style="color:#27C93F;font-weight:700;">NORMAL</span>
               </div>
               <div style="margin-bottom:10px;">
-                <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#718096;margin-bottom:4px;">
-                  <span>Change Rate: <b id="rateValText" style="color:#E2E8F0;">0%</b></span>
+                <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-muted);margin-bottom:4px;">
+                  <span>Change Rate: <b id="rateValText" style="color:var(--text);">0%</b></span>
                   <span>Threshold: 30% Ransomware</span>
                 </div>
                 <input type="range" id="rateSlider" min="0" max="100" value="0" style="width:100%;cursor:pointer;accent-color:#2F4BFF;">
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
-                <span style="font-size:0.68rem;color:#A0AEC0;">Decoy: .canary/salary.xlsx</span>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:6px 10px;border-radius:4px;border:1px solid var(--border);">
+                <span style="font-size:0.68rem;color:var(--text-muted);">Decoy: .canary/salary.xlsx</span>
                 <button type="button" id="tripCanaryBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Trip Canary Decoy ⚡</button>
               </div>
             </div>
@@ -917,20 +917,20 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
         renderSandbox: (box) => {
           box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Cloud IAM Control Plane</span>
                 <span id="accountStatusTag" style="color:#4FA3C7;">● ACCOUNT FROZEN (READ-ONLY)</span>
               </div>
-              <div style="background:#111624;padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);margin-bottom:8px;">
-                <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#718096;margin-bottom:3px;">
-                  <span>Identity: <code style="color:#E2E8F0;">acc-attacker-9014</code></span>
+              <div style="background:var(--surface-subtle);padding:8px;border-radius:4px;border:1px solid var(--border);margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-muted);margin-bottom:3px;">
+                  <span>Identity: <code style="color:var(--text);">acc-attacker-9014</code></span>
                   <span style="color:#D93636;">Write/Delete: DENIED</span>
                 </div>
-                <div style="font-size:0.65rem;color:#718096;">Ed25519 Signature:</div>
+                <div style="font-size:0.65rem;color:var(--text-muted);">Ed25519 Signature:</div>
                 <div id="edSigVal" style="font-size:0.68rem;color:#27C93F;word-break:break-all;">7f3d81b94e098a54c330f1d9a20... [RFC 8032 VALID]</div>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-size:0.68rem;color:#718096;">SLA Latency: <strong>3.2s</strong> &lt; 10s maximum</span>
+                <span style="font-size:0.68rem;color:var(--text-muted);">SLA Latency: <strong>3.2s</strong> &lt; 10s maximum</span>
                 <button type="button" id="recheckSigBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Verify Signature ↗</button>
               </div>
             </div>
@@ -939,7 +939,7 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
           if (btn) {
             btn.addEventListener('click', () => {
               const sig = box.querySelector('#edSigVal');
-              sig.style.color = '#FFF';
+              sig.style.color = 'var(--text)';
               sig.textContent = 'Verifying curve25519 public key…';
               setTimeout(() => {
                 sig.style.color = '#27C93F';
@@ -968,26 +968,26 @@ ledger.push({ index, hash, prevHash, data });`,
         renderSandbox: (box) => {
           box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Hash-Chained Ledger Blocks</span>
                 <span id="chainIntegrityStatus" style="color:#27C93F;">● Chain Intact</span>
               </div>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;">
-                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;">
-                  <div style="font-size:0.65rem;color:#718096;">#0 Baseline</div>
-                  <div style="font-size:0.65rem;color:#A0AEC0;">h: e3b0..</div>
+                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">#0 Baseline</div>
+                  <div style="font-size:0.65rem;color:var(--text-muted);">h: e3b0..</div>
                 </div>
-                <div id="chainBlock1" style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;">
-                  <div style="font-size:0.65rem;color:#718096;">#1 Freeze</div>
-                  <div id="chainBlock1Hash" style="font-size:0.65rem;color:#A0AEC0;">h: 4a92..</div>
+                <div id="chainBlock1" style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">#1 Freeze</div>
+                  <div id="chainBlock1Hash" style="font-size:0.65rem;color:var(--text-muted);">h: 4a92..</div>
                 </div>
-                <div id="chainBlock2" style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;">
-                  <div style="font-size:0.65rem;color:#718096;">#2 Restore</div>
-                  <div id="chainBlock2Prev" style="font-size:0.65rem;color:#A0AEC0;">prev: 4a92..</div>
+                <div id="chainBlock2" style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;">
+                  <div style="font-size:0.65rem;color:var(--text-muted);">#2 Restore</div>
+                  <div id="chainBlock2Prev" style="font-size:0.65rem;color:var(--text-muted);">prev: 4a92..</div>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
-                <span style="font-size:0.68rem;color:#718096;">Tamper test demo:</span>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:6px 10px;border-radius:4px;border:1px solid var(--border);">
+                <span style="font-size:0.68rem;color:var(--text-muted);">Tamper test demo:</span>
                 <button type="button" id="tamperChainBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Tamper Block #1 ⚡</button>
               </div>
             </div>
@@ -1013,7 +1013,7 @@ ledger.push({ index, hash, prevHash, data });`,
                 b1.style.borderColor = '#27C93F';
                 b2.style.borderColor = '#27C93F';
                 b1h.textContent = 'h: 4a92..';
-                b1h.style.color = '#A0AEC0';
+                b1h.style.color = 'var(--text-muted)';
                 status.textContent = '● Chain Intact';
                 status.style.color = '#27C93F';
                 btn.textContent = 'Tamper Block #1 ⚡';
@@ -1041,15 +1041,15 @@ if (isValid) await storage.write(bucket, path, bytes);`,
         renderSandbox: (box) => {
           box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>AEAD Verification Progress</span>
                 <span id="restoreVerifCount" style="color:#27C93F;font-weight:700;">16 / 16 VALID (100%)</span>
               </div>
-              <div style="background:#111624;height:8px;border-radius:4px;overflow:hidden;margin-bottom:10px;">
+              <div style="background:var(--surface-subtle);height:8px;border-radius:4px;overflow:hidden;margin-bottom:10px;">
                 <div id="restoreProgressBar" style="width:100%;height:100%;background:#27C93F;transition:width 0.4s ease;"></div>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
-                <div style="font-size:0.68rem;color:#718096;">Status: <b style="color:#27C93F;">Incident Ready to Close</b></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:6px 10px;border-radius:4px;border:1px solid var(--border);">
+                <div style="font-size:0.68rem;color:var(--text-muted);">Status: <b style="color:#27C93F;">Incident Ready to Close</b></div>
                 <button type="button" id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run AEAD Verify ⚡</button>
               </div>
             </div>

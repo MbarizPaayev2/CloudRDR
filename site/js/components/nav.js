@@ -30,8 +30,8 @@ export function initSharedNav(options = {}) {
               <g transform="translate(120, 124)">
                 <path d="M 65,-55 A 85,85 0 1,0 75,40" fill="none" stroke="url(#nav_rgD)" stroke-width="12" stroke-linecap="round" />
                 <polygon points="84,22 86,52 58,42" fill="#10B981" />
-                <circle cx="0" cy="0" r="66" fill="none" stroke="#334155" stroke-width="2.5" stroke-dasharray="3 6" />
-                <path d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25" fill="none" stroke="#E2E8F0" stroke-width="9" stroke-linecap="round" />
+                <circle cx="0" cy="0" r="66" fill="none" stroke="var(--border)" stroke-width="2.5" stroke-dasharray="3 6" />
+                <path d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25" fill="none" stroke="var(--logo-shackle, #1E293B)" stroke-width="9" stroke-linecap="round" />
                 <polygon points="0,-42 42,-18 0,6 -42,-18" fill="url(#nav_tfD)" />
                 <polygon points="-42,-18 0,6 0,54 -42,30" fill="url(#nav_lfD)" />
                 <polygon points="0,6 42,-18 42,30 0,54" fill="url(#nav_rfD)" />
@@ -53,18 +53,8 @@ export function initSharedNav(options = {}) {
           </ul>
 
           <div class="header-actions">
-            <button type="button" id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle light and dark color mode" title="Toggle Theme">
-              <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"/>
-                <line x1="12" y1="1" x2="12" y2="3"/>
-                <line x1="12" y1="21" x2="12" y2="23"/>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                <line x1="1" y1="12" x2="3" y2="12"/>
-                <line x1="21" y1="12" x2="23" y2="12"/>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-              </svg>
+            <button type="button" id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle color mode" title="Toggle Theme">
+              <!-- Dynamically populated icon -->
             </button>
 
             <a href="${basePath}demo/index.html" class="btn btn-primary btn-sm">
@@ -91,11 +81,11 @@ export function initSharedNav(options = {}) {
       <footer class="site-footer" role="contentinfo">
         <div class="container footer-inner">
           <div style="display:flex;align-items:center;gap:12px;">
-            <svg width="26" height="26" viewBox="0 0 240 240" style="flex-shrink:0;">
+            <svg width="28" height="28" viewBox="0 0 240 240" style="flex-shrink:0;">
               <g transform="translate(120, 124)">
                 <path d="M 65,-55 A 85,85 0 1,0 75,40" fill="none" stroke="url(#nav_rgD)" stroke-width="14" stroke-linecap="round" />
                 <polygon points="84,22 86,52 58,42" fill="#10B981" />
-                <path d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25" fill="none" stroke="#E2E8F0" stroke-width="10" stroke-linecap="round" />
+                <path d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25" fill="none" stroke="var(--logo-shackle, #1E293B)" stroke-width="10" stroke-linecap="round" />
                 <polygon points="0,-42 42,-18 0,6 -42,-18" fill="url(#nav_tfD)" />
                 <polygon points="-42,-18 0,6 0,54 -42,30" fill="url(#nav_lfD)" />
                 <polygon points="0,6 42,-18 42,30 0,54" fill="url(#nav_rfD)" />
@@ -119,18 +109,37 @@ export function initSharedNav(options = {}) {
     `;
   }
 
-  // 3. Theme toggle logic
-  const savedTheme = localStorage.getItem('cloudrdr-theme');
-  if (savedTheme) {
-    document.documentElement.setAttribute('data-theme', savedTheme);
+  // 3. Theme Toggle & State Management
+  function getEffectiveTheme() {
+    const explicit = document.documentElement.getAttribute('data-theme');
+    if (explicit === 'dark' || explicit === 'light') return explicit;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
+
+  function renderThemeToggle(theme) {
+    const btn = document.querySelector('#themeToggleBtn');
+    if (!btn) return;
+    const isDark = theme === 'dark';
+    btn.innerHTML = isDark
+      ? `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
+      : `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+    const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
+  }
+
+  const savedTheme = localStorage.getItem('cloudrdr-theme');
+  const initialTheme = savedTheme || getEffectiveTheme();
+  document.documentElement.setAttribute('data-theme', initialTheme);
+  renderThemeToggle(initialTheme);
 
   const themeBtn = document.querySelector('#themeToggleBtn');
   themeBtn?.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
+    const current = getEffectiveTheme();
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('cloudrdr-theme', next);
+    renderThemeToggle(next);
   });
 
   // 4. Mobile nav toggle

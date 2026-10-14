@@ -44,7 +44,7 @@
                 Before any attack occurs, every file in the protected bucket is read via streaming SHA-256 hashing without buffering the full file into server RAM. The resulting cryptographic digests are sorted deterministically and assembled into a binary Merkle tree.
               </p>
               <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:#F8FAFC;">What you will see in the demo:</strong> The Baseline Panel shows the total protected files and the 64-character Merkle root hash. In the Merkle DAG, all 16 leaves appear healthy green.
+                <strong style="color:var(--text);">What you will see in the demo:</strong> The Baseline Panel shows the total protected files and the 64-character Merkle root hash. In the Merkle DAG, all 16 leaves appear healthy green.
               </div>
             </div>
             <!-- Micro-Diagram 01 -->
@@ -93,7 +93,7 @@
                 A lightweight background monitor agent observes bucket storage events (file creations, modifications, and deletions) on a 10-second polling cadence. It computes rolling change counts within a 60-second sliding time window.
               </p>
               <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:#F8FAFC;">What you will see in the demo:</strong> The Detection Velocity Chart plots change rates in real time, comparing current file activity against configured threshold lines.
+                <strong style="color:var(--text);">What you will see in the demo:</strong> The Detection Velocity Chart plots change rates in real time, comparing current file activity against configured threshold lines.
               </div>
             </div>
             <!-- Micro-Diagram 02 -->
@@ -113,7 +113,7 @@
                 <div class="radar-blip b3" title="Object 3 (database.sql)"></div>
               </div>
               <div style="margin-top:8px;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);text-align:center;">
-                Cadence: <span style="color:#38BDF8;">10.0s</span> | Objects Tracked: <span style="color:#FFFFFF;">16</span> | State: <span style="color:#10B981;">Clean</span>
+                Cadence: <span style="color:var(--brand);">10.0s</span> | Objects Tracked: <span style="color:var(--text);font-weight:600;">16</span> | State: <span style="color:#10B981;">Clean</span>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
                 The engine evaluates the change rate (unique modified files / total files). Changes under 10% are classified as <span class="status-chip valid">NORMAL</span>, 10–30% as <span class="status-chip" style="background:var(--status-suspicious-subtle);color:var(--status-suspicious);">SUSPICIOUS</span>, and 30%+ as <span class="status-chip modified">RANSOMWARE</span>. In addition, decoy canary files (such as <code>canary/tripwire_sentinel.docx</code>) act as zero-tolerance tripwires: modifying or deleting any canary triggers an immediate ransomware verdict regardless of rate.
               </p>
               <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:#F8FAFC;">What you will see in the demo:</strong> The Verdict Badge switches to pulsing red RANSOMWARE, and the Canary Sentinel Card displays the exact timestamp the decoy was touched.
+                <strong style="color:var(--text);">What you will see in the demo:</strong> The Verdict Badge switches to pulsing red RANSOMWARE, and the Canary Sentinel Card displays the exact timestamp the decoy was touched.
               </div>
             </div>
             <!-- Micro-Diagram 03 -->
@@ -144,8 +144,8 @@
                 <div style="display:flex;align-items:center;gap:8px;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D93636" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                   <div>
-                    <div style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:#F8FAFC;">canary/tripwire_sentinel.docx</div>
-                    <div id="canaryStatusText" style="font-size:0.65rem;color:#A0AEC0;">Status: Armed Sentinel (Zero modifications allowed)</div>
+                    <div style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:var(--text);">canary/tripwire_sentinel.docx</div>
+                    <div id="canaryStatusText" style="font-size:0.65rem;color:var(--text-muted);">Status: Armed Sentinel (Zero modifications allowed)</div>
                   </div>
                 </div>
               </div>
@@ -168,7 +168,7 @@
                 Upon a ransomware verdict, CloudRDR immediately attaches an IAM Deny-All write policy to the compromised cloud credentials. All write, overwrite, and delete API calls are blocked at the cloud control plane in under 10 seconds. An incident case file is generated and signed with an RFC 8032 Ed25519 asymmetric signature.
               </p>
               <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:#F8FAFC;">What you will see in the demo:</strong> The Account Status badge turns frost-blue with label <span class="status-chip frozen">FROZEN (READ-ONLY)</span> and a new case file appears in the Incidents queue.
+                <strong style="color:var(--text);">What you will see in the demo:</strong> The Account Status badge turns frost-blue with label <span class="status-chip frozen">FROZEN (READ-ONLY)</span> and a new case file appears in the Incidents queue.
               </div>
             </div>
             <!-- Micro-Diagram 04 -->
@@ -204,7 +204,7 @@
                 Every security action (baseline seal, freeze policy attachment, incident sign, restore) is appended to a hash-chained audit log. Each entry embeds the SHA-256 digest of the previous entry. If an attacker gains database access and modifies a record, the subsequent block links visibly break.
               </p>
               <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:#F8FAFC;">What you will see in the demo:</strong> The Audit Log page displays linked blocks. Visitors can click "Tamper with Entry #1" to witness the cryptographic chain immediately invalidate.
+                <strong style="color:var(--text);">What you will see in the demo:</strong> The Audit Log page displays linked blocks. Visitors can click "Tamper with Entry #1" to witness the cryptographic chain immediately invalidate.
               </div>
             </div>
             <!-- Micro-Diagram 05 -->
@@ -247,7 +247,7 @@
                 CloudRDR restores files from AES-256-GCM encrypted backup storage. The recovery process validates the GCM authentication tag before returning plaintext bytes. Every restored file is re-hashed with SHA-256 and matched against the pre-attack baseline. If any hash differs or tag fails, the file is rejected. The incident only transitions to resolved when 100% of files are verified.
               </p>
               <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:#F8FAFC;">What you will see in the demo:</strong> The Restore progress bar fills, leaves return to green on the Merkle tree, and a final "100% verified" banner confirms that the Merkle Root matches the original baseline.
+                <strong style="color:var(--text);">What you will see in the demo:</strong> The Restore progress bar fills, leaves return to green on the Merkle tree, and a final "100% verified" banner confirms that the Merkle Root matches the original baseline.
               </div>
             </div>
             <!-- Micro-Diagram 06 -->
