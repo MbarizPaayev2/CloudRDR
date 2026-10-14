@@ -110,9 +110,14 @@ function deriveVerdict(runs) {
 
 /**
  * Orchestrate complete data refresh across all panels.
+ * Preserves existing telemetry on partial failures to prevent blank screens.
+ * @param {{ background?: boolean }} [options]
  */
-export async function refreshAll() {
-  setState({ isLoading: true, error: null });
+export async function refreshAll(options = {}) {
+  const isBackground = Boolean(options.background);
+  if (!isBackground) {
+    setState({ isLoading: true });
+  }
 
   try {
     const [healthRes, baselineRes, runsRes, incidentsRes, auditRes] = await Promise.allSettled([
@@ -123,12 +128,31 @@ export async function refreshAll() {
       api.getAuditLog(),
     ]);
 
+    // Check for errors without wiping out valid panels
+    let errorDetail = null;
+    const rejected = [healthRes, baselineRes, runsRes, incidentsRes, auditRes].find(
+      (r) => r.status === 'rejected'
+    );
+    if (rejected && rejected.reason) {
+      const err = rejected.reason;
+      errorDetail = {
+        code: err.code || err.error?.code || 'api_error',
+        message: err.message || err.error?.message || 'Failed to communicate with backend API',
+      };
+    }
+
     const health =
-      healthRes.status === 'fulfilled' ? healthRes.value : { status: 'offline', uptime: 0 };
-    const baseline = baselineRes.status === 'fulfilled' ? baselineRes.value : null;
-    const runs = runsRes.status === 'fulfilled' ? runsRes.value : [];
-    const incidents = incidentsRes.status === 'fulfilled' ? incidentsRes.value : [];
-    const auditLog = auditRes.status === 'fulfilled' ? auditRes.value : [];
+      healthRes.status === 'fulfilled'
+        ? healthRes.value
+        : currentState.health || { status: 'offline', uptime: 0 };
+    const baseline =
+      baselineRes.status === 'fulfilled' ? baselineRes.value : currentState.baseline;
+    const runs =
+      runsRes.status === 'fulfilled' ? runsRes.value : currentState.detectionRuns;
+    const incidents =
+      incidentsRes.status === 'fulfilled' ? incidentsRes.value : currentState.incidents;
+    const auditLog =
+      auditRes.status === 'fulfilled' ? auditRes.value : currentState.auditLog;
 
     const { verdict, canaryTriggered } = deriveVerdict(runs);
 
@@ -155,15 +179,17 @@ export async function refreshAll() {
       canaryTriggered,
       lastUpdated: new Date().toISOString(),
       isLoading: false,
+      error: errorDetail,
     });
   } catch (err) {
     console.error('[state] refresh failed:', err);
     setState({
       isLoading: false,
       error: {
-        code: err.code || 'refresh_failed',
-        message: err.message || 'Failed to refresh telemetry from backend',
+        code: err.code || err.error?.code || 'refresh_failed',
+        message: err.message || err.error?.message || 'Failed to refresh telemetry from backend',
       },
     });
   }
 }
+

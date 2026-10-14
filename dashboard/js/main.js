@@ -41,7 +41,7 @@ function initTheme() {
   }
 }
 
-// ── Demo Mode Toggle ─────────────────────────────────────────────────────────
+// ── Demo Mode Toggle & Manual Refresh ────────────────────────────────────────
 
 function initDemoMode() {
   const toggle = document.getElementById('demoModeToggle');
@@ -60,10 +60,83 @@ function initDemoMode() {
 
   const manualRefreshBtn = document.getElementById('manualRefreshBtn');
   if (manualRefreshBtn) {
-    manualRefreshBtn.addEventListener('click', () => {
-      refreshAll();
+    manualRefreshBtn.addEventListener('click', async () => {
+      manualRefreshBtn.disabled = true;
+      const originalText = manualRefreshBtn.textContent;
+      manualRefreshBtn.textContent = '⏳ Refreshing...';
+      try {
+        await refreshAll();
+      } finally {
+        manualRefreshBtn.disabled = false;
+        manualRefreshBtn.textContent = originalText;
+      }
     });
   }
+}
+
+// ── System Error Banner ──────────────────────────────────────────────────────
+
+function initErrorBanner() {
+  const banner = document.getElementById('systemErrorBanner');
+  const codeEl = document.getElementById('errorBannerCode');
+  const messageEl = document.getElementById('errorBannerMessage');
+  const dismissBtn = document.getElementById('errorBannerDismissBtn');
+
+  if (dismissBtn && banner) {
+    dismissBtn.addEventListener('click', () => {
+      banner.style.display = 'none';
+    });
+  }
+
+  // Reactive subscription for error handling
+  subscribe((state) => {
+    if (!banner || !codeEl || !messageEl) return;
+
+    if (state.error) {
+      codeEl.textContent = state.error.code || 'ERROR';
+      messageEl.textContent = state.error.message || 'Operation failed';
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  });
+}
+
+// ── Background Polling with Tab Visibility Lifecycle ─────────────────────────
+
+let pollTimer = null;
+
+function startPolling() {
+  stopPolling();
+  const interval = CONFIG.POLL_INTERVAL_MS || 5000;
+  pollTimer = setInterval(() => {
+    // Only poll when browser tab is actively visible to conserve client/server resources
+    if (document.visibilityState !== 'hidden') {
+      refreshAll({ background: true });
+    }
+  }, interval);
+}
+
+function stopPolling() {
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
+  }
+}
+
+function initPolling() {
+  startPolling();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      console.info('[CloudRDR] Tab visible — polling resumed');
+      refreshAll();
+      startPolling();
+    } else {
+      console.info('[CloudRDR] Tab hidden — polling paused');
+      stopPolling();
+    }
+  });
 }
 
 // ── Copy Button Helper ───────────────────────────────────────────────────────
@@ -143,9 +216,11 @@ function renderInitialSkeletons() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initDemoMode();
+  initErrorBanner();
   initCopyButtons();
   initBaselinePanel();
   renderInitialSkeletons();
+  initPolling();
 
   // Subscribe components to state store
   subscribe((state) => {
@@ -160,6 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   refreshAll();
   console.info(
-    '[CloudRDR] Security Operations Dashboard initialised (Step 7 Audit Log Connected).'
+    '[CloudRDR] Security Operations Dashboard initialised (Step 8 Polling & Error Lifecycle Active).'
   );
 });

@@ -90,6 +90,31 @@
 
     <!-- Main Content Layout -->
     <main id="mainContent" class="dashboard-main" role="main">
+      <!-- System Notification / Error Alert Banner -->
+      <div
+        id="systemErrorBanner"
+        class="alert-banner"
+        style="display: none"
+        role="alert"
+        aria-live="assertive"
+      >
+        <div style="display: flex; align-items: center; gap: 0.5rem">
+          <span aria-hidden="true" style="font-size: 1.1rem">⚠️</span>
+          <div>
+            <strong id="errorBannerCode" style="text-transform: uppercase"></strong>:
+            <span id="errorBannerMessage"></span>
+          </div>
+        </div>
+        <button
+          id="errorBannerDismissBtn"
+          class="btn btn-sm"
+          aria-label="Dismiss alert"
+          style="background: transparent; border: none; font-size: 1rem; cursor: pointer; color: inherit"
+        >
+          ✕
+        </button>
+      </div>
+
       <!-- Row 1: Baseline Panel (1/3) + Detection Chart (2/3) -->
       <div class="grid-2col">
         <!-- 2. Baseline Panel -->
