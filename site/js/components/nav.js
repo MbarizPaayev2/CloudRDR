@@ -49,7 +49,6 @@ export function initSharedNav(options = {}) {
             <li><a href="${basePath}demo/index.html" class="nav-link ${activePage === 'demo' ? 'active' : ''}">Live Demo</a></li>
             <li><a href="${basePath}team.html" class="nav-link ${activePage === 'team' ? 'active' : ''}">Team</a></li>
             <li><a href="${basePath}docs.html" class="nav-link ${activePage === 'docs' ? 'active' : ''}">ISMS Docs</a></li>
-            <li><a href="${basePath}brand-kit.html" class="nav-link ${activePage === 'brand' ? 'active' : ''}">Brand Kit</a></li>
           </ul>
 
           <div class="header-actions">
