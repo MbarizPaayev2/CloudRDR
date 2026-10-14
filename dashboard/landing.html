@@ -736,10 +736,63 @@
         text-align: center;
       }
     }
+
+    /* ── Vercel Web Interface Guidelines & Motion Principles ──────────────── */
+    :focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -80px;
+      left: 20px;
+      background: var(--brand);
+      color: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      z-index: 10000;
+      transition: top 0.2s var(--ease);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .skip-link:focus-visible {
+      top: 20px;
+    }
+
+    section, [id] {
+      scroll-margin-top: 5.5rem;
+    }
+
+    .hero-title, .section-title, .feature-title, h1, h2, h3 {
+      text-wrap: balance;
+    }
+
+    .stat-number, .step-num, code, time, .metric-val {
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .ambient-canvas, .ambient-orb-1, .ambient-orb-2, .ambient-orb-3 {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Accessible Skip Link (WCAG 2.2 AA / Vercel Web Interface Guidelines) -->
+  <a href="#hero" class="skip-link">Skip to main content</a>
 
   <!-- Ambient Light Orbs -->
   <div class="ambient-canvas" aria-hidden="true">
@@ -773,7 +826,7 @@
     </div>
 
     <!-- ── Hero Section ─────────────────────────────────────────────────── -->
-    <header class="hero-section">
+    <header class="hero-section" id="hero">
       <div class="container">
         
         <div class="eyebrow-badge">

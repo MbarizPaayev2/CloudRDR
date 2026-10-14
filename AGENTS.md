@@ -45,4 +45,8 @@ Every time a user provides a prompt or request, internalize these four core foun
 - `graphify`
 - `headroom`
 - `codeburn`
+- `design-motion-principles` (Emil Kowalski + Jakub Krehel motion lenses)
+- `web-design-guidelines` (Vercel Web Interface Guidelines compliance)
+- `awesome-design-md` (80+ developer tool design systems & DESIGN.md standard)
+- `ui-skills` (Frontend design engineering toolkit & motion recipes)
 - `design-taste-frontend`, `ui-ux-pro-max`, `high-end-visual-design`, `design-system`, `slides`

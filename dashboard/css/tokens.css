@@ -119,14 +119,16 @@
   --shadow-doc:  var(--shadow-md);
   --shadow-lift: var(--shadow-lg);
 
-  /* ── Motion & Fluid Dynamic Physics ──────────────────────────────────────── */
-  --dur-fast:   150ms;
-  --dur-mid:    280ms;
-  --dur-slow:   500ms;
+  /* ── Motion & Fluid Dynamic Physics (Design Motion Principles) ─────────────── */
+  --dur-fast:   140ms;
+  --dur-mid:    240ms;
+  --dur-slow:   450ms;
   /* Agency-grade custom cubic-bezier (simulating physical spring mass) */
-  --ease:       cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-desk:  var(--ease);
-  --ease-stamp: var(--ease);
+  --ease:        cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1); /* Emil Kowalski restraint & speed */
+  --ease-subtle: cubic-bezier(0.25, 1, 0.5, 1); /* Jakub Krehel production polish */
+  --ease-desk:   var(--ease);
+  --ease-stamp:  var(--ease);
 
   /* ── Dimensions ──────────────────────────────────────────────────────────── */
   --sidebar-w:    330px;
@@ -139,5 +141,6 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

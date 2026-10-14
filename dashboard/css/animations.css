@@ -137,11 +137,25 @@
 .doc-enter:nth-child(4) { animation-delay: 0.24s; }
 .doc-enter:nth-child(5) { animation-delay: 0.30s; }
 
-/* ── Kinetic Micro-Interactions ────────────────────────────────────────── */
+/* ── Kinetic Micro-Interactions (Design Motion Principles) ─────────────── */
 .kinetic-btn {
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  transition: transform var(--dur-fast) var(--ease-snappy), box-shadow var(--dur-fast) var(--ease-snappy);
 }
 
 .kinetic-btn:active {
   transform: scale(0.98);
+}
+
+/* Accessible reduced-motion guard (WCAG 2.2 / Vercel Guidelines) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .radar-ping, .badge-alert, .doc-enter, .kinetic-btn {
+    animation: none !important;
+    transition: none !important;
+  }
 }

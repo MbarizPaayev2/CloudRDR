@@ -37,10 +37,25 @@ body {
   z-index: 1;
 }
 
-/* ── Accessibility & Focus Rings (WCAG 2.2 AA / ui-ux-pro-max) ────────── */
+/* ── Accessibility & Focus Rings (WCAG 2.2 AA / Vercel Guidelines) ────────── */
 :focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
+}
+
+/* Headings balance text to prevent orphan words */
+h1, h2, h3, h4, .section-label, .wordmark {
+  text-wrap: balance;
+}
+
+/* Anchor targets clear the sticky navbar */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Tabular figures for numbers, counters, timestamps, and cryptographic hashes */
+code, pre, .hash, .merkle-val, .sig-val, time, .badge, .bucket-name, table td, .metric-value, .stat-val {
+  font-variant-numeric: tabular-nums;
 }
 
 .skip-link {
@@ -59,7 +74,7 @@ body {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-.skip-link:focus {
+.skip-link:focus, .skip-link:focus-visible {
   top: 14px;
 }
 

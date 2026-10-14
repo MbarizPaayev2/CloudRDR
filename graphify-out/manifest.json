@@ -796,5 +796,1541 @@
     "seen": 1791976775.693973,
     "ast_hash": "b3c170c1b599891bf7f3671139ce42f4",
     "semantic_hash": "b3c170c1b599891bf7f3671139ce42f4"
+  },
+  ".agents/rules/codeburn.md": {
+    "mtime": 1791976727.1722875,
+    "seen": 1791977306.78061,
+    "ast_hash": "79e15f9cdc652f29f64c0d4304bd1385",
+    "semantic_hash": ""
+  },
+  ".agents/rules/headroom.md": {
+    "mtime": 1791976723.2869935,
+    "seen": 1791977306.7806175,
+    "ast_hash": "9da86e40aafd8d8544524d0bad0e236b",
+    "semantic_hash": ""
+  },
+  ".agents/rules/ponytail.md": {
+    "mtime": 1791976196.473934,
+    "seen": 1791977306.7806218,
+    "ast_hash": "cd64a670c05b6e86a262c2aeacefc619",
+    "semantic_hash": ""
+  },
+  ".agents/rules/preflight_skills_execution.md": {
+    "mtime": 1791976735.7229538,
+    "seen": 1791977306.780626,
+    "ast_hash": "f58e60328b57a17ae82e8c7515ab15a5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/README.md": {
+    "mtime": 1791976844.185881,
+    "seen": 1791977306.78063,
+    "ast_hash": "0f2f19d56164cae274e04b0d61367e6c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/SKILL.md": {
+    "mtime": 1791977026.746073,
+    "seen": 1791977306.7806337,
+    "ast_hash": "64dc81579c5b4e29168f95811ee39d78",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/1win/DESIGN.md": {
+    "mtime": 1791976844.187878,
+    "seen": 1791977306.7806377,
+    "ast_hash": "113a92586ba4d67d8955cc9ded4ba920",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/1win/README.md": {
+    "mtime": 1791976844.1888816,
+    "seen": 1791977306.7806418,
+    "ast_hash": "c595b4686d545521e71b934e65512ef9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/airbnb/DESIGN.md": {
+    "mtime": 1791976844.1913257,
+    "seen": 1791977306.7806458,
+    "ast_hash": "57743e0ae73b656625546d5b1461a37f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/airbnb/README.md": {
+    "mtime": 1791976844.1913257,
+    "seen": 1791977306.78065,
+    "ast_hash": "446cfd78a0ae0f82f2cdf67243486639",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/airtable/DESIGN.md": {
+    "mtime": 1791976844.1933966,
+    "seen": 1791977306.7806537,
+    "ast_hash": "b623a1757802f49c8e6a6ca46ff0bc13",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/airtable/README.md": {
+    "mtime": 1791976844.19442,
+    "seen": 1791977306.7806573,
+    "ast_hash": "e763ba4a15364abef72fa97d35afa8c6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/aljazeera/DESIGN.md": {
+    "mtime": 1791976844.1964161,
+    "seen": 1791977306.7806616,
+    "ast_hash": "bdaf3209642ac58a1769d7ff1814359b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/aljazeera/README.md": {
+    "mtime": 1791976844.1974194,
+    "seen": 1791977306.7806654,
+    "ast_hash": "61305bc2ce8fc5906a5fc7ac0dab61d1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/apple/DESIGN.md": {
+    "mtime": 1791976844.198559,
+    "seen": 1791977306.780669,
+    "ast_hash": "80fefd6464d842c79f5c5433bd870d95",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/apple/README.md": {
+    "mtime": 1791976844.1995873,
+    "seen": 1791977306.780673,
+    "ast_hash": "e01fea6af6d188bf889e0715799774c5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/binance/DESIGN.md": {
+    "mtime": 1791976844.2005882,
+    "seen": 1791977306.7806766,
+    "ast_hash": "053340eaf6ae5c8536e9c33f880ccb2c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/binance/README.md": {
+    "mtime": 1791976844.2019455,
+    "seen": 1791977306.78068,
+    "ast_hash": "b6effe9cd16750cd8fc6764a743d6cd7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/bmw-m/DESIGN.md": {
+    "mtime": 1791976844.203971,
+    "seen": 1791977306.7806838,
+    "ast_hash": "d1bad396fcd7c5a7e48cdb5ef476d0dd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/bmw-m/README.md": {
+    "mtime": 1791976844.2050104,
+    "seen": 1791977306.7806876,
+    "ast_hash": "781669747cb9b1eef58830288d653be3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/bmw/DESIGN.md": {
+    "mtime": 1791976844.2060852,
+    "seen": 1791977306.7806916,
+    "ast_hash": "13ff1e1cca3998621e766e93f78cc374",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/bmw/README.md": {
+    "mtime": 1791976844.207153,
+    "seen": 1791977306.780696,
+    "ast_hash": "af78082a435516ef2fca4969b93a3162",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/bugatti/DESIGN.md": {
+    "mtime": 1791976844.2091522,
+    "seen": 1791977306.7806997,
+    "ast_hash": "240c3146453bd617bc5b12011ea65c42",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/bugatti/README.md": {
+    "mtime": 1791976844.210147,
+    "seen": 1791977306.7807033,
+    "ast_hash": "7ef9de54e8e35403f950dd81d3ee3462",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/cal/DESIGN.md": {
+    "mtime": 1791976844.211207,
+    "seen": 1791977306.7807071,
+    "ast_hash": "61a9f41fd2829ad635000aaf91e2bcef",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/cal/README.md": {
+    "mtime": 1791976844.2122064,
+    "seen": 1791977306.780711,
+    "ast_hash": "2d5a6aa4e738ecc5eaddbe6119c3331e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/claude/DESIGN.md": {
+    "mtime": 1791976844.2142072,
+    "seen": 1791977306.780714,
+    "ast_hash": "9cdc7a3d90c4769827d5111c0950b216",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/claude/README.md": {
+    "mtime": 1791976844.2152057,
+    "seen": 1791977306.7807176,
+    "ast_hash": "63f2167016d1a23ae73aa86f9b0fdaf1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/clay/DESIGN.md": {
+    "mtime": 1791976844.217208,
+    "seen": 1791977306.7807214,
+    "ast_hash": "6398448d920020fe58d273e7b752b60c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/clay/README.md": {
+    "mtime": 1791976844.2192094,
+    "seen": 1791977306.7807257,
+    "ast_hash": "5e52e30bf94765a561cd4bc9fcd28e15",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/clickhouse/DESIGN.md": {
+    "mtime": 1791976844.221831,
+    "seen": 1791977306.7807298,
+    "ast_hash": "c090683f726aab25c9ae68713df510c9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/clickhouse/README.md": {
+    "mtime": 1791976844.223101,
+    "seen": 1791977306.780734,
+    "ast_hash": "6db258ae94ae9a24b980eb4c323426c5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/cohere/DESIGN.md": {
+    "mtime": 1791976844.2251,
+    "seen": 1791977306.7807384,
+    "ast_hash": "b4e1bd94eafeee4b99c228e1cf6d3799",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/cohere/README.md": {
+    "mtime": 1791976844.226099,
+    "seen": 1791977306.7807424,
+    "ast_hash": "893f076261886c9b54dbf8e2787e12ff",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/coinbase/DESIGN.md": {
+    "mtime": 1791976844.2271006,
+    "seen": 1791977306.7807465,
+    "ast_hash": "95b7ec9f43ef6b3d010fdfd31fa20894",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/coinbase/README.md": {
+    "mtime": 1791976844.2281008,
+    "seen": 1791977306.7807505,
+    "ast_hash": "07480d1c455abed987d1835ab00aacd1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/composio/DESIGN.md": {
+    "mtime": 1791976844.2302558,
+    "seen": 1791977306.7807548,
+    "ast_hash": "ba9efa5b40e0e01973e1dd1579c9c569",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/composio/README.md": {
+    "mtime": 1791976844.2315352,
+    "seen": 1791977306.7807586,
+    "ast_hash": "1cc425c9a2f8836eb0b3ed8a09623872",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/cursor/DESIGN.md": {
+    "mtime": 1791976844.2327752,
+    "seen": 1791977306.7807698,
+    "ast_hash": "664a8a724509772802053f7bcbe13324",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/cursor/README.md": {
+    "mtime": 1791976844.2337728,
+    "seen": 1791977306.7807736,
+    "ast_hash": "6e2f11be8c20de0c28e783e10599e8ae",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/dell-1996/DESIGN.md": {
+    "mtime": 1791976844.2347722,
+    "seen": 1791977306.7807775,
+    "ast_hash": "b94fbdf46959173be3b3d92fb4beea87",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/dell-1996/README.md": {
+    "mtime": 1791976844.2357745,
+    "seen": 1791977306.7807815,
+    "ast_hash": "aa345561e83f0b1a74d1969091bd0627",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/dji/DESIGN.md": {
+    "mtime": 1791976844.237774,
+    "seen": 1791977306.7807853,
+    "ast_hash": "58492b1bc5b841c23f92ba354962c1af",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/dji/README.md": {
+    "mtime": 1791976844.2387743,
+    "seen": 1791977306.7807896,
+    "ast_hash": "ea5158ff41ac825208f63886b2092113",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/elevenlabs/DESIGN.md": {
+    "mtime": 1791976844.2397726,
+    "seen": 1791977306.7807941,
+    "ast_hash": "c560f36cc8a9f63572db1309333e446c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/elevenlabs/README.md": {
+    "mtime": 1791976844.240772,
+    "seen": 1791977306.780798,
+    "ast_hash": "5e712007eb380e08477fe7aaedb6e889",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/expo/DESIGN.md": {
+    "mtime": 1791976844.2417722,
+    "seen": 1791977306.7808018,
+    "ast_hash": "db899f4ef8e6e80f6b8ddcb8d56a8357",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/expo/README.md": {
+    "mtime": 1791976844.2427728,
+    "seen": 1791977306.780806,
+    "ast_hash": "cb495733c54fbdf0e10beeaae1163fc3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/ferrari/DESIGN.md": {
+    "mtime": 1791976844.2448974,
+    "seen": 1791977306.7808104,
+    "ast_hash": "bdc79278db097b4592d3861cd6920dd3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/ferrari/README.md": {
+    "mtime": 1791976844.2458973,
+    "seen": 1791977306.780814,
+    "ast_hash": "ff418bc7fe086bcd043f562c68b17de7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/figma/DESIGN.md": {
+    "mtime": 1791976844.2478962,
+    "seen": 1791977306.7808175,
+    "ast_hash": "bb1037cbb1745814f4debaa6f0b9e30a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/figma/README.md": {
+    "mtime": 1791976844.2478962,
+    "seen": 1791977306.780821,
+    "ast_hash": "97e4de6c849e440816463a4c08114dd1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/framer/DESIGN.md": {
+    "mtime": 1791976844.2498965,
+    "seen": 1791977306.7808251,
+    "ast_hash": "7d7fc8b49de2a6b428398b6b7db4ceb0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/framer/README.md": {
+    "mtime": 1791976844.2508976,
+    "seen": 1791977306.780829,
+    "ast_hash": "eb5c7ed81c85337a8c2c0947a1aa6a19",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/hashicorp/DESIGN.md": {
+    "mtime": 1791976844.2528965,
+    "seen": 1791977306.7808328,
+    "ast_hash": "d8466c3df31e17da9012315a91f03198",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/hashicorp/README.md": {
+    "mtime": 1791976844.2538958,
+    "seen": 1791977306.7808366,
+    "ast_hash": "ca09e5baf180d9ab8580824780574c9e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/hp/DESIGN.md": {
+    "mtime": 1791976844.2548978,
+    "seen": 1791977306.7808402,
+    "ast_hash": "ff636b7ec18f893514911e860d2d5d87",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/hp/README.md": {
+    "mtime": 1791976844.2559054,
+    "seen": 1791977306.7808437,
+    "ast_hash": "3530aa7b2f346ac0492428c19047a62a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/ibm/DESIGN.md": {
+    "mtime": 1791976844.2579067,
+    "seen": 1791977306.7808485,
+    "ast_hash": "062adcf30b691ac97927330233414001",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/ibm/README.md": {
+    "mtime": 1791976844.2589114,
+    "seen": 1791977306.7808528,
+    "ast_hash": "72cce1d7a66ce00d48710b1a1af2fd65",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/intercom/DESIGN.md": {
+    "mtime": 1791976844.2609067,
+    "seen": 1791977306.7808576,
+    "ast_hash": "43ce610b45405cc64e96a6071a0aef45",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/intercom/README.md": {
+    "mtime": 1791976844.2619064,
+    "seen": 1791977306.7808611,
+    "ast_hash": "a40b283e6be6cd448d5d13db9713b4f9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/jobright/DESIGN.md": {
+    "mtime": 1791976844.2639055,
+    "seen": 1791977306.780865,
+    "ast_hash": "8ef86198ca2c94bca5d787d3a345da4e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/jobright/README.md": {
+    "mtime": 1791976844.2649083,
+    "seen": 1791977306.7808688,
+    "ast_hash": "5b4ae8256d9ccb7050012527d9d3569a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/kraken/DESIGN.md": {
+    "mtime": 1791976844.2669067,
+    "seen": 1791977306.7808723,
+    "ast_hash": "2b58b77eec725cb02afdf1eb17133785",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/kraken/README.md": {
+    "mtime": 1791976844.2679057,
+    "seen": 1791977306.7808764,
+    "ast_hash": "91257bfd14c23ddf3f6db2e6a4da8c89",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/lamborghini/DESIGN.md": {
+    "mtime": 1791976844.2704153,
+    "seen": 1791977306.7808802,
+    "ast_hash": "fb67c14d18975e5a7eac42000c9cd44c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/lamborghini/README.md": {
+    "mtime": 1791976844.2714255,
+    "seen": 1791977306.7808843,
+    "ast_hash": "590b00b46513288599c02607cd03591d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/linear.app/DESIGN.md": {
+    "mtime": 1791976844.272426,
+    "seen": 1791977306.780888,
+    "ast_hash": "dd1682e2f3a319b54272ca66b9383b6d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/linear.app/README.md": {
+    "mtime": 1791976844.2734237,
+    "seen": 1791977306.7808924,
+    "ast_hash": "a50843b68972bc014b7e0b91ac731732",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/lovable/DESIGN.md": {
+    "mtime": 1791976844.2760139,
+    "seen": 1791977306.7808964,
+    "ast_hash": "0b6355af45aff9dada442340c4659684",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/lovable/README.md": {
+    "mtime": 1791976844.2770135,
+    "seen": 1791977306.7809,
+    "ast_hash": "78caab84763b375bd62b454851c82b23",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mastercard/DESIGN.md": {
+    "mtime": 1791976844.2780132,
+    "seen": 1791977306.7809036,
+    "ast_hash": "4c20cf9ddf0ccb9f004d16ab4595f14a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mastercard/README.md": {
+    "mtime": 1791976844.2794087,
+    "seen": 1791977306.7809079,
+    "ast_hash": "70f3fce49ac332b7e399857904d87ce9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mercury/DESIGN.md": {
+    "mtime": 1791976844.2816093,
+    "seen": 1791977306.7809114,
+    "ast_hash": "b46dbba206712f1c6dac340248f1a7b3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mercury/README.md": {
+    "mtime": 1791976844.282606,
+    "seen": 1791977306.780915,
+    "ast_hash": "3dd5681f53ab7973b472301334dd62f4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/meta/DESIGN.md": {
+    "mtime": 1791976844.2846155,
+    "seen": 1791977306.7809188,
+    "ast_hash": "14b088f370774506c2c5b53369c2664a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/meta/README.md": {
+    "mtime": 1791976844.2856143,
+    "seen": 1791977306.7809222,
+    "ast_hash": "949728aad1d61ca5a0a6dfd22a92ee30",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/minimax/DESIGN.md": {
+    "mtime": 1791976844.2888,
+    "seen": 1791977306.780926,
+    "ast_hash": "297a9ee61419d9b81c0e99e7f863672c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/minimax/README.md": {
+    "mtime": 1791976844.2898445,
+    "seen": 1791977306.7809298,
+    "ast_hash": "62b842ca55d4718dd500dc833679f752",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mintlify/DESIGN.md": {
+    "mtime": 1791976844.2910023,
+    "seen": 1791977306.7809336,
+    "ast_hash": "4216b58896ae3461339adbd6e489da12",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mintlify/README.md": {
+    "mtime": 1791976844.2920158,
+    "seen": 1791977306.7809377,
+    "ast_hash": "9ce113fcb9225e21d54d3a7edb8eaab9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/miro/DESIGN.md": {
+    "mtime": 1791976844.2941947,
+    "seen": 1791977306.7809412,
+    "ast_hash": "189876e4a701d3ed9ee73f517ca36533",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/miro/README.md": {
+    "mtime": 1791976844.2954986,
+    "seen": 1791977306.7809446,
+    "ast_hash": "f36fb592ada6aeb8b3721e9b272e5dec",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mistral.ai/DESIGN.md": {
+    "mtime": 1791976844.2975104,
+    "seen": 1791977306.7809484,
+    "ast_hash": "d67a380fdbcd8f01aa148ad47bcda37b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mistral.ai/README.md": {
+    "mtime": 1791976844.2985156,
+    "seen": 1791977306.7809522,
+    "ast_hash": "19ccf577d5177c899288b6be072d8685",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mongodb/DESIGN.md": {
+    "mtime": 1791976844.2998855,
+    "seen": 1791977306.7809556,
+    "ast_hash": "7b1b9c7963c2e1b8ede0faefa3d31ee8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mongodb/README.md": {
+    "mtime": 1791976844.3018878,
+    "seen": 1791977306.780959,
+    "ast_hash": "b6bbafc09489f5fc1539c98e8e67af6a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mydealz/DESIGN.md": {
+    "mtime": 1791976844.3028848,
+    "seen": 1791977306.7809627,
+    "ast_hash": "9ded94e3f109630670aa1c426ca115f3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/mydealz/README.md": {
+    "mtime": 1791976844.3038871,
+    "seen": 1791977306.780966,
+    "ast_hash": "c15a28f96b6f7704b72f939c6743e41a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nerdwallet/DESIGN.md": {
+    "mtime": 1791976844.3058853,
+    "seen": 1791977306.7809696,
+    "ast_hash": "0cd6d6ae90efd543fcad4ead9db64a6f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nerdwallet/README.md": {
+    "mtime": 1791976844.3070536,
+    "seen": 1791977306.780973,
+    "ast_hash": "d13241a8765154985638d952c71628b7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nike/DESIGN.md": {
+    "mtime": 1791976844.3090677,
+    "seen": 1791977306.7809772,
+    "ast_hash": "ddafeeba39e54928eea369e92b9d563a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nike/README.md": {
+    "mtime": 1791976844.3090677,
+    "seen": 1791977306.7809806,
+    "ast_hash": "495cbe9899d878ccdba8724ccc4e7ae4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nintendo-2001/DESIGN.md": {
+    "mtime": 1791976844.3114228,
+    "seen": 1791977306.7809846,
+    "ast_hash": "433f3b1f3a011274352f1e107001a160",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nintendo-2001/README.md": {
+    "mtime": 1791976844.3124216,
+    "seen": 1791977306.780988,
+    "ast_hash": "d2ba1db0c0896caeb96330d4fed57311",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/notion/DESIGN.md": {
+    "mtime": 1791976844.3144248,
+    "seen": 1791977306.7809916,
+    "ast_hash": "9fad35845721a15ed45c181692e7a889",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/notion/README.md": {
+    "mtime": 1791976844.3154263,
+    "seen": 1791977306.7809954,
+    "ast_hash": "3895ecfd1c0834cbd3247b0ee074c199",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nvidia/DESIGN.md": {
+    "mtime": 1791976844.3174222,
+    "seen": 1791977306.7809992,
+    "ast_hash": "13aa2ce69278a7dee59b3f9b82df67ab",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/nvidia/README.md": {
+    "mtime": 1791976844.3184245,
+    "seen": 1791977306.7810023,
+    "ast_hash": "68967249031dfcbbc234d4ac47e170da",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/ollama/DESIGN.md": {
+    "mtime": 1791976844.3194249,
+    "seen": 1791977306.7810056,
+    "ast_hash": "b8ae843fde6b4252482fa3d545a8dba5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/ollama/README.md": {
+    "mtime": 1791976844.3214264,
+    "seen": 1791977306.781009,
+    "ast_hash": "e5ff056b527aa44f00a1a4dbc4f69964",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/opencode.ai/DESIGN.md": {
+    "mtime": 1791976844.323425,
+    "seen": 1791977306.7810123,
+    "ast_hash": "ed5837cac4cb2b3eb5d36f652e60df90",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/opencode.ai/README.md": {
+    "mtime": 1791976844.324424,
+    "seen": 1791977306.7810152,
+    "ast_hash": "d9e6daafc4594bfec8e5104d9ee5ed83",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/oracle/DESIGN.md": {
+    "mtime": 1791976844.3264246,
+    "seen": 1791977306.7810187,
+    "ast_hash": "62a4ffd97e929476871f038f34f4d9cd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/oracle/README.md": {
+    "mtime": 1791976844.327425,
+    "seen": 1791977306.7810225,
+    "ast_hash": "6d43b3953f65adab9cecc67bbd89bc31",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/oura/DESIGN.md": {
+    "mtime": 1791976844.3294246,
+    "seen": 1791977306.7810276,
+    "ast_hash": "6179b40877055bd11a3af85307c2123a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/oura/README.md": {
+    "mtime": 1791976844.3304236,
+    "seen": 1791977306.7810316,
+    "ast_hash": "4d9d04eefd892566096d7450bfcfaf52",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/pinterest/DESIGN.md": {
+    "mtime": 1791976844.3314235,
+    "seen": 1791977306.7810352,
+    "ast_hash": "c7ce0d26125a518e117676bbcfbcb2e5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/pinterest/README.md": {
+    "mtime": 1791976844.3326373,
+    "seen": 1791977306.7810388,
+    "ast_hash": "4f0c582eece5f088005609d5eb48a8a1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/playstation/DESIGN.md": {
+    "mtime": 1791976844.3351593,
+    "seen": 1791977306.7810426,
+    "ast_hash": "75911cca998ba809c6b14fd5be88d9e0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/playstation/README.md": {
+    "mtime": 1791976844.3363855,
+    "seen": 1791977306.7810469,
+    "ast_hash": "f4bc48c6b507b3ee92152eb6fa7615bc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/posthog/DESIGN.md": {
+    "mtime": 1791976844.3378263,
+    "seen": 1791977306.7810504,
+    "ast_hash": "1bcc528def99842457f386ad2ddd4d53",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/posthog/README.md": {
+    "mtime": 1791976844.338953,
+    "seen": 1791977306.7810543,
+    "ast_hash": "5fe1533c4cd743c7b24451ebc8f9598b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/raycast/DESIGN.md": {
+    "mtime": 1791976844.340221,
+    "seen": 1791977306.781059,
+    "ast_hash": "e537dc5cd0750a3b1e35ff94539c4760",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/raycast/README.md": {
+    "mtime": 1791976844.341231,
+    "seen": 1791977306.7810624,
+    "ast_hash": "a002152cb79e9cbe179eff4fc0b8a438",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/renault/DESIGN.md": {
+    "mtime": 1791976844.3434234,
+    "seen": 1791977306.7810662,
+    "ast_hash": "bcfecaf556dc3f8b172cc6882cb13bca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/renault/README.md": {
+    "mtime": 1791976844.3444216,
+    "seen": 1791977306.78107,
+    "ast_hash": "b738b55af71b69a5536769cf322ed3a8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/replicate/DESIGN.md": {
+    "mtime": 1791976844.347422,
+    "seen": 1791977306.7810745,
+    "ast_hash": "972c51a9392e2bf706996be0df737ae1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/replicate/README.md": {
+    "mtime": 1791976844.347422,
+    "seen": 1791977306.7810783,
+    "ast_hash": "b26f291c7787e4f6fd8f3b3f67237e33",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/resend/DESIGN.md": {
+    "mtime": 1791976844.3496766,
+    "seen": 1791977306.7810817,
+    "ast_hash": "a727f8fea638885e77ae993705356511",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/resend/README.md": {
+    "mtime": 1791976844.3507953,
+    "seen": 1791977306.7810853,
+    "ast_hash": "1271cc0d4631deeb468365df327cd457",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/revolut/DESIGN.md": {
+    "mtime": 1791976844.3517928,
+    "seen": 1791977306.7810888,
+    "ast_hash": "75e73f0283b2b5c9afea2867e270b7ac",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/revolut/README.md": {
+    "mtime": 1791976844.3531744,
+    "seen": 1791977306.7810922,
+    "ast_hash": "539358e79e42501f8b0f1f7983ff0bbf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/runwayml/DESIGN.md": {
+    "mtime": 1791976844.355283,
+    "seen": 1791977306.7810957,
+    "ast_hash": "bcd38afdfaf3646006f4d0bf54258216",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/runwayml/README.md": {
+    "mtime": 1791976844.3573492,
+    "seen": 1791977306.7810996,
+    "ast_hash": "a4450750fd82111d7d66f62cedfa8923",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/sanity/DESIGN.md": {
+    "mtime": 1791976844.3593724,
+    "seen": 1791977306.7811034,
+    "ast_hash": "3e78ad7ac4e0980053350f33c4017ca4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/sanity/README.md": {
+    "mtime": 1791976844.3603683,
+    "seen": 1791977306.781107,
+    "ast_hash": "f85eecacea49847f42a4dd767c481a77",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/sap/DESIGN.md": {
+    "mtime": 1791976844.3623679,
+    "seen": 1791977306.7811117,
+    "ast_hash": "6872c487e9d9c80579928e855bea3a82",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/sap/README.md": {
+    "mtime": 1791976844.3634782,
+    "seen": 1791977306.781116,
+    "ast_hash": "35164e8e27e765c3ad2031ac484de1fb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/sentry/DESIGN.md": {
+    "mtime": 1791976844.3655534,
+    "seen": 1791977306.7811198,
+    "ast_hash": "d282f2632e047d7614f6de5306142328",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/sentry/README.md": {
+    "mtime": 1791976844.3655534,
+    "seen": 1791977306.7811236,
+    "ast_hash": "e6051e22c0d2ae3ff0815b9bf76f16ef",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/shopify/DESIGN.md": {
+    "mtime": 1791976844.3675776,
+    "seen": 1791977306.7811272,
+    "ast_hash": "8e6e08118bf6d416c816c54e32d942e3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/shopify/README.md": {
+    "mtime": 1791976844.3690753,
+    "seen": 1791977306.781131,
+    "ast_hash": "8d146837156e29d4102b4bea8c5cb1af",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/slack/DESIGN.md": {
+    "mtime": 1791976844.3713903,
+    "seen": 1791977306.7811348,
+    "ast_hash": "27daa5eded4ac2c057dd87618723da54",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/spacex/DESIGN.md": {
+    "mtime": 1791976844.373391,
+    "seen": 1791977306.781139,
+    "ast_hash": "e784d676e085c8e3fb6a16ede1f2176f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/spacex/README.md": {
+    "mtime": 1791976844.37439,
+    "seen": 1791977306.7811425,
+    "ast_hash": "872cc6752ce75df56a978eac13c65545",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/spotify/DESIGN.md": {
+    "mtime": 1791976844.376888,
+    "seen": 1791977306.7811463,
+    "ast_hash": "6d5e5992bd1e2e339148377b1c06bd73",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/spotify/README.md": {
+    "mtime": 1791976844.376888,
+    "seen": 1791977306.7811508,
+    "ast_hash": "8f86e8cd3faeb80def5b52689d6734c5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/starbucks/DESIGN.md": {
+    "mtime": 1791976844.3803947,
+    "seen": 1791977306.7811549,
+    "ast_hash": "8475dc0ec4ca26b4453577701ab0411c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/starbucks/README.md": {
+    "mtime": 1791976844.3803947,
+    "seen": 1791977306.7811584,
+    "ast_hash": "322c33f6898b00f643dce28566cf9530",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/stripe/DESIGN.md": {
+    "mtime": 1791976844.3828914,
+    "seen": 1791977306.7811615,
+    "ast_hash": "4495ff5a52f0a2e65a961c177c82bef7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/stripe/README.md": {
+    "mtime": 1791976844.383915,
+    "seen": 1791977306.7811646,
+    "ast_hash": "cb5f05f104795a1fc255658ef142595e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/supabase/DESIGN.md": {
+    "mtime": 1791976844.385911,
+    "seen": 1791977306.7811675,
+    "ast_hash": "78bd877f968ceb4758d82f06714ea45a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/supabase/README.md": {
+    "mtime": 1791976844.3872035,
+    "seen": 1791977306.7811701,
+    "ast_hash": "5d2ca39b609f821e33493e14528ed936",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/superhuman/DESIGN.md": {
+    "mtime": 1791976844.3892055,
+    "seen": 1791977306.7811723,
+    "ast_hash": "0a740a113ec13996de4708a16dfd8832",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/superhuman/README.md": {
+    "mtime": 1791976844.390283,
+    "seen": 1791977306.781175,
+    "ast_hash": "ade573a177bf29518fea4bd2e42b55f9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/tesla/DESIGN.md": {
+    "mtime": 1791976844.39246,
+    "seen": 1791977306.7811768,
+    "ast_hash": "802daa7f110a6acbc18294c4017056a3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/tesla/README.md": {
+    "mtime": 1791976844.393461,
+    "seen": 1791977306.7811792,
+    "ast_hash": "a0c7d9d94feab35d6090f76bc270c85b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/theverge/DESIGN.md": {
+    "mtime": 1791976844.3954601,
+    "seen": 1791977306.7811813,
+    "ast_hash": "680f41c3b21219066aaafded3687b61a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/theverge/README.md": {
+    "mtime": 1791976844.3954601,
+    "seen": 1791977306.7811837,
+    "ast_hash": "d36e53747640759730c56dba598092c3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/together.ai/DESIGN.md": {
+    "mtime": 1791976844.3974626,
+    "seen": 1791977306.7811859,
+    "ast_hash": "fdadae039718382c5e78b5521a8499f9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/together.ai/README.md": {
+    "mtime": 1791976844.3989725,
+    "seen": 1791977306.7811983,
+    "ast_hash": "7569456427d1b9f053472ef00b8e75e1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/uber/DESIGN.md": {
+    "mtime": 1791976844.4009924,
+    "seen": 1791977306.7812004,
+    "ast_hash": "b1a7cce8101e5f25787944536ebd0224",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/uber/README.md": {
+    "mtime": 1791976844.4019895,
+    "seen": 1791977306.7812023,
+    "ast_hash": "4ec0407f9521e543909fb23629d4389a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/vercel/DESIGN.md": {
+    "mtime": 1791976844.4039886,
+    "seen": 1791977306.7812047,
+    "ast_hash": "10fc43f2087c9e14fe051687d6b425f0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/vercel/README.md": {
+    "mtime": 1791976844.4053428,
+    "seen": 1791977306.7812068,
+    "ast_hash": "60b38c38c543403402d3c63422c05fba",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/vodafone/DESIGN.md": {
+    "mtime": 1791976844.4068599,
+    "seen": 1791977306.7812085,
+    "ast_hash": "8885f24de62b51d8a8026e3e0cb040b6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/vodafone/README.md": {
+    "mtime": 1791976844.4078617,
+    "seen": 1791977306.7812107,
+    "ast_hash": "6e4079538ce7608629e30230acd6dfb7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/voltagent/DESIGN.md": {
+    "mtime": 1791976844.40986,
+    "seen": 1791977306.781213,
+    "ast_hash": "cf6a918f07977c14b94c4ef0ed4bf397",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/voltagent/README.md": {
+    "mtime": 1791976844.4108613,
+    "seen": 1791977306.781215,
+    "ast_hash": "4a43e223500ff1a89604270affde27f0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/warp/DESIGN.md": {
+    "mtime": 1791976844.4138913,
+    "seen": 1791977306.7812173,
+    "ast_hash": "0f482ebdf98343d1c0f0e619021c859a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/warp/README.md": {
+    "mtime": 1791976844.4138913,
+    "seen": 1791977306.7812197,
+    "ast_hash": "605b3b55548eb8525cef5bd2a188246d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/webflow/DESIGN.md": {
+    "mtime": 1791976844.4164064,
+    "seen": 1791977306.7812219,
+    "ast_hash": "2ab606a64441e956a66e9b2a97fa5496",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/webflow/README.md": {
+    "mtime": 1791976844.4184022,
+    "seen": 1791977306.7812243,
+    "ast_hash": "1730fa73df5ed64c20105ce5e0b6eba7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/wired/DESIGN.md": {
+    "mtime": 1791976844.4204016,
+    "seen": 1791977306.781226,
+    "ast_hash": "7988ca6b04b21fa53e53ea6e87e21aa0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/wired/README.md": {
+    "mtime": 1791976844.4216187,
+    "seen": 1791977306.7812283,
+    "ast_hash": "1fbe7ccf0919a2246f2e010ccbac7633",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/wise/DESIGN.md": {
+    "mtime": 1791976844.4249337,
+    "seen": 1791977306.78123,
+    "ast_hash": "5e32d8770a28c189a4e84a87c30a2f51",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/wise/README.md": {
+    "mtime": 1791976844.4276848,
+    "seen": 1791977306.7812324,
+    "ast_hash": "210cea956622af8d7a3d4257ad1462b0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/x.ai/DESIGN.md": {
+    "mtime": 1791976844.4309473,
+    "seen": 1791977306.7812345,
+    "ast_hash": "c4f846c2f05e96601e5f21930a423062",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/x.ai/README.md": {
+    "mtime": 1791976844.4329596,
+    "seen": 1791977306.7812364,
+    "ast_hash": "e6efb688de11c07e0ecb70d6e4c191c4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/zapier/DESIGN.md": {
+    "mtime": 1791976844.4377663,
+    "seen": 1791977306.7812386,
+    "ast_hash": "94207e59be0354d358766c8b90669fac",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-design-md/design-md/zapier/README.md": {
+    "mtime": 1791976844.4394324,
+    "seen": 1791977306.781241,
+    "ast_hash": "be7b254cadb3c5db242a48bdf68b93b8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/brandkit/SKILL.md": {
+    "mtime": 1791974874.5287097,
+    "seen": 1791977306.781243,
+    "ast_hash": "5c2acec0e2123eee551132a578f213b1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/codeburn/SKILL.md": {
+    "mtime": 1791976713.4941614,
+    "seen": 1791977306.7812452,
+    "ast_hash": "c9038f07e022cb775d346b9bb112f1ad",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/SKILL.md": {
+    "mtime": 1791976842.4506166,
+    "seen": 1791977306.7812474,
+    "ast_hash": "b7ad443871da0815916d79676ac3d379",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/accessibility.md": {
+    "mtime": 1791976842.4527016,
+    "seen": 1791977306.7812495,
+    "ast_hash": "2be45529d68f0f0be93ef990f879b048",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/anti-checklist.md": {
+    "mtime": 1791976842.4541652,
+    "seen": 1791977306.7812517,
+    "ast_hash": "c4da133888cf98c8e1026b0412adb107",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/audit-checklist.md": {
+    "mtime": 1791976842.4554195,
+    "seen": 1791977306.7812538,
+    "ast_hash": "e0a405878680d37f23abad6c47aa5b8a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/creation-gotchas.md": {
+    "mtime": 1791976842.4566026,
+    "seen": 1791977306.781256,
+    "ast_hash": "698ef145458421ce970b8bd7629d499c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/demo-shell.html": {
+    "mtime": 1791976842.457605,
+    "seen": 1791977306.7812579,
+    "ast_hash": "587e6ce85be1a5e26e39e33acb3f38ba",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/emil-kowalski.md": {
+    "mtime": 1791976842.4586022,
+    "seen": 1791977306.78126,
+    "ast_hash": "2741480fca47410b5a5e705556fde398",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/jakub-krehel.md": {
+    "mtime": 1791976842.4596007,
+    "seen": 1791977306.7812622,
+    "ast_hash": "a12d1d68c0ac84af177080f49e736a5b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/jhey-tompkins.md": {
+    "mtime": 1791976842.460602,
+    "seen": 1791977306.781264,
+    "ast_hash": "e2532039e068c7fa99a9a0f848a9d039",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/motion-cookbook.md": {
+    "mtime": 1791976842.4615998,
+    "seen": 1791977306.7812662,
+    "ast_hash": "a3ff21ed0fb44370ad5e59d83d9ff6f2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/output-format.md": {
+    "mtime": 1791976842.4626026,
+    "seen": 1791977306.7812681,
+    "ast_hash": "2203a929eff30284390afa731c20f21c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/performance.md": {
+    "mtime": 1791976842.463602,
+    "seen": 1791977306.7812707,
+    "ast_hash": "038e80415dde4fe1f55cb935d471237c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/references/report-template.html": {
+    "mtime": 1791976842.4646027,
+    "seen": 1791977306.7812724,
+    "ast_hash": "b3385d272aee33a819862c3886715108",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/workflows/audit.md": {
+    "mtime": 1791976842.4666016,
+    "seen": 1791977306.7812746,
+    "ast_hash": "2eb036d0d6e97e03c817ef093b9f14b9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-motion-principles/workflows/create.md": {
+    "mtime": 1791976842.4675999,
+    "seen": 1791977306.7812765,
+    "ast_hash": "ed2bb886cb74f4bf1b889ba518a45a5d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/SKILL.md": {
+    "mtime": 1791975492.551616,
+    "seen": 1791977306.7812786,
+    "ast_hash": "37e7fbda7ea5734e4868d9fb9b3ec729",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/references/component-specs.md": {
+    "mtime": 1791975492.562616,
+    "seen": 1791977306.7812808,
+    "ast_hash": "800d64833545996f7c61af874ea0c66e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/references/component-tokens.md": {
+    "mtime": 1791975492.5636168,
+    "seen": 1791977306.781283,
+    "ast_hash": "c7acadf3787aad400831c355b19f0471",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/references/primitive-tokens.md": {
+    "mtime": 1791975492.5656154,
+    "seen": 1791977306.7812848,
+    "ast_hash": "ae8bbb7dbf88e23b59396e380b1ece0b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/references/semantic-tokens.md": {
+    "mtime": 1791975492.566616,
+    "seen": 1791977306.781287,
+    "ast_hash": "7f646cd1f434d55e27973f56d65d4828",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/references/states-and-variants.md": {
+    "mtime": 1791975492.566616,
+    "seen": 1791977306.7812886,
+    "ast_hash": "7c9ea66af1b4b2df9b1cb585d9d67d84",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/references/tailwind-integration.md": {
+    "mtime": 1791975492.5676167,
+    "seen": 1791977306.781291,
+    "ast_hash": "d8cbd2666cd878b35bee5ea2dc25e4e0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-system/references/token-architecture.md": {
+    "mtime": 1791975492.5686162,
+    "seen": 1791977306.7812932,
+    "ast_hash": "da908dc8722cd5c21b75f1ceab8431c7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend-v1/SKILL.md": {
+    "mtime": 1791974874.5489135,
+    "seen": 1791977306.781295,
+    "ast_hash": "1eccc657c645f6b78c6adde2261858ba",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend-v2-experimental/SKILL.md": {
+    "mtime": 1791974874.5509148,
+    "seen": 1791977306.781297,
+    "ast_hash": "bd36704b4a275a16710c179a3d2f021d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/README.md": {
+    "mtime": 1791974874.5529165,
+    "seen": 1791977306.7812989,
+    "ast_hash": "572eefa17225dca7b0e96b18f8bbcf7d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/SKILL.md": {
+    "mtime": 1791974874.5549154,
+    "seen": 1791977306.781301,
+    "ast_hash": "cbc729e1a243eab31f87b2b2d96ce648",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/colour.md": {
+    "mtime": 1791974874.5779288,
+    "seen": 1791977306.7813034,
+    "ast_hash": "813d4dbbd43bcbb16635b475ef0a152b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/copy.md": {
+    "mtime": 1791974874.5794373,
+    "seen": 1791977306.7813053,
+    "ast_hash": "f6a31b12e2a93044cf707b0b48ff54f2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/critique.md": {
+    "mtime": 1791974874.5804458,
+    "seen": 1791977306.781308,
+    "ast_hash": "b1a4be4d2438520a4e52274789480251",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/imagery.md": {
+    "mtime": 1791974874.5814471,
+    "seen": 1791977306.7813103,
+    "ast_hash": "d2df3e59b715d921195cad4d1dcde60b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/layout.md": {
+    "mtime": 1791974874.5824468,
+    "seen": 1791977306.781312,
+    "ast_hash": "53f06a25de21b85dffcdb37bcece4f9b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/motion.md": {
+    "mtime": 1791974874.583448,
+    "seen": 1791977306.7813141,
+    "ast_hash": "26576a5a15aef0efe04f318702a5ac44",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/research.md": {
+    "mtime": 1791974874.5844452,
+    "seen": 1791977306.7813158,
+    "ast_hash": "74f2056f57dd956fd43a5b1ebedc3eae",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/tells.md": {
+    "mtime": 1791974874.5854492,
+    "seen": 1791977306.781347,
+    "ast_hash": "6d8dc4b738e997a74523fc2bc87ba081",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/references/type.md": {
+    "mtime": 1791974874.5864513,
+    "seen": 1791977306.7813494,
+    "ast_hash": "3c038076f4078e89a5bcf4115f05e128",
+    "semantic_hash": ""
+  },
+  ".agents/skills/full-output-enforcement/SKILL.md": {
+    "mtime": 1791974874.541228,
+    "seen": 1791977306.7813513,
+    "ast_hash": "2072dc2c1357dc9cd6384d1f441e05c3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gpt-taste/SKILL.md": {
+    "mtime": 1791974874.5317116,
+    "seen": 1791977306.7813532,
+    "ast_hash": "cafc9e1508f9e03ca25f9a5d35d03134",
+    "semantic_hash": ""
+  },
+  ".agents/skills/headroom/SKILL.md": {
+    "mtime": 1791976706.9633186,
+    "seen": 1791977306.781355,
+    "ast_hash": "ffba70e374e74f6f3312bfb3ca439819",
+    "semantic_hash": ""
+  },
+  ".agents/skills/high-end-visual-design/SKILL.md": {
+    "mtime": 1791974874.5449061,
+    "seen": 1791977306.7813568,
+    "ast_hash": "64f7c1069a5a3d18797950d8fac7b63a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/image-to-code/SKILL.md": {
+    "mtime": 1791974874.5332198,
+    "seen": 1791977306.781359,
+    "ast_hash": "b18a810930da9c6b558b15c85bc74007",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-mobile/SKILL.md": {
+    "mtime": 1791974874.5352273,
+    "seen": 1791977306.7813609,
+    "ast_hash": "6253c18387ca5d561a945ffe14e70d54",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-web/SKILL.md": {
+    "mtime": 1791974874.53723,
+    "seen": 1791977306.7813632,
+    "ast_hash": "728f55ab7e44330e78aac4ca8331d83a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/industrial-brutalist-ui/SKILL.md": {
+    "mtime": 1791974874.5307133,
+    "seen": 1791977306.781365,
+    "ast_hash": "da7f92d7e3b8b526ecbd71009fe973ca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/minimalist-ui/SKILL.md": {
+    "mtime": 1791974874.5402288,
+    "seen": 1791977306.7813673,
+    "ast_hash": "c0921533558eb588af1b9b1b25b2d787",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ponytail-audit/SKILL.md": {
+    "mtime": 1791976196.760224,
+    "seen": 1791977306.7813694,
+    "ast_hash": "3c74cf12a43402931cf527ba67ea352f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ponytail-debt/SKILL.md": {
+    "mtime": 1791976196.762428,
+    "seen": 1791977306.781371,
+    "ast_hash": "22cfa7bc601b57791e1efc7db70d09b5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ponytail-gain/SKILL.md": {
+    "mtime": 1791976196.7646556,
+    "seen": 1791977306.7813733,
+    "ast_hash": "2b50dc83251cc60c1d0f066805b8ca3f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ponytail-help/SKILL.md": {
+    "mtime": 1791976196.7666552,
+    "seen": 1791977306.7813752,
+    "ast_hash": "1b654c8cea452eddeed657707f6a3a7d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ponytail-review/SKILL.md": {
+    "mtime": 1791976196.7675838,
+    "seen": 1791977306.7813773,
+    "ast_hash": "599ba68a9bd0134e902b4158a4efd271",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ponytail/SKILL.md": {
+    "mtime": 1791976196.7697318,
+    "seen": 1791977306.781379,
+    "ast_hash": "0de2574920505e8f423705421e60742e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/redesign-existing-projects/SKILL.md": {
+    "mtime": 1791974874.5432296,
+    "seen": 1791977306.7813811,
+    "ast_hash": "49eafbf0a0935449cc25e26d3961a342",
+    "semantic_hash": ""
+  },
+  ".agents/skills/slides/SKILL.md": {
+    "mtime": 1791975492.6305854,
+    "seen": 1791977306.7813828,
+    "ast_hash": "a8fb01478746ff1cfb34ef8ebf7eb89d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/slides/references/copywriting-formulas.md": {
+    "mtime": 1791975492.6315875,
+    "seen": 1791977306.7813847,
+    "ast_hash": "0be2fa17086e66e9e4512f7f4519a463",
+    "semantic_hash": ""
+  },
+  ".agents/skills/slides/references/create.md": {
+    "mtime": 1791975492.6322162,
+    "seen": 1791977306.7813869,
+    "ast_hash": "477752a5cc080a9ce932b02ba961a0d8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/slides/references/html-template.md": {
+    "mtime": 1791975492.6342301,
+    "seen": 1791977306.781389,
+    "ast_hash": "f72faaf4f650dfc05550619a42fae258",
+    "semantic_hash": ""
+  },
+  ".agents/skills/slides/references/layout-patterns.md": {
+    "mtime": 1791975492.6352308,
+    "seen": 1791977306.7813911,
+    "ast_hash": "74903a26887f910f24fc26f0d4669656",
+    "semantic_hash": ""
+  },
+  ".agents/skills/slides/references/slide-strategies.md": {
+    "mtime": 1791975492.6362357,
+    "seen": 1791977306.7813928,
+    "ast_hash": "d5ec2d4e2f19745d90e93f97f8283687",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/DESIGN.md": {
+    "mtime": 1791974874.5459204,
+    "seen": 1791977306.7813952,
+    "ast_hash": "7f8c91aeecc8983b687965c2fc23438c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/SKILL.md": {
+    "mtime": 1791974874.546918,
+    "seen": 1791977306.7813973,
+    "ast_hash": "fcbb4f37d67a66a53013b484dcfc9f25",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ui-skills/SKILL.md": {
+    "mtime": 1791977043.5061393,
+    "seen": 1791977306.7813993,
+    "ast_hash": "ad929774eb87bbd917131a291f243afc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ui-ux-pro-max/SKILL.md": {
+    "mtime": 1791975492.802389,
+    "seen": 1791977306.7814012,
+    "ast_hash": "4a1d318eaaa775c7b36d2c4df1bf2c6d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ui-ux-pro-max/references/pro-rules.md": {
+    "mtime": 1791975492.859658,
+    "seen": 1791977306.781403,
+    "ast_hash": "09930cd335a0c214a382ed1559add8ea",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ui-ux-pro-max/references/quick-reference.md": {
+    "mtime": 1791975492.8616538,
+    "seen": 1791977306.7814052,
+    "ast_hash": "8f2640b17bff62ca22892d5c4da5eafe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web-design-guidelines/SKILL.md": {
+    "mtime": 1791977037.5110953,
+    "seen": 1791977306.781408,
+    "ast_hash": "85753256570c6f1f7f3ea8db4d5bbc29",
+    "semantic_hash": ""
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1791924557.3569453,
+    "seen": 1791977306.7814102,
+    "ast_hash": "0f81002771bbdfca6acf8eb73ba145f6",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1791977260.192146,
+    "seen": 1791977306.7814124,
+    "ast_hash": "c4488f1001293d50822f6845b1e5a7a0",
+    "semantic_hash": ""
+  },
+  "CONTRIBUTING.md": {
+    "mtime": 1791924557.5072794,
+    "seen": 1791977306.7814145,
+    "ast_hash": "908ca2eb7d0b8e47462b97c716607d91",
+    "semantic_hash": ""
+  },
+  "DESIGN.md": {
+    "mtime": 1791977235.5230224,
+    "seen": 1791977306.7814167,
+    "ast_hash": "a9e05fea30d1351d892a26b05dff1563",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1791925278.4199774,
+    "seen": 1791977306.781419,
+    "ast_hash": "ec9ee43da609632527e07ccfe1ce0400",
+    "semantic_hash": ""
+  },
+  "dashboard/README.md": {
+    "mtime": 1791963443.4535015,
+    "seen": 1791977306.7814207,
+    "ast_hash": "f799a5efdda408c7f4801bb696be0868",
+    "semantic_hash": ""
+  },
+  "dashboard/index.html": {
+    "mtime": 1791975944.5631487,
+    "seen": 1791977306.7814233,
+    "ast_hash": "b5a11dd622d534ccd67c239cdbe6c8b1",
+    "semantic_hash": ""
+  },
+  "dashboard/landing.html": {
+    "mtime": 1791977168.8741953,
+    "seen": 1791977306.7814252,
+    "ast_hash": "9b8074feb0d0d1ea18c200abe5965ddb",
+    "semantic_hash": ""
+  },
+  "docs/grc/01_THREAT_MODEL_STRIDE.md": {
+    "mtime": 1791924274.7569926,
+    "seen": 1791977306.7814271,
+    "ast_hash": "39f292f84782f487b5f56827b2ece64c",
+    "semantic_hash": ""
+  },
+  "docs/grc/02_REQUIREMENTS_AND_SCOPE_FREEZE.md": {
+    "mtime": 1791924274.8689065,
+    "seen": 1791977306.7814293,
+    "ast_hash": "e81ed9d390145fb219e4925375d646b5",
+    "semantic_hash": ""
+  },
+  "docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md": {
+    "mtime": 1791924274.9468246,
+    "seen": 1791977306.781431,
+    "ast_hash": "d646b858d4b75a1293331e23502d4973",
+    "semantic_hash": ""
+  },
+  "docs/grc/04_RISK_REGISTER_AND_ASSET_CLASSIFICATION.md": {
+    "mtime": 1791924275.016194,
+    "seen": 1791977306.781433,
+    "ast_hash": "162cfa876a15377e348026370c6e179c",
+    "semantic_hash": ""
+  },
+  "docs/grc/05_BCP_DRP_INCIDENT_RESPONSE_PLAN.md": {
+    "mtime": 1791924275.075011,
+    "seen": 1791977306.7814348,
+    "ast_hash": "7a1cea92be77942d19e2c738ec80d930",
+    "semantic_hash": ""
+  },
+  "docs/qa/01_THRESHOLD_SWEEP_EXPERIMENT.md": {
+    "mtime": 1791924868.3431017,
+    "seen": 1791977306.781437,
+    "ast_hash": "27120831bb0d30fe165f4eaf516e58dc",
+    "semantic_hash": ""
+  },
+  "docs/qa/02_BENCHMARK_METRICS_REPORT.md": {
+    "mtime": 1791924868.3786116,
+    "seen": 1791977306.781439,
+    "ast_hash": "8c7e948d2cc35fa1e10907f386507ecf",
+    "semantic_hash": ""
+  },
+  "src/dashboard/index.html": {
+    "mtime": 1791925184.0254004,
+    "seen": 1791977306.781441,
+    "ast_hash": "12c2fcc65fe9669262af1592a22f6c16",
+    "semantic_hash": ""
   }
 }
