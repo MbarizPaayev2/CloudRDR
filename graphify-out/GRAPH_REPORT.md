@@ -1,9 +1,9 @@
 # Graph Report - CloudRDR  (2026-10-14)
 
 ## Corpus Check
-- 1191 files · ~2,442,630 words
+- 1191 files · ~2,447,691 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 36 file(s) not represented in the graph (top: .css 14, (none) 9, .toml 4)
+- Unclassified: 38 file(s) not represented in the graph (top: .css 14, (none) 10, .toml 4)
 
 ## Summary
 - 18566 nodes · 24632 edges · 1290 communities (1085 shown, 205 thin omitted)
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `50a18d48`
+- Built from commit: `b6f6d3da`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
