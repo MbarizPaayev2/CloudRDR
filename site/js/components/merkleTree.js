@@ -166,6 +166,100 @@ export function initMerkleTree(containerEl, options = {}) {
     nodesGroup.appendChild(g);
   });
 
+  // Mock File metadata for rich node inspection
+  const FILE_METADATA = [
+    { name: '.canary/decoy_tokens.docx', type: 'TRIPWIRE CANARY FILE', size: '14.2 KB' },
+    { name: 'finance/q3_earnings.xlsx', type: 'Protected Object', size: '84.5 KB' },
+    { name: 'database/users.sqlite', type: 'Protected Object', size: '1.2 MB' },
+    { name: 'contracts/vendor_nda.pdf', type: 'Protected Object', size: '240 KB' },
+    { name: 'keys/backup_private.pem', type: 'Protected Object', size: '3.1 KB' },
+    { name: 'hr/employees_2026.csv', type: 'Protected Object', size: '52.0 KB' },
+    { name: 'legal/patents_draft.docx', type: 'Protected Object', size: '118 KB' },
+    { name: 'production/secrets.env', type: 'Protected Object', size: '1.8 KB' },
+    { name: 'customer/orders.parquet', type: 'Protected Object', size: '4.8 MB' },
+    { name: 'audit/isms_policy_v2.pdf', type: 'Protected Object', size: '620 KB' },
+    { name: 'billing/invoices.json', type: 'Protected Object', size: '92.4 KB' },
+    { name: 'code/cloudrdr_kernel.bin', type: 'Protected Object', size: '512 KB' },
+    { name: 'archives/backup_snap.tar', type: 'Protected Object', size: '12.0 MB' },
+    { name: 'logs/access_audit.log', type: 'Protected Object', size: '310 KB' },
+    { name: 'health/records.enc', type: 'Protected Object', size: '890 KB' },
+    { name: 'tokens/jwt_sign.key', type: 'Protected Object', size: '2.4 KB' }
+  ];
+
+  // Tooltip container
+  let tooltip = containerEl.querySelector('.merkle-tooltip');
+  if (!tooltip) {
+    tooltip = document.createElement('div');
+    tooltip.className = 'merkle-tooltip';
+    tooltip.style.display = 'none';
+    containerEl.style.position = 'relative';
+    containerEl.appendChild(tooltip);
+  }
+
+  let currentCorrupted = new Set();
+
+  // Attach hover events to nodes
+  nodes.forEach((node) => {
+    const g = nodesGroup.querySelector(`[data-node-id="${node.id}"]`);
+    if (!g) return;
+    g.style.cursor = 'pointer';
+
+    g.addEventListener('mouseenter', (e) => {
+      const circle = g.querySelector('.merkle-node-circle');
+      if (circle) {
+        circle.style.transform = 'scale(1.4)';
+        circle.style.transformOrigin = `${node.x}px ${node.y}px`;
+        circle.style.transition = 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      }
+
+      const isAffected = node.level === 0 ? currentCorrupted.has(node.index) : false;
+      const rect = containerEl.getBoundingClientRect();
+      const svgRect = svgEl.getBoundingClientRect();
+      const scaleX = svgRect.width / width;
+      const scaleY = svgRect.height / height;
+      const posX = (node.x * scaleX);
+      const posY = (node.y * scaleY);
+
+      if (node.level === 0) {
+        const file = FILE_METADATA[node.index] || { name: `file_${node.index}.dat`, type: 'Object', size: '20 KB' };
+        tooltip.innerHTML = `
+          <div style="font-weight:700;color:var(--text);margin-bottom:2px;">${file.name}</div>
+          <div style="color:var(--text-muted);font-size:0.68rem;margin-bottom:3px;">${file.type} &middot; ${file.size}</div>
+          <div style="font-family:var(--font-mono);font-size:0.65rem;color:${isAffected ? 'var(--status-ransomware)' : 'var(--status-healthy)'};">
+            ${isAffected ? '&#x26A0; TAMPERED (DIFFERS FROM BASELINE)' : '&#x2713; SHA-256 MATCHES BASELINE'}
+          </div>
+          <div style="font-size:0.62rem;color:var(--text-muted);margin-top:2px;">RFC 6962: SHA-256(0x00 || file_bytes)</div>
+        `;
+      } else if (node.level === 4) {
+        tooltip.innerHTML = `
+          <div style="font-weight:700;color:var(--brand);margin-bottom:2px;">Merkle Root Digest (Level 4)</div>
+          <div style="color:var(--text-muted);font-size:0.68rem;margin-bottom:3px;">Full Storage Bucket Representation</div>
+          <div style="font-size:0.62rem;color:var(--text-muted);">Pairwise cryptographic tree apex</div>
+        `;
+      } else {
+        tooltip.innerHTML = `
+          <div style="font-weight:700;color:var(--text);margin-bottom:2px;">Intermediate DAG Node (${node.label})</div>
+          <div style="color:var(--text-muted);font-size:0.68rem;margin-bottom:3px;">Level ${node.level} &middot; Pairwise Hash</div>
+          <div style="font-size:0.62rem;color:var(--text-muted);">H = SHA-256(0x01 || left || right)</div>
+        `;
+      }
+
+      tooltip.style.left = `${posX}px`;
+      tooltip.style.top = `${posY}px`;
+      tooltip.style.display = 'block';
+      tooltip.style.opacity = '1';
+    });
+
+    g.addEventListener('mouseleave', () => {
+      const circle = g.querySelector('.merkle-node-circle');
+      if (circle) {
+        circle.style.transform = 'scale(1)';
+      }
+      tooltip.style.opacity = '0';
+      tooltip.style.display = 'none';
+    });
+  });
+
   // Wire Copy Button
   const copyBtn = containerEl.querySelector('#copyRootBtn');
   copyBtn?.addEventListener('click', () => {
@@ -178,6 +272,7 @@ export function initMerkleTree(containerEl, options = {}) {
   // Return update function
   return function update(appState) {
     const corrupted = appState.corruptedLeaves || new Set();
+    currentCorrupted = corrupted;
     const hasCorrupt = corrupted.size > 0;
 
     // Update root text

@@ -649,12 +649,207 @@
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 4px 8px;
+  padding: 6px 10px;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  box-shadow: var(--shadow-subtle);
-  transform: translate(-50%, -120%);
+  font-size: 0.72rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translate(-50%, -125%);
   transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
   z-index: 50;
   white-space: nowrap;
+}
+
+/* ── Interactive Step Detail Drawer ───────────────────────────────────────── */
+.step-card {
+  cursor: pointer;
+}
+
+.step-card.selected {
+  border-color: var(--brand);
+  background: var(--surface-subtle);
+  box-shadow: 0 0 0 1px var(--brand);
+}
+
+.step-detail-drawer {
+  margin-top: var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-panel);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: start;
+  transition: all var(--dur-mid) var(--ease);
+}
+
+@media (max-width: 800px) {
+  .step-detail-drawer {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
+
+.step-code-preview {
+  background: #0A0D14;
+  color: #DDE2EC;
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Live SOC Telemetry Terminal Component ────────────────────────────────── */
+.soc-terminal-container {
+  background: #090C15;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.soc-terminal-header {
+  background: #111624;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+}
+
+.soc-terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.soc-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.soc-dot.red { background: #FF5F56; }
+.soc-dot.yellow { background: #FFBD2E; }
+.soc-dot.green { background: #27C93F; }
+
+.soc-terminal-tabs {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.soc-tab-btn {
+  background: transparent;
+  border: none;
+  color: #7E869B;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.soc-tab-btn.active, .soc-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F4F6FB;
+}
+
+.soc-terminal-body {
+  height: 240px;
+  overflow-y: auto;
+  padding: 14px 18px;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: #C0C8D8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.soc-log-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  word-break: break-all;
+  animation: logSlide 0.25s var(--ease) both;
+}
+
+@keyframes logSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.soc-time {
+  color: #55607A;
+  flex-shrink: 0;
+}
+
+.soc-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.soc-tag.info { background: rgba(47, 75, 255, 0.25); color: #7B92FF; }
+.soc-tag.canary { background: rgba(240, 177, 26, 0.25); color: #F0B11A; }
+.soc-tag.alert { background: rgba(230, 69, 69, 0.25); color: #FF6666; }
+.soc-tag.crypto { background: rgba(39, 185, 127, 0.25); color: #43DF9D; }
+.soc-tag.restore { background: rgba(88, 179, 218, 0.25); color: #6FD3FA; }
+
+/* ── Standards Academic Bar ──────────────────────────────────────────────── */
+.standards-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.standard-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.standard-badge:hover {
+  border-color: var(--brand);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* ── Magnetic & Glow Button Styles ───────────────────────────────────────── */
+.btn-primary {
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(47, 75, 255, 0.35);
+}
+
+.btn-secondary {
+  transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--text-muted);
 }

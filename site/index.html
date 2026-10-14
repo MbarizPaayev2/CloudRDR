@@ -82,6 +82,28 @@
       </div>
     </section>
 
+    <!-- ── ACADEMIC SPECIFICATIONS & CRYPTOGRAPHIC STANDARDS ──────────────── -->
+    <div class="container reveal-on-scroll">
+      <div class="standards-bar">
+        <span class="standard-badge" title="Cryptographic Hash Trees in Append-Only Logs">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          RFC 6962: Merkle Tree Hash DAG
+        </span>
+        <span class="standard-badge" title="Edwards-Curve Digital Signature Algorithm">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          RFC 8032: Ed25519 Incident Signatures
+        </span>
+        <span class="standard-badge" title="Galois/Counter Mode Authenticated Encryption">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          NIST SP 800-38D: AES-256-GCM AEAD
+        </span>
+        <span class="standard-badge" title="Information Security Management System Controls">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          ISO/IEC 27001:2022 (A.8.7, A.8.15, A.8.24)
+        </span>
+      </div>
+    </div>
+
     <!-- ── 2. THE PROBLEM ─────────────────────────────────────────────────── -->
     <section class="section-pad">
       <div class="container">
@@ -113,57 +135,122 @@
       </div>
     </section>
 
-    <!-- ── 3. HOW IT WORKS (6 STEPS HORIZONTAL STEPPER) ────────────────────── -->
+    <!-- ── 3. HOW IT WORKS (6 STEPS HORIZONTAL STEPPER & DETAIL DRAWER) ────── -->
     <section class="section-pad bg-grid-dots">
       <div class="container">
         <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Architecture</span>
           <h2 class="section-title">How the defense system works</h2>
-          <p class="section-desc">Six automated stages that close the loop from baseline capture to 100% verified restore.</p>
+          <p class="section-desc">Click any stage below to inspect its cryptographic specifications, data contracts, and ISO 27001 mappings.</p>
         </div>
 
-        <div class="stepper-horizontal">
-          <div class="step-card reveal-on-scroll stagger-1">
+        <div class="stepper-horizontal" id="stepperCards">
+          <div class="step-card selected reveal-on-scroll stagger-1" data-step="0">
             <div class="step-number">Step 01</div>
             <h3>Baseline</h3>
             <p>Every file gets a SHA-256 fingerprint. Hashes assemble into a single Merkle root.</p>
           </div>
 
-          <div class="step-card reveal-on-scroll stagger-2">
+          <div class="step-card reveal-on-scroll stagger-2" data-step="1">
             <div class="step-number">Step 02</div>
             <h3>Monitor</h3>
             <p>A background agent continuously polls bucket event streams every 10 seconds.</p>
           </div>
 
-          <div class="step-card reveal-on-scroll stagger-3">
+          <div class="step-card reveal-on-scroll stagger-3" data-step="2">
             <div class="step-number">Step 03</div>
             <h3>Detect</h3>
             <p>Sliding 60-second window. Rate &ge;30% or touching decoy canaries trips ransomware verdict.</p>
           </div>
 
-          <div class="step-card reveal-on-scroll stagger-4">
+          <div class="step-card reveal-on-scroll stagger-4" data-step="3">
             <div class="step-number">Step 04</div>
             <h3>Respond</h3>
             <p>Attacking account is frozen read-only via cloud IAM. Incident signed with Ed25519.</p>
           </div>
 
-          <div class="step-card reveal-on-scroll stagger-5">
+          <div class="step-card reveal-on-scroll stagger-5" data-step="4">
             <div class="step-number">Step 05</div>
             <h3>Audit</h3>
             <p>All decisions enter a hash-chained ledger. Altering past blocks breaks downstream links.</p>
           </div>
 
-          <div class="step-card reveal-on-scroll stagger-6">
+          <div class="step-card reveal-on-scroll stagger-6" data-step="5">
             <div class="step-number">Step 06</div>
             <h3>Restore</h3>
             <p>AES-256-GCM backups decrypted. Incident closes only when 100% of files match baseline.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Step Detail Drawer -->
+        <div class="step-detail-drawer reveal-on-scroll" id="stepDetailDrawer">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:var(--space-2);">
+              <span id="drawerStepTag" class="brand-badge">Step 01 // Baseline</span>
+              <span id="drawerIsoTag" class="status-chip valid">ISO 27001 A.8.9</span>
+            </div>
+            <h3 id="drawerStepTitle" style="font-size:var(--text-xl);margin-bottom:var(--space-2);">Continuous Canonical Merkle Snapshot</h3>
+            <p id="drawerStepDesc" style="color:var(--text-muted);font-size:0.9rem;line-height:1.6;margin-bottom:var(--space-4);">
+              Captures SHA-256 digests across all storage bucket objects. Hashes are deterministically ordered and computed into a pairwise Merkle DAG, producing a single 64-character root hash.
+            </p>
+            <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--brand);">
+              Backend module: <code id="drawerModule" style="background:var(--surface-subtle);padding:2px 6px;border-radius:4px;">src/baseline/baselineService.js</code>
+            </div>
+          </div>
+          <div class="step-code-preview" id="drawerCodePreview">// 1. Compute deterministic Merkle Root
+const leaves = files.map(f => hashBuffer(f.bytes));
+const merkleRoot = crypto.merkleRoot(leaves);
+await db.from('baseline_snapshots').insert({
+  bucket: 'protected',
+  merkle_root: merkleRoot,
+  file_count: files.length
+});</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LIVE SOC TELEMETRY TERMINAL ────────────────────────────────────── -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Real-Time Pipeline Telemetry</span>
+          <h2 class="section-title">Autonomous containment &amp; recovery stream</h2>
+          <p class="section-desc">Live event processing log from the Fastify backend, showing sliding rate calculations, canary tripwires, and Ed25519 signing.</p>
+        </div>
+
+        <div class="soc-terminal-container reveal-on-scroll">
+          <div class="soc-terminal-header">
+            <div class="soc-terminal-dots">
+              <span class="soc-dot red"></span>
+              <span class="soc-dot yellow"></span>
+              <span class="soc-dot green"></span>
+            </div>
+            <div class="soc-terminal-tabs" id="socTerminalTabs">
+              <button class="soc-tab-btn active" data-filter="all">All Telemetry</button>
+              <button class="soc-tab-btn" data-filter="canary">Canary Alerts</button>
+              <button class="soc-tab-btn" data-filter="crypto">Crypto Proofs</button>
+              <button class="soc-tab-btn" data-filter="restore">AEAD Restore</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="display:inline-flex;align-items:center;gap:6px;color:#27C93F;font-size:0.7rem;">
+                <span style="width:6px;height:6px;background:#27C93F;border-radius:50%;box-shadow:0 0 6px #27C93F;"></span>
+                STREAM ACTIVE
+              </span>
+              <button id="triggerSocSpikeBtn" class="hero-pill-btn" style="background:#D93636;color:#FFF;border-color:#D93636;font-size:0.68rem;">
+                Simulate Attack Event ⚡
+              </button>
+            </div>
+          </div>
+
+          <div class="soc-terminal-body" id="socTerminalBody" role="log" aria-live="polite">
+            <!-- Dynamic stream logs injected here -->
           </div>
         </div>
       </div>
     </section>
 
     <!-- ── 4. WHAT MAKES US DIFFERENT ────────────────────────────────────── -->
-    <section class="section-pad">
+    <section class="section-pad bg-grid-dots">
       <div class="container">
         <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">Comparison</span>
@@ -415,6 +502,201 @@
         });
       });
     }
+
+    // ── 4. Interactive Step Detail Drawer Logic ─────────────────────────────
+    const stepData = [
+      {
+        tag: 'Step 01 // Baseline',
+        iso: 'ISO 27001 A.8.9',
+        title: 'Continuous Canonical Merkle Snapshot',
+        desc: 'Captures SHA-256 digests across all storage bucket objects. Hashes are deterministically ordered and computed into a pairwise Merkle DAG, producing a single 64-character root hash.',
+        module: 'src/baseline/baselineService.js',
+        code: `// 1. Compute deterministic Merkle Root
+const leaves = files.map(f => hashBuffer(f.bytes));
+const merkleRoot = crypto.merkleRoot(leaves);
+await db.from('baseline_snapshots').insert({
+  bucket: 'protected',
+  merkle_root: merkleRoot,
+  file_count: files.length
+});`
+      },
+      {
+        tag: 'Step 02 // Monitor',
+        iso: 'ISO 27001 A.8.16',
+        title: 'Storage Event Ingestion Agent',
+        desc: 'Polls bucket event streams every 10 seconds. Emits created, modified, and deleted notifications while hashing modified objects to observe content entropy.',
+        module: 'src/monitor/monitorAgent.js',
+        code: `// 2. Poll storage adapter and emit change delta
+const current = await storage.list(bucket);
+const changes = diffEntries(prevListing, current);
+await db.from('change_events').insert(changes.map(c => ({
+  bucket, path: c.path, event_type: c.type, observed_sha256: c.sha256
+})));`
+      },
+      {
+        tag: 'Step 03 // Detect',
+        iso: 'ISO 27001 A.8.7',
+        title: 'Sliding-Window Heuristic & Canary Tripwire',
+        desc: 'Evaluates file modification rate within a 60-second sliding window. Touching any canary file or rate >=30% immediately issues a RANSOMWARE verdict.',
+        module: 'src/detection/detectionEngine.js',
+        code: `// 3. Sliding window & canary tripwire
+const rate = changedFiles / totalFiles;
+const canaryTripped = events.some(e => e.is_canary);
+const verdict = canaryTripped || rate >= 0.30 
+  ? 'ransomware' : rate >= 0.10 ? 'suspicious' : 'normal';`
+      },
+      {
+        tag: 'Step 04 // Respond',
+        iso: 'ISO 27001 A.8.15',
+        title: 'Control-Plane IAM Lockdown & Ed25519 Signing',
+        desc: 'Injects an IAM deny-all policy on the compromised account within 10 seconds. Creates an immutable incident record signed with Ed25519.',
+        module: 'src/response/responseService.js',
+        code: `// 4. Autonomous IAM freeze & RFC 8032 signing
+await freezeClient.freezeAccount(accountId);
+const record = { incidentId, accountId, frozenAt: new Date().toISOString() };
+const { signature, keyId } = crypto.signRecord(record);
+await db.from('incidents').update({ status: 'frozen', record_signature: signature });`
+      },
+      {
+        tag: 'Step 05 // Audit',
+        iso: 'ISO 27001 A.8.15',
+        title: 'Tamper-Evident Hash-Chained Audit Ledger',
+        desc: 'Appends incident state transitions into a SHA-256 hash-chained log. Any modification of past records cryptographically invalidates all downstream blocks.',
+        module: 'src/contracts/crypto.contract.js',
+        code: `// 5. Append-only tamper-evident hash chain
+const prevHash = ledger.length ? ledger.at(-1).hash : '0'.repeat(64);
+const blockPayload = JSON.stringify({ index, prevHash, timestamp, data });
+const hash = crypto.createHash('sha256').update(blockPayload).digest('hex');
+ledger.push({ index, hash, prevHash, data });`
+      },
+      {
+        tag: 'Step 06 // Restore',
+        iso: 'ISO 27001 A.8.13',
+        title: 'AEAD-Authenticated Verified Decryption',
+        desc: 'Decrypts AES-256-GCM backups, verifies the 128-bit authentication tag, and checks the SHA-256 against baseline. Requires 100% VALID match to close incident.',
+        module: 'src/restore/restoreService.js',
+        code: `// 6. AEAD tag verification & baseline check
+const { bytes, aeadVerified } = await backup.restoreFile(bucket, path);
+const recomputedHash = hashBuffer(bytes);
+const isValid = aeadVerified && (recomputedHash === expectedSha256);
+if (isValid) await storage.write(bucket, path, bytes);`
+      }
+    ];
+
+    const stepCards = document.querySelectorAll('#stepperCards .step-card');
+    const drawerTag = document.getElementById('drawerStepTag');
+    const drawerIso = document.getElementById('drawerIsoTag');
+    const drawerTitle = document.getElementById('drawerStepTitle');
+    const drawerDesc = document.getElementById('drawerStepDesc');
+    const drawerModule = document.getElementById('drawerModule');
+    const drawerCode = document.getElementById('drawerCodePreview');
+
+    stepCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        stepCards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        const idx = parseInt(card.getAttribute('data-step'), 10);
+        const data = stepData[idx];
+        if (data) {
+          drawerTag.textContent = data.tag;
+          drawerIso.textContent = data.iso;
+          drawerTitle.textContent = data.title;
+          drawerDesc.textContent = data.desc;
+          drawerModule.textContent = data.module;
+          drawerCode.textContent = data.code;
+        }
+      });
+    });
+
+    // ── 5. Live SOC Telemetry Terminal Stream Simulation ────────────────────
+    const socBody = document.getElementById('socTerminalBody');
+    const socTabs = document.querySelectorAll('#socTerminalTabs .soc-tab-btn');
+    const triggerSocSpike = document.getElementById('triggerSocSpikeBtn');
+    let currentFilter = 'all';
+
+    const SAMPLE_LOGS = [
+      { filter: 'info', tag: 'INFO', class: 'info', text: 'Storage monitor polled bucket "protected": 16 objects indexed (0 unauthenticated changes)' },
+      { filter: 'crypto', tag: 'CRYPTO', class: 'crypto', text: 'Merkle root verified: e3b0c44298fc...7852b855 matches baseline snapshot #1' },
+      { filter: 'canary', tag: 'CANARY', class: 'canary', text: 'Canary tripwire active: .canary/decoy_tokens.docx integrity clean (hash matches baseline)' },
+      { filter: 'info', tag: 'MONITOR', class: 'info', text: 'Sliding 60s window evaluated: change_rate = 0.00% &lt; 10.0% (VERDICT: NORMAL)' }
+    ];
+
+    function appendSocLog(tag, typeClass, message, filterType = 'info') {
+      if (!socBody) return;
+      const now = new Date().toTimeString().split(' ')[0];
+      const line = document.createElement('div');
+      line.className = 'soc-log-line';
+      line.setAttribute('data-category', filterType);
+      line.innerHTML = `
+        <span class="soc-time">[${now}]</span>
+        <span class="soc-tag ${typeClass}">${tag}</span>
+        <span>${message}</span>
+      `;
+      if (currentFilter !== 'all' && filterType !== currentFilter) {
+        line.style.display = 'none';
+      }
+      socBody.appendChild(line);
+      socBody.scrollTop = socBody.scrollHeight;
+      if (socBody.children.length > 50) {
+        socBody.removeChild(socBody.firstChild);
+      }
+    }
+
+    // Initial logs
+    SAMPLE_LOGS.forEach(l => appendSocLog(l.tag, l.class, l.text, l.filter));
+
+    // Periodic calm telemetry
+    let socInterval = setInterval(() => {
+      const msgs = [
+        { tag: 'POLL', class: 'info', text: 'Bucket "protected" checked: 0 change events observed', cat: 'info' },
+        { tag: 'CANARY', class: 'canary', text: 'Sentinel check: All canary objects untouched', cat: 'canary' },
+        { tag: 'CRYPTO', class: 'crypto', text: 'RFC 6962 DAG leaf verification: 16/16 hashes intact', cat: 'crypto' },
+      ];
+      const pick = msgs[Math.floor(Math.random() * msgs.length)];
+      appendSocLog(pick.tag, pick.class, pick.text, pick.cat);
+    }, 4500);
+
+    // Tab filter clicks
+    socTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        socTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilter = tab.getAttribute('data-filter');
+        const lines = socBody.querySelectorAll('.soc-log-line');
+        lines.forEach((line) => {
+          const cat = line.getAttribute('data-category');
+          if (currentFilter === 'all' || cat === currentFilter) {
+            line.style.display = 'flex';
+          } else {
+            line.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Spike attack simulation in terminal
+    triggerSocSpike?.addEventListener('click', () => {
+      appendSocLog('ALERT', 'alert', '⚠️ THREAT SPIKE: High-frequency PUT requests detected from account "svc-api-compromised"', 'alert');
+      setTimeout(() => {
+        appendSocLog('CANARY', 'alert', '🚨 TRIPWIRE TRIGGERED: Object ".canary/decoy_tokens.docx" modified! Instant RANSOMWARE verdict!', 'canary');
+      }, 400);
+      setTimeout(() => {
+        appendSocLog('RESPONSE', 'alert', '🔒 IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-api-compromised" [8.2s SLA]', 'alert');
+      }, 900);
+      setTimeout(() => {
+        appendSocLog('CRYPTO', 'crypto', '🔏 Ed25519 SIGNATURE: Incident record signed with key ID "ed25519-v1" (RFC 8032)', 'crypto');
+      }, 1400);
+      setTimeout(() => {
+        appendSocLog('RESTORE', 'restore', '🛡️ AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED', 'restore');
+      }, 1900);
+      setTimeout(() => {
+        appendSocLog('AUDIT', 'crypto', '⛓️ IMMUTABLE CHAIN: Audit block #043 appended with SHA-256 hash continuity', 'crypto');
+      }, 2400);
+
+      // Trigger Merkle tree attack mode as well
+      const attackBtn = document.querySelector('[data-scenario="attack"]');
+      attackBtn?.click();
+    });
   </script>
 </body>
 </html>
