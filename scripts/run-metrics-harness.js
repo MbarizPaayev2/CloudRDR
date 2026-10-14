@@ -46,6 +46,17 @@ async function runMetricsHarness() {
   const storage = await getStorageAdapter();
   const metrics = [];
 
+  // Reset audit log and test bucket state for isolated test measurement
+  defaultAuditLog.clear();
+
+  const { getSupabaseClient } = await import('../src/adapters/db/supabaseClient.js');
+  const { defaultBackupStore } = await import('../src/backup/backupService.js');
+  const db = getSupabaseClient();
+  await db.from('protected_files').delete().eq('bucket', bucket);
+  await db.from('baseline_snapshots').delete().eq('bucket', bucket);
+  await db.from('incidents').delete().eq('account_id', accountId);
+  defaultBackupStore.clear(bucket);
+
   const initialMemory = process.memoryUsage().heapUsed;
 
   // ── M8: Baseline Creation & Hashing Throughput ──────────────────────────────
