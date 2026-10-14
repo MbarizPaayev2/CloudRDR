@@ -2182,3 +2182,189 @@ body.ambient-threat-active .site-header {
   transition: width 0.3s ease;
 }
 
+/* ── ISMS DOCUMENTS & GOVERNANCE STYLES ──────────────────────────────────── */
+.isms-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+@media (max-width: 860px) {
+  .isms-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .isms-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.isms-metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s var(--ease);
+}
+
+.isms-metric-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+
+.isms-metric-icon {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
+
+.isms-metric-val {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: #F8FAFC;
+  font-family: var(--font-mono);
+}
+
+.isms-metric-lbl {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Category Filter Bar */
+.isms-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+
+.isms-filter-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.isms-filter-btn:hover {
+  color: var(--text-main);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.isms-filter-btn.active {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38BDF8;
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Document Item Enhancements */
+.doc-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.doc-item-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.doc-iso-chip {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(56, 189, 248, 0.12);
+  color: #38BDF8;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+/* Document Inspector Modal */
+.doc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 14, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease);
+}
+
+.doc-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.doc-modal-card {
+  width: 100%;
+  max-width: 740px;
+  max-height: 88vh;
+  background: #0B0F19;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.doc-modal-overlay.active .doc-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.doc-modal-header {
+  padding: 16px 20px;
+  background: #111726;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.doc-modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: #C0C8D8;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.doc-modal-footer {
+  padding: 12px 20px;
+  background: #0D121F;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
