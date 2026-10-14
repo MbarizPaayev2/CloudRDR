@@ -7,9 +7,30 @@
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <link rel="stylesheet" href="/dashboard/css/tokens.css" />
     <link rel="stylesheet" href="/dashboard/css/styles.css" />
-  </head>
   <body class="auth-page-canvas">
-    <div class="auth-card-container">
+    <a
+      href="/"
+      style="
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        text-decoration: none;
+        margin-bottom: 20px;
+        transition: color var(--dur-fast) var(--ease);
+      "
+      onmouseover="this.style.color='var(--text-primary)'"
+      onmouseout="this.style.color='var(--text-muted)'"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      <span>Back to CloudRDR Overview</span>
+    </a>
+
+    <div class="auth-double-bezel">
+      <div class="auth-card-core">
       <div class="auth-card-header">
         <a
           href="/"
@@ -312,6 +333,7 @@
         Already have an account? <a href="/login" id="toLoginLink">Sign In</a>
       </div>
     </div>
+  </div>
 
     <script type="module">
       const form = document.getElementById('registerForm');

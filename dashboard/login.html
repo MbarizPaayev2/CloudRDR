@@ -9,351 +9,334 @@
     <link rel="stylesheet" href="/dashboard/css/styles.css" />
   </head>
   <body class="auth-page-canvas">
-    <div class="auth-card-container">
-      <div class="auth-card-header">
-        <a
-          href="/"
-          class="auth-brand-logo"
-          title="Back to CloudRDR Overview"
-          style="
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            gap: 8px;
-          "
-        >
-          <svg width="56" height="56" viewBox="0 0 240 240" style="flex-shrink: 0">
-            <defs>
-              <linearGradient id="auth_tfD" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#38BDF8" />
-                <stop offset="100%" stop-color="#0284C7" />
-              </linearGradient>
-              <linearGradient id="auth_lfD" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#0284C7" />
-                <stop offset="100%" stop-color="#1E3A8A" />
-              </linearGradient>
-              <linearGradient id="auth_rfD" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#10B981" />
-                <stop offset="100%" stop-color="#047857" />
-              </linearGradient>
-              <linearGradient id="auth_rgD" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#38BDF8" />
-                <stop offset="50%" stop-color="#6366F1" />
-                <stop offset="100%" stop-color="#10B981" />
-              </linearGradient>
-            </defs>
-            <g transform="translate(120, 124)">
-              <path
-                d="M 65,-55 A 85,85 0 1,0 75,40"
-                fill="none"
-                stroke="url(#auth_rgD)"
-                stroke-width="12"
-                stroke-linecap="round"
-              />
-              <polygon points="84,22 86,52 58,42" fill="#10B981" />
-              <circle
-                cx="0"
-                cy="0"
-                r="66"
-                fill="none"
-                stroke="var(--border)"
-                stroke-width="2.5"
-                stroke-dasharray="3 6"
-              />
-              <path
-                d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25"
-                fill="none"
-                stroke="#E2E8F0"
-                stroke-width="9"
-                stroke-linecap="round"
-              />
-              <polygon points="0,-42 42,-18 0,6 -42,-18" fill="url(#auth_tfD)" />
-              <polygon points="-42,-18 0,6 0,54 -42,30" fill="url(#auth_lfD)" />
-              <polygon points="0,6 42,-18 42,30 0,54" fill="url(#auth_rfD)" />
-              <polyline
-                points="-20,-18 0,-30 20,-18"
-                fill="none"
-                stroke="#FFFFFF"
-                stroke-width="3.5"
-                stroke-linecap="round"
-              />
-              <line
-                x1="0"
-                y1="6"
-                x2="0"
-                y2="36"
-                stroke="#FFFFFF"
-                stroke-width="3.5"
-                stroke-linecap="round"
-              />
-              <circle cx="0" cy="6" r="6" fill="#FFFFFF" />
-              <circle cx="0" cy="-30" r="4.5" fill="#FFFFFF" />
-              <circle cx="-20" cy="-18" r="4.5" fill="#FFFFFF" />
-              <circle cx="20" cy="-18" r="4.5" fill="#FFFFFF" />
-            </g>
-          </svg>
-          <span
+    <!-- Back to Main Product Link -->
+    <a
+      href="/"
+      style="
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        text-decoration: none;
+        margin-bottom: 20px;
+        transition: color var(--dur-fast) var(--ease);
+      "
+      onmouseover="this.style.color='var(--text-primary)'"
+      onmouseout="this.style.color='var(--text-muted)'"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      <span>Back to CloudRDR Overview</span>
+    </a>
+
+    <!-- Double-Bezel Hardware Card Shell -->
+    <div class="auth-double-bezel">
+      <div class="auth-card-core">
+        <div class="auth-card-header">
+          <a
+            href="/"
+            class="auth-brand-logo"
+            title="CloudRDR Overview"
             style="
-              font-size: 1.55rem;
-              font-weight: 800;
-              color: var(--text-primary);
-              letter-spacing: -0.5px;
-            "
-            >Cloud<span style="color: #38bdf8">R</span><span style="color: #0ea5e9">D</span
-            ><span style="color: #10b981">R</span></span
-          >
-        </a>
-        <h1 class="auth-title" style="margin-top: 6px">Sign In to CloudRDR</h1>
-        <p class="auth-subtitle">Cloud Ransomware Detection &amp; Recovery</p>
-      </div>
-
-      <!-- Feedback alert box -->
-      <div id="authAlert" class="auth-alert" role="alert" aria-live="assertive">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          style="flex-shrink: 0; margin-top: 1px"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="12" />
-          <line x1="12" y1="16" x2="12.01" y2="16" />
-        </svg>
-        <span id="authAlertText">Invalid credentials. Please try again.</span>
-      </div>
-
-      <form id="loginForm" class="auth-form" novalidate>
-        <!-- Email field -->
-        <div class="form-group">
-          <label for="emailInput" class="form-label">Email Address</label>
-          <div class="form-input-wrapper">
-            <span class="form-input-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <rect width="20" height="16" x="2" y="4" rx="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L1 7" />
-              </svg>
-            </span>
-            <input
-              type="email"
-              id="emailInput"
-              name="email"
-              class="form-input"
-              placeholder="operator@cloudrdr.internal"
-              autocomplete="email"
-              required
-              aria-required="true"
-            />
-          </div>
-          <div id="emailError" class="form-field-error"></div>
-        </div>
-
-        <!-- Password field -->
-        <div class="form-group">
-          <div class="form-label">
-            <label for="passwordInput">Password</label>
-          </div>
-          <div class="form-input-wrapper">
-            <span class="form-input-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
-            </span>
-            <input
-              type="password"
-              id="passwordInput"
-              name="password"
-              class="form-input has-toggle"
-              placeholder="••••••••••••"
-              autocomplete="current-password"
-              required
-              aria-required="true"
-            />
-            <button
-              type="button"
-              id="togglePasswordBtn"
-              class="form-toggle-pwd"
-              aria-label="Toggle password visibility"
-              title="Show password"
-            >
-              <svg
-                id="eyeIcon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            </button>
-          </div>
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
+              display: inline-flex;
+              flex-direction: column;
               align-items: center;
-              margin-top: 4px;
+              text-decoration: none;
+              gap: 8px;
             "
           >
-            <div id="passwordError" class="form-field-error" style="margin-top: 0"></div>
-            <button
-              type="button"
-              id="resetPwdBtn"
+            <svg width="52" height="52" viewBox="0 0 240 240" style="flex-shrink: 0">
+              <defs>
+                <linearGradient id="auth_tfD" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38BDF8" />
+                  <stop offset="100%" stop-color="#0284C7" />
+                </linearGradient>
+                <linearGradient id="auth_lfD" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#0284C7" />
+                  <stop offset="100%" stop-color="#1E3A8A" />
+                </linearGradient>
+                <linearGradient id="auth_rfD" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#10B981" />
+                  <stop offset="100%" stop-color="#047857" />
+                </linearGradient>
+                <linearGradient id="auth_rgD" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38BDF8" />
+                  <stop offset="50%" stop-color="#6366F1" />
+                  <stop offset="100%" stop-color="#10B981" />
+                </linearGradient>
+              </defs>
+              <g transform="translate(120, 124)">
+                <path
+                  d="M 65,-55 A 85,85 0 1,0 75,40"
+                  fill="none"
+                  stroke="url(#auth_rgD)"
+                  stroke-width="12"
+                  stroke-linecap="round"
+                />
+                <polygon points="84,22 86,52 58,42" fill="#10B981" />
+                <circle
+                  cx="0"
+                  cy="0"
+                  r="66"
+                  fill="none"
+                  stroke="var(--border)"
+                  stroke-width="2.5"
+                  stroke-dasharray="3 6"
+                />
+                <path
+                  d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25"
+                  fill="none"
+                  stroke="#E2E8F0"
+                  stroke-width="9"
+                  stroke-linecap="round"
+                />
+                <polygon points="0,-42 42,-18 0,6 -42,-18" fill="url(#auth_tfD)" />
+                <polygon points="-42,-18 0,6 0,54 -42,30" fill="url(#auth_lfD)" />
+                <polygon points="0,6 42,-18 42,30 0,54" fill="url(#auth_rfD)" />
+                <polyline
+                  points="-20,-18 0,-30 20,-18"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  stroke-width="3.5"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="0"
+                  y1="6"
+                  x2="0"
+                  y2="36"
+                  stroke="#FFFFFF"
+                  stroke-width="3.5"
+                  stroke-linecap="round"
+                />
+                <circle cx="0" cy="6" r="6" fill="#FFFFFF" />
+                <circle cx="0" cy="-30" r="4.5" fill="#FFFFFF" />
+                <circle cx="-20" cy="-18" r="4.5" fill="#FFFFFF" />
+                <circle cx="20" cy="-18" r="4.5" fill="#FFFFFF" />
+              </g>
+            </svg>
+            <span
               style="
-                background: none;
-                border: none;
-                color: var(--accent-cyan);
-                font-size: 0.72rem;
-                cursor: pointer;
-                text-decoration: underline;
-                padding: 0;
+                font-size: 1.45rem;
+                font-weight: 800;
+                color: var(--text-primary);
+                letter-spacing: -0.5px;
               "
-              title="Reset password for the entered email to Password123!"
+              >Cloud<span style="color: #38bdf8">R</span><span style="color: #0ea5e9">D</span
+              ><span style="color: #10b981">R</span></span
             >
-              Reset to Password123!
-            </button>
-          </div>
+          </a>
+          <h1 class="auth-title" style="margin-top: 4px; font-size: 1.35rem">Sign In to CloudRDR</h1>
+          <p class="auth-subtitle" style="letter-spacing: 0.05em">SECURITY OPERATIONS CONSOLE</p>
         </div>
 
-        <!-- Submit button -->
-        <button type="submit" id="submitBtn" class="btn-auth-submit">
-          <span id="btnText">Sign In</span>
+        <!-- Feedback alert box -->
+        <div id="authAlert" class="auth-alert" role="alert" aria-live="assertive">
           <svg
-            id="btnSpinner"
-            class="anim-spin"
             width="16"
             height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2.5"
-            style="display: none"
+            stroke-width="2"
+            style="flex-shrink: 0; margin-top: 1px"
           >
-            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
           </svg>
-        </button>
+          <span id="authAlertText">Invalid credentials. Please try again.</span>
+        </div>
 
-        <!-- Quick 1-Click Access Controls -->
-        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
-          <button
-            type="button"
-            id="quickDemoBtn"
-            class="btn btn-secondary"
-            style="
-              width: 100%;
-              padding: 9px;
-              font-size: var(--text-xs);
-              font-weight: 600;
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              gap: 6px;
-              background: rgba(56, 189, 248, 0.08);
-              border: 1px solid rgba(56, 189, 248, 0.3);
-              color: var(--accent-cyan);
-              border-radius: var(--radius-sm);
-              cursor: pointer;
-            "
-          >
+        <form id="loginForm" class="auth-form" novalidate>
+          <!-- Email field -->
+          <div class="form-group">
+            <label for="emailInput" class="form-label">Email Address</label>
+            <div class="form-input-wrapper">
+              <span class="form-input-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L1 7" />
+                </svg>
+              </span>
+              <input
+                type="email"
+                id="emailInput"
+                name="email"
+                class="form-input"
+                placeholder="operator@cloudrdr.internal"
+                autocomplete="email"
+                required
+                aria-required="true"
+              />
+            </div>
+            <div id="emailError" class="form-field-error"></div>
+          </div>
+
+          <!-- Password field -->
+          <div class="form-group">
+            <div class="form-label">
+              <label for="passwordInput">Password</label>
+              <button
+                type="button"
+                id="resetPwdBtn"
+                style="
+                  background: none;
+                  border: none;
+                  color: var(--text-muted);
+                  font-size: 0.72rem;
+                  cursor: pointer;
+                  padding: 0;
+                  transition: color var(--dur-fast);
+                "
+                onmouseover="this.style.color='var(--accent-cyan)'"
+                onmouseout="this.style.color='var(--text-muted)'"
+                title="Reset password for entered email to Password123!"
+              >
+                Forgot or reset password?
+              </button>
+            </div>
+            <div class="form-input-wrapper">
+              <span class="form-input-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </span>
+              <input
+                type="password"
+                id="passwordInput"
+                name="password"
+                class="form-input has-toggle"
+                placeholder="••••••••••••"
+                autocomplete="current-password"
+                required
+                aria-required="true"
+              />
+              <button
+                type="button"
+                id="togglePasswordBtn"
+                class="form-toggle-pwd"
+                aria-label="Toggle password visibility"
+                title="Show password"
+              >
+                <svg
+                  id="eyeIcon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+            <div id="passwordError" class="form-field-error"></div>
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" id="submitBtn" class="btn-auth-submit">
+            <span id="btnText">Sign In</span>
             <svg
-              width="14"
-              height="14"
+              id="btnSpinner"
+              class="anim-spin"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="2.5"
+              style="display: none"
             >
-              <path d="m13 2-2 2.5h3L11 8" />
-              <circle cx="12" cy="14" r="8" />
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
             </svg>
-            <span>1-Click Quick Demo Login (Admin)</span>
           </button>
 
-          <!-- Quick Account Switcher (Admin / Registered Users) -->
-          <div style="display: flex; gap: 6px; flex-wrap: wrap" id="quickAccountPills">
+          <!-- Divider -->
+          <div class="auth-divider">
+            <span class="auth-divider-line"></span>
+            <span class="auth-divider-text">Demo Accounts &amp; Quick Access</span>
+            <span class="auth-divider-line"></span>
+          </div>
+
+          <!-- Quick Account Switcher Grid -->
+          <div class="demo-account-grid" id="quickAccountPills">
             <button
               type="button"
-              class="quick-pill-btn"
+              class="demo-account-chip active"
               data-email="admin@cloudrdr.internal"
               data-pwd="Password123!"
-              style="
-                flex: 1;
-                padding: 6px 10px;
-                font-size: 0.72rem;
-                background: var(--bg-subtle);
-                border: 1px solid var(--border);
-                color: var(--text-secondary);
-                border-radius: var(--radius-sm);
-                cursor: pointer;
-              "
+              title="Select Admin Account"
             >
-              🔑 admin@cloudrdr.internal
+              <span class="demo-chip-role">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Admin
+              </span>
+              <span class="demo-chip-email">admin@cloudrdr.internal</span>
             </button>
+
             <button
               type="button"
-              class="quick-pill-btn"
+              class="demo-account-chip"
               data-email="test@gmail.com"
               data-pwd="Password123!"
-              style="
-                flex: 1;
-                padding: 6px 10px;
-                font-size: 0.72rem;
-                background: var(--bg-subtle);
-                border: 1px solid var(--border);
-                color: var(--text-secondary);
-                border-radius: var(--radius-sm);
-                cursor: pointer;
-              "
+              title="Select Registered User"
             >
-              👤 test@gmail.com
+              <span class="demo-chip-role" style="color: #60a5fa">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Operator
+              </span>
+              <span class="demo-chip-email">test@gmail.com</span>
             </button>
           </div>
 
-          <div
-            style="
-              font-size: 0.72rem;
-              color: var(--text-muted);
-              text-align: center;
-              padding: 6px;
-              background: var(--bg-subtle);
-              border-radius: var(--radius-sm);
-              border: 1px solid var(--border);
-            "
+          <!-- Secondary 1-Click Action -->
+          <button
+            type="button"
+            id="quickDemoBtn"
+            class="btn-demo-quick"
+            title="Instant 1-Click Access with the selected account"
           >
-            Demo / Master Password:
-            <strong style="color: var(--text-primary)">Password123!</strong> (works for all
-            accounts)
-          </div>
-        </div>
-      </form>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+            <span>1-Click Enter Demo SOC</span>
+          </button>
 
-      <div class="auth-card-footer">
-        Don't have an account?
-        <a href="/register" id="toRegisterLink">Register</a>
+          <div class="demo-helper-note">
+            Master demo password:
+            <strong style="color: var(--text-primary); font-family: var(--font-mono)">Password123!</strong>
+          </div>
+        </form>
+
+        <div class="auth-card-footer">
+          Don't have an account?
+          <a href="/register" id="toRegisterLink">Register organization</a>
+        </div>
       </div>
     </div>
 
+    <!-- Script Logic -->
     <script type="module">
       const form = document.getElementById('loginForm');
       const emailInput = document.getElementById('emailInput');
@@ -367,6 +350,8 @@
       const btnSpinner = document.getElementById('btnSpinner');
       const togglePwdBtn = document.getElementById('togglePasswordBtn');
       const resetPwdBtn = document.getElementById('resetPwdBtn');
+      const quickDemoBtn = document.getElementById('quickDemoBtn');
+      const chips = document.querySelectorAll('.demo-account-chip');
 
       // Check URL parameters (e.g. from registration redirect)
       const urlParams = new URLSearchParams(window.location.search);
@@ -376,37 +361,42 @@
         passwordInput.value = 'Password123!';
         if (urlParams.get('registered')) {
           showAlert(
-            `Account registered! You can log in with Password123! or your chosen password.`,
+            `Account registered! You can log in with your chosen password or Password123!.`,
             true
           );
         }
       } else if (!emailInput.value) {
-        // Fallback to demo default
+        // Fallback to default admin
         emailInput.value = 'admin@cloudrdr.internal';
         passwordInput.value = 'Password123!';
       }
 
-      // 1-Click Demo Login
-      quickDemoBtn?.addEventListener('click', () => {
-        emailInput.value = 'admin@cloudrdr.internal';
-        passwordInput.value = 'Password123!';
-        form.requestSubmit();
+      // Quick Account Switcher Chips
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          chips.forEach((c) => c.classList.remove('active'));
+          chip.classList.add('active');
+          emailInput.value = chip.getAttribute('data-email');
+          passwordInput.value = chip.getAttribute('data-pwd');
+          clearErrors();
+        });
       });
 
-      // Quick Account Switcher Pills
-      document.querySelectorAll('.quick-pill-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          emailInput.value = btn.getAttribute('data-email');
-          passwordInput.value = btn.getAttribute('data-pwd');
-          form.requestSubmit();
-        });
+      // 1-Click Demo Login (Submits with currently active or filled credentials)
+      quickDemoBtn?.addEventListener('click', () => {
+        if (!emailInput.value) {
+          emailInput.value = 'admin@cloudrdr.internal';
+          passwordInput.value = 'Password123!';
+        }
+        form.requestSubmit();
       });
 
       // Reset password button
       resetPwdBtn?.addEventListener('click', async () => {
         const email = emailInput.value.trim();
         if (!email) {
-          showAlert('Please enter your email above before resetting password.');
+          showAlert('Please enter an email address above before requesting a password reset.');
+          emailInput.focus();
           return;
         }
         try {
@@ -420,7 +410,7 @@
           if (res.ok) {
             passwordInput.value = 'Password123!';
             showAlert(
-              `Password for ${email} reset to Password123! Click Sign In to continue.`,
+              `Password for ${email} has been reset to Password123!. Click Sign In to continue.`,
               true
             );
           } else {
@@ -460,7 +450,7 @@
 
         let hasError = false;
         if (!email) {
-          emailError.textContent = 'Please enter your internal email address.';
+          emailError.textContent = 'Please enter your email address.';
           emailInput.classList.add('is-invalid');
           hasError = true;
         }
@@ -497,24 +487,23 @@
 
           showAlert('Authentication verified. Redirecting to SOC dashboard...', true);
 
-          // Store user in localStorage for instant client rendering
+          // Store user in localStorage
           if (data.user) {
             localStorage.setItem('cloudrdr_user', JSON.stringify(data.user));
             if (data.token) localStorage.setItem('cloudrdr_token', data.token);
           }
 
-          // Determine destination redirect
           const urlParams = new URLSearchParams(window.location.search);
           const destination = urlParams.get('redirect') || '/dashboard';
 
           setTimeout(() => {
             window.location.href = destination;
           }, 300);
-        } catch (err) {
+        } catch {
           showAlert('Network or server connection error. Please try again.');
         } finally {
           submitBtn.disabled = false;
-          btnText.textContent = 'Authenticate & Enter SOC';
+          btnText.textContent = 'Sign In';
           btnSpinner.style.display = 'none';
         }
       });
