@@ -23,12 +23,31 @@
 .site-brand {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 12px;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.15rem;
+  font-weight: 800;
+  font-size: 1.45rem;
   color: var(--text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.site-brand:hover {
+  transform: translateY(-1px);
+}
+
+.site-brand svg {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.22));
+  transition: filter var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.site-brand:hover svg {
+  filter: drop-shadow(0 4px 16px rgba(56, 189, 248, 0.5));
+  transform: scale(1.04);
 }
 
 .brand-badge {
