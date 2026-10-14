@@ -1327,3 +1327,132 @@
   transform: translateY(-2px);
   border-color: var(--text-muted);
 }
+
+/* ── 1. Interactive Cursor Spotlight on Bento Cards ─────────────────────── */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    480px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(47, 75, 255, 0.08),
+    transparent 65%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    320px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(47, 75, 255, 0.4),
+    transparent 65%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  z-index: 0;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ── 2. Merkle Cryptographic Path Wave ───────────────────────────────────── */
+.merkle-pulse-particle {
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.merkle-apex-halo {
+  pointer-events: none;
+  animation: apexRipple 2s infinite ease-out;
+  transform-origin: center;
+}
+
+@keyframes apexRipple {
+  0% {
+    r: 12;
+    opacity: 0.85;
+    stroke-width: 2.5px;
+  }
+  100% {
+    r: 30;
+    opacity: 0;
+    stroke-width: 0.5px;
+  }
+}
+
+/* ── 3. Ambient Threat Flash Mode ────────────────────────────────────────── */
+body.ambient-threat-active::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #D93636, #FF5F56, #D93636);
+  background-size: 200% 100%;
+  animation: threatLinePulse 1.5s infinite linear;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+body.ambient-threat-active .site-header {
+  border-bottom-color: rgba(217, 54, 54, 0.45);
+  background: rgba(217, 54, 54, 0.04);
+  transition: all 0.4s var(--ease);
+}
+
+@keyframes threatLinePulse {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── 4. Micro-Parallax Dotted Grid ───────────────────────────────────────── */
+.bg-grid-dots {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  transition: background-position 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── 5. Fluid Stage Morphing ─────────────────────────────────────────────── */
+.pipeline-visualizer-card.morphing .visualizer-spec-col,
+.pipeline-visualizer-card.morphing .visualizer-live-box {
+  animation: fluidStageFade 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fluidStageFade {
+  0% {
+    opacity: 0.35;
+    transform: translateY(8px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

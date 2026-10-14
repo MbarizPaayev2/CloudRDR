@@ -43,7 +43,7 @@
         </div>
 
         <!-- Memorable Element: Live Looping & Interactive Hero Merkle Tree Illustration -->
-        <div class="hero-preview-box hero-animate-preview">
+        <div class="hero-preview-box hero-animate-preview spotlight-card">
           <!-- Sleek Segmented Scenario Controls -->
           <div class="hero-tree-toolbar" id="heroTreeControls" role="toolbar" aria-label="Interactive Tree Scenarios">
             <div class="tree-toolbar-group">
@@ -139,19 +139,19 @@
         </div>
 
         <div class="problems-grid">
-          <div class="problem-card reveal-on-scroll stagger-1">
+          <div class="problem-card reveal-on-scroll stagger-1 spotlight-card">
             <div class="problem-num">01 / Silent overwrite</div>
             <h3>Silent blob encryption</h3>
             <p>Attackers steal API keys or service tokens and overwrite thousands of storage objects with encrypted blobs without changing file extensions.</p>
           </div>
 
-          <div class="problem-card reveal-on-scroll stagger-2">
+          <div class="problem-card reveal-on-scroll stagger-2 spotlight-card">
             <div class="problem-num">02 / Poisoned backups</div>
             <h3>Backup pipeline poisoning</h3>
             <p>Scheduled cloud backups automatically sync the newly encrypted files, overwriting good historical copies before security teams notice.</p>
           </div>
 
-          <div class="problem-card reveal-on-scroll stagger-3">
+          <div class="problem-card reveal-on-scroll stagger-3 spotlight-card">
             <div class="problem-num">03 / Zero proof of integrity</div>
             <h3>Unverifiable recovery</h3>
             <p>When organizations pay ransoms or restore from cold archives, they have no cryptographic proof whether restored files were tampered with or truncated.</p>
@@ -183,7 +183,7 @@
 
         <div class="pipeline-flow-track" id="pipelineTrack" role="tablist" aria-label="CloudRDR Pipeline Stages">
           <!-- Step 1 -->
-          <div class="pipeline-node active reveal-on-scroll stagger-1" data-stage="0" role="tab" aria-selected="true" tabindex="0">
+          <div class="pipeline-node active reveal-on-scroll stagger-1 spotlight-card" data-stage="0" role="tab" aria-selected="true" tabindex="0">
             <div class="pipeline-node-top">
               <span class="pipeline-step-idx">01</span>
               <div class="pipeline-icon-box" title="Baseline Merkle Root">
@@ -195,7 +195,7 @@
           </div>
 
           <!-- Step 2 -->
-          <div class="pipeline-node reveal-on-scroll stagger-2" data-stage="1" role="tab" aria-selected="false" tabindex="0">
+          <div class="pipeline-node reveal-on-scroll stagger-2 spotlight-card" data-stage="1" role="tab" aria-selected="false" tabindex="0">
             <div class="pipeline-node-top">
               <span class="pipeline-step-idx">02</span>
               <div class="pipeline-icon-box" title="Storage Event Polling">
@@ -207,7 +207,7 @@
           </div>
 
           <!-- Step 3 -->
-          <div class="pipeline-node reveal-on-scroll stagger-3" data-stage="2" role="tab" aria-selected="false" tabindex="0">
+          <div class="pipeline-node reveal-on-scroll stagger-3 spotlight-card" data-stage="2" role="tab" aria-selected="false" tabindex="0">
             <div class="pipeline-node-top">
               <span class="pipeline-step-idx">03</span>
               <div class="pipeline-icon-box" title="Heuristic &amp; Canary">
@@ -219,7 +219,7 @@
           </div>
 
           <!-- Step 4 -->
-          <div class="pipeline-node reveal-on-scroll stagger-4" data-stage="3" role="tab" aria-selected="false" tabindex="0">
+          <div class="pipeline-node reveal-on-scroll stagger-4 spotlight-card" data-stage="3" role="tab" aria-selected="false" tabindex="0">
             <div class="pipeline-node-top">
               <span class="pipeline-step-idx">04</span>
               <div class="pipeline-icon-box" title="IAM Freeze &amp; Ed25519">
@@ -231,7 +231,7 @@
           </div>
 
           <!-- Step 5 -->
-          <div class="pipeline-node reveal-on-scroll stagger-5" data-stage="4" role="tab" aria-selected="false" tabindex="0">
+          <div class="pipeline-node reveal-on-scroll stagger-5 spotlight-card" data-stage="4" role="tab" aria-selected="false" tabindex="0">
             <div class="pipeline-node-top">
               <span class="pipeline-step-idx">05</span>
               <div class="pipeline-icon-box" title="Hash-Chained Audit Log">
@@ -243,7 +243,7 @@
           </div>
 
           <!-- Step 6 -->
-          <div class="pipeline-node reveal-on-scroll stagger-6" data-stage="5" role="tab" aria-selected="false" tabindex="0">
+          <div class="pipeline-node reveal-on-scroll stagger-6 spotlight-card" data-stage="5" role="tab" aria-selected="false" tabindex="0">
             <div class="pipeline-node-top">
               <span class="pipeline-step-idx">06</span>
               <div class="pipeline-icon-box" title="AEAD Verified Decryption">
@@ -256,7 +256,7 @@
         </div>
 
         <!-- Featured Stage Visualizer Card -->
-        <div class="pipeline-visualizer-card reveal-on-scroll" id="pipelineVisualizer">
+        <div class="pipeline-visualizer-card reveal-on-scroll spotlight-card" id="pipelineVisualizer">
           <div class="visualizer-spec-col">
             <div>
               <div class="visualizer-meta-badges">
@@ -561,6 +561,9 @@
       function renderScenario(name) {
         const sc = scenarios[name];
         if (sc) {
+          const isThreat = (name === 'attack');
+          document.body.classList.toggle('ambient-threat-active', isThreat);
+
           updateTree({
             corruptedLeaves: sc.corruptedLeaves,
             currentRootHash: sc.currentRootHash,
@@ -583,9 +586,11 @@
         loopInterval = setInterval(() => {
           loopStage = (loopStage + 1) % 4;
           if (loopStage === 0) {
+            document.body.classList.remove('ambient-threat-active');
             renderScenario('calm');
           } else if (loopStage === 1) {
             // Subtle initial touch on canary
+            document.body.classList.add('ambient-threat-active');
             updateTree({
               corruptedLeaves: new Set([0]),
               currentRootHash: TAMPERED_ROOT,
@@ -600,8 +605,10 @@
             }
             if (heroTelemetryDot) heroTelemetryDot.className = 'telemetry-live-dot compromised';
           } else if (loopStage === 2) {
+            document.body.classList.add('ambient-threat-active');
             renderScenario('attack');
           } else {
+            document.body.classList.remove('ambient-threat-active');
             renderScenario('restore');
           }
         }, 3200);
@@ -1068,6 +1075,15 @@ if (isValid) await storage.write(bucket, path, bytes);`,
       if (vizSandbox && typeof s.renderSandbox === 'function') {
         s.renderSandbox(vizSandbox);
       }
+
+      // Smooth morphing tab switch animation
+      const vizCard = document.getElementById('pipelineVisualizer');
+      if (vizCard) {
+        vizCard.classList.remove('morphing');
+        void vizCard.offsetWidth; // Force reflow
+        vizCard.classList.add('morphing');
+        setTimeout(() => vizCard.classList.remove('morphing'), 420);
+      }
     }
 
     pipelineNodes.forEach((node) => {
@@ -1215,6 +1231,53 @@ if (isValid) await storage.write(bucket, path, bytes);`,
       // Trigger Merkle tree attack mode as well
       const attackBtn = document.querySelector('[data-scenario="attack"]');
       attackBtn?.click();
+    });
+
+    // ── 6. Cursor Spotlight & Bento Glow Pointer Tracking ────────────────────
+    const spotlightCards = document.querySelectorAll('.spotlight-card');
+    spotlightCards.forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      }, { passive: true });
+    });
+
+    // ── 7. Micro-Parallax Dotted Grid Background ────────────────────────────
+    const gridBgs = document.querySelectorAll('.bg-grid-dots');
+    let parallaxTicking = false;
+    window.addEventListener('mousemove', (e) => {
+      if (!parallaxTicking) {
+        window.requestAnimationFrame(() => {
+          const normX = ((e.clientX / window.innerWidth) - 0.5) * 16;
+          const normY = ((e.clientY / window.innerHeight) - 0.5) * 16;
+          gridBgs.forEach((bg) => {
+            bg.style.backgroundPosition = `calc(50% + ${normX.toFixed(1)}px) calc(50% + ${normY.toFixed(1)}px)`;
+          });
+          parallaxTicking = false;
+        });
+        parallaxTicking = true;
+      }
+    }, { passive: true });
+
+    // ── 8. Presentation & Grading Hotkeys (A: Attack, C: Calm, R: Restore) ──
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+      if (e.key === 'a' || e.key === 'A') {
+        const attackTab = document.querySelector('[data-scenario="attack"]');
+        attackTab?.click();
+      } else if (e.key === 'c' || e.key === 'C') {
+        const calmTab = document.querySelector('[data-scenario="calm"]');
+        calmTab?.click();
+      } else if (e.key === 'r' || e.key === 'R') {
+        const restoreTab = document.querySelector('[data-scenario="restore"]');
+        restoreTab?.click();
+      } else if (e.key === ' ') {
+        e.preventDefault();
+        autoPlayBtn?.click();
+      }
     });
   </script>
 </body>

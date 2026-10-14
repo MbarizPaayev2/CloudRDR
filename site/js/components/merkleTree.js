@@ -106,6 +106,7 @@ export function initMerkleTree(containerEl, options = {}) {
 
       <svg class="merkle-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cryptographic Merkle Tree DAG">
         <g class="merkle-links-group"></g>
+        <g class="merkle-particles-group"></g>
         <g class="merkle-nodes-group"></g>
       </svg>
 
@@ -120,6 +121,7 @@ export function initMerkleTree(containerEl, options = {}) {
 
   const svgEl = containerEl.querySelector('.merkle-svg');
   const linksGroup = svgEl.querySelector('.merkle-links-group');
+  const particlesGroup = svgEl.querySelector('.merkle-particles-group');
   const nodesGroup = svgEl.querySelector('.merkle-nodes-group');
 
   // Draw links
@@ -417,5 +419,63 @@ export function initMerkleTree(containerEl, options = {}) {
         line.setAttribute('stroke-width', '1.5');
       }
     });
+
+    // ── Cryptographic Travelling Pulse Wave Animation ──
+    if (particlesGroup) {
+      particlesGroup.innerHTML = '';
+      if (hasCorrupt) {
+        const activeLinks = links.filter(l => affectedNodeIds.has(l.target.id) && affectedNodeIds.has(l.source.id));
+        activeLinks.forEach((link, idx) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          p.setAttribute('r', '3.5');
+          p.setAttribute('fill', '#D93636');
+          p.setAttribute('class', 'merkle-pulse-particle');
+          particlesGroup.appendChild(p);
+
+          const startX = link.target.x;
+          const startY = link.target.y;
+          const endX = link.source.x;
+          const endY = link.source.y;
+          const duration = 520;
+          const startTime = performance.now() + (idx * 55);
+
+          function step(now) {
+            if (now < startTime) {
+              p.setAttribute('cx', startX);
+              p.setAttribute('cy', startY);
+              p.setAttribute('opacity', '0');
+              requestAnimationFrame(step);
+              return;
+            }
+            const progress = Math.min((now - startTime) / duration, 1);
+            const curX = startX + (endX - startX) * progress;
+            const curY = startY + (endY - startY) * progress;
+            p.setAttribute('cx', curX);
+            p.setAttribute('cy', curY);
+            p.setAttribute('opacity', `${0.9 * (1 - progress * 0.3)}`);
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              p.remove();
+              if (link.source.level === 4 && idx === activeLinks.length - 1) {
+                // Apex Halo ripple when wave reaches the root
+                const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                halo.setAttribute('cx', rootNode.x);
+                halo.setAttribute('cy', rootNode.y);
+                halo.setAttribute('r', '11');
+                halo.setAttribute('fill', 'none');
+                halo.setAttribute('stroke', '#D93636');
+                halo.setAttribute('stroke-width', '2');
+                halo.setAttribute('class', 'merkle-apex-halo');
+                particlesGroup.appendChild(halo);
+                setTimeout(() => { halo.remove(); }, 2000);
+              }
+            }
+          }
+          requestAnimationFrame(step);
+        });
+      }
+    }
   };
 }
