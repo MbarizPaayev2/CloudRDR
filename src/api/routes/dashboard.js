@@ -82,27 +82,120 @@ async function serveSiteFile(relPath, reply) {
 }
 
 /**
+ * Safely serve CSS/JS with site folder precedence, fallback to dashboard.
+ * @param {'css' | 'js'} folder
+ * @param {string} file
+ * @param {import('fastify').FastifyReply} reply
+ */
+async function serveAsset(folder, file, reply) {
+  const safeFile = path.normalize(file).replace(/^(\.\.[\/\\])+/, '');
+  const siteAssetPath = path.join(SITE_DIR, folder, safeFile);
+  const dashboardAssetPath = path.join(DASHBOARD_DIR, folder, safeFile);
+
+  try {
+    const content = await fs.readFile(siteAssetPath);
+    const ext = path.extname(siteAssetPath).toLowerCase();
+    return reply.type(MIME_TYPES[ext] || 'application/octet-stream').send(content);
+  } catch (_e) {
+    try {
+      const content = await fs.readFile(dashboardAssetPath);
+      const ext = path.extname(dashboardAssetPath).toLowerCase();
+      return reply.type(MIME_TYPES[ext] || 'application/octet-stream').send(content);
+    } catch (_e2) {
+      return reply.status(404).send('Not Found');
+    }
+  }
+}
+
+/**
  * @param {import('fastify').FastifyInstance} fastify
  */
 export async function dashboardRoutes(fastify) {
+  // ── Primary Site Routes ──────────────────────────────────────────────────
   fastify.get('/', async (_request, reply) => {
-    return serveFile('landing.html', reply);
+    return serveSiteFile('index.html', reply);
+  });
+
+  fastify.get('/index.html', async (_request, reply) => {
+    return serveSiteFile('index.html', reply);
+  });
+
+  fastify.get('/how-it-works', async (_request, reply) => {
+    return serveSiteFile('how-it-works.html', reply);
+  });
+
+  fastify.get('/how-it-works.html', async (_request, reply) => {
+    return serveSiteFile('how-it-works.html', reply);
+  });
+
+  fastify.get('/team', async (_request, reply) => {
+    return serveSiteFile('team.html', reply);
+  });
+
+  fastify.get('/team.html', async (_request, reply) => {
+    return serveSiteFile('team.html', reply);
+  });
+
+  fastify.get('/docs', async (_request, reply) => {
+    return serveSiteFile('docs.html', reply);
+  });
+
+  fastify.get('/docs.html', async (_request, reply) => {
+    return serveSiteFile('docs.html', reply);
+  });
+
+  // ── Demo Product Routes ──────────────────────────────────────────────────
+  fastify.get('/demo', async (_request, reply) => {
+    return serveSiteFile('demo/index.html', reply);
+  });
+
+  fastify.get('/demo/', async (_request, reply) => {
+    return serveSiteFile('demo/index.html', reply);
+  });
+
+  fastify.get('/demo/index.html', async (_request, reply) => {
+    return serveSiteFile('demo/index.html', reply);
+  });
+
+  fastify.get('/demo/incidents', async (_request, reply) => {
+    return serveSiteFile('demo/incidents.html', reply);
+  });
+
+  fastify.get('/demo/incidents.html', async (_request, reply) => {
+    return serveSiteFile('demo/incidents.html', reply);
+  });
+
+  fastify.get('/demo/incident', async (_request, reply) => {
+    return serveSiteFile('demo/incident.html', reply);
+  });
+
+  fastify.get('/demo/incident.html', async (_request, reply) => {
+    return serveSiteFile('demo/incident.html', reply);
+  });
+
+  fastify.get('/demo/audit', async (_request, reply) => {
+    return serveSiteFile('demo/audit.html', reply);
+  });
+
+  fastify.get('/demo/audit.html', async (_request, reply) => {
+    return serveSiteFile('demo/audit.html', reply);
+  });
+
+  fastify.get('/demo/*', async (request, reply) => {
+    const file = request.params['*'];
+    return serveSiteFile(path.join('demo', file), reply);
+  });
+
+  // ── Legacy / Alternative Dashboard Views ─────────────────────────────────
+  fastify.get('/dashboard', async (_request, reply) => {
+    return serveFile('index.html', reply);
   });
 
   fastify.get('/landing', async (_request, reply) => {
     return serveFile('landing.html', reply);
   });
 
-  fastify.get('/dashboard', async (_request, reply) => {
-    return serveFile('index.html', reply);
-  });
-
-  // Dedicated Site Routes (Multi-Page Website)
   fastify.get('/site', async (_request, reply) => {
-    return serveSiteFile('index.html', reply);
-  });
-
-  fastify.get('/site/', async (_request, reply) => {
     return serveSiteFile('index.html', reply);
   });
 
@@ -111,14 +204,15 @@ export async function dashboardRoutes(fastify) {
     return serveSiteFile(file, reply);
   });
 
+  // ── Static Assets (CSS / JS / Favicon) ───────────────────────────────────
   fastify.get('/css/*', async (request, reply) => {
     const file = request.params['*'];
-    return serveFile(path.join('css', file), reply);
+    return serveAsset('css', file, reply);
   });
 
   fastify.get('/js/*', async (request, reply) => {
     const file = request.params['*'];
-    return serveFile(path.join('js', file), reply);
+    return serveAsset('js', file, reply);
   });
 
   fastify.get('/favicon.ico', async (_request, reply) => {
