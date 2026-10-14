@@ -219,16 +219,22 @@
 
     /* ── Doppelrand (Double-Bezel) Card Architecture ───────────────────────── */
     .doppel-shell {
-      background: rgba(255, 255, 255, 0.025);
+      position: relative;
+      background: radial-gradient(
+        500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(59, 130, 246, 0.12),
+        rgba(255, 255, 255, 0.025) 50%
+      );
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 24px;
       padding: 6px;
-      transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+      will-change: transform, border-color;
     }
 
     .doppel-shell:hover {
-      border-color: rgba(59, 130, 246, 0.35);
-      box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.6);
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
     }
 
     .doppel-core {
@@ -775,6 +781,231 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* ── Quick-Terminal CLI Pills ────────────────────────────────────────── */
+    .quick-terminal-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .terminal-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(11, 16, 29, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #E2E8F0;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s var(--ease);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .terminal-pill:hover {
+      border-color: var(--brand);
+      background: rgba(17, 24, 43, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .terminal-pill:active {
+      transform: scale(0.98);
+    }
+
+    .terminal-prompt {
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .copy-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      transition: all 0.2s var(--ease);
+    }
+
+    .terminal-pill:hover .copy-badge {
+      background: rgba(59, 130, 246, 0.2);
+      color: #93C5FD;
+    }
+
+    .terminal-pill.copied .copy-badge {
+      background: rgba(16, 185, 129, 0.25);
+      color: var(--emerald);
+    }
+
+    /* ── Keyboard Shortcut Badges (<kbd>) ───────────────────────────────── */
+    .kbd-shortcut {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text-muted);
+      margin-left: 6px;
+      vertical-align: middle;
+      user-select: none;
+    }
+
+    .btn-island-nav:hover .kbd-shortcut,
+    .btn-hero-primary:hover .kbd-shortcut {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ── Interactive Simulation Phase Cards ─────────────────────────────── */
+    .sim-phase-card {
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+    }
+
+    .sim-phase-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .sim-phase-card.active {
+      background: var(--bg-elevated);
+      border-top-width: 4px;
+      box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.4);
+    }
+
+    .sim-state-inspector {
+      margin-top: 2rem;
+      background: rgba(11, 16, 29, 0.95);
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    }
+
+    .inspector-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .inspector-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .inspector-val {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Scroll Entrance Animations ─────────────────────────────────────── */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Toast Notifications ────────────────────────────────────────────── */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10001;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 420px;
+      width: calc(100vw - 48px);
+      pointer-events: none;
+    }
+
+    .toast-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(13, 20, 36, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      color: #FFFFFF;
+      font-size: 0.82rem;
+      font-family: var(--font-sans);
+      pointer-events: auto;
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
+      transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+    }
+
+    .toast-item.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .toast-item.dismissing {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.94);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .toast-icon {
+      font-size: 0.95rem;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .toast-info { border-left: 3px solid #38BDF8; }
+    .toast-info .toast-icon { color: #38BDF8; background: rgba(56, 189, 248, 0.15); }
+    .toast-success { border-left: 3px solid #10B981; }
+    .toast-success .toast-icon { color: #10B981; background: rgba(16, 185, 129, 0.15); }
+    .toast-warning { border-left: 3px solid #F59E0B; }
+    .toast-warning .toast-icon { color: #F59E0B; background: rgba(245, 158, 11, 0.15); }
+    .toast-threat { border-left: 3px solid #EF4444; }
+    .toast-threat .toast-icon { color: #EF4444; background: rgba(239, 68, 68, 0.2); }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -818,8 +1049,9 @@
           <li><a href="#architecture">Architecture</a></li>
         </ul>
 
-        <a href="/dashboard" class="btn-island-nav">
+        <a href="/dashboard" class="btn-island-nav" title="Launch Security Operations Center Console (Shortcut: D)">
           <span>Open Live SOC Console</span>
+          <kbd class="kbd-shortcut">D</kbd>
           <span class="btn-icon-circle" aria-hidden="true">↗</span>
         </a>
       </nav>
@@ -846,13 +1078,33 @@
         </p>
 
         <div class="hero-actions">
-          <a href="/dashboard" class="btn-hero-primary">
+          <a href="/dashboard" class="btn-hero-primary" title="Launch Security Operations Center Console (Shortcut: D)">
             <span>Launch Live Defense Console</span>
+            <kbd class="kbd-shortcut">D</kbd>
             <span class="hero-btn-icon" aria-hidden="true">▶</span>
           </a>
-          <a href="#how-it-works" class="btn-hero-secondary">
-            Inspect Architecture ↓
+          <a href="#simulation" class="btn-hero-secondary">
+            Test Interactive Stepper ↓
           </a>
+        </div>
+
+        <!-- Quick-Terminal CLI Pills (1-Click Copy with Real-Time Feedback) -->
+        <div class="quick-terminal-bar" aria-label="One-click developer CLI commands">
+          <div class="terminal-pill" role="button" tabindex="0" title="Click to copy CLI command" data-copy="npm run simulate">
+            <span class="terminal-prompt">$</span>
+            <code>npm run simulate</code>
+            <span class="copy-badge">Copy</span>
+          </div>
+          <div class="terminal-pill" role="button" tabindex="0" title="Click to copy CLI command" data-copy="npm run seed">
+            <span class="terminal-prompt">$</span>
+            <code>npm run seed</code>
+            <span class="copy-badge">Copy</span>
+          </div>
+          <div class="terminal-pill" role="button" tabindex="0" title="Click to copy CLI command" data-copy="npm test">
+            <span class="terminal-prompt">$</span>
+            <code>npm test</code>
+            <span class="copy-badge">Copy</span>
+          </div>
         </div>
 
         <!-- Metrics Doppelrand Banner -->
@@ -1105,10 +1357,10 @@
           </p>
         </div>
 
-        <div class="sim-timeline-grid">
+        <div class="sim-timeline-grid" id="simPhaseGrid">
           
           <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card">
+            <div class="doppel-core sim-phase-card active" data-phase="1" role="button" tabindex="0" aria-label="Phase 1: Calm Baseline. Click to inspect telemetry.">
               <div class="sim-phase-time">PHASE 01 // 0.0s</div>
               <h3 class="sim-phase-title">Calm Baseline</h3>
               <p class="sim-phase-desc">
@@ -1118,7 +1370,7 @@
           </div>
 
           <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card breach">
+            <div class="doppel-core sim-phase-card breach" data-phase="2" role="button" tabindex="0" aria-label="Phase 2: Tampering & Canary Strike. Click to inspect telemetry.">
               <div class="sim-phase-time">PHASE 02 // 1.2s</div>
               <h3 class="sim-phase-title">Tampering & Canary Strike</h3>
               <p class="sim-phase-desc">
@@ -1128,7 +1380,7 @@
           </div>
 
           <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card lock">
+            <div class="doppel-core sim-phase-card lock" data-phase="3" role="button" tabindex="0" aria-label="Phase 3: Cryo-Lock & Ed25519. Click to inspect telemetry.">
               <div class="sim-phase-time">PHASE 03 // 2.0s</div>
               <h3 class="sim-phase-title">Cryo-Lock & Ed25519</h3>
               <p class="sim-phase-desc">
@@ -1138,7 +1390,7 @@
           </div>
 
           <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card restore">
+            <div class="doppel-core sim-phase-card restore" data-phase="4" role="button" tabindex="0" aria-label="Phase 4: Verified Pure Recovery. Click to inspect telemetry.">
               <div class="sim-phase-time">PHASE 04 // 3.5s</div>
               <h3 class="sim-phase-title">Verified Pure Recovery</h3>
               <p class="sim-phase-desc">
@@ -1147,6 +1399,44 @@
             </div>
           </div>
 
+        </div>
+
+        <!-- Interactive Phase State Inspector Console -->
+        <div class="sim-state-inspector" id="simInspector" aria-live="polite" aria-label="Simulated phase telemetry inspector">
+          <div class="inspector-item">
+            <span class="inspector-label">Real-Time Threat Verdict</span>
+            <span class="inspector-val" id="inspVerdict" style="color:var(--emerald);">
+              <span style="font-size:0.75rem;">●</span> NORMAL
+            </span>
+          </div>
+
+          <div class="inspector-item">
+            <span class="inspector-label">Sentinel Tripwire</span>
+            <span class="inspector-val" id="inspSentinel" style="color:var(--emerald);">
+              ARMED (Green Pulse)
+            </span>
+          </div>
+
+          <div class="inspector-item">
+            <span class="inspector-label">Cloud IAM Access State</span>
+            <span class="inspector-val" id="inspIam" style="color:#60A5FA;">
+              READ_WRITE (Active)
+            </span>
+          </div>
+
+          <div class="inspector-item">
+            <span class="inspector-label">Merkle Root Integrity</span>
+            <span class="inspector-val" id="inspMerkle" style="color:#38BDF8;">
+              100% INTACT (e3b0c442…)
+            </span>
+          </div>
+
+          <div class="inspector-item">
+            <span class="inspector-label">Audit Log Signature</span>
+            <span class="inspector-val" id="inspAudit" style="color:#A78BFA;">
+              BLOCK #0 (GENESIS)
+            </span>
+          </div>
         </div>
 
       </div>
@@ -1235,5 +1525,209 @@
 
   </div>
 
+  <!-- Global Toast Notification Container -->
+  <div id="toast-container" class="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
+
+  <!-- Interactive Capabilities Module -->
+  <script type="module">
+    // 1. Toast Notification Helper
+    function showToast(message, type = 'info', duration = 3000) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = `toast-item toast-${type}`;
+      toast.setAttribute('role', 'status');
+
+      const icons = { info: 'ℹ', success: '✓', warning: '⚠', threat: '⚡' };
+      const icon = document.createElement('span');
+      icon.className = 'toast-icon';
+      icon.textContent = icons[type] || '•';
+
+      const text = document.createElement('span');
+      text.style.flex = '1';
+      text.textContent = message;
+
+      toast.appendChild(icon);
+      toast.appendChild(text);
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => toast.classList.add('visible'));
+
+      setTimeout(() => {
+        toast.classList.remove('visible');
+        toast.classList.add('dismissing');
+        setTimeout(() => toast.remove(), 200);
+      }, duration);
+    }
+
+    // 2. Mouse Spotlight Tracking on Doppel Shells
+    document.querySelectorAll('.doppel-shell').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // 3. Quick-Terminal CLI Pills 1-Click Copy
+    document.querySelectorAll('.terminal-pill').forEach((pill) => {
+      const copyText = pill.getAttribute('data-copy');
+      const handler = async () => {
+        try {
+          if (navigator?.clipboard?.writeText) {
+            await navigator.clipboard.writeText(copyText);
+          }
+          pill.classList.add('copied');
+          const badge = pill.querySelector('.copy-badge');
+          if (badge) badge.textContent = 'Copied! ✓';
+          showToast(`Copied to clipboard: ${copyText}`, 'success', 2200);
+          setTimeout(() => {
+            pill.classList.remove('copied');
+            if (badge) badge.textContent = 'Copy';
+          }, 2000);
+        } catch (_) {}
+      };
+      pill.addEventListener('click', handler);
+      pill.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handler();
+        }
+      });
+    });
+
+    // 4. Interactive Simulation Phase Stepper
+    const phaseData = {
+      1: {
+        verdict: 'NORMAL',
+        verdictColor: 'var(--emerald)',
+        sentinel: 'ARMED (Green Pulse)',
+        sentinelColor: 'var(--emerald)',
+        iam: 'READ_WRITE (Active)',
+        iamColor: '#60A5FA',
+        merkle: '100% INTACT (e3b0c442…)',
+        merkleColor: '#38BDF8',
+        audit: 'BLOCK #0 (GENESIS)',
+        toast: 'Phase 1: Baseline established. Continuous Merkle tree integrity verification active.',
+        toastType: 'info'
+      },
+      2: {
+        verdict: 'SUSPICIOUS',
+        verdictColor: 'var(--amber)',
+        sentinel: 'TRIPWIRE ACCELERATING (15% alter)',
+        sentinelColor: 'var(--amber)',
+        iam: 'EVALUATING (Sliding window 60s)',
+        iamColor: 'var(--amber)',
+        merkle: '3 LEAVES ALTERED',
+        merkleColor: 'var(--amber)',
+        audit: 'BLOCK #1 (ANOMALY DETECTED)',
+        toast: 'Phase 2: Bulk file alteration rate crossed suspicious threshold (15%).',
+        toastType: 'warning'
+      },
+      3: {
+        verdict: 'RANSOMWARE',
+        verdictColor: 'var(--crimson)',
+        sentinel: 'CANARY COMPROMISED (Tampered)',
+        sentinelColor: 'var(--crimson)',
+        iam: 'FROZEN (<10s IAM Deny-All)',
+        iamColor: 'var(--crimson)',
+        merkle: 'DAG ROOT COMPROMISED',
+        merkleColor: 'var(--crimson)',
+        audit: 'BLOCK #2 (Ed25519 CRYPTO SIGNED)',
+        toast: 'Phase 3: RANSOMWARE BREACH! Automated account freeze locked under 10 seconds.',
+        toastType: 'threat'
+      },
+      4: {
+        verdict: 'RESOLVED',
+        verdictColor: 'var(--emerald)',
+        sentinel: 'RE-SEALED (Sentinel Restored)',
+        sentinelColor: 'var(--emerald)',
+        iam: 'RESTORE COMPLETED (Validated)',
+        iamColor: 'var(--emerald)',
+        merkle: '100% RE-SEALED (Baseline Verified)',
+        merkleColor: '#38BDF8',
+        audit: 'BLOCK #3 (AUDIT CHAIN SEALED)',
+        toast: 'Phase 4: AES-256-GCM AEAD restore verified. 100% cryptographic hashes re-stamped.',
+        toastType: 'success'
+      }
+    };
+
+    const phaseCards = document.querySelectorAll('.sim-phase-card');
+    phaseCards.forEach((card) => {
+      const activate = () => {
+        phaseCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const phase = card.getAttribute('data-phase');
+        const data = phaseData[phase];
+        if (data) {
+          const vEl = document.getElementById('inspVerdict');
+          const sEl = document.getElementById('inspSentinel');
+          const iEl = document.getElementById('inspIam');
+          const mEl = document.getElementById('inspMerkle');
+          const aEl = document.getElementById('inspAudit');
+
+          if (vEl) { vEl.style.color = data.verdictColor; vEl.textContent = `● ${data.verdict}`; }
+          if (sEl) { sEl.style.color = data.sentinelColor; sEl.textContent = data.sentinel; }
+          if (iEl) { iEl.style.color = data.iamColor; iEl.textContent = data.iam; }
+          if (mEl) { mEl.style.color = data.merkleColor; mEl.textContent = data.merkle; }
+          if (aEl) { aEl.textContent = data.audit; }
+
+          showToast(data.toast, data.toastType, 2800);
+        }
+      };
+
+      card.addEventListener('click', activate);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
+      });
+    });
+
+    // 5. Global Keyboard Shortcuts (D for SOC, 1-4 for sections)
+    window.addEventListener('keydown', (e) => {
+      const target = e.target;
+      const isEditing = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+      if (isEditing) return;
+
+      if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        window.location.href = '/dashboard';
+      } else if (e.key === '1') {
+        e.preventDefault();
+        document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === '2') {
+        e.preventDefault();
+        document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === '3') {
+        e.preventDefault();
+        document.getElementById('simulation')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === '4') {
+        e.preventDefault();
+        document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // 6. Intersection Observer for Scroll Entrance
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.section-wrap, .metrics-shell, .cta-shell').forEach(el => {
+        el.classList.add('reveal-on-scroll');
+        observer.observe(el);
+      });
+    }
+  </script>
 </body>
 </html>
