@@ -1,5 +1,7 @@
 import { CONFIG, updateConfig } from './config.js';
 import { refreshAll, subscribe } from './state.js';
+import { updateStatusBar } from './components/statusBar.js';
+import { initBaselinePanel, updateBaselinePanel } from './components/baselinePanel.js';
 
 // ── Theme Manager ────────────────────────────────────────────────────────────
 
@@ -137,9 +139,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initDemoMode();
   initCopyButtons();
+  initBaselinePanel();
   renderInitialSkeletons();
+
+  // Subscribe components to state store
+  subscribe((state) => {
+    updateStatusBar(state);
+    updateBaselinePanel(state);
+  });
+
   refreshAll();
   console.info(
-    '[CloudRDR] Security Operations Dashboard initialised (Step 2 Data Layer Connected).'
+    '[CloudRDR] Security Operations Dashboard initialised (Step 3 StatusBar & Baseline Connected).'
   );
 });
