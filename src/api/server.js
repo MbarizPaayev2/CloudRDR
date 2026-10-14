@@ -67,6 +67,9 @@ export async function buildServer(options = {}) {
       request.url === '/' ||
       request.url.startsWith('/login') ||
       request.url.startsWith('/register') ||
+      request.url === '/health' ||
+      request.url.startsWith('/health') ||
+      request.url.startsWith('/api/health') ||
       request.url.startsWith('/api/auth') ||
       request.url.startsWith('/api/agent') ||
       request.url.startsWith('/site') ||

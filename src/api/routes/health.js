@@ -8,11 +8,14 @@
  * @param {import('fastify').FastifyInstance} fastify
  */
 export async function healthRoutes(fastify) {
-  fastify.get('/health', async (_request, reply) => {
+  const handler = async (_request, reply) => {
     return reply.status(200).send({
       status: 'ok',
       uptime: process.uptime(),
       timestamp: new Date().toISOString(),
     });
-  });
+  };
+
+  fastify.get('/health', handler);
+  fastify.get('/api/health', handler);
 }
