@@ -1,17 +1,17 @@
 # Graph Report - CloudRDR  (2026-10-14)
 
 ## Corpus Check
-- 811 files · ~1,206,144 words
+- 812 files · ~1,206,914 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 21 file(s) not represented in the graph (top: (none) 8, .toml 4, .css 3)
 
 ## Summary
-- 11394 nodes · 15624 edges · 813 communities (630 shown, 183 thin omitted)
+- 11399 nodes · 15641 edges · 819 communities (638 shown, 181 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 249 edges (avg confidence: 0.89)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b9f18acb`
+- Built from commit: `4975e483`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -25,32 +25,32 @@
 - package.json
 - DesignSystemGenerator
 - validate-tokens.cjs
-- search_stack
+- citations.mjs
 - spacing
 - crypto.contract.js
 - test_validate_tokens.py
 - live-browser.js
-- logger.js
+- supabaseClient.js
 - html-token-validator.py
 - state.js
 - caseFile.js
-- run-metrics-harness.js
+- ref_node_fs
 - connectSSE
-- time.js
-- detectionChart.js
+- attackCycle.test.js
+- run-metrics-harness.js
 - generate-slide.py
 - slide_search_core.py
 - server.js
 - json
 - inspect.mjs
-- BM25
+- test_core.py
 - setLiveState
 - detectionEngine.js
 - color
 - 4. Component Stylings
 - ExternalServiceError
 - fontSize
-- ref_node_fs
+- fetch-background.py
 - brandkit/SKILL.md
 - CatalogRefreshTest
 - verify-claim.mjs
@@ -62,7 +62,7 @@
 - syncPageChatFocus
 - Design System Inspired by Mastercard
 - duration
-- Page
+- cdp.mjs
 - renderHashChain
 - button
 - binance/DESIGN.md
@@ -70,12 +70,12 @@
 - input
 - radius
 - $impeccable hooks
-- test_relevance_evaluator.py
-- test_skill_script_paths.py
+- TestThresholdGate
+- merkleTree.js
 - mongodb/DESIGN.md
 - rules.mjs
 - nvidia/DESIGN.md
-- boot
+- baselineLedger.js
 - workspace-resolver.mjs
 - $type
 - radius
@@ -83,7 +83,7 @@
 - cursor/DESIGN.md
 - TestStackFlagWithDesignSystem
 - expo/DESIGN.md
-- selectIncident
+- aggregate_benchmark.py
 - padding-y
 - figma/DESIGN.md
 - framer/DESIGN.md
@@ -96,7 +96,7 @@
 - primary-foreground
 - ring
 - secondary-foreground
-- restorePanel.js
+- prepare-investigation-brief.mjs
 - statusBar.js
 - el
 - Design System Inspired by Lamborghini
@@ -235,7 +235,7 @@
 - Critique — judging the render
 - 11. COMPONENT EXECUTION GUIDELINES
 - 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE
-- AuditLog
+- 4. STRIDE Threat Analysis
 - CloudRDR — ISMS Gap Analysis (ISO/IEC 27001:2022)
 - Mandatory Pre-Flight Checklist (Run Before Every Task)
 - 9. AI TELLS (Forbidden Patterns)
@@ -267,7 +267,7 @@
 - 29. ANTI-AI-SLOP RULES
 - 5. IMAGE COUNT & PAGE SLICING
 - Design System Template
-- gates/index.mjs
+- cold-start.mjs
 - new-work.md
 - initGlobalBar
 - 12. THE BLOCK LIBRARY (Contract - Implementations Land Here Iteratively)
@@ -391,7 +391,7 @@
 - x.ai/README.md
 - zapier/README.md
 - references/create.md
-- scanners/index.mjs
+- gates/index.mjs
 - showToast
 - Motion Specification Template
 - Lift-Test Templates
@@ -434,7 +434,7 @@
 - Agentic UX Design - Real-World Examples
 - Contextual Usage Patterns
 - Agentic UX Design - Technical Reference
-- build_run
+- select-candidates.mjs
 - scripts/render-report.mjs
 - algorithmic-art/SKILL.md
 - actOnAgentTarget
@@ -472,18 +472,18 @@
 - 7. JavaScript Performance
 - Quick Reference
 - Process
-- package_skill.py
+- sys
 - vercel-optimize
 - verify-and-regen.mjs
 - readClaimFile
 - Recommendations
 - Adaptive Communication
 - Production System
-- ValidationResult
+- contract.mjs
 - optimize.md
 - Hungarian Case Study — Tisza vs. Fidesz, April 2026
 - Data collection
-- verifyNextCacheComponentsRouteChainFile
+- rate-limit.mjs
 - Princeton GEO Study: Strategic Insights
 - Concept Rounds
 - Anthropic Brand Styling
@@ -569,13 +569,13 @@
 - Android platform
 - Persona-Based Design Testing
 - doctor.md
-- Extract Flow
+- document.md
 - Quality Checklist
 - Bisecting a Regression Across Published Playwright Versions
 - 3.1 Core Event Types
 - Implementation Workflow
 - Theme Factory Skill
-- large-static-asset.mjs
+- turbo-force-bypass.mjs
 - docs-library.json
 - Vercel Optimize
 - Web Application Testing
@@ -624,13 +624,13 @@
 - Questions to Always Ask
 - The Foundation: Loyalty
 - The Architect Process
-- Diagnostic Scan
+- CloudRDR — Risk Register v1 & Asset Classification
 - Visualize: Direction Comps & Asset Production
 - ye
 - Evaluation Process
 - Advanced MCP Features
 - Advanced FastMCP Features
-- Dispatcher Layer
+- undeclared-dep.mjs
 - Adding CLI Commands
 - React Best Practices
 - React View Transitions Skill
@@ -638,8 +638,8 @@
 - Quick Start: Minimum Viable Relationship (MVR)
 - Common Implementation Pitfalls
 - The Five Pillars of Agentic UX
-- CatalogSummaryLineEndingsTest
-- TestTextLayoutDataContracts
+- unoptimized-image.mjs
+- Region map
 - cost-coverage.mjs
 - queries.mjs
 - API service
@@ -657,10 +657,11 @@
 - Quick Pre-Meeting Checklist
 - Example 4: AI-Assisted Legacy Refactoring
 - AI Operational Loyalty
-- Impeccable Documenter
+- TestMetricMath
+- external-api-slow.mjs
 - Flipping the Switch: From Decay to Growth
-- Server Layer
-- Testing: tests/library vs tests/page
+- Page
+- platform-fluid-compute.mjs
 - 8. Trace Loading (traceLoader.ts)
 - 8. Advanced Patterns
 - Example 1: EU B2B Relationship Cockpit (Automotive Service Networks)
@@ -723,6 +724,7 @@
 - xl
 - none
 - Heuristics Scoring Guide
+- usage-spike-triage.mjs
 - 10. Trace Modernizer (traceModernizer.ts)
 - 11. Trace Viewer
 - 12. CLI Commands
@@ -820,6 +822,12 @@
 - react-best-practices/rules/_template.md
 - bundle-artifact.sh
 - init-artifact.sh
+- Read
+- TestFixtureValidation
+- build-minutes-fanout.mjs
+- isr-overrevalidation.mjs
+- observability-events-attribution.mjs
+- middleware-broad-matcher.mjs
 
 ## God Nodes (most connected - your core abstractions)
 1. `search()` - 43 edges
@@ -836,23 +844,23 @@
 ## Surprising Connections (you probably didn't know these)
 - `Step 2: Reuse the page, then start` --references--> `boot()`  [INFERRED]
   .agents/skills/impeccable/reference/generate.md → dashboard/js/main.js
-- `Performance & Architecture` --references--> `setState()`  [INFERRED]
-  .agents/skills/bencium-code-conventions/SKILL.md → dashboard/js/state.js
 - `3. Non-Functional Requirements (NFR)` --references--> `LocalFsStorage`  [INFERRED]
   docs/grc/02_REQUIREMENTS_AND_SCOPE_FREEZE.md → src/adapters/storage/localFsStorage.js
-- `1. RFC 8032 Ed25519 Signatures (`src/crypto/ed25519.js`)` --references--> `generateEd25519KeyPair()`  [INFERRED]
-  README.md → src/crypto/ed25519.js
 - `2.1 Component Breakdown` --references--> `MonitorAgent`  [INFERRED]
   docs/grc/01_THREAT_MODEL_STRIDE.md → src/monitor/monitorAgent.js
+- `3.2 Theme 8: Technological Controls` --references--> `MonitorAgent`  [INFERRED]
+  docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md → src/monitor/monitorAgent.js
+- `Performance & Architecture` --references--> `setState()`  [INFERRED]
+  .agents/skills/bencium-code-conventions/SKILL.md → dashboard/js/state.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (813 total, 183 thin omitted)
+## Communities (819 total, 181 thin omitted)
 
 ### Community 0 - "assets.mjs"
-Cohesion: 0.08
-Nodes (40): AIC_FIELDS, AIC_HEADERS, applyThumb(), ARCHIVE_LICENCE, args, argv, commonsApi(), commonsInfo() (+32 more)
+Cohesion: 0.09
+Nodes (35): AIC_FIELDS, AIC_HEADERS, applyThumb(), ARCHIVE_LICENCE, args, argv, commonsApi(), commonsInfo() (+27 more)
 
 ### Community 1 - "validate_data.py"
 Cohesion: 0.06
@@ -863,8 +871,8 @@ Cohesion: 0.05
 Nodes (53): $type, $value, $type, $value, $type, $value, $type, $value (+45 more)
 
 ### Community 3 - "core.py"
-Cohesion: 0.04
-Nodes (30): _contains_phrase(), detect_domain(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _file_signature(), _get_bm25(), _legacy_successor_guidance() (+22 more)
+Cohesion: 0.03
+Nodes (37): _contains_phrase(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature(), _get_bm25(), _legacy_successor_guidance() (+29 more)
 
 ### Community 4 - "draw.mjs"
 Cohesion: 0.08
@@ -876,27 +884,27 @@ Nodes (31): ansi_ljust(), _button_outline_text_color(), _contrast_ratio(), _deri
 
 ### Community 6 - "package.json"
 Cohesion: 0.07
-Nodes (28): dependencies, dotenv, fastify, @fastify/cors, @fastify/rate-limit, pino, pino-pretty, @supabase/supabase-js (+20 more)
+Nodes (27): dependencies, dotenv, fastify, @fastify/cors, @fastify/rate-limit, pino, pino-pretty, @supabase/supabase-js (+19 more)
 
 ### Community 7 - "DesignSystemGenerator"
-Cohesion: 0.04
-Nodes (24): Act on the receipt, Assemble and review, Plan and asset review, Plan, capture, serve, Command guidance, No-argument routing: the context-aware menu, Workflow questions, DesignSystemGenerator (+16 more)
+Cohesion: 0.06
+Nodes (18): Act on the receipt, Assemble and review, Plan and asset review, Plan, capture, serve, Command guidance, No-argument routing: the context-aware menu, Workflow questions, DesignSystemGenerator (+10 more)
 
 ### Community 8 - "validate-tokens.cjs"
 Cohesion: 0.08
 Nodes (28): args, fs, minimal, MINIMAL_TOKENS, path, projectRoot, tokensPath, wrapStyle (+20 more)
 
-### Community 9 - "search_stack"
-Cohesion: 0.08
-Nodes (10): _exact_stack_identifier(), _project_row(), search_stack(), _valid_max_results(), TestDiagnosticsContracts, _rows(), TestNativeDesktopStackFreshness, TestTextLayoutRetrieval (+2 more)
+### Community 9 - "citations.mjs"
+Cohesion: 0.16
+Nodes (21): compareVersion(), HERE, isKnownUrl(), LIBRARY_PATH, libraryForStack(), loadLibrary(), lookupSkillRule(), lookupUrl() (+13 more)
 
 ### Community 10 - "spacing"
 Cohesion: 0.09
 Nodes (22): $type, $value, $type, $value, $type, $value, $type, $value (+14 more)
 
 ### Community 11 - "crypto.contract.js"
-Cohesion: 0.11
-Nodes (24): RFC-8785, 4.5 Denial of Service (Availability), hashBuffer, hashStream, RFC-8032, merkleRoot, signRecord, verifyRecord (+16 more)
+Cohesion: 0.07
+Nodes (29): RFC-8785, 4.5 Denial of Service (Availability), 1. RFC 8032 Ed25519 Signatures (`src/crypto/ed25519.js`), 2. Hash-Chained Audit Ledger & Chain Verifier (`src/log/`), 3. AES-256-GCM Authenticated Encryption (`src/backup/backupService.js`), Cryptography & Integrity Modules (`src/crypto/`, `src/log/`, `src/backup/`), hashBuffer, hashStream (+21 more)
 
 ### Community 12 - "test_validate_tokens.py"
 Cohesion: 0.25
@@ -906,61 +914,61 @@ Nodes (3): _run(), test_flags_hardcoded_hex_sharing_line_with_token(), test_toke
 Cohesion: 0.03
 Nodes (121): addManualContextText(), applyGlobalBarLabelState(), applyPlaceholderSizingStyles(), bindEditBadgeProxy(), bufferToBase64(), buildCollapsible(), buildColorModels(), buildListHtml() (+113 more)
 
-### Community 14 - "logger.js"
-Cohesion: 0.14
-Nodes (8): main(), main(), main(), getStorageAdapter(), createBaseline(), PollingEventSource, MonitorAgent, logger
+### Community 14 - "supabaseClient.js"
+Cohesion: 0.11
+Nodes (8): @supabase/supabase-js, createInMemorySupabaseClient(), _memoryDb, _resetClientForTests(), _setAdapterForTests(), GENESIS_PREV_HASH, PollingEventSource, logger
 
 ### Community 15 - "html-token-validator.py"
-Cohesion: 0.15
-Nodes (6): get_context(), is_allowed_exception(), is_allowed_rgba(), is_inside_block(), load_css_variables(), validate_html()
+Cohesion: 0.10
+Nodes (13): get_context(), is_allowed_exception(), is_allowed_rgba(), is_inside_block(), load_css_variables(), main(), print_result(), print_summary() (+5 more)
 
 ### Community 16 - "state.js"
-Cohesion: 0.14
-Nodes (20): api, formatDate(), initBaselinePanel(), shortenHash(), updateBaselinePanel(), formatDate(), isCanaryPath(), triggerRestore() (+12 more)
+Cohesion: 0.10
+Nodes (27): Performance & Architecture, api, formatDate(), initBaselinePanel(), shortenHash(), updateBaselinePanel(), formatDate(), isCanaryPath() (+19 more)
 
 ### Community 17 - "caseFile.js"
 Cohesion: 0.14
-Nodes (22): buildEvidencePane(), buildRestorePane(), buildSignaturePane(), buildTabs(), buildTimelinePane(), formatTime(), handleRestoreClick(), isCanaryPath() (+14 more)
+Nodes (25): buildEvidencePane(), buildRestorePane(), buildSignaturePane(), buildTabs(), buildTimelinePane(), formatTime(), handleRestoreClick(), isCanaryPath() (+17 more)
 
-### Community 18 - "run-metrics-harness.js"
-Cohesion: 0.16
-Nodes (11): runMetricsHarness(), decryptDataGCM(), defaultBackupStore, encryptDataGCM(), EncryptedBackupStore, getBackupKey(), MAGIC_HEADER, _resetBackupStoreForTests() (+3 more)
+### Community 18 - "ref_node_fs"
+Cohesion: 0.12
+Nodes (15): formatBytes(), metadata, scan(), shouldSkip(), SKIP_EXTENSIONS, SKIP_PATH_PREFIXES, walk(), decryptDataGCM() (+7 more)
 
 ### Community 19 - "connectSSE"
 Cohesion: 0.06
 Nodes (84): abortSvelteComponentInjection(), applyParamDefaults(), applyParamValue(), applySavedSessionMeta(), checkpointPayload(), clampVariantIndex(), closedClipPath(), commitAcceptedVariantToDom() (+76 more)
 
-### Community 20 - "time.js"
-Cohesion: 0.23
-Nodes (9): _frozenAccounts, _isFrozenForTests(), _resetFreezeStateForTests(), unfreezeAccount(), freezeAccount(), unfreezeAccount(), freezeWithRetry(), backoffMs() (+1 more)
+### Community 20 - "attackCycle.test.js"
+Cohesion: 0.21
+Nodes (18): getSupabaseClient(), supaQuery(), detectionRoutes(), _frozenAccounts, _isFrozenForTests(), _resetFreezeStateForTests(), unfreezeAccount(), freezeAccount() (+10 more)
 
-### Community 21 - "detectionChart.js"
-Cohesion: 0.38
-Nodes (4): buildChartData(), initDetectionChart(), updateDetectionChart(), initChart()
+### Community 21 - "run-metrics-harness.js"
+Cohesion: 0.24
+Nodes (12): main(), runMetricsHarness(), main(), main(), getStorageAdapter(), createBaseline(), appendAuditLog(), freezeAccount() (+4 more)
 
 ### Community 22 - "generate-slide.py"
-Cohesion: 0.13
-Nodes (10): _e(), generate_chart_slide(), generate_cta_slide(), generate_deck(), generate_metrics_slide(), generate_problem_slide(), generate_solution_slide(), generate_testimonial_slide() (+2 more)
+Cohesion: 0.14
+Nodes (11): _e(), generate_chart_slide(), generate_cta_slide(), generate_deck(), generate_metrics_slide(), generate_problem_slide(), generate_solution_slide(), generate_testimonial_slide() (+3 more)
 
 ### Community 23 - "slide_search_core.py"
 Cohesion: 0.10
 Nodes (16): format_context(), format_result(), main(), calculate_pattern_break(), detect_domain(), get_background_config(), get_color_for_emotion(), get_layout_for_goal() (+8 more)
 
 ### Community 24 - "server.js"
-Cohesion: 0.15
-Nodes (24): getSupabaseClient(), supaQuery(), baselineRoutes(), detectionRoutes(), healthRoutes(), incidentRoutes(), restoreRoutes(), buildServer() (+16 more)
+Cohesion: 0.19
+Nodes (14): baselineRoutes(), DASHBOARD_DIR, dashboardRoutes(), __dirname, __filename, MIME_TYPES, serveFile(), healthRoutes() (+6 more)
 
 ### Community 25 - "json"
-Cohesion: 0.04
-Nodes (35): generate_css_for_background(), get_background_image(), get_curated_images(), get_overlay_css(), get_pexels_search_url(), load_backgrounds_config(), load_brand_colors(), main() (+27 more)
+Cohesion: 0.05
+Nodes (23): build_run(), embed_file(), find_runs(), _find_runs_recursive(), generate_html(), get_mime_type(), _kill_port(), load_previous_iteration() (+15 more)
 
 ### Community 26 - "inspect.mjs"
 Cohesion: 0.11
 Nodes (12): allow, args, asJson, fails, HEIGHT, merged, outDir, report (+4 more)
 
-### Community 27 - "BM25"
-Cohesion: 0.13
-Nodes (3): BM25, TestBm25CoreBehavior, TestTokenizer
+### Community 27 - "test_core.py"
+Cohesion: 0.07
+Nodes (7): BM25, detect_domain(), generate_design_system(), TestBm25CoreBehavior, TestDomainDetection, TestPersistence, TestTokenizer
 
 ### Community 28 - "setLiveState"
 Cohesion: 0.09
@@ -979,28 +987,28 @@ Cohesion: 0.04
 Nodes (45): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typography Rules, 4. Component Stylings, 5. Layout Principles, 6. Depth & Elevation, 7. Do's and Don'ts, 8. Responsive Behavior (+37 more)
 
 ### Community 32 - "ExternalServiceError"
-Cohesion: 0.20
-Nodes (3): LocalFsStorage, SupabaseStorage, ExternalServiceError
+Cohesion: 0.11
+Nodes (8): LocalFsStorage, SupabaseStorage, AccountFrozenError, CloudRdrError, ConflictError, ExternalServiceError, IntegrityError, NotFoundError
 
 ### Community 33 - "fontSize"
 Cohesion: 0.12
 Nodes (16): $type, $value, $type, $value, $type, $value, $type, $value (+8 more)
 
-### Community 34 - "ref_node_fs"
+### Community 34 - "fetch-background.py"
 Cohesion: 0.15
-Nodes (10): createInMemorySupabaseClient(), _memoryDb, _resetClientForTests(), _setAdapterForTests(), DASHBOARD_DIR, dashboardRoutes(), __dirname, __filename (+2 more)
+Nodes (9): generate_css_for_background(), get_background_image(), get_curated_images(), get_overlay_css(), get_pexels_search_url(), load_backgrounds_config(), load_brand_colors(), main() (+1 more)
 
 ### Community 35 - "brandkit/SKILL.md"
 Cohesion: 0.04
 Nodes (44): 1. Logo Cover, 1. Monogram + Meaning, 2 × 3 REFERENCE-STYLE LAYOUT, 2. Logo Construction, 2. Product Action, 3. Digital Application, 3. Metaphor Fusion, 4. Brand Essence (+36 more)
 
 ### Community 37 - "verify-claim.mjs"
-Cohesion: 0.08
-Nodes (56): findRecContradictions(), cacheInvalidationFileCache, cacheLifeNeedsContentFreshnessProof(), cleanHeaderValue(), configContainsTag(), dedupeCacheTags(), escapeRegExp(), execFileP (+48 more)
+Cohesion: 0.07
+Nodes (70): findRecContradictions(), asArray(), cacheInvalidationFileCache, cacheLifeNeedsContentFreshnessProof(), cleanHeaderValue(), configContainsTag(), dedupeCacheTags(), escapeRegExp() (+62 more)
 
 ### Community 38 - "main.js"
-Cohesion: 0.16
-Nodes (25): updateCanaryCage(), renderCaseFile(), animateCorruption(), animateRestore(), COLORS, computeLayout(), drawEdge(), drawTree() (+17 more)
+Cohesion: 0.17
+Nodes (20): updateCanaryCage(), buildChartData(), initDetectionChart(), updateDetectionChart(), animateCorruption(), animateRestore(), setLeafState(), setRootHash() (+12 more)
 
 ### Community 39 - "design-tokens-starter.json"
 Cohesion: 0.15
@@ -1030,13 +1038,13 @@ Nodes (43): 1. Visual Theme & Atmosphere, 2. Color Palette & Roles, 3. Typograph
 Cohesion: 0.20
 Nodes (10): fast, normal, slow, $type, $value, $type, $value, duration (+2 more)
 
-### Community 46 - "Page"
-Cohesion: 0.19
-Nodes (6): Browser, findChrome(), Page, sleep(), Representative Client Classes, tests/library — API and Feature Tests
+### Community 46 - "cdp.mjs"
+Cohesion: 0.15
+Nodes (13): Browser, findChrome(), sleep(), ChannelOwner — Base Class, Client Layer, Configuration, Connection, Decision Rule (+5 more)
 
 ### Community 47 - "renderHashChain"
-Cohesion: 0.70
-Nodes (4): buildConnector(), renderHashChain(), shortEvent(), shortHash()
+Cohesion: 0.43
+Nodes (5): buildConnector(), renderHashChain(), shortEvent(), shortHash(), ICONS
 
 ### Community 48 - "button"
 Cohesion: 0.20
@@ -1055,16 +1063,12 @@ Cohesion: 0.19
 Nodes (14): $type, $value, $type, $value, $type, $value, primitive, radius (+6 more)
 
 ### Community 53 - "$impeccable hooks"
-Cohesion: 0.33
+Cohesion: 0.29
 Nodes (6): Constraints, Failure modes, Flow, $impeccable hooks, Routing, Triage findings
 
-### Community 54 - "test_relevance_evaluator.py"
-Cohesion: 0.12
-Nodes (3): TestFixtureValidation, TestMetricMath, TestThresholdGate
-
-### Community 55 - "test_skill_script_paths.py"
-Cohesion: 0.38
-Nodes (3): resolve(), shipped_invocations(), SkillScriptPathsTest
+### Community 55 - "merkleTree.js"
+Cohesion: 0.17
+Nodes (16): COLORS, computeLayout(), drawEdge(), drawTree(), walkEdges(), _edgeEls, getLeafCount(), initMerkleTree() (+8 more)
 
 ### Community 56 - "mongodb/DESIGN.md"
 Cohesion: 0.05
@@ -1078,9 +1082,9 @@ Nodes (5): colourFamily(), hexToHsl(), inRange(), judge(), RULE_IDS
 Cohesion: 0.05
 Nodes (41): Border Radius Scale, Brand & Accent, Breakpoints, Buttons, Cards, Collapsing Strategy, Colors, Components (+33 more)
 
-### Community 59 - "boot"
-Cohesion: 0.25
-Nodes (12): formatArchiveDate(), initBaselineLedger(), renderBaseline(), shortHash(), VERDICT_CONFIG, createIcon(), ICONS, setButtonContent() (+4 more)
+### Community 59 - "baselineLedger.js"
+Cohesion: 0.60
+Nodes (5): formatArchiveDate(), initBaselineLedger(), renderBaseline(), shortHash(), getState()
 
 ### Community 60 - "workspace-resolver.mjs"
 Cohesion: 0.07
@@ -1106,9 +1110,9 @@ Nodes (40): AI Timeline (signature), Border Radius Scale, Brand & Accent, Breakp
 Cohesion: 0.05
 Nodes (40): Atmospheric Backdrop, Border Radius Scale, Brand & Accent, Breakpoints, Buttons, Cards, Code & IDE, Collapsing Strategy (+32 more)
 
-### Community 67 - "selectIncident"
-Cohesion: 0.70
-Nodes (4): formatTime(), shortenId(), updateIncidentList(), selectIncident()
+### Community 67 - "aggregate_benchmark.py"
+Cohesion: 0.19
+Nodes (6): aggregate_results(), calculate_stats(), generate_benchmark(), generate_markdown(), load_run_results(), main()
 
 ### Community 68 - "padding-y"
 Cohesion: 0.67
@@ -1128,7 +1132,7 @@ Nodes (40): Border Radius Scale, Brand & Accent, Breakpoints, Buttons, Cards & C
 
 ### Community 72 - "lib/render-report.mjs"
 Cohesion: 0.10
-Nodes (50): formatCandidateLabel(), formatKind(), formatPublicText(), formatRoute(), asArray(), assertValidObservations(), candidateForDisplay(), compactFinalText() (+42 more)
+Nodes (51): formatCandidateLabel(), formatKind(), formatRoute(), asArray(), assertValidObservations(), candidateForDisplay(), canonicalRefOf(), compactFinalText() (+43 more)
 
 ### Community 73 - "components/auditLog.js"
 Cohesion: 0.83
@@ -1157,6 +1161,10 @@ Nodes (3): ring, $type, $value
 ### Community 79 - "secondary-foreground"
 Cohesion: 0.67
 Nodes (3): secondary-foreground, $type, $value
+
+### Community 80 - "prepare-investigation-brief.mjs"
+Cohesion: 0.26
+Nodes (14): inferFrameworkPlaybook(), inferPlaybook(), candidateRefFor(), buildFanoutPlan(), buildManifest(), candidateFamilyKey(), HERE, log() (+6 more)
 
 ### Community 82 - "el"
 Cohesion: 0.07
@@ -1487,8 +1495,8 @@ Cohesion: 0.11
 Nodes (18): AI & LLM Platforms, Automotive, Awesome DESIGN.md, Backend, Database & DevOps, Collection, Contributing, Design & Creative Tools, Developer Tools & IDEs (+10 more)
 
 ### Community 164 - "support-topics.mjs"
-Cohesion: 0.08
-Nodes (45): compareVersion(), HERE, isKnownUrl(), LIBRARY_PATH, libraryForStack(), loadLibrary(), lookupSkillRule(), lookupUrl() (+37 more)
+Cohesion: 0.13
+Nodes (26): citationApplies(), HERE, KNOWN_CANDIDATE_KINDS, loadSupportTopics(), matchesCandidateKind(), matchesCandidateMetrics(), matchesCandidateRoutePatterns(), matchesFrameworks() (+18 more)
 
 ### Community 165 - "Analysis & Synthesis Instructions"
 Cohesion: 0.11
@@ -1706,9 +1714,9 @@ Nodes (9): 11. COMPONENT EXECUTION GUIDELINES, 3D Cascading Card Deck, Diagonal 
 Cohesion: 0.22
 Nodes (9): 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE, Composition variety check, Conversion focus, Cross-section contrast, CTA specificity, Cultural / tonal alignment, Data-viz restraint, Image variety inside one comp (+1 more)
 
-### Community 219 - "AuditLog"
-Cohesion: 0.06
-Nodes (27): 1. Executive Summary & Objective, 2.1 Component Breakdown, 2.2 Data Flow Diagram (DFD) & Trust Boundaries, 2. System Architecture & Trust Boundaries, 3. Threat Actor Profiles, 4.1 Spoofing (Identity & Authenticity), 4.2 Tampering (Data Integrity), 4.3 Repudiation (Audit & Accountability) (+19 more)
+### Community 219 - "4. STRIDE Threat Analysis"
+Cohesion: 0.13
+Nodes (14): 1. Executive Summary & Objective, 2.1 Component Breakdown, 2.2 Data Flow Diagram (DFD) & Trust Boundaries, 2. System Architecture & Trust Boundaries, 3. Threat Actor Profiles, 4.1 Spoofing (Identity & Authenticity), 4.2 Tampering (Data Integrity), 4.3 Repudiation (Audit & Accountability) (+6 more)
 
 ### Community 220 - "CloudRDR — ISMS Gap Analysis (ISO/IEC 27001:2022)"
 Cohesion: 0.22
@@ -1743,8 +1751,8 @@ Cohesion: 0.25
 Nodes (7): 1. Executive Summary & Objective, 2.1 Test Dataset Structure, 2.2 Metrics Formulations, 2. Experimental Methodology, 3. Results Matrix, 4. Key Findings & Engineering Recommendations, CloudRDR — Threshold Sweep Experiment Report
 
 ### Community 228 - "lineOf"
-Cohesion: 0.08
-Nodes (33): apply(), metadata, apply(), metadata, MODE_PATTERNS, countMatches(), findRepeated(), metadata (+25 more)
+Cohesion: 0.09
+Nodes (28): apply(), metadata, apply(), metadata, MODE_PATTERNS, countMatches(), findRepeated(), metadata (+20 more)
 
 ### Community 229 - "Creation Gotchas"
 Cohesion: 0.29
@@ -1834,13 +1842,13 @@ Nodes (6): 5. IMAGE COUNT & PAGE SLICING, Continuity Rule, Counting rule, Format
 Cohesion: 0.05
 Nodes (41): 1. Brand Color System, 1. Component Variations, 1. Spacing Scale, 2. Grid System, 2. Responsive Breakpoints, 2. Typography Pairing, 3. Accessibility Standards, 3. Dark Mode Palette (+33 more)
 
-### Community 251 - "gates/index.mjs"
-Cohesion: 0.06
-Nodes (31): gate(), metadata, unique(), extractColdStarts(), gate(), metadata, extractCallCounts(), extractExternalApis() (+23 more)
+### Community 251 - "cold-start.mjs"
+Cohesion: 0.29
+Nodes (6): extractColdStarts(), gate(), metadata, gate(), metadata, sumRows()
 
 ### Community 252 - "new-work.md"
 Cohesion: 0.06
-Nodes (29): Recommended Actions, Craft (deprecated alias), Pitfalls, Style guidelines, The frontmatter: token schema, The markdown body: eight sections (canonical order), Two paths, When to run (+21 more)
+Nodes (30): 1. Accessibility (VoiceOver / TalkBack), 2. Performance, 3. Appearance & Theming, 4. Platform Conformance (CRITICAL), 5. Adaptivity, Diagnostic Scan, Recommended Actions, Craft (deprecated alias) (+22 more)
 
 ### Community 253 - "initGlobalBar"
 Cohesion: 0.09
@@ -1915,16 +1923,16 @@ Cohesion: 0.50
 Nodes (4): 7. CSS Custom Properties & @property (Jhey), Decompose Complex Transforms, Scoped Variables for Dynamic Behavior (Jhey), Type Specification Unlocks Animation
 
 ### Community 271 - "investigation-brief.mjs"
-Cohesion: 0.12
-Nodes (38): absoluteBriefPath(), briefRoots(), buildBrief(), cachePolicyGuidance(), capBriefFiles(), citationSubset(), closestAncestorLayoutFiles(), inferFrameworkPlaybook() (+30 more)
+Cohesion: 0.19
+Nodes (23): absoluteBriefPath(), briefRoots(), buildBrief(), cachePolicyGuidance(), capBriefFiles(), closestAncestorLayoutFiles(), isCatchAllPlaceholder(), isDynamicPlaceholder() (+15 more)
 
 ### Community 272 - "name"
 Cohesion: 0.10
 Nodes (21): name(), Seed mode, Step 1: Route through new-work's workshop, Step 2: Write seed DESIGN.md, Step 3: Confirm, Choosing Animation Style, Next.js Implementation Additions, Same-Route Dynamic Segment Transitions (+13 more)
 
 ### Community 273 - "sanitizers/index.mjs"
-Cohesion: 0.07
-Nodes (27): sanitizeCitations(), applyDollarStrip(), stripDollarLiterals(), metadata, STRING_FIELDS, metadata, STRING_FIELDS, metadata (+19 more)
+Cohesion: 0.11
+Nodes (14): applyDollarStrip(), stripDollarLiterals(), metadata, STRING_FIELDS, metadata, STRING_FIELDS, metadata, STRING_FIELDS (+6 more)
 
 ### Community 274 - "live.md"
 Cohesion: 0.06
@@ -1971,8 +1979,8 @@ Cohesion: 0.50
 Nodes (3): CLI Usage, Principles, UI Skills — Design Engineering Toolkit
 
 ### Community 285 - "gate-investigations.mjs"
-Cohesion: 0.10
-Nodes (31): applyAuthDisqualifier(), AUTH_ROUTE_REGEX, isAuthRoute(), CandidateContractError, candidateLabel(), nonEmptyString(), VALID_SCOPES, validateCandidate() (+23 more)
+Cohesion: 0.17
+Nodes (18): applyAuthDisqualifier(), AUTH_ROUTE_REGEX, isAuthRoute(), applyHardGates(), FLAGS_ENDPOINT, flagsEndpointReason(), isFlagsEndpointCandidate(), isWorkflowRuntimeEndpointCandidate() (+10 more)
 
 ### Community 286 - "Innovative Designer for impact"
 Cohesion: 0.06
@@ -1982,9 +1990,9 @@ Nodes (35): Accessibility Standards, After Getting Context, Color & Contrast, Co
 Cohesion: 0.09
 Nodes (36): acceptedDomAlreadyClean(), applyOriginalAttrsToSvelteAnchor(), clearHandledWrapperReloadStamp(), commitAcceptedSvelteComponentToDom(), componentModuleCandidates(), deferredRecoverySuperseded(), describeMountFailure(), detectDevServerBase() (+28 more)
 
-### Community 375 - "scanners/index.mjs"
-Cohesion: 0.08
-Nodes (27): gates, scanners, isApplicable(), metadata, scan(), isApplicable(), metadata, scan() (+19 more)
+### Community 375 - "gates/index.mjs"
+Cohesion: 0.11
+Nodes (21): GATE_VERSION, gates, MAX_CODE_CANDIDATES, metadata, scanners, isApplicable(), metadata, scan() (+13 more)
 
 ### Community 376 - "showToast"
 Cohesion: 0.11
@@ -2027,8 +2035,8 @@ Cohesion: 0.11
 Nodes (23): byRoute(), gate(), metadata, ratioOverThreshold(), round2(), sumRows(), extractErrors(), extractFromStatusRows() (+15 more)
 
 ### Community 386 - "connections.py"
-Cohesion: 0.11
-Nodes (5): create_connection(), MCPConnection, MCPConnectionHTTP, MCPConnectionSSE, MCPConnectionStdio
+Cohesion: 0.07
+Nodes (4): MCPConnection, MCPConnectionHTTP, MCPConnectionSSE, MCPConnectionStdio
 
 ### Community 387 - "Node/TypeScript MCP Server Implementation Guide"
 Cohesion: 0.07
@@ -2111,8 +2119,8 @@ Cohesion: 0.09
 Nodes (23): Async/Await Best Practices, Code Best Practices, Code Composability and Reusability, Complete Example, Error Handling, Key Imports, MCP Python SDK and FastMCP, Overview (+15 more)
 
 ### Community 407 - "evaluation.py"
-Cohesion: 0.15
-Nodes (8): agent_loop(), evaluate_single_task(), extract_xml_content(), main(), parse_env_vars(), parse_evaluation_file(), parse_headers(), run_evaluation()
+Cohesion: 0.14
+Nodes (9): create_connection(), agent_loop(), evaluate_single_task(), extract_xml_content(), main(), parse_env_vars(), parse_evaluation_file(), parse_headers() (+1 more)
 
 ### Community 408 - "Anti-Vanity Diagnostic Lenses"
 Cohesion: 0.09
@@ -2123,8 +2131,8 @@ Cohesion: 0.09
 Nodes (21): 1. Product Overview (50 words), 2. 15 FAQs with Schema, 3. Evidence Panels, 4. JSON-LD Schema, AEO Content Optimization Skill, Anti-Patterns (What to Avoid), Assessment Framework, Authority Level Determines Strategy (+13 more)
 
 ### Community 410 - "text"
-Cohesion: 0.15
-Nodes (21): base(), first(), fromAic(), fromArchive(), fromMet(), fromNasa(), licenceFromUrl(), mapLimit() (+13 more)
+Cohesion: 0.17
+Nodes (22): base(), commonsLicence(), first(), fromAic(), fromArchive(), fromCommons(), fromCommonsVideo(), fromMet() (+14 more)
 
 ### Community 411 - "onAnnotDown"
 Cohesion: 0.14
@@ -2135,8 +2143,8 @@ Cohesion: 0.12
 Nodes (21): averageRgb01(), captureAndEmit(), captureChromeNodes(), captureElementFromRenderedAncestor(), captureElementToBlob(), compileShader(), cssColorToRgb01(), dominantRgb01() (+13 more)
 
 ### Community 413 - "route-normalize.mjs"
-Cohesion: 0.19
-Nodes (20): canonicalRefOf(), enrichRecFromCandidates(), candidateKey(), canonicalizeBranchPrefix(), canonicalizeRoute(), decodeSegmentToken(), dedupeCandidates(), firstRouteSegment() (+12 more)
+Cohesion: 0.21
+Nodes (18): candidateKey(), canonicalizeBranchPrefix(), canonicalizeRoute(), decodeSegmentToken(), dedupeCandidates(), firstRouteSegment(), isBase64FlagState(), isDynamicPlaceholder() (+10 more)
 
 ### Community 414 - "The Toolkit"
 Cohesion: 0.10
@@ -2154,9 +2162,9 @@ Nodes (20): Arrows and Misc, Common Accented Characters, Complete Entity Table, 
 Cohesion: 0.10
 Nodes (20): Agentic UX Design - Technical Reference, Collaborative Planning, Collaborative Planning: Technical Patterns, Implementation Checklist, Key Research Sources, Memory Architecture, Next Steps, Pattern 1: Dynamic Reasoning Display (+12 more)
 
-### Community 418 - "build_run"
-Cohesion: 0.13
-Nodes (7): build_run(), embed_file(), find_runs(), _find_runs_recursive(), get_mime_type(), load_previous_iteration(), ReviewHandler
+### Community 418 - "select-candidates.mjs"
+Cohesion: 0.36
+Nodes (8): candidateIdentity(), DEFAULT_KIND_CAPS, DIVERSITY_ELIGIBILITY, durationMsFromSignal(), isDiversityEligible(), numberFromEvidence(), numberFromSignal(), selectLaunchCandidates()
 
 ### Community 419 - "scripts/render-report.mjs"
 Cohesion: 0.19
@@ -2211,8 +2219,8 @@ Cohesion: 0.12
 Nodes (16): 1.1 Avoid Boolean Prop Proliferation, 1.2 Use Compound Components, 1. Component Architecture, 2.1 Decouple State Management from UI, 2.2 Define Generic Context Interfaces for Dependency Injection, 2.3 Lift State into Provider Components, 2. State Management, 3.1 Create Explicit Component Variants (+8 more)
 
 ### Community 432 - "impeccable/SKILL.md"
-Cohesion: 0.13
-Nodes (12): Before you finish, Scope is sovereign, The amplification, The skeleton test, Why it reads flat, Craft floor, Refuse, Verify (+4 more)
+Cohesion: 0.11
+Nodes (16): Before you finish, Scope is sovereign, The amplification, The skeleton test, Why it reads flat, Extract Flow, Step 1: Discover the Design System, Step 2: Identify Patterns (+8 more)
 
 ### Community 433 - "Insurgent Campaign"
 Cohesion: 0.12
@@ -2276,7 +2284,7 @@ Nodes (16): Agentic UX Design - Relationship-Centric Interfaces, Collaborative P
 
 ### Community 448 - "display-labels.mjs"
 Cohesion: 0.18
-Nodes (14): formatNumberLike(), formatSignal(), formatSignalPart(), formatSignalValue(), humanizeKey(), KIND_LABELS, normalizeObservedWindowUnits(), PUBLIC_ASSIGNMENT_LABELS (+6 more)
+Nodes (15): formatNumberLike(), formatPublicText(), formatSignal(), formatSignalPart(), formatSignalValue(), humanizeKey(), KIND_LABELS, normalizeObservedWindowUnits() (+7 more)
 
 ### Community 449 - ".update"
 Cohesion: 0.13
@@ -2306,9 +2314,9 @@ Nodes (14): 1. Eliminating Waterfalls (CRITICAL), 2. Bundle Size Optimization (C
 Cohesion: 0.13
 Nodes (14): Blind Comparator Agent, Field Descriptions, Guidelines, Inputs, Output Format, Process, Role, Step 1: Read Both Outputs (+6 more)
 
-### Community 456 - "package_skill.py"
-Cohesion: 0.20
-Nodes (4): main(), package_skill(), should_exclude(), validate_skill()
+### Community 456 - "sys"
+Cohesion: 0.04
+Nodes (18): main(), main(), package_skill(), should_exclude(), validate_skill(), CatalogSummaryLineEndingsTest, _load_generator(), split_values() (+10 more)
 
 ### Community 457 - "vercel-optimize"
 Cohesion: 0.13
@@ -2334,9 +2342,9 @@ Nodes (13): Adaptive Communication, Anti-Patterns, Core Principle, Detection Sig
 Cohesion: 0.14
 Nodes (14): Choose the smallest useful system, Freeze and continue, Handoff prompt examples, Handover, HTML style guide, Icons, marks, and imagery, Interaction and motion, No SVG (+6 more)
 
-### Community 463 - "ValidationResult"
-Cohesion: 0.24
-Nodes (6): main(), print_result(), print_summary(), validate_directory(), validate_file(), ValidationResult
+### Community 463 - "contract.mjs"
+Cohesion: 0.39
+Nodes (6): CandidateContractError, candidateLabel(), nonEmptyString(), VALID_SCOPES, validateCandidate(), validateCandidates()
 
 ### Community 464 - "optimize.md"
 Cohesion: 0.14
@@ -2350,9 +2358,9 @@ Nodes (13): Budget vs. impact, Efficiency per forint — paid amplification was 
 Cohesion: 0.15
 Nodes (14): inferPlan(), Data collection, Error states and fallbacks, Per-signal source matrix, Real JSON shapes, Table of contents, The `signals.json` shape, `vercel api /v9/projects/<id>` / `?teamId=<orgId>` (+6 more)
 
-### Community 467 - "verifyNextCacheComponentsRouteChainFile"
-Cohesion: 0.16
-Nodes (14): asArray(), firstAccessiblePath(), firstDynamicRouteChainReason(), isCatchAllPlaceholder(), isDynamicPlaceholder(), layoutAppliesToCandidateRoute(), normalizeProjectRootDirectory(), normalizeRouteForLayoutMatch() (+6 more)
+### Community 467 - "rate-limit.mjs"
+Cohesion: 0.36
+Nodes (7): apply(), collectText(), matchConcurrency(), matchProviders(), metadata, PROVIDER_LIMITS, PROVIDER_RE
 
 ### Community 468 - "Princeton GEO Study: Strategic Insights"
 Cohesion: 0.15
@@ -2423,8 +2431,8 @@ Cohesion: 0.17
 Nodes (8): Core MCP Documentation (Load First), 📚 Documentation Library, Evaluation Guide (Load During Phase 4), Language-Specific Implementation Guides (Load During Phase 2), MCP Server Development Guide, Overview, Reference Files, SDK Documentation (Load During Phase 1/2)
 
 ### Community 485 - "Playwright Library Architecture: Client, Server, and Dispatchers"
-Cohesion: 0.17
-Nodes (12): ChannelOwner — Base Class, Client Layer, Code Generation, Connection, Dependency Rules (DEPS.list), End-to-End Flow Example, Object Lifecycle, Package Layout (+4 more)
+Cohesion: 0.13
+Nodes (15): Code Generation, Dependency Rules (DEPS.list), Dispatcher — Base Class, Dispatcher Creation Pattern, Dispatcher Hierarchy, Dispatcher Layer, DispatcherConnection, End-to-End Flow Example (+7 more)
 
 ### Community 486 - "Adding MCP Tools"
 Cohesion: 0.17
@@ -2471,8 +2479,8 @@ Cohesion: 0.18
 Nodes (11): 1. Extraction Score (0-10), 2. Focus Score (0-10), 3. Authority Score (0-10), 4. Freshness Score (0-10), AI Visibility Assessment Framework, Assessment Dimensions, Content Evaluation Checklist, Optimization Level Assessment (+3 more)
 
 ### Community 497 - "Code Conventions"
-Cohesion: 0.18
-Nodes (10): Code Conventions, Code Style & Structure, Component Library & Styling, Core Technologies, Development Workflow, Environment & Deployment, Error Handling, Framework Conventions (+2 more)
+Cohesion: 0.20
+Nodes (9): Code Conventions, Code Style & Structure, Component Library & Styling, Core Technologies, Development Workflow, Environment & Deployment, Error Handling, Framework Conventions (+1 more)
 
 ### Community 498 - "Accessibility Essentials"
 Cohesion: 0.18
@@ -2611,8 +2619,8 @@ Cohesion: 0.22
 Nodes (9): Color & materials, Components & controls, iOS platform, Layout & structure, Motion, The iOS slop test, Touch targets, Typography (+1 more)
 
 ### Community 532 - "Operate mode depth (and Read notes)"
-Cohesion: 0.22
-Nodes (9): Color, Components, Layout, Motion, Operate mode depth (and Read notes), Product constraints, Product permissions, The product slop test (+1 more)
+Cohesion: 0.14
+Nodes (12): Craft floor, Refuse, Verify, Color, Components, Layout, Motion, Operate mode depth (and Read notes) (+4 more)
 
 ### Community 533 - "Shape"
 Cohesion: 0.22
@@ -2694,9 +2702,9 @@ Nodes (8): 1. Impatient Power User: "Alex", 2. Confused First-Timer: "Jordan", 3
 Cohesion: 0.25
 Nodes (7): Monorepo notes, Opting out of the boot check, Step 1: Run the pass, Step 2: Act by severity, Step 3: Deprecated fields are binding, Step 4: Do not overclaim on truth drift, What this owns, and what it does not
 
-### Community 553 - "Extract Flow"
-Cohesion: 0.25
-Nodes (7): Extract Flow, Step 1: Discover the Design System, Step 2: Identify Patterns, Step 3: Plan Extraction, Step 4: Extract & Enrich, Step 5: Migrate, Step 6: Document
+### Community 553 - "document.md"
+Cohesion: 0.29
+Nodes (6): Pitfalls, Style guidelines, The frontmatter: token schema, The markdown body: eight sections (canonical order), Two paths, When to run
 
 ### Community 554 - "Quality Checklist"
 Cohesion: 0.25
@@ -2718,9 +2726,9 @@ Nodes (8): Implementation Workflow, Step 1: Audit the App, Step 2: Add CSS Recip
 Cohesion: 0.25
 Nodes (7): Application Process, Create your Own Theme, Purpose, Theme Details, Theme Factory Skill, Themes Available, Usage Instructions
 
-### Community 559 - "large-static-asset.mjs"
-Cohesion: 0.36
-Nodes (7): formatBytes(), metadata, scan(), shouldSkip(), SKIP_EXTENSIONS, SKIP_PATH_PREFIXES, walk()
+### Community 559 - "turbo-force-bypass.mjs"
+Cohesion: 0.48
+Nodes (6): detectBuildCacheDisabled(), lineOfMatch(), metadata, safeScripts(), scan(), truncate()
 
 ### Community 560 - "docs-library.json"
 Cohesion: 0.25
@@ -2914,9 +2922,9 @@ Nodes (6): Loyalty in Architecture, The AI Perfection Trap, The Foundation: Loya
 Cohesion: 0.33
 Nodes (6): Phase 1: Domain Discovery, Phase 2: Systems Analysis, Phase 3: Constraint Mapping, Phase 4: AI Decomposition Planning, Phase 5: Solution Synthesis, The Architect Process
 
-### Community 609 - "Diagnostic Scan"
-Cohesion: 0.33
-Nodes (6): 1. Accessibility (VoiceOver / TalkBack), 2. Performance, 3. Appearance & Theming, 4. Platform Conformance (CRITICAL), 5. Adaptivity, Diagnostic Scan
+### Community 609 - "CloudRDR — Risk Register v1 & Asset Classification"
+Cohesion: 0.29
+Nodes (6): 1. Asset Classification Framework, 2. Asset Inventory & Criticality Assessment, 3. Risk Assessment Methodology, 4. Risk Register v1, 5. Risk Treatment & Monitoring Summary, CloudRDR — Risk Register v1 & Asset Classification
 
 ### Community 610 - "Visualize: Direction Comps & Asset Production"
 Cohesion: 0.33
@@ -2938,9 +2946,9 @@ Nodes (6): Advanced MCP Features, Notification Support, Resource Registration, s
 Cohesion: 0.33
 Nodes (6): Advanced FastMCP Features, Context Parameter Injection, Lifespan Management, Resource Registration, Structured Output Types, Transport Options
 
-### Community 616 - "Dispatcher Layer"
-Cohesion: 0.33
-Nodes (6): Dispatcher — Base Class, Dispatcher Creation Pattern, Dispatcher Hierarchy, Dispatcher Layer, DispatcherConnection, Key Dispatcher Files
+### Community 616 - "undeclared-dep.mjs"
+Cohesion: 0.47
+Nodes (5): apply(), extractCodeBlocks(), metadata, NODE_BUILTINS, pkgRoot()
 
 ### Community 617 - "Adding CLI Commands"
 Cohesion: 0.33
@@ -2969,6 +2977,14 @@ Nodes (6): Common Implementation Pitfalls, ❌ Pitfall 1: Remembering Too Much, 
 ### Community 623 - "The Five Pillars of Agentic UX"
 Cohesion: 0.33
 Nodes (6): 1. Memory Revolution: From Static Preferences to Contextual Intelligence, 2. Trust as a Design Material: The Three-Stage Evolution, 3. Relationship-Centric Architecture, 4. Systems That Plan Their Own Path, 5. New Success Metrics: Beyond Conversion Rates, The Five Pillars of Agentic UX
+
+### Community 624 - "unoptimized-image.mjs"
+Cohesion: 0.53
+Nodes (5): isJsxLike(), isNextConfig(), metadata, scan(), snippet()
+
+### Community 625 - "Region map"
+Cohesion: 0.40
+Nodes (4): Containment, Painted material, Region map, What varies independently
 
 ### Community 626 - "cost-coverage.mjs"
 Cohesion: 0.47
@@ -3038,21 +3054,21 @@ Nodes (5): AI Decomposition Done Right, Example 4: AI-Assisted Legacy Refactorin
 Cohesion: 0.40
 Nodes (5): AI Operational Loyalty, How to Operationalize AI Loyalty, The Honest Truth, What AI CAN Commit To, What AI CANNOT Commit To
 
-### Community 644 - "Impeccable Documenter"
-Cohesion: 0.40
-Nodes (4): Impeccable Documenter, Input Contract, Output Contract, Workflow
+### Community 645 - "external-api-slow.mjs"
+Cohesion: 0.60
+Nodes (4): extractCallCounts(), extractExternalApis(), gate(), metadata
 
 ### Community 646 - "Flipping the Switch: From Decay to Growth"
 Cohesion: 0.40
 Nodes (4): Flipping the Switch: From Decay to Growth, How a health crisis taught me a system view that now governs my life and work, How an observation about knowledge changed the trajectory of my career, Start observing: entropy and negentropy are everywhere
 
-### Community 647 - "Server Layer"
-Cohesion: 0.40
-Nodes (5): Browser Engine Directories, Key Server Classes, PageDelegate Pattern, SdkObject — Base Class, Server Layer
+### Community 647 - "Page"
+Cohesion: 0.23
+Nodes (6): Page, Browser Engine Directories, Key Server Classes, PageDelegate Pattern, SdkObject — Base Class, Server Layer
 
-### Community 648 - "Testing: tests/library vs tests/page"
-Cohesion: 0.40
-Nodes (5): Configuration, Decision Rule, Running Tests, Testing: tests/library vs tests/page, tests/page — Page Interaction Tests
+### Community 648 - "platform-fluid-compute.mjs"
+Cohesion: 0.60
+Nodes (4): extractHighColdRoutes(), extractSlowHotRoutes(), gate(), metadata
 
 ### Community 649 - "8. Trace Loading (traceLoader.ts)"
 Cohesion: 0.40
@@ -3302,6 +3318,10 @@ Nodes (4): $type, $value, none, none
 Cohesion: 0.50
 Nodes (4): Heuristics Scoring Guide, Issue Severity (P0–P3), Reference Material, Score Summary
 
+### Community 712 - "usage-spike-triage.mjs"
+Cohesion: 0.60
+Nodes (4): aggregateSkuStats(), dayTotal(), gate(), metadata
+
 ### Community 713 - "10. Trace Modernizer (traceModernizer.ts)"
 Cohesion: 0.50
 Nodes (4): 10. Trace Modernizer (traceModernizer.ts), How It Works, TraceModernizer Class, Version Support
@@ -3370,10 +3390,30 @@ Nodes (3): 14. Quick Reference: Accessing Trace Data, In Test Runner, In Trace V
 Cohesion: 0.67
 Nodes (3): 15. Version Information, Compatibility, Trace Format Versions
 
+### Community 813 - "Read"
+Cohesion: 0.50
+Nodes (3): Comps, Directions, Read
+
+### Community 815 - "build-minutes-fanout.mjs"
+Cohesion: 0.67
+Nodes (3): gate(), metadata, unique()
+
+### Community 816 - "isr-overrevalidation.mjs"
+Cohesion: 0.67
+Nodes (3): extractRows(), gate(), metadata
+
+### Community 817 - "observability-events-attribution.mjs"
+Cohesion: 0.67
+Nodes (3): gate(), metadata, sumBilled()
+
+### Community 818 - "middleware-broad-matcher.mjs"
+Cohesion: 0.67
+Nodes (3): isApplicable(), metadata, scan()
+
 ## Knowledge Gaps
 - **14 isolated node(s):** `@modelcontextprotocol/sdk`, `axios`, `dotenv`, `@types/node`, `shx` (+9 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 7105 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **183 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **181 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -3383,12 +3423,12 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `@modelcontextprotocol/sdk`, `axios`, `dotenv` to the rest of the system?**
   _14 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `assets.mjs` be split into smaller, more focused modules?**
-  _Cohesion score 0.08170731707317073 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08571428571428572 - nodes in this community are weakly interconnected._
 - **Why does `Default behavior — write and open the HTML report` connect `Workflow: Audit Mode` to `name`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._
 - **Should `validate_data.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.059466848940533154 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0647887323943662 - nodes in this community are weakly interconnected._
 - **Should `gray` be split into smaller, more focused modules?**
   _Cohesion score 0.05370101596516691 - nodes in this community are weakly interconnected._
 - **Should `core.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.04158686730506156 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.032789670404349304 - nodes in this community are weakly interconnected._

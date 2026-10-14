@@ -12,6 +12,8 @@
  *   setRootHash(hash, state)  // state: 'normal'|'compromised'|'restored'
  */
 
+import { showToast } from './toast.js';
+
 /* ── Layout constants ────────────────────────────────────────────────────── */
 const SVG_NS  = 'http://www.w3.org/2000/svg';
 const LEAF_R  = 9;       // leaf circle radius
@@ -147,13 +149,38 @@ function drawTree(layout) {
 
   // Root node
   const rootNode = layout.root;
+  const rootG = svgEl('g', {
+    role: 'button',
+    tabindex: '0',
+    'aria-label': 'Merkle Root Node. Press Enter or click to copy root hash.',
+    class: 'merkle-root-interactive',
+  });
   const rootCircle = svgEl('circle', {
     cx: rootNode.x, cy: rootNode.y,
     r: ROOT_R,
     fill: COLORS.root,
     stroke: 'none',
   });
-  _svg.appendChild(rootCircle);
+  rootG.appendChild(rootCircle);
+
+  const copyRootHash = () => {
+    const rootHashEl = document.getElementById('merkleRootDisplay');
+    const hash = rootHashEl?.dataset?.fullHash || rootHashEl?.textContent || 'MerkleRoot';
+    if (navigator?.clipboard?.writeText && hash !== '—') {
+      navigator.clipboard.writeText(hash).catch(() => {});
+    }
+    showToast(`Merkle Root Hash copied: ${hash.slice(0, 16)}…`, 'success', 2500);
+  };
+
+  rootG.addEventListener('click', copyRootHash);
+  rootG.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      copyRootHash();
+    }
+  });
+
+  _svg.appendChild(rootG);
   _rootEl = rootCircle;
 
   // Root label
@@ -164,6 +191,7 @@ function drawTree(layout) {
     'font-size': '8',
     'font-weight': '600',
     fill: '#94A3B8',
+    style: 'pointer-events: none;',
   });
   rootLabel.textContent = 'ROOT';
   _svg.appendChild(rootLabel);
@@ -171,8 +199,11 @@ function drawTree(layout) {
   // Leaf nodes
   for (const leaf of layout.leaves) {
     const g = svgEl('g', {
-      role: 'img',
-      'aria-label': `Leaf ${leaf.index}: healthy`,
+      role: 'button',
+      tabindex: '0',
+      'aria-label': `Leaf ${leaf.index}: healthy. Press Enter or click to copy hash.`,
+      class: 'merkle-leaf-interactive',
+      style: 'cursor: pointer;',
     });
     const circle = svgEl('circle', {
       cx: leaf.x, cy: leaf.y,
@@ -182,6 +213,25 @@ function drawTree(layout) {
       'stroke-width': 1,
     });
     g.appendChild(circle);
+
+    const onLeafActivate = () => {
+      const state = g.getAttribute('data-state') || 'healthy';
+      const leafId = `leaf_${leaf.index.toString(16).padStart(4, '0')}`;
+      const fakeHash = `sha256:${leafId}9ac280fe4177b9d`;
+      if (navigator?.clipboard?.writeText) {
+        navigator.clipboard.writeText(fakeHash).catch(() => {});
+      }
+      showToast(`Leaf #${leaf.index} [${state.toUpperCase()}] · Hash copied: ${fakeHash.slice(0, 18)}…`, state === 'corrupt' ? 'threat' : 'info', 2500);
+    };
+
+    g.addEventListener('click', onLeafActivate);
+    g.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onLeafActivate();
+      }
+    });
+
     _svg.appendChild(g);
     _leafEls.set(leaf.index, { el: circle, g, x: leaf.x, y: leaf.y });
   }
@@ -229,7 +279,8 @@ export function setLeafState(index, state) {
   if (!entry) return;
   const color = COLORS[state] || COLORS.healthy;
   entry.el.setAttribute('fill', color);
-  entry.g.setAttribute('aria-label', `Leaf ${index}: ${state}`);
+  entry.g.setAttribute('data-state', state);
+  entry.g.setAttribute('aria-label', `Leaf ${index}: ${state}. Press Enter or click to copy hash.`);
 
   // Brief scale flash
   entry.el.style.transition = 'fill 300ms ease, r 150ms ease';
@@ -313,8 +364,21 @@ export function animateRestore(indices, baseDelayMs = 0) {
 export function setRootHash(hash, state = 'normal') {
   const rootHashEl = document.getElementById('merkleRootDisplay');
   if (rootHashEl) {
+    rootHashEl.dataset.fullHash = hash || '';
     rootHashEl.textContent = hash ? `${hash.slice(0, 8)}…${hash.slice(-8)}` : '—';
     rootHashEl.className = `merkle-root-hash ${state === 'normal' ? '' : state}`;
+    rootHashEl.title = 'Click to copy full Merkle root hash';
+    rootHashEl.style.cursor = 'pointer';
+    if (!rootHashEl._hasCopyListener) {
+      rootHashEl._hasCopyListener = true;
+      rootHashEl.addEventListener('click', () => {
+        const h = rootHashEl.dataset.fullHash || rootHashEl.textContent;
+        if (h && h !== '—') {
+          navigator?.clipboard?.writeText?.(h)?.catch?.(() => {});
+          showToast(`Merkle Root Hash copied: ${h}`, 'success', 2500);
+        }
+      });
+    }
   }
   if (_rootEl) {
     _rootEl.setAttribute('fill', state === 'compromised' ? COLORS.rootC : COLORS.root);

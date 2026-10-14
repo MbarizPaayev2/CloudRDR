@@ -1410,3 +1410,176 @@ code, pre, .hash, .merkle-val, .sig-val, time, .badge, .bucket-name, table td, .
     font-size: 0.72rem;
   }
 }
+
+/* ── Interactive Merkle Leaves & Node Inspection ────────────────────────── */
+.merkle-leaf-interactive {
+  outline: none;
+  transition: transform 120ms var(--ease-snappy, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.merkle-leaf-interactive circle {
+  transition: r 150ms var(--ease-snappy, cubic-bezier(0.2, 0, 0, 1)), filter 150ms ease;
+}
+
+.merkle-leaf-interactive:hover circle,
+.merkle-leaf-interactive:focus-visible circle {
+  r: 12px;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.merkle-root-interactive {
+  cursor: pointer;
+  outline: none;
+}
+
+.merkle-root-interactive:hover circle,
+.merkle-root-interactive:focus-visible circle {
+  r: 14px;
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.8));
+}
+
+/* ── Keyboard Shortcut Badges (<kbd>) ───────────────────────────────────── */
+.kbd-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 2px 5px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--text-muted);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.header-btn:hover .kbd-shortcut {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Toast Notification System ──────────────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+  width: calc(100vw - 48px);
+  pointer-events: none;
+}
+
+.toast-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(13, 20, 36, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  font-family: var(--font-sans);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(16px) scale(0.96);
+  transition: opacity 220ms var(--ease-snappy, cubic-bezier(0.2, 0, 0, 1)),
+              transform 220ms var(--ease-snappy, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.toast-item.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.toast-item.dismissing {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.94);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.toast-icon {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+.toast-text {
+  flex: 1;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 0.85rem;
+  line-height: 1;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--dur-fast), background var(--dur-fast);
+}
+
+.toast-close:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toast-info {
+  border-left: 3px solid #38BDF8;
+}
+.toast-info .toast-icon {
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.toast-success {
+  border-left: 3px solid #10B981;
+}
+.toast-success .toast-icon {
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.toast-warning {
+  border-left: 3px solid #F59E0B;
+}
+.toast-warning .toast-icon {
+  color: #F59E0B;
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.toast-threat {
+  border-left: 3px solid #EF4444;
+  background: rgba(28, 13, 20, 0.96);
+  box-shadow: 0 12px 36px rgba(239, 68, 68, 0.3), 0 0 0 1px rgba(239, 68, 68, 0.2);
+}
+.toast-threat .toast-icon {
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.2);
+}
+

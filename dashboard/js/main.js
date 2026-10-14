@@ -21,6 +21,7 @@ import { updateCanaryCage } from './components/canaryCage.js';
 import { renderCaseFile } from './components/caseFile.js';
 import { renderHashChain } from './components/hashChain.js';
 import { setButtonContent } from './icons.js';
+import { showToast } from './components/toast.js';
 
 /* ─── State ─────────────────────────────────────────────────────────────── */
 let _pollTimer    = null;
@@ -204,6 +205,7 @@ function initManualRefresh() {
     btn.disabled = false;
     btn.removeAttribute('aria-busy');
     setButtonContent(btn, 'Refresh', 'refresh', { leading: true });
+    showToast('Telemetry refreshed from server', 'info', 2000);
   });
 }
 
@@ -215,6 +217,56 @@ function initErrorBanner() {
       setState({ error: null });
     });
   }
+}
+
+/* ─── Global Keyboard Shortcuts (Space, R, Alt+D, Escape) ───────────────── */
+function initKeyboardShortcuts() {
+  window.addEventListener('keydown', (e) => {
+    const target = e.target;
+    const isEditing = target && (
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.tagName === 'SELECT' ||
+      target.isContentEditable
+    );
+    if (isEditing) return;
+
+    // Space or Alt+S: Play Attack Simulation
+    if (e.code === 'Space' || (e.altKey && (e.key === 's' || e.key === 'S'))) {
+      const playBtn = document.getElementById('playStoryBtn');
+      if (playBtn && !playBtn.disabled && !_storyPlaying) {
+        e.preventDefault();
+        playBtn.click();
+      }
+    }
+    // R or Alt+R: Manual Telemetry Refresh
+    else if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey) {
+      const refreshBtn = document.getElementById('manualRefreshBtn');
+      if (refreshBtn && !refreshBtn.disabled) {
+        e.preventDefault();
+        refreshBtn.click();
+      }
+    }
+    // Alt+D: Demo Mode Toggle
+    else if (e.altKey && (e.key === 'd' || e.key === 'D')) {
+      const toggle = document.getElementById('demoModeToggle');
+      if (toggle) {
+        e.preventDefault();
+        toggle.checked = !toggle.checked;
+        toggle.dispatchEvent(new Event('change'));
+        showToast(toggle.checked ? 'Demo mode enabled (synthetic attack data)' : 'Live API mode enabled (Fastify backend)', 'info', 2500);
+      }
+    }
+    // Escape: Dismiss error banner
+    else if (e.key === 'Escape') {
+      const banner = document.getElementById('global-error-banner');
+      if (banner && banner.classList.contains('visible')) {
+        e.preventDefault();
+        setState({ error: null });
+        showToast('Notice dismissed', 'info', 1500);
+      }
+    }
+  });
 }
 
 /* ─── Page-load entrance animations ────────────────────────────────────────── */
@@ -270,6 +322,7 @@ async function playStory() {
   const leafCount = 20;
 
   // ── Phase 1: Calm baseline ──────────────────────────────────────────
+  showToast('Phase 1: Baseline established. All 20 storage leaves verified under Merkle root.', 'info', 3000);
   const baseline = await mockApi.getBaseline('protected');
   setState({
     baseline,
@@ -295,6 +348,7 @@ async function playStory() {
   await sleep(2000);
 
   // ── Phase 2: Suspicious activity ───────────────────────────────────
+  showToast('Phase 2: Suspicious file alteration spike (15% rate). Tripwire monitoring armed.', 'warning', 3000);
   const allRuns = await mockApi.getDetectionRuns(50);
   setState({ currentVerdict: 'suspicious', detectionRuns: allRuns.slice(0, 5) });
   updateVerdictStamp('suspicious', false);
@@ -305,6 +359,7 @@ async function playStory() {
   await sleep(2000);
 
   // ── Phase 3: Ransomware — corruption climbs the tree ───────────────
+  showToast('Phase 3: RANSOMWARE DETECTED! Canary corrupted. Automated containment initiated.', 'threat', 3500);
   setState({ currentVerdict: 'ransomware', canaryTriggered: true, detectionRuns: allRuns });
   updateVerdictStamp('ransomware', true);
   updateCanaryCage(true, 'ransomware');
@@ -317,6 +372,7 @@ async function playStory() {
   await sleep(3000);
 
   // ── Phase 4: Incident created & frozen ─────────────────────────────
+  showToast('Phase 4: Containment locked. Cloud account frozen via IAM write-deny policy.', 'warning', 3000);
   const incidents = await mockApi.getIncidents();
   const frozen = incidents.find((i) => i.status === 'frozen') || incidents[0];
   setState({
@@ -330,6 +386,7 @@ async function playStory() {
   await sleep(2000);
 
   // ── Phase 5: Restore — leaves re-seal one by one ───────────────────
+  showToast('Phase 5: AEAD authenticated restore in progress. Re-sealing files from tamper-proof backup…', 'info', 3000);
   const restoreJob = await mockApi.restoreIncident(frozen?.id);
   setState({ currentVerdict: 'normal', canaryTriggered: false });
   updateVerdictStamp('normal', false);
@@ -343,6 +400,7 @@ async function playStory() {
   await sleep(allLeaves.length * 100 + 800);
 
   // Show resolved incident with restore results
+  showToast('Recovery verified: 100% cryptographic hashes re-verified. Incident resolved.', 'success', 4000);
   const resolvedInc = { ...frozen, status: 'resolved', resolved_at: new Date().toISOString() };
   setState({
     incidents: incidents.map((i) => i.id === frozen?.id ? resolvedInc : i),
@@ -373,6 +431,7 @@ async function boot() {
   // Wire up UI controls
   initDemoToggle();
   initManualRefresh();
+  initKeyboardShortcuts();
   initErrorBanner();
   initBaselineLedger();
 
