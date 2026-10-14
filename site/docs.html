@@ -30,23 +30,23 @@
       <div class="isms-metrics-grid">
         <div class="isms-metric-card spotlight-card">
           <div class="isms-metric-icon">🛡️</div>
-          <div class="isms-metric-val">100%</div>
-          <div class="isms-metric-lbl">ISO/IEC 27001:2022 Mapped</div>
+          <div class="isms-metric-val">100% Mapped</div>
+          <div class="isms-metric-lbl">ISO/IEC 27001:2022 (6 Sənəd)</div>
         </div>
         <div class="isms-metric-card spotlight-card">
           <div class="isms-metric-icon">⚡</div>
-          <div class="isms-metric-val">&lt; 15m / 60s</div>
-          <div class="isms-metric-lbl">RTO &amp; RPO SLA Guarantee</div>
+          <div class="isms-metric-val">RTO &lt; 15m | RPO &lt; 60s</div>
+          <div class="isms-metric-lbl">Bərpa və SLA Zəmanəti</div>
         </div>
         <div class="isms-metric-card spotlight-card">
           <div class="isms-metric-icon">🔐</div>
           <div class="isms-metric-val">NIST SP 800-38D</div>
-          <div class="isms-metric-lbl">AEAD AES-256-GCM Decryption</div>
+          <div class="isms-metric-lbl">AEAD AES-256-GCM &amp; RFC 8032</div>
         </div>
         <div class="isms-metric-card spotlight-card">
           <div class="isms-metric-icon">📜</div>
-          <div class="isms-metric-val">RFC 6962 / 8032</div>
-          <div class="isms-metric-lbl">Ed25519 Signed Audit Chain</div>
+          <div class="isms-metric-val">RFC 6962</div>
+          <div class="isms-metric-lbl">Tamper-Evident SHA-256 Zənciri</div>
         </div>
       </div>
 
@@ -315,18 +315,18 @@
       modalTitle.textContent = data.title;
 
       modalBody.innerHTML = `
-        <div style="background:#070B14;border:1px solid rgba(56,189,248,0.25);border-radius:6px;padding:8px 12px;font-family:var(--font-mono);font-size:0.72rem;display:flex;justify-content:space-between;color:#7DD3FC;">
-          <span>${data.classification}</span>
+        <div style="background:#070B14;border:1px solid rgba(56,189,248,0.25);border-radius:6px;padding:8px 12px;font-family:var(--font-mono);font-size:0.72rem;display:flex;justify-content:space-between;color:#7DD3FC;flex-wrap:wrap;gap:6px;">
+          <span>CLASSIFICATION: RESTRICTED // ISO 27001:2022 AUDIT READY</span>
           <span>APPROVED: 2026 // CLOUDRDR-ISMS</span>
         </div>
 
         <div>
-          <h4 style="font-size:0.85rem;color:#F8FAFC;text-transform:uppercase;margin-bottom:6px;font-family:var(--font-mono);">1. Executive Summary &amp; Scope</h4>
+          <h4 style="font-size:0.85rem;color:#F8FAFC;text-transform:uppercase;margin-bottom:6px;font-family:var(--font-mono);">1. Məqsəd və Əhatə Dairəsi (Scope &amp; Executive Summary)</h4>
           <p style="margin:0;font-size:0.85rem;color:#A0AEC0;">${data.summary}</p>
         </div>
 
         <div>
-          <h4 style="font-size:0.85rem;color:#F8FAFC;text-transform:uppercase;margin-bottom:6px;font-family:var(--font-mono);">2. ISO/IEC 27001:2022 Control Mapping</h4>
+          <h4 style="font-size:0.85rem;color:#F8FAFC;text-transform:uppercase;margin-bottom:6px;font-family:var(--font-mono);">2. Müvafiq ISO Bəndləri (ISO/IEC 27001:2022 Mapping)</h4>
           <ul style="margin:0 0 0 18px;padding:0;font-size:0.82rem;color:#7DD3FC;font-family:var(--font-mono);">
             ${data.isoMapping.map(m => `<li style="margin-bottom:4px;">${m}</li>`).join('')}
           </ul>
@@ -337,6 +337,16 @@
           <ul style="margin:0 0 0 18px;padding:0;font-size:0.82rem;color:#CBD5E1;">
             ${data.mitigations.map(m => `<li style="margin-bottom:4px;">${m}</li>`).join('')}
           </ul>
+        </div>
+
+        <div style="background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.2);border-radius:6px;padding:10px 14px;">
+          <h4 style="font-size:0.8rem;color:#38BDF8;text-transform:uppercase;margin:0 0 6px;font-family:var(--font-mono);">4. Nəticə və Tətbiq Formula (Operational SLA &amp; Crypto)</h4>
+          <div style="font-size:0.78rem;color:#E2E8F0;font-family:var(--font-mono);display:flex;flex-wrap:wrap;gap:12px;">
+            <span>⏱️ <b>RTO:</b> &lt; 15 dəq</span>
+            <span>⏱️ <b>RPO:</b> &lt; 60 san</span>
+            <span>🔑 <b>Açar:</b> Ed25519 Asimmetrik İdarəetmə</span>
+            <span>🛡️ <b>Bərpa:</b> 100% AEAD Tag Valid</span>
+          </div>
         </div>
       `;
 
