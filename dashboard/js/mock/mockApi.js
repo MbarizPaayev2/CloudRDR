@@ -68,6 +68,8 @@ export const mockApi = {
    * KPI Overview (Section 4)
    */
   async getKpis() {
+    this._ensureState();
+    const activeCount = this._mockIncidents.filter((i) => i.status !== 'resolved').length;
     return {
       protectedFiles: {
         total: 50,
@@ -77,11 +79,14 @@ export const mockApi = {
         secondary: '100% valid baselines captured',
       },
       activeIncidents: {
-        total: 1,
-        critical: 1,
+        total: activeCount,
+        critical: activeCount,
         high: 0,
         label: 'Active Incidents',
-        secondary: '1 critical threat contained (frozen)',
+        secondary:
+          activeCount > 0
+            ? `${activeCount} critical threat contained (frozen)`
+            : 'All incidents resolved (0 active threats)',
       },
       detectionEvents: {
         total: 24,
@@ -155,6 +160,22 @@ export const mockApi = {
    * Detection Summary Panel (Section 6)
    */
   async getDetectionEngineSummary() {
+    this._ensureState();
+    const hasActive = this._mockIncidents.some((i) => i.status !== 'resolved');
+    if (!hasActive) {
+      return {
+        status: 'active',
+        modificationThreshold: 0.3,
+        windowSeconds: 30,
+        currentObservedRate: 0.02,
+        verdict: 'normal',
+        canaryTriggered: false,
+        canaryPath: 'canary/tripwire_sentinel.docx',
+        recentDetectionAt: minutesAgo(14),
+        pendingCases: 0,
+        mode: 'deterministic-simulation',
+      };
+    }
     return {
       status: 'active',
       modificationThreshold: 0.3,
@@ -303,64 +324,136 @@ export const mockApi = {
     return runs.slice(-limit);
   },
 
+  _ensureState() {
+    if (!this._mockIncidents) {
+      this._mockIncidents = [
+        {
+          id: 'inc-9f81a7b4-32d8-4f1b-a944-598bc817ea20',
+          detection_run_id: 'run-06',
+          account_id: 'finance-prod-01',
+          severity: 'Critical',
+          detection_reason: 'CANARY_MODIFIED',
+          status: 'frozen', // Active incident waiting for restoration
+          status_label: 'Contained (Frozen)',
+          affected_paths: [
+            'corporate/payroll_q3.xlsx',
+            'corporate/executive_memo.docx',
+            'financials/gl_ledger_2026.dat',
+            'financials/q2_audit_report.pdf',
+            'canary/tripwire_sentinel.docx', // Canary file
+            'legal/nda_templates.docx',
+            'hr/employee_roster.csv',
+            'operations/vendor_invoices.pdf',
+            'research/cloud_sec_patent.pdf',
+            'database/backup_dump.sql',
+          ],
+          detected_at: minutesAgo(4),
+          frozen_at: minutesAgo(3.9),
+          resolved_at: null,
+          record_signature:
+            '4a7e91bd8f26c3b88950d8847cb5c83f98c6d123e4b78912304918230948120938471928374918273491827349182734',
+          signing_key_id: 'ed25519-hsm-soc-key-01',
+        },
+        {
+          id: 'inc-3a10b982-8411-4822-b582-771928491823',
+          detection_run_id: 'run-prev-01',
+          account_id: 'dev-sandbox-02',
+          severity: 'High',
+          detection_reason: 'MASS_MODIFICATION',
+          status: 'resolved',
+          status_label: 'Recovery Verified',
+          affected_paths: ['test/sample_a.txt', 'test/sample_b.txt', 'test/sample_c.txt'],
+          detected_at: minutesAgo(180),
+          frozen_at: minutesAgo(179.9),
+          resolved_at: minutesAgo(175),
+          record_signature:
+            '88c3a9182739182739182739182739182739182739182739182739182739182739182739182739182739182739182739',
+          signing_key_id: 'ed25519-hsm-soc-key-01',
+        },
+      ];
+    }
+
+    if (!this._mockEvents) {
+      this._mockEvents = [
+        {
+          id: 'evt-01',
+          type: 'canary_accessed',
+          icon: 'alert',
+          severity: 'Critical',
+          description: 'Canary honeytoken modified: canary/tripwire_sentinel.docx',
+          target: 'canary/tripwire_sentinel.docx',
+          identity: 'service-acc-backup-sync',
+          timestamp: minutesAgo(4),
+        },
+        {
+          id: 'evt-02',
+          type: 'threshold_exceeded',
+          icon: 'activity',
+          severity: 'Critical',
+          description: 'Sliding-window modification threshold exceeded (44% > 30%)',
+          target: 'finance-prod-01',
+          identity: 'monitored-bucket',
+          timestamp: minutesAgo(4.1),
+        },
+        {
+          id: 'evt-03',
+          type: 'identity_isolated',
+          icon: 'freeze',
+          severity: 'High',
+          description: 'IAM deny-all write lock dispatched to account: finance-prod-01',
+          target: 'finance-prod-01',
+          identity: 'devops-freeze-service',
+          timestamp: minutesAgo(3.9),
+        },
+        {
+          id: 'evt-04',
+          type: 'evidence_signed',
+          icon: 'sign',
+          severity: 'Info',
+          description: 'Incident manifest sealed with Ed25519 signature',
+          target: 'inc-9f81a7b4',
+          identity: 'ed25519-hsm-soc-key-01',
+          timestamp: minutesAgo(3.8),
+        },
+        {
+          id: 'evt-05',
+          type: 'backup_verified',
+          icon: 'shieldCheck',
+          severity: 'Success',
+          description: 'AEAD authenticated decryption verified: 10/10 files valid',
+          target: 'restore-job-77a82b',
+          identity: 'recovery-daemon',
+          timestamp: secondsAgo(15),
+        },
+        {
+          id: 'evt-06',
+          type: 'baseline_verified',
+          icon: 'check',
+          severity: 'Success',
+          description: 'Merkle root verified against immutable baseline snapshot #1',
+          target: 'f7bbb36aa01a...',
+          identity: 'cloudrdr-agent-v1',
+          timestamp: minutesAgo(120),
+        },
+      ];
+    }
+  },
+
   /**
    * GET /incidents
    * Incident Queue (Section 7)
    */
   async getIncidents() {
-    return [
-      {
-        id: 'inc-9f81a7b4-32d8-4f1b-a944-598bc817ea20',
-        detection_run_id: 'run-06',
-        account_id: 'finance-prod-01',
-        severity: 'Critical',
-        detection_reason: 'CANARY_MODIFIED',
-        status: 'frozen', // Active incident waiting for restoration
-        status_label: 'Contained (Frozen)',
-        affected_paths: [
-          'corporate/payroll_q3.xlsx',
-          'corporate/executive_memo.docx',
-          'financials/gl_ledger_2026.dat',
-          'financials/q2_audit_report.pdf',
-          'canary/tripwire_sentinel.docx', // Canary file
-          'legal/nda_templates.docx',
-          'hr/employee_roster.csv',
-          'operations/vendor_invoices.pdf',
-          'research/cloud_sec_patent.pdf',
-          'database/backup_dump.sql',
-        ],
-        detected_at: minutesAgo(4),
-        frozen_at: minutesAgo(3.9),
-        resolved_at: null,
-        record_signature:
-          '4a7e91bd8f26c3b88950d8847cb5c83f98c6d123e4b78912304918230948120938471928374918273491827349182734',
-        signing_key_id: 'ed25519-hsm-soc-key-01',
-      },
-      {
-        id: 'inc-3a10b982-8411-4822-b582-771928491823',
-        detection_run_id: 'run-prev-01',
-        account_id: 'dev-sandbox-02',
-        severity: 'High',
-        detection_reason: 'MASS_MODIFICATION',
-        status: 'resolved',
-        status_label: 'Recovery Verified',
-        affected_paths: ['test/sample_a.txt', 'test/sample_b.txt', 'test/sample_c.txt'],
-        detected_at: minutesAgo(180),
-        frozen_at: minutesAgo(179.9),
-        resolved_at: minutesAgo(175),
-        record_signature:
-          '88c3a9182739182739182739182739182739182739182739182739182739182739182739182739182739182739182739',
-        signing_key_id: 'ed25519-hsm-soc-key-01',
-      },
-    ];
+    this._ensureState();
+    return [...this._mockIncidents];
   },
 
   /**
    * GET /incidents/:id
    */
   async getIncidentById(id) {
-    const list = await this.getIncidents();
-    const found = list.find((inc) => inc.id === id);
+    this._ensureState();
+    const found = this._mockIncidents.find((inc) => inc.id === id);
     if (!found) {
       throw { error: { code: 'not_found', message: `Incident ${id} not found` } };
     }
@@ -372,68 +465,8 @@ export const mockApi = {
    * Recent Security Events Feed (Section 8)
    */
   async getSecurityEvents(limit = 10) {
-    return [
-      {
-        id: 'evt-01',
-        type: 'canary_accessed',
-        icon: 'alert',
-        severity: 'Critical',
-        description: 'Canary honeytoken modified: canary/tripwire_sentinel.docx',
-        target: 'canary/tripwire_sentinel.docx',
-        identity: 'service-acc-backup-sync',
-        timestamp: minutesAgo(4),
-      },
-      {
-        id: 'evt-02',
-        type: 'threshold_exceeded',
-        icon: 'activity',
-        severity: 'Critical',
-        description: 'Sliding-window modification threshold exceeded (44% > 30%)',
-        target: 'finance-prod-01',
-        identity: 'monitored-bucket',
-        timestamp: minutesAgo(4.1),
-      },
-      {
-        id: 'evt-03',
-        type: 'identity_isolated',
-        icon: 'freeze',
-        severity: 'High',
-        description: 'IAM deny-all write lock dispatched to account: finance-prod-01',
-        target: 'finance-prod-01',
-        identity: 'devops-freeze-service',
-        timestamp: minutesAgo(3.9),
-      },
-      {
-        id: 'evt-04',
-        type: 'evidence_signed',
-        icon: 'sign',
-        severity: 'Info',
-        description: 'Incident manifest sealed with Ed25519 signature',
-        target: 'inc-9f81a7b4',
-        identity: 'ed25519-hsm-soc-key-01',
-        timestamp: minutesAgo(3.8),
-      },
-      {
-        id: 'evt-05',
-        type: 'backup_verified',
-        icon: 'shieldCheck',
-        severity: 'Success',
-        description: 'AEAD authenticated decryption verified: 10/10 files valid',
-        target: 'restore-job-77a82b',
-        identity: 'recovery-daemon',
-        timestamp: secondsAgo(15),
-      },
-      {
-        id: 'evt-06',
-        type: 'baseline_verified',
-        icon: 'check',
-        severity: 'Success',
-        description: 'Merkle root verified against immutable baseline snapshot #1',
-        target: 'f7bbb36aa01a...',
-        identity: 'cloudrdr-agent-v1',
-        timestamp: minutesAgo(120),
-      },
-    ].slice(0, limit);
+    this._ensureState();
+    return this._mockEvents.slice(0, limit);
   },
 
   /**
@@ -554,11 +587,15 @@ export const mockApi = {
    * POST /incidents/:id/restore
    */
   async restoreIncident(incidentId) {
+    this._ensureState();
     const incident = await this.getIncidentById(incidentId);
 
+    incident.status = 'resolved';
+    incident.status_label = 'Recovery Verified';
+    incident.resolved_at = new Date().toISOString();
+
     // Generate verified recovery report for mock
-    const results = incident.affected_paths.map((path) => {
-      // Deterministic mock hashes
+    const results = (incident.affected_paths || []).map((path) => {
       const expectedSha256 = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
       return {
         path,
@@ -569,8 +606,21 @@ export const mockApi = {
       };
     });
 
+    if (this._mockEvents) {
+      this._mockEvents.unshift({
+        id: `evt-restore-${Date.now()}`,
+        type: 'backup_verified',
+        icon: 'shieldCheck',
+        severity: 'Success',
+        description: `Recovery authorized & verified: ${results.length}/${results.length} files restored byte-for-byte`,
+        target: incident.account_id,
+        identity: 'soc-operator',
+        timestamp: new Date().toISOString(),
+      });
+    }
+
     return {
-      jobId: 'restore-job-77a82b',
+      jobId: `restore-job-${Date.now().toString(16)}`,
       incidentId,
       status: 'verified',
       totalFiles: results.length,
@@ -582,6 +632,90 @@ export const mockApi = {
       finishedAt: new Date().toISOString(),
       results,
     };
+  },
+
+  /**
+   * Demo Simulation Triggers
+   */
+  async triggerCanaryAlert() {
+    this._ensureState();
+    const newInc = {
+      id: `inc-canary-${Date.now().toString(16).slice(-8)}`,
+      detection_run_id: `run-${Date.now().toString(16).slice(-4)}`,
+      account_id: 'finance-prod-01',
+      severity: 'Critical',
+      detection_reason: 'CANARY_MODIFIED',
+      status: 'frozen',
+      status_label: 'Contained (Frozen)',
+      affected_paths: [
+        'canary/tripwire_sentinel.docx',
+        'canary/salary_2026.xlsx',
+        'corporate/executive_memo.docx',
+      ],
+      detected_at: new Date().toISOString(),
+      frozen_at: new Date().toISOString(),
+      resolved_at: null,
+      record_signature:
+        '4a7e91bd8f26c3b88950d8847cb5c83f98c6d123e4b78912304918230948120938471928374918273491827349182734',
+      signing_key_id: 'ed25519-hsm-soc-key-01',
+    };
+    this._mockIncidents.unshift(newInc);
+    if (this._mockEvents) {
+      this._mockEvents.unshift({
+        id: `evt-canary-${Date.now()}`,
+        type: 'canary_alert',
+        icon: 'zap',
+        severity: 'Critical',
+        description:
+          'Canary tripwire breached: canary/tripwire_sentinel.docx. Automated IAM write-freeze dispatched.',
+        target: 'canary/tripwire_sentinel.docx',
+        identity: 'tripwire-sentinel-daemon',
+        timestamp: new Date().toISOString(),
+      });
+    }
+    return newInc;
+  },
+
+  async simulateMassAttack() {
+    this._ensureState();
+    const newInc = {
+      id: `inc-attack-${Date.now().toString(16).slice(-8)}`,
+      detection_run_id: `run-${Date.now().toString(16).slice(-4)}`,
+      account_id: 'finance-prod-01',
+      severity: 'Critical',
+      detection_reason: 'MASS_MODIFICATION',
+      status: 'frozen',
+      status_label: 'Contained (Frozen)',
+      affected_paths: [
+        'corporate/payroll_q3.xlsx',
+        'financials/gl_ledger_2026.dat',
+        'financials/q2_audit_report.pdf',
+        'canary/tripwire_sentinel.docx',
+        'legal/nda_templates.docx',
+        'hr/employee_roster.csv',
+      ],
+      detected_at: new Date().toISOString(),
+      frozen_at: new Date().toISOString(),
+      resolved_at: null,
+      record_signature:
+        '33c1a892019481273948127394812739481273948127394812739481273948127394812739481273948127394812739',
+      signing_key_id: 'ed25519-hsm-soc-key-01',
+    };
+    this._mockIncidents.unshift(newInc);
+    if (this._mockEvents) {
+      this._mockEvents.unshift({
+        id: `evt-attack-${Date.now()}`,
+        type: 'threshold_exceeded',
+        icon: 'activity',
+        severity: 'Critical',
+        description:
+          'Sliding-window modification threshold exceeded (44% > 30%). Automated IAM freeze active.',
+        target: 'finance-prod-01',
+        identity: 'detection-engine',
+        timestamp: new Date().toISOString(),
+      });
+    }
+    return newInc;
   },
 
   /**

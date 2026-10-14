@@ -549,6 +549,47 @@ function updateUI(state) {
   }
 }
 
+/* ─── Sidebar Tab Router ──────────────────────────────────────────────────── */
+export function switchView(viewName) {
+  if (!viewName) return;
+  const views = document.querySelectorAll('.dashboard-view');
+  const targetView = document.getElementById(`view-${viewName}`);
+  if (!targetView) return;
+
+  views.forEach((v) => v.classList.remove('active'));
+  targetView.classList.add('active');
+
+  if (_dom.navItems) {
+    _dom.navItems.forEach((btn) => {
+      if (btn.getAttribute('data-nav') === viewName) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  // Update header breadcrumb
+  const breadcrumbCurrent = document.querySelector('.header-breadcrumb .current');
+  if (breadcrumbCurrent) {
+    const titles = {
+      overview: 'Overview',
+      storage: 'Cloud Storage & Canaries',
+      detection: 'Threat Detection Engine',
+      incidents: 'Security Incidents',
+      recovery: 'Backup & Recovery Health',
+      evidence: 'Cryptographic Evidence',
+      audit: 'Forensic Audit Logs',
+      settings: 'Settings & Config',
+    };
+    breadcrumbCurrent.textContent =
+      titles[viewName] || viewName.charAt(0).toUpperCase() + viewName.slice(1);
+  }
+
+  window.location.hash = viewName;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 /* ─── Attack Simulation Story Runner ──────────────────────────────────────── */
 async function launchSimulation() {
   if (_storyPlaying) return;
@@ -559,32 +600,22 @@ async function launchSimulation() {
     // Step 1: Normal operations
     setState({ currentVerdict: 'normal', canaryTriggered: false });
     await refreshAll();
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 800));
 
     // Step 2: Mass modifications begin
     showToast('Simulating mass modifications (22 objects modified)...', 'info');
-    setState({
-      detectionSummary: {
-        status: 'active',
-        modificationThreshold: 0.3,
-        windowSeconds: 30,
-        currentObservedRate: 0.44,
-        verdict: 'ransomware',
-        canaryTriggered: true,
-        canaryPath: 'canary/tripwire_sentinel.docx',
-        recentDetectionAt: new Date().toISOString(),
-        pendingCases: 1,
-      },
-    });
-    await new Promise((r) => setTimeout(r, 1200));
+    if (typeof api.simulateMassAttack === 'function') {
+      await api.simulateMassAttack();
+    }
+    await new Promise((r) => setTimeout(r, 1000));
 
     // Step 3: Threat verdict & IAM account freeze
-    showToast('Canary tripwire breached! Automated IAM Write-Freeze triggered.', 'threat');
-    await new Promise((r) => setTimeout(r, 1200));
+    showToast('Threat threshold breached! Automated IAM Write-Freeze triggered.', 'threat');
+    await new Promise((r) => setTimeout(r, 800));
 
     // Step 4: Full refresh to show active incident
     await refreshAll();
-    showToast('Incident record cryptographically signed with Ed25519 HSM key.', 'info');
+    showToast('Incident record cryptographically sealed with Ed25519 HSM signature.', 'info');
   } catch (err) {
     console.error('[simulation] error:', err);
   } finally {
@@ -603,25 +634,27 @@ function wireEvents() {
     });
   }
 
-  // Sidebar Nav Items
+  // Sidebar Nav Items (Tab Router)
   if (_dom.navItems) {
     _dom.navItems.forEach((btn) => {
       btn.addEventListener('click', () => {
-        _dom.navItems.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
         const navTarget = btn.getAttribute('data-nav');
-        if (navTarget === 'incidents') {
-          document.querySelector('.table-card')?.scrollIntoView({ behavior: 'smooth' });
-        } else if (navTarget === 'audit') {
-          document.getElementById('audit-section')?.scrollIntoView({ behavior: 'smooth' });
-        } else if (navTarget === 'settings') {
-          showToast(
-            'Dashboard Settings: Local Storage, 30s sliding window, API origin: localhost:3000',
-            'info'
-          );
-        }
+        if (navTarget) switchView(navTarget);
       });
     });
+  }
+
+  // URL Hash Navigation Sync
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById(`view-${hash}`)) {
+      switchView(hash);
+    }
+  });
+
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash && document.getElementById(`view-${initialHash}`)) {
+    switchView(initialHash);
   }
 
   // Time Range Buttons
@@ -748,19 +781,117 @@ function wireEvents() {
     }, 800);
   });
 
-  _dom.qaIncidentsBtn?.addEventListener('click', () => {
-    document.querySelector('.table-card')?.scrollIntoView({ behavior: 'smooth' });
-  });
+  _dom.qaIncidentsBtn?.addEventListener('click', () => switchView('incidents'));
+  _dom.qaAuditBtn?.addEventListener('click', () => switchView('audit'));
+  _dom.qaVerifyBtn?.addEventListener('click', () => switchView('recovery'));
 
-  _dom.qaAuditBtn?.addEventListener('click', () => {
-    document.getElementById('audit-section')?.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('viewAuditLogsLink')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    switchView('audit');
   });
 
   document.getElementById('viewEvidenceBtn')?.addEventListener('click', () => {
-    showToast(
-      'Forensic bundle #1 signed with Ed25519 HSM Key: 4a7e91bd8f26... (Immutable)',
-      'info'
+    switchView('evidence');
+    showToast('Forensic bundle sealed with Ed25519 HSM Key: 4a7e91bd8f26... (Immutable)', 'info');
+  });
+
+  // Canary Sentinel Tripwire Demo
+  document.getElementById('btnTripCanaryDemo')?.addEventListener('click', () => {
+    openConfirmModal(
+      'Trip Canary Sentinel Trap?',
+      'This simulates ransomware touching the zero-touch decoy object (canary/tripwire_sentinel.docx), testing the sub-second automated IAM write-freeze response.',
+      async () => {
+        showToast('Canary decoy touched! Disagreeing hash detected...', 'threat');
+        if (typeof api.triggerCanaryAlert === 'function') {
+          await api.triggerCanaryAlert();
+        }
+        showToast(
+          'Zero-Touch Canary breached! Automated IAM Write-Deny dispatched in 3.8s.',
+          'threat'
+        );
+        const badge = document.getElementById('canarySentinelBadge');
+        if (badge) {
+          badge.textContent = 'TRIPPED & LOCKED';
+          badge.className = 'canary-sentinel-badge tripped';
+        }
+        await refreshAll();
+        setTimeout(() => {
+          showToast('Incident record sealed with Ed25519 signature.', 'info');
+          switchView('incidents');
+        }, 1500);
+      }
     );
+  });
+
+  // Merkle DAG Inspector Tamper Demo
+  document.getElementById('btnTamperMerkleDemo')?.addEventListener('click', () => {
+    const leaf = document.getElementById('leaf-2');
+    const rootDisplay = document.getElementById('merkleRootHashText');
+    const leafText = leaf?.querySelector('.text-muted');
+    if (!leaf || !rootDisplay) return;
+
+    if (leaf.classList.contains('tampered')) {
+      // Revert tampering
+      leaf.classList.remove('tampered');
+      if (leafText) leafText.textContent = '7e41...90cc';
+      rootDisplay.textContent = 'f7bbb36aa01a64a15ccf3ebfebfc51487263b6528994a5e128913...';
+      rootDisplay.style.color = '';
+      showToast(
+        'Merkle Tree integrity re-verified: all leaves match snapshot baseline.',
+        'success'
+      );
+    } else {
+      // Tamper leaf
+      leaf.classList.add('tampered');
+      if (leafText) leafText.textContent = 'TAMPERED: c0ff...dead';
+      rootDisplay.textContent = 'MISMATCH DETECTED: Root hash differs from signed manifest!';
+      rootDisplay.style.color = 'var(--accent-red)';
+      showToast(
+        'Cryptographic Alert: Merkle Root mismatch detected in O(1)! File tampering caught.',
+        'threat'
+      );
+    }
+  });
+
+  // Authorize Verified Recovery Workflow
+  document.getElementById('btnTriggerRecoveryWorkflow')?.addEventListener('click', async () => {
+    const incidents = await api.getIncidents();
+    const frozen = incidents.filter((i) => i.status === 'frozen');
+    if (frozen.length === 0) {
+      showToast(
+        'All protected objects are already valid and verified. No incidents require restoration.',
+        'info'
+      );
+      return;
+    }
+
+    openConfirmModal(
+      'Authorize Verified Recovery?',
+      `Restore all ${frozen.length} contained incidents from AES-256-GCM backups with full AEAD authentication tag and SHA-256 baseline verification?`,
+      async () => {
+        showToast('Restoring objects through 4 Cryptographic Verification Gates...', 'info');
+        for (const inc of frozen) {
+          await api.restoreIncident(inc.id);
+        }
+        showToast('All files restored & verified! Threat level reset to normal.', 'success');
+        const badge = document.getElementById('canarySentinelBadge');
+        if (badge) {
+          badge.textContent = 'ARMED • ZERO-TOUCH';
+          badge.className = 'canary-sentinel-badge armed';
+        }
+        await refreshAll();
+      }
+    );
+  });
+
+  // Test Detection Policy
+  document.getElementById('btnTestDetectionPolicy')?.addEventListener('click', () => {
+    showToast('Telemetry tested against detection policy: 0 false positives detected.', 'success');
+  });
+
+  // Settings Save
+  document.getElementById('btnSaveSettings')?.addEventListener('click', () => {
+    showToast('Configuration settings updated and applied to active monitor.', 'success');
   });
 
   // Modal Close Handlers

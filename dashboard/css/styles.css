@@ -496,6 +496,152 @@ body {
   margin: 0 auto;
 }
 
+/* ── SPA Tab Router Views ─────────────────────────────────────────────────── */
+.dashboard-view {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+.dashboard-view.active {
+  display: flex;
+  animation: viewFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Armed Canary Sentinel Component ─────────────────────────────────────── */
+.canary-sentinel-card {
+  background: linear-gradient(135deg, rgba(217, 54, 54, 0.08) 0%, rgba(11, 15, 25, 0.8) 100%);
+  border: 1px solid rgba(217, 54, 54, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.canary-sentinel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.canary-sentinel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.canary-sentinel-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(39, 201, 63, 0.15);
+  color: #27c93f;
+  border: 1px solid rgba(39, 201, 63, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.canary-sentinel-badge.tripped {
+  background: rgba(217, 54, 54, 0.2);
+  color: #ff5f56;
+  border-color: rgba(217, 54, 54, 0.5);
+}
+
+/* ── Merkle Tree DAG Inspector ───────────────────────────────────────────── */
+.merkle-dag-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.merkle-dag-nodes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+@media (max-width: 768px) {
+  .merkle-dag-nodes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.merkle-leaf-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.merkle-leaf-card.corrupted {
+  border-color: #ff5f56;
+  background: rgba(255, 95, 86, 0.08);
+}
+
+/* ── Settings Panel Layout ───────────────────────────────────────────────── */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 900px) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settings-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-field .help-text {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
 /* ── Page Header & Action Group (Section 2.C) ────────────────────────────── */
 .page-title-strip {
   display: flex;

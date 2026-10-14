@@ -341,588 +341,1193 @@
 
         <!-- ── Main Content Area (Section 2.C) ──────────────────────────────── -->
         <main class="soc-main" id="main-overview" role="main" tabindex="-1">
-          <!-- Page Title & Primary Actions Strip -->
-          <section class="page-title-strip" aria-labelledby="pageHeading">
-            <div class="page-title-block">
-              <h1 id="pageHeading">Security Overview</h1>
-              <p>
-                Monitor cloud integrity, detect suspicious activity, and verify recovery operations.
-              </p>
-            </div>
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 1: OVERVIEW                                                    -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view active" id="view-overview" data-view="overview">
+            <!-- Page Title & Primary Actions Strip -->
+            <section class="page-title-strip" aria-labelledby="pageHeading">
+              <div class="page-title-block">
+                <h1 id="pageHeading">Security Overview</h1>
+                <p>
+                  Monitor cloud integrity, detect suspicious activity, and verify recovery
+                  operations.
+                </p>
+              </div>
 
-            <div class="page-action-group">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                id="runIntegrityScanBtn"
-                aria-label="Run Integrity Scan"
-              >
-                <span id="iconScanBtn"></span>
-                <span>Run Integrity Scan</span>
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                id="simulateAttackBtn"
-                aria-label="Simulate Attack Demo"
-              >
-                <span id="iconSimulateBtn"></span>
-                <span>Simulate Attack</span>
-                <span class="tag-demo">DEMO</span>
-              </button>
-            </div>
-          </section>
-
-          <!-- ── System Status Strip (Section 3) ────────────────────────────── -->
-          <section class="status-strip-grid" aria-label="System Components Health">
-            <!-- Item 1: Detection Engine -->
-            <div class="status-strip-card">
-              <div class="status-strip-icon" id="statusIconDetection"></div>
-              <div class="status-strip-info">
-                <span class="status-strip-label">Detection Engine</span>
-                <div class="status-strip-state">
-                  <span class="status-dot healthy" id="statusDotDetection"></span>
-                  <span id="statusLabelDetection">Active</span>
-                </div>
-                <span
-                  class="text-muted"
-                  style="font-size: 0.7rem; font-family: var(--font-mono)"
-                  id="statusDetailDetection"
-                  >Sliding-window: 30s</span
+              <div class="page-action-group">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  id="runIntegrityScanBtn"
+                  aria-label="Run Integrity Scan"
                 >
-              </div>
-            </div>
-
-            <!-- Item 2: Cloud Storage -->
-            <div class="status-strip-card">
-              <div class="status-strip-icon" id="statusIconStorage"></div>
-              <div class="status-strip-info">
-                <span class="status-strip-label">Cloud Storage</span>
-                <div class="status-strip-state">
-                  <span class="status-dot healthy" id="statusDotStorage"></span>
-                  <span id="statusLabelStorage">Connected</span>
-                </div>
-                <span
-                  class="text-muted"
-                  style="font-size: 0.7rem; font-family: var(--font-mono)"
-                  id="statusDetailStorage"
-                  >local-storage / protected</span
+                  <span id="iconScanBtn"></span>
+                  <span>Run Integrity Scan</span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="simulateAttackBtn"
+                  aria-label="Simulate Attack Demo"
                 >
-              </div>
-            </div>
-
-            <!-- Item 3: Baseline Integrity -->
-            <div class="status-strip-card">
-              <div class="status-strip-icon" id="statusIconBaseline"></div>
-              <div class="status-strip-info">
-                <span class="status-strip-label">Baseline Integrity</span>
-                <div class="status-strip-state">
-                  <span class="status-dot healthy" id="statusDotBaseline"></span>
-                  <span id="statusLabelBaseline">Verified</span>
-                </div>
-                <span
-                  class="text-muted"
-                  style="font-size: 0.7rem; font-family: var(--font-mono)"
-                  id="statusDetailBaseline"
-                  >Merkle root confirmed</span
-                >
-              </div>
-            </div>
-
-            <!-- Item 4: Backup Service -->
-            <div class="status-strip-card">
-              <div class="status-strip-icon" id="statusIconBackup"></div>
-              <div class="status-strip-info">
-                <span class="status-strip-label">Backup Service</span>
-                <div class="status-strip-state">
-                  <span class="status-dot healthy" id="statusDotBackup"></span>
-                  <span id="statusLabelBackup">Healthy</span>
-                </div>
-                <span
-                  class="text-muted"
-                  style="font-size: 0.7rem; font-family: var(--font-mono)"
-                  id="statusDetailBackup"
-                  >AES-256-GCM AEAD Tag verified</span
-                >
-              </div>
-            </div>
-          </section>
-
-          <!-- ── KPI Overview Cards (Section 4) ──────────────────────────────── -->
-          <section class="kpi-grid" aria-label="Key Performance Indicators">
-            <!-- Card 1: Protected Files -->
-            <div class="kpi-card" id="kpiCardFiles">
-              <div class="kpi-card-top">
-                <span class="kpi-card-label">Protected Files</span>
-                <div class="kpi-card-icon" id="kpiIconFiles"></div>
-              </div>
-              <div class="kpi-card-metric" id="kpiValFiles">50</div>
-              <div class="kpi-card-secondary" id="kpiSubFiles">100% covered by valid baseline</div>
-            </div>
-
-            <!-- Card 2: Active Incidents -->
-            <div class="kpi-card has-threat" id="kpiCardIncidents">
-              <div class="kpi-card-top">
-                <span class="kpi-card-label">Active Incidents</span>
-                <div class="kpi-card-icon" id="kpiIconIncidents"></div>
-              </div>
-              <div class="kpi-card-metric" id="kpiValIncidents">1</div>
-              <div class="kpi-card-secondary" id="kpiSubIncidents">
-                1 Critical (CANARY_MODIFIED)
-              </div>
-            </div>
-
-            <!-- Card 3: Detection Events -->
-            <div class="kpi-card" id="kpiCardEvents">
-              <div class="kpi-card-top">
-                <span class="kpi-card-label">Detection Events</span>
-                <div class="kpi-card-icon" id="kpiIconEvents"></div>
-              </div>
-              <div class="kpi-card-metric" id="kpiValEvents">24</div>
-              <div class="kpi-card-secondary" id="kpiSubEvents">+18 vs previous 1H window</div>
-            </div>
-
-            <!-- Card 4: Backup Integrity -->
-            <div class="kpi-card" id="kpiCardBackup">
-              <div class="kpi-card-top">
-                <span class="kpi-card-label">Backup Integrity</span>
-                <div class="kpi-card-icon" id="kpiIconBackup"></div>
-              </div>
-              <div class="kpi-card-metric" id="kpiValBackup">100%</div>
-              <div class="kpi-card-secondary" id="kpiSubBackup">10/10 verified (0 failed)</div>
-            </div>
-          </section>
-
-          <!-- ── Section 5 & 6: Main Threat Activity Chart & Detection Summary ─ -->
-          <section class="threat-section-grid" aria-label="Threat Activity and Detection Engine">
-            <!-- Threat Activity Chart -->
-            <div class="panel-card" style="grid-column: span 1">
-              <div class="panel-card-header">
-                <div class="panel-card-titles">
-                  <h2>Threat Activity</h2>
-                  <p>File modifications and security detections over time</p>
-                </div>
-
-                <!-- Time-range controls -->
-                <div class="time-range-group" role="group" aria-label="Time range selector">
-                  <button type="button" class="time-btn" data-range="1H">1H</button>
-                  <button type="button" class="time-btn" data-range="6H">6H</button>
-                  <button type="button" class="time-btn active" data-range="24H">24H</button>
-                  <button type="button" class="time-btn" data-range="7D">7D</button>
-                </div>
-              </div>
-
-              <!-- Chart Canvas Container -->
-              <div class="chart-wrapper">
-                <canvas
-                  id="threatActivityCanvas"
-                  aria-label="Threat Activity telemetry graph"
-                ></canvas>
-              </div>
-            </div>
-
-            <!-- Detection Engine Summary Panel -->
-            <div class="panel-card">
-              <div class="panel-card-header">
-                <div class="panel-card-titles">
-                  <h2>Detection Engine</h2>
-                  <p>Velocity threshold &amp; canary sentinel config</p>
-                </div>
-                <span class="signal-chip threat" id="detectionStatusBadge"
-                  >POTENTIAL RANSOMWARE</span
-                >
-              </div>
-
-              <div class="detection-summary-rows">
-                <!-- Threshold Gauge -->
-                <div class="threshold-gauge-box">
-                  <div class="gauge-header">
-                    <span>Modification Velocity</span>
-                    <span class="mono font-semibold" id="gaugeVelocityText"
-                      >44% observed (Threshold: 30%)</span
-                    >
-                  </div>
-                  <div class="gauge-track">
-                    <div class="gauge-fill threat" id="gaugeVelocityFill" style="width: 44%"></div>
-                    <div
-                      class="gauge-marker"
-                      style="left: 30%"
-                      title="Configured Threshold: 30%"
-                    ></div>
-                  </div>
-                </div>
-
-                <div class="summary-row">
-                  <span class="text-secondary">Modification Threshold</span>
-                  <span class="mono font-semibold" id="cfgThreshold">30% per window</span>
-                </div>
-
-                <div class="summary-row">
-                  <span class="text-secondary">Sliding-Window Duration</span>
-                  <span class="mono font-semibold" id="cfgWindow">30 seconds</span>
-                </div>
-
-                <div class="summary-row">
-                  <span class="text-secondary">Canary Sentinel Alert</span>
-                  <span class="mono text-red font-semibold" id="cfgCanaryAlert"
-                    >Tripped (tripwire_sentinel.docx)</span
-                  >
-                </div>
-
-                <div class="summary-row">
-                  <span class="text-secondary">Most Recent Detection</span>
-                  <span class="mono text-primary font-semibold" id="cfgLastDetect"
-                    >4 minutes ago</span
-                  >
-                </div>
-
-                <div class="summary-row">
-                  <span class="text-secondary">Awaiting Investigation</span>
-                  <span class="mono text-amber font-semibold" id="cfgPendingCases"
-                    >1 active case</span
-                  >
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ── Section 7: Incident Queue ───────────────────────────────────── -->
-          <section class="table-card" aria-label="Recent Security Incidents">
-            <div class="table-controls-bar">
-              <div class="panel-card-titles">
-                <h2>Recent Incidents</h2>
-                <p>Cryptographically logged containment and recovery incidents</p>
-              </div>
-
-              <div class="filter-group">
-                <!-- Search Table -->
-                <input
-                  type="text"
-                  id="incidentTableSearch"
-                  class="header-search-input"
-                  style="width: 180px; padding: 4px 10px"
-                  placeholder="Filter by ID or Reason..."
-                  aria-label="Filter incidents table"
-                />
-
-                <!-- Severity Filter -->
-                <select
-                  id="severitySelectFilter"
-                  class="select-filter"
-                  aria-label="Filter by Severity"
-                >
-                  <option value="all">All Severities</option>
-                  <option value="Critical">Critical</option>
-                  <option value="High">High</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low</option>
-                </select>
-
-                <!-- Status Filter -->
-                <select
-                  id="statusSelectFilter"
-                  class="select-filter"
-                  aria-label="Filter by Response Status"
-                >
-                  <option value="all">All Statuses</option>
-                  <option value="frozen">Contained (Frozen)</option>
-                  <option value="resolved">Recovery Verified</option>
-                  <option value="open">Investigating</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="table-responsive">
-              <table class="soc-table" id="incidentsTable">
-                <thead>
-                  <tr>
-                    <th>Incident ID</th>
-                    <th>Severity</th>
-                    <th>Detection Reason</th>
-                    <th>Affected Objects</th>
-                    <th>Detected At</th>
-                    <th>Response Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="incidentsTableBody">
-                  <!-- Dynamically populated by main.js -->
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- ── Section 8 & 9: Recent Security Events & Recovery Health ─────── -->
-          <section class="two-col-grid">
-            <!-- Recent Security Events Feed (Section 8) -->
-            <div class="panel-card">
-              <div class="panel-card-header">
-                <div class="panel-card-titles">
-                  <h2>Recent Security Events</h2>
-                  <p>Real-time forensic telemetry stream</p>
-                </div>
-                <a
-                  href="#audit-section"
-                  class="text-teal text-xs font-semibold"
-                  id="viewAuditLogsLink"
-                  style="text-decoration: none"
-                  >View Audit Logs &rarr;</a
-                >
-              </div>
-
-              <div class="event-feed" id="securityEventsFeed">
-                <!-- Dynamically populated by main.js -->
-              </div>
-            </div>
-
-            <!-- Backup & Recovery Health (Section 9) -->
-            <div class="panel-card">
-              <div class="panel-card-header">
-                <div class="panel-card-titles">
-                  <h2>Backup &amp; Recovery Health</h2>
-                  <p>Cryptographic verification gates for restored objects</p>
-                </div>
-                <span class="signal-chip normal" id="recoveryOverallBadge">100% VALID</span>
-              </div>
-
-              <div class="recovery-gates-list">
-                <!-- Gate 1: AES-256-GCM AEAD -->
-                <div class="recovery-gate-item">
-                  <div class="gate-title-block">
-                    <span class="gate-name">AES-256-GCM Authenticated Decryption</span>
-                    <span class="gate-detail"
-                      >AEAD tag integrity check before returning plaintext</span
-                    >
-                  </div>
-                  <span class="status-badge-pill VALID">VALID</span>
-                </div>
-
-                <!-- Gate 2: SHA-256 Baseline Match -->
-                <div class="recovery-gate-item">
-                  <div class="gate-title-block">
-                    <span class="gate-name">SHA-256 Pre-Attack Baseline Match</span>
-                    <span class="gate-detail"
-                      >Byte-for-byte digest verification against snapshot #1</span
-                    >
-                  </div>
-                  <span class="status-badge-pill VALID">VALID</span>
-                </div>
-
-                <!-- Gate 3: Backup Manifest Signature -->
-                <div class="recovery-gate-item">
-                  <div class="gate-title-block">
-                    <span class="gate-name">Backup Manifest Signature</span>
-                    <span class="gate-detail"
-                      >Ed25519 hardware key signature authenticity verified</span
-                    >
-                  </div>
-                  <span class="status-badge-pill VALID">VALID</span>
-                </div>
-
-                <!-- Gate 4: Merkle Root Consistency -->
-                <div class="recovery-gate-item">
-                  <div class="gate-title-block">
-                    <span class="gate-name">Merkle Root DAG Consistency</span>
-                    <span class="gate-detail">Pairwise hashes recompute to signed root digest</span>
-                  </div>
-                  <span class="status-badge-pill VALID">VALID</span>
-                </div>
-              </div>
-
-              <div
-                style="
-                  margin-top: 12px;
-                  background: var(--bg-subtle);
-                  border: 1px solid var(--border);
-                  border-radius: var(--radius-sm);
-                  padding: 10px 12px;
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  font-size: var(--text-xs);
-                "
-              >
-                <span class="text-secondary">Latest Verified Restore:</span>
-                <span class="mono font-semibold text-primary"
-                  >10/10 files restored &bull; 0 mismatches</span
-                >
-              </div>
-            </div>
-          </section>
-
-          <!-- ── Section 10 & 11: Cryptographic Integrity & Protected Storage ── -->
-          <section class="two-col-grid" id="audit-section">
-            <!-- Cryptographic Integrity Summary (Section 10) -->
-            <div class="panel-card">
-              <div class="panel-card-header">
-                <div class="panel-card-titles">
-                  <h2>Cryptographic Integrity</h2>
-                  <p>Multi-layered evidence sealing &amp; audit chain verification</p>
-                </div>
-                <button type="button" class="btn btn-secondary btn-sm" id="viewEvidenceBtn">
-                  View Evidence
+                  <span id="iconSimulateBtn"></span>
+                  <span>Simulate Attack</span>
+                  <span class="tag-demo">DEMO</span>
                 </button>
               </div>
+            </section>
 
-              <table class="crypto-checks-table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <div style="font-weight: 600; color: var(--text-primary)">
-                        Baseline SHA-256 Digests
-                      </div>
-                      <div class="text-muted" style="font-size: 0.75rem">
-                        50/50 monitored files match snapshot hashes
-                      </div>
-                    </td>
-                    <td style="text-align: right">
-                      <span class="status-badge-pill Verified">Verified</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div style="font-weight: 600; color: var(--text-primary)">
-                        Trusted Merkle Root
-                      </div>
-                      <div class="text-muted mono" style="font-size: 0.72rem">
-                        f7bbb36aa01a64a15ccf3ebfebfc5148...
-                      </div>
-                    </td>
-                    <td style="text-align: right">
-                      <span class="status-badge-pill Verified">Verified</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div style="font-weight: 600; color: var(--text-primary)">
-                        Incident Manifest Signature
-                      </div>
-                      <div class="text-muted" style="font-size: 0.75rem">
-                        Ed25519 HSM signature verified (key-01)
-                      </div>
-                    </td>
-                    <td style="text-align: right">
-                      <span class="status-badge-pill Verified">Verified</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div style="font-weight: 600; color: var(--text-primary)">
-                        Audit Hash-Chain (0 &rarr; 5)
-                      </div>
-                      <div class="text-muted" style="font-size: 0.75rem">
-                        Genesis to Block #5 tamper-evident chain intact
-                      </div>
-                    </td>
-                    <td style="text-align: right">
-                      <span class="status-badge-pill Verified">Verified</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div style="font-weight: 600; color: var(--text-primary)">
-                        Evidence Sealing Timestamp
-                      </div>
-                      <div class="text-muted" style="font-size: 0.75rem">
-                        RFC-3161 UTC token embedded in manifest
-                      </div>
-                    </td>
-                    <td style="text-align: right">
-                      <span class="status-badge-pill Verified">Verified</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <!-- ── System Status Strip (Section 3) ────────────────────────────── -->
+            <section class="status-strip-grid" aria-label="System Components Health">
+              <!-- Item 1: Detection Engine -->
+              <div class="status-strip-card">
+                <div class="status-strip-icon" id="statusIconDetection"></div>
+                <div class="status-strip-info">
+                  <span class="status-strip-label">Detection Engine</span>
+                  <div class="status-strip-state">
+                    <span class="status-dot healthy" id="statusDotDetection"></span>
+                    <span id="statusLabelDetection">Active</span>
+                  </div>
+                  <span
+                    class="text-muted"
+                    style="font-size: 0.7rem; font-family: var(--font-mono)"
+                    id="statusDetailDetection"
+                    >Sliding-window: 30s</span
+                  >
+                </div>
+              </div>
 
-            <!-- Protected Storage Overview (Section 11) -->
-            <div class="panel-card">
-              <div class="panel-card-header">
+              <!-- Item 2: Cloud Storage -->
+              <div class="status-strip-card">
+                <div class="status-strip-icon" id="statusIconStorage"></div>
+                <div class="status-strip-info">
+                  <span class="status-strip-label">Cloud Storage</span>
+                  <div class="status-strip-state">
+                    <span class="status-dot healthy" id="statusDotStorage"></span>
+                    <span id="statusLabelStorage">Connected</span>
+                  </div>
+                  <span
+                    class="text-muted"
+                    style="font-size: 0.7rem; font-family: var(--font-mono)"
+                    id="statusDetailStorage"
+                    >local-storage / protected</span
+                  >
+                </div>
+              </div>
+
+              <!-- Item 3: Baseline Integrity -->
+              <div class="status-strip-card">
+                <div class="status-strip-icon" id="statusIconBaseline"></div>
+                <div class="status-strip-info">
+                  <span class="status-strip-label">Baseline Integrity</span>
+                  <div class="status-strip-state">
+                    <span class="status-dot healthy" id="statusDotBaseline"></span>
+                    <span id="statusLabelBaseline">Verified</span>
+                  </div>
+                  <span
+                    class="text-muted"
+                    style="font-size: 0.7rem; font-family: var(--font-mono)"
+                    id="statusDetailBaseline"
+                    >Merkle root confirmed</span
+                  >
+                </div>
+              </div>
+
+              <!-- Item 4: Backup Service -->
+              <div class="status-strip-card">
+                <div class="status-strip-icon" id="statusIconBackup"></div>
+                <div class="status-strip-info">
+                  <span class="status-strip-label">Backup Service</span>
+                  <div class="status-strip-state">
+                    <span class="status-dot healthy" id="statusDotBackup"></span>
+                    <span id="statusLabelBackup">Healthy</span>
+                  </div>
+                  <span
+                    class="text-muted"
+                    style="font-size: 0.7rem; font-family: var(--font-mono)"
+                    id="statusDetailBackup"
+                    >AES-256-GCM AEAD Tag verified</span
+                  >
+                </div>
+              </div>
+            </section>
+
+            <!-- ── KPI Overview Cards (Section 4) ──────────────────────────────── -->
+            <section class="kpi-grid" aria-label="Key Performance Indicators">
+              <!-- Card 1: Protected Files -->
+              <div class="kpi-card" id="kpiCardFiles">
+                <div class="kpi-card-top">
+                  <span class="kpi-card-label">Protected Files</span>
+                  <div class="kpi-card-icon" id="kpiIconFiles"></div>
+                </div>
+                <div class="kpi-card-metric" id="kpiValFiles">50</div>
+                <div class="kpi-card-secondary" id="kpiSubFiles">
+                  100% covered by valid baseline
+                </div>
+              </div>
+
+              <!-- Card 2: Active Incidents -->
+              <div class="kpi-card has-threat" id="kpiCardIncidents">
+                <div class="kpi-card-top">
+                  <span class="kpi-card-label">Active Incidents</span>
+                  <div class="kpi-card-icon" id="kpiIconIncidents"></div>
+                </div>
+                <div class="kpi-card-metric" id="kpiValIncidents">1</div>
+                <div class="kpi-card-secondary" id="kpiSubIncidents">
+                  1 Critical (CANARY_MODIFIED)
+                </div>
+              </div>
+
+              <!-- Card 3: Detection Events -->
+              <div class="kpi-card" id="kpiCardEvents">
+                <div class="kpi-card-top">
+                  <span class="kpi-card-label">Detection Events</span>
+                  <div class="kpi-card-icon" id="kpiIconEvents"></div>
+                </div>
+                <div class="kpi-card-metric" id="kpiValEvents">24</div>
+                <div class="kpi-card-secondary" id="kpiSubEvents">+18 vs previous 1H window</div>
+              </div>
+
+              <!-- Card 4: Backup Integrity -->
+              <div class="kpi-card" id="kpiCardBackup">
+                <div class="kpi-card-top">
+                  <span class="kpi-card-label">Backup Integrity</span>
+                  <div class="kpi-card-icon" id="kpiIconBackup"></div>
+                </div>
+                <div class="kpi-card-metric" id="kpiValBackup">100%</div>
+                <div class="kpi-card-secondary" id="kpiSubBackup">10/10 verified (0 failed)</div>
+              </div>
+            </section>
+
+            <!-- ── Section 5: Main Threat Activity Chart & Live Overview ───────── -->
+            <section
+              class="threat-section-grid"
+              aria-label="Threat Activity and Incident Spotlight"
+            >
+              <!-- Threat Activity Chart -->
+              <div class="panel-card" style="grid-column: span 1">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Threat Activity</h2>
+                    <p>File modifications and security detections over time</p>
+                  </div>
+
+                  <!-- Time-range controls -->
+                  <div class="time-range-group" role="group" aria-label="Time range selector">
+                    <button type="button" class="time-btn" data-range="1H">1H</button>
+                    <button type="button" class="time-btn" data-range="6H">6H</button>
+                    <button type="button" class="time-btn active" data-range="24H">24H</button>
+                    <button type="button" class="time-btn" data-range="7D">7D</button>
+                  </div>
+                </div>
+
+                <!-- Chart Canvas Container -->
+                <div class="chart-wrapper">
+                  <canvas
+                    id="threatActivityCanvas"
+                    aria-label="Threat Activity telemetry graph"
+                  ></canvas>
+                </div>
+              </div>
+
+              <!-- Rapid Response & System Readiness Panel -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Response Readiness</h2>
+                    <p>Containment mechanisms &amp; SLA compliance</p>
+                  </div>
+                  <span class="signal-chip normal">READY</span>
+                </div>
+
+                <div class="detection-summary-rows">
+                  <div class="summary-row">
+                    <span class="text-secondary">Containment Method</span>
+                    <span class="mono font-semibold text-primary">Automated IAM Write-Deny</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Automated Freeze SLA</span>
+                    <span class="mono font-semibold text-teal"
+                      >&lt; 10 Seconds (Observed: 4.2s)</span
+                    >
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Zero-Trust Verification</span>
+                    <span class="mono font-semibold text-green">AEAD + SHA-256 + Merkle</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Evidence Integrity</span>
+                    <span class="mono font-semibold text-primary">Ed25519 HSM Key-Signed</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Canary Sentinel Decoys</span>
+                    <span class="mono font-semibold text-teal">2 Armed Tripwires</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Immutability (WORM)</span>
+                    <span class="mono font-semibold text-green">Strict Retention Active</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ── Section 12: Quick Actions ───────────────────────────────────── -->
+            <section class="quick-actions-bar" aria-label="Quick Actions">
+              <span class="quick-actions-label">Quick Actions</span>
+              <div class="quick-actions-btns">
+                <button type="button" class="btn btn-secondary btn-sm" id="qaScanBtn">
+                  <span id="qaIconScan"></span>
+                  <span>Run Integrity Scan</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="qaVerifyBtn">
+                  <span id="qaIconVerify"></span>
+                  <span>Verify Backup</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="qaIncidentsBtn">
+                  <span id="qaIconIncidents"></span>
+                  <span>Review Open Incidents</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="qaAuditBtn">
+                  <span id="qaIconAudit"></span>
+                  <span>Open Audit Logs</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="qaSimulateBtn">
+                  <span id="qaIconSimulate"></span>
+                  <span>Launch Demo Simulation</span>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 2: CLOUD STORAGE & CANARY SENTINELS                            -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view" id="view-storage" data-view="storage">
+            <section class="page-title-strip">
+              <div class="page-title-block">
+                <h1>Protected Cloud Storage &amp; Canary Sentinels</h1>
+                <p>
+                  Cryptographic baseline integrity, logical bucket prefixes, WORM immutability, and
+                  zero-touch sentinel tripwires.
+                </p>
+              </div>
+            </section>
+
+            <section class="two-col-grid">
+              <!-- Protected Storage Overview -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Storage Buckets &amp; Isolation</h2>
+                    <p>Logical prefix isolation &amp; immutability policies</p>
+                  </div>
+                  <span class="signal-chip normal">CONNECTED</span>
+                </div>
+
+                <div
+                  style="
+                    font-size: var(--text-xs);
+                    color: var(--text-secondary);
+                    margin-bottom: 8px;
+                  "
+                >
+                  Provider:
+                  <strong class="text-primary"
+                    >Local Filesystem Storage (S3 / Supabase Compliant)</strong
+                  ><br />
+                  WORM Policy:
+                  <span class="text-teal font-semibold">Active Immutability</span> &bull; Object
+                  Versioning: <span class="text-primary font-semibold">Enabled</span>
+                </div>
+
+                <div class="prefix-list">
+                  <div class="prefix-item">
+                    <div>
+                      <span class="mono font-semibold text-primary">files/</span>
+                      <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
+                        >Corporate Documents &amp; Databases</span
+                      >
+                    </div>
+                    <span class="mono font-semibold">38 objects</span>
+                  </div>
+                  <div class="prefix-item">
+                    <div>
+                      <span class="mono font-semibold text-primary">canary/</span>
+                      <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
+                        >Tripwire Sentinels (Zero-Touch)</span
+                      >
+                    </div>
+                    <span class="mono font-semibold text-red">2 sentinels</span>
+                  </div>
+                  <div class="prefix-item">
+                    <div>
+                      <span class="mono font-semibold text-primary">evidence/</span>
+                      <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
+                        >Signed Forensic Bundles</span
+                      >
+                    </div>
+                    <span class="mono font-semibold text-teal">5 bundles</span>
+                  </div>
+                  <div class="prefix-item">
+                    <div>
+                      <span class="mono font-semibold text-primary">backup/</span>
+                      <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
+                        >AES-256-GCM Encrypted Backups</span
+                      >
+                    </div>
+                    <span class="mono font-semibold text-green">50 objects</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Armed Canary Trap Sentinel Card -->
+              <div class="canary-sentinel-card" id="canarySentinelCard">
+                <div class="canary-sentinel-header">
+                  <div>
+                    <h3 style="margin: 0; font-size: 1rem; color: var(--text-primary)">
+                      Canary Trap Sentinel
+                    </h3>
+                    <p
+                      style="
+                        margin: 2px 0 0;
+                        font-size: var(--text-xs);
+                        color: var(--text-secondary);
+                      "
+                    >
+                      Early tripwire detection via zero-touch decoys
+                    </p>
+                  </div>
+                  <span class="canary-sentinel-badge armed" id="canarySentinelBadge"
+                    >ARMED &bull; ZERO-TOUCH</span
+                  >
+                </div>
+
+                <div class="canary-file-list">
+                  <div class="canary-file-item">
+                    <span class="mono font-semibold text-primary"
+                      >canary/tripwire_sentinel.docx</span
+                    >
+                    <span class="status-badge-pill VALID">ARMED</span>
+                  </div>
+                  <div class="canary-file-item">
+                    <span class="mono font-semibold text-primary">canary/salary_2026.xlsx</span>
+                    <span class="status-badge-pill VALID">ARMED</span>
+                  </div>
+                </div>
+
+                <p
+                  style="
+                    font-size: var(--text-xs);
+                    color: var(--text-secondary);
+                    margin-bottom: 12px;
+                    line-height: 1.5;
+                  "
+                >
+                  Canaries are enticing decoy objects placed in storage prefixes. No legitimate user
+                  or workflow ever accesses these files. Any unauthorized modification or deletion
+                  triggers an automated sub-second IAM containment write-freeze.
+                </p>
+
+                <button type="button" class="btn btn-primary btn-sm" id="btnTripCanaryDemo">
+                  <span>Trip Canary Sentinel (Simulate Ransomware Touch)</span>
+                </button>
+              </div>
+            </section>
+
+            <!-- Merkle Inspector DAG Box -->
+            <section style="margin-top: 16px">
+              <div class="merkle-dag-box" id="merkleDagBox">
+                <div class="merkle-dag-header">
+                  <div>
+                    <h3 style="margin: 0; font-size: 0.95rem; color: var(--text-primary)">
+                      Merkle Root DAG Inspector
+                    </h3>
+                    <p
+                      style="
+                        margin: 2px 0 0;
+                        font-size: var(--text-xs);
+                        color: var(--text-secondary);
+                      "
+                    >
+                      Hierarchical cryptographic hashing verifying 50 baseline objects in O(1)
+                    </p>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnTamperMerkleDemo">
+                    Simulate File Tampering
+                  </button>
+                </div>
+
+                <div class="merkle-root-display" id="merkleRootDisplay">
+                  Root Hash:
+                  <span id="merkleRootHashText"
+                    >f7bbb36aa01a64a15ccf3ebfebfc51487263b6528994a5e128913...</span
+                  >
+                  (VALID)
+                </div>
+
+                <div class="merkle-leaf-grid" id="merkleLeafGrid">
+                  <div class="merkle-leaf-card" id="leaf-1">
+                    <span class="mono text-xs">files/financials_q2.pdf</span>
+                    <span class="mono text-muted text-xs">d2b4...8f1a</span>
+                  </div>
+                  <div class="merkle-leaf-card" id="leaf-2">
+                    <span class="mono text-xs">files/payroll_q3.xlsx</span>
+                    <span class="mono text-muted text-xs">7e41...90cc</span>
+                  </div>
+                  <div class="merkle-leaf-card" id="leaf-3">
+                    <span class="mono text-xs">files/nda_templates.docx</span>
+                    <span class="mono text-muted text-xs">3a99...b2ee</span>
+                  </div>
+                  <div class="merkle-leaf-card" id="leaf-4">
+                    <span class="mono text-xs">canary/tripwire_sentinel.docx</span>
+                    <span class="mono text-muted text-xs">88fe...c014</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 3: THREAT DETECTION ENGINE                                     -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view" id="view-detection" data-view="detection">
+            <section class="page-title-strip">
+              <div class="page-title-block">
+                <h1>Threat Detection Engine &amp; Heuristics</h1>
+                <p>
+                  Sliding-window velocity algorithms, anomaly change rates, and automated verdict
+                  triggers.
+                </p>
+              </div>
+            </section>
+
+            <section class="two-col-grid">
+              <!-- Detection Engine Summary Panel -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Velocity &amp; Sentinel Status</h2>
+                    <p>Real-time telemetry analysis</p>
+                  </div>
+                  <span class="signal-chip threat" id="detectionStatusBadge"
+                    >POTENTIAL RANSOMWARE</span
+                  >
+                </div>
+
+                <div class="detection-summary-rows">
+                  <!-- Threshold Gauge -->
+                  <div class="threshold-gauge-box">
+                    <div class="gauge-header">
+                      <span>Modification Velocity</span>
+                      <span class="mono font-semibold" id="gaugeVelocityText"
+                        >44% observed (Threshold: 30%)</span
+                      >
+                    </div>
+                    <div class="gauge-track">
+                      <div
+                        class="gauge-fill threat"
+                        id="gaugeVelocityFill"
+                        style="width: 44%"
+                      ></div>
+                      <div
+                        class="gauge-marker"
+                        style="left: 30%"
+                        title="Configured Threshold: 30%"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div class="summary-row">
+                    <span class="text-secondary">Modification Threshold</span>
+                    <span class="mono font-semibold" id="cfgThreshold">30% per window</span>
+                  </div>
+
+                  <div class="summary-row">
+                    <span class="text-secondary">Sliding-Window Duration</span>
+                    <span class="mono font-semibold" id="cfgWindow">30 seconds</span>
+                  </div>
+
+                  <div class="summary-row">
+                    <span class="text-secondary">Canary Sentinel Alert</span>
+                    <span class="mono text-red font-semibold" id="cfgCanaryAlert"
+                      >Tripped (tripwire_sentinel.docx)</span
+                    >
+                  </div>
+
+                  <div class="summary-row">
+                    <span class="text-secondary">Most Recent Detection</span>
+                    <span class="mono text-primary font-semibold" id="cfgLastDetect"
+                      >4 minutes ago</span
+                    >
+                  </div>
+
+                  <div class="summary-row">
+                    <span class="text-secondary">Awaiting Investigation</span>
+                    <span class="mono text-amber font-semibold" id="cfgPendingCases"
+                      >1 active case</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Detection Heuristics Tuning Card -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Detection Policy Rules</h2>
+                    <p>Tunable mathematical bounds</p>
+                  </div>
+                  <span class="signal-chip normal">ACTIVE</span>
+                </div>
+
+                <div class="detection-summary-rows">
+                  <div
+                    class="summary-row"
+                    style="flex-direction: column; align-items: flex-start; gap: 6px"
+                  >
+                    <div style="display: flex; justify-content: space-between; width: 100%">
+                      <span class="text-secondary">Sliding Window Window (s)</span>
+                      <span class="mono font-semibold text-primary">30s</span>
+                    </div>
+                    <span class="text-muted" style="font-size: 0.72rem"
+                      >Evaluates rate of modifications across tumbling time intervals.</span
+                    >
+                  </div>
+
+                  <div
+                    class="summary-row"
+                    style="flex-direction: column; align-items: flex-start; gap: 6px"
+                  >
+                    <div style="display: flex; justify-content: space-between; width: 100%">
+                      <span class="text-secondary">Ransomware Rate Threshold</span>
+                      <span class="mono font-semibold text-primary">30% (15 / 50 files)</span>
+                    </div>
+                    <span class="text-muted" style="font-size: 0.72rem"
+                      >Triggers automatic containment freeze when exceeded.</span
+                    >
+                  </div>
+
+                  <div
+                    class="summary-row"
+                    style="flex-direction: column; align-items: flex-start; gap: 6px"
+                  >
+                    <div style="display: flex; justify-content: space-between; width: 100%">
+                      <span class="text-secondary">Canary Zero-Touch Policy</span>
+                      <span class="mono font-semibold text-red">INSTANT FREEZE</span>
+                    </div>
+                    <span class="text-muted" style="font-size: 0.72rem"
+                      >Bypasses rate threshold if any sentinel file is altered.</span
+                    >
+                  </div>
+
+                  <div style="margin-top: 10px">
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                      id="btnTestDetectionPolicy"
+                    >
+                      Test Policy Against Current Telemetry
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 4: INCIDENTS                                                   -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view" id="view-incidents" data-view="incidents">
+            <section class="page-title-strip">
+              <div class="page-title-block">
+                <h1>Security Incidents Queue &amp; Response</h1>
+                <p>
+                  Cryptographically logged containment and recovery incidents with full forensic
+                  audit chains.
+                </p>
+              </div>
+            </section>
+
+            <section class="table-card" aria-label="Security Incidents Table">
+              <div class="table-controls-bar">
                 <div class="panel-card-titles">
-                  <h2>Protected Storage</h2>
-                  <p>Logical prefix isolation &amp; immutability policies</p>
+                  <h2>Incident Queue</h2>
+                  <p>All contained, active, and resolved security alerts</p>
                 </div>
-                <span class="signal-chip normal">CONNECTED</span>
+
+                <div class="filter-group">
+                  <input
+                    type="text"
+                    id="incidentTableSearch"
+                    class="header-search-input"
+                    style="width: 180px; padding: 4px 10px"
+                    placeholder="Filter by ID or Reason..."
+                    aria-label="Filter incidents table"
+                  />
+
+                  <select
+                    id="severitySelectFilter"
+                    class="select-filter"
+                    aria-label="Filter by Severity"
+                  >
+                    <option value="all">All Severities</option>
+                    <option value="Critical">Critical</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+
+                  <select
+                    id="statusSelectFilter"
+                    class="select-filter"
+                    aria-label="Filter by Response Status"
+                  >
+                    <option value="all">All Statuses</option>
+                    <option value="frozen">Contained (Frozen)</option>
+                    <option value="resolved">Recovery Verified</option>
+                    <option value="open">Investigating</option>
+                  </select>
+                </div>
               </div>
 
-              <div
-                style="font-size: var(--text-xs); color: var(--text-secondary); margin-bottom: 8px"
-              >
-                Provider:
-                <strong class="text-primary"
-                  >Local Filesystem Storage (S3 / Supabase Compliant)</strong
-                ><br />
-                WORM Policy: <span class="text-teal font-semibold">Active Immutability</span> &bull;
-                Object Versioning: <span class="text-primary font-semibold">Enabled</span>
+              <div class="table-responsive">
+                <table class="soc-table" id="incidentsTable">
+                  <thead>
+                    <tr>
+                      <th>Incident ID</th>
+                      <th>Severity</th>
+                      <th>Detection Reason</th>
+                      <th>Affected Objects</th>
+                      <th>Detected At</th>
+                      <th>Response Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="incidentsTableBody">
+                    <!-- Dynamically populated by main.js -->
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 5: BACKUP & RECOVERY                                           -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view" id="view-recovery" data-view="recovery">
+            <section class="page-title-strip">
+              <div class="page-title-block">
+                <h1>Backup &amp; Recovery Health</h1>
+                <p>
+                  Cryptographic verification gates for restored objects before writing back to cloud
+                  storage.
+                </p>
+              </div>
+            </section>
+
+            <section class="two-col-grid">
+              <!-- Backup & Recovery Health Panel -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Cryptographic Verification Gates</h2>
+                    <p>4 mandatory zero-trust checkpoints</p>
+                  </div>
+                  <span class="signal-chip normal" id="recoveryOverallBadge">100% VALID</span>
+                </div>
+
+                <div class="recovery-gates-list">
+                  <!-- Gate 1: AES-256-GCM AEAD -->
+                  <div class="recovery-gate-item">
+                    <div class="gate-title-block">
+                      <span class="gate-name">AES-256-GCM Authenticated Decryption</span>
+                      <span class="gate-detail"
+                        >AEAD tag integrity check before returning plaintext</span
+                      >
+                    </div>
+                    <span class="status-badge-pill VALID">VALID</span>
+                  </div>
+
+                  <!-- Gate 2: SHA-256 Baseline Match -->
+                  <div class="recovery-gate-item">
+                    <div class="gate-title-block">
+                      <span class="gate-name">SHA-256 Pre-Attack Baseline Match</span>
+                      <span class="gate-detail"
+                        >Byte-for-byte digest verification against snapshot #1</span
+                      >
+                    </div>
+                    <span class="status-badge-pill VALID">VALID</span>
+                  </div>
+
+                  <!-- Gate 3: Backup Manifest Signature -->
+                  <div class="recovery-gate-item">
+                    <div class="gate-title-block">
+                      <span class="gate-name">Backup Manifest Signature</span>
+                      <span class="gate-detail"
+                        >Ed25519 hardware key signature authenticity verified</span
+                      >
+                    </div>
+                    <span class="status-badge-pill VALID">VALID</span>
+                  </div>
+
+                  <!-- Gate 4: Merkle Root Consistency -->
+                  <div class="recovery-gate-item">
+                    <div class="gate-title-block">
+                      <span class="gate-name">Merkle Root DAG Consistency</span>
+                      <span class="gate-detail"
+                        >Pairwise hashes recompute to signed root digest</span
+                      >
+                    </div>
+                    <span class="status-badge-pill VALID">VALID</span>
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    margin-top: 12px;
+                    background: var(--bg-subtle);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius-sm);
+                    padding: 10px 12px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: var(--text-xs);
+                  "
+                >
+                  <span class="text-secondary">Latest Verified Restore:</span>
+                  <span class="mono font-semibold text-primary" id="recoveryLatestSummary"
+                    >10/10 files restored &bull; 0 mismatches</span
+                  >
+                </div>
               </div>
 
-              <div class="prefix-list">
-                <div class="prefix-item">
-                  <div>
-                    <span class="mono font-semibold text-primary">files/</span>
-                    <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
-                      >Corporate Documents &amp; Databases</span
-                    >
+              <!-- Recovery Execution & Staging Panel -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Isolated Recovery Staging</h2>
+                    <p>Quarantined sandbox verification</p>
                   </div>
-                  <span class="mono font-semibold">38 objects</span>
+                  <span class="signal-chip normal">STANDBY</span>
                 </div>
-                <div class="prefix-item">
-                  <div>
-                    <span class="mono font-semibold text-primary">canary/</span>
-                    <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
-                      >Tripwire Sentinels (Zero-Touch)</span
+
+                <div class="detection-summary-rows">
+                  <div class="summary-row">
+                    <span class="text-secondary">Recovery Staging Path</span>
+                    <span class="mono font-semibold text-primary"
+                      >data/staging/quarantine_restore</span
                     >
                   </div>
-                  <span class="mono font-semibold text-red">2 sentinels</span>
-                </div>
-                <div class="prefix-item">
-                  <div>
-                    <span class="mono font-semibold text-primary">evidence/</span>
-                    <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
-                      >Signed Forensic Bundles</span
-                    >
+                  <div class="summary-row">
+                    <span class="text-secondary">Encrypted Backup Source</span>
+                    <span class="mono font-semibold text-teal">AES-256-GCM Vault</span>
                   </div>
-                  <span class="mono font-semibold text-teal">5 bundles</span>
-                </div>
-                <div class="prefix-item">
-                  <div>
-                    <span class="mono font-semibold text-primary">backup/</span>
-                    <span class="text-muted" style="font-size: 0.72rem; margin-left: 6px"
-                      >AES-256-GCM Encrypted Backups</span
-                    >
+                  <div class="summary-row">
+                    <span class="text-secondary">Direct Cloud Overwrite</span>
+                    <span class="mono font-semibold text-red">BLOCKED UNTIL 100% VALID</span>
                   </div>
-                  <span class="mono font-semibold text-green">50 objects</span>
+
+                  <div style="margin-top: 14px">
+                    <p
+                      style="
+                        font-size: var(--text-xs);
+                        color: var(--text-secondary);
+                        line-height: 1.5;
+                        margin-bottom: 12px;
+                      "
+                    >
+                      CloudRDR enforces zero-trust restoration: recovered plaintext is staged in an
+                      isolated memory buffer where AEAD tags and baseline SHA-256 hashes are
+                      verified before touching production buckets.
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-sm"
+                      id="btnTriggerRecoveryWorkflow"
+                    >
+                      Authorize Restores for Contained Incidents
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
-          <!-- ── Section 12: Quick Actions ───────────────────────────────────── -->
-          <section class="quick-actions-bar" aria-label="Quick Actions">
-            <span class="quick-actions-label">Quick Actions</span>
-            <div class="quick-actions-btns">
-              <button type="button" class="btn btn-secondary btn-sm" id="qaScanBtn">
-                <span id="qaIconScan"></span>
-                <span>Run Integrity Scan</span>
-              </button>
-              <button type="button" class="btn btn-secondary btn-sm" id="qaVerifyBtn">
-                <span id="qaIconVerify"></span>
-                <span>Verify Backup</span>
-              </button>
-              <button type="button" class="btn btn-secondary btn-sm" id="qaIncidentsBtn">
-                <span id="qaIconIncidents"></span>
-                <span>Review Open Incidents</span>
-              </button>
-              <button type="button" class="btn btn-secondary btn-sm" id="qaAuditBtn">
-                <span id="qaIconAudit"></span>
-                <span>Open Audit Logs</span>
-              </button>
-              <button type="button" class="btn btn-primary btn-sm" id="qaSimulateBtn">
-                <span id="qaIconSimulate"></span>
-                <span>Launch Demo Simulation</span>
-              </button>
-            </div>
-          </section>
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 6: CRYPTOGRAPHIC EVIDENCE                                      -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view" id="view-evidence" data-view="evidence">
+            <section class="page-title-strip">
+              <div class="page-title-block">
+                <h1>Cryptographic Evidence &amp; Proofs</h1>
+                <p>
+                  Multi-layered evidence sealing, Merkle DAG root proofs, and Ed25519 digital
+                  signatures.
+                </p>
+              </div>
+              <div class="page-action-group">
+                <button type="button" class="btn btn-secondary btn-sm" id="viewEvidenceBtn">
+                  Verify Evidence Bundle
+                </button>
+              </div>
+            </section>
+
+            <section class="two-col-grid" id="audit-section">
+              <!-- Cryptographic Integrity Summary -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Cryptographic Integrity Summary</h2>
+                    <p>Tamper-evident verification status</p>
+                  </div>
+                  <span class="signal-chip normal">SEALED</span>
+                </div>
+
+                <table class="crypto-checks-table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div style="font-weight: 600; color: var(--text-primary)">
+                          Baseline SHA-256 Digests
+                        </div>
+                        <div class="text-muted" style="font-size: 0.75rem">
+                          50/50 monitored files match snapshot hashes
+                        </div>
+                      </td>
+                      <td style="text-align: right">
+                        <span class="status-badge-pill Verified">Verified</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="font-weight: 600; color: var(--text-primary)">
+                          Trusted Merkle Root
+                        </div>
+                        <div class="text-muted mono" style="font-size: 0.72rem">
+                          f7bbb36aa01a64a15ccf3ebfebfc5148...
+                        </div>
+                      </td>
+                      <td style="text-align: right">
+                        <span class="status-badge-pill Verified">Verified</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="font-weight: 600; color: var(--text-primary)">
+                          Incident Manifest Signature
+                        </div>
+                        <div class="text-muted" style="font-size: 0.75rem">
+                          Ed25519 HSM signature verified (key-01)
+                        </div>
+                      </td>
+                      <td style="text-align: right">
+                        <span class="status-badge-pill Verified">Verified</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="font-weight: 600; color: var(--text-primary)">
+                          Audit Hash-Chain (0 &rarr; 5)
+                        </div>
+                        <div class="text-muted" style="font-size: 0.75rem">
+                          Genesis to Block #5 tamper-evident chain intact
+                        </div>
+                      </td>
+                      <td style="text-align: right">
+                        <span class="status-badge-pill Verified">Verified</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="font-weight: 600; color: var(--text-primary)">
+                          Evidence Sealing Timestamp
+                        </div>
+                        <div class="text-muted" style="font-size: 0.75rem">
+                          RFC-3161 UTC token embedded in manifest
+                        </div>
+                      </td>
+                      <td style="text-align: right">
+                        <span class="status-badge-pill Verified">Verified</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Signed Digital Manifest Viewer -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Signed Incident Manifest</h2>
+                    <p>Cryptographic proof bundle payload</p>
+                  </div>
+                  <span class="status-badge-pill VALID">Ed25519 SIGNED</span>
+                </div>
+
+                <pre
+                  class="code-preview-box"
+                  style="
+                    margin: 0;
+                    padding: 12px;
+                    font-size: 0.72rem;
+                    line-height: 1.45;
+                    max-height: 280px;
+                    overflow-y: auto;
+                    background: var(--bg-subtle);
+                    border-radius: var(--radius-sm);
+                    border: 1px solid var(--border);
+                    color: var(--text-secondary);
+                    font-family: var(--font-mono);
+                  "
+                ><code>{
+  "bundle_id": "bundle-99f2b8-2026-q3",
+  "signing_key_id": "ed25519-hsm-soc-key-01",
+  "merkle_root": "f7bbb36aa01a64a15ccf3ebfebfc51487263b6528994a5e128913...",
+  "verified_baseline_count": 50,
+  "incident_ref": "inc-c194b301-7299-4a91-a189-918237491028",
+  "containment_action": "IAM_DENY_WRITE_ATTACHED",
+  "rfc3161_timestamp": "2026-10-14T21:30:00.000Z",
+  "signature": "4a7e91bd8f26c3b88950d8847cb5c83f98c6d123e4b78912304918230948120938471928374918273491827349182734"
+}</code></pre>
+              </div>
+            </section>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 7: AUDIT LOGS                                                  -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view" id="view-audit" data-view="audit">
+            <section class="page-title-strip">
+              <div class="page-title-block">
+                <h1>Forensic Audit Trail &amp; Hash Chain</h1>
+                <p>
+                  Tamper-evident, hash-chained ledger tracking every baseline creation, detection
+                  event, freeze action, and restoration.
+                </p>
+              </div>
+            </section>
+
+            <section class="two-col-grid">
+              <!-- Recent Security Events Feed -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Recent Security Events</h2>
+                    <p>Real-time forensic telemetry stream</p>
+                  </div>
+                  <a
+                    href="#audit-section"
+                    class="text-teal text-xs font-semibold"
+                    id="viewAuditLogsLink"
+                    style="text-decoration: none"
+                    >Live Feed &rarr;</a
+                  >
+                </div>
+
+                <div class="event-feed" id="securityEventsFeed">
+                  <!-- Dynamically populated by main.js -->
+                </div>
+              </div>
+
+              <!-- Tamper-Evident Hash-Chain Blocks -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Cryptographic Audit Chain</h2>
+                    <p>SHA-256 linked log blocks</p>
+                  </div>
+                  <span class="signal-chip normal">CHAIN VALID</span>
+                </div>
+
+                <div class="detection-summary-rows" style="font-size: var(--text-xs)">
+                  <div
+                    class="summary-row"
+                    style="
+                      flex-direction: column;
+                      align-items: flex-start;
+                      gap: 4px;
+                      padding: 8px 10px;
+                      background: var(--bg-subtle);
+                      border-radius: var(--radius-sm);
+                    "
+                  >
+                    <div style="display: flex; justify-content: space-between; width: 100%">
+                      <strong class="text-primary">Block #4: VERIFIED_RECOVERY</strong>
+                      <span class="mono text-green">MATCH</span>
+                    </div>
+                    <span class="mono text-muted">Hash: b89f...3312 &bull; Prev: a14c...77da</span>
+                  </div>
+
+                  <div
+                    class="summary-row"
+                    style="
+                      flex-direction: column;
+                      align-items: flex-start;
+                      gap: 4px;
+                      padding: 8px 10px;
+                      background: var(--bg-subtle);
+                      border-radius: var(--radius-sm);
+                    "
+                  >
+                    <div style="display: flex; justify-content: space-between; width: 100%">
+                      <strong class="text-primary">Block #3: IAM_WRITE_FREEZE</strong>
+                      <span class="mono text-green">MATCH</span>
+                    </div>
+                    <span class="mono text-muted">Hash: a14c...77da &bull; Prev: 91fe...1002</span>
+                  </div>
+
+                  <div
+                    class="summary-row"
+                    style="
+                      flex-direction: column;
+                      align-items: flex-start;
+                      gap: 4px;
+                      padding: 8px 10px;
+                      background: var(--bg-subtle);
+                      border-radius: var(--radius-sm);
+                    "
+                  >
+                    <div style="display: flex; justify-content: space-between; width: 100%">
+                      <strong class="text-primary">Block #2: CANARY_ALERT_TRIPPED</strong>
+                      <span class="mono text-green">MATCH</span>
+                    </div>
+                    <span class="mono text-muted">Hash: 91fe...1002 &bull; Prev: 45cc...8911</span>
+                  </div>
+
+                  <div
+                    class="summary-row"
+                    style="
+                      flex-direction: column;
+                      align-items: flex-start;
+                      gap: 4px;
+                      padding: 8px 10px;
+                      background: var(--bg-subtle);
+                      border-radius: var(--radius-sm);
+                    "
+                  >
+                    <div style="display: flex; justify-content: space-between; width: 100%">
+                      <strong class="text-primary">Block #1: BASELINE_SEEDED</strong>
+                      <span class="mono text-green">MATCH</span>
+                    </div>
+                    <span class="mono text-muted">Hash: 45cc...8911 &bull; Prev: 0000...0000</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <!-- VIEW 8: SETTINGS                                                    -->
+          <!-- ═══════════════════════════════════════════════════════════════════ -->
+          <div class="dashboard-view" id="view-settings" data-view="settings">
+            <section class="page-title-strip">
+              <div class="page-title-block">
+                <h1>System Settings &amp; Configuration</h1>
+                <p>
+                  Configure storage adapter providers, sliding-window detection sensitivity, and
+                  demo presets.
+                </p>
+              </div>
+            </section>
+
+            <section class="two-col-grid">
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Storage &amp; Engine Parameters</h2>
+                    <p>Runtime environment variables</p>
+                  </div>
+                </div>
+
+                <div class="settings-grid">
+                  <div class="setting-item">
+                    <label class="setting-label" for="settingStorageProvider"
+                      >Storage Provider</label
+                    >
+                    <select id="settingStorageProvider" class="select-filter" style="width: 100%">
+                      <option value="local" selected>
+                        Local Filesystem (./data/local-storage)
+                      </option>
+                      <option value="supabase">Supabase Storage (S3 / Cloud Bucket)</option>
+                    </select>
+                  </div>
+
+                  <div class="setting-item">
+                    <label class="setting-label" for="settingWindowSeconds"
+                      >Sliding Window Duration (seconds)</label
+                    >
+                    <input
+                      type="number"
+                      id="settingWindowSeconds"
+                      class="header-search-input"
+                      style="width: 100%"
+                      value="30"
+                    />
+                  </div>
+
+                  <div class="setting-item">
+                    <label class="setting-label" for="settingRansomwareRate"
+                      >Ransomware Threshold Rate (0.01 - 1.0)</label
+                    >
+                    <input
+                      type="number"
+                      step="0.05"
+                      id="settingRansomwareRate"
+                      class="header-search-input"
+                      style="width: 100%"
+                      value="0.30"
+                    />
+                  </div>
+
+                  <div class="setting-item">
+                    <label class="setting-label" for="settingSimulationMode"
+                      >Demo Simulation Speed</label
+                    >
+                    <select id="settingSimulationMode" class="select-filter" style="width: 100%">
+                      <option value="normal" selected>Normal (Realistic 1.2s delay)</option>
+                      <option value="fast">Instant (No artificial delays)</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-top: 10px">
+                    <button type="button" class="btn btn-primary btn-sm" id="btnSaveSettings">
+                      Save Settings
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>System Information</h2>
+                    <p>Version and cryptographic environment details</p>
+                  </div>
+                </div>
+
+                <div class="detection-summary-rows">
+                  <div class="summary-row">
+                    <span class="text-secondary">CloudRDR Version</span>
+                    <span class="mono font-semibold">v0.1.0 (Information Security Year 3)</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Node Engine</span>
+                    <span class="mono font-semibold">&gt;= 18.0.0</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Cryptographic Suite</span>
+                    <span class="mono font-semibold">SHA-256 / AES-256-GCM / Ed25519</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Framework</span>
+                    <span class="mono font-semibold">Fastify Backend + Vanilla SOC Frontend</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
         </main>
       </div>
     </div>
