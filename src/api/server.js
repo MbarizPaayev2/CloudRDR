@@ -60,7 +60,10 @@ export async function buildServer(options = {}) {
       request.routerPath === '/dashboard' ||
       request.routerPath === '/' ||
       request.url === '/' ||
+      request.url === '/favicon.ico' ||
       request.url.startsWith('/dashboard') ||
+      request.url.startsWith('/css') ||
+      request.url.startsWith('/js') ||
       request.method === 'OPTIONS';
 
     if (isPublicRoute) {
