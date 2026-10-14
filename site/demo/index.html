@@ -6,7 +6,7 @@
     <title>CloudRDR — Product Demo Dashboard</title>
     <meta
       name="description"
-      content="Live interactive Security Operations Center (SOC) dashboard with real-time Merkle tree integrity tracking and sliding-window velocity analysis."
+      content="Live interactive Security Operations Center (SOC) dashboard with real-time Merkle tree integrity tracking, threat simulation triggers, and sliding-window velocity analysis."
     />
 
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
@@ -115,17 +115,18 @@
             font-size: var(--text-xs);
           "
         >
-          <div style="font-weight: 600; margin-bottom: 4px">Story Runner</div>
-          <p style="font-size: 0.75rem; margin: 0 0 8px 0">
-            Demonstrate full attack containment and recovery.
+          <div style="font-weight: 600; margin-bottom: 4px">Attack Story Runner</div>
+          <p style="font-size: 0.75rem; margin: 0 0 8px 0; color: var(--text-muted)">
+            Automated 6-stage attack, containment, and verified recovery walkthrough.
           </p>
           <button
             type="button"
             id="sidebarPlayStoryBtn"
             class="btn btn-primary btn-sm"
-            style="width: 100%"
+            style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px;"
           >
-            ▶ Play Attack Story
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Play Attack Story</span>
           </button>
         </div>
       </aside>
@@ -152,8 +153,10 @@
               id="playStoryBtn"
               class="btn btn-secondary btn-sm"
               title="Simulate complete attack-to-recovery narrative"
+              style="display: inline-flex; align-items: center; gap: 6px;"
             >
-              ▶ Play Story
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>Play Story</span>
             </button>
 
             <!-- Demo Mode Toggle -->
@@ -182,6 +185,75 @@
           "
         >
           <span id="storyProgressText"></span>
+        </div>
+
+        <!-- ── Live SOC KPI Metrics Strip ─────────────────────────────────── -->
+        <div class="demo-kpi-grid">
+          <div class="demo-kpi-card">
+            <div class="demo-kpi-header">
+              <span class="demo-kpi-title">Protected Storage</span>
+              <span class="demo-kpi-tag green">16 / 16 Sealed</span>
+            </div>
+            <div class="demo-kpi-val" id="kpiProtectedCount">16 Objects</div>
+            <div class="demo-kpi-sub">RFC 6962 SHA-256 Leaves</div>
+          </div>
+
+          <div class="demo-kpi-card">
+            <div class="demo-kpi-header">
+              <span class="demo-kpi-title">Containment SLA</span>
+              <span class="demo-kpi-tag blue">&lt; 4.0s Target</span>
+            </div>
+            <div class="demo-kpi-val" id="kpiContainmentSla">3.8s Measured</div>
+            <div class="demo-kpi-sub">Automated IAM Write-Lock</div>
+          </div>
+
+          <div class="demo-kpi-card">
+            <div class="demo-kpi-header">
+              <span class="demo-kpi-title">Detection Velocity</span>
+              <span class="demo-kpi-tag green" id="kpiVelocityTag">Normal &lt; 30%</span>
+            </div>
+            <div class="demo-kpi-val" id="kpiVelocityVal">0.0% / min</div>
+            <div class="demo-kpi-sub">60s Sliding-Window Rate</div>
+          </div>
+
+          <div class="demo-kpi-card">
+            <div class="demo-kpi-header">
+              <span class="demo-kpi-title">Zero-Trust Recovery</span>
+              <span class="demo-kpi-tag green" id="kpiRecoveryTag">100% Verified</span>
+            </div>
+            <div class="demo-kpi-val" id="kpiRecoveryVal">AEAD Clean</div>
+            <div class="demo-kpi-sub">AES-256-GCM + Baseline Gate</div>
+          </div>
+        </div>
+
+        <!-- ── Threat Simulation Command Bar ─────────────────────────────── -->
+        <div class="demo-action-bar">
+          <div class="demo-action-lead">
+            <strong>Interactive Threat Simulations:</strong>
+            <span>Trigger individual attack stages or full cryptographic recovery to observe live Merkle DAG mutations, IAM freeze, and verifiable restore.</span>
+          </div>
+          <div class="demo-action-buttons">
+            <button type="button" id="btnActionCanary" class="btn btn-secondary btn-sm" title="Trip canary sentinel file">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Trip Canary Tripwire</span>
+            </button>
+            <button type="button" id="btnActionMassBurst" class="btn btn-secondary btn-sm" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4);" title="Simulate rapid mass file encryption">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <span>Burst Encryption (45%)</span>
+            </button>
+            <button type="button" id="btnActionFreeze" class="btn btn-secondary btn-sm" style="color: #f59e0b; border-color: rgba(245, 158, 11, 0.4);" title="Execute IAM write-lock">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Enforce IAM Freeze</span>
+            </button>
+            <button type="button" id="btnActionRestore" class="btn btn-primary btn-sm" style="background: #10b981; border-color: #10b981;" title="Verify AEAD tags and restore baseline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+              <span>Verified Restore</span>
+            </button>
+            <button type="button" id="btnActionReset" class="btn btn-secondary btn-sm" title="Reset all states to clean baseline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              <span>Reset Baseline</span>
+            </button>
+          </div>
         </div>
 
         <!-- ── Dashboard Grid ─────────────────────────────────────────────── -->
@@ -228,9 +300,40 @@
                 <canvas id="detectionChartCanvas" aria-label="Detection velocity chart"></canvas>
               </div>
             </section>
+
+            <!-- Live Security Event Stream -->
+            <section class="panel" aria-label="Real-time forensic event stream">
+              <div class="panel-header">
+                <div>
+                  <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase;">Audit Ledger</span>
+                  <h3 class="panel-title">Real-Time Security Event Stream</h3>
+                </div>
+                <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #10b981; display: inline-flex; align-items: center; gap: 6px;">
+                  <span style="width: 6px; height: 6px; background: #10b981; border-radius: 50%; box-shadow: 0 0 6px #10b981;"></span>
+                  CHAIN INTACT
+                </span>
+              </div>
+              <div class="demo-event-stream" id="demoEventStream">
+                <div class="demo-event-item">
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">CRYPTO</span>
+                  <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:30:15</span>
+                  <span style="color: var(--text-secondary);">Merkle Root verified: <code>e3b0c442...7852b855</code> (16/16 baseline SHA-256 leaves sealed).</span>
+                </div>
+                <div class="demo-event-item">
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">SENTINEL</span>
+                  <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:30:15</span>
+                  <span style="color: var(--text-secondary);">Canary tripwire active: <code>canary/tripwire_sentinel.docx</code> intact and untampered.</span>
+                </div>
+                <div class="demo-event-item">
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">IAM</span>
+                  <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:30:20</span>
+                  <span style="color: var(--text-secondary);">IAM write permissions active. 0 containment restrictions applied.</span>
+                </div>
+              </div>
+            </section>
           </div>
 
-          <!-- Right Rail: Baseline, Canary, Account Status -->
+          <!-- Right Rail: Baseline, Canary, Account Status, Evidence -->
           <div class="dashboard-column">
             <!-- Account Status Card -->
             <section class="panel">
@@ -370,6 +473,27 @@
                 Capture New Baseline
               </button>
             </section>
+
+            <!-- Cryptographic Evidence & Quarantine Inspector -->
+            <section class="panel">
+              <div class="panel-header">
+                <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); text-transform: uppercase;">Cryptographic Evidence</span>
+                <span class="status-chip valid" id="evidenceStatusChip">Ed25519 Valid</span>
+              </div>
+              <h3>Forensic Proof Chain</h3>
+              <div style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 8px 0; background: var(--surface-subtle); padding: 8px 10px; border-radius: 4px; border: 1px solid var(--border);">
+                <div style="color: var(--text-muted); margin-bottom: 2px;">Incident Signature:</div>
+                <div id="demoSignatureVal" style="color: #38bdf8; word-break: break-all; font-size: 0.7rem;">91f8a70c2e4b5d6f8a9b0c... [HSM Signed]</div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: var(--text-xs); margin-top: 8px;">
+                <span style="color: var(--text-muted);">Quarantine Match:</span>
+                <strong style="color: #10b981;" id="demoQuarantineMatch">16 / 16 Pre-Attack Match</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: var(--text-xs); margin-top: 4px;">
+                <span style="color: var(--text-muted);">AEAD Verification:</span>
+                <strong style="color: #10b981;">0 Corrupted Bytes</strong>
+              </div>
+            </section>
           </div>
         </div>
       </main>
@@ -407,7 +531,7 @@
       // 5. Wire UI Buttons & Demo Mode
       const demoToggle = document.getElementById('demoModeToggle');
       const demoLabel = document.getElementById('demoModeLabel');
-      demoToggle.addEventListener('change', () => {
+      demoToggle?.addEventListener('change', () => {
         CONFIG.USE_MOCK = demoToggle.checked;
         demoLabel.textContent = CONFIG.USE_MOCK ? 'Mock API' : 'Live API';
       });
@@ -415,8 +539,24 @@
       const storyBanner = document.getElementById('storyProgressBanner');
       const storyText = document.getElementById('storyProgressText');
 
+      function appendDemoEvent(tag, tagCls, text) {
+        const stream = document.getElementById('demoEventStream');
+        if (!stream) return;
+        const item = document.createElement('div');
+        item.className = 'demo-event-item';
+        const now = new Date().toTimeString().split(' ')[0];
+        item.innerHTML = `
+          <span class="stage-badge-chip ${tagCls}" style="margin: 0; padding: 2px 6px;">${tag}</span>
+          <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">${now}</span>
+          <span style="color: var(--text-secondary);">${text}</span>
+        `;
+        stream.prepend(item);
+        if (stream.children.length > 25) stream.removeChild(stream.lastChild);
+      }
+
       const handlePlayStory = () => {
         storyBanner.style.display = 'block';
+        appendDemoEvent('STORY', 'blue', 'Automated 6-stage attack and recovery narrative started.');
         playStory((msg) => {
           storyText.textContent = msg;
           if (msg.includes('completed')) {
@@ -430,6 +570,70 @@
       document.getElementById('playStoryBtn')?.addEventListener('click', handlePlayStory);
       document.getElementById('sidebarPlayStoryBtn')?.addEventListener('click', handlePlayStory);
 
+      // Interactive Action Triggers
+      document.getElementById('btnActionCanary')?.addEventListener('click', () => {
+        document.body.classList.add('attack-active');
+        setState({
+          canaryTriggered: true,
+          canaryTriggeredAt: new Date().toISOString(),
+          verdict: 'ransomware',
+          corruptedLeaves: new Set([7, 8]),
+          storyStep: 'Canary tripped',
+        });
+        appendDemoEvent('TRIPWIRE', 'red', 'CANARY DECOY TRIPPED: canary/tripwire_sentinel.docx modified. Immediate ransomware alert!');
+      });
+
+      document.getElementById('btnActionMassBurst')?.addEventListener('click', () => {
+        document.body.classList.add('attack-active');
+        setState({
+          changeRate: 0.45,
+          verdict: 'ransomware',
+          corruptedLeaves: new Set([0, 1, 4, 7, 8, 11, 14]),
+          currentRootHash: '00000000_TAMPERED_ROOT_HASH_' + Math.random().toString(16).slice(2, 10),
+          storyStep: 'Mass modification surge',
+        });
+        appendDemoEvent('VELOCITY', 'red', 'Mass burst encryption detected: 45.0% change rate in sliding window (> 30% threshold).');
+      });
+
+      document.getElementById('btnActionFreeze')?.addEventListener('click', () => {
+        setState({
+          accountFrozen: true,
+          frozenAt: new Date().toISOString(),
+          storyStep: 'IAM Freeze enforced',
+        });
+        appendDemoEvent('CONTAINMENT', 'amber', 'Automated IAM Freeze enforced (< 4.0s SLA). Write access denied on acc-cloudrdr-prod.');
+      });
+
+      document.getElementById('btnActionRestore')?.addEventListener('click', () => {
+        document.body.classList.remove('attack-active');
+        setState({
+          verdict: 'normal',
+          changeRate: 0.02,
+          canaryTriggered: false,
+          accountFrozen: false,
+          corruptedLeaves: new Set(),
+          restoredLeaves: new Set([0, 1, 4, 7, 8, 11, 14]),
+          currentRootHash: getState().baseline.merkle_root,
+          storyStep: 'AEAD recovery verified',
+        });
+        appendDemoEvent('RESTORE', 'green', 'All 16 objects 100% verified via AES-256-GCM AEAD tags and matched against pre-attack SHA-256 baseline.');
+      });
+
+      document.getElementById('btnActionReset')?.addEventListener('click', () => {
+        document.body.classList.remove('attack-active');
+        setState({
+          verdict: 'normal',
+          changeRate: 0.0,
+          canaryTriggered: false,
+          accountFrozen: false,
+          corruptedLeaves: new Set(),
+          restoredLeaves: new Set(),
+          currentRootHash: getState().baseline.merkle_root,
+          storyStep: 'Reset to clean baseline',
+        });
+        appendDemoEvent('SYSTEM', 'green', 'Console reset to clean operational baseline. Active monitoring running.');
+      });
+
       document.getElementById('createBaselineBtn')?.addEventListener('click', async () => {
         const btn = document.getElementById('createBaselineBtn');
         btn.disabled = true;
@@ -437,6 +641,7 @@
         try {
           const res = await api.createBaseline();
           setState({ baseline: res });
+          appendDemoEvent('BASELINE', 'green', `New baseline sealed: Version ${res.version} with Merkle Root ${res.merkle_root.slice(0, 16)}...`);
         } finally {
           btn.disabled = false;
           btn.textContent = 'Capture New Baseline';
@@ -457,6 +662,47 @@
         // Current Velocity Text
         const veloEl = document.getElementById('currentVelocityDisplay');
         if (veloEl) veloEl.textContent = `${(state.changeRate * 100).toFixed(1)}%`;
+
+        // Update KPI Telemetry Cards
+        const kpiVeloVal = document.getElementById('kpiVelocityVal');
+        const kpiVeloTag = document.getElementById('kpiVelocityTag');
+        const kpiRecoveryTag = document.getElementById('kpiRecoveryTag');
+        const kpiRecoveryVal = document.getElementById('kpiRecoveryVal');
+        const evidenceStatusChip = document.getElementById('evidenceStatusChip');
+
+        if (kpiVeloVal) kpiVeloVal.textContent = `${(state.changeRate * 100).toFixed(1)}% / min`;
+        if (kpiVeloTag) {
+          if (state.changeRate >= 0.3) {
+            kpiVeloTag.className = 'demo-kpi-tag red';
+            kpiVeloTag.textContent = 'Critical > 30%';
+          } else if (state.changeRate >= 0.1) {
+            kpiVeloTag.className = 'demo-kpi-tag amber';
+            kpiVeloTag.textContent = 'Suspicious > 10%';
+          } else {
+            kpiVeloTag.className = 'demo-kpi-tag green';
+            kpiVeloTag.textContent = 'Normal < 30%';
+          }
+        }
+
+        if (kpiRecoveryTag && kpiRecoveryVal) {
+          if (state.accountFrozen) {
+            kpiRecoveryTag.className = 'demo-kpi-tag blue';
+            kpiRecoveryTag.textContent = 'Quarantine Ready';
+            kpiRecoveryVal.textContent = 'Staged';
+          } else if (state.corruptedLeaves && state.corruptedLeaves.size > 0) {
+            kpiRecoveryTag.className = 'demo-kpi-tag red';
+            kpiRecoveryTag.textContent = 'Threat Active';
+            kpiRecoveryVal.textContent = `${state.corruptedLeaves.size} Leaves Corrupted`;
+          } else {
+            kpiRecoveryTag.className = 'demo-kpi-tag green';
+            kpiRecoveryTag.textContent = '100% Verified';
+            kpiRecoveryVal.textContent = 'AEAD Clean';
+          }
+        }
+
+        if (evidenceStatusChip) {
+          evidenceStatusChip.textContent = state.accountFrozen ? 'Frozen Manifest Signed' : 'Ed25519 Valid';
+        }
 
         // Account Status
         const accChip = document.getElementById('accountStatusChip');
