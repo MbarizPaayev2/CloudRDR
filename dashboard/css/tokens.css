@@ -1,67 +1,72 @@
 /**
  * @file dashboard/css/tokens.css
- * CloudRDR Enterprise Design Tokens — SOC Dark Charcoal System
- *
- * Visual Palette:
- * - Canvas: #0B0E11 (Dark charcoal)
- * - Sidebar: #11161B
- * - Panels: #151B21
- * - Elevated Hover: #1B222A
- * - Borders: #252D35
- * - Accent: #2DD4BF (Restrained Teal)
- * - Critical: #EF4444 (Laser Red)
- * - Warning: #F59E0B (Security Amber)
- * - Success/Verified: #10B981 (Cyber Emerald)
- * - Neutral: #64748B / #9CA3AF
+ * CloudRDR Unified Enterprise Design Tokens — Cyber Dark System
+ * Synchronized with the global CloudRDR brand identity and palette.
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 :root {
-  /* ── SOC Canvas & Surface Hierarchy ────────────────────────────────────── */
-  --bg-canvas:        #0B0E11;   /* Primary dark charcoal canvas */
-  --bg-sidebar:       #11161B;   /* Fixed left sidebar */
-  --bg-panel:         #151B21;   /* Card, table and widget containers */
-  --bg-panel-elev:    #1B222A;   /* Elevated hover states, modals, popovers */
-  --bg-subtle:        #1A2129;   /* Input backgrounds, tag badges */
-  --bg-glass:         rgba(17, 22, 27, 0.94);
+  /* ── Canvas & Surface Hierarchy (Matches site/ --bg, --surface, --surface-subtle) ── */
+  --bg-canvas:        #0C0E14;   /* Obsidian Cyber Dark background */
+  --bg-sidebar:       #0F131C;   /* Left navigation sidebar */
+  --bg-panel:         #141822;   /* Elevated panels, cards, data tables */
+  --bg-panel-elev:    #1B2130;   /* Interactive hover states, modals, popovers */
+  --bg-subtle:        #181E2B;   /* Form inputs, pill badges, nested blocks */
+  --bg-glass:         rgba(15, 19, 28, 0.94);
 
-  /* ── Borders & Separators ──────────────────────────────────────────────── */
-  --border:           #252D35;   /* Thin subtle border */
+  /* ── Borders & Dividers ─────────────────────────────────────────────────── */
+  --border:           rgba(255, 255, 255, 0.09);
   --border-subtle:    rgba(255, 255, 255, 0.05);
-  --border-focus:     #2DD4BF;   /* Teal focus hairline */
+  --border-card:      #222B3D;
+  --border-focus:     #38BDF8;
 
-  /* ── Typography Colors ─────────────────────────────────────────────────── */
-  --text-primary:     #F3F4F6;   /* Clean readable heading white */
-  --text-secondary:   #9CA3AF;   /* Crisp slate body */
-  --text-muted:       #6B7280;   /* Muted metadata and timestamps */
-  --text-inverse:     #0B0E11;
+  /* ── Typography Colors ──────────────────────────────────────────────────── */
+  --text-primary:     #F4F6FB;
+  --text-secondary:   #A0AABF;
+  --text-muted:       #6E7A91;
+  --text-inverse:     #0C0E14;
 
-  /* ── Restrained Teal Brand & Navigation Accent ─────────────────────────── */
-  --accent-teal:        #2DD4BF;
-  --accent-teal-hover:  #14B8A6;
-  --accent-teal-subtle: rgba(45, 212, 191, 0.08);
-  --accent-teal-border: rgba(45, 212, 191, 0.25);
+  /* ── Primary Brand & Navigation Accents (Matches site/ brand identity) ──── */
+  --brand:              #4360FF;   /* High-contrast brand indigo */
+  --brand-hover:        #5D76FF;
+  --brand-subtle:       rgba(67, 96, 255, 0.16);
+  --brand-border:       rgba(67, 96, 255, 0.35);
 
-  /* ── Security Status Accents ───────────────────────────────────────────── */
-  --threat-red:         #EF4444;   /* Critical ransomware alerts */
+  --accent-cyan:        #38BDF8;   /* Cyber Cyan accent (from CloudRDR logo 'R') */
+  --accent-cyan-hover:  #0EA5E9;
+  --accent-cyan-subtle: rgba(56, 189, 248, 0.12);
+  --accent-cyan-border: rgba(56, 189, 248, 0.30);
+
+  --accent-teal:        #38BDF8;   /* Default brand active indicator */
+  --accent-teal-hover:  #0EA5E9;
+  --accent-teal-subtle: rgba(56, 189, 248, 0.12);
+  --accent-teal-border: rgba(56, 189, 248, 0.30);
+
+  /* ── Security Status Accents (WCAG AA/AAA compliant) ─────────────────────── */
+  --threat-red:         #E64545;   /* Critical ransomware alerts */
   --threat-red-text:    #F87171;
-  --threat-red-subtle:  rgba(239, 68, 68, 0.12);
-  --threat-red-border:  rgba(239, 68, 68, 0.28);
+  --threat-red-subtle:  rgba(230, 69, 69, 0.18);
+  --threat-red-border:  rgba(230, 69, 69, 0.35);
 
-  --warning-amber:        #F59E0B;   /* Suspicious threshold warnings */
+  --warning-amber:        #F0B11A;   /* Suspicious threshold warnings */
   --warning-amber-text:   #FBBF24;
-  --warning-amber-subtle: rgba(245, 158, 11, 0.12);
-  --warning-amber-border: rgba(245, 158, 11, 0.28);
+  --warning-amber-subtle: rgba(240, 177, 26, 0.18);
+  --warning-amber-border: rgba(240, 177, 26, 0.35);
 
-  --healthy-green:        #10B981;   /* Verified healthy states */
+  --healthy-green:        #27B97F;   /* Verified healthy states */
   --healthy-green-text:   #34D399;
-  --healthy-green-subtle: rgba(16, 185, 129, 0.12);
-  --healthy-green-border: rgba(16, 185, 129, 0.28);
+  --healthy-green-subtle: rgba(39, 185, 127, 0.18);
+  --healthy-green-border: rgba(39, 185, 127, 0.35);
+
+  --status-frozen:        #58B3DA;
+  --status-frozen-subtle: rgba(88, 179, 218, 0.18);
 
   --neutral-gray:         #64748B;
-  --neutral-gray-subtle:  rgba(100, 116, 139, 0.12);
-  --neutral-gray-border:  rgba(100, 116, 139, 0.25);
+  --neutral-gray-subtle:  rgba(100, 116, 139, 0.14);
+  --neutral-gray-border:  rgba(100, 116, 139, 0.28);
 
-  /* Compatibility Aliases for components */
+  /* Compatibility Aliases for component stylesheets */
   --bg-app:          var(--bg-canvas);
   --bg-surface:      var(--bg-panel);
   --bg-surface-elev: var(--bg-panel-elev);
@@ -74,23 +79,19 @@
   --warning:         var(--warning-amber);
   --warning-bg:      var(--warning-amber-subtle);
   --warning-border:  var(--warning-amber-border);
-  --brand:           var(--accent-teal);
-  --brand-hover:     var(--accent-teal-hover);
-  --brand-bg:        var(--accent-teal-subtle);
-  --brand-border:    var(--accent-teal-border);
 
   /* ── Typography Families ───────────────────────────────────────────────── */
-  --font-sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono:  ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  --font-sans:  'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Typography Scale */
-  --text-xs:    0.72rem;
-  --text-sm:    0.82rem;
-  --text-base:  0.92rem;
-  --text-md:    1.05rem;
-  --text-lg:    1.25rem;
-  --text-xl:    1.65rem;
-  --text-2xl:   2.2rem;
+  --text-xs:    0.75rem;
+  --text-sm:    0.85rem;
+  --text-base:  0.95rem;
+  --text-md:    1.08rem;
+  --text-lg:    1.30rem;
+  --text-xl:    1.75rem;
+  --text-2xl:   2.25rem;
 
   /* ── Spacing Scale ─────────────────────────────────────────────────────── */
   --space-1: 0.25rem;
@@ -104,21 +105,22 @@
   /* ── Structural Radii ──────────────────────────────────────────────────── */
   --radius-xs:   4px;
   --radius-sm:   6px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-pill: 9999px;
   --radius-full: 9999px;
 
   /* ── Layout Dimensions ─────────────────────────────────────────────────── */
-  --sidebar-w:           250px;
+  --sidebar-w:           255px;
   --sidebar-collapsed-w: 68px;
   --header-h:            58px;
 
   /* ── Subtle Elevation & Transitions ────────────────────────────────────── */
-  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-dropdown: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
-  --ease:          cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-fast:      140ms;
-  --dur-mid:       220ms;
+  --shadow-subtle:   0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
+  --shadow-dropdown: 0 12px 30px -5px rgba(0, 0, 0, 0.7), 0 8px 12px -6px rgba(0, 0, 0, 0.5);
+  --ease:            cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:        140ms;
+  --dur-mid:         220ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
