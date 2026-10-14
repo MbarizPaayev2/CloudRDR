@@ -191,6 +191,18 @@ export async function dashboardRoutes(fastify) {
     return serveFile('index.html', reply);
   });
 
+  fastify.get('/dashboard/index.html', async (_request, reply) => {
+    return serveFile('index.html', reply);
+  });
+
+  fastify.get('/admin', async (_request, reply) => {
+    return serveFile('index.html', reply);
+  });
+
+  fastify.get('/admin/index.html', async (_request, reply) => {
+    return serveFile('index.html', reply);
+  });
+
   fastify.get('/landing', async (_request, reply) => {
     return serveFile('landing.html', reply);
   });

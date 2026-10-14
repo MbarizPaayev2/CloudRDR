@@ -67,6 +67,7 @@ export async function buildServer(options = {}) {
       request.url.startsWith('/docs') ||
       request.url.startsWith('/index.html') ||
       request.url.startsWith('/dashboard') ||
+      request.url.startsWith('/admin') ||
       request.url.startsWith('/landing') ||
       request.url.startsWith('/css') ||
       request.url.startsWith('/js') ||

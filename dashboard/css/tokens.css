@@ -1,139 +1,124 @@
 /**
  * @file dashboard/css/tokens.css
- * CloudRDR Enterprise Design Tokens — High-End Agency / Awwwards-Tier Design System
- * Engineered with: high-end-visual-design, design-taste-frontend, minimalist-ui, industrial-brutalist-ui
- * 
- * Typography: Geist (Display & UI) + Geist Mono (Telemetry & Cryptographic Hashes)
- * Surfaces: Deep OLED Canvas with Doppelrand (Double-Bezel) Nested Architecture
- * Motion: Custom Cubic-Bezier Physics with Spring Damping
+ * CloudRDR Enterprise Design Tokens — SOC Dark Charcoal System
+ *
+ * Visual Palette:
+ * - Canvas: #0B0E11 (Dark charcoal)
+ * - Sidebar: #11161B
+ * - Panels: #151B21
+ * - Elevated Hover: #1B222A
+ * - Borders: #252D35
+ * - Accent: #2DD4BF (Restrained Teal)
+ * - Critical: #EF4444 (Laser Red)
+ * - Warning: #F59E0B (Security Amber)
+ * - Success/Verified: #10B981 (Cyber Emerald)
+ * - Neutral: #64748B / #9CA3AF
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap');
-
 :root {
-  /* ── Canvas & Surface Hierarchy (Deep OLED Slate) ────────────────────────── */
-  --bg-app:          #050811;   /* deep OLED black canvas */
-  --bg-surface:      #0B101D;   /* primary container core */
-  --bg-surface-elev: #11182B;   /* elevated interactive panels */
-  --bg-subtle:       #18223B;   /* inputs, chips, borders */
-  --bg-glass:        rgba(11, 16, 29, 0.82);
+  /* ── SOC Canvas & Surface Hierarchy ────────────────────────────────────── */
+  --bg-canvas:        #0B0E11;   /* Primary dark charcoal canvas */
+  --bg-sidebar:       #11161B;   /* Fixed left sidebar */
+  --bg-panel:         #151B21;   /* Card, table and widget containers */
+  --bg-panel-elev:    #1B222A;   /* Elevated hover states, modals, popovers */
+  --bg-subtle:        #1A2129;   /* Input backgrounds, tag badges */
+  --bg-glass:         rgba(17, 22, 27, 0.94);
 
-  /* Doppelrand (Double-Bezel Nested Architecture) */
-  --doppel-outer-bg:      rgba(255, 255, 255, 0.025);
-  --doppel-outer-border:  1px solid rgba(255, 255, 255, 0.08);
-  --doppel-outer-radius:  20px;
-  --doppel-outer-padding: 6px;
-  --doppel-inner-bg:      #0B101D;
-  --doppel-inner-radius:  14px;
-  --doppel-inner-shadow:  inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  /* ── Borders & Separators ──────────────────────────────────────────────── */
+  --border:           #252D35;   /* Thin subtle border */
+  --border-subtle:    rgba(255, 255, 255, 0.05);
+  --border-focus:     #2DD4BF;   /* Teal focus hairline */
 
-  /* Border Tones (Ultra-Fine Hairlines) */
-  --border-subtle:   rgba(255, 255, 255, 0.07);
-  --border-medium:   rgba(255, 255, 255, 0.12);
-  --border-active:   #3B82F6;
+  /* ── Typography Colors ─────────────────────────────────────────────────── */
+  --text-primary:     #F3F4F6;   /* Clean readable heading white */
+  --text-secondary:   #9CA3AF;   /* Crisp slate body */
+  --text-muted:       #6B7280;   /* Muted metadata and timestamps */
+  --text-inverse:     #0B0E11;
 
-  /* Typography Colors */
-  --text-primary:    #F8FAFC;   /* 98% pure heading white */
-  --text-secondary:  #94A3B8;   /* crisp slate body */
-  --text-muted:      #64748B;   /* slate-500 subtle telemetry */
-  --text-inverse:    #050811;
+  /* ── Restrained Teal Brand & Navigation Accent ─────────────────────────── */
+  --accent-teal:        #2DD4BF;
+  --accent-teal-hover:  #14B8A6;
+  --accent-teal-subtle: rgba(45, 212, 191, 0.08);
+  --accent-teal-border: rgba(45, 212, 191, 0.25);
 
-  /* Security Status Accents (Calibrated Saturation < 80%) */
-  --threat:          #EF4444;   /* Laser Crimson - Ransomware */
-  --threat-bg:       rgba(239, 68, 68, 0.12);
-  --threat-border:   rgba(239, 68, 68, 0.35);
-  --threat-glow:     rgba(239, 68, 68, 0.35);
+  /* ── Security Status Accents ───────────────────────────────────────────── */
+  --threat-red:         #EF4444;   /* Critical ransomware alerts */
+  --threat-red-text:    #F87171;
+  --threat-red-subtle:  rgba(239, 68, 68, 0.12);
+  --threat-red-border:  rgba(239, 68, 68, 0.28);
 
-  --normal:          #10B981;   /* Cyber Emerald - Normal / Verified */
-  --normal-bg:       rgba(16, 185, 129, 0.12);
-  --normal-border:   rgba(16, 185, 129, 0.35);
-  --normal-glow:     rgba(16, 185, 129, 0.35);
+  --warning-amber:        #F59E0B;   /* Suspicious threshold warnings */
+  --warning-amber-text:   #FBBF24;
+  --warning-amber-subtle: rgba(245, 158, 11, 0.12);
+  --warning-amber-border: rgba(245, 158, 11, 0.28);
 
-  --warning:         #F59E0B;   /* Amber - Suspicious */
-  --warning-bg:      rgba(245, 158, 11, 0.14);
-  --warning-border:  rgba(245, 158, 11, 0.35);
+  --healthy-green:        #10B981;   /* Verified healthy states */
+  --healthy-green-text:   #34D399;
+  --healthy-green-subtle: rgba(16, 185, 129, 0.12);
+  --healthy-green-border: rgba(16, 185, 129, 0.28);
 
-  --brand:           #3B82F6;   /* Electric Cobalt */
-  --brand-hover:     #2563EB;
-  --brand-bg:        rgba(59, 130, 246, 0.14);
-  --brand-border:    rgba(59, 130, 246, 0.35);
-
-  --frost:           #06B6D4;   /* Cryo Cyan - IAM Account Lock */
-  --frost-bg:        rgba(6, 182, 212, 0.14);
-  --frost-border:    rgba(6, 182, 212, 0.35);
+  --neutral-gray:         #64748B;
+  --neutral-gray-subtle:  rgba(100, 116, 139, 0.12);
+  --neutral-gray-border:  rgba(100, 116, 139, 0.25);
 
   /* Compatibility Aliases for components */
-  --paper:           var(--bg-app);
-  --paper-dark:      var(--bg-surface);
-  --paper-deep:      var(--bg-subtle);
-  --ink:             var(--text-primary);
-  --ink-faint:       var(--text-secondary);
-  --ink-ghost:       var(--text-muted);
-  --seal:            var(--threat);
-  --seal-light:      var(--threat-bg);
-  --verdigris:       var(--normal);
-  --verdigris-light: var(--normal-bg);
-  --canary:          var(--warning);
-  --canary-light:    var(--warning-bg);
-  --canary-mid:      var(--warning);
-  --frost-mid:       var(--frost);
-  --frost-light:     var(--frost-bg);
+  --bg-app:          var(--bg-canvas);
+  --bg-surface:      var(--bg-panel);
+  --bg-surface-elev: var(--bg-panel-elev);
+  --threat:          var(--threat-red);
+  --threat-bg:       var(--threat-red-subtle);
+  --threat-border:   var(--threat-red-border);
+  --normal:          var(--healthy-green);
+  --normal-bg:       var(--healthy-green-subtle);
+  --normal-border:   var(--healthy-green-border);
+  --warning:         var(--warning-amber);
+  --warning-bg:      var(--warning-amber-subtle);
+  --warning-border:  var(--warning-amber-border);
+  --brand:           var(--accent-teal);
+  --brand-hover:     var(--accent-teal-hover);
+  --brand-bg:        var(--accent-teal-subtle);
+  --brand-border:    var(--accent-teal-border);
 
-  /* ── Typography Families ─────────────────────────────────────────────────── */
-  --font-display:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono:       'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
-  --font-stamp:      'Geist Mono', monospace;
+  /* ── Typography Families ───────────────────────────────────────────────── */
+  --font-sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:  ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
 
   /* Typography Scale */
   --text-xs:    0.72rem;
-  --text-sm:    0.85rem;
-  --text-base:  0.95rem;
-  --text-md:    1.15rem;
-  --text-lg:    1.4rem;
-  --text-xl:    1.9rem;
-  --text-2xl:   2.8rem;
-  --text-hero:  3.6rem;
+  --text-sm:    0.82rem;
+  --text-base:  0.92rem;
+  --text-md:    1.05rem;
+  --text-lg:    1.25rem;
+  --text-xl:    1.65rem;
+  --text-2xl:   2.2rem;
 
-  /* ── Spacing Scale ───────────────────────────────────────────────────────── */
+  /* ── Spacing Scale ─────────────────────────────────────────────────────── */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
-  --space-12: 3rem;
 
-  /* ── Structural Radii ────────────────────────────────────────────────────── */
+  /* ── Structural Radii ──────────────────────────────────────────────────── */
   --radius-xs:   4px;
-  --radius-sm:   8px;
-  --radius-md:   12px;
-  --radius-lg:   16px;
-  --radius-xl:   20px;
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
   --radius-full: 9999px;
 
-  /* ── Elevation & Colored Ambient Shadows ─────────────────────────────────── */
-  --shadow-sm:   0 1px 3px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md:   0 6px 20px -2px rgba(0, 0, 0, 0.55), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
-  --shadow-lg:   0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 6px 14px -2px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 30px -4px rgba(59, 130, 246, 0.25);
-  --shadow-doc:  var(--shadow-md);
-  --shadow-lift: var(--shadow-lg);
+  /* ── Layout Dimensions ─────────────────────────────────────────────────── */
+  --sidebar-w:           250px;
+  --sidebar-collapsed-w: 68px;
+  --header-h:            58px;
 
-  /* ── Motion & Fluid Dynamic Physics (Design Motion Principles) ─────────────── */
-  --dur-fast:   140ms;
-  --dur-mid:    240ms;
-  --dur-slow:   450ms;
-  /* Agency-grade custom cubic-bezier (simulating physical spring mass) */
-  --ease:        cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1); /* Emil Kowalski restraint & speed */
-  --ease-subtle: cubic-bezier(0.25, 1, 0.5, 1); /* Jakub Krehel production polish */
-  --ease-desk:   var(--ease);
-  --ease-stamp:  var(--ease);
-
-  /* ── Dimensions ──────────────────────────────────────────────────────────── */
-  --sidebar-w:    330px;
-  --right-rail-w: 330px;
-  --header-h:     64px;
+  /* ── Subtle Elevation & Transitions ────────────────────────────────────── */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-dropdown: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --ease:          cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:      140ms;
+  --dur-mid:       220ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

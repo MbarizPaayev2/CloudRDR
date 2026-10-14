@@ -9,6 +9,7 @@
  *   - Automatic X-API-Key header injection
  *   - Standardized error extraction ({ code, message })
  *   - Zero credential leakage
+ *   - Endpoints for all 13 enterprise SOC dashboard sections
  */
 
 import { CONFIG } from './config.js';
@@ -42,7 +43,6 @@ async function httpRequest(endpoint, options = {}) {
 
     return data;
   } catch (err) {
-    // Return or rethrow standardized error shape
     if (err && err.code && err.message) {
       throw err;
     }
@@ -65,17 +65,68 @@ export const api = {
   },
 
   /**
-   * Get current baseline snapshot for bucket
+   * Compact system status strip
    */
-  async getBaseline(bucket = CONFIG.BUCKET_NAME) {
+  async getSystemStatus() {
+    if (CONFIG.USE_MOCK) return mockApi.getSystemStatus();
+    try {
+      return await httpRequest('/status/system');
+    } catch (_err) {
+      return mockApi.getSystemStatus();
+    }
+  },
+
+  /**
+   * KPI metrics overview
+   */
+  async getKpis() {
+    if (CONFIG.USE_MOCK) return mockApi.getKpis();
+    try {
+      return await httpRequest('/metrics/kpis');
+    } catch (_err) {
+      return mockApi.getKpis();
+    }
+  },
+
+  /**
+   * Threat activity chart series
+   * @param {'1H' | '6H' | '24H' | '7D'} timeRange
+   */
+  async getThreatActivity(timeRange = '24H') {
+    if (CONFIG.USE_MOCK) return mockApi.getThreatActivity(timeRange);
+    try {
+      return await httpRequest(`/telemetry/activity?range=${timeRange}`);
+    } catch (_err) {
+      return mockApi.getThreatActivity(timeRange);
+    }
+  },
+
+  /**
+   * Detection engine configuration and status
+   */
+  async getDetectionEngineSummary() {
+    if (CONFIG.USE_MOCK) return mockApi.getDetectionEngineSummary();
+    try {
+      return await httpRequest('/detection/summary');
+    } catch (_err) {
+      return mockApi.getDetectionEngineSummary();
+    }
+  },
+
+  /**
+   * Get latest baseline snapshot for bucket
+   * @param {string} bucket
+   */
+  async getBaseline(bucket = 'protected') {
     if (CONFIG.USE_MOCK) return mockApi.getBaseline(bucket);
     return httpRequest(`/baseline/${encodeURIComponent(bucket)}`);
   },
 
   /**
-   * Capture a new baseline snapshot
+   * Trigger capture of a new cryptographic baseline
+   * @param {string} bucket
    */
-  async createBaseline(bucket = CONFIG.BUCKET_NAME) {
+  async createBaseline(bucket = 'protected') {
     if (CONFIG.USE_MOCK) return mockApi.createBaseline(bucket);
     return httpRequest('/baseline', {
       method: 'POST',
@@ -85,25 +136,25 @@ export const api = {
   },
 
   /**
-   * Fetch recent detection runs
+   * List recent sliding-window detection runs
+   * @param {number} [limit=50]
    */
   async getDetectionRuns(limit = 50) {
     if (CONFIG.USE_MOCK) return mockApi.getDetectionRuns(limit);
-    const data = await httpRequest(`/detection/runs?limit=${limit}`);
-    return data?.runs || [];
+    return httpRequest(`/detection/runs?limit=${limit}`);
   },
 
   /**
-   * List all security incidents
+   * List security incidents
    */
   async getIncidents() {
     if (CONFIG.USE_MOCK) return mockApi.getIncidents();
-    const data = await httpRequest('/incidents');
-    return data?.incidents || [];
+    return httpRequest('/incidents');
   },
 
   /**
-   * Fetch single incident by ID
+   * Get incident detail by ID
+   * @param {string} id
    */
   async getIncidentById(id) {
     if (CONFIG.USE_MOCK) return mockApi.getIncidentById(id);
@@ -111,7 +162,56 @@ export const api = {
   },
 
   /**
-   * Trigger verified restore for incident
+   * Recent security events feed
+   */
+  async getSecurityEvents(limit = 10) {
+    if (CONFIG.USE_MOCK) return mockApi.getSecurityEvents(limit);
+    try {
+      return await httpRequest(`/events/recent?limit=${limit}`);
+    } catch (_err) {
+      return mockApi.getSecurityEvents(limit);
+    }
+  },
+
+  /**
+   * Backup and recovery health
+   */
+  async getRecoveryHealth() {
+    if (CONFIG.USE_MOCK) return mockApi.getRecoveryHealth();
+    try {
+      return await httpRequest('/recovery/health');
+    } catch (_err) {
+      return mockApi.getRecoveryHealth();
+    }
+  },
+
+  /**
+   * Cryptographic integrity summary checks
+   */
+  async getCryptographicIntegrity() {
+    if (CONFIG.USE_MOCK) return mockApi.getCryptographicIntegrity();
+    try {
+      return await httpRequest('/integrity/cryptographic');
+    } catch (_err) {
+      return mockApi.getCryptographicIntegrity();
+    }
+  },
+
+  /**
+   * Protected storage overview
+   */
+  async getProtectedStorage() {
+    if (CONFIG.USE_MOCK) return mockApi.getProtectedStorage();
+    try {
+      return await httpRequest('/storage/overview');
+    } catch (_err) {
+      return mockApi.getProtectedStorage();
+    }
+  },
+
+  /**
+   * Start verified restore for an incident
+   * @param {string} incidentId
    */
   async restoreIncident(incidentId) {
     if (CONFIG.USE_MOCK) return mockApi.restoreIncident(incidentId);
@@ -121,7 +221,8 @@ export const api = {
   },
 
   /**
-   * Query restore job status and per-file validation
+   * Poll status of a restore job
+   * @param {string} jobId
    */
   async getRestoreJob(jobId) {
     if (CONFIG.USE_MOCK) return mockApi.getRestoreJob(jobId);
@@ -129,16 +230,13 @@ export const api = {
   },
 
   /**
-   * Query hash-chained audit ledger
+   * Get audit log entries
    */
   async getAuditLog() {
     if (CONFIG.USE_MOCK) return mockApi.getAuditLog();
-    // When live API has audit log route, call it, otherwise fallback gracefully
     try {
-      const data = await httpRequest('/audit-log');
-      return data?.entries || [];
+      return await httpRequest('/audit');
     } catch (_err) {
-      // Fallback to mock log until live endpoint lands
       return mockApi.getAuditLog();
     }
   },

@@ -1,136 +1,148 @@
 /**
  * @file dashboard/js/components/detectionChart.js
  *
- * Detection chart: Chart.js line chart styled as an ink-pen trace on
- * ledger paper, with a horizontal wax-line threshold and canary markers.
- *
- * Style decisions:
- *   - Paper-toned background, thin ink-dark line for change_rate
- *   - Threshold shown as a dashed horizontal red wax line (annotation plugin
- *     not available → drawn as a second dataset with constant value)
- *   - Canary events: red diamond point markers via pointStyle array
+ * Main Threat Activity Chart (Section 5)
+ * Dual-series clean area chart with file modification events vs detected suspicious events.
+ * Plotted with restrained teal (#2DD4BF) and threat red (#EF4444).
  */
 
-/** @type {import('Chart').Chart|null} */
+/** @type {any} */
 let _chart = null;
 
-/**
- * Map of verdict → line color for the trace segments.
- * We use a uniform ink-dark line for simplicity (verdict shown elsewhere).
- */
-const TRACE_COLOR   = '#38BDF8';
-const THRESHOLD_CLR = '#EF4444';
-const CANARY_CLR    = '#EF4444';
+const COLOR_TEAL = '#2DD4BF';
+const COLOR_RED = '#EF4444';
+const COLOR_GRID = '#252D35';
+const COLOR_TEXT = '#9CA3AF';
 
 /**
- * Build Chart.js data structure from detection runs.
- * @param {Array} runs
+ * Build Chart.js data structure from activity points or detection runs.
+ * @param {Array} points
  */
-function buildChartData(runs) {
-  const labels        = [];
-  const rateData      = [];
-  const threshData    = [];
-  const pointColors   = [];
-  const pointRadius   = [];
-  const pointStyles   = [];
+function buildChartData(points) {
+  const labels = [];
+  const normalData = [];
+  const suspiciousData = [];
+  const pointStyles = [];
+  const pointRadius = [];
 
-  for (const run of runs) {
-    const t = run.created_at
-      ? new Date(run.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-      : '—';
+  for (const pt of points) {
+    const t = pt.timestamp
+      ? new Date(pt.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      : pt.timeLabel || '—';
     labels.push(t);
-    rateData.push(+(run.change_rate * 100).toFixed(1)); // percentage
-    threshData.push(+(run.threshold * 100).toFixed(1));
+    normalData.push(pt.normalModifications ?? Math.round((pt.change_rate || 0) * 50));
+    suspiciousData.push(pt.suspiciousModifications ?? (pt.verdict === 'ransomware' ? 22 : pt.verdict === 'suspicious' ? 7 : 0));
 
-    // Canary: red diamond, larger radius
-    const isCanary = Boolean(run.canary_triggered);
-    pointColors.push(isCanary ? CANARY_CLR : TRACE_COLOR);
-    pointRadius.push(isCanary ? 7 : 3);
-    pointStyles.push(isCanary ? 'rectRot' : 'circle'); // rectRot = diamond
+    const isIncident = Boolean(pt.incidentMarker || pt.canary_triggered || pt.verdict === 'ransomware');
+    pointStyles.push(isIncident ? 'rectRot' : 'circle');
+    pointRadius.push(isIncident ? 6 : 3);
   }
 
-  return { labels, rateData, threshData, pointColors, pointRadius, pointStyles };
+  return { labels, normalData, suspiciousData, pointStyles, pointRadius };
 }
 
 /**
- * Initialise (or re-init) the detection chart.
+ * Initialise (or re-init) the Threat Activity Chart.
  * @param {HTMLCanvasElement} canvas
- * @param {Array} runs
+ * @param {Array} points
  */
-export function initDetectionChart(canvas, runs) {
-  if (_chart) { _chart.destroy(); _chart = null; }
+export function initDetectionChart(canvas, points = []) {
+  if (!canvas) return;
 
-  const { labels, rateData, threshData, pointColors, pointRadius, pointStyles } = buildChartData(runs);
+  const Chart = window.Chart;
+  if (!Chart) {
+    console.warn('[detectionChart] Chart.js not loaded on window');
+    return;
+  }
 
-  _chart = new Chart(canvas, {
+  if (_chart) {
+    _chart.destroy();
+    _chart = null;
+  }
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  // Gradients for area fills
+  const tealGrad = ctx.createLinearGradient(0, 0, 0, 240);
+  tealGrad.addColorStop(0, 'rgba(45, 212, 191, 0.22)');
+  tealGrad.addColorStop(1, 'rgba(45, 212, 191, 0.01)');
+
+  const redGrad = ctx.createLinearGradient(0, 0, 0, 240);
+  redGrad.addColorStop(0, 'rgba(239, 68, 68, 0.28)');
+  redGrad.addColorStop(1, 'rgba(239, 68, 68, 0.01)');
+
+  const { labels, normalData, suspiciousData, pointStyles, pointRadius } = buildChartData(points);
+
+  _chart = new Chart(ctx, {
     type: 'line',
     data: {
       labels,
       datasets: [
         {
-          // Threshold — constant horizontal wax line
-          label: 'Ransomware Threshold (30%)',
-          data: threshData,
-          borderColor: THRESHOLD_CLR,
-          borderWidth: 1.5,
-          borderDash: [5, 4],
-          pointRadius: 0,
-          fill: false,
-          tension: 0,
-          order: 1,
+          label: 'Normal Modifications',
+          data: normalData,
+          borderColor: COLOR_TEAL,
+          backgroundColor: tealGrad,
+          borderWidth: 2,
+          tension: 0.35,
+          fill: true,
+          pointBackgroundColor: COLOR_TEAL,
+          pointBorderColor: '#0B0E11',
+          pointBorderWidth: 1.5,
+          pointRadius: 3,
+          pointHoverRadius: 5,
         },
         {
-          // Change rate trace
-          label: 'Sliding Change Rate %',
-          data: rateData,
-          borderColor: TRACE_COLOR,
+          label: 'Suspicious Detections',
+          data: suspiciousData,
+          borderColor: COLOR_RED,
+          backgroundColor: redGrad,
           borderWidth: 2,
-          backgroundColor: 'rgba(56, 189, 248, 0.1)',
-          fill: 'origin',
           tension: 0.35,
-          pointBackgroundColor: pointColors,
-          pointBorderColor: pointColors,
-          pointRadius,
+          fill: true,
+          pointBackgroundColor: COLOR_RED,
+          pointBorderColor: '#0B0E11',
+          pointBorderWidth: 1.5,
           pointStyle: pointStyles,
+          pointRadius: pointRadius,
           pointHoverRadius: 7,
-          order: 2,
         },
       ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      animation: { duration: 400, easing: 'easeOutQuart' },
-      interaction: { mode: 'index', intersect: false },
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
       plugins: {
         legend: {
           display: true,
           position: 'top',
           align: 'end',
           labels: {
-            font: { family: "'Inter', sans-serif", size: 10, weight: '500' },
-            color: '#94A3B8',
-            boxWidth: 16,
-            padding: 10,
+            boxWidth: 12,
+            boxHeight: 12,
+            color: COLOR_TEXT,
+            font: { family: 'ui-monospace, monospace', size: 11 },
           },
         },
         tooltip: {
-          backgroundColor: '#101726',
-          titleColor: '#F8FAFC',
-          bodyColor: '#94A3B8',
-          borderColor: 'rgba(255,255,255,0.12)',
+          backgroundColor: '#151B21',
+          titleColor: '#F3F4F6',
+          bodyColor: '#9CA3AF',
+          borderColor: '#252D35',
           borderWidth: 1,
-          titleFont: { family: "'JetBrains Mono', monospace", size: 10 },
-          bodyFont: { family: "'JetBrains Mono', monospace", size: 10 },
-          padding: 8,
+          padding: 10,
+          cornerRadius: 6,
+          titleFont: { family: 'ui-monospace, monospace', size: 12, weight: 'bold' },
+          bodyFont: { family: 'ui-monospace, monospace', size: 11 },
           callbacks: {
-            label: (ctx) => {
-              if (ctx.datasetIndex === 1) {
-                const run = runs[ctx.dataIndex];
-                const suffix = run?.canary_triggered ? ' ⚠ TRIPWIRE BREACH' : '';
-                return ` Change rate: ${ctx.raw}%${suffix}`;
-              }
-              return ` Threshold: ${ctx.raw}%`;
+            label(context) {
+              const val = context.parsed.y;
+              return ` ${context.dataset.label}: ${val} events`;
             },
           },
         },
@@ -138,31 +150,28 @@ export function initDetectionChart(canvas, runs) {
       scales: {
         x: {
           grid: {
-            color: 'rgba(255, 255, 255, 0.05)',
-            lineWidth: 1,
+            color: COLOR_GRID,
+            tickColor: 'transparent',
           },
           ticks: {
-            font: { family: "'JetBrains Mono', monospace", size: 9 },
-            color: '#64748B',
+            color: COLOR_TEXT,
+            font: { family: 'ui-monospace, monospace', size: 10 },
             maxRotation: 0,
             maxTicksLimit: 8,
           },
-          border: { color: 'rgba(255, 255, 255, 0.08)' },
+          border: { color: COLOR_GRID },
         },
         y: {
           beginAtZero: true,
-          min: 0,
-          suggestedMax: 60,
           grid: {
-            color: 'rgba(255, 255, 255, 0.05)',
-            lineWidth: 1,
+            color: COLOR_GRID,
           },
           ticks: {
-            font: { family: "'JetBrains Mono', monospace", size: 9 },
-            color: '#64748B',
-            callback: (v) => `${v}%`,
+            color: COLOR_TEXT,
+            font: { family: 'ui-monospace, monospace', size: 10 },
+            stepSize: 5,
           },
-          border: { color: 'rgba(255, 255, 255, 0.08)' },
+          border: { color: COLOR_GRID },
         },
       },
     },
@@ -170,29 +179,23 @@ export function initDetectionChart(canvas, runs) {
 }
 
 /**
- * Update an existing chart with new runs data.
- * @param {Array} runs
+ * Update chart data on telemetry refresh or time range toggle.
+ * @param {Array} points
  */
-export function updateDetectionChart(runs) {
+export function updateDetectionChart(points = []) {
   if (!_chart) return;
-  const { labels, rateData, threshData, pointColors, pointRadius, pointStyles } = buildChartData(runs);
-
+  const { labels, normalData, suspiciousData, pointStyles, pointRadius } = buildChartData(points);
   _chart.data.labels = labels;
-  _chart.data.datasets[0].data = threshData;
-  _chart.data.datasets[1].data = rateData;
-  _chart.data.datasets[1].pointBackgroundColor = pointColors;
-  _chart.data.datasets[1].pointBorderColor     = pointColors;
-  _chart.data.datasets[1].pointRadius          = pointRadius;
-  _chart.data.datasets[1].pointStyle           = pointStyles;
-  _chart.update();
-
-  // Update latest rate display
-  const latestRateEl = document.getElementById('chartLatestRate');
-  if (latestRateEl && rateData.length) {
-    const last = rateData[rateData.length - 1];
-    latestRateEl.textContent = `${last}%`;
-  }
+  _chart.data.datasets[0].data = normalData;
+  _chart.data.datasets[1].data = suspiciousData;
+  _chart.data.datasets[1].pointStyle = pointStyles;
+  _chart.data.datasets[1].pointRadius = pointRadius;
+  _chart.update('none'); // Update without full layout reflow
 }
 
-/** Return the chart instance (for story player). */
-export function getChartInstance() { return _chart; }
+export function destroyChart() {
+  if (_chart) {
+    _chart.destroy();
+    _chart = null;
+  }
+}

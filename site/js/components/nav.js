@@ -47,6 +47,7 @@ export function initSharedNav(options = {}) {
           <ul class="nav-links" id="mainNavLinks">
             <li><a href="${basePath}index.html" class="nav-link ${activePage === 'home' ? 'active' : ''}">Overview</a></li>
             <li><a href="${basePath}how-it-works.html" class="nav-link ${activePage === 'how' ? 'active' : ''}">How It Works</a></li>
+            <li><a href="/dashboard" class="nav-link ${activePage === 'dashboard' ? 'active' : ''}">Admin SOC</a></li>
             <li><a href="${basePath}demo/index.html" class="nav-link ${activePage === 'demo' ? 'active' : ''}">Live Demo</a></li>
             <li><a href="${basePath}team.html" class="nav-link ${activePage === 'team' ? 'active' : ''}">Team</a></li>
             <li><a href="${basePath}docs.html" class="nav-link ${activePage === 'docs' ? 'active' : ''}">ISMS Docs</a></li>
@@ -57,8 +58,8 @@ export function initSharedNav(options = {}) {
               <!-- Dynamically populated icon -->
             </button>
 
-            <a href="${basePath}demo/index.html" class="btn btn-primary btn-sm">
-              Open the demo ↗
+            <a href="/dashboard" class="btn btn-primary btn-sm">
+              SOC Console &rarr;
             </a>
 
             <button type="button" class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Toggle navigation menu">

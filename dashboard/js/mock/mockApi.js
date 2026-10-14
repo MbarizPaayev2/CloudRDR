@@ -4,16 +4,18 @@
  * Mock API Fixtures for CloudRDR Dashboard Demo.
  * Provides a complete, realistic forensic story:
  *   1. Initial clean operations (normal change rates < 5%)
- *   2. Sudden LockBit-style ransomware spike (45% modification + canary tripped)
+ *   2. Sudden LockBit-style ransomware spike (44% modification + canary tripped)
  *   3. Automated account freeze & signed Ed25519 incident record
  *   4. Verified restore showing 100% VALID restoration against pre-attack SHA-256
  *   5. Hash-chained audit ledger with unbroken cryptographic links
+ *   6. Full enterprise SOC data models (KPIs, System status, Recovery health, Storage overview)
  */
 
 // Helper to generate ISO timestamps offset from now
 const now = Date.now();
 const minutesAgo = (m) => new Date(now - m * 60 * 1000).toISOString();
 const secondsAgo = (s) => new Date(now - s * 1000).toISOString();
+const hoursAgo = (h) => new Date(now - h * 3600 * 1000).toISOString();
 
 export const mockApi = {
   /**
@@ -25,6 +27,145 @@ export const mockApi = {
       uptime: 86420.5,
       timestamp: new Date().toISOString(),
       provider: 'local-filesystem (mock)',
+    };
+  },
+
+  /**
+   * GET /status/system
+   * Compact system status strip (Section 3)
+   */
+  async getSystemStatus() {
+    return {
+      detectionEngine: {
+        status: 'active',
+        label: 'Active',
+        detail: 'Sliding-window: 30s',
+        lastChecked: secondsAgo(15),
+      },
+      cloudStorage: {
+        status: 'connected',
+        label: 'Connected',
+        detail: 'local-storage / protected',
+        lastChecked: secondsAgo(25),
+      },
+      baselineIntegrity: {
+        status: 'verified',
+        label: 'Verified',
+        detail: 'Merkle root confirmed',
+        lastChecked: minutesAgo(2),
+      },
+      backupService: {
+        status: 'healthy',
+        label: 'Healthy',
+        detail: 'AES-256-GCM AEAD Tag verified',
+        lastChecked: minutesAgo(5),
+      },
+    };
+  },
+
+  /**
+   * GET /metrics/kpis
+   * KPI Overview (Section 4)
+   */
+  async getKpis() {
+    return {
+      protectedFiles: {
+        total: 50,
+        baselined: 50,
+        coveragePct: 100,
+        label: 'Protected Files',
+        secondary: '100% valid baselines captured',
+      },
+      activeIncidents: {
+        total: 1,
+        critical: 1,
+        high: 0,
+        label: 'Active Incidents',
+        secondary: '1 critical threat contained (frozen)',
+      },
+      detectionEvents: {
+        total: 24,
+        diffPeriod: '+18 vs previous 1H period',
+        label: 'Detection Events',
+        secondary: 'Monitored across 60s sliding window',
+      },
+      backupIntegrity: {
+        verifiedPct: 100,
+        verifiedCount: 10,
+        failedCount: 0,
+        lastVerification: minutesAgo(4),
+        label: 'Backup Integrity',
+        secondary: '10/10 verified (0 failed)',
+      },
+    };
+  },
+
+  /**
+   * GET /telemetry/activity?range=24H
+   * Main Threat Activity Chart (Section 5)
+   */
+  async getThreatActivity(timeRange = '24H') {
+    const points = [];
+    let count = 12;
+    let stepMinutes = 120; // 24h default
+
+    if (timeRange === '1H') {
+      count = 12;
+      stepMinutes = 5;
+    } else if (timeRange === '6H') {
+      count = 12;
+      stepMinutes = 30;
+    } else if (timeRange === '7D') {
+      count = 14;
+      stepMinutes = 720;
+    }
+
+    for (let i = count - 1; i >= 0; i--) {
+      const t = new Date(now - i * stepMinutes * 60 * 1000);
+      let normal = Math.floor(Math.random() * 5) + 2;
+      let suspicious = 0;
+      let incidentMarker = false;
+
+      // Spike during the last 20 minutes
+      if (i === 1) {
+        normal = 12;
+        suspicious = 22;
+        incidentMarker = true;
+      } else if (i === 2) {
+        suspicious = 7;
+      }
+
+      points.push({
+        timestamp: t.toISOString(),
+        timeLabel: t.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        normalModifications: normal,
+        suspiciousModifications: suspicious,
+        incidentMarker,
+      });
+    }
+
+    return {
+      timeRange,
+      points,
+    };
+  },
+
+  /**
+   * GET /detection/summary
+   * Detection Summary Panel (Section 6)
+   */
+  async getDetectionEngineSummary() {
+    return {
+      status: 'active',
+      modificationThreshold: 0.30,
+      windowSeconds: 30,
+      currentObservedRate: 0.44,
+      verdict: 'ransomware',
+      canaryTriggered: true,
+      canaryPath: 'canary/tripwire_sentinel.docx',
+      recentDetectionAt: minutesAgo(4),
+      pendingCases: 1,
+      mode: 'deterministic-simulation',
     };
   },
 
@@ -58,7 +199,6 @@ export const mockApi = {
 
   /**
    * GET /detection/runs?limit=50
-   * Real-time sliding window telemetry: baseline -> spike -> containment
    */
   async getDetectionRuns(limit = 15) {
     const runs = [
@@ -165,6 +305,7 @@ export const mockApi = {
 
   /**
    * GET /incidents
+   * Incident Queue (Section 7)
    */
   async getIncidents() {
     return [
@@ -172,7 +313,10 @@ export const mockApi = {
         id: 'inc-9f81a7b4-32d8-4f1b-a944-598bc817ea20',
         detection_run_id: 'run-06',
         account_id: 'finance-prod-01',
+        severity: 'Critical',
+        detection_reason: 'CANARY_MODIFIED',
         status: 'frozen', // Active incident waiting for restoration
+        status_label: 'Contained (Frozen)',
         affected_paths: [
           'corporate/payroll_q3.xlsx',
           'corporate/executive_memo.docx',
@@ -196,7 +340,10 @@ export const mockApi = {
         id: 'inc-3a10b982-8411-4822-b582-771928491823',
         detection_run_id: 'run-prev-01',
         account_id: 'dev-sandbox-02',
+        severity: 'High',
+        detection_reason: 'MASS_MODIFICATION',
         status: 'resolved',
+        status_label: 'Recovery Verified',
         affected_paths: ['test/sample_a.txt', 'test/sample_b.txt', 'test/sample_c.txt'],
         detected_at: minutesAgo(180),
         frozen_at: minutesAgo(179.9),
@@ -218,6 +365,184 @@ export const mockApi = {
       throw { error: { code: 'not_found', message: `Incident ${id} not found` } };
     }
     return found;
+  },
+
+  /**
+   * GET /events/recent
+   * Recent Security Events Feed (Section 8)
+   */
+  async getSecurityEvents(limit = 10) {
+    return [
+      {
+        id: 'evt-01',
+        type: 'canary_accessed',
+        icon: 'alert',
+        severity: 'Critical',
+        description: 'Canary honeytoken modified: canary/tripwire_sentinel.docx',
+        target: 'canary/tripwire_sentinel.docx',
+        identity: 'service-acc-backup-sync',
+        timestamp: minutesAgo(4),
+      },
+      {
+        id: 'evt-02',
+        type: 'threshold_exceeded',
+        icon: 'activity',
+        severity: 'Critical',
+        description: 'Sliding-window modification threshold exceeded (44% > 30%)',
+        target: 'finance-prod-01',
+        identity: 'monitored-bucket',
+        timestamp: minutesAgo(4.1),
+      },
+      {
+        id: 'evt-03',
+        type: 'identity_isolated',
+        icon: 'freeze',
+        severity: 'High',
+        description: 'IAM deny-all write lock dispatched to account: finance-prod-01',
+        target: 'finance-prod-01',
+        identity: 'devops-freeze-service',
+        timestamp: minutesAgo(3.9),
+      },
+      {
+        id: 'evt-04',
+        type: 'evidence_signed',
+        icon: 'sign',
+        severity: 'Info',
+        description: 'Incident manifest sealed with Ed25519 signature',
+        target: 'inc-9f81a7b4',
+        identity: 'ed25519-hsm-soc-key-01',
+        timestamp: minutesAgo(3.8),
+      },
+      {
+        id: 'evt-05',
+        type: 'backup_verified',
+        icon: 'shieldCheck',
+        severity: 'Success',
+        description: 'AEAD authenticated decryption verified: 10/10 files valid',
+        target: 'restore-job-77a82b',
+        identity: 'recovery-daemon',
+        timestamp: secondsAgo(15),
+      },
+      {
+        id: 'evt-06',
+        type: 'baseline_verified',
+        icon: 'check',
+        severity: 'Success',
+        description: 'Merkle root verified against immutable baseline snapshot #1',
+        target: 'f7bbb36aa01a...',
+        identity: 'cloudrdr-agent-v1',
+        timestamp: minutesAgo(120),
+      },
+    ].slice(0, limit);
+  },
+
+  /**
+   * GET /recovery/health
+   * Backup & Recovery Health (Section 9)
+   */
+  async getRecoveryHealth() {
+    return {
+      latestBackupAt: minutesAgo(120),
+      lastSuccessfulRestoreAt: secondsAgo(15),
+      pendingRecoveryJobs: 0,
+      failedRecoveryJobs: 0,
+      verifiedFilesCount: 10,
+      overallIntegrity: 'VALID',
+      activeProgress: 100,
+      activeStatus: 'Completed & Verified',
+      checks: [
+        {
+          name: 'AES-256-GCM AEAD Tag Authentication',
+          result: 'VALID',
+          details: 'Authentication tag verified before ciphertext decryption',
+        },
+        {
+          name: 'Pre-Attack SHA-256 Baseline Match',
+          result: 'VALID',
+          details: 'Byte-for-byte SHA-256 matches pre-incident baseline',
+        },
+        {
+          name: 'Backup Manifest Ed25519 Signature',
+          result: 'VALID',
+          details: 'HSM signature cryptographically verified',
+        },
+        {
+          name: 'Merkle Root Consistency',
+          result: 'VALID',
+          details: 'Restored leaf digests recompute to trusted Merkle root',
+        },
+      ],
+    };
+  },
+
+  /**
+   * GET /integrity/cryptographic
+   * Cryptographic Integrity Summary (Section 10)
+   */
+  async getCryptographicIntegrity() {
+    return {
+      lastSealedAt: minutesAgo(3.8),
+      checks: [
+        {
+          id: 'chk-baseline',
+          name: 'Baseline SHA-256 Hashes',
+          result: 'Verified',
+          lastVerifiedAt: minutesAgo(2),
+          explanation: 'All 50 monitored objects match immutable baseline hashes.',
+        },
+        {
+          id: 'chk-merkle',
+          name: 'Trusted Merkle Root',
+          result: 'Verified',
+          lastVerifiedAt: minutesAgo(2),
+          explanation: 'Root f7bbb36a... is cryptographically consistent with leaf digests.',
+        },
+        {
+          id: 'chk-signature',
+          name: 'Incident Manifest Signature',
+          result: 'Verified',
+          lastVerifiedAt: minutesAgo(3.8),
+          explanation: 'Signed with Ed25519 HSM key (ed25519-hsm-soc-key-01).',
+        },
+        {
+          id: 'chk-hashchain',
+          name: 'Audit Hash-Chain',
+          result: 'Verified',
+          lastVerifiedAt: secondsAgo(10),
+          explanation: 'Zero broken links across all 6 blocks from Genesis to latest.',
+        },
+        {
+          id: 'chk-timestamp',
+          name: 'RFC-3161 Evidence Timestamp',
+          result: 'Verified',
+          lastVerifiedAt: minutesAgo(3.8),
+          explanation: 'Trusted UTC time token securely embedded in manifest.',
+        },
+      ],
+    };
+  },
+
+  /**
+   * GET /storage/overview
+   * Protected Storage Overview (Section 11)
+   */
+  async getProtectedStorage() {
+    return {
+      provider: 'Local Filesystem Storage (S3 / Supabase Compliant)',
+      protectedObjects: 50,
+      validBaselines: 50,
+      coveragePct: 100,
+      requiringReview: 0,
+      connectivity: 'Connected',
+      versioning: 'Enabled',
+      immutability: 'Active (WORM Policies)',
+      prefixes: [
+        { prefix: 'files/', count: 38, type: 'Corporate Spreadsheets & Documents', status: 'Protected' },
+        { prefix: 'canary/', count: 2, type: 'Tripwire Sentinels (Zero-Touch)', status: 'Armed' },
+        { prefix: 'evidence/', count: 5, type: 'Forensic Incident Bundles', status: 'Immutable' },
+        { prefix: 'backup/', count: 50, type: 'AES-256-GCM Encrypted Backups', status: 'Verified' },
+      ],
+    };
   },
 
   /**

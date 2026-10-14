@@ -1,9 +1,9 @@
 /**
  * @file dashboard/js/state.js
  *
- * Central Reactive State Store for CloudRDR Dashboard.
+ * Central Reactive State Store for CloudRDR Admin Dashboard.
  * Manages in-memory state, event notification for UI components,
- * and unified refresh orchestration.
+ * unified refresh orchestration, and filters.
  */
 
 import { api } from './api.js';
@@ -11,11 +11,20 @@ import { CONFIG } from './config.js';
 
 const initialState = {
   health: { status: 'loading', uptime: 0, timestamp: null },
+  systemStatus: null,
+  kpis: null,
+  threatActivity: null,
+  timeRange: '24H',
+  detectionSummary: null,
   baseline: null,
   detectionRuns: [],
   incidents: [],
   selectedIncidentId: null,
   selectedIncident: null,
+  securityEvents: [],
+  recoveryHealth: null,
+  cryptographicIntegrity: null,
+  protectedStorage: null,
   restoreJob: null,
   auditLog: [],
   currentVerdict: 'normal',
@@ -23,6 +32,12 @@ const initialState = {
   lastUpdated: null,
   isLoading: false,
   error: null,
+  // Filters & UI state
+  searchQuery: '',
+  severityFilter: 'all',
+  statusFilter: 'all',
+  sidebarCollapsed: false,
+  activeNav: 'overview',
 };
 
 let currentState = { ...initialState };
@@ -58,138 +73,107 @@ export function setState(partial) {
  */
 export function subscribe(listener) {
   listeners.add(listener);
-  // Call listener immediately with current state
   try {
     listener(currentState);
   } catch (err) {
-    console.error('[state] initial subscriber call error:', err);
+    console.error('[state] initial subscriber error:', err);
   }
-  return () => listeners.delete(listener);
-}
-
-/**
- * Select an incident to view its detailed timeline and affected files.
- * @param {string|null} incidentId
- */
-export async function selectIncident(incidentId) {
-  if (!incidentId) {
-    setState({ selectedIncidentId: null, selectedIncident: null });
-    return;
-  }
-
-  // Find in already loaded list or fetch from API
-  let found = currentState.incidents.find((i) => i.id === incidentId);
-  if (!found) {
-    try {
-      found = await api.getIncidentById(incidentId);
-    } catch (_err) {
-      found = null;
-    }
-  }
-
-  setState({ selectedIncidentId: incidentId, selectedIncident: found });
-}
-
-/**
- * Determine global threat verdict from recent runs.
- * @param {Array<any>} runs
- * @returns {{ verdict: 'normal'|'suspicious'|'ransomware', canaryTriggered: boolean }}
- */
-function deriveVerdict(runs) {
-  if (!runs || runs.length === 0) {
-    return { verdict: 'normal', canaryTriggered: false };
-  }
-
-  // Look at the latest run
-  const latest = runs[runs.length - 1];
-  return {
-    verdict: latest.verdict || 'normal',
-    canaryTriggered: Boolean(latest.canary_triggered),
+  return () => {
+    listeners.delete(listener);
   };
 }
 
 /**
- * Orchestrate complete data refresh across all panels.
- * Preserves existing telemetry on partial failures to prevent blank screens.
- * @param {{ background?: boolean }} [options]
+ * Select an incident and fetch its details.
+ * @param {string} incidentId
  */
-export async function refreshAll(options = {}) {
-  const isBackground = Boolean(options.background);
-  if (!isBackground) {
-    setState({ isLoading: true });
-  }
+export function selectIncident(incidentId) {
+  const inc = currentState.incidents.find((i) => i.id === incidentId);
+  setState({
+    selectedIncidentId: incidentId,
+    selectedIncident: inc || null,
+  });
+}
+
+/**
+ * Refresh all dashboard data in a single synchronized pass.
+ */
+export async function refreshAll() {
+  setState({ isLoading: true, error: null });
 
   try {
-    const [healthRes, baselineRes, runsRes, incidentsRes, auditRes] = await Promise.allSettled([
+    const [
+      health,
+      systemStatus,
+      kpis,
+      threatActivity,
+      detectionSummary,
+      baseline,
+      detectionRuns,
+      incidents,
+      securityEvents,
+      recoveryHealth,
+      cryptographicIntegrity,
+      protectedStorage,
+      auditLog,
+    ] = await Promise.allSettled([
       api.getHealth(),
+      api.getSystemStatus(),
+      api.getKpis(),
+      api.getThreatActivity(currentState.timeRange),
+      api.getDetectionEngineSummary(),
       api.getBaseline(CONFIG.BUCKET_NAME),
-      api.getDetectionRuns(50),
+      api.getDetectionRuns(15),
       api.getIncidents(),
+      api.getSecurityEvents(10),
+      api.getRecoveryHealth(),
+      api.getCryptographicIntegrity(),
+      api.getProtectedStorage(),
       api.getAuditLog(),
     ]);
 
-    // Check for errors without wiping out valid panels
-    let errorDetail = null;
-    const rejected = [healthRes, baselineRes, runsRes, incidentsRes, auditRes].find(
-      (r) => r.status === 'rejected'
-    );
-    if (rejected && rejected.reason) {
-      const err = rejected.reason;
-      errorDetail = {
-        code: err.code || err.error?.code || 'api_error',
-        message: err.message || err.error?.message || 'Failed to communicate with backend API',
-      };
-    }
+    const runsVal = detectionRuns.status === 'fulfilled' ? detectionRuns.value : [];
+    const latestRun = runsVal.length > 0 ? runsVal[runsVal.length - 1] : null;
+    const currentVerdict = latestRun?.verdict || 'normal';
+    const canaryTriggered = latestRun?.canary_triggered || false;
 
-    const health =
-      healthRes.status === 'fulfilled'
-        ? healthRes.value
-        : currentState.health || { status: 'offline', uptime: 0 };
-    const baseline =
-      baselineRes.status === 'fulfilled' ? baselineRes.value : currentState.baseline;
-    const runs =
-      runsRes.status === 'fulfilled' ? runsRes.value : currentState.detectionRuns;
-    const incidents =
-      incidentsRes.status === 'fulfilled' ? incidentsRes.value : currentState.incidents;
-    const auditLog =
-      auditRes.status === 'fulfilled' ? auditRes.value : currentState.auditLog;
+    const incidentsVal = incidents.status === 'fulfilled' ? incidents.value : [];
+    let selectedInc = currentState.selectedIncident;
+    let selectedId = currentState.selectedIncidentId;
 
-    const { verdict, canaryTriggered } = deriveVerdict(runs);
-
-    // Keep selected incident synced if available
-    let selectedIncident = currentState.selectedIncident;
-    if (currentState.selectedIncidentId) {
-      selectedIncident =
-        incidents.find((i) => i.id === currentState.selectedIncidentId) || selectedIncident;
-    } else if (incidents.length > 0) {
-      // Default select the first active/frozen incident or the latest incident
-      const firstActive = incidents.find((i) => i.status !== 'resolved') || incidents[0];
-      selectedIncident = firstActive;
+    if (!selectedId && incidentsVal.length > 0) {
+      selectedId = incidentsVal[0].id;
+      selectedInc = incidentsVal[0];
+    } else if (selectedId) {
+      selectedInc = incidentsVal.find((i) => i.id === selectedId) || null;
     }
 
     setState({
-      health,
-      baseline,
-      detectionRuns: runs,
-      incidents,
-      selectedIncidentId: selectedIncident ? selectedIncident.id : null,
-      selectedIncident,
-      auditLog,
-      currentVerdict: verdict,
+      health: health.status === 'fulfilled' ? health.value : { status: 'error', uptime: 0, timestamp: null },
+      systemStatus: systemStatus.status === 'fulfilled' ? systemStatus.value : null,
+      kpis: kpis.status === 'fulfilled' ? kpis.value : null,
+      threatActivity: threatActivity.status === 'fulfilled' ? threatActivity.value : null,
+      detectionSummary: detectionSummary.status === 'fulfilled' ? detectionSummary.value : null,
+      baseline: baseline.status === 'fulfilled' ? baseline.value : null,
+      detectionRuns: runsVal,
+      incidents: incidentsVal,
+      selectedIncidentId: selectedId,
+      selectedIncident: selectedInc,
+      securityEvents: securityEvents.status === 'fulfilled' ? securityEvents.value : [],
+      recoveryHealth: recoveryHealth.status === 'fulfilled' ? recoveryHealth.value : null,
+      cryptographicIntegrity: cryptographicIntegrity.status === 'fulfilled' ? cryptographicIntegrity.value : null,
+      protectedStorage: protectedStorage.status === 'fulfilled' ? protectedStorage.value : null,
+      auditLog: auditLog.status === 'fulfilled' ? auditLog.value : [],
+      currentVerdict,
       canaryTriggered,
       lastUpdated: new Date().toISOString(),
       isLoading: false,
-      error: errorDetail,
     });
   } catch (err) {
-    console.error('[state] refresh failed:', err);
+    console.error('[state] refreshAll failed:', err);
     setState({
+      error: err.message || 'Failed to refresh telemetry',
       isLoading: false,
-      error: {
-        code: err.code || err.error?.code || 'refresh_failed',
-        message: err.message || err.error?.message || 'Failed to refresh telemetry from backend',
-      },
     });
   }
 }
-
