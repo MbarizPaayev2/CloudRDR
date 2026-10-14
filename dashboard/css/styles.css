@@ -23,6 +23,57 @@ body {
   min-height: 100vh;
 }
 
+/* ── Custom Dark SOC Scrollbars ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas, #080b12);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-teal, #38bdf8);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) var(--bg-canvas, #080b12);
+}
+
+/* ── Accessible Focus Management (WCAG 2.2 AA) ────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-teal, #38bdf8);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-teal, #38bdf8);
+  outline-offset: 2px;
+}
+
+/* ── Motion Accessibility (WCAG 2.2 AA) ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ── Typography Helpers ────────────────────────────────────────────────────── */
 .mono {
   font-family: var(--font-mono);
