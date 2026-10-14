@@ -2274,15 +2274,15 @@
     "semantic_hash": ""
   },
   "dashboard/index.html": {
-    "mtime": 1791977844.8826478,
-    "seen": 1791978108.4517066,
-    "ast_hash": "1851892db51b3ec662ef9b314cc88f39",
+    "mtime": 1791979766.7817206,
+    "seen": 1791979875.830895,
+    "ast_hash": "16766b799779bf1ed23f4ca83cec7dff",
     "semantic_hash": ""
   },
   "dashboard/landing.html": {
-    "mtime": 1791979385.0174596,
-    "seen": 1791979437.3835702,
-    "ast_hash": "e2ef63335d5a028bbc7a9646e0f64c87",
+    "mtime": 1791979824.5431416,
+    "seen": 1791979875.8309002,
+    "ast_hash": "92ff5b3d7c0934e75c2931e819d9f3a0",
     "semantic_hash": ""
   },
   "docs/grc/01_THREAT_MODEL_STRIDE.md": {
@@ -5145,6 +5145,60 @@
     "mtime": 1791979068.832995,
     "seen": 1791979437.3780758,
     "ast_hash": "cc4378619297228b831d9b60d4f4b1c8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-api-security-testing/SKILL.md": {
+    "mtime": 1791979506.4081345,
+    "seen": 1791979875.774686,
+    "ast_hash": "31afad6c8135f0f65eb14b650718c355",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-application-security-testing/SKILL.md": {
+    "mtime": 1791979506.408676,
+    "seen": 1791979875.7746947,
+    "ast_hash": "44669d8984048037082a0e28d1116c16",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-ci-security-scanning-with-strix/SKILL.md": {
+    "mtime": 1791979506.4092188,
+    "seen": 1791979875.774701,
+    "ast_hash": "1ec2024934bb9d4c93cb2a5c3dbd41fe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-find-security-vulnerabilities-in-code/SKILL.md": {
+    "mtime": 1791979506.4103491,
+    "seen": 1791979875.7747061,
+    "ast_hash": "eb7f4928d552fbcb6baa7099c9dd1da7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-fix-security-vulnerabilities-with-strix/SKILL.md": {
+    "mtime": 1791979506.4114375,
+    "seen": 1791979875.7747116,
+    "ast_hash": "80682915e59c5232cb1bd4569dc63a9d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-managed-pentesting-with-strix/SKILL.md": {
+    "mtime": 1791979506.412526,
+    "seen": 1791979875.7747173,
+    "ast_hash": "1ba9a253e220e37a124cc29e55e30113",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-owasp-top-10-testing/SKILL.md": {
+    "mtime": 1791979506.413064,
+    "seen": 1791979875.7747223,
+    "ast_hash": "ce716c1abf2a2eeafed9781a0ab042fb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-penetration-testing-with-strix/SKILL.md": {
+    "mtime": 1791979506.4141388,
+    "seen": 1791979875.7747273,
+    "ast_hash": "da3e17eb8f377b6cc7037ac6db5c4e13",
+    "semantic_hash": ""
+  },
+  ".agents/skills/strix-web-app-penetration-testing/SKILL.md": {
+    "mtime": 1791979506.4146788,
+    "seen": 1791979875.774732,
+    "ast_hash": "35490286cd461b9ffe3c625c8fe0196e",
     "semantic_hash": ""
   }
 }
