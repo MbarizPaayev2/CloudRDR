@@ -3,20 +3,27 @@ node_modules/
 
 # Environment – NEVER commit real secrets
 .env
+.env.local
+.env.*.local
 
-# Local storage data (generated at runtime)
+# Local storage data & quarantine (generated at runtime)
 data/
 
-# Build / cache
+# AI Agent configuration, system prompts, skills & rules (keep local only)
+.agents/
+AGENTS.md
+skills-lock.json
+
+# Codebase knowledge graph & AST structural extraction (keep local only)
+graphify-out/
+
+# Temporary directories
+temp_design_skills/
+
+# Build & cache
 .eslintcache
 *.log
 
-# OS
+# OS metadata
 .DS_Store
 Thumbs.db
-
-# Graphify cache
-graphify-out/cache/
-
-# Temporary clones / external skills
-temp_design_skills/

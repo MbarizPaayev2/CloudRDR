@@ -6,6 +6,8 @@ data/
 
 # Agent configuration, rules & skill packages
 .agents/
+AGENTS.md
+skills-lock.json
 
 # Knowledge graph generated artifacts & cache
 graphify-out/
@@ -17,5 +19,5 @@ temp_design_skills/
 .eslintcache
 *.log
 
-# Lockfiles (optional, prettier should not reformat lockfiles)
+# Lockfiles
 package-lock.json
