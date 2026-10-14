@@ -23,7 +23,7 @@ const defaultOrigin =
 // Safe defaults
 const DEFAULTS = {
   API_BASE_URL: defaultOrigin,
-  API_KEY: 'dev-secret-key-12345',
+  API_KEY: 'cloudrdr-default-key-2026',
   POLL_INTERVAL_MS: 5000,
   USE_MOCK: false, // Connect directly to real Fastify backend APIs
   THEME: 'dark',

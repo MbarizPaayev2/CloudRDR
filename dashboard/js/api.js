@@ -23,14 +23,17 @@ import { mockApi } from './mock/mockApi.js';
  */
 async function httpRequest(endpoint, options = {}) {
   const url = `${CONFIG.API_BASE_URL}${endpoint}`;
+  const token =
+    typeof localStorage !== 'undefined' ? localStorage.getItem('cloudrdr_token') : null;
   const headers = {
     Accept: 'application/json',
-    'X-API-Key': CONFIG.API_KEY,
+    'X-API-Key': CONFIG.API_KEY || 'cloudrdr-default-key-2026',
+    ...(token ? { Authorization: `Bearer ${token}`, 'x-session-token': token } : {}),
     ...(options.headers || {}),
   };
 
   try {
-    const res = await fetch(url, { ...options, headers });
+    const res = await fetch(url, { credentials: 'include', ...options, headers });
     const data = await res.json().catch(() => null);
 
     if (!res.ok) {
@@ -313,5 +316,32 @@ export const api = {
     } catch (_err) {
       return mockApi.getAuditLog();
     }
+  },
+
+  /**
+   * Simulate a mass ransomware attack
+   */
+  async simulateMassAttack() {
+    return httpRequest('/api/simulate/attack', {
+      method: 'POST',
+    });
+  },
+
+  /**
+   * Trip the canary decoy tripwire
+   */
+  async triggerCanaryAlert() {
+    return httpRequest('/api/simulate/canary', {
+      method: 'POST',
+    });
+  },
+
+  /**
+   * Reset simulation state
+   */
+  async resetSimulation() {
+    return httpRequest('/api/simulate/reset', {
+      method: 'POST',
+    });
   },
 };

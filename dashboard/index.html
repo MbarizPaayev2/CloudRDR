@@ -602,6 +602,110 @@
                 </button>
               </div>
             </section>
+
+            <!-- Active Incidents & Containment Queue Spotlight -->
+            <section class="table-card" aria-label="Active Security Incidents Spotlight" style="margin-top: 16px;">
+              <div class="table-controls-bar">
+                <div class="panel-card-titles">
+                  <h2>Active Incidents &amp; Containment Queue</h2>
+                  <p>Real-time ransomware alerts, IAM freeze states, and cryptographic recovery</p>
+                </div>
+                <div class="filter-group">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnGoToIncidentsFromOverview">
+                    View Full Incident Queue &rarr;
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="soc-table" id="overviewIncidentsTable">
+                  <thead>
+                    <tr>
+                      <th>Incident ID</th>
+                      <th>Severity</th>
+                      <th>Detection Reason</th>
+                      <th>Affected Objects</th>
+                      <th>Detected At</th>
+                      <th>Response Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="overviewIncidentsTableBody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- Storage & Cryptographic Baseline Quick Inspection Grid -->
+            <section class="two-col-grid" style="margin-top: 16px;">
+              <!-- Armed Canary Sentinel Quick Status -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Canary Trap Sentinels</h2>
+                    <p>Zero-touch decoys armed in storage prefixes</p>
+                  </div>
+                  <span class="canary-sentinel-badge armed">2 ARMED</span>
+                </div>
+                <div class="detection-summary-rows">
+                  <div class="summary-row">
+                    <span class="mono font-semibold text-primary">canary/tripwire_sentinel.docx</span>
+                    <span class="status-badge-pill VALID">ZERO-TOUCH ARMED</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="mono font-semibold text-primary">canary/salary_2026.xlsx</span>
+                    <span class="status-badge-pill VALID">ZERO-TOUCH ARMED</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Containment Policy</span>
+                    <span class="mono font-semibold text-teal">Sub-Second IAM Write-Deny</span>
+                  </div>
+                </div>
+                <div style="margin-top: 12px;">
+                  <button type="button" class="btn btn-primary btn-sm" id="btnTripCanaryOverview">
+                    Trip Canary Sentinel (Simulate Touch)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Cryptographic Baseline & Merkle Proof -->
+              <div class="panel-card">
+                <div class="panel-card-header">
+                  <div class="panel-card-titles">
+                    <h2>Cryptographic Baseline &amp; Merkle Root</h2>
+                    <p>Tamper-evident integrity verification over protected objects</p>
+                  </div>
+                  <span class="signal-chip normal">VERIFIED</span>
+                </div>
+                <div class="detection-summary-rows">
+                  <div class="summary-row">
+                    <span class="text-secondary">Baseline Version</span>
+                    <span class="mono font-semibold text-primary" id="overviewBaselineVersion">v1 (Active Manifest)</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Protected Objects</span>
+                    <span class="mono font-semibold" id="overviewBaselineCount">27 verified objects</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Trusted Merkle Root</span>
+                    <span class="mono text-teal font-semibold" id="overviewMerkleRoot" style="font-size: 0.72rem;">1d232053e99eb283...2a59f8b2</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="text-secondary">Digital Signature</span>
+                    <span class="mono font-semibold text-green">Ed25519 HSM Hardware-Signed</span>
+                  </div>
+                </div>
+                <div style="margin-top: 12px; display: flex; gap: 8px;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnRecaptureBaselineOverview">
+                    Capture New Baseline
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnGoToStorageFromOverview">
+                    Open Storage Ledger &rarr;
+                  </button>
+                </div>
+              </div>
+            </section>
           </div>
 
           <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -790,6 +894,44 @@
                 </div>
               </div>
             </section>
+
+            <!-- Protected Files Registry & WORM Storage Ledger -->
+            <section class="table-card" aria-label="Protected Files Registry & WORM Storage Ledger" style="margin-top: 16px;">
+              <div class="table-controls-bar">
+                <div class="panel-card-titles">
+                  <h2>Protected Files Registry &amp; WORM Storage Ledger</h2>
+                  <p>Monitored objects, baseline cryptographic hashes, and WORM immutability states</p>
+                </div>
+                <div class="filter-group">
+                  <input
+                    type="text"
+                    id="storageFilesSearch"
+                    class="header-search-input"
+                    style="width: 220px; padding: 4px 10px"
+                    placeholder="Search file path or hash..."
+                    aria-label="Filter storage files"
+                  />
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="soc-table" id="storageFilesTable">
+                  <thead>
+                    <tr>
+                      <th>Object Path</th>
+                      <th>Size</th>
+                      <th>Baseline SHA-256 Digest</th>
+                      <th>Immutability</th>
+                      <th>Tripwire Role</th>
+                      <th>Baseline Version</th>
+                    </tr>
+                  </thead>
+                  <tbody id="storageFilesTableBody">
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
+              </div>
+            </section>
           </div>
 
           <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -935,6 +1077,37 @@
                     </button>
                   </div>
                 </div>
+              </div>
+            </section>
+
+            <!-- Historical Detection Runs & Sliding Window Sweeps -->
+            <section class="table-card" aria-label="Historical Detection Runs & Sliding Window Sweeps" style="margin-top: 16px;">
+              <div class="table-controls-bar">
+                <div class="panel-card-titles">
+                  <h2>Historical Detection Runs &amp; Sliding Window Sweeps</h2>
+                  <p>Continuous tumbling interval velocity checks, anomaly rates, and verdict triggers</p>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="soc-table" id="detectionRunsTable">
+                  <thead>
+                    <tr>
+                      <th>Run ID</th>
+                      <th>Account ID</th>
+                      <th>Window</th>
+                      <th>Total Objects</th>
+                      <th>Changed</th>
+                      <th>Velocity Rate</th>
+                      <th>Canary Breached</th>
+                      <th>Verdict</th>
+                      <th>Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detectionRunsTableBody">
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
               </div>
             </section>
           </div>
@@ -1155,6 +1328,34 @@
                     </button>
                   </div>
                 </div>
+            </section>
+
+            <!-- Quarantine Recovery Jobs & Restoration History -->
+            <section class="table-card" aria-label="Quarantine Recovery Jobs & Restoration History" style="margin-top: 16px;">
+              <div class="table-controls-bar">
+                <div class="panel-card-titles">
+                  <h2>Quarantine Recovery Jobs &amp; Restoration History</h2>
+                  <p>Multi-stage cryptographic verification records (AEAD tag, baseline SHA-256 match, Merkle proof)</p>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="soc-table" id="recoveryJobsTable">
+                  <thead>
+                    <tr>
+                      <th>Incident ID</th>
+                      <th>Account ID</th>
+                      <th>Affected Objects</th>
+                      <th>AEAD Tag &amp; Hash Check</th>
+                      <th>Status</th>
+                      <th>Detected At</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recoveryJobsTableBody">
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
               </div>
             </section>
           </div>

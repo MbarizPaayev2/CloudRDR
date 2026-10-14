@@ -103,6 +103,26 @@ function cacheDom() {
     confirmCancelBtn: document.getElementById('confirmCancelBtn'),
     confirmAcceptBtn: document.getElementById('confirmAcceptBtn'),
 
+    // Overview Active Incidents & Baseline Quick Inspection
+    overviewIncidentsTableBody: document.getElementById('overviewIncidentsTableBody'),
+    overviewBaselineVersion: document.getElementById('overviewBaselineVersion'),
+    overviewBaselineCount: document.getElementById('overviewBaselineCount'),
+    overviewMerkleRoot: document.getElementById('overviewMerkleRoot'),
+    btnTripCanaryOverview: document.getElementById('btnTripCanaryOverview'),
+    btnRecaptureBaselineOverview: document.getElementById('btnRecaptureBaselineOverview'),
+    btnGoToIncidentsFromOverview: document.getElementById('btnGoToIncidentsFromOverview'),
+    btnGoToStorageFromOverview: document.getElementById('btnGoToStorageFromOverview'),
+
+    // Storage Files Table
+    storageFilesTableBody: document.getElementById('storageFilesTableBody'),
+    storageFilesSearch: document.getElementById('storageFilesSearch'),
+
+    // Detection Runs Table
+    detectionRunsTableBody: document.getElementById('detectionRunsTableBody'),
+
+    // Recovery Jobs Table
+    recoveryJobsTableBody: document.getElementById('recoveryJobsTableBody'),
+
     toastContainer: document.getElementById('toast-container'),
   };
 }
@@ -408,6 +428,219 @@ function renderIncidentsTable(
 
     _dom.incidentsTableBody.appendChild(tr);
   }
+
+  // Also render spotlight on Overview tab if present
+  if (_dom.overviewIncidentsTableBody) {
+    _dom.overviewIncidentsTableBody.replaceChildren();
+    const overviewList = filtered.slice(0, 5);
+    if (overviewList.length === 0) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="7" class="empty-state">No active incidents. Threat containment and storage are clean.</td>`;
+      _dom.overviewIncidentsTableBody.appendChild(tr);
+    } else {
+      for (const inc of overviewList) {
+        const tr = document.createElement('tr');
+        const sev = inc.severity || 'Critical';
+        const statusLabel =
+          inc.status === 'frozen'
+            ? 'Contained (Frozen)'
+            : inc.status === 'resolved'
+              ? 'Recovery Verified'
+              : inc.status;
+        const detectedStr = inc.detected_at
+          ? new Date(inc.detected_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : '—';
+        const shortIdStr = inc.id.length > 20 ? inc.id.slice(0, 10) + '...' + inc.id.slice(-6) : inc.id;
+
+        tr.innerHTML = `
+          <td class="mono font-semibold text-primary">${shortIdStr}</td>
+          <td><span class="severity-pill ${sev.toLowerCase()}">${sev}</span></td>
+          <td class="mono text-red font-semibold">${inc.detection_reason || 'CANARY_MODIFIED'}</td>
+          <td class="mono">${inc.affected_paths?.length || 0} objects</td>
+          <td class="text-muted mono">${detectedStr}</td>
+          <td>
+            <span class="status-badge-pill ${inc.status === 'resolved' ? 'VALID' : inc.status === 'frozen' ? 'MODIFIED' : 'PENDING'}">
+              ${statusLabel}
+            </span>
+          </td>
+          <td>
+            <button type="button" class="btn btn-secondary btn-sm table-action-btn" data-id="${inc.id}">
+              Investigate
+            </button>
+          </td>
+        `;
+
+        tr.addEventListener('click', () => {
+          selectIncident(inc.id);
+          openIncidentModal(inc);
+        });
+
+        _dom.overviewIncidentsTableBody.appendChild(tr);
+      }
+    }
+  }
+}
+
+/* ─── Render Protected Storage Files Table ────────────────────────────────── */
+function renderStorageFilesTable(files = [], searchQuery = '') {
+  if (!_dom.storageFilesTableBody) return;
+  _dom.storageFilesTableBody.replaceChildren();
+
+  const query = (searchQuery || '').toLowerCase().trim();
+  const filtered = files.filter((f) => {
+    if (!query) return true;
+    return (
+      (f.path || '').toLowerCase().includes(query) ||
+      (f.baseline_sha256 || '').toLowerCase().includes(query)
+    );
+  });
+
+  if (filtered.length === 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td colspan="6" class="empty-state">No protected files found matching filter.</td>`;
+    _dom.storageFilesTableBody.appendChild(tr);
+    return;
+  }
+
+  for (const f of filtered) {
+    const tr = document.createElement('tr');
+    const isCanary = !!f.is_canary;
+    const sizeStr = f.size_bytes
+      ? f.size_bytes > 1048576
+        ? `${(f.size_bytes / 1048576).toFixed(1)} MB`
+        : `${Math.round(f.size_bytes / 1024)} KB`
+      : '4 KB';
+    const hash = f.baseline_sha256 || '';
+    const shortHash = hash.length > 20 ? `${hash.slice(0, 10)}...${hash.slice(-8)}` : hash;
+
+    tr.innerHTML = `
+      <td class="mono font-semibold" style="color: ${isCanary ? 'var(--threat-red)' : 'var(--text-primary)'}">
+        ${isCanary ? '⚠️ ' : '📄 '} ${f.path}
+      </td>
+      <td class="mono text-muted">${sizeStr}</td>
+      <td class="mono text-teal" title="${hash}" style="cursor: pointer;">${shortHash}</td>
+      <td>
+        <span class="status-badge-pill VALID">WORM LOCKED</span>
+      </td>
+      <td>
+        <span class="canary-sentinel-badge ${isCanary ? 'armed' : ''}" style="font-size: 0.68rem; padding: 2px 6px;">
+          ${isCanary ? 'ZERO-TOUCH CANARY' : 'PROTECTED ASSET'}
+        </span>
+      </td>
+      <td class="mono text-muted">v${f.baseline_version || 1}</td>
+    `;
+    _dom.storageFilesTableBody.appendChild(tr);
+  }
+}
+
+/* ─── Render Detection Runs Table ─────────────────────────────────────────── */
+function renderDetectionRunsTable(runs = []) {
+  if (!_dom.detectionRunsTableBody) return;
+  _dom.detectionRunsTableBody.replaceChildren();
+
+  if (!runs || runs.length === 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td colspan="9" class="empty-state">No detection runs recorded yet.</td>`;
+    _dom.detectionRunsTableBody.appendChild(tr);
+    return;
+  }
+
+  for (const run of runs) {
+    const tr = document.createElement('tr');
+    const ratePct = run.change_rate != null ? Math.round(run.change_rate * 100) : 0;
+    const threshPct = run.threshold != null ? Math.round(run.threshold * 100) : 30;
+    const isRansomware = run.verdict === 'ransomware';
+    const isSuspicious = run.verdict === 'suspicious';
+    const timeStr = run.created_at
+      ? new Date(run.created_at).toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        })
+      : '—';
+    const shortId = (run.id || '').length > 16 ? run.id.slice(0, 8) + '...' : run.id;
+
+    tr.innerHTML = `
+      <td class="mono font-semibold text-primary">${shortId}</td>
+      <td class="mono text-muted">${run.account_id || 'finance-prod-01'}</td>
+      <td class="mono">${run.window_seconds || 30}s</td>
+      <td class="mono">${run.total_files || 50}</td>
+      <td class="mono ${run.changed_files > 0 ? 'text-amber font-semibold' : ''}">${run.changed_files || 0}</td>
+      <td class="mono font-semibold ${ratePct >= threshPct ? 'text-red' : 'text-teal'}">${ratePct}%</td>
+      <td>
+        <span class="status-badge-pill ${run.canary_triggered ? 'MODIFIED' : 'VALID'}">
+          ${run.canary_triggered ? 'TRIPPED' : 'CLEAN'}
+        </span>
+      </td>
+      <td>
+        <span class="signal-chip ${isRansomware ? 'threat' : isSuspicious ? 'warning' : 'normal'}" style="font-size: 0.7rem; padding: 2px 6px;">
+          ${(run.verdict || 'normal').toUpperCase()}
+        </span>
+      </td>
+      <td class="mono text-muted">${timeStr}</td>
+    `;
+    _dom.detectionRunsTableBody.appendChild(tr);
+  }
+}
+
+/* ─── Render Recovery Jobs Table ──────────────────────────────────────────── */
+function renderRecoveryJobsTable(incidents = []) {
+  if (!_dom.recoveryJobsTableBody) return;
+  _dom.recoveryJobsTableBody.replaceChildren();
+
+  if (!incidents || incidents.length === 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td colspan="7" class="empty-state">No quarantine recovery jobs or contained incidents recorded.</td>`;
+    _dom.recoveryJobsTableBody.appendChild(tr);
+    return;
+  }
+
+  for (const inc of incidents) {
+    const tr = document.createElement('tr');
+    const isResolved = inc.status === 'resolved';
+    const isFrozen = inc.status === 'frozen';
+    const detectedStr = inc.detected_at
+      ? new Date(inc.detected_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      : '—';
+    const shortId = inc.id.length > 20 ? inc.id.slice(0, 10) + '...' + inc.id.slice(-6) : inc.id;
+
+    tr.innerHTML = `
+      <td class="mono font-semibold text-primary">${shortId}</td>
+      <td class="mono text-muted">${inc.account_id}</td>
+      <td class="mono">${inc.affected_paths?.length || 0} objects</td>
+      <td>
+        <span class="status-badge-pill ${isResolved ? 'VALID' : 'PENDING'}">
+          ${isResolved ? 'AEAD + SHA-256 MATCH' : 'SANDBOX STAGED'}
+        </span>
+      </td>
+      <td>
+        <span class="status-badge-pill ${isResolved ? 'VALID' : isFrozen ? 'MODIFIED' : 'PENDING'}">
+          ${isResolved ? 'RECOVERY VERIFIED' : isFrozen ? 'CONTAINED (FROZEN)' : inc.status.toUpperCase()}
+        </span>
+      </td>
+      <td class="mono text-muted">${detectedStr}</td>
+      <td>
+        ${
+          isResolved
+            ? '<span class="mono text-green font-semibold" style="font-size: 0.75rem;">COMPLETED</span>'
+            : `<button type="button" class="btn btn-primary btn-sm table-restore-btn" data-id="${inc.id}" style="padding: 3px 8px; font-size: 0.75rem;">
+                Authorize Restore
+              </button>`
+        }
+      </td>
+    `;
+
+    const btn = tr.querySelector('.table-restore-btn');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectIncident(inc.id);
+        openIncidentModal(inc);
+      });
+    }
+
+    _dom.recoveryJobsTableBody.appendChild(tr);
+  }
 }
 
 /* ─── Render Security Events (Section 8) ──────────────────────────────────── */
@@ -546,7 +779,33 @@ function updateUI(state) {
     renderSecurityEvents(state.securityEvents);
   }
 
-  // 7. Connectivity & Timestamp
+  // 7. Overview Baseline & Canary Inspection Card
+  if (state.baseline) {
+    if (_dom.overviewBaselineVersion) {
+      _dom.overviewBaselineVersion.textContent = `v${state.baseline.version || 1} (Active Manifest)`;
+    }
+    if (_dom.overviewBaselineCount) {
+      const count = state.baseline.file_count || state.baseline.files?.length || 50;
+      _dom.overviewBaselineCount.textContent = `${count} verified objects`;
+    }
+    if (_dom.overviewMerkleRoot && state.baseline.merkle_root) {
+      const mr = state.baseline.merkle_root;
+      _dom.overviewMerkleRoot.textContent = `${mr.slice(0, 16)}...${mr.slice(-8)}`;
+      _dom.overviewMerkleRoot.title = mr;
+    }
+  }
+
+  // 8. Storage Files Table
+  const storageFiles = state.baseline?.files || [];
+  renderStorageFilesTable(storageFiles, _dom.storageFilesSearch?.value || '');
+
+  // 9. Detection Runs Table
+  renderDetectionRunsTable(state.detectionRuns || []);
+
+  // 10. Recovery Jobs Table
+  renderRecoveryJobsTable(state.incidents || []);
+
+  // 11. Connectivity & Timestamp
   if (_dom.lastRefreshedLabel && state.lastUpdated) {
     const d = new Date(state.lastUpdated);
     _dom.lastRefreshedLabel.textContent = `Refreshed: ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
@@ -828,6 +1087,36 @@ function wireEvents() {
     );
   });
 
+  // Overview Inspection Actions & Deep Links
+  _dom.btnTripCanaryOverview?.addEventListener('click', () => {
+    document.getElementById('btnTripCanaryDemo')?.click();
+  });
+
+  _dom.btnRecaptureBaselineOverview?.addEventListener('click', () => {
+    openConfirmModal(
+      'Capture Fresh Baseline Snapshot?',
+      'CloudRDR will compute fresh SHA-256 digests across all protected storage objects and re-seal the Merkle tree DAG.',
+      async () => {
+        showToast('Capturing baseline snapshot...', 'info');
+        try {
+          await api.createBaseline(CONFIG.BUCKET_NAME);
+          showToast('Baseline captured and Merkle root verified!', 'success');
+          await refreshAll();
+        } catch (err) {
+          showToast(`Baseline capture failed: ${err.message}`, 'threat');
+        }
+      }
+    );
+  });
+
+  _dom.btnGoToIncidentsFromOverview?.addEventListener('click', () => switchView('incidents'));
+  _dom.btnGoToStorageFromOverview?.addEventListener('click', () => switchView('storage'));
+
+  // Storage Files Realtime Filter
+  _dom.storageFilesSearch?.addEventListener('input', (e) => {
+    renderStorageFilesTable(getState().baseline?.files || [], e.target.value);
+  });
+
   // Merkle DAG Inspector Tamper Demo
   document.getElementById('btnTamperMerkleDemo')?.addEventListener('click', () => {
     const leaf = document.getElementById('leaf-2');
@@ -1036,8 +1325,10 @@ function applyUserProfile(user) {
 }
 
 async function initUserSession() {
+  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('cloudrdr_token') : null;
   try {
-    const res = await fetch('/api/auth/me');
+    const headers = token ? { Authorization: `Bearer ${token}`, 'x-session-token': token } : {};
+    const res = await fetch('/api/auth/me', { credentials: 'include', headers });
     if (res.ok) {
       const data = await res.json();
       if (data.user) {

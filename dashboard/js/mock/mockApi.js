@@ -201,6 +201,18 @@ export const mockApi = {
       file_count: 50,
       created_at: minutesAgo(120),
       created_by: 'cloudrdr-agent-v1',
+      files: [
+        { id: 'pf-01', bucket, path: 'canary/tripwire_sentinel.docx', size_bytes: 28410, baseline_sha256: '88fe29a1b02d449ac81e5b22194c014f3211dae87b2191c98114c014fa2312b1', is_canary: true, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-02', bucket, path: 'canary/salary_2026.xlsx', size_bytes: 42100, baseline_sha256: '99ea44c1f12e881ba01c3321495c014e3211cae87b2191c98114c014fa2312c2', is_canary: true, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-03', bucket, path: 'files/financials_q2.pdf', size_bytes: 1482000, baseline_sha256: 'd2b45e89a1c02b334190c4412e8f1a239922bc11283901ba8811cf0981a2b344', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-04', bucket, path: 'files/payroll_q3.xlsx', size_bytes: 512000, baseline_sha256: '7e4129b0a1c049d8821ec014b290cc11283901ba8811cf0981a2b34455667788', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-05', bucket, path: 'files/nda_templates.docx', size_bytes: 94300, baseline_sha256: '3a992cb019f201e8812c4491a2b2eec011283901ba8811cf0981a2b344998877', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-06', bucket, path: 'files/customer_db_export.sql', size_bytes: 8421000, baseline_sha256: 'b45c21f001a239bca901238471da928374619028374619283746192837461928', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-07', bucket, path: 'files/api_gateway_routes.json', size_bytes: 18200, baseline_sha256: 'c812d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-08', bucket, path: 'files/contracts/client_master.pdf', size_bytes: 789000, baseline_sha256: 'f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-09', bucket, path: 'evidence/incident_forensic_bundle_01.tar.gz', size_bytes: 341000, baseline_sha256: 'e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+        { id: 'pf-10', bucket, path: 'backup/daily_snapshot_20261014.aes', size_bytes: 12400000, baseline_sha256: 'd1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2', is_canary: false, baseline_version: 1, created_at: minutesAgo(120) },
+      ],
     };
   },
 
