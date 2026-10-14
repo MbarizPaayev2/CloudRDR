@@ -25,32 +25,52 @@ const DEFAULTS = {
   BUCKET_NAME: 'protected',
 };
 
+// Safe storage abstraction (browser localStorage with Node.js fallback)
+const storage =
+  typeof window !== 'undefined' && window.localStorage
+    ? window.localStorage
+    : typeof localStorage !== 'undefined'
+      ? localStorage
+      : {
+          _map: new Map(),
+          getItem(k) {
+            return this._map.has(k) ? this._map.get(k) : null;
+          },
+          setItem(k, v) {
+            this._map.set(k, String(v));
+          },
+          removeItem(k) {
+            this._map.delete(k);
+          },
+        };
+
 /**
  * Load configuration with localStorage overrides.
  */
 function loadConfig() {
   const getStoredBool = (key, fallback) => {
-    const val = localStorage.getItem(key);
+    const val = storage.getItem(key);
     if (val === null) return fallback;
     return val === 'true';
   };
 
   const getStoredNum = (key, fallback) => {
-    const val = localStorage.getItem(key);
+    const val = storage.getItem(key);
     if (val === null) return fallback;
     const n = parseInt(val, 10);
     return isNaN(n) ? fallback : n;
   };
 
   return {
-    API_BASE_URL: (
-      localStorage.getItem(STORAGE_KEYS.API_BASE_URL) || DEFAULTS.API_BASE_URL
-    ).replace(/\/+$/, ''),
-    API_KEY: localStorage.getItem(STORAGE_KEYS.API_KEY) || DEFAULTS.API_KEY,
+    API_BASE_URL: (storage.getItem(STORAGE_KEYS.API_BASE_URL) || DEFAULTS.API_BASE_URL).replace(
+      /\/+$/,
+      ''
+    ),
+    API_KEY: storage.getItem(STORAGE_KEYS.API_KEY) || DEFAULTS.API_KEY,
     POLL_INTERVAL_MS: getStoredNum(STORAGE_KEYS.POLL_INTERVAL_MS, DEFAULTS.POLL_INTERVAL_MS),
     USE_MOCK: getStoredBool(STORAGE_KEYS.USE_MOCK, DEFAULTS.USE_MOCK),
-    THEME: localStorage.getItem(STORAGE_KEYS.THEME) || DEFAULTS.THEME,
-    BUCKET_NAME: localStorage.getItem(STORAGE_KEYS.BUCKET_NAME) || DEFAULTS.BUCKET_NAME,
+    THEME: storage.getItem(STORAGE_KEYS.THEME) || DEFAULTS.THEME,
+    BUCKET_NAME: storage.getItem(STORAGE_KEYS.BUCKET_NAME) || DEFAULTS.BUCKET_NAME,
   };
 }
 
@@ -66,7 +86,7 @@ export function updateConfig(key, value) {
     CONFIG[key] = value;
     const storageKey = STORAGE_KEYS[key];
     if (storageKey) {
-      localStorage.setItem(storageKey, String(value));
+      storage.setItem(storageKey, String(value));
     }
   }
 }

@@ -1,11 +1,5 @@
-/**
- * @file dashboard/js/main.js
- *
- * CloudRDR Security Operations Dashboard — Main Entry Point (Step 1 Skeleton).
- * Initializes theme, UI layout skeletons, and event listeners.
- */
-
 import { CONFIG, updateConfig } from './config.js';
+import { refreshAll, subscribe } from './state.js';
 
 // ── Theme Manager ────────────────────────────────────────────────────────────
 
@@ -53,6 +47,14 @@ function initDemoMode() {
         label.textContent = e.target.checked ? 'Demo Mock' : 'Live API';
       }
       console.info(`[CloudRDR] Mode switched to: ${e.target.checked ? 'MOCK DATA' : 'LIVE API'}`);
+      refreshAll();
+    });
+  }
+
+  const manualRefreshBtn = document.getElementById('manualRefreshBtn');
+  if (manualRefreshBtn) {
+    manualRefreshBtn.addEventListener('click', () => {
+      refreshAll();
     });
   }
 }
@@ -136,5 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initDemoMode();
   initCopyButtons();
   renderInitialSkeletons();
-  console.info('[CloudRDR] Security Operations Dashboard initialised (Step 1 Skeleton).');
+  refreshAll();
+  console.info(
+    '[CloudRDR] Security Operations Dashboard initialised (Step 2 Data Layer Connected).'
+  );
 });
