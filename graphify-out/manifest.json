@@ -552,9 +552,9 @@
     "semantic_hash": "5f952243d55836e8454edb2e375d1d73"
   },
   "src/api/routes/dashboard.js": {
-    "mtime": 1791993007.4325025,
-    "seen": 1791993156.570397,
-    "ast_hash": "822ef248568c2a6bc1077be4c27005ea",
+    "mtime": 1791994882.2146306,
+    "seen": 1791995003.73282,
+    "ast_hash": "ec5cccd488b88e0d35959f88fc37799c",
     "semantic_hash": ""
   },
   "src/api/routes/detection.js": {
@@ -2262,9 +2262,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1791925278.4199774,
-    "seen": 1791977306.781419,
-    "ast_hash": "ec9ee43da609632527e07ccfe1ce0400",
+    "mtime": 1791995705.5369306,
+    "seen": 1791995798.3511584,
+    "ast_hash": "c00c4e0aad4fea641454ab31aea96ff2",
     "semantic_hash": ""
   },
   "dashboard/README.md": {
@@ -2274,9 +2274,9 @@
     "semantic_hash": ""
   },
   "dashboard/index.html": {
-    "mtime": 1791992787.0451233,
-    "seen": 1791993157.092866,
-    "ast_hash": "ea960b365ac6007131b2294f3fa6481c",
+    "mtime": 1791996588.0991788,
+    "seen": 1791996669.4825323,
+    "ast_hash": "69e80b881948f211f98e6412a5ab5e20",
     "semantic_hash": ""
   },
   "dashboard/landing.html": {
@@ -5322,9 +5322,9 @@
     "semantic_hash": ""
   },
   "site/index.html": {
-    "mtime": 1791990630.3169792,
-    "seen": 1791990781.2326105,
-    "ast_hash": "bb1c39cb6bb29d64837ff69731096fd1",
+    "mtime": 1791995622.4829218,
+    "seen": 1791995798.360534,
+    "ast_hash": "3022b58f4c5eea58dc4e9dd9ef2ff10e",
     "semantic_hash": ""
   },
   "site/team.html": {
@@ -7986,15 +7986,15 @@
     "semantic_hash": ""
   },
   "dashboard/login.html": {
-    "mtime": 1791992747.1851532,
-    "seen": 1791993157.0935376,
-    "ast_hash": "ef9cff066ed651fc1e4f0e1e973a9d43",
+    "mtime": 1791996481.5934267,
+    "seen": 1791996669.4829476,
+    "ast_hash": "e79ae14f52f9ff20dcba054e8657d73f",
     "semantic_hash": ""
   },
   "dashboard/register.html": {
-    "mtime": 1791992773.227327,
-    "seen": 1791993157.093544,
-    "ast_hash": "7f9277e488ec4634fc9cbbdf364aa845",
+    "mtime": 1791996485.1497357,
+    "seen": 1791996669.4829519,
+    "ast_hash": "ceaa21d6eab641d2e15e646ab689522d",
     "semantic_hash": ""
   },
   "src/api/routes/telemetry.js": {
@@ -8007,6 +8007,438 @@
     "mtime": 1791994257.6642828,
     "seen": 1791994578.6751037,
     "ast_hash": "0e805adb9ab39aaf5ed7193a346c3e7a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-domain/extract-domain-context.py": {
+    "mtime": 1791995456.7737305,
+    "seen": 1791995797.954319,
+    "ast_hash": "dc76a8891b483677f3a8dcc6658622a4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-figma/figma-merge.mjs": {
+    "mtime": 1791995456.7778115,
+    "seen": 1791995797.9543254,
+    "ast_hash": "9c702b8fed1f8916e6454e7ca577a287",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-figma/figma-scan.mjs": {
+    "mtime": 1791995456.778811,
+    "seen": 1791995797.9543295,
+    "ast_hash": "e0ba4b432edbec2431a9d4305d0e6bc3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-knowledge/merge-knowledge-graph.py": {
+    "mtime": 1791995456.782806,
+    "seen": 1791995797.9543324,
+    "ast_hash": "47e082d11d89cd1b2a5a8fa99b548bef",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-knowledge/parse-knowledge-base.py": {
+    "mtime": 1791995456.7838044,
+    "seen": 1791995797.9543362,
+    "ast_hash": "ed2f8e05a9034f1e1f764fa29b4735e5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/build-fingerprints.mjs": {
+    "mtime": 1791995456.7878077,
+    "seen": 1791995797.954339,
+    "ast_hash": "2f40268b5daf3a03c6dde4ecfe009693",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/compute-batches.mjs": {
+    "mtime": 1791995456.7903903,
+    "seen": 1791995797.954342,
+    "ast_hash": "2a3859dda56f9592efcd8e3d087770fa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/extract-import-map.mjs": {
+    "mtime": 1791995456.7913907,
+    "seen": 1791995797.9543445,
+    "ast_hash": "57d08c07d5282570609bf09de3342b9f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/extract-structure-result.mjs": {
+    "mtime": 1791995456.7923963,
+    "seen": 1791995797.9543474,
+    "ast_hash": "3e601406a35350397f097cf289190dfa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/extract-structure.mjs": {
+    "mtime": 1791995456.7935205,
+    "seen": 1791995797.95435,
+    "ast_hash": "9b64df5bbfc4fb454848c2365a8edd9e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/finalize-incremental.mjs": {
+    "mtime": 1791995456.7948794,
+    "seen": 1791995797.9543524,
+    "ast_hash": "e0e725c0dce16bc0a0d67c5e7f7ecbdf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/generate-ignore.mjs": {
+    "mtime": 1791995456.8059518,
+    "seen": 1791995797.9543552,
+    "ast_hash": "d27758d085472f57f044ffdccb35ac67",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/merge-batch-graphs.py": {
+    "mtime": 1791995456.8423188,
+    "seen": 1791995797.9543583,
+    "ast_hash": "9640b779a38c52c7ce7cb0d5c6f9ec97",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/merge-subdomain-graphs.py": {
+    "mtime": 1791995456.8438275,
+    "seen": 1791995797.9543607,
+    "ast_hash": "6ad387f0b0dad39bdd39f6ea478719af",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/prepare-incremental.mjs": {
+    "mtime": 1791995456.8450632,
+    "seen": 1791995797.9543636,
+    "ast_hash": "7ab5a095ef4a4fb62a5eefe67561181e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/prepare-symbol-retry.mjs": {
+    "mtime": 1791995456.846067,
+    "seen": 1791995797.9543662,
+    "ast_hash": "00cbb440cc6b861c8b2cc95d137d1472",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/scan-project.mjs": {
+    "mtime": 1791995456.8472762,
+    "seen": 1791995797.954369,
+    "ast_hash": "ad468853c29529b66b67d373c36cfadd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/validate-incremental-symbols.mjs": {
+    "mtime": 1791995456.848341,
+    "seen": 1791995797.9543717,
+    "ast_hash": "ea62468e0eec192271c8b499d87edd26",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-chat/SKILL.md": {
+    "mtime": 1791995456.7656405,
+    "seen": 1791995798.3156838,
+    "ast_hash": "1e184a7a22101e3a0fabc6f06a3702ab",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-dashboard/SKILL.md": {
+    "mtime": 1791995456.7676637,
+    "seen": 1791995798.3156903,
+    "ast_hash": "4cc0be4be5996cd27a3288d8500554e1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-diff/SKILL.md": {
+    "mtime": 1791995456.770192,
+    "seen": 1791995798.3156948,
+    "ast_hash": "ee18a5ae56fc11c66dc219ebf3dd562c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-domain/SKILL.md": {
+    "mtime": 1791995456.7711928,
+    "seen": 1791995798.3156993,
+    "ast_hash": "0e44f8255a30fbcebebf7a5a40ae4916",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-explain/SKILL.md": {
+    "mtime": 1791995456.7757401,
+    "seen": 1791995798.3157046,
+    "ast_hash": "ae63262d6af48992179f8fce2ea5e2e2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-figma/SKILL.md": {
+    "mtime": 1791995456.7767856,
+    "seen": 1791995798.315711,
+    "ast_hash": "6c11cc75a7eb4d6383413565ccd1e245",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-knowledge/SKILL.md": {
+    "mtime": 1791995456.7808075,
+    "seen": 1791995798.3157158,
+    "ast_hash": "656ed8fd879fae3ba065bbdffdfe573f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand-onboard/SKILL.md": {
+    "mtime": 1791995456.7848074,
+    "seen": 1791995798.3157187,
+    "ast_hash": "0aef9f8df1f3cf129a9acc92099c73c1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/SKILL.md": {
+    "mtime": 1791995456.7878077,
+    "seen": 1791995798.315721,
+    "ast_hash": "2159f5f6002bee4759001d30e978d9e2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/django.md": {
+    "mtime": 1791995456.7961116,
+    "seen": 1791995798.315725,
+    "ast_hash": "775a39cbcc2ede0eca2422a7192dfb2e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/express.md": {
+    "mtime": 1791995456.7971115,
+    "seen": 1791995798.315728,
+    "ast_hash": "bf70288a01adc21954a34208c54a7ceb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/fastapi.md": {
+    "mtime": 1791995456.798116,
+    "seen": 1791995798.3157306,
+    "ast_hash": "d40da3eba42316823200bd4470e7416d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/flask.md": {
+    "mtime": 1791995456.7991438,
+    "seen": 1791995798.3157334,
+    "ast_hash": "24f5a93bea07e0fdeac9413a0a5b84e4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/gin.md": {
+    "mtime": 1791995456.800356,
+    "seen": 1791995798.3158264,
+    "ast_hash": "db366c91880078552fbec4f9eb93da59",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/nextjs.md": {
+    "mtime": 1791995456.8014243,
+    "seen": 1791995798.3158295,
+    "ast_hash": "36a74a6d2021c508b3c94f57b3b05f3f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/rails.md": {
+    "mtime": 1791995456.8026052,
+    "seen": 1791995798.315832,
+    "ast_hash": "4abfce206caeca5557c67fd851591429",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/react.md": {
+    "mtime": 1791995456.8037038,
+    "seen": 1791995798.3158345,
+    "ast_hash": "7ac7e5ce1b9629ad1967f70f676c78a3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/spring.md": {
+    "mtime": 1791995456.804705,
+    "seen": 1791995798.315837,
+    "ast_hash": "066fe6bb8b3a36fca92192d71d68e748",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/frameworks/vue.md": {
+    "mtime": 1791995456.804705,
+    "seen": 1791995798.3158395,
+    "ast_hash": "6597475f43feb25b93fd9d000c2987cc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/cpp.md": {
+    "mtime": 1791995456.8073623,
+    "seen": 1791995798.3158417,
+    "ast_hash": "bacf3f5ec63268c04d12541e69fa960e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/csharp.md": {
+    "mtime": 1791995456.8086653,
+    "seen": 1791995798.315844,
+    "ast_hash": "e0ad7ded7ff5a50c67b938888a4bb76e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/css.md": {
+    "mtime": 1791995456.8098323,
+    "seen": 1791995798.3158472,
+    "ast_hash": "5b7e93b55fddc3df14bcfa73806c3ae9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/dockerfile.md": {
+    "mtime": 1791995456.8110418,
+    "seen": 1791995798.3158498,
+    "ast_hash": "bc818b1b006e28f6c0c40ec07f903ce7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/go.md": {
+    "mtime": 1791995456.8120408,
+    "seen": 1791995798.315852,
+    "ast_hash": "ffcea1d05b0e087c12ad651db9b6a71e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/graphql.md": {
+    "mtime": 1791995456.8130414,
+    "seen": 1791995798.3158555,
+    "ast_hash": "7dffeb6386cd371ec4ad1eb69df36316",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/html.md": {
+    "mtime": 1791995456.814042,
+    "seen": 1791995798.3158581,
+    "ast_hash": "d5074449191ef1e3c05f38a31d82d3f0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/java.md": {
+    "mtime": 1791995456.8150446,
+    "seen": 1791995798.3158605,
+    "ast_hash": "66501cb40ed004b8a2ff48a677238fa4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/javascript.md": {
+    "mtime": 1791995456.8160424,
+    "seen": 1791995798.3158634,
+    "ast_hash": "1181577e3aa9327dc789ca279ea8cfe2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/json.md": {
+    "mtime": 1791995456.8170445,
+    "seen": 1791995798.3158665,
+    "ast_hash": "456da8d30621b781ecc67e1d10a5728b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/kotlin.md": {
+    "mtime": 1791995456.8180413,
+    "seen": 1791995798.315869,
+    "ast_hash": "32caa712c803ecb94d8dc4ece3f8028e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/markdown.md": {
+    "mtime": 1791995456.8190422,
+    "seen": 1791995798.3158715,
+    "ast_hash": "640267ff059e47d8d42b4824313cc4eb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/php.md": {
+    "mtime": 1791995456.8195498,
+    "seen": 1791995798.3158736,
+    "ast_hash": "1c51657d96cc49bc15afb3f545123be2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/protobuf.md": {
+    "mtime": 1791995456.8210943,
+    "seen": 1791995798.3158758,
+    "ast_hash": "4852f5e7b30136931cc047ef80535928",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/python.md": {
+    "mtime": 1791995456.8221438,
+    "seen": 1791995798.3158786,
+    "ast_hash": "35be94f4542850d0a5e335c1e7ea824f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/ruby.md": {
+    "mtime": 1791995456.8232174,
+    "seen": 1791995798.3158808,
+    "ast_hash": "6eb7adabb62c8cb7ce38eb1576251210",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/rust.md": {
+    "mtime": 1791995456.824217,
+    "seen": 1791995798.3158836,
+    "ast_hash": "4276a3be3b30526168f4588468a24c87",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/scala.md": {
+    "mtime": 1791995456.825217,
+    "seen": 1791995798.3158863,
+    "ast_hash": "31c979035910e3cf0e17be7a2d726058",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/shell.md": {
+    "mtime": 1791995456.8262172,
+    "seen": 1791995798.3158886,
+    "ast_hash": "f035990a6b2c2401bf486b6b4a7be710",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/sql.md": {
+    "mtime": 1791995456.8278677,
+    "seen": 1791995798.3158915,
+    "ast_hash": "e4878d061cd8a90738bf87826dcfb9a3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/swift.md": {
+    "mtime": 1791995456.8288815,
+    "seen": 1791995798.3158941,
+    "ast_hash": "ff952dfd00844ae80a6845fd4bfbd425",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/terraform.md": {
+    "mtime": 1791995456.8288815,
+    "seen": 1791995798.3158963,
+    "ast_hash": "6e32f51409fc43a7818567a6994a7d2f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/typescript.md": {
+    "mtime": 1791995456.8303185,
+    "seen": 1791995798.3158982,
+    "ast_hash": "689f564fdd1b266906e7d942563c3172",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/languages/yaml.md": {
+    "mtime": 1791995456.832317,
+    "seen": 1791995798.3159003,
+    "ast_hash": "6a34a79dbdc43fb9dea655ce48ccd7e9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/locales/en.md": {
+    "mtime": 1791995456.8333175,
+    "seen": 1791995798.315903,
+    "ast_hash": "e8221b652df79cc08fe3818b3f916bc7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/locales/ja.md": {
+    "mtime": 1791995456.8343177,
+    "seen": 1791995798.315905,
+    "ast_hash": "209b4f83842500eccf68cc67d1427b47",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/locales/ko.md": {
+    "mtime": 1791995456.8363166,
+    "seen": 1791995798.315907,
+    "ast_hash": "731eb923008b20ccbca3a094ba16e6e5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/locales/ru.md": {
+    "mtime": 1791995456.8373158,
+    "seen": 1791995798.315909,
+    "ast_hash": "95013b6fb0a68a37209b5985014e37c7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/locales/vi.md": {
+    "mtime": 1791995456.8383174,
+    "seen": 1791995798.3159108,
+    "ast_hash": "9d11800c46fd675a4f837ad0fb95756e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/locales/zh-TW.md": {
+    "mtime": 1791995456.8393178,
+    "seen": 1791995798.315914,
+    "ast_hash": "b53bcc5ea0a2856f788807dd355fcf7a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/understand/locales/zh.md": {
+    "mtime": 1791995456.840319,
+    "seen": 1791995798.3159163,
+    "ast_hash": "60c5ae67b7cc393dec2e0618ba76944c",
+    "semantic_hash": ""
+  },
+  "dashboard/assets/logo-pack.html": {
+    "mtime": 1791989686.0242739,
+    "seen": 1791996669.482524,
+    "ast_hash": "c3bdf5c40ef895b5c725d8ecc286f06e",
+    "semantic_hash": ""
+  },
+  "dashboard/assets/favicon.svg": {
+    "mtime": 1791991305.4099085,
+    "seen": 1791996669.569825,
+    "ast_hash": "609e5c8dc1ad5866a8dad5735aab6d98",
+    "semantic_hash": ""
+  },
+  "dashboard/assets/logo-dark.svg": {
+    "mtime": 1791991354.2251277,
+    "seen": 1791996669.5698328,
+    "ast_hash": "dffa11c350a8aa751a9cb995ab3f7896",
+    "semantic_hash": ""
+  },
+  "dashboard/assets/logo-light.svg": {
+    "mtime": 1791991358.911016,
+    "seen": 1791996669.5698373,
+    "ast_hash": "45e5a8761f5bde7e15c8267cf39259c0",
     "semantic_hash": ""
   }
 }
