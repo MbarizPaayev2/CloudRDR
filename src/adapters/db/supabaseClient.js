@@ -71,20 +71,21 @@ try {
 }
 
 // Ensure default admin user exists for immediate offline access and demos
-if (!_memoryDb.internal_users || _memoryDb.internal_users.length === 0) {
-  _memoryDb.internal_users = [
-    {
-      id: 'usr-admin-01',
-      full_name: 'Security Admin',
-      email: 'admin@cloudrdr.internal',
-      password_hash:
-        'scrypt$16384$8$1$369ac5bb98f2c2ae991b199e6bbcf056$18f53d127e0a582178207a1d91e36047d77115a32aa11212d99aa789d446a73d7bc1e40fadc4cc86cd54cdcb915e9d6d4f2afa3a4a71242955636d86ed131023',
-      role: 'admin',
-      status: 'active',
-      created_at: new Date().toISOString(),
-      last_login_at: null,
-    },
-  ];
+if (!_memoryDb.internal_users) {
+  _memoryDb.internal_users = [];
+}
+if (!_memoryDb.internal_users.some((u) => u.email === 'admin@cloudrdr.internal')) {
+  _memoryDb.internal_users.push({
+    id: 'usr-admin-01',
+    full_name: 'Security Admin',
+    email: 'admin@cloudrdr.internal',
+    password_hash:
+      'scrypt$16384$8$1$0e5a5c2f0af1d4073b83a3d4f3251147$006a9643c49ffd5f29bca54fe9ad7186734ddfbe06c80dc1d5b32dcf9a1a374726b1a13d7d4ff177552863879b22fb65740a8540f27a013a94c73d1569e4908e',
+    role: 'admin',
+    status: 'active',
+    created_at: new Date().toISOString(),
+    last_login_at: null,
+  });
 }
 
 function _persistAuthStorageIfApplicable(_tableName) {

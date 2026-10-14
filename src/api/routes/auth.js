@@ -142,4 +142,20 @@ export async function authRoutes(fastify) {
 
     return reply.status(200).send({ ok: true, message: 'Logged out successfully.' });
   });
+
+  // ── 5. Emergency Password Reset ───────────────────────────────────────────
+  fastify.post('/api/auth/reset-password', async (request, reply) => {
+    try {
+      const { email, newPassword } = request.body || {};
+      const result = await authService.resetPassword({ email, newPassword });
+      return reply.status(200).send(result);
+    } catch (err) {
+      if (err instanceof CloudRdrError) {
+        return reply.status(httpStatusForCode(err.code)).send({
+          error: { code: err.code, message: err.message },
+        });
+      }
+      throw err;
+    }
+  });
 }

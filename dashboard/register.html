@@ -390,7 +390,7 @@
       });
 
       function showAlert(msg, isSuccess = false) {
-        alertText.textContent = msg;
+        alertText.innerHTML = msg;
         alertBox.className = `auth-alert show ${isSuccess ? 'success' : 'error'}`;
       }
 
@@ -468,7 +468,11 @@
           const data = await res.json();
 
           if (!res.ok) {
-            showAlert(data.error?.message || 'Registration failed. Please check your details.');
+            let msg = data.error?.message || 'Registration failed. Please check your details.';
+            if (msg.includes('already exists')) {
+              msg += ` <a href="/login?email=${encodeURIComponent(email)}" style="color:var(--accent-cyan);text-decoration:underline;font-weight:600;margin-left:6px;">Sign In Here &rarr;</a>`;
+            }
+            showAlert(msg);
             return;
           }
 

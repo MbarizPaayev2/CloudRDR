@@ -208,7 +208,32 @@
               </svg>
             </button>
           </div>
-          <div id="passwordError" class="form-field-error"></div>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-top: 4px;
+            "
+          >
+            <div id="passwordError" class="form-field-error" style="margin-top: 0"></div>
+            <button
+              type="button"
+              id="resetPwdBtn"
+              style="
+                background: none;
+                border: none;
+                color: var(--accent-cyan);
+                font-size: 0.72rem;
+                cursor: pointer;
+                text-decoration: underline;
+                padding: 0;
+              "
+              title="Reset password for the entered email to Password123!"
+            >
+              Reset to Password123!
+            </button>
+          </div>
         </div>
 
         <!-- Submit button -->
@@ -229,7 +254,7 @@
           </svg>
         </button>
 
-        <!-- 1-Click Demo Admin Access -->
+        <!-- Quick 1-Click Access Controls -->
         <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
           <button
             type="button"
@@ -265,6 +290,46 @@
             <span>1-Click Quick Demo Login (Admin)</span>
           </button>
 
+          <!-- Quick Account Switcher (Admin / Registered Users) -->
+          <div style="display: flex; gap: 6px; flex-wrap: wrap" id="quickAccountPills">
+            <button
+              type="button"
+              class="quick-pill-btn"
+              data-email="admin@cloudrdr.internal"
+              data-pwd="Password123!"
+              style="
+                flex: 1;
+                padding: 6px 10px;
+                font-size: 0.72rem;
+                background: var(--bg-subtle);
+                border: 1px solid var(--border);
+                color: var(--text-secondary);
+                border-radius: var(--radius-sm);
+                cursor: pointer;
+              "
+            >
+              🔑 admin@cloudrdr.internal
+            </button>
+            <button
+              type="button"
+              class="quick-pill-btn"
+              data-email="test@gmail.com"
+              data-pwd="Password123!"
+              style="
+                flex: 1;
+                padding: 6px 10px;
+                font-size: 0.72rem;
+                background: var(--bg-subtle);
+                border: 1px solid var(--border);
+                color: var(--text-secondary);
+                border-radius: var(--radius-sm);
+                cursor: pointer;
+              "
+            >
+              👤 test@gmail.com
+            </button>
+          </div>
+
           <div
             style="
               font-size: 0.72rem;
@@ -276,9 +341,9 @@
               border: 1px solid var(--border);
             "
           >
-            Default Demo:
-            <strong style="color: var(--text-primary)">admin@cloudrdr.internal</strong> &bull;
-            Password: <strong style="color: var(--text-primary)">Password123!</strong>
+            Demo / Master Password:
+            <strong style="color: var(--text-primary)">Password123!</strong> (works for all
+            accounts)
           </div>
         </div>
       </form>
@@ -301,17 +366,69 @@
       const btnText = document.getElementById('btnText');
       const btnSpinner = document.getElementById('btnSpinner');
       const togglePwdBtn = document.getElementById('togglePasswordBtn');
-      const quickDemoBtn = document.getElementById('quickDemoBtn');
+      const resetPwdBtn = document.getElementById('resetPwdBtn');
 
-      // Pre-fill demo credentials for zero-friction evaluation
-      if (!emailInput.value) emailInput.value = 'admin@cloudrdr.internal';
-      if (!passwordInput.value) passwordInput.value = 'Password123!';
+      // Check URL parameters (e.g. from registration redirect)
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlEmail = urlParams.get('email');
+      if (urlEmail) {
+        emailInput.value = urlEmail;
+        passwordInput.value = 'Password123!';
+        if (urlParams.get('registered')) {
+          showAlert(
+            `Account registered! You can log in with Password123! or your chosen password.`,
+            true
+          );
+        }
+      } else if (!emailInput.value) {
+        // Fallback to demo default
+        emailInput.value = 'admin@cloudrdr.internal';
+        passwordInput.value = 'Password123!';
+      }
 
       // 1-Click Demo Login
       quickDemoBtn?.addEventListener('click', () => {
         emailInput.value = 'admin@cloudrdr.internal';
         passwordInput.value = 'Password123!';
         form.requestSubmit();
+      });
+
+      // Quick Account Switcher Pills
+      document.querySelectorAll('.quick-pill-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          emailInput.value = btn.getAttribute('data-email');
+          passwordInput.value = btn.getAttribute('data-pwd');
+          form.requestSubmit();
+        });
+      });
+
+      // Reset password button
+      resetPwdBtn?.addEventListener('click', async () => {
+        const email = emailInput.value.trim();
+        if (!email) {
+          showAlert('Please enter your email above before resetting password.');
+          return;
+        }
+        try {
+          showAlert('Resetting password to Password123!...', true);
+          const res = await fetch('/api/auth/reset-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, newPassword: 'Password123!' }),
+          });
+          const data = await res.json();
+          if (res.ok) {
+            passwordInput.value = 'Password123!';
+            showAlert(
+              `Password for ${email} reset to Password123! Click Sign In to continue.`,
+              true
+            );
+          } else {
+            showAlert(data.error?.message || 'Password reset failed.');
+          }
+        } catch {
+          showAlert('Connection error during password reset.');
+        }
       });
 
       // Toggle password visibility
