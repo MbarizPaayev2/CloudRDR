@@ -152,8 +152,12 @@
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: all var(--dur-fast) var(--ease);
+  transition: transform var(--dur-fast) var(--spring-snappy), background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-mid) var(--spring-gentle);
   user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.965) translateY(1px);
 }
 
 .btn-primary {
@@ -164,6 +168,8 @@
 .btn-primary:hover {
   background: var(--brand-hover);
   color: #FFFFFF;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 16px rgba(67, 96, 255, 0.35);
 }
 
 .btn-secondary {
@@ -176,6 +182,8 @@
   background: var(--surface-subtle);
   border-color: var(--text-muted);
   color: var(--text);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-subtle);
 }
 
 .btn-sm {

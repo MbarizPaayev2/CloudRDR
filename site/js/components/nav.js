@@ -113,7 +113,7 @@ export function initSharedNav(options = {}) {
   function getEffectiveTheme() {
     const explicit = document.documentElement.getAttribute('data-theme');
     if (explicit === 'dark' || explicit === 'light') return explicit;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return 'dark'; // Cyber SOC Obsidian as default
   }
 
   function renderThemeToggle(theme) {
@@ -129,12 +129,16 @@ export function initSharedNav(options = {}) {
   }
 
   const savedTheme = localStorage.getItem('cloudrdr-theme');
-  const initialTheme = savedTheme || getEffectiveTheme();
+  const initialTheme = savedTheme || 'dark'; // Always default to Cyber Dark for maximum eye comfort
   document.documentElement.setAttribute('data-theme', initialTheme);
   renderThemeToggle(initialTheme);
 
   const themeBtn = document.querySelector('#themeToggleBtn');
   themeBtn?.addEventListener('click', () => {
+    // Spring feedback
+    themeBtn.style.transform = 'scale(0.88) rotate(15deg)';
+    setTimeout(() => { themeBtn.style.transform = ''; }, 160);
+
     const current = getEffectiveTheme();
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);

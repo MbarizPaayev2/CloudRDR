@@ -5238,9 +5238,9 @@
     "semantic_hash": ""
   },
   "site/js/components/nav.js": {
-    "mtime": 1791988362.5009024,
-    "seen": 1791988976.710733,
-    "ast_hash": "04ce0d61988e8ffd2eefd26df21a07fb",
+    "mtime": 1791990521.1526327,
+    "seen": 1791990780.8231127,
+    "ast_hash": "d66e7989079e9bf5b1dcec7cb21f88ea",
     "semantic_hash": ""
   },
   "site/js/components/verdictBadge.js": {
@@ -5304,33 +5304,33 @@
     "semantic_hash": ""
   },
   "site/demo/index.html": {
-    "mtime": 1791989578.928661,
-    "seen": 1791989806.6851552,
-    "ast_hash": "1853a5c81bd0e6009b5fd910d18cf6f4",
+    "mtime": 1791990710.9114015,
+    "seen": 1791990781.2325983,
+    "ast_hash": "f5b5d24ebe1f3c9d4be420724e041620",
     "semantic_hash": ""
   },
   "site/docs.html": {
-    "mtime": 1791989692.7395363,
-    "seen": 1791989806.6851604,
-    "ast_hash": "b4225b293f35bedee6fc14e3a4a83e02",
+    "mtime": 1791990665.0402932,
+    "seen": 1791990781.2326038,
+    "ast_hash": "b88c96d57b3f3d6f92023898c422ed5d",
     "semantic_hash": ""
   },
   "site/how-it-works.html": {
-    "mtime": 1791989298.3949623,
-    "seen": 1791989806.6851637,
-    "ast_hash": "0325e5a5a70a1bb1ebfdf18e08bc14d8",
+    "mtime": 1791990639.5376666,
+    "seen": 1791990781.2326076,
+    "ast_hash": "f60c02d56bdf9f670976c4379f7ca9aa",
     "semantic_hash": ""
   },
   "site/index.html": {
-    "mtime": 1791989701.0522995,
-    "seen": 1791989806.6851664,
-    "ast_hash": "d7fdbb9e852f07aa0541f85309f13137",
+    "mtime": 1791990630.3169792,
+    "seen": 1791990781.2326105,
+    "ast_hash": "bb1c39cb6bb29d64837ff69731096fd1",
     "semantic_hash": ""
   },
   "site/team.html": {
-    "mtime": 1791987696.6151774,
-    "seen": 1791988977.0496364,
-    "ast_hash": "d8e16aa577acd56460e20be69b02fe46",
+    "mtime": 1791990693.586691,
+    "seen": 1791990781.2326136,
+    "ast_hash": "0fd62cc1f1559ededa8a7aada9b850e6",
     "semantic_hash": ""
   },
   ".agents/skills/aframe-webxr/assets/starter_aframe/main.js": {
@@ -7953,6 +7953,12 @@
     "mtime": 1791985547.4913852,
     "seen": 1791988977.1190693,
     "ast_hash": "09e846247957e0e19f2e41f764144ef5",
+    "semantic_hash": ""
+  },
+  "site/js/motion.js": {
+    "mtime": 1791990541.5401452,
+    "seen": 1791990780.8259683,
+    "ast_hash": "e54e5acd979790e4ca1e43aa46194c9a",
     "semantic_hash": ""
   }
 }
