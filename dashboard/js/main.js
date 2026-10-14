@@ -3,6 +3,8 @@ import { refreshAll, subscribe } from './state.js';
 import { updateStatusBar } from './components/statusBar.js';
 import { initBaselinePanel, updateBaselinePanel } from './components/baselinePanel.js';
 import { updateDetectionChart } from './components/detectionChart.js';
+import { updateIncidentList } from './components/incidentList.js';
+import { updateIncidentDetail } from './components/incidentDetail.js';
 
 // ── Theme Manager ────────────────────────────────────────────────────────────
 
@@ -148,10 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStatusBar(state);
     updateBaselinePanel(state);
     updateDetectionChart(state.detectionRuns);
+    updateIncidentList(state);
+    updateIncidentDetail(state);
   });
 
   refreshAll();
   console.info(
-    '[CloudRDR] Security Operations Dashboard initialised (Step 4 Detection Chart Connected).'
+    '[CloudRDR] Security Operations Dashboard initialised (Step 5 Incidents Connected).'
   );
 });
