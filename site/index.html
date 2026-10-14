@@ -23,11 +23,16 @@
     <section class="hero-section bg-grid-dots">
       <div class="container hero-grid">
         <div>
-          <h1>Don't just detect ransomware. Prove the recovery.</h1>
-          <p class="hero-subtitle">
+          <div class="hero-animate-eyebrow" style="margin-bottom:var(--space-3);display:flex;align-items:center;gap:var(--space-2);">
+            <span class="brand-badge">Academic Capstone // Year 3</span>
+            <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">ISMS · Cloud Security · Cryptography</span>
+          </div>
+
+          <h1 class="hero-animate-title">Don't just detect ransomware. Prove the recovery.</h1>
+          <p class="hero-subtitle hero-animate-subtitle">
             CloudRDR detects secret cloud file encryption within seconds, freezes the attacking account at the IAM control plane, and uses cryptographic Merkle trees to prove every restored file is an authentic original.
           </p>
-          <div class="hero-cta-group">
+          <div class="hero-cta-group hero-animate-cta">
             <a href="demo/index.html" class="btn btn-primary">
               Open the demo ↗
             </a>
@@ -37,12 +42,42 @@
           </div>
         </div>
 
-        <!-- Memorable Element: Live Looping Hero Merkle Tree Illustration -->
-        <div class="hero-preview-box">
-          <div id="heroMerkleTree"></div>
-          <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:10px;">
-            Live preview: Continuous cryptographic Merkle integrity proof
+        <!-- Memorable Element: Live Looping & Interactive Hero Merkle Tree Illustration -->
+        <div class="hero-preview-box hero-animate-preview">
+          <!-- Interactive Scenario Controls -->
+          <div class="hero-tree-controls" id="heroTreeControls" aria-label="Interactive Tree Scenarios">
+            <button class="hero-pill-btn active" data-scenario="loop" title="Loop continuous attack and recovery narrative">▶ Auto Narrative</button>
+            <button class="hero-pill-btn" data-scenario="calm" title="Inspect calm baseline integrity state">🟢 Calm</button>
+            <button class="hero-pill-btn" data-scenario="attack" title="Simulate canary breach and climbing corruption">🔴 Attack</button>
+            <button class="hero-pill-btn" data-scenario="restore" title="Watch AEAD verified recovery restore leaves">🛡️ Restore</button>
           </div>
+
+          <div id="heroMerkleTree"></div>
+          <div id="heroTreeStatusCaption" style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:8px;">
+            Live narrative: Continuous cryptographic Merkle integrity proof
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── KEY METRICS STRIP ──────────────────────────────────────────────── -->
+    <section class="metrics-strip reveal-on-scroll">
+      <div class="container metrics-grid">
+        <div class="metric-item">
+          <div class="metric-val" data-counter="10" data-prefix="&lt; " data-suffix="s">&lt; 10s</div>
+          <div class="metric-label">Autonomous IAM Containment SLA</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val" data-counter="100" data-suffix="%">100%</div>
+          <div class="metric-label">Cryptographic Merkle Proof</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val" data-counter="60" data-suffix="s">60s</div>
+          <div class="metric-label">Sliding Detection Window</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val" data-counter="256" data-suffix="-bit">256-bit</div>
+          <div class="metric-label">AEAD Authentication Tag Check</div>
         </div>
       </div>
     </section>
@@ -50,26 +85,26 @@
     <!-- ── 2. THE PROBLEM ─────────────────────────────────────────────────── -->
     <section class="section-pad">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-ransomware);text-transform:uppercase;">The Threat</span>
           <h2 class="section-title">What ransomware does to cloud object storage</h2>
           <p class="section-desc">Traditional endpoint antivirus cannot protect remote buckets when cloud credentials leak.</p>
         </div>
 
         <div class="problems-grid">
-          <div class="problem-card">
+          <div class="problem-card reveal-on-scroll stagger-1">
             <div class="problem-num">01 / Silent overwrite</div>
             <h3>Silent blob encryption</h3>
             <p>Attackers steal API keys or service tokens and overwrite thousands of storage objects with encrypted blobs without changing file extensions.</p>
           </div>
 
-          <div class="problem-card">
+          <div class="problem-card reveal-on-scroll stagger-2">
             <div class="problem-num">02 / Poisoned backups</div>
             <h3>Backup pipeline poisoning</h3>
             <p>Scheduled cloud backups automatically sync the newly encrypted files, overwriting good historical copies before security teams notice.</p>
           </div>
 
-          <div class="problem-card">
+          <div class="problem-card reveal-on-scroll stagger-3">
             <div class="problem-num">03 / Zero proof of integrity</div>
             <h3>Unverifiable recovery</h3>
             <p>When organizations pay ransoms or restore from cold archives, they have no cryptographic proof whether restored files were tampered with or truncated.</p>
@@ -81,44 +116,44 @@
     <!-- ── 3. HOW IT WORKS (6 STEPS HORIZONTAL STEPPER) ────────────────────── -->
     <section class="section-pad bg-grid-dots">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Architecture</span>
           <h2 class="section-title">How the defense system works</h2>
           <p class="section-desc">Six automated stages that close the loop from baseline capture to 100% verified restore.</p>
         </div>
 
         <div class="stepper-horizontal">
-          <div class="step-card">
+          <div class="step-card reveal-on-scroll stagger-1">
             <div class="step-number">Step 01</div>
             <h3>Baseline</h3>
             <p>Every file gets a SHA-256 fingerprint. Hashes assemble into a single Merkle root.</p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card reveal-on-scroll stagger-2">
             <div class="step-number">Step 02</div>
             <h3>Monitor</h3>
             <p>A background agent continuously polls bucket event streams every 10 seconds.</p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card reveal-on-scroll stagger-3">
             <div class="step-number">Step 03</div>
             <h3>Detect</h3>
             <p>Sliding 60-second window. Rate &ge;30% or touching decoy canaries trips ransomware verdict.</p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card reveal-on-scroll stagger-4">
             <div class="step-number">Step 04</div>
             <h3>Respond</h3>
             <p>Attacking account is frozen read-only via cloud IAM. Incident signed with Ed25519.</p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card reveal-on-scroll stagger-5">
             <div class="step-number">Step 05</div>
             <h3>Audit</h3>
             <p>All decisions enter a hash-chained ledger. Altering past blocks breaks downstream links.</p>
           </div>
 
-          <div class="step-card">
+          <div class="step-card reveal-on-scroll stagger-6">
             <div class="step-number">Step 06</div>
             <h3>Restore</h3>
             <p>AES-256-GCM backups decrypted. Incident closes only when 100% of files match baseline.</p>
@@ -130,55 +165,57 @@
     <!-- ── 4. WHAT MAKES US DIFFERENT ────────────────────────────────────── -->
     <section class="section-pad">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">Comparison</span>
           <h2 class="section-title">What makes CloudRDR different</h2>
           <p class="section-desc">Comparing legacy cloud backup approaches against autonomous cryptographic defense.</p>
         </div>
 
-        <table class="comparison-table" aria-label="Comparison between Typical Tools and CloudRDR">
-          <thead>
-            <tr>
-              <th scope="col" style="width: 25%;">Capability</th>
-              <th scope="col" style="width: 35%;">Typical Cloud Backup Tools</th>
-              <th scope="col" style="width: 40%;" class="col-diff">CloudRDR Autonomous Defense</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Primary objective</strong></td>
-              <td>Detect and generate email alert notifications</td>
-              <td class="col-diff">Detect, freeze attacker IAM, and cryptographically prove restore</td>
-            </tr>
-            <tr>
-              <td><strong>Containment speed</strong></td>
-              <td>Hours or days waiting for manual human triage</td>
-              <td class="col-diff">Sub-10 seconds automated IAM control-plane lockdown</td>
-            </tr>
-            <tr>
-              <td><strong>Tamper detection</strong></td>
-              <td>Relies on OS file timestamps and size heuristics</td>
-              <td class="col-diff">Deterministic Merkle tree root hash calculation</td>
-            </tr>
-            <tr>
-              <td><strong>Audit log security</strong></td>
-              <td>Plaintext database records easily modified or purged</td>
-              <td class="col-diff">Hash-chained ledger signed with RFC 8032 Ed25519</td>
-            </tr>
-            <tr>
-              <td><strong>Restore guarantee</strong></td>
-              <td>Blind file overwrite with no post-restore verification</td>
-              <td class="col-diff">AES-256-GCM with AEAD tag check and 100% baseline match gate</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="reveal-on-scroll">
+          <table class="comparison-table" aria-label="Comparison between Typical Tools and CloudRDR">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 25%;">Capability</th>
+                <th scope="col" style="width: 35%;">Typical Cloud Backup Tools</th>
+                <th scope="col" style="width: 40%;" class="col-diff">CloudRDR Autonomous Defense</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primary objective</strong></td>
+                <td>Detect and generate email alert notifications</td>
+                <td class="col-diff">Detect, freeze attacker IAM, and cryptographically prove restore</td>
+              </tr>
+              <tr>
+                <td><strong>Containment speed</strong></td>
+                <td>Hours or days waiting for manual human triage</td>
+                <td class="col-diff">Sub-10 seconds automated IAM control-plane lockdown</td>
+              </tr>
+              <tr>
+                <td><strong>Tamper detection</strong></td>
+                <td>Relies on OS file timestamps and size heuristics</td>
+                <td class="col-diff">Deterministic Merkle tree root hash calculation</td>
+              </tr>
+              <tr>
+                <td><strong>Audit log security</strong></td>
+                <td>Plaintext database records easily modified or purged</td>
+                <td class="col-diff">Hash-chained ledger signed with RFC 8032 Ed25519</td>
+              </tr>
+              <tr>
+                <td><strong>Restore guarantee</strong></td>
+                <td>Blind file overwrite with no post-restore verification</td>
+                <td class="col-diff">AES-256-GCM with AEAD tag check and 100% baseline match gate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
     <!-- ── 5. DEMO PREVIEW ────────────────────────────────────────────────── -->
     <section class="section-pad bg-grid-dots">
       <div class="container">
-        <div class="hero-preview-box" style="padding:var(--space-8);text-align:center;">
+        <div class="hero-preview-box reveal-on-scroll" style="padding:var(--space-8);text-align:center;">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Interactive SOC Console</span>
           <h2 style="font-size:var(--text-2xl);margin:var(--space-2) 0 var(--space-4) 0;">Experience the full attack narrative</h2>
           <p style="margin:0 auto var(--space-6) auto;">
@@ -194,7 +231,7 @@
     <!-- ── 6. TEAM AND DOCUMENTS PREVIEW ──────────────────────────────────── -->
     <section class="section-pad">
       <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);" class="reveal-on-scroll">
           <div>
             <h3>Project Team &amp; Governance</h3>
             <p style="margin-bottom:var(--space-4);">Developed for Year-3 Information Security by a cross-functional engineering team covering ISMS compliance, cryptography, DevOps, and testing.</p>
@@ -213,52 +250,170 @@
   <!-- Shared Footer Container -->
   <div id="site-footer-container"></div>
 
-  <!-- Shared Scripts & Hero Looping Animation -->
+  <!-- Shared Scripts & Motion Orchestration -->
   <script type="module">
     import { initSharedNav } from './js/components/nav.js';
     import { initMerkleTree } from './js/components/merkleTree.js';
 
     initSharedNav({ activePage: 'home', basePath: '' });
 
-    // Memorable Element: Hero Live Looping Merkle Tree Illustration
+    // ── 1. Scroll-Triggered Reveal Animation (IntersectionObserver) ────────
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      revealElements.forEach((el) => observer.observe(el));
+    } else {
+      revealElements.forEach((el) => el.classList.add('is-visible'));
+    }
+
+    // ── 2. Metric Counters Animation (requestAnimationFrame) ────────────────
+    const counterElements = document.querySelectorAll('[data-counter]');
+    let countersStarted = false;
+
+    function animateCounters() {
+      if (countersStarted) return;
+      countersStarted = true;
+
+      counterElements.forEach((el) => {
+        const target = parseInt(el.getAttribute('data-counter'), 10);
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        const duration = 1200; // ms
+        const startTime = performance.now();
+
+        function step(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          // Ease-out cubic: 1 - (1 - progress)^3
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(easeProgress * target);
+          el.textContent = `${prefix}${current}${suffix}`;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = `${prefix}${target}${suffix}`;
+          }
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    const metricsStrip = document.querySelector('.metrics-strip');
+    if (metricsStrip && 'IntersectionObserver' in window) {
+      const metricsObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          animateCounters();
+          metricsObserver.disconnect();
+        }
+      }, { threshold: 0.2 });
+      metricsObserver.observe(metricsStrip);
+    } else {
+      animateCounters();
+    }
+
+    // ── 3. Memorable Element: Hero Merkle Tree with Interactive Scenarios ──
     const heroTreeContainer = document.getElementById('heroMerkleTree');
+    const heroStatusCaption = document.getElementById('heroTreeStatusCaption');
+    const controlButtons = document.querySelectorAll('#heroTreeControls .hero-pill-btn');
+
     if (heroTreeContainer) {
       const updateTree = initMerkleTree(heroTreeContainer, { compact: true });
-      
-      // Gentle loop: Calm -> 3 leaves red -> climb -> recover
-      let loopStage = 0;
-      setInterval(() => {
-        loopStage = (loopStage + 1) % 4;
-        if (loopStage === 0) {
-          // Calm
-          updateTree({
-            corruptedLeaves: new Set(),
-            currentRootHash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
-          });
-        } else if (loopStage === 1) {
-          // Attack touches canary and leaf 1
-          updateTree({
-            corruptedLeaves: new Set([0, 1]),
-            currentRootHash: '00000000_TAMPERED_0000',
-            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
-          });
-        } else if (loopStage === 2) {
-          // Corruption climbs to leaf 4 and 7
-          updateTree({
-            corruptedLeaves: new Set([0, 1, 4, 7]),
-            currentRootHash: '00000000_TAMPERED_0000',
-            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
-          });
-        } else {
-          // Recovering
-          updateTree({
-            corruptedLeaves: new Set([0]),
-            currentRootHash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
-          });
+      const BASELINE_ROOT = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+      const TAMPERED_ROOT = 'a8f9c1b34e62d590e8b211f49a2cd7081bc598e213ad459bc76319802d354aef';
+
+      const scenarios = {
+        calm: {
+          corruptedLeaves: new Set(),
+          currentRootHash: BASELINE_ROOT,
+          baseline: { merkle_root: BASELINE_ROOT },
+          caption: 'Baseline calm: All 16 leaf fingerprints match baseline Merkle root.'
+        },
+        attack: {
+          corruptedLeaves: new Set([0, 1, 4, 7]),
+          currentRootHash: TAMPERED_ROOT,
+          baseline: { merkle_root: BASELINE_ROOT },
+          caption: 'Attack detected! Decoy canary tripped and 4 leaves modified. Corruption climbs to root.'
+        },
+        restore: {
+          corruptedLeaves: new Set([0]),
+          currentRootHash: BASELINE_ROOT,
+          baseline: { merkle_root: BASELINE_ROOT },
+          caption: 'Verified recovery in progress: Decrypted AES-256-GCM blocks re-verified with baseline.'
         }
-      }, 2500);
+      };
+
+      let loopInterval = null;
+      let loopStage = 0;
+      let activeMode = 'loop';
+
+      function renderScenario(name) {
+        const sc = scenarios[name];
+        if (sc) {
+          updateTree({
+            corruptedLeaves: sc.corruptedLeaves,
+            currentRootHash: sc.currentRootHash,
+            baseline: sc.baseline
+          });
+          if (heroStatusCaption) {
+            heroStatusCaption.textContent = sc.caption;
+          }
+        }
+      }
+
+      function startNarrativeLoop() {
+        if (loopInterval) clearInterval(loopInterval);
+        loopStage = 0;
+        renderScenario('calm');
+
+        loopInterval = setInterval(() => {
+          loopStage = (loopStage + 1) % 4;
+          if (loopStage === 0) {
+            renderScenario('calm');
+          } else if (loopStage === 1) {
+            // Subtle initial touch on canary
+            updateTree({
+              corruptedLeaves: new Set([0, 2]),
+              currentRootHash: TAMPERED_ROOT,
+              baseline: { merkle_root: BASELINE_ROOT }
+            });
+            if (heroStatusCaption) {
+              heroStatusCaption.textContent = 'Canary touched: Instant ransomware tripwire verdict triggered!';
+            }
+          } else if (loopStage === 2) {
+            renderScenario('attack');
+          } else {
+            renderScenario('restore');
+          }
+        }, 3000);
+      }
+
+      // Initial start
+      startNarrativeLoop();
+
+      // Scenario button interactions
+      controlButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          controlButtons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const scenario = btn.getAttribute('data-scenario');
+          activeMode = scenario;
+
+          if (scenario === 'loop') {
+            startNarrativeLoop();
+          } else {
+            if (loopInterval) clearInterval(loopInterval);
+            renderScenario(scenario);
+          }
+        });
+      });
     }
   </script>
 </body>
