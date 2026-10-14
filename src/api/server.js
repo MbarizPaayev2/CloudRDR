@@ -70,6 +70,7 @@ export async function buildServer(options = {}) {
       request.url.startsWith('/landing') ||
       request.url.startsWith('/css') ||
       request.url.startsWith('/js') ||
+      request.url.startsWith('/assets') ||
       request.url === '/favicon.ico' ||
       request.method === 'OPTIONS';
 

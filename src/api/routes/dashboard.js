@@ -204,7 +204,7 @@ export async function dashboardRoutes(fastify) {
     return serveSiteFile(file, reply);
   });
 
-  // ── Static Assets (CSS / JS / Favicon) ───────────────────────────────────
+  // ── Static Assets (CSS / JS / Assets / Favicon) ──────────────────────────
   fastify.get('/css/*', async (request, reply) => {
     const file = request.params['*'];
     return serveAsset('css', file, reply);
@@ -215,7 +215,12 @@ export async function dashboardRoutes(fastify) {
     return serveAsset('js', file, reply);
   });
 
+  fastify.get('/assets/*', async (request, reply) => {
+    const file = request.params['*'];
+    return serveSiteFile(path.join('assets', file), reply);
+  });
+
   fastify.get('/favicon.ico', async (_request, reply) => {
-    return reply.status(204).send();
+    return serveSiteFile('assets/favicon.svg', reply);
   });
 }
