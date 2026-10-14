@@ -23,11 +23,6 @@
     <section class="hero-section bg-grid-dots">
       <div class="container hero-grid">
         <div>
-          <div class="hero-animate-eyebrow" style="margin-bottom:var(--space-3);display:flex;align-items:center;gap:var(--space-2);">
-            <span class="brand-badge">Autonomous Cloud Defense</span>
-            <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">Sub-10s Containment · Cryptographic Verification</span>
-          </div>
-
           <h1 class="hero-animate-title">Don't just detect ransomware. Prove the recovery.</h1>
           <p class="hero-subtitle hero-animate-subtitle">
             CloudRDR detects secret cloud file encryption within seconds, freezes the attacking account at the IAM control plane, and uses cryptographic Merkle trees to prove every restored file is an authentic original.
@@ -90,7 +85,7 @@
       <div class="container metrics-grid">
         <div class="metric-item">
           <div class="metric-val" data-counter="10" data-prefix="&lt; " data-suffix="s">&lt; 10s</div>
-          <div class="metric-label">Autonomous IAM Containment SLA</div>
+          <div class="metric-label">IAM Containment SLA</div>
         </div>
         <div class="metric-item">
           <div class="metric-val" data-counter="100" data-suffix="%">100%</div>
@@ -165,15 +160,11 @@
       <div class="container">
         <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Architecture &amp; Protocol Flow</span>
-          <h2 class="section-title">Autonomous 6-stage defense lifecycle</h2>
+          <h2 class="section-title">6-Stage defense lifecycle</h2>
           <p class="section-desc">From initial cryptographic baseline to verifiable AEAD recovery. Click any stage to test its interactive sandbox and inspect protocol specifications.</p>
         </div>
 
-        <div class="pipeline-controls-bar reveal-on-scroll">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="brand-badge" style="background:var(--brand-subtle);color:var(--brand);font-size:0.75rem;">Connected Pipeline Flow</span>
-            <span style="font-size:var(--text-xs);color:var(--text-muted);font-family:var(--font-mono);">Automated Control Plane • Cryptographic Proofs</span>
-          </div>
+        <div class="pipeline-controls-bar reveal-on-scroll" style="justify-content:flex-end;">
           <div style="display:flex;align-items:center;gap:10px;">
             <button id="pipelineAutoPlayBtn" class="btn btn-secondary" style="font-size:0.75rem;padding:6px 14px;font-family:var(--font-mono);">
               <span id="pipelinePlayIcon">▶</span> <span id="pipelinePlayText">Auto-Play Walkthrough</span>
@@ -321,7 +312,7 @@
       <div class="container">
         <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Real-Time Pipeline Telemetry</span>
-          <h2 class="section-title">Autonomous containment &amp; recovery stream</h2>
+          <h2 class="section-title">Live containment &amp; recovery telemetry</h2>
           <p class="section-desc">Live event processing log from the Fastify backend, showing sliding rate calculations, canary tripwires, and Ed25519 signing.</p>
         </div>
 
@@ -362,7 +353,7 @@
         <div class="section-head reveal-on-scroll">
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">Comparison</span>
           <h2 class="section-title">What makes CloudRDR different</h2>
-          <p class="section-desc">Comparing legacy cloud backup approaches against autonomous cryptographic defense.</p>
+          <p class="section-desc">Comparing legacy cloud backup approaches against cryptographic defense.</p>
         </div>
 
         <div class="reveal-on-scroll">
@@ -371,7 +362,7 @@
               <tr>
                 <th scope="col" style="width: 25%;">Capability</th>
                 <th scope="col" style="width: 35%;">Typical Cloud Backup Tools</th>
-                <th scope="col" style="width: 40%;" class="col-diff">CloudRDR Autonomous Defense</th>
+                <th scope="col" style="width: 40%;" class="col-diff">CloudRDR Defense System</th>
               </tr>
             </thead>
             <tbody>
