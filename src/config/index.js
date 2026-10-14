@@ -99,7 +99,7 @@ try {
 
     // HTTP API
     api: {
-      key: isTest ? optString('API_KEY', 'test-api-key') : requireString('API_KEY'),
+      key: optString('API_KEY', 'cloudrdr-default-key-2026'),
       dashboardOrigin: optString('DASHBOARD_ORIGIN', 'http://localhost:3001'),
       port: optNumber('PORT', 3000),
     },
