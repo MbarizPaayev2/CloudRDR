@@ -17,3 +17,6 @@ Thumbs.db
 
 # Graphify cache
 graphify-out/cache/
+
+# Temporary clones / external skills
+temp_design_skills/
