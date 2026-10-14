@@ -93,4 +93,56 @@ describe('Dashboard Data Layer - Mock API & State Store', () => {
 
     unsubscribe();
   });
+
+  it('validates audit log chain continuity and detects tampered blocks', async () => {
+    const logs = await mockApi.getAuditLog();
+    assert.ok(logs.length >= 4);
+
+    // Verify valid chain
+    let isChainValid = true;
+    let brokenIndex = -1;
+    for (let i = 0; i < logs.length; i++) {
+      if (i === 0) {
+        if (logs[i].prevHash !== '0'.repeat(64)) {
+          isChainValid = false;
+          brokenIndex = 0;
+          break;
+        }
+      } else {
+        if (logs[i].prevHash !== logs[i - 1].hash) {
+          isChainValid = false;
+          brokenIndex = i;
+          break;
+        }
+      }
+    }
+    assert.equal(isChainValid, true);
+    assert.equal(brokenIndex, -1);
+
+    // Tamper with block #2 hash
+    const tamperedLogs = JSON.parse(JSON.stringify(logs));
+    tamperedLogs[2].hash = 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
+
+    let tamperedChainValid = true;
+    let tamperedBrokenIndex = -1;
+    for (let i = 0; i < tamperedLogs.length; i++) {
+      if (i === 0) {
+        if (tamperedLogs[i].prevHash !== '0'.repeat(64)) {
+          tamperedChainValid = false;
+          tamperedBrokenIndex = 0;
+          break;
+        }
+      } else {
+        if (tamperedLogs[i].prevHash !== tamperedLogs[i - 1].hash) {
+          tamperedChainValid = false;
+          tamperedBrokenIndex = i;
+          break;
+        }
+      }
+    }
+    assert.equal(tamperedChainValid, false);
+    // Block #3's prevHash doesn't match Block #2's modified hash
+    assert.equal(tamperedBrokenIndex, 3);
+  });
 });
+

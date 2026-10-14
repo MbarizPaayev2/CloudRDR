@@ -567,6 +567,21 @@ body {
   border-left: 3px solid var(--color-primary);
 }
 
+.data-table tbody tr.row-broken {
+  background-color: var(--color-danger-subtle) !important;
+  border-left: 4px solid var(--color-danger) !important;
+}
+
+.data-table tbody tr.row-broken td {
+  color: var(--color-danger) !important;
+}
+
+.data-table tbody tr.row-untrusted {
+  background-color: rgba(239, 68, 68, 0.05);
+  opacity: 0.85;
+}
+
+
 /* Chips & Badges */
 .chip {
   display: inline-flex;
