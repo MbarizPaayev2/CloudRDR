@@ -29,7 +29,10 @@
             CloudRDR detects secret cloud file encryption within seconds, freezes the attacking account at the IAM control plane, and uses cryptographic Merkle trees to prove every restored file is an authentic original.
           </p>
           <div class="hero-cta-group hero-animate-cta">
-            <a href="demo/index.html" class="btn btn-primary">
+            <button id="startPresentationTourBtn" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+              <span>🎬</span> <span>Start 45s Presentation Tour</span>
+            </button>
+            <a href="demo/index.html" class="btn btn-secondary">
               Open the demo ↗
             </a>
             <a href="how-it-works.html" class="btn btn-secondary">
@@ -440,8 +443,13 @@
   <script type="module">
     import { initSharedNav } from './js/components/nav.js';
     import { initMerkleTree } from './js/components/merkleTree.js';
+    import { startPresentationTour, endPresentationTour } from './js/components/tour.js';
 
     initSharedNav({ activePage: 'home', basePath: '' });
+
+    document.getElementById('startPresentationTourBtn')?.addEventListener('click', () => {
+      startPresentationTour();
+    });
 
     // ── 1. Scroll-Triggered Reveal Animation (IntersectionObserver) ────────
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -1266,6 +1274,8 @@ if (isValid) await storage.write(bucket, path, bytes);`,
       } else if (e.key === 'r' || e.key === 'R') {
         const restoreTab = document.querySelector('[data-scenario="restore"]');
         restoreTab?.click();
+      } else if (e.key === 't' || e.key === 'T') {
+        startPresentationTour();
       } else if (e.key === ' ') {
         e.preventDefault();
         autoPlayBtn?.click();

@@ -5,6 +5,7 @@
  */
 
 import { getState } from '../state.js';
+import { openMerkleInspector } from './merkleInspector.js';
 
 /**
  * Render or update the Merkle Tree SVG inside a container element.
@@ -302,6 +303,21 @@ export function initMerkleTree(containerEl, options = {}) {
       }
       tooltip.style.opacity = '0';
       tooltip.style.display = 'none';
+    });
+
+    // Click to open Cryptographic File Integrity & Merkle Proof Inspector
+    g.addEventListener('click', () => {
+      let rootHash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+      const rootDisplay = containerEl.querySelector('#merkleRootHashDisplay');
+      if (rootDisplay && rootDisplay.getAttribute('data-full-hash')) {
+        rootHash = rootDisplay.getAttribute('data-full-hash');
+      }
+      const leafIdx = node.level === 0 ? node.index : (node.index % 16);
+      const isCorrupted = currentCorrupted.has(leafIdx);
+      openMerkleInspector(leafIdx, {
+        isCorrupted,
+        currentRoot: rootHash
+      });
     });
   });
 
