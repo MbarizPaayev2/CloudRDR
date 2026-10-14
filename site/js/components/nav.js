@@ -57,7 +57,21 @@ export function initSharedNav(options = {}) {
               <!-- Dynamically populated icon -->
             </button>
 
-            <a href="/login" class="nav-link" style="font-size:0.85rem;padding:4px 8px;font-weight:600;">Sign In</a>
+            <a
+              href="/login"
+              class="btn btn-white btn-sm"
+              style="font-size: 0.82rem; padding: 6px 14px; border-radius: 6px; font-weight: 600; text-decoration: none;"
+              >Sign In</a
+            >
+
+            <a
+              href="/dashboard"
+              class="btn btn-primary btn-sm"
+              style="font-size: 0.82rem; padding: 6px 14px; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;"
+            >
+              <span>Open App</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
 
             <button type="button" class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Toggle navigation menu">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
