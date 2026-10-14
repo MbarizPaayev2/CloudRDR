@@ -1,16 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
   <defs>
+    <style>
+      .fav-shackle { stroke: #F8FAFC; }
+      .fav-orbit { stroke: #64748B; opacity: 0.75; }
+      @media (prefers-color-scheme: light) {
+        .fav-shackle { stroke: #1E293B; }
+        .fav-orbit { stroke: #94A3B8; opacity: 0.9; }
+      }
+    </style>
     <linearGradient id="tfD_fav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#0284C7"/></linearGradient>
     <linearGradient id="lfD_fav" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0284C7"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
     <linearGradient id="rfD_fav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#10B981"/><stop offset="100%" stop-color="#047857"/></linearGradient>
     <linearGradient id="rgD_fav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#38BDF8"/><stop offset="50%" stop-color="#6366F1"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
   </defs>
-  <rect width="240" height="240" rx="48" fill="#0B1120" />
   <g transform="translate(120, 124)">
-    <path d="M 65,-55 A 85,85 0 1,0 75,40" fill="none" stroke="url(#rgD_fav)" stroke-width="11" stroke-linecap="round" />
+    <path d="M 65,-55 A 85,85 0 1,0 75,40" fill="none" stroke="url(#rgD_fav)" stroke-width="12" stroke-linecap="round" />
     <polygon points="84,22 86,52 58,42" fill="#10B981" />
-    <circle cx="0" cy="0" r="66" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="3 6" />
-    <path d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25" fill="none" stroke="#F8FAFC" stroke-width="7.5" stroke-linecap="round" />
+    <circle class="fav-orbit" cx="0" cy="0" r="66" fill="none" stroke-width="2.5" stroke-dasharray="3 6" />
+    <path class="fav-shackle" d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25" fill="none" stroke-width="8.5" stroke-linecap="round" />
     <polygon points="0,-42 42,-18 0,6 -42,-18" fill="url(#tfD_fav)" />
     <polygon points="-42,-18 0,6 0,54 -42,30" fill="url(#lfD_fav)" />
     <polygon points="0,6 42,-18 42,30 0,54" fill="url(#rfD_fav)" />
