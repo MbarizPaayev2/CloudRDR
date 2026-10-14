@@ -1,218 +1,230 @@
-# CloudRDR — Cloud Ransomware Detection & Recovery
-
-> University Project — Information Security, Year 3  
-> Backend implementation: Node.js 18+, Fastify, Supabase Postgres, pino
-
-CloudRDR watches a cloud object storage bucket, computes a SHA-256 cryptographic baseline of every protected file, detects ransomware-like mass modification using a change-rate threshold plus canary sentinel files, freezes the affected account, writes a signed incident record, and restores files from encrypted backups while proving the restored files match the baseline (`VALID` / `MODIFIED` / `MISSING`).
+<div align="center">
+  <img src="site/assets/logo-dark.svg" alt="CloudRDR Logo" width="560" />
+  <p><strong>Cloud Ransomware Detection & Cryptographically Verified Recovery Platform</strong></p>
+  <p>
+    <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-v18%2B-339933?logo=node.js&logoColor=white" alt="Node Version" /></a>
+    <a href="https://fastify.dev"><img src="https://img.shields.io/badge/Fastify-v4.27-000000?logo=fastify&logoColor=white" alt="Fastify" /></a>
+    <img src="https://img.shields.io/badge/Tests-74%2F74%20Passing-27B97F?logo=checkmarx&logoColor=white" alt="Tests" />
+    <img src="https://img.shields.io/badge/Zero--Trust-RFC%208032%20Ed25519-4360FF" alt="Ed25519" />
+    <img src="https://img.shields.io/badge/Encryption-AES--256--GCM-008080" alt="AES-256-GCM" />
+    <img src="https://img.shields.io/badge/Audit-Hash--Chained%20Ledger-58B3DA" alt="Audit Chain" />
+  </p>
+</div>
 
 ---
 
-## Architecture
+## Executive Overview
+
+Modern cloud ransomware attacks rarely announce themselves with desktop ransom notes. Instead, attackers compromise cloud credentials, silently encrypt high-value objects inside storage buckets, and let automated backup pipelines sync encrypted ciphertext—poisoning recovery repositories before security analysts notice.
+
+**CloudRDR** is an enterprise-grade cloud security operations platform designed to detect silent mass modifications, freeze compromised identities at the IAM control plane, preserve immutable cryptographic evidence, and guarantee verified recovery from clean backups.
+
+### Core Guarantees:
+1. **Mathematical Integrity Baseline**: Every protected object receives an immutable SHA-256 fingerprint folded pairwise into a deterministic Merkle tree root anchor.
+2. **Real-Time Sliding-Window Detection**: Flags anomalous change velocity (e.g. >30% modifications within 30 seconds) and triggers immediate response if canary sentinel files are touched.
+3. **Automated Safe Containment**: Restricts write privileges for compromised IAM credentials at the control plane while maintaining read access for forensic and recovery workflows.
+4. **Cryptographic Evidence Preservation**: Generates RFC 8032 Ed25519-signed incident casefiles and records all administrative events in an immutable, tamper-evident hash-chained audit ledger.
+5. **Zero-Trust Verified Recovery**: Decrypts AES-256-GCM backups into an isolated quarantine staging environment. Files are strictly verified against pre-attack baseline hashes (`VALID` / `MODIFIED` / `MISSING`) and require operator confirmation before live storage promotion.
+
+---
+
+## System Architecture
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                          CloudRDR Backend                              │
+│                        CloudRDR Platform Core                          │
 │                                                                        │
-│  ┌──────────┐    change events    ┌───────────────┐                    │
-│  │  Monitor │───────────────────▶ │   Detection   │                    │
+│  ┌──────────┐    Change Events    ┌───────────────┐                    │
+│  │  Monitor │────────────────────▶│   Detection   │                    │
 │  │  Agent   │                     │    Engine     │                    │
 │  └────┬─────┘                     └───────┬───────┘                    │
-│       │                                   │ ransomware verdict         │
-│       │ poll changes                      ▼                            │
+│       │                                   │ Ransomware Verdict         │
+│       │ Poll Storage                      ▼                            │
 │       ▼                           ┌───────────────┐                    │
 │  ┌──────────┐                     │   Response    │──▶ Freeze IAM      │
-│  │ Storage  │                     │    Service    │──▶ Sign Record     │
+│  │ Storage  │                     │    Service    │──▶ Ed25519 Sign    │
 │  │ Adapter  │                     └───────┬───────┘──▶ Hash Audit Log  │
 │  └────┬─────┘                             │                            │
 │       │                                   ▼                            │
 │       ▼                           ┌───────────────┐                    │
-│  ┌──────────┐                     │   Verified    │◀── Encrypted Backup│
-│  │ Baseline │                     │    Restore    │──▶ Verify AEAD/Hash│
-│  │ Service  │                     └───────────────┘──▶ Write VALID only│
-│  └──────────┘                                                          │
-│                                                                        │
+│  ┌──────────┐                     │   Verified    │◀── AES-256-GCM     │
+│  │ Baseline │                     │    Restore    │──▶ Quarantine Stage│
+│  │ Service  │                     └───────┬───────┘──▶ Promote Gate    │
+│  └──────────┘                             │                            │
+│                                           ▼                            │
 │  ┌──────────────────────────────────────────────────────────────────┐  │
-│  │                       HTTP API (Fastify)                         │  │
-│  │   /health   /baseline   /detection/runs   /incidents   /restore  │  │
+│  │                       HTTP REST & SOC API                        │  │
+│  │  /status/system   /metrics/kpis   /incidents   /evidence/verify  │  │
 │  └──────────────────────────────────────────────────────────────────┘  │
-└────────────────────────────────────────────────────────────────────────┘
-          │                                        │
-    ┌─────▼──────┐                           ┌─────▼──────┐
-    │  Supabase  │                           │   Crypto   │
-    │  Postgres  │                           │   Module   │
-    │  Storage   │                           │ (Dev team) │
-    └────────────┘                           └────────────┘
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+           ┌────────────────────────┴────────────────────────┐
+           ▼                                                 ▼
+┌─────────────────────┐                           ┌─────────────────────┐
+│  Public Showcase &  │                           │   SOC Operational   │
+│   Landing Portal    │                           │   Admin Dashboard   │
+│   (http://.../site) │                           │ (http://.../dashboard)│
+└─────────────────────┘                           └─────────────────────┘
 ```
 
 ---
 
-## Quick Start (under 10 minutes)
+## Quick Start (Local Demo in Under 3 Minutes)
+
+CloudRDR is preconfigured to run out of the box with zero external cloud dependencies using its built-in local filesystem adapter and in-memory persistence layer.
 
 ### 1. Prerequisites
-
 - **Node.js**: ≥ 18.0.0
 - **npm**: ≥ 9.0.0
 
 ### 2. Installation
-
 ```bash
-git clone <repo-url> cloudrdr
-cd cloudrdr
+git clone https://github.com/MbarizPaayev2/CloudRDR.git
+cd CloudRDR
 npm install
 ```
 
-### 3. Environment Setup
-
+### 3. Environment Configuration
 ```bash
 cp .env.example .env
-# Defaults are pre-configured for instant zero-dependency local dev
+# Default configuration uses local storage adapter and dev API keys
 ```
 
-### 4. Run Locally (Zero Cloud Configuration Needed)
-
+### 4. Seed Protected Files & Establish Cryptographic Baseline
 ```bash
-# Seed protected files and compute initial SHA-256 baseline
 npm run seed
-
-# Run the full end-to-end ransomware attack simulation
-npm run simulate
-
-# Start the Fastify API server & SOC Web Dashboard (open http://localhost:3000/dashboard)
-npm run dev
-
-# Start the background monitoring agent
-npm run monitor
-
-# Run threshold sweep experiment (generates docs/qa/01_THRESHOLD_SWEEP_EXPERIMENT.md)
-npm run sweep
-
-# Run formal benchmark metrics harness M1-M9 (generates docs/qa/02_BENCHMARK_METRICS_REPORT.md)
-npm run metrics
+# Creates sample protected documents and canary tripwire files under data/local-storage/protected
+# Computes pairwise SHA-256 Merkle root anchor
 ```
 
-### 5. Run Test Suite
-
+### 5. Run the Automated End-to-End Attack Simulation
 ```bash
-# Run all 46 unit & integration tests across 14 test suites
+npm run simulate
+# 1. Seeds clean baseline
+# 2. Simulates attacker modifying 50% of protected files
+# 3. Detection engine triggers ransomware alert
+# 4. Response service freezes IAM credentials and creates Ed25519-signed manifest
+# 5. Restores files to quarantine and verifies 100% pre-attack hash match
+```
+
+### 6. Start the API Server & SOC Admin Dashboard
+```bash
+npm start
+# Server listens on http://localhost:3000
+```
+Open in your browser:
+- **Public Interactive Site**: [http://localhost:3000/](http://localhost:3000/)
+- **SOC Admin Dashboard**: [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
+- **Operator Login**: [http://localhost:3000/login](http://localhost:3000/login)
+- **Account Registration**: [http://localhost:3000/register](http://localhost:3000/register)
+
+### 7. Run Verification Test Suite
+```bash
 npm test
-
-# Run ESLint and Prettier
-npm run lint
-npm run format:check
+# Executes all 74 automated unit & integration tests across 23 test suites
 ```
 
 ---
 
-## Environment Variables
+## Core Security Capabilities
 
-| Variable                   | Default                 | Description                                                   |
-| -------------------------- | ----------------------- | ------------------------------------------------------------- |
-| `STORAGE_PROVIDER`         | `local`                 | `local` (filesystem fallback) or `supabase` (cloud storage)   |
-| `STORAGE_BUCKET`           | `protected`             | Bucket name                                                   |
-| `LOCAL_STORAGE_PATH`       | `./data/local-storage`  | Root path for local storage adapter                           |
-| `SUPABASE_URL`             | —                       | Supabase URL (required when `STORAGE_PROVIDER=supabase`)      |
-| `SUPABASE_SERVICE_KEY`     | —                       | Service role key (server-side only, bypasses RLS)             |
-| `MONITOR_INTERVAL_SECONDS` | `10`                    | Frequency of storage polling in seconds                       |
-| `WINDOW_SECONDS`           | `60`                    | Detection sliding window duration                             |
-| `SUSPICIOUS_RATE`          | `0.10`                  | 10% change rate triggers suspicious alert                     |
-| `RANSOMWARE_RATE`          | `0.30`                  | 30% change rate triggers immediate ransomware response        |
-| `ALLOWLISTED_ACCOUNTS`     | —                       | Comma-separated cloud accounts exempt from bulk triggers      |
-| `API_KEY`                  | `dev-secret-key-12345`  | API Key required on all endpoints (except `/health`)          |
-| `DASHBOARD_ORIGIN`         | `http://localhost:3001` | Origin allowed by CORS                                        |
-| `PORT`                     | `3000`                  | HTTP port                                                     |
-| `LOG_LEVEL`                | `info`                  | Logging verbosity (`trace`, `debug`, `info`, `warn`, `error`) |
+### 1. File Integrity Monitoring & Merkle Baselines
+- Monitors protected object buckets, calculating 64-character SHA-256 content hashes.
+- Builds pairwise Merkle DAGs (`src/crypto/ed25519.js`, `src/contracts/crypto.contract.js`).
+- If even one bit of any protected file is altered, the Merkle root mismatch mathematically proves corruption.
 
----
+### 2. Detection Engine & Sentinel Canaries
+- Configurable sliding window (default 30 seconds, rate threshold 30%).
+- Integrated canary tripwire monitoring (`tripwire_sentinel.docx`). Any modification or deletion of a canary triggers an immediate `critical` ransomware verdict regardless of change volume.
+- Dynamic threshold adjustment via authenticated API (`POST /detection/config`).
 
-## Database Migration (`db/migrations/001_init.sql`)
+### 3. Safe Control-Plane IAM Containment
+- Safe isolation client with exponential backoff retry logic (`src/response/freezeClient.js`).
+- Restricts write permissions for compromised identities while preserving read permissions for verification.
+- Idempotent and auditable—every containment request generates an audit entry and updates incident records.
 
-When deploying to Supabase Postgres, execute `db/migrations/001_init.sql` in the Supabase SQL editor or via `supabase db push`.
+### 4. Authenticated Backup & Staged Quarantine Recovery
+- Backup encryption using `AES-256-GCM` with random 96-bit initialization vectors and 128-bit AEAD authentication tags (`src/backup/backupService.js`).
+- **Quarantine Staging**: Decrypted backup files are first extracted to an isolated directory (`data/quarantine/<jobId>/`).
+- **Cryptographic Gate**: Each file is verified against pre-attack baseline SHA-256 fingerprints:
+  - `VALID`: AEAD tag verified + restored SHA-256 exactly matches pre-attack baseline.
+  - `MODIFIED`: AEAD failed or restored hash differs from baseline. Plaintext is suppressed.
+  - `MISSING`: Backup archive does not contain the target file.
+- **Operator Promotion**: Restored files are only written back to live storage after an authorized operator inspects the results and provides explicit confirmation (`POST /incidents/:id/promote`).
 
-### Tables Created:
-
-1. `protected_files` — Baseline file catalog with versioning and canary flags (`UNIQUE (bucket, path, baseline_version)`).
-2. `baseline_snapshots` — Merkle root snapshots per baseline execution.
-3. `change_events` — Sliding window event stream indexed on `(observed_at DESC, account_id)`.
-4. `detection_runs` — Telemetry for all evaluations (including normal verdicts for threshold analysis).
-5. `incidents` — Lifecycle tracking (`open` ➔ `frozen` ➔ `restoring` ➔ `resolved` / `freeze_failed`).
-6. `restore_jobs` — Multi-file restore job execution status.
-7. `restore_results` — Granular per-file verification outcomes (`VALID`, `MODIFIED`, `MISSING`).
-
-> **Security Note:** Row Level Security (RLS) is enabled with `deny_all` policies on all tables. Only the service role key can access database tables.
+### 5. Tamper-Evident Audit Ledger
+- Cryptographic hash-chained audit log (`src/log/auditLog.js`).
+- Genesis block starts with `prevHash = 00...00`. Every event links to the preceding entry:
+  $$\text{hash} = \text{SHA-256}(\text{index} \parallel \text{prevHash} \parallel \text{timestamp} \parallel \text{canonicalJson}(\text{data}))$$
+- Complete chain verification utility (`verifyAuditChain`) detects any modified, deleted, or inserted historical records.
 
 ---
 
-## HTTP REST API
+## HTTP REST API Reference
 
-All endpoints return JSON and require `x-api-key: <API_KEY>` or `Authorization: Bearer <API_KEY>`, except `/health`.
+All protected endpoints require authentication via session cookie or `Authorization: Bearer <API_KEY>` / `x-api-key: <API_KEY>`.
 
-Errors follow a consistent structure:
+### Platform Telemetry & SOC Monitoring
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/health` | System liveness, uptime, and memory status |
+| `GET` | `/status/system` | Live status across detection, storage, baseline, and backup services |
+| `GET` | `/metrics/kpis` | Real-time counts: protected files, active incidents, 24h events, backup health |
+| `GET` | `/telemetry/activity?range=24H` | Bucketed time-series activity data (`1H`, `6H`, `24H`, `7D`) |
+| `GET` | `/events/recent` | Unified chronological security event feed |
+| `GET` | `/storage/overview` | Storage backend health, object inventory, and WORM immutability state |
+| `GET` | `/recovery/health` | Cryptographic recovery health metrics (AEAD checks, baseline hash matches) |
 
-```json
-{
-  "error": {
-    "code": "validation_error",
-    "message": "Field 'bucket' is required"
-  }
-}
-```
+### Cryptographic Evidence & Audit Trail
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/integrity/cryptographic` | Real-time Merkle root verification & audit hash-chain integrity check |
+| `POST` | `/evidence/verify` | On-demand forensic validation of incident signatures and hash chains |
+| `GET` | `/audit` | Query tamper-evident audit ledger with chain validity verification |
 
-| Method | Endpoint                   | Auth    | Description                                                             |
-| ------ | -------------------------- | ------- | ----------------------------------------------------------------------- |
-| `GET`  | `/`                        | None    | Web Dashboard (Security SOC GUI)                                        |
-| `GET`  | `/dashboard`               | None    | Web Dashboard (Security SOC GUI)                                        |
-| `GET`  | `/health`                  | None    | Service liveness and uptime check                                       |
-| `POST` | `/baseline`                | API Key | Initiate baseline creation (Body: `{ "bucket": "protected" }`)          |
-| `GET`  | `/baseline/:bucket`        | API Key | Retrieve latest snapshot, Merkle root, and files                        |
-| `GET`  | `/detection/runs?limit=50` | API Key | Query historical detection runs and verdicts                            |
-| `GET`  | `/incidents`               | API Key | List incidents (optional query params: `?status=frozen&accountId=acc1`) |
-| `GET`  | `/incidents/:id`           | API Key | Get detailed incident record and digital signature                      |
-| `POST` | `/incidents/:id/restore`   | API Key | Trigger verified restore pipeline for incident                          |
-| `GET`  | `/restore/:jobId`          | API Key | Inspect restore job progress and per-file validation states             |
+### Baseline & Detection Engine
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/baseline` | Compute new baseline snapshot for a bucket (`{ "bucket": "protected" }`) |
+| `GET` | `/baseline/:bucket` | Retrieve latest Merkle root and cataloged file list |
+| `GET` | `/detection/summary` | Current sliding-window velocity, observed rate, and tripwire status |
+| `GET` | `/detection/runs` | Historical detection evaluations and verdicts (`normal`, `suspicious`, `ransomware`) |
+| `POST` | `/detection/config` | Update detection window, suspicious rate, and ransomware rate |
+
+### Incident Lifecycle & Safe Recovery
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/incidents` | List security incidents (filter by `status`, `accountId`) |
+| `GET` | `/incidents/:id` | Detailed incident record with Ed25519 signature and affected files |
+| `PATCH` | `/incidents/:id/status` | Update incident status (`acknowledged`, `resolved`, `closed`) |
+| `POST` | `/incidents/:id/contain` | Execute safe control-plane write-freeze on compromised account |
+| `GET` | `/incidents/:id/timeline` | Complete chronological timeline from alert to containment and recovery |
+| `POST` | `/incidents/:id/restore` | Stage decrypted backup files in quarantine and verify baseline hashes |
+| `POST` | `/incidents/:id/promote` | Promote verified quarantine files to live storage (`{ "confirmed": true }`) |
+| `GET` | `/restore/:jobId` | Inspect file-level recovery outcomes (`VALID`, `MODIFIED`, `MISSING`) |
+
+### Identity & Authentication
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/auth/register` | Register new SOC operator account with secure password hashing |
+| `POST` | `/api/auth/login` | Authenticate operator credentials and create persistent session |
+| `GET` | `/api/auth/me` | Fetch authenticated operator profile |
+| `POST` | `/api/auth/logout` | Terminate active operator session |
 
 ---
 
-## Cryptography & Integrity Modules (`src/crypto/`, `src/log/`, `src/backup/`)
+## Quality & Verification Benchmarks
 
-The cryptographic layer is implemented with high security standards:
-
-### 1. RFC 8032 Ed25519 Signatures (`src/crypto/ed25519.js`)
-
-- `generateEd25519KeyPair()`: Produces PKCS#8 / SPKI DER keys with deterministic `keyId`.
-- `signRecordEd25519(record)`: Serializes object using deterministic recursive canonical JSON (RFC 8785) before Ed25519 signing.
-- `verifyRecordEd25519(record, signature)`: Validates signature using constant-time comparison to eliminate timing side-channels.
-
-### 2. Hash-Chained Audit Ledger & Chain Verifier (`src/log/`)
-
-- `AuditLog` (`src/log/auditLog.js`): Genesis block starts with `prevHash = 00...00`. Each block links cryptographically: `hash = SHA256(index : prevHash : timestamp : canonicalJson(data))`. Supports append-only persistence to `data/audit-log/audit.jsonl`.
-- `verifyAuditChain(entries)` (`src/log/chainVerifier.js`): Walks the chain from genesis to head, validates every link and recomputes hashes. Detects any tampered block or broken link (QA Tampering test M7).
-
-### 3. AES-256-GCM Authenticated Encryption (`src/backup/backupService.js`)
-
-- Encrypts protected backup files using `aes-256-gcm` with random 96-bit IV and 128-bit authentication tag.
-- Binds `bucket : path : versionRef` as Additional Authenticated Data (AAD).
-- Any corrupted ciphertext byte, modified tag, or mismatched metadata causes AEAD verification to immediately fail (`aeadVerified: false`) and suppresses plaintext output.
+| Metric | Target | Verified Value | Status |
+|---|---|---|---|
+| **Unit & Integration Tests** | 100% Pass | **74 / 74 Passing** (23 Suites) | ✅ Verified |
+| **ESLint Quality** | 0 Errors | **0 Errors, 0 Warnings** | ✅ Verified |
+| **Tamper Detection (M7)** | Instant | 100% Detected (Broken chain rejected) | ✅ Verified |
+| **AEAD Authentication** | Unconditional | 100% Corrupted blocks rejected | ✅ Verified |
+| **Baseline Accuracy (M9)** | Deterministic | 100% Pre-attack SHA-256 match gate | ✅ Verified |
 
 ---
 
-## Teammate Contract Interfaces
+## License
 
-To allow concurrent development across teammates, contracts are defined under `src/contracts/`:
-
-### 1. Crypto Modules (`src/contracts/crypto.contract.js`)
-
-- Exports production SHA-256 streaming, Merkle tree root, Ed25519 signing, and hash-chained audit logging.
-
-### 2. Backup Service (`src/contracts/backup.contract.js`)
-
-- Exports production AES-256-GCM authenticated encryption and decryption with AEAD tag validation.
-
-### 3. DevOps Engineer (`src/contracts/freeze.contract.js`)
-
-- `freezeAccount(accountId)` ➔ Applies IAM deny-all write policy to cloud account/bucket.
-- `unfreezeAccount(accountId)` ➔ Restores normal IAM permissions.
-
-### 4. QA Engineer
-
-- Run `npm run simulate` to test ransomware behavior, canary triggers, and recovery verification.
-- Run `npm test` to execute all 45 unit and integration tests across 14 test suites.
+This project is developed for university research and educational demonstration in cloud security, cryptography, and incident recovery. Released under the **MIT License**.

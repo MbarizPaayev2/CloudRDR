@@ -261,9 +261,9 @@
                 <span id="vizIsoBadge" class="status-chip valid">ISO 27001 A.8.9</span>
                 <span id="vizRfcBadge" class="status-chip missing" style="border:1px solid var(--border);">RFC 6962</span>
               </div>
-              <h3 id="vizTitle" class="visualizer-title">Deterministic Merkle Tree Snapshot</h3>
+              <h3 id="vizTitle" class="visualizer-title">Take a Cryptographic Fingerprint of Every File</h3>
               <p id="vizDesc" class="visualizer-desc">
-                Captures SHA-256 digests across all protected bucket objects. Hashes are deterministically ordered and folded pairwise into a single Merkle root hash.
+                Before any file can be attacked, CloudRDR records a unique cryptographic fingerprint (SHA-256) of every file while the system is safe. If even one byte of a file changes later, its fingerprint changes too—letting us immediately spot unauthorized tampering.
               </p>
               <div class="visualizer-spec-grid" id="vizSpecGrid">
                 <div class="spec-chip">
@@ -748,8 +748,8 @@
         tag: 'Stage 01 // Baseline',
         iso: 'ISO 27001 A.8.9',
         rfc: 'RFC 6962',
-        title: 'Deterministic Merkle Tree Snapshot',
-        desc: 'Every file in the storage bucket receives a SHA-256 fingerprint. Hashes are sorted deterministically and folded into a pairwise Merkle DAG, establishing an immutable cryptographic anchor.',
+        title: 'Take a Cryptographic Fingerprint of Every File',
+        desc: 'Before any file can be attacked, CloudRDR records a unique cryptographic fingerprint (SHA-256) of every file while the system is safe. If even one byte of a file changes later, its fingerprint changes too—letting us immediately spot unauthorized tampering.',
         alg: 'SHA-256 Pairwise Tree',
         sla: '< 450ms per 1k files',
         invariant: 'Root Mismatch = Tampered',
@@ -766,31 +766,34 @@ await db.from('baseline_snapshots').insert({
         renderSandbox: (box) => {
           box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
-                <span>Merkle Leaves (4 Sample Blocks)</span>
-                <span id="merkleStatusText" style="color:#27C93F;">● 100% Invariant Match</span>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="color:var(--text);font-weight:600;">Monitored Files</span>
+                <span id="merkleStatusText" style="color:#27C93F;font-weight:600;">● 100% Verified Original</span>
               </div>
               <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;">
-                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:var(--text-muted);">f1.pdf</div>
-                  <div id="leafHash0" style="color:var(--text);font-size:0.68rem;">a4f1..</div>
+                <div id="card0" style="background:var(--surface-subtle);padding:8px 6px;border-radius:6px;border:1px solid #27C93F;text-align:center;transition:all 0.25s ease;">
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:3px;">f1.pdf</div>
+                  <div id="leafStatus0" style="color:#27C93F;font-size:0.68rem;font-weight:600;">✓ Original</div>
                 </div>
-                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:var(--text-muted);">f2.db</div>
-                  <div id="leafHash1" style="color:var(--text);font-size:0.68rem;">98e2..</div>
+                <div id="card1" style="background:var(--surface-subtle);padding:8px 6px;border-radius:6px;border:1px solid #27C93F;text-align:center;transition:all 0.25s ease;">
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:3px;">f2.db</div>
+                  <div id="leafStatus1" style="color:#27C93F;font-size:0.68rem;font-weight:600;">✓ Original</div>
                 </div>
-                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:var(--text-muted);">f3.key</div>
-                  <div id="leafHash2" style="color:var(--text);font-size:0.68rem;">0b7c..</div>
+                <div id="card2" style="background:var(--surface-subtle);padding:8px 6px;border-radius:6px;border:1px solid #27C93F;text-align:center;transition:all 0.25s ease;">
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:3px;">f3.key</div>
+                  <div id="leafStatus2" style="color:#27C93F;font-size:0.68rem;font-weight:600;">✓ Original</div>
                 </div>
-                <div style="background:var(--surface-subtle);padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
-                  <div style="font-size:0.65rem;color:var(--text-muted);">f4.env</div>
-                  <div id="leafHash3" style="color:var(--text);font-size:0.68rem;">c3d9..</div>
+                <div id="card3" style="background:var(--surface-subtle);padding:8px 6px;border-radius:6px;border:1px solid #27C93F;text-align:center;transition:all 0.25s ease;">
+                  <div style="font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:3px;">f4.env</div>
+                  <div id="leafStatus3" style="color:#27C93F;font-size:0.68rem;font-weight:600;">✓ Original</div>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:8px 10px;border-radius:4px;border:1px solid var(--border);">
-                <div style="font-size:0.7rem;color:var(--text-muted);">Root: <span id="merkleRootVal" style="color:#27C93F;font-weight:600;">e3b0c44298fc1c149afb7852b855</span></div>
-                <button type="button" id="recalcMerkleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Mutate Leaf</button>
+              <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;background:var(--surface);padding:8px 10px;border-radius:6px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);">Root: <span id="merkleRootVal" style="color:#27C93F;font-weight:600;font-family:var(--font-mono);">VALID (All 4 Authentic)</span></div>
+                <button type="button" id="recalcMerkleBtn" style="background:#E64545;color:#FFF;border:none;padding:5px 10px;border-radius:4px;font-size:0.7rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s ease;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Simulate an attack on this file</span>
+                </button>
               </div>
             </div>
           `;
@@ -799,25 +802,57 @@ await db.from('baseline_snapshots').insert({
           if (btn) {
             btn.addEventListener('click', () => {
               mutated = !mutated;
-              const leaf0 = box.querySelector('#leafHash0');
+              const card0 = box.querySelector('#card0');
+              const leaf0 = box.querySelector('#leafStatus0');
               const status = box.querySelector('#merkleStatusText');
               const root = box.querySelector('#merkleRootVal');
               if (mutated) {
-                leaf0.textContent = 'd99a..';
-                leaf0.parentElement.style.borderColor = '#D93636';
-                status.textContent = '▲ Root Mismatch (Tampered)';
-                status.style.color = '#D93636';
-                root.textContent = '7f8a10bc33182a4d91a1820491ab';
-                root.style.color = '#D93636';
-                btn.textContent = 'Restore Baseline';
+                if (card0) {
+                  card0.style.borderColor = '#E64545';
+                  card0.style.background = 'rgba(230, 69, 69, 0.12)';
+                }
+                if (leaf0) {
+                  leaf0.textContent = 'Fingerprint changed → tampering detected';
+                  leaf0.style.color = '#E64545';
+                  leaf0.style.fontSize = '0.62rem';
+                  leaf0.style.lineHeight = '1.2';
+                }
+                if (status) {
+                  status.textContent = '▲ Tampering Detected!';
+                  status.style.color = '#E64545';
+                }
+                if (root) {
+                  root.textContent = 'MISMATCH (Tampered root detected)';
+                  root.style.color = '#E64545';
+                }
+                btn.style.background = 'var(--brand)';
+                btn.innerHTML = `
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+                  <span>Restore & Prove Original</span>
+                `;
               } else {
-                leaf0.textContent = 'a4f1..';
-                leaf0.parentElement.style.borderColor = '#27C93F';
-                status.textContent = '● 100% Invariant Match';
-                status.style.color = '#27C93F';
-                root.textContent = 'e3b0c44298fc1c149afb7852b855';
-                root.style.color = '#27C93F';
-                btn.textContent = 'Mutate Leaf';
+                if (card0) {
+                  card0.style.borderColor = '#27C93F';
+                  card0.style.background = 'var(--surface-subtle)';
+                }
+                if (leaf0) {
+                  leaf0.textContent = '✓ Original';
+                  leaf0.style.color = '#27C93F';
+                  leaf0.style.fontSize = '0.68rem';
+                }
+                if (status) {
+                  status.textContent = '● 100% Verified Original';
+                  status.style.color = '#27C93F';
+                }
+                if (root) {
+                  root.textContent = 'VALID (All 4 Authentic)';
+                  root.style.color = '#27C93F';
+                }
+                btn.style.background = '#E64545';
+                btn.innerHTML = `
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Simulate an attack on this file</span>
+                `;
               }
             });
           }
