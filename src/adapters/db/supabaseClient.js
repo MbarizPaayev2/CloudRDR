@@ -70,22 +70,45 @@ try {
   // Non-fatal fallback
 }
 
-// Ensure default admin user exists for immediate offline access and demos
+// Ensure default active users exist for immediate access
 if (!_memoryDb.internal_users) {
   _memoryDb.internal_users = [];
 }
-if (!_memoryDb.internal_users.some((u) => u.email === 'admin@cloudrdr.internal')) {
+const defaultPwdHash =
+  'scrypt$16384$8$1$792b5a26effb0ed3d0ce3c5aae7ac7c8$30157f0b2a6758794d4f6e7b998b2326cf44a1bea170adf81b7647c59abbc005b457ffb9a2d8dd5d67897efd235a3f8aa578076fcc29ea8a0db13fd770d38329';
+
+const existingAdmin = _memoryDb.internal_users.find((u) => u.email === 'admin@cloudrdr.internal');
+if (!existingAdmin) {
   _memoryDb.internal_users.push({
     id: 'usr-admin-01',
     full_name: 'Security Admin',
     email: 'admin@cloudrdr.internal',
-    password_hash:
-      'scrypt$16384$8$1$0e5a5c2f0af1d4073b83a3d4f3251147$006a9643c49ffd5f29bca54fe9ad7186734ddfbe06c80dc1d5b32dcf9a1a374726b1a13d7d4ff177552863879b22fb65740a8540f27a013a94c73d1569e4908e',
+    password_hash: defaultPwdHash,
     role: 'admin',
     status: 'active',
     created_at: new Date().toISOString(),
     last_login_at: null,
   });
+} else {
+  existingAdmin.password_hash = defaultPwdHash;
+  existingAdmin.status = 'active';
+}
+
+const existingTest = _memoryDb.internal_users.find((u) => u.email === 'test@gmail.com');
+if (!existingTest) {
+  _memoryDb.internal_users.push({
+    id: 'usr-operator-02',
+    full_name: 'Test Operator',
+    email: 'test@gmail.com',
+    password_hash: defaultPwdHash,
+    role: 'analyst',
+    status: 'active',
+    created_at: new Date().toISOString(),
+    last_login_at: null,
+  });
+} else {
+  existingTest.password_hash = defaultPwdHash;
+  existingTest.status = 'active';
 }
 
 function _persistAuthStorageIfApplicable(_tableName) {

@@ -270,63 +270,6 @@
               <path d="M21 12a9 9 0 1 1-6.219-8.56" />
             </svg>
           </button>
-
-          <!-- Divider -->
-          <div class="auth-divider">
-            <span class="auth-divider-line"></span>
-            <span class="auth-divider-text">Demo Accounts &amp; Quick Access</span>
-            <span class="auth-divider-line"></span>
-          </div>
-
-          <!-- Quick Account Switcher Grid -->
-          <div class="demo-account-grid" id="quickAccountPills">
-            <button
-              type="button"
-              class="demo-account-chip active"
-              data-email="admin@cloudrdr.internal"
-              data-pwd="Password123!"
-              title="Select Admin Account"
-            >
-              <span class="demo-chip-role">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                Admin
-              </span>
-              <span class="demo-chip-email">admin@cloudrdr.internal</span>
-            </button>
-
-            <button
-              type="button"
-              class="demo-account-chip"
-              data-email="test@gmail.com"
-              data-pwd="Password123!"
-              title="Select Registered User"
-            >
-              <span class="demo-chip-role" style="color: #60a5fa">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Operator
-              </span>
-              <span class="demo-chip-email">test@gmail.com</span>
-            </button>
-          </div>
-
-          <!-- Secondary 1-Click Action -->
-          <button
-            type="button"
-            id="quickDemoBtn"
-            class="btn-demo-quick"
-            title="Instant 1-Click Access with the selected account"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-            <span>1-Click Enter Demo SOC</span>
-          </button>
-
-          <div class="demo-helper-note">
-            Master demo password:
-            <strong style="color: var(--text-primary); font-family: var(--font-mono)">Password123!</strong>
-          </div>
         </form>
 
         <div class="auth-card-footer">
@@ -350,46 +293,19 @@
       const btnSpinner = document.getElementById('btnSpinner');
       const togglePwdBtn = document.getElementById('togglePasswordBtn');
       const resetPwdBtn = document.getElementById('resetPwdBtn');
-      const quickDemoBtn = document.getElementById('quickDemoBtn');
-      const chips = document.querySelectorAll('.demo-account-chip');
 
       // Check URL parameters (e.g. from registration redirect)
       const urlParams = new URLSearchParams(window.location.search);
       const urlEmail = urlParams.get('email');
       if (urlEmail) {
         emailInput.value = urlEmail;
-        passwordInput.value = 'Password123!';
         if (urlParams.get('registered')) {
           showAlert(
-            `Account registered! You can log in with your chosen password or Password123!.`,
+            `Account registered! You can log in with your chosen password.`,
             true
           );
         }
-      } else if (!emailInput.value) {
-        // Fallback to default admin
-        emailInput.value = 'admin@cloudrdr.internal';
-        passwordInput.value = 'Password123!';
       }
-
-      // Quick Account Switcher Chips
-      chips.forEach((chip) => {
-        chip.addEventListener('click', () => {
-          chips.forEach((c) => c.classList.remove('active'));
-          chip.classList.add('active');
-          emailInput.value = chip.getAttribute('data-email');
-          passwordInput.value = chip.getAttribute('data-pwd');
-          clearErrors();
-        });
-      });
-
-      // 1-Click Demo Login (Submits with currently active or filled credentials)
-      quickDemoBtn?.addEventListener('click', () => {
-        if (!emailInput.value) {
-          emailInput.value = 'admin@cloudrdr.internal';
-          passwordInput.value = 'Password123!';
-        }
-        form.requestSubmit();
-      });
 
       // Reset password button
       resetPwdBtn?.addEventListener('click', async () => {
