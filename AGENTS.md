@@ -40,13 +40,29 @@ Every time a user provides a prompt or request, internalize these four core foun
 
 ---
 
-## Active Skills in `.agents/skills/`
-- `ponytail`, `ponytail-audit`, `ponytail-debt`, `ponytail-gain`, `ponytail-help`, `ponytail-review`
-- `graphify`
-- `headroom`
-- `codeburn`
+## Active Skills in `.agents/skills/` (65 Installed Skills)
+
+### 1. Frontend, Design Systems & Motion
+- `impeccable` (Peak design director craft, zero-slop UI, bounded iteration)
+- `frontend-design`, `web-artifacts-builder`, `theme-factory`, `brand-guidelines` (Anthropic)
+- `composition-patterns`, `react-view-transitions`, `react-best-practices`, `vercel-optimize`, `web-design-guidelines` (Vercel)
 - `design-motion-principles` (Emil Kowalski + Jakub Krehel motion lenses)
-- `web-design-guidelines` (Vercel Web Interface Guidelines compliance)
 - `awesome-design-md` (80+ developer tool design systems & DESIGN.md standard)
-- `ui-skills` (Frontend design engineering toolkit & motion recipes)
-- `design-taste-frontend`, `ui-ux-pro-max`, `high-end-visual-design`, `design-system`, `slides`
+- `ui-skills` (motion-primitives frontend design engineering)
+- `bencium-controlled-ux-designer`, `bencium-impact-designer`, `bencium-innovative-ux-designer`, `design-audit`, `typography` (Bencium)
+- `design-taste-frontend`, `ui-ux-pro-max`, `high-end-visual-design`, `minimalist-ui`, `industrial-brutalist-ui`, `gpt-taste`, `stitch-design-taste`
+
+### 2. Testing, Verification & Code Hygiene
+- `webapp-testing` (Anthropic)
+- `playwright-dev`, `playwright-test-results`, `playwright-triage`, `playwright-cherry-pick`, `playwright-devops` (Microsoft Playwright)
+- `vanity-engineering-review`, `bencium-code-conventions`, `eu-ai-act-reviewer` (Bencium)
+
+### 3. Core Foundations & Engineering Efficiency
+- `ponytail`, `ponytail-audit`, `ponytail-debt`, `ponytail-gain`, `ponytail-help`, `ponytail-review` (Dietrich Gebert)
+- `human-architect-mindset`, `renaissance-architecture`, `negentropy-lens`, `adaptive-communication` (Bencium)
+- `graphify` (Graphify Labs knowledge graph)
+- `headroom` (Headroom AI context compression)
+- `codeburn` (AgentSeal AI spend & token optimizer)
+- `mcp-builder` (Anthropic)
+- `perplexity-ask` (Perplexity AI web search & reasoning)
+
