@@ -112,7 +112,7 @@ a:hover {
   color: var(--brand-hover);
 }
 
-code, pre, .mono {
+code, pre, .mono, .tabular-nums {
   font-family: var(--font-mono);
   font-size: 0.9em;
   font-variant-numeric: tabular-nums;
@@ -122,6 +122,10 @@ code, pre, .mono {
 :focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
+}
+
+main:focus {
+  outline: none;
 }
 
 .skip-to-content {

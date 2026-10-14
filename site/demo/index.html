@@ -45,14 +45,14 @@
       <div style="margin-top:auto;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:var(--text-xs);">
         <div style="font-weight:600;margin-bottom:4px;">Story Runner</div>
         <p style="font-size:0.75rem;margin:0 0 8px 0;">Demonstrate full attack containment and recovery.</p>
-        <button id="sidebarPlayStoryBtn" class="btn btn-primary btn-sm" style="width:100%;">
+        <button type="button" id="sidebarPlayStoryBtn" class="btn btn-primary btn-sm" style="width:100%;">
           ▶ Play Attack Story
         </button>
       </div>
     </aside>
 
     <!-- ── Main Workspace ───────────────────────────────────────────────── -->
-    <main class="demo-main" id="main-content">
+    <main class="demo-main" id="main-content" tabindex="-1">
       <!-- ── Demo Topbar ────────────────────────────────────────────────── -->
       <header class="demo-topbar">
         <div class="demo-meta-group">
@@ -70,7 +70,7 @@
           <div id="verdictBadgeContainer"></div>
 
           <!-- Play Story Button -->
-          <button id="playStoryBtn" class="btn btn-secondary btn-sm" title="Simulate complete attack-to-recovery narrative">
+          <button type="button" id="playStoryBtn" class="btn btn-secondary btn-sm" title="Simulate complete attack-to-recovery narrative">
             ▶ Play Story
           </button>
 
@@ -172,7 +172,7 @@
             <div style="font-size:var(--text-xs);color:var(--text-muted);margin-bottom:12px;">
               Sealed: <time id="baselineSealedTime">—</time>
             </div>
-            <button id="createBaselineBtn" class="btn btn-secondary btn-sm" style="width:100%;">
+            <button type="button" id="createBaselineBtn" class="btn btn-secondary btn-sm" style="width:100%;">
               Capture New Baseline
             </button>
           </section>

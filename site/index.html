@@ -19,7 +19,7 @@
   <!-- Shared Top Navigation Header Container -->
   <div id="site-header-container"></div>
 
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <!-- ── 1. HERO SECTION ────────────────────────────────────────────────── -->
     <section class="hero-section bg-grid-dots">
       <div class="container hero-grid">
@@ -29,7 +29,7 @@
             CloudRDR detects secret cloud file encryption within seconds, freezes the attacking account at the IAM control plane, and uses cryptographic Merkle trees to prove every restored file is an authentic original.
           </p>
           <div class="hero-cta-group hero-animate-cta">
-            <button id="startPresentationTourBtn" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+            <button type="button" id="startPresentationTourBtn" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
               <span>🎬</span> <span>Start 45s Presentation Tour</span>
             </button>
             <a href="demo/index.html" class="btn btn-secondary">
@@ -46,22 +46,22 @@
           <!-- Sleek Segmented Scenario Controls -->
           <div class="hero-tree-toolbar" id="heroTreeControls" role="toolbar" aria-label="Interactive Tree Scenarios">
             <div class="tree-toolbar-group">
-              <button class="tree-tab-btn active" data-scenario="loop" title="Loop continuous attack and recovery narrative">
+              <button type="button" class="tree-tab-btn active" data-scenario="loop" title="Loop continuous attack and recovery narrative">
                 <span class="tab-indicator-dot"></span>
                 <span>Auto Narrative</span>
               </button>
             </div>
             <div class="tree-toolbar-divider"></div>
             <div class="tree-toolbar-group">
-              <button class="tree-tab-btn" data-scenario="calm" title="Inspect calm baseline integrity state">
+              <button type="button" class="tree-tab-btn" data-scenario="calm" title="Inspect calm baseline integrity state">
                 <span class="tab-status-dot calm"></span>
                 <span>Calm</span>
               </button>
-              <button class="tree-tab-btn" data-scenario="attack" title="Simulate canary breach and climbing corruption">
+              <button type="button" class="tree-tab-btn" data-scenario="attack" title="Simulate canary breach and climbing corruption">
                 <span class="tab-status-dot attack"></span>
                 <span>Attack</span>
               </button>
-              <button class="tree-tab-btn" data-scenario="restore" title="Watch AEAD verified recovery restore leaves">
+              <button type="button" class="tree-tab-btn" data-scenario="restore" title="Watch AEAD verified recovery restore leaves">
                 <span class="tab-status-dot restore"></span>
                 <span>Restore</span>
               </button>
@@ -170,7 +170,7 @@
 
         <div class="pipeline-controls-bar reveal-on-scroll" style="justify-content:flex-end;">
           <div style="display:flex;align-items:center;gap:10px;">
-            <button id="pipelineAutoPlayBtn" class="btn btn-secondary" style="font-size:0.75rem;padding:6px 14px;font-family:var(--font-mono);">
+            <button type="button" id="pipelineAutoPlayBtn" class="btn btn-secondary" style="font-size:0.75rem;padding:6px 14px;font-family:var(--font-mono);">
               <span id="pipelinePlayIcon">▶</span> <span id="pipelinePlayText">Auto-Play Walkthrough</span>
             </button>
           </div>
@@ -328,17 +328,17 @@
               <span class="soc-dot green"></span>
             </div>
             <div class="soc-terminal-tabs" id="socTerminalTabs">
-              <button class="soc-tab-btn active" data-filter="all">All Telemetry</button>
-              <button class="soc-tab-btn" data-filter="canary">Canary Alerts</button>
-              <button class="soc-tab-btn" data-filter="crypto">Crypto Proofs</button>
-              <button class="soc-tab-btn" data-filter="restore">AEAD Restore</button>
+              <button type="button" class="soc-tab-btn active" data-filter="all">All Telemetry</button>
+              <button type="button" class="soc-tab-btn" data-filter="canary">Canary Alerts</button>
+              <button type="button" class="soc-tab-btn" data-filter="crypto">Crypto Proofs</button>
+              <button type="button" class="soc-tab-btn" data-filter="restore">AEAD Restore</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;">
               <span style="display:inline-flex;align-items:center;gap:6px;color:#27C93F;font-size:0.7rem;">
                 <span style="width:6px;height:6px;background:#27C93F;border-radius:50%;box-shadow:0 0 6px #27C93F;"></span>
                 STREAM ACTIVE
               </span>
-              <button id="triggerSocSpikeBtn" class="hero-pill-btn" style="background:#D93636;color:#FFF;border-color:#D93636;font-size:0.68rem;">
+              <button type="button" id="triggerSocSpikeBtn" class="hero-pill-btn" style="background:#D93636;color:#FFF;border-color:#D93636;font-size:0.68rem;">
                 Simulate Attack Event ⚡
               </button>
             </div>
@@ -351,7 +351,7 @@
                 <span class="soc-incident-pulse-dot"></span>
                 <span>CRITICAL ALERT // INCIDENT #CR-8032 GENERATED</span>
               </div>
-              <button type="button" id="dismissIncidentCardBtn" class="soc-incident-btn dismiss" title="Acknowledge Alert">Dismiss ✕</button>
+              <button type="button" id="dismissIncidentCardBtn" class="soc-incident-btn dismiss" title="Acknowledge Alert" aria-label="Acknowledge and dismiss incident alert">Dismiss ✕</button>
             </div>
             <div class="soc-incident-grid">
               <div class="soc-incident-field">
@@ -364,7 +364,7 @@
               </div>
               <div class="soc-incident-field">
                 <span class="field-lbl">Ed25519 Signature</span>
-                <span class="field-val" style="color:#CBD5E1;">3a9f01bc...481d (RFC 8032)</span>
+                <span class="field-val" style="color:#CBD5E1;">3a9f01bc…481d (RFC 8032)</span>
               </div>
               <div class="soc-incident-field">
                 <span class="field-lbl">Restore Integrity</span>
@@ -393,7 +393,7 @@
             </div>
             <form id="socCliForm" class="soc-cli-input-form" autocomplete="off">
               <span class="soc-cli-prompt">cloudrdr@edge:~$</span>
-              <input type="text" id="socCliInput" class="soc-cli-input" placeholder="Type a command (e.g. status, test-canary-tripwire, help)..." spellcheck="false" />
+              <input type="text" id="socCliInput" class="soc-cli-input" placeholder="Type a command (e.g. status, test-canary-tripwire, help)…" spellcheck="false" />
               <button type="submit" class="soc-cli-submit-btn">Run ↵</button>
             </form>
           </div>
@@ -735,7 +735,7 @@ await db.from('baseline_snapshots').insert({
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
                 <div style="font-size:0.7rem;color:#718096;">Root: <span id="merkleRootVal" style="color:#27C93F;font-weight:600;">e3b0c44298fc1c149afb7852b855</span></div>
-                <button id="recalcMerkleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Mutate Leaf ⚡</button>
+                <button type="button" id="recalcMerkleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Mutate Leaf ⚡</button>
               </div>
             </div>
           `;
@@ -804,7 +804,7 @@ await db.from('change_events').insert(changes.map(c => ({
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
                 <span id="monitorEventStatus" style="font-size:0.7rem;color:#A0AEC0;">Delta: 0 events in current window</span>
-                <button id="emitChangeEventBtn" style="background:rgba(255,255,255,0.08);color:#FFF;border:1px solid rgba(255,255,255,0.15);padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Simulate Write Event ⚡</button>
+                <button type="button" id="emitChangeEventBtn" style="background:rgba(255,255,255,0.08);color:#FFF;border:1px solid rgba(255,255,255,0.15);padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Simulate Write Event ⚡</button>
               </div>
             </div>
           `;
@@ -860,7 +860,7 @@ const verdict = canaryTripped || rate >= 0.30
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
                 <span style="font-size:0.68rem;color:#A0AEC0;">Decoy: .canary/salary.xlsx</span>
-                <button id="tripCanaryBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Trip Canary Decoy ⚡</button>
+                <button type="button" id="tripCanaryBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Trip Canary Decoy ⚡</button>
               </div>
             </div>
           `;
@@ -930,7 +930,7 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;">
                 <span style="font-size:0.68rem;color:#718096;">SLA Latency: <strong>3.2s</strong> &lt; 10s maximum</span>
-                <button id="recheckSigBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Verify Signature ↗</button>
+                <button type="button" id="recheckSigBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Verify Signature ↗</button>
               </div>
             </div>
           `;
@@ -939,10 +939,10 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
             btn.addEventListener('click', () => {
               const sig = box.querySelector('#edSigVal');
               sig.style.color = '#FFF';
-              sig.textContent = 'Verifying curve25519 public key...';
+              sig.textContent = 'Verifying curve25519 public key…';
               setTimeout(() => {
                 sig.style.color = '#27C93F';
-                sig.textContent = '7f3d81b94e098a54c330f1d9a20... [RFC 8032 VALID]';
+                sig.textContent = '7f3d81b94e098a54c330f1d9a20… [RFC 8032 VALID]';
               }, 400);
             });
           }
@@ -987,7 +987,7 @@ ledger.push({ index, hash, prevHash, data });`,
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
                 <span style="font-size:0.68rem;color:#718096;">Tamper test demo:</span>
-                <button id="tamperChainBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Tamper Block #1 ⚡</button>
+                <button type="button" id="tamperChainBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Tamper Block #1 ⚡</button>
               </div>
             </div>
           `;
@@ -1049,7 +1049,7 @@ if (isValid) await storage.write(bucket, path, bytes);`,
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
                 <div style="font-size:0.68rem;color:#718096;">Status: <b style="color:#27C93F;">Incident Ready to Close</b></div>
-                <button id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run AEAD Verify ⚡</button>
+                <button type="button" id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run AEAD Verify ⚡</button>
               </div>
             </div>
           `;
@@ -1059,7 +1059,7 @@ if (isValid) await storage.write(bucket, path, bytes);`,
               const bar = box.querySelector('#restoreProgressBar');
               const count = box.querySelector('#restoreVerifCount');
               bar.style.width = '0%';
-              count.textContent = 'Verifying GCM tags...';
+              count.textContent = 'Verifying GCM tags…';
               let progress = 0;
               const timer = setInterval(() => {
                 progress += 2;

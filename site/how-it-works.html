@@ -16,7 +16,7 @@
   <a href="#main-content" class="skip-to-content">Skip to main content</a>
   <div id="site-header-container"></div>
 
-  <main id="main-content" class="section-pad">
+  <main id="main-content" class="section-pad" tabindex="-1">
     <div class="container" style="max-width:1060px;">
       <div style="margin-bottom:var(--space-10);">
         <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;letter-spacing:1.5px;">Cryptographic Pipeline Walkthrough</span>
@@ -50,11 +50,11 @@
             <div class="stage-diagram-col" id="microDiagram0">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;">Merkle Tree Assembly</span>
-                <button id="recalcMerkleBtn" style="background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.4);color:#38BDF8;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Fold Tree ⚡</button>
+                <button type="button" id="recalcMerkleBtn" style="background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.4);color:#38BDF8;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Fold Tree ⚡</button>
               </div>
               <div style="text-align:center;margin-bottom:6px;">
                 <div id="merkleRootChip" class="micro-node-chip highlight" style="display:inline-block;padding:5px 12px;border-color:#10B981;color:#10B981;font-weight:700;">
-                  ROOT: e3b0c442...7852b855
+                  ROOT: e3b0c442…7852b855
                 </div>
               </div>
               <svg class="micro-tree-svg" viewBox="0 0 280 40" style="width:100%;height:32px;display:block;">
@@ -136,7 +136,7 @@
             <div class="stage-diagram-col" id="microDiagramCanary">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--status-ransomware);text-transform:uppercase;">Zero-Tolerance Tripwire</span>
-                <button id="tripCanaryBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Touch Canary 💥</button>
+                <button type="button" id="tripCanaryBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Touch Canary 💥</button>
               </div>
               <div id="canaryBoxCard" class="canary-box">
                 <div class="canary-hazard-stripes"></div>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="ed25519-seal-badge">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Ed25519 Signed // Key: 7f4a...e8b1</span>
+                  <span>Ed25519 Signed // Key: 7f4a…e8b1</span>
                 </div>
               </div>
               <div style="margin-top:8px;font-family:var(--font-mono);font-size:0.64rem;color:var(--text-muted);text-align:center;">
@@ -210,22 +210,22 @@
             <div class="stage-diagram-col" id="microDiagramChain">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;">Hash-Chained Ledger</span>
-                <button id="tamperChainBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Tamper #02 ⚡</button>
+                <button type="button" id="tamperChainBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Tamper #02 ⚡</button>
               </div>
               <div class="chain-blocks-row">
                 <div class="chain-block-item">
                   <div style="color:var(--brand);font-weight:700;">#01 BASE</div>
-                  <div style="color:#64748B;font-size:0.6rem;">h: a1b2...</div>
+                  <div style="color:#64748B;font-size:0.6rem;">h: a1b2…</div>
                 </div>
                 <span class="chain-link-icon" id="link01">➔</span>
                 <div class="chain-block-item" id="chainBlock02">
                   <div style="color:var(--brand);font-weight:700;">#02 FREEZE</div>
-                  <div id="chainHash02" style="color:#64748B;font-size:0.6rem;">h: c3d4...</div>
+                  <div id="chainHash02" style="color:#64748B;font-size:0.6rem;">h: c3d4…</div>
                 </div>
                 <span class="chain-link-icon" id="link02">➔</span>
                 <div class="chain-block-item" id="chainBlock03">
                   <div style="color:var(--brand);font-weight:700;">#03 RESTORE</div>
-                  <div style="color:#64748B;font-size:0.6rem;">h: e5f6...</div>
+                  <div style="color:#64748B;font-size:0.6rem;">h: e5f6…</div>
                 </div>
               </div>
               <div id="chainStatusMsg" style="margin-top:10px;font-family:var(--font-mono);font-size:0.65rem;color:#10B981;text-align:center;">
@@ -253,7 +253,7 @@
             <div class="stage-diagram-col" id="microDiagramRestore">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--status-healthy);text-transform:uppercase;">100% AEAD Verified</span>
-                <button id="testAeadBtn" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10B981;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Verify Tags ⚡</button>
+                <button type="button" id="testAeadBtn" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10B981;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Verify Tags ⚡</button>
               </div>
               <div class="aead-restore-visual">
                 <div class="aead-shield-icon" id="aeadShieldIcon">
@@ -383,10 +383,10 @@
         chipH01?.classList.add('highlight');
         chipH23?.classList.add('highlight');
         merkleRootChip.style.transform = 'scale(1.08)';
-        merkleRootChip.textContent = 'HASHING PAIRS...';
+        merkleRootChip.textContent = 'HASHING PAIRS…';
 
         setTimeout(() => {
-          merkleRootChip.textContent = 'ROOT: e3b0c442...7852b855';
+          merkleRootChip.textContent = 'ROOT: e3b0c442…7852b855';
           merkleRootChip.style.transform = 'scale(1)';
           lineL?.classList.remove('pulse');
           lineR?.classList.remove('pulse');
@@ -450,7 +450,7 @@
         } else {
           chainBlock02?.classList.remove('tampered');
           link02?.classList.remove('broken');
-          if (chainHash02) chainHash02.textContent = 'h: c3d4...';
+          if (chainHash02) chainHash02.textContent = 'h: c3d4…';
           if (chainStatusMsg) {
             chainStatusMsg.style.color = '#10B981';
             chainStatusMsg.textContent = '✓ Chain valid: Every block incorporates prev_hash';
@@ -471,7 +471,7 @@
     if (testAeadBtn && aeadBarFill && aeadProgressText) {
       testAeadBtn.addEventListener('click', () => {
         aeadBarFill.style.width = '0%';
-        aeadProgressText.textContent = 'Checking GCM tags...';
+        aeadProgressText.textContent = 'Checking GCM tags…';
         aeadProgressText.style.color = '#38BDF8';
         if (aeadShieldIcon) aeadShieldIcon.style.transform = 'scale(0.9)';
 

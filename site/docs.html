@@ -16,7 +16,7 @@
   <a href="#main-content" class="skip-to-content">Skip to main content</a>
   <div id="site-header-container"></div>
 
-  <main id="main-content" class="section-pad">
+  <main id="main-content" class="section-pad" tabindex="-1">
     <div class="container" style="max-width:1060px;">
       <div style="margin-bottom:var(--space-8);">
         <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;letter-spacing:1.5px;">Institutional Compliance &amp; Governance</span>
@@ -52,10 +52,10 @@
 
       <!-- ── 2. CATEGORY FILTER BAR ────────────────────────────────────────── -->
       <div class="isms-filter-bar" id="ismsFilterBar">
-        <button class="isms-filter-btn active" data-filter="all">All Documents (6)</button>
-        <button class="isms-filter-btn" data-filter="risk">Risk &amp; Governance</button>
-        <button class="isms-filter-btn" data-filter="ops">Operations &amp; BCP</button>
-        <button class="isms-filter-btn" data-filter="crypto">Crypto &amp; Architecture</button>
+        <button type="button" class="isms-filter-btn active" data-filter="all">All Documents (6)</button>
+        <button type="button" class="isms-filter-btn" data-filter="risk">Risk &amp; Governance</button>
+        <button type="button" class="isms-filter-btn" data-filter="ops">Operations &amp; BCP</button>
+        <button type="button" class="isms-filter-btn" data-filter="crypto">Crypto &amp; Architecture</button>
       </div>
 
       <!-- ── 3. ENHANCED DOCUMENT LIST ─────────────────────────────────────── -->
@@ -161,7 +161,7 @@
           <span id="modalDocCode" style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;font-weight:700;">ISMS-01 // RISK MANAGEMENT</span>
           <h2 id="modalDocTitle" style="font-size:1.2rem;margin:2px 0 0;color:#F8FAFC;">Information Security Risk Register</h2>
         </div>
-        <button type="button" id="closeDocModalBtn" class="btn btn-secondary btn-sm" style="padding:4px 10px;font-size:0.8rem;">✕</button>
+        <button type="button" id="closeDocModalBtn" class="btn btn-secondary btn-sm" aria-label="Close document inspector" style="padding:4px 10px;font-size:0.8rem;">✕</button>
       </div>
 
       <div class="doc-modal-body" id="modalDocBody">
