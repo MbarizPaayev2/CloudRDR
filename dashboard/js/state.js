@@ -149,7 +149,10 @@ export async function refreshAll() {
     }
 
     setState({
-      health: health.status === 'fulfilled' ? health.value : { status: 'error', uptime: 0, timestamp: null },
+      health:
+        health.status === 'fulfilled'
+          ? health.value
+          : { status: 'error', uptime: 0, timestamp: null },
       systemStatus: systemStatus.status === 'fulfilled' ? systemStatus.value : null,
       kpis: kpis.status === 'fulfilled' ? kpis.value : null,
       threatActivity: threatActivity.status === 'fulfilled' ? threatActivity.value : null,
@@ -161,7 +164,8 @@ export async function refreshAll() {
       selectedIncident: selectedInc,
       securityEvents: securityEvents.status === 'fulfilled' ? securityEvents.value : [],
       recoveryHealth: recoveryHealth.status === 'fulfilled' ? recoveryHealth.value : null,
-      cryptographicIntegrity: cryptographicIntegrity.status === 'fulfilled' ? cryptographicIntegrity.value : null,
+      cryptographicIntegrity:
+        cryptographicIntegrity.status === 'fulfilled' ? cryptographicIntegrity.value : null,
       protectedStorage: protectedStorage.status === 'fulfilled' ? protectedStorage.value : null,
       auditLog: auditLog.status === 'fulfilled' ? auditLog.value : [],
       currentVerdict,

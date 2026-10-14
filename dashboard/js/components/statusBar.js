@@ -67,7 +67,9 @@ export function updateStatusBar(state) {
     verdictBadge.className = `verdict-badge ${verdict}`;
 
     if (verdict === 'ransomware') {
-      verdictText.textContent = state.canaryTriggered ? 'RANSOMWARE (CANARY TRIPPED)' : 'RANSOMWARE DETECTED';
+      verdictText.textContent = state.canaryTriggered
+        ? 'RANSOMWARE (CANARY TRIPPED)'
+        : 'RANSOMWARE DETECTED';
       verdictBadge.classList.add('pulse-threat');
       if (verdictIcon) verdictIcon.textContent = '⚠️';
       verdictBadge.setAttribute('aria-label', 'Emergency: Ransomware attack in progress');

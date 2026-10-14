@@ -12,7 +12,7 @@ export function updateVerdictBadge(badgeEl, verdict = 'normal') {
   if (!badgeEl) return;
 
   badgeEl.className = `verdict-badge ${verdict}`;
-  
+
   let iconSvg = '';
   let labelText = '';
 

@@ -1,761 +1,1205 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CloudRDR — Don't just detect ransomware. Prove the recovery.</title>
-  <meta name="description" content="Cloud Ransomware Detection & Recovery: sub-10s autonomous containment, Merkle tree cryptographic proof, and AEAD verified recovery for cloud object storage." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudRDR — Don't just detect ransomware. Prove the recovery.</title>
+    <meta
+      name="description"
+      content="Cloud Ransomware Detection & Recovery: sub-10s autonomous containment, Merkle tree cryptographic proof, and AEAD verified recovery for cloud object storage."
+    />
 
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="alternate icon" href="assets/favicon.ico" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/pages.css" />
-</head>
-<body>
-  <!-- Accessible Skip Link -->
-  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="alternate icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <!-- Accessible Skip Link -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-  <!-- Shared Top Navigation Header Container -->
-  <div id="site-header-container"></div>
+    <!-- Shared Top Navigation Header Container -->
+    <div id="site-header-container"></div>
 
-  <main id="main-content" tabindex="-1">
-    <!-- ── 1. HERO SECTION ────────────────────────────────────────────────── -->
-    <section class="hero-section bg-grid-dots">
-      <div class="container hero-grid">
-        <div>
-          <h1 class="hero-animate-title">Don't just detect ransomware. Prove the recovery.</h1>
-          <p class="hero-subtitle hero-animate-subtitle">
-            CloudRDR detects secret cloud file encryption within seconds, freezes the attacking account at the IAM control plane, and uses cryptographic Merkle trees to prove every restored file is an authentic original.
-          </p>
-          <div class="hero-cta-group hero-animate-cta">
-            <button type="button" id="startPresentationTourBtn" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              <span>Start 45s Presentation Tour</span>
-            </button>
-            <a href="demo/index.html" class="btn btn-secondary">
-              Open the demo
-            </a>
-            <a href="how-it-works.html" class="btn btn-secondary">
-              How it works
-            </a>
-          </div>
-        </div>
-
-        <!-- Memorable Element: Live Looping & Interactive Hero Merkle Tree Illustration -->
-        <div class="hero-preview-box hero-animate-preview spotlight-card">
-          <!-- Sleek Segmented Scenario Controls -->
-          <div class="hero-tree-toolbar" id="heroTreeControls" role="toolbar" aria-label="Interactive Tree Scenarios">
-            <div class="tree-toolbar-group">
-              <button type="button" class="tree-tab-btn active" data-scenario="loop" title="Loop continuous attack and recovery narrative">
-                <span class="tab-indicator-dot"></span>
-                <span>Auto Narrative</span>
-              </button>
-            </div>
-            <div class="tree-toolbar-divider"></div>
-            <div class="tree-toolbar-group">
-              <button type="button" class="tree-tab-btn" data-scenario="calm" title="Inspect calm baseline integrity state">
-                <span class="tab-status-dot calm"></span>
-                <span>Calm</span>
-              </button>
-              <button type="button" class="tree-tab-btn" data-scenario="attack" title="Simulate canary breach and climbing corruption">
-                <span class="tab-status-dot attack"></span>
-                <span>Attack</span>
-              </button>
-              <button type="button" class="tree-tab-btn" data-scenario="restore" title="Watch AEAD verified recovery restore leaves">
-                <span class="tab-status-dot restore"></span>
-                <span>Restore</span>
-              </button>
-            </div>
-          </div>
-
-          <div id="heroMerkleTree"></div>
-
-          <!-- Structured Telemetry Banner -->
-          <div class="hero-telemetry-banner" id="heroTelemetryBanner">
-            <div class="telemetry-lead">
-              <span class="telemetry-live-dot" id="heroTelemetryDot"></span>
-              <span class="telemetry-state-pill" id="heroTelemetryPill">BASELINE VERIFIED</span>
-            </div>
-            <div class="telemetry-text" id="heroTreeStatusCaption">
-              All 16 protected file fingerprints match baseline Merkle root (RFC 6962 canonical DAG).
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── KEY METRICS STRIP ──────────────────────────────────────────────── -->
-    <section class="metrics-strip reveal-on-scroll">
-      <div class="container metrics-grid">
-        <div class="metric-item">
-          <div class="metric-val" data-counter="10" data-prefix="&lt; " data-suffix="s">&lt; 10s</div>
-          <div class="metric-label">IAM Containment SLA</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-val" data-counter="100" data-suffix="%">100%</div>
-          <div class="metric-label">Cryptographic Merkle Proof</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-val" data-counter="60" data-suffix="s">60s</div>
-          <div class="metric-label">Sliding Detection Window</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-val" data-counter="256" data-suffix="-bit">256-bit</div>
-          <div class="metric-label">AEAD Authentication Tag Check</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── ACADEMIC SPECIFICATIONS & CRYPTOGRAPHIC STANDARDS ──────────────── -->
-    <div class="container reveal-on-scroll">
-      <div class="standards-bar">
-        <span class="standard-badge" title="Cryptographic Hash Trees in Append-Only Logs">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          RFC 6962: Merkle Tree Hash DAG
-        </span>
-        <span class="standard-badge" title="Edwards-Curve Digital Signature Algorithm">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          RFC 8032: Ed25519 Incident Signatures
-        </span>
-        <span class="standard-badge" title="Galois/Counter Mode Authenticated Encryption">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          NIST SP 800-38D: AES-256-GCM AEAD
-        </span>
-        <span class="standard-badge" title="Information Security Management System Controls">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          ISO/IEC 27001:2022 (A.8.7, A.8.15, A.8.24)
-        </span>
-      </div>
-    </div>
-
-    <!-- ── 2. THE PROBLEM ─────────────────────────────────────────────────── -->
-    <section class="section-pad">
-      <div class="container">
-        <div class="section-head reveal-on-scroll">
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-ransomware);text-transform:uppercase;">The Threat</span>
-          <h2 class="section-title">What ransomware does to cloud object storage</h2>
-          <p class="section-desc">Traditional endpoint antivirus cannot protect remote buckets when cloud credentials leak.</p>
-        </div>
-
-        <div class="problems-grid">
-          <div class="problem-card reveal-on-scroll stagger-1 spotlight-card">
-            <div class="problem-num">01 / Silent overwrite</div>
-            <h3>Silent blob encryption</h3>
-            <p>Attackers steal API keys or service tokens and overwrite thousands of storage objects with encrypted blobs without changing file extensions.</p>
-          </div>
-
-          <div class="problem-card reveal-on-scroll stagger-2 spotlight-card">
-            <div class="problem-num">02 / Poisoned backups</div>
-            <h3>Backup pipeline poisoning</h3>
-            <p>Scheduled cloud backups automatically sync the newly encrypted files, overwriting good historical copies before security teams notice.</p>
-          </div>
-
-          <div class="problem-card reveal-on-scroll stagger-3 spotlight-card">
-            <div class="problem-num">03 / Zero proof of integrity</div>
-            <h3>Unverifiable recovery</h3>
-            <p>When organizations pay ransoms or restore from cold archives, they have no cryptographic proof whether restored files were tampered with or truncated.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 3. HOW THE DEFENSE SYSTEM WORKS (CONNECTED PIPELINE & VISUALIZER) ── -->
-    <section class="section-pad bg-grid-dots">
-      <div class="container">
-        <div class="section-head reveal-on-scroll">
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Architecture &amp; Protocol Flow</span>
-          <h2 class="section-title">6-Stage defense lifecycle</h2>
-          <p class="section-desc">From initial cryptographic baseline to verifiable AEAD recovery. Click any stage to test its interactive sandbox and inspect protocol specifications.</p>
-        </div>
-
-        <div class="pipeline-controls-bar reveal-on-scroll" style="justify-content:flex-end;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <button type="button" id="pipelineAutoPlayBtn" class="btn btn-secondary" style="font-size:0.75rem;padding:6px 14px;font-family:var(--font-mono);">
-              <span id="pipelinePlayIcon">▶</span> <span id="pipelinePlayText">Auto-Play Walkthrough</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="pipeline-flow-track" id="pipelineTrack" role="tablist" aria-label="CloudRDR Pipeline Stages">
-          <!-- Step 1 -->
-          <div class="pipeline-node active reveal-on-scroll stagger-1 spotlight-card" data-stage="0" role="tab" aria-selected="true" tabindex="0">
-            <div class="pipeline-node-top">
-              <span class="pipeline-step-idx">01</span>
-              <div class="pipeline-icon-box" title="Baseline Merkle Root">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M12 6.5v4M12 10.5l-4.5 5.5M12 10.5l4.5 5.5"/></svg>
-              </div>
-            </div>
-            <div class="pipeline-node-title">Baseline</div>
-            <div class="pipeline-node-subtitle">SHA-256 Merkle Root</div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="pipeline-node reveal-on-scroll stagger-2 spotlight-card" data-stage="1" role="tab" aria-selected="false" tabindex="0">
-            <div class="pipeline-node-top">
-              <span class="pipeline-step-idx">02</span>
-              <div class="pipeline-icon-box" title="Storage Event Polling">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6a6 6 0 1 0 6 6"/><circle cx="12" cy="12" r="2"/><path d="M12 12l5-5"/></svg>
-              </div>
-            </div>
-            <div class="pipeline-node-title">Monitor</div>
-            <div class="pipeline-node-subtitle">10s Event Polling</div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="pipeline-node reveal-on-scroll stagger-3 spotlight-card" data-stage="2" role="tab" aria-selected="false" tabindex="0">
-            <div class="pipeline-node-top">
-              <span class="pipeline-step-idx">03</span>
-              <div class="pipeline-icon-box" title="Heuristic &amp; Canary">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/><circle cx="12" cy="12" r="3"/></svg>
-              </div>
-            </div>
-            <div class="pipeline-node-title">Detect</div>
-            <div class="pipeline-node-subtitle">Sliding Window &amp; Canary</div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="pipeline-node reveal-on-scroll stagger-4 spotlight-card" data-stage="3" role="tab" aria-selected="false" tabindex="0">
-            <div class="pipeline-node-top">
-              <span class="pipeline-step-idx">04</span>
-              <div class="pipeline-icon-box" title="IAM Freeze &amp; Ed25519">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="9.5" y="10" width="5" height="4" rx="1"/><path d="M10.5 10V8.5a1.5 1.5 0 0 1 3 0V10"/></svg>
-              </div>
-            </div>
-            <div class="pipeline-node-title">Respond</div>
-            <div class="pipeline-node-subtitle">IAM Freeze &amp; Ed25519</div>
-          </div>
-
-          <!-- Step 5 -->
-          <div class="pipeline-node reveal-on-scroll stagger-5 spotlight-card" data-stage="4" role="tab" aria-selected="false" tabindex="0">
-            <div class="pipeline-node-top">
-              <span class="pipeline-step-idx">05</span>
-              <div class="pipeline-icon-box" title="Hash-Chained Audit Log">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-              </div>
-            </div>
-            <div class="pipeline-node-title">Audit</div>
-            <div class="pipeline-node-subtitle">SHA-256 Hash-Chain</div>
-          </div>
-
-          <!-- Step 6 -->
-          <div class="pipeline-node reveal-on-scroll stagger-6 spotlight-card" data-stage="5" role="tab" aria-selected="false" tabindex="0">
-            <div class="pipeline-node-top">
-              <span class="pipeline-step-idx">06</span>
-              <div class="pipeline-icon-box" title="AEAD Verified Decryption">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><polyline points="9 16 11.5 18.5 15 14"/></svg>
-              </div>
-            </div>
-            <div class="pipeline-node-title">Restore</div>
-            <div class="pipeline-node-subtitle">AEAD Verified Recovery</div>
-          </div>
-        </div>
-
-        <!-- Featured Stage Visualizer Card -->
-        <div class="pipeline-visualizer-card reveal-on-scroll spotlight-card" id="pipelineVisualizer">
-          <div class="visualizer-spec-col">
-            <div>
-              <div class="visualizer-meta-badges">
-                <span id="vizStageBadge" class="brand-badge">Stage 01 // Baseline</span>
-                <span id="vizIsoBadge" class="status-chip valid">ISO 27001 A.8.9</span>
-                <span id="vizRfcBadge" class="status-chip missing" style="border:1px solid var(--border);">RFC 6962</span>
-              </div>
-              <h3 id="vizTitle" class="visualizer-title">Take a Cryptographic Fingerprint of Every File</h3>
-              <p id="vizDesc" class="visualizer-desc">
-                Before any file can be attacked, CloudRDR records a unique cryptographic fingerprint (SHA-256) of every file while the system is safe. If even one byte of a file changes later, its fingerprint changes too—letting us immediately spot unauthorized tampering.
-              </p>
-              <div class="visualizer-spec-grid" id="vizSpecGrid">
-                <div class="spec-chip">
-                  <div class="spec-chip-label">Algorithm</div>
-                  <div class="spec-chip-val" id="vizAlg">SHA-256 Pairwise Tree</div>
-                </div>
-                <div class="spec-chip">
-                  <div class="spec-chip-label">SLA / Window</div>
-                  <div class="spec-chip-val" id="vizSla">&lt; 450ms per 1k files</div>
-                </div>
-                <div class="spec-chip">
-                  <div class="spec-chip-label">Integrity Invariant</div>
-                  <div class="spec-chip-val" id="vizInvariant">Root Mismatch = Tampered</div>
-                </div>
-                <div class="spec-chip">
-                  <div class="spec-chip-label">Backend Target</div>
-                  <div class="spec-chip-val" id="vizTarget">src/baseline/baselineService.js</div>
-                </div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;margin-top:auto;">
-              <a href="how-it-works.html" class="btn btn-secondary" style="font-size:0.75rem;padding:6px 14px;">Read Full Protocol Specs ↗</a>
-              <a href="demo/index.html" class="btn btn-primary" style="font-size:0.75rem;padding:6px 14px;">Inspect in Live Demo →</a>
-            </div>
-          </div>
-
-          <div class="visualizer-live-box">
-            <div class="live-box-header">
-              <div style="display:flex;align-items:center;gap:6px;">
-                <span style="width:8px;height:8px;border-radius:50%;background:#FF5F56;"></span>
-                <span style="width:8px;height:8px;border-radius:50%;background:#FFBD2E;"></span>
-                <span style="width:8px;height:8px;border-radius:50%;background:#27C93F;"></span>
-                <span style="margin-left:8px;font-weight:600;color:#C0C8D8;" id="vizCodeTitle">baselineService.js</span>
-              </div>
-              <span id="vizEngineState" style="color:#27C93F;font-size:0.68rem;display:flex;align-items:center;gap:4px;">
-                <span style="width:5px;height:5px;background:#27C93F;border-radius:50%;"></span> ACTIVE
-              </span>
-            </div>
-
-            <div class="live-interactive-sandbox" id="vizSandbox">
-              <!-- Dynamically populated sandbox widget -->
-            </div>
-
-            <pre class="live-code-snippet" id="vizCodeSnippet"></pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── LIVE SOC TELEMETRY TERMINAL ────────────────────────────────────── -->
-    <section class="section-pad">
-      <div class="container">
-        <div class="section-head reveal-on-scroll">
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Real-Time Pipeline Telemetry</span>
-          <h2 class="section-title">Live containment &amp; recovery telemetry</h2>
-          <p class="section-desc">Live event processing log from the Fastify backend, showing sliding rate calculations, canary tripwires, and Ed25519 signing.</p>
-        </div>
-
-        <div class="soc-terminal-container reveal-on-scroll">
-          <div class="soc-terminal-header">
-            <div class="soc-terminal-dots">
-              <span class="soc-dot red"></span>
-              <span class="soc-dot yellow"></span>
-              <span class="soc-dot green"></span>
-            </div>
-            <div class="soc-terminal-tabs" id="socTerminalTabs">
-              <button type="button" class="soc-tab-btn active" data-filter="all">All Telemetry</button>
-              <button type="button" class="soc-tab-btn" data-filter="canary">Canary Alerts</button>
-              <button type="button" class="soc-tab-btn" data-filter="crypto">Crypto Proofs</button>
-              <button type="button" class="soc-tab-btn" data-filter="restore">AEAD Restore</button>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <span style="display:inline-flex;align-items:center;gap:6px;color:#27C93F;font-size:0.7rem;">
-                <span style="width:6px;height:6px;background:#27C93F;border-radius:50%;box-shadow:0 0 6px #27C93F;"></span>
-                STREAM ACTIVE
-              </span>
-              <button type="button" id="triggerSocSpikeBtn" class="hero-pill-btn" style="background:#D93636;color:#FFF;border-color:#D93636;font-size:0.68rem;">
-                Simulate Attack Event
-              </button>
-            </div>
-          </div>
-
-          <!-- Incident Popover Alert Card -->
-          <div id="socIncidentAlertCard" class="soc-incident-card" style="display:none;" role="alert">
-            <div class="soc-incident-header">
-              <div class="soc-incident-title">
-                <span class="soc-incident-pulse-dot"></span>
-                <span>CRITICAL ALERT // INCIDENT #CR-8032 GENERATED</span>
-              </div>
-              <button type="button" id="dismissIncidentCardBtn" class="soc-incident-btn dismiss" title="Acknowledge Alert" aria-label="Acknowledge and dismiss incident alert">Dismiss</button>
-            </div>
-            <div class="soc-incident-grid">
-              <div class="soc-incident-field">
-                <span class="field-lbl">Compromised Credential</span>
-                <span class="field-val" style="color:#FF8080;">svc-backup-agent (IAM Role)</span>
-              </div>
-              <div class="soc-incident-field">
-                <span class="field-lbl">SLA Response Time</span>
-                <span class="field-val" style="color:#38BDF8;">8.2 seconds (&lt;10.0s SLA)</span>
-              </div>
-              <div class="soc-incident-field">
-                <span class="field-lbl">Ed25519 Signature</span>
-                <span class="field-val" style="color:#CBD5E1;">3a9f01bc…481d (RFC 8032)</span>
-              </div>
-              <div class="soc-incident-field">
-                <span class="field-lbl">Restore Integrity</span>
-                <span class="field-val" style="color:#10B981;">100% AEAD VALID (AES-256-GCM)</span>
-              </div>
-            </div>
-            <div class="soc-incident-actions">
-              <button type="button" id="viewIncidentProofBtn" class="soc-incident-btn" style="background:#0284C7;color:#FFF;">Inspect Cryptographic Proof</button>
-            </div>
-          </div>
-
-          <div class="soc-terminal-body" id="socTerminalBody" role="log" aria-live="polite">
-            <!-- Dynamic stream logs injected here -->
-          </div>
-
-          <!-- Interactive CLI Input & Command Pills -->
-          <div class="soc-terminal-cli-bar">
-            <div class="soc-cli-pills" id="socCliPills">
-              <span class="soc-cli-pills-label">Quick Commands:</span>
-              <button type="button" class="soc-cli-pill" data-cmd="cloudrdr status">> cloudrdr status</button>
-              <button type="button" class="soc-cli-pill" data-cmd="test-canary-tripwire">> test-canary-tripwire</button>
-              <button type="button" class="soc-cli-pill" data-cmd="curl /baseline/protected">> curl /baseline/protected</button>
-              <button type="button" class="soc-cli-pill" data-cmd="verify-merkle-proof">> verify-merkle-proof</button>
-              <button type="button" class="soc-cli-pill" data-cmd="help">> help</button>
-              <button type="button" class="soc-cli-pill" data-cmd="clear">> clear</button>
-            </div>
-            <form id="socCliForm" class="soc-cli-input-form" autocomplete="off">
-              <span class="soc-cli-prompt">cloudrdr@edge:~$</span>
-              <input type="text" id="socCliInput" class="soc-cli-input" placeholder="Type a command (e.g. status, test-canary-tripwire, help)…" spellcheck="false" />
-              <button type="submit" class="soc-cli-submit-btn">Run ↵</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 4. WHAT MAKES US DIFFERENT ────────────────────────────────────── -->
-    <section class="section-pad bg-grid-dots">
-      <div class="container">
-        <div class="section-head reveal-on-scroll">
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">Comparison</span>
-          <h2 class="section-title">What makes CloudRDR different</h2>
-          <p class="section-desc">Comparing legacy cloud backup approaches against cryptographic defense.</p>
-        </div>
-
-        <div class="reveal-on-scroll">
-          <table class="comparison-table" aria-label="Comparison between Typical Tools and CloudRDR">
-            <thead>
-              <tr>
-                <th scope="col" style="width: 25%;">Capability</th>
-                <th scope="col" style="width: 35%;">Typical Cloud Backup Tools</th>
-                <th scope="col" style="width: 40%;" class="col-diff">CloudRDR Defense System</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Primary objective</strong></td>
-                <td>Detect and generate email alert notifications</td>
-                <td class="col-diff">Detect, freeze attacker IAM, and cryptographically prove restore</td>
-              </tr>
-              <tr>
-                <td><strong>Containment speed</strong></td>
-                <td>Hours or days waiting for manual human triage</td>
-                <td class="col-diff">Sub-10 seconds automated IAM control-plane lockdown</td>
-              </tr>
-              <tr>
-                <td><strong>Tamper detection</strong></td>
-                <td>Relies on OS file timestamps and size heuristics</td>
-                <td class="col-diff">Deterministic Merkle tree root hash calculation</td>
-              </tr>
-              <tr>
-                <td><strong>Audit log security</strong></td>
-                <td>Plaintext database records easily modified or purged</td>
-                <td class="col-diff">Hash-chained ledger signed with RFC 8032 Ed25519</td>
-              </tr>
-              <tr>
-                <td><strong>Restore guarantee</strong></td>
-                <td>Blind file overwrite with no post-restore verification</td>
-                <td class="col-diff">AES-256-GCM with AEAD tag check and 100% baseline match gate</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 5. DEMO PREVIEW ────────────────────────────────────────────────── -->
-    <section class="section-pad bg-grid-dots">
-      <div class="container">
-        <div class="hero-preview-box reveal-on-scroll" style="padding:var(--space-8);text-align:center;">
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Interactive SOC Console</span>
-          <h2 style="font-size:var(--text-2xl);margin:var(--space-2) 0 var(--space-4) 0;">Experience the full attack narrative</h2>
-          <p style="margin:0 auto var(--space-6) auto;">
-            Launch the interactive Security Operations Center (SOC) dashboard. Witness an attack spike, watch corruption climb the Merkle tree in real time, and trigger the verified recovery.
-          </p>
-          <a href="demo/index.html" class="btn btn-primary">
-            Launch Interactive Demo ↗
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 6. TEAM AND DOCUMENTS PREVIEW ──────────────────────────────────── -->
-    <section class="section-pad">
-      <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);" class="reveal-on-scroll">
+    <main id="main-content" tabindex="-1">
+      <!-- ── 1. HERO SECTION ────────────────────────────────────────────────── -->
+      <section class="hero-section bg-grid-dots">
+        <div class="container hero-grid">
           <div>
-            <h3>Project Team &amp; Governance</h3>
-            <p style="margin-bottom:var(--space-4);">Developed by a cross-functional engineering team covering security architecture, cryptography, DevOps, and verification.</p>
-            <a href="team.html" class="btn btn-secondary btn-sm">Meet the team →</a>
-          </div>
-          <div>
-            <h3>ISMS Documentation</h3>
-            <p style="margin-bottom:var(--space-4);">Complete institutional security documentation including Risk Register, BCP/DRP plans, and Incident Response Playbooks.</p>
-            <a href="docs.html" class="btn btn-secondary btn-sm">Browse documents →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 7. REQUEST ACCESS ───────────────────────────────────────────────── -->
-    <section class="section-pad bg-grid-dots" aria-labelledby="requestAccessTitle">
-      <div class="container">
-        <div class="hero-preview-box access-panel reveal-on-scroll">
-          <div class="access-copy">
-            <span class="access-eyebrow">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-              Platform Access
-            </span>
-            <h2 id="requestAccessTitle" class="access-title">Ready to Explore CloudRDR?</h2>
-            <p class="access-desc">
-              Get access to the CloudRDR security platform and explore cloud ransomware detection, real-time threat monitoring, and cryptographically verified recovery.
+            <h1 class="hero-animate-title">Don't just detect ransomware. Prove the recovery.</h1>
+            <p class="hero-subtitle hero-animate-subtitle">
+              CloudRDR detects secret cloud file encryption within seconds, freezes the attacking
+              account at the IAM control plane, and uses cryptographic Merkle trees to prove every
+              restored file is an authentic original.
             </p>
-            <div class="access-cta">
-              <a href="/register" class="btn btn-primary">Request Access →</a>
-              <span class="access-note">Create your account to access the platform.</span>
+            <div class="hero-cta-group hero-animate-cta">
+              <button
+                type="button"
+                id="startPresentationTourBtn"
+                class="btn btn-primary"
+                style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                <span>Start 45s Presentation Tour</span>
+              </button>
+              <a href="demo/index.html" class="btn btn-secondary"> Open the demo </a>
+              <a href="how-it-works.html" class="btn btn-secondary"> How it works </a>
             </div>
           </div>
 
-          <ul class="access-benefits" aria-label="Platform capabilities">
-            <li>
-              <span class="access-benefit-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-              </span>
-              <div>
-                <strong>Real-Time Threat Monitoring</strong>
-                <span>Sliding-window change-rate detection with canary tripwires.</span>
+          <!-- Memorable Element: Live Looping & Interactive Hero Merkle Tree Illustration -->
+          <div class="hero-preview-box hero-animate-preview spotlight-card">
+            <!-- Sleek Segmented Scenario Controls -->
+            <div
+              class="hero-tree-toolbar"
+              id="heroTreeControls"
+              role="toolbar"
+              aria-label="Interactive Tree Scenarios"
+            >
+              <div class="tree-toolbar-group">
+                <button
+                  type="button"
+                  class="tree-tab-btn active"
+                  data-scenario="loop"
+                  title="Loop continuous attack and recovery narrative"
+                >
+                  <span class="tab-indicator-dot"></span>
+                  <span>Auto Narrative</span>
+                </button>
               </div>
-            </li>
-            <li>
-              <span class="access-benefit-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              </span>
-              <div>
-                <strong>Cryptographic Integrity Verification</strong>
-                <span>SHA-256 Merkle baselines and Ed25519-signed evidence.</span>
+              <div class="tree-toolbar-divider"></div>
+              <div class="tree-toolbar-group">
+                <button
+                  type="button"
+                  class="tree-tab-btn"
+                  data-scenario="calm"
+                  title="Inspect calm baseline integrity state"
+                >
+                  <span class="tab-status-dot calm"></span>
+                  <span>Calm</span>
+                </button>
+                <button
+                  type="button"
+                  class="tree-tab-btn"
+                  data-scenario="attack"
+                  title="Simulate canary breach and climbing corruption"
+                >
+                  <span class="tab-status-dot attack"></span>
+                  <span>Attack</span>
+                </button>
+                <button
+                  type="button"
+                  class="tree-tab-btn"
+                  data-scenario="restore"
+                  title="Watch AEAD verified recovery restore leaves"
+                >
+                  <span class="tab-status-dot restore"></span>
+                  <span>Restore</span>
+                </button>
               </div>
-            </li>
-            <li>
-              <span class="access-benefit-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-              </span>
-              <div>
-                <strong>Secure Backup &amp; Recovery</strong>
-                <span>AES-256-GCM backups restored only after verification.</span>
+            </div>
+
+            <div id="heroMerkleTree"></div>
+
+            <!-- Structured Telemetry Banner -->
+            <div class="hero-telemetry-banner" id="heroTelemetryBanner">
+              <div class="telemetry-lead">
+                <span class="telemetry-live-dot" id="heroTelemetryDot"></span>
+                <span class="telemetry-state-pill" id="heroTelemetryPill">BASELINE VERIFIED</span>
               </div>
-            </li>
-          </ul>
+              <div class="telemetry-text" id="heroTreeStatusCaption">
+                All 16 protected file fingerprints match baseline Merkle root (RFC 6962 canonical
+                DAG).
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── KEY METRICS STRIP ──────────────────────────────────────────────── -->
+      <section class="metrics-strip reveal-on-scroll">
+        <div class="container metrics-grid">
+          <div class="metric-item">
+            <div class="metric-val" data-counter="10" data-prefix="&lt; " data-suffix="s">
+              &lt; 10s
+            </div>
+            <div class="metric-label">IAM Containment SLA</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val" data-counter="100" data-suffix="%">100%</div>
+            <div class="metric-label">Cryptographic Merkle Proof</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val" data-counter="60" data-suffix="s">60s</div>
+            <div class="metric-label">Sliding Detection Window</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val" data-counter="256" data-suffix="-bit">256-bit</div>
+            <div class="metric-label">AEAD Authentication Tag Check</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ACADEMIC SPECIFICATIONS & CRYPTOGRAPHIC STANDARDS ──────────────── -->
+      <div class="container reveal-on-scroll">
+        <div class="standards-bar">
+          <span class="standard-badge" title="Cryptographic Hash Trees in Append-Only Logs">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M3 9h18M9 21V9" />
+            </svg>
+            RFC 6962: Merkle Tree Hash DAG
+          </span>
+          <span class="standard-badge" title="Edwards-Curve Digital Signature Algorithm">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            RFC 8032: Ed25519 Incident Signatures
+          </span>
+          <span class="standard-badge" title="Galois/Counter Mode Authenticated Encryption">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            NIST SP 800-38D: AES-256-GCM AEAD
+          </span>
+          <span class="standard-badge" title="Information Security Management System Controls">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            ISO/IEC 27001:2022 (A.8.7, A.8.15, A.8.24)
+          </span>
         </div>
       </div>
-    </section>
-  </main>
 
-  <!-- Shared Footer Container -->
-  <div id="site-footer-container"></div>
+      <!-- ── 2. THE PROBLEM ─────────────────────────────────────────────────── -->
+      <section class="section-pad">
+        <div class="container">
+          <div class="section-head reveal-on-scroll">
+            <span
+              style="
+                font-family: var(--font-mono);
+                font-size: var(--text-xs);
+                color: var(--status-ransomware);
+                text-transform: uppercase;
+              "
+              >The Threat</span
+            >
+            <h2 class="section-title">What ransomware does to cloud object storage</h2>
+            <p class="section-desc">
+              Traditional endpoint antivirus cannot protect remote buckets when cloud credentials
+              leak.
+            </p>
+          </div>
 
-  <!-- Shared Scripts & Motion Orchestration -->
-  <script type="module">
-    import { initSharedNav } from './js/components/nav.js';
-    import { initMerkleTree } from './js/components/merkleTree.js';
-    import { startPresentationTour, endPresentationTour } from './js/components/tour.js';
-    import { openMerkleInspector } from './js/components/merkleInspector.js';
-    import './js/motion.js';
+          <div class="problems-grid">
+            <div class="problem-card reveal-on-scroll stagger-1 spotlight-card">
+              <div class="problem-num">01 / Silent overwrite</div>
+              <h3>Silent blob encryption</h3>
+              <p>
+                Attackers steal API keys or service tokens and overwrite thousands of storage
+                objects with encrypted blobs without changing file extensions.
+              </p>
+            </div>
 
-    initSharedNav({ activePage: 'home', basePath: '' });
+            <div class="problem-card reveal-on-scroll stagger-2 spotlight-card">
+              <div class="problem-num">02 / Poisoned backups</div>
+              <h3>Backup pipeline poisoning</h3>
+              <p>
+                Scheduled cloud backups automatically sync the newly encrypted files, overwriting
+                good historical copies before security teams notice.
+              </p>
+            </div>
 
-    document.getElementById('startPresentationTourBtn')?.addEventListener('click', () => {
-      startPresentationTour();
-    });
+            <div class="problem-card reveal-on-scroll stagger-3 spotlight-card">
+              <div class="problem-num">03 / Zero proof of integrity</div>
+              <h3>Unverifiable recovery</h3>
+              <p>
+                When organizations pay ransoms or restore from cold archives, they have no
+                cryptographic proof whether restored files were tampered with or truncated.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    // ── 1. Scroll-Triggered Reveal Animation (IntersectionObserver) ────────
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      <!-- ── 3. HOW THE DEFENSE SYSTEM WORKS (CONNECTED PIPELINE & VISUALIZER) ── -->
+      <section class="section-pad bg-grid-dots">
+        <div class="container">
+          <div class="section-head reveal-on-scroll">
+            <span
+              style="
+                font-family: var(--font-mono);
+                font-size: var(--text-xs);
+                color: var(--brand);
+                text-transform: uppercase;
+              "
+              >Architecture &amp; Protocol Flow</span
+            >
+            <h2 class="section-title">6-Stage defense lifecycle</h2>
+            <p class="section-desc">
+              From initial cryptographic baseline to verifiable AEAD recovery. Click any stage to
+              test its interactive sandbox and inspect protocol specifications.
+            </p>
+          </div>
 
-      revealElements.forEach((el) => observer.observe(el));
-    } else {
-      revealElements.forEach((el) => el.classList.add('is-visible'));
-    }
+          <div class="pipeline-controls-bar reveal-on-scroll" style="justify-content: flex-end">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <button
+                type="button"
+                id="pipelineAutoPlayBtn"
+                class="btn btn-secondary"
+                style="font-size: 0.75rem; padding: 6px 14px; font-family: var(--font-mono)"
+              >
+                <span id="pipelinePlayIcon">▶</span>
+                <span id="pipelinePlayText">Auto-Play Walkthrough</span>
+              </button>
+            </div>
+          </div>
 
-    // ── 2. Metric Counters Animation (requestAnimationFrame) ────────────────
-    const counterElements = document.querySelectorAll('[data-counter]');
-    let countersStarted = false;
+          <div
+            class="pipeline-flow-track"
+            id="pipelineTrack"
+            role="tablist"
+            aria-label="CloudRDR Pipeline Stages"
+          >
+            <!-- Step 1 -->
+            <div
+              class="pipeline-node active reveal-on-scroll stagger-1 spotlight-card"
+              data-stage="0"
+              role="tab"
+              aria-selected="true"
+              tabindex="0"
+            >
+              <div class="pipeline-node-top">
+                <span class="pipeline-step-idx">01</span>
+                <div class="pipeline-icon-box" title="Baseline Merkle Root">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="4" r="2.5" />
+                    <circle cx="6" cy="18" r="2.5" />
+                    <circle cx="18" cy="18" r="2.5" />
+                    <path d="M12 6.5v4M12 10.5l-4.5 5.5M12 10.5l4.5 5.5" />
+                  </svg>
+                </div>
+              </div>
+              <div class="pipeline-node-title">Baseline</div>
+              <div class="pipeline-node-subtitle">SHA-256 Merkle Root</div>
+            </div>
 
-    function animateCounters() {
-      if (countersStarted) return;
-      countersStarted = true;
+            <!-- Step 2 -->
+            <div
+              class="pipeline-node reveal-on-scroll stagger-2 spotlight-card"
+              data-stage="1"
+              role="tab"
+              aria-selected="false"
+              tabindex="0"
+            >
+              <div class="pipeline-node-top">
+                <span class="pipeline-step-idx">02</span>
+                <div class="pipeline-icon-box" title="Storage Event Polling">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M12 2a10 10 0 1 0 10 10" />
+                    <path d="M12 6a6 6 0 1 0 6 6" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path d="M12 12l5-5" />
+                  </svg>
+                </div>
+              </div>
+              <div class="pipeline-node-title">Monitor</div>
+              <div class="pipeline-node-subtitle">10s Event Polling</div>
+            </div>
 
-      counterElements.forEach((el) => {
-        const target = parseInt(el.getAttribute('data-counter'), 10);
-        const prefix = el.getAttribute('data-prefix') || '';
-        const suffix = el.getAttribute('data-suffix') || '';
-        const duration = 1200; // ms
-        const startTime = performance.now();
+            <!-- Step 3 -->
+            <div
+              class="pipeline-node reveal-on-scroll stagger-3 spotlight-card"
+              data-stage="2"
+              role="tab"
+              aria-selected="false"
+              tabindex="0"
+            >
+              <div class="pipeline-node-top">
+                <span class="pipeline-step-idx">03</span>
+                <div class="pipeline-icon-box" title="Heuristic &amp; Canary">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="12" y1="3" x2="12" y2="7" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                    <line x1="3" y1="12" x2="7" y2="12" />
+                    <line x1="17" y1="12" x2="21" y2="12" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </div>
+              </div>
+              <div class="pipeline-node-title">Detect</div>
+              <div class="pipeline-node-subtitle">Sliding Window &amp; Canary</div>
+            </div>
 
-        function step(now) {
-          const progress = Math.min((now - startTime) / duration, 1);
-          // Ease-out cubic: 1 - (1 - progress)^3
-          const easeProgress = 1 - Math.pow(1 - progress, 3);
-          const current = Math.floor(easeProgress * target);
-          el.textContent = `${prefix}${current}${suffix}`;
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          } else {
-            el.textContent = `${prefix}${target}${suffix}`;
-          }
-        }
-        requestAnimationFrame(step);
+            <!-- Step 4 -->
+            <div
+              class="pipeline-node reveal-on-scroll stagger-4 spotlight-card"
+              data-stage="3"
+              role="tab"
+              aria-selected="false"
+              tabindex="0"
+            >
+              <div class="pipeline-node-top">
+                <span class="pipeline-step-idx">04</span>
+                <div class="pipeline-icon-box" title="IAM Freeze &amp; Ed25519">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <rect x="9.5" y="10" width="5" height="4" rx="1" />
+                    <path d="M10.5 10V8.5a1.5 1.5 0 0 1 3 0V10" />
+                  </svg>
+                </div>
+              </div>
+              <div class="pipeline-node-title">Respond</div>
+              <div class="pipeline-node-subtitle">IAM Freeze &amp; Ed25519</div>
+            </div>
+
+            <!-- Step 5 -->
+            <div
+              class="pipeline-node reveal-on-scroll stagger-5 spotlight-card"
+              data-stage="4"
+              role="tab"
+              aria-selected="false"
+              tabindex="0"
+            >
+              <div class="pipeline-node-top">
+                <span class="pipeline-step-idx">05</span>
+                <div class="pipeline-icon-box" title="Hash-Chained Audit Log">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                  </svg>
+                </div>
+              </div>
+              <div class="pipeline-node-title">Audit</div>
+              <div class="pipeline-node-subtitle">SHA-256 Hash-Chain</div>
+            </div>
+
+            <!-- Step 6 -->
+            <div
+              class="pipeline-node reveal-on-scroll stagger-6 spotlight-card"
+              data-stage="5"
+              role="tab"
+              aria-selected="false"
+              tabindex="0"
+            >
+              <div class="pipeline-node-top">
+                <span class="pipeline-step-idx">06</span>
+                <div class="pipeline-icon-box" title="AEAD Verified Decryption">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    <polyline points="9 16 11.5 18.5 15 14" />
+                  </svg>
+                </div>
+              </div>
+              <div class="pipeline-node-title">Restore</div>
+              <div class="pipeline-node-subtitle">AEAD Verified Recovery</div>
+            </div>
+          </div>
+
+          <!-- Featured Stage Visualizer Card -->
+          <div
+            class="pipeline-visualizer-card reveal-on-scroll spotlight-card"
+            id="pipelineVisualizer"
+          >
+            <div class="visualizer-spec-col">
+              <div>
+                <div class="visualizer-meta-badges">
+                  <span id="vizStageBadge" class="brand-badge">Stage 01 // Baseline</span>
+                  <span id="vizIsoBadge" class="status-chip valid">ISO 27001 A.8.9</span>
+                  <span
+                    id="vizRfcBadge"
+                    class="status-chip missing"
+                    style="border: 1px solid var(--border)"
+                    >RFC 6962</span
+                  >
+                </div>
+                <h3 id="vizTitle" class="visualizer-title">
+                  Take a Cryptographic Fingerprint of Every File
+                </h3>
+                <p id="vizDesc" class="visualizer-desc">
+                  Before any file can be attacked, CloudRDR records a unique cryptographic
+                  fingerprint (SHA-256) of every file while the system is safe. If even one byte of
+                  a file changes later, its fingerprint changes too—letting us immediately spot
+                  unauthorized tampering.
+                </p>
+                <div class="visualizer-spec-grid" id="vizSpecGrid">
+                  <div class="spec-chip">
+                    <div class="spec-chip-label">Algorithm</div>
+                    <div class="spec-chip-val" id="vizAlg">SHA-256 Pairwise Tree</div>
+                  </div>
+                  <div class="spec-chip">
+                    <div class="spec-chip-label">SLA / Window</div>
+                    <div class="spec-chip-val" id="vizSla">&lt; 450ms per 1k files</div>
+                  </div>
+                  <div class="spec-chip">
+                    <div class="spec-chip-label">Integrity Invariant</div>
+                    <div class="spec-chip-val" id="vizInvariant">Root Mismatch = Tampered</div>
+                  </div>
+                  <div class="spec-chip">
+                    <div class="spec-chip-label">Backend Target</div>
+                    <div class="spec-chip-val" id="vizTarget">src/baseline/baselineService.js</div>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; margin-top: auto">
+                <a
+                  href="how-it-works.html"
+                  class="btn btn-secondary"
+                  style="font-size: 0.75rem; padding: 6px 14px"
+                  >Read Full Protocol Specs ↗</a
+                >
+                <a
+                  href="demo/index.html"
+                  class="btn btn-primary"
+                  style="font-size: 0.75rem; padding: 6px 14px"
+                  >Inspect in Live Demo →</a
+                >
+              </div>
+            </div>
+
+            <div class="visualizer-live-box">
+              <div class="live-box-header">
+                <div style="display: flex; align-items: center; gap: 6px">
+                  <span
+                    style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56"
+                  ></span>
+                  <span
+                    style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e"
+                  ></span>
+                  <span
+                    style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f"
+                  ></span>
+                  <span style="margin-left: 8px; font-weight: 600; color: #c0c8d8" id="vizCodeTitle"
+                    >baselineService.js</span
+                  >
+                </div>
+                <span
+                  id="vizEngineState"
+                  style="
+                    color: #27c93f;
+                    font-size: 0.68rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                  "
+                >
+                  <span
+                    style="width: 5px; height: 5px; background: #27c93f; border-radius: 50%"
+                  ></span>
+                  ACTIVE
+                </span>
+              </div>
+
+              <div class="live-interactive-sandbox" id="vizSandbox">
+                <!-- Dynamically populated sandbox widget -->
+              </div>
+
+              <pre class="live-code-snippet" id="vizCodeSnippet"></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── LIVE SOC TELEMETRY TERMINAL ────────────────────────────────────── -->
+      <section class="section-pad">
+        <div class="container">
+          <div class="section-head reveal-on-scroll">
+            <span
+              style="
+                font-family: var(--font-mono);
+                font-size: var(--text-xs);
+                color: var(--brand);
+                text-transform: uppercase;
+              "
+              >Real-Time Pipeline Telemetry</span
+            >
+            <h2 class="section-title">Live containment &amp; recovery telemetry</h2>
+            <p class="section-desc">
+              Live event processing log from the Fastify backend, showing sliding rate calculations,
+              canary tripwires, and Ed25519 signing.
+            </p>
+          </div>
+
+          <div class="soc-terminal-container reveal-on-scroll">
+            <div class="soc-terminal-header">
+              <div class="soc-terminal-dots">
+                <span class="soc-dot red"></span>
+                <span class="soc-dot yellow"></span>
+                <span class="soc-dot green"></span>
+              </div>
+              <div class="soc-terminal-tabs" id="socTerminalTabs">
+                <button type="button" class="soc-tab-btn active" data-filter="all">
+                  All Telemetry
+                </button>
+                <button type="button" class="soc-tab-btn" data-filter="canary">
+                  Canary Alerts
+                </button>
+                <button type="button" class="soc-tab-btn" data-filter="crypto">
+                  Crypto Proofs
+                </button>
+                <button type="button" class="soc-tab-btn" data-filter="restore">
+                  AEAD Restore
+                </button>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px">
+                <span
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    color: #27c93f;
+                    font-size: 0.7rem;
+                  "
+                >
+                  <span
+                    style="
+                      width: 6px;
+                      height: 6px;
+                      background: #27c93f;
+                      border-radius: 50%;
+                      box-shadow: 0 0 6px #27c93f;
+                    "
+                  ></span>
+                  STREAM ACTIVE
+                </span>
+                <button
+                  type="button"
+                  id="triggerSocSpikeBtn"
+                  class="hero-pill-btn"
+                  style="
+                    background: #d93636;
+                    color: #fff;
+                    border-color: #d93636;
+                    font-size: 0.68rem;
+                  "
+                >
+                  Simulate Attack Event
+                </button>
+              </div>
+            </div>
+
+            <!-- Incident Popover Alert Card -->
+            <div
+              id="socIncidentAlertCard"
+              class="soc-incident-card"
+              style="display: none"
+              role="alert"
+            >
+              <div class="soc-incident-header">
+                <div class="soc-incident-title">
+                  <span class="soc-incident-pulse-dot"></span>
+                  <span>CRITICAL ALERT // INCIDENT #CR-8032 GENERATED</span>
+                </div>
+                <button
+                  type="button"
+                  id="dismissIncidentCardBtn"
+                  class="soc-incident-btn dismiss"
+                  title="Acknowledge Alert"
+                  aria-label="Acknowledge and dismiss incident alert"
+                >
+                  Dismiss
+                </button>
+              </div>
+              <div class="soc-incident-grid">
+                <div class="soc-incident-field">
+                  <span class="field-lbl">Compromised Credential</span>
+                  <span class="field-val" style="color: #ff8080">svc-backup-agent (IAM Role)</span>
+                </div>
+                <div class="soc-incident-field">
+                  <span class="field-lbl">SLA Response Time</span>
+                  <span class="field-val" style="color: #38bdf8">8.2 seconds (&lt;10.0s SLA)</span>
+                </div>
+                <div class="soc-incident-field">
+                  <span class="field-lbl">Ed25519 Signature</span>
+                  <span class="field-val" style="color: #cbd5e1">3a9f01bc…481d (RFC 8032)</span>
+                </div>
+                <div class="soc-incident-field">
+                  <span class="field-lbl">Restore Integrity</span>
+                  <span class="field-val" style="color: #10b981"
+                    >100% AEAD VALID (AES-256-GCM)</span
+                  >
+                </div>
+              </div>
+              <div class="soc-incident-actions">
+                <button
+                  type="button"
+                  id="viewIncidentProofBtn"
+                  class="soc-incident-btn"
+                  style="background: #0284c7; color: #fff"
+                >
+                  Inspect Cryptographic Proof
+                </button>
+              </div>
+            </div>
+
+            <div class="soc-terminal-body" id="socTerminalBody" role="log" aria-live="polite">
+              <!-- Dynamic stream logs injected here -->
+            </div>
+
+            <!-- Interactive CLI Input & Command Pills -->
+            <div class="soc-terminal-cli-bar">
+              <div class="soc-cli-pills" id="socCliPills">
+                <span class="soc-cli-pills-label">Quick Commands:</span>
+                <button type="button" class="soc-cli-pill" data-cmd="cloudrdr status">
+                  > cloudrdr status
+                </button>
+                <button type="button" class="soc-cli-pill" data-cmd="test-canary-tripwire">
+                  > test-canary-tripwire
+                </button>
+                <button type="button" class="soc-cli-pill" data-cmd="curl /baseline/protected">
+                  > curl /baseline/protected
+                </button>
+                <button type="button" class="soc-cli-pill" data-cmd="verify-merkle-proof">
+                  > verify-merkle-proof
+                </button>
+                <button type="button" class="soc-cli-pill" data-cmd="help">> help</button>
+                <button type="button" class="soc-cli-pill" data-cmd="clear">> clear</button>
+              </div>
+              <form id="socCliForm" class="soc-cli-input-form" autocomplete="off">
+                <span class="soc-cli-prompt">cloudrdr@edge:~$</span>
+                <input
+                  type="text"
+                  id="socCliInput"
+                  class="soc-cli-input"
+                  placeholder="Type a command (e.g. status, test-canary-tripwire, help)…"
+                  spellcheck="false"
+                />
+                <button type="submit" class="soc-cli-submit-btn">Run ↵</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 4. WHAT MAKES US DIFFERENT ────────────────────────────────────── -->
+      <section class="section-pad bg-grid-dots">
+        <div class="container">
+          <div class="section-head reveal-on-scroll">
+            <span
+              style="
+                font-family: var(--font-mono);
+                font-size: var(--text-xs);
+                color: var(--text-muted);
+                text-transform: uppercase;
+              "
+              >Comparison</span
+            >
+            <h2 class="section-title">What makes CloudRDR different</h2>
+            <p class="section-desc">
+              Comparing legacy cloud backup approaches against cryptographic defense.
+            </p>
+          </div>
+
+          <div class="reveal-on-scroll">
+            <table
+              class="comparison-table"
+              aria-label="Comparison between Typical Tools and CloudRDR"
+            >
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 25%">Capability</th>
+                  <th scope="col" style="width: 35%">Typical Cloud Backup Tools</th>
+                  <th scope="col" style="width: 40%" class="col-diff">CloudRDR Defense System</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Primary objective</strong></td>
+                  <td>Detect and generate email alert notifications</td>
+                  <td class="col-diff">
+                    Detect, freeze attacker IAM, and cryptographically prove restore
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Containment speed</strong></td>
+                  <td>Hours or days waiting for manual human triage</td>
+                  <td class="col-diff">Sub-10 seconds automated IAM control-plane lockdown</td>
+                </tr>
+                <tr>
+                  <td><strong>Tamper detection</strong></td>
+                  <td>Relies on OS file timestamps and size heuristics</td>
+                  <td class="col-diff">Deterministic Merkle tree root hash calculation</td>
+                </tr>
+                <tr>
+                  <td><strong>Audit log security</strong></td>
+                  <td>Plaintext database records easily modified or purged</td>
+                  <td class="col-diff">Hash-chained ledger signed with RFC 8032 Ed25519</td>
+                </tr>
+                <tr>
+                  <td><strong>Restore guarantee</strong></td>
+                  <td>Blind file overwrite with no post-restore verification</td>
+                  <td class="col-diff">
+                    AES-256-GCM with AEAD tag check and 100% baseline match gate
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 5. DEMO PREVIEW ────────────────────────────────────────────────── -->
+      <section class="section-pad bg-grid-dots">
+        <div class="container">
+          <div
+            class="hero-preview-box reveal-on-scroll"
+            style="padding: var(--space-8); text-align: center"
+          >
+            <span
+              style="
+                font-family: var(--font-mono);
+                font-size: var(--text-xs);
+                color: var(--brand);
+                text-transform: uppercase;
+              "
+              >Interactive SOC Console</span
+            >
+            <h2 style="font-size: var(--text-2xl); margin: var(--space-2) 0 var(--space-4) 0">
+              Experience the full attack narrative
+            </h2>
+            <p style="margin: 0 auto var(--space-6) auto">
+              Launch the interactive Security Operations Center (SOC) dashboard. Witness an attack
+              spike, watch corruption climb the Merkle tree in real time, and trigger the verified
+              recovery.
+            </p>
+            <a href="demo/index.html" class="btn btn-primary"> Launch Interactive Demo ↗ </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 6. TEAM AND DOCUMENTS PREVIEW ──────────────────────────────────── -->
+      <section class="section-pad">
+        <div class="container">
+          <div
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12)"
+            class="reveal-on-scroll"
+          >
+            <div>
+              <h3>Project Team &amp; Governance</h3>
+              <p style="margin-bottom: var(--space-4)">
+                Developed by a cross-functional engineering team covering security architecture,
+                cryptography, DevOps, and verification.
+              </p>
+              <a href="team.html" class="btn btn-secondary btn-sm">Meet the team →</a>
+            </div>
+            <div>
+              <h3>ISMS Documentation</h3>
+              <p style="margin-bottom: var(--space-4)">
+                Complete institutional security documentation including Risk Register, BCP/DRP
+                plans, and Incident Response Playbooks.
+              </p>
+              <a href="docs.html" class="btn btn-secondary btn-sm">Browse documents →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 7. REQUEST ACCESS ───────────────────────────────────────────────── -->
+      <section class="section-pad bg-grid-dots" aria-labelledby="requestAccessTitle">
+        <div class="container">
+          <div class="hero-preview-box access-panel reveal-on-scroll">
+            <div class="access-copy">
+              <span class="access-eyebrow">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+                Platform Access
+              </span>
+              <h2 id="requestAccessTitle" class="access-title">Ready to Explore CloudRDR?</h2>
+              <p class="access-desc">
+                Get access to the CloudRDR security platform and explore cloud ransomware detection,
+                real-time threat monitoring, and cryptographically verified recovery.
+              </p>
+              <div class="access-cta">
+                <a href="/register" class="btn btn-primary">Request Access →</a>
+                <span class="access-note">Create your account to access the platform.</span>
+              </div>
+            </div>
+
+            <ul class="access-benefits" aria-label="Platform capabilities">
+              <li>
+                <span class="access-benefit-icon" aria-hidden="true">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                  </svg>
+                </span>
+                <div>
+                  <strong>Real-Time Threat Monitoring</strong>
+                  <span>Sliding-window change-rate detection with canary tripwires.</span>
+                </div>
+              </li>
+              <li>
+                <span class="access-benefit-icon" aria-hidden="true">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </span>
+                <div>
+                  <strong>Cryptographic Integrity Verification</strong>
+                  <span>SHA-256 Merkle baselines and Ed25519-signed evidence.</span>
+                </div>
+              </li>
+              <li>
+                <span class="access-benefit-icon" aria-hidden="true">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+                    <path d="M3 3v5h5" />
+                  </svg>
+                </span>
+                <div>
+                  <strong>Secure Backup &amp; Recovery</strong>
+                  <span>AES-256-GCM backups restored only after verification.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Shared Footer Container -->
+    <div id="site-footer-container"></div>
+
+    <!-- Shared Scripts & Motion Orchestration -->
+    <script type="module">
+      import { initSharedNav } from './js/components/nav.js';
+      import { initMerkleTree } from './js/components/merkleTree.js';
+      import { startPresentationTour, endPresentationTour } from './js/components/tour.js';
+      import { openMerkleInspector } from './js/components/merkleInspector.js';
+      import './js/motion.js';
+
+      initSharedNav({ activePage: 'home', basePath: '' });
+
+      document.getElementById('startPresentationTourBtn')?.addEventListener('click', () => {
+        startPresentationTour();
       });
-    }
 
-    const metricsStrip = document.querySelector('.metrics-strip');
-    if (metricsStrip && 'IntersectionObserver' in window) {
-      const metricsObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          animateCounters();
-          metricsObserver.disconnect();
-        }
-      }, { threshold: 0.2 });
-      metricsObserver.observe(metricsStrip);
-    } else {
-      animateCounters();
-    }
-
-    // ── 3. Memorable Element: Hero Merkle Tree with Interactive Scenarios ──
-    const heroTreeContainer = document.getElementById('heroMerkleTree');
-    const heroStatusCaption = document.getElementById('heroTreeStatusCaption');
-    const heroTelemetryDot = document.getElementById('heroTelemetryDot');
-    const heroTelemetryPill = document.getElementById('heroTelemetryPill');
-    const controlButtons = document.querySelectorAll('#heroTreeControls .tree-tab-btn');
-
-    if (heroTreeContainer) {
-      const updateTree = initMerkleTree(heroTreeContainer, { compact: true });
-      const BASELINE_ROOT = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
-      const TAMPERED_ROOT = 'a8f9c1b34e62d590e8b211f49a2cd7081bc598e213ad459bc76319802d354aef';
-
-      const scenarios = {
-        calm: {
-          corruptedLeaves: new Set(),
-          currentRootHash: BASELINE_ROOT,
-          baseline: { merkle_root: BASELINE_ROOT },
-          pillText: 'BASELINE VERIFIED',
-          pillClass: 'telemetry-state-pill',
-          dotClass: 'telemetry-live-dot',
-          caption: 'Baseline calm: All 16 file fingerprints cryptographically verified against baseline root.'
-        },
-        attack: {
-          corruptedLeaves: new Set([0, 1, 4, 7]),
-          currentRootHash: TAMPERED_ROOT,
-          baseline: { merkle_root: BASELINE_ROOT },
-          pillText: 'RANSOMWARE ALERT',
-          pillClass: 'telemetry-state-pill compromised',
-          dotClass: 'telemetry-live-dot compromised',
-          caption: 'Attack detected! Decoy canary tripped and 4 leaves modified. Corruption climbs to root.'
-        },
-        restore: {
-          corruptedLeaves: new Set([0]),
-          currentRootHash: BASELINE_ROOT,
-          baseline: { merkle_root: BASELINE_ROOT },
-          pillText: 'AEAD RESTORING',
-          pillClass: 'telemetry-state-pill restoring',
-          dotClass: 'telemetry-live-dot',
-          caption: 'Verified recovery in progress: Decrypted AES-256-GCM blocks re-verified against baseline.'
-        }
-      };
-
-      let loopInterval = null;
-      let loopStage = 0;
-      let activeMode = 'loop';
-
-      function renderScenario(name) {
-        const sc = scenarios[name];
-        if (sc) {
-          const isThreat = (name === 'attack');
-          document.body.classList.toggle('ambient-threat-active', isThreat);
-
-          updateTree({
-            corruptedLeaves: sc.corruptedLeaves,
-            currentRootHash: sc.currentRootHash,
-            baseline: sc.baseline
-          });
-          if (heroStatusCaption) heroStatusCaption.textContent = sc.caption;
-          if (heroTelemetryPill) {
-            heroTelemetryPill.textContent = sc.pillText;
-            heroTelemetryPill.className = sc.pillClass;
-          }
-          if (heroTelemetryDot) heroTelemetryDot.className = sc.dotClass;
-        }
-      }
-
-      function startNarrativeLoop() {
-        if (loopInterval) clearInterval(loopInterval);
-        loopStage = 0;
-        renderScenario('calm');
-
-        loopInterval = setInterval(() => {
-          loopStage = (loopStage + 1) % 4;
-          if (loopStage === 0) {
-            document.body.classList.remove('ambient-threat-active');
-            renderScenario('calm');
-          } else if (loopStage === 1) {
-            // Subtle initial touch on canary
-            document.body.classList.add('ambient-threat-active');
-            updateTree({
-              corruptedLeaves: new Set([0]),
-              currentRootHash: TAMPERED_ROOT,
-              baseline: { merkle_root: BASELINE_ROOT }
+      // ── 1. Scroll-Triggered Reveal Animation (IntersectionObserver) ────────
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
             });
-            if (heroStatusCaption) {
-              heroStatusCaption.textContent = 'Canary touched: Instant ransomware tripwire verdict triggered!';
-            }
-            if (heroTelemetryPill) {
-              heroTelemetryPill.textContent = 'CANARY TRIPPED';
-              heroTelemetryPill.className = 'telemetry-state-pill compromised';
-            }
-            if (heroTelemetryDot) heroTelemetryDot.className = 'telemetry-live-dot compromised';
-          } else if (loopStage === 2) {
-            document.body.classList.add('ambient-threat-active');
-            renderScenario('attack');
-          } else {
-            document.body.classList.remove('ambient-threat-active');
-            renderScenario('restore');
-          }
-        }, 3200);
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        revealElements.forEach((el) => observer.observe(el));
+      } else {
+        revealElements.forEach((el) => el.classList.add('is-visible'));
       }
 
-      // Initial start
-      startNarrativeLoop();
+      // ── 2. Metric Counters Animation (requestAnimationFrame) ────────────────
+      const counterElements = document.querySelectorAll('[data-counter]');
+      let countersStarted = false;
 
-      // Scenario button interactions
-      controlButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          controlButtons.forEach((b) => b.classList.remove('active'));
-          btn.classList.add('active');
+      function animateCounters() {
+        if (countersStarted) return;
+        countersStarted = true;
 
-          const scenario = btn.getAttribute('data-scenario');
-          activeMode = scenario;
+        counterElements.forEach((el) => {
+          const target = parseInt(el.getAttribute('data-counter'), 10);
+          const prefix = el.getAttribute('data-prefix') || '';
+          const suffix = el.getAttribute('data-suffix') || '';
+          const duration = 1200; // ms
+          const startTime = performance.now();
 
-          if (scenario === 'loop') {
-            startNarrativeLoop();
-          } else {
-            if (loopInterval) clearInterval(loopInterval);
-            renderScenario(scenario);
+          function step(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            // Ease-out cubic: 1 - (1 - progress)^3
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(easeProgress * target);
+            el.textContent = `${prefix}${current}${suffix}`;
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              el.textContent = `${prefix}${target}${suffix}`;
+            }
           }
+          requestAnimationFrame(step);
         });
-      });
-    }
+      }
 
-    // ── 4. Interactive Pipeline Stages & Visualizer Logic ───────────────────
-    const pipelineStages = [
-      {
-        tag: 'Stage 01 // Baseline',
-        iso: 'ISO 27001 A.8.9',
-        rfc: 'RFC 6962',
-        title: 'Take a Cryptographic Fingerprint of Every File',
-        desc: 'Before any file can be attacked, CloudRDR records a unique cryptographic fingerprint (SHA-256) of every file while the system is safe. If even one byte of a file changes later, its fingerprint changes too—letting us immediately spot unauthorized tampering.',
-        alg: 'SHA-256 Pairwise Tree',
-        sla: '< 450ms per 1k files',
-        invariant: 'Root Mismatch = Tampered',
-        target: 'src/baseline/baselineService.js',
-        codeTitle: 'baselineService.js',
-        code: `// 1. Compute deterministic Merkle Root over bucket objects
+      const metricsStrip = document.querySelector('.metrics-strip');
+      if (metricsStrip && 'IntersectionObserver' in window) {
+        const metricsObserver = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) {
+              animateCounters();
+              metricsObserver.disconnect();
+            }
+          },
+          { threshold: 0.2 }
+        );
+        metricsObserver.observe(metricsStrip);
+      } else {
+        animateCounters();
+      }
+
+      // ── 3. Memorable Element: Hero Merkle Tree with Interactive Scenarios ──
+      const heroTreeContainer = document.getElementById('heroMerkleTree');
+      const heroStatusCaption = document.getElementById('heroTreeStatusCaption');
+      const heroTelemetryDot = document.getElementById('heroTelemetryDot');
+      const heroTelemetryPill = document.getElementById('heroTelemetryPill');
+      const controlButtons = document.querySelectorAll('#heroTreeControls .tree-tab-btn');
+
+      if (heroTreeContainer) {
+        const updateTree = initMerkleTree(heroTreeContainer, { compact: true });
+        const BASELINE_ROOT = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+        const TAMPERED_ROOT = 'a8f9c1b34e62d590e8b211f49a2cd7081bc598e213ad459bc76319802d354aef';
+
+        const scenarios = {
+          calm: {
+            corruptedLeaves: new Set(),
+            currentRootHash: BASELINE_ROOT,
+            baseline: { merkle_root: BASELINE_ROOT },
+            pillText: 'BASELINE VERIFIED',
+            pillClass: 'telemetry-state-pill',
+            dotClass: 'telemetry-live-dot',
+            caption:
+              'Baseline calm: All 16 file fingerprints cryptographically verified against baseline root.',
+          },
+          attack: {
+            corruptedLeaves: new Set([0, 1, 4, 7]),
+            currentRootHash: TAMPERED_ROOT,
+            baseline: { merkle_root: BASELINE_ROOT },
+            pillText: 'RANSOMWARE ALERT',
+            pillClass: 'telemetry-state-pill compromised',
+            dotClass: 'telemetry-live-dot compromised',
+            caption:
+              'Attack detected! Decoy canary tripped and 4 leaves modified. Corruption climbs to root.',
+          },
+          restore: {
+            corruptedLeaves: new Set([0]),
+            currentRootHash: BASELINE_ROOT,
+            baseline: { merkle_root: BASELINE_ROOT },
+            pillText: 'AEAD RESTORING',
+            pillClass: 'telemetry-state-pill restoring',
+            dotClass: 'telemetry-live-dot',
+            caption:
+              'Verified recovery in progress: Decrypted AES-256-GCM blocks re-verified against baseline.',
+          },
+        };
+
+        let loopInterval = null;
+        let loopStage = 0;
+        let activeMode = 'loop';
+
+        function renderScenario(name) {
+          const sc = scenarios[name];
+          if (sc) {
+            const isThreat = name === 'attack';
+            document.body.classList.toggle('ambient-threat-active', isThreat);
+
+            updateTree({
+              corruptedLeaves: sc.corruptedLeaves,
+              currentRootHash: sc.currentRootHash,
+              baseline: sc.baseline,
+            });
+            if (heroStatusCaption) heroStatusCaption.textContent = sc.caption;
+            if (heroTelemetryPill) {
+              heroTelemetryPill.textContent = sc.pillText;
+              heroTelemetryPill.className = sc.pillClass;
+            }
+            if (heroTelemetryDot) heroTelemetryDot.className = sc.dotClass;
+          }
+        }
+
+        function startNarrativeLoop() {
+          if (loopInterval) clearInterval(loopInterval);
+          loopStage = 0;
+          renderScenario('calm');
+
+          loopInterval = setInterval(() => {
+            loopStage = (loopStage + 1) % 4;
+            if (loopStage === 0) {
+              document.body.classList.remove('ambient-threat-active');
+              renderScenario('calm');
+            } else if (loopStage === 1) {
+              // Subtle initial touch on canary
+              document.body.classList.add('ambient-threat-active');
+              updateTree({
+                corruptedLeaves: new Set([0]),
+                currentRootHash: TAMPERED_ROOT,
+                baseline: { merkle_root: BASELINE_ROOT },
+              });
+              if (heroStatusCaption) {
+                heroStatusCaption.textContent =
+                  'Canary touched: Instant ransomware tripwire verdict triggered!';
+              }
+              if (heroTelemetryPill) {
+                heroTelemetryPill.textContent = 'CANARY TRIPPED';
+                heroTelemetryPill.className = 'telemetry-state-pill compromised';
+              }
+              if (heroTelemetryDot) heroTelemetryDot.className = 'telemetry-live-dot compromised';
+            } else if (loopStage === 2) {
+              document.body.classList.add('ambient-threat-active');
+              renderScenario('attack');
+            } else {
+              document.body.classList.remove('ambient-threat-active');
+              renderScenario('restore');
+            }
+          }, 3200);
+        }
+
+        // Initial start
+        startNarrativeLoop();
+
+        // Scenario button interactions
+        controlButtons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            controlButtons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const scenario = btn.getAttribute('data-scenario');
+            activeMode = scenario;
+
+            if (scenario === 'loop') {
+              startNarrativeLoop();
+            } else {
+              if (loopInterval) clearInterval(loopInterval);
+              renderScenario(scenario);
+            }
+          });
+        });
+      }
+
+      // ── 4. Interactive Pipeline Stages & Visualizer Logic ───────────────────
+      const pipelineStages = [
+        {
+          tag: 'Stage 01 // Baseline',
+          iso: 'ISO 27001 A.8.9',
+          rfc: 'RFC 6962',
+          title: 'Take a Cryptographic Fingerprint of Every File',
+          desc: 'Before any file can be attacked, CloudRDR records a unique cryptographic fingerprint (SHA-256) of every file while the system is safe. If even one byte of a file changes later, its fingerprint changes too—letting us immediately spot unauthorized tampering.',
+          alg: 'SHA-256 Pairwise Tree',
+          sla: '< 450ms per 1k files',
+          invariant: 'Root Mismatch = Tampered',
+          target: 'src/baseline/baselineService.js',
+          codeTitle: 'baselineService.js',
+          code: `// 1. Compute deterministic Merkle Root over bucket objects
 const leaves = files.map(f => hashBuffer(f.bytes));
 const merkleRoot = crypto.merkleRoot(leaves);
 await db.from('baseline_snapshots').insert({
@@ -763,8 +1207,8 @@ await db.from('baseline_snapshots').insert({
   merkle_root: merkleRoot,
   file_count: files.length
 });`,
-        renderSandbox: (box) => {
-          box.innerHTML = `
+          renderSandbox: (box) => {
+            box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="color:var(--text);font-weight:600;">Monitored Files</span>
@@ -797,86 +1241,86 @@ await db.from('baseline_snapshots').insert({
               </div>
             </div>
           `;
-          let mutated = false;
-          const btn = box.querySelector('#recalcMerkleBtn');
-          if (btn) {
-            btn.addEventListener('click', () => {
-              mutated = !mutated;
-              const card0 = box.querySelector('#card0');
-              const leaf0 = box.querySelector('#leafStatus0');
-              const status = box.querySelector('#merkleStatusText');
-              const root = box.querySelector('#merkleRootVal');
-              if (mutated) {
-                if (card0) {
-                  card0.style.borderColor = '#E64545';
-                  card0.style.background = 'rgba(230, 69, 69, 0.12)';
-                }
-                if (leaf0) {
-                  leaf0.textContent = 'Fingerprint changed → tampering detected';
-                  leaf0.style.color = '#E64545';
-                  leaf0.style.fontSize = '0.62rem';
-                  leaf0.style.lineHeight = '1.2';
-                }
-                if (status) {
-                  status.textContent = '▲ Tampering Detected!';
-                  status.style.color = '#E64545';
-                }
-                if (root) {
-                  root.textContent = 'MISMATCH (Tampered root detected)';
-                  root.style.color = '#E64545';
-                }
-                btn.style.background = 'var(--brand)';
-                btn.innerHTML = `
+            let mutated = false;
+            const btn = box.querySelector('#recalcMerkleBtn');
+            if (btn) {
+              btn.addEventListener('click', () => {
+                mutated = !mutated;
+                const card0 = box.querySelector('#card0');
+                const leaf0 = box.querySelector('#leafStatus0');
+                const status = box.querySelector('#merkleStatusText');
+                const root = box.querySelector('#merkleRootVal');
+                if (mutated) {
+                  if (card0) {
+                    card0.style.borderColor = '#E64545';
+                    card0.style.background = 'rgba(230, 69, 69, 0.12)';
+                  }
+                  if (leaf0) {
+                    leaf0.textContent = 'Fingerprint changed → tampering detected';
+                    leaf0.style.color = '#E64545';
+                    leaf0.style.fontSize = '0.62rem';
+                    leaf0.style.lineHeight = '1.2';
+                  }
+                  if (status) {
+                    status.textContent = '▲ Tampering Detected!';
+                    status.style.color = '#E64545';
+                  }
+                  if (root) {
+                    root.textContent = 'MISMATCH (Tampered root detected)';
+                    root.style.color = '#E64545';
+                  }
+                  btn.style.background = 'var(--brand)';
+                  btn.innerHTML = `
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
                   <span>Restore & Prove Original</span>
                 `;
-              } else {
-                if (card0) {
-                  card0.style.borderColor = '#27C93F';
-                  card0.style.background = 'var(--surface-subtle)';
-                }
-                if (leaf0) {
-                  leaf0.textContent = '✓ Original';
-                  leaf0.style.color = '#27C93F';
-                  leaf0.style.fontSize = '0.68rem';
-                }
-                if (status) {
-                  status.textContent = '● 100% Verified Original';
-                  status.style.color = '#27C93F';
-                }
-                if (root) {
-                  root.textContent = 'VALID (All 4 Authentic)';
-                  root.style.color = '#27C93F';
-                }
-                btn.style.background = '#E64545';
-                btn.innerHTML = `
+                } else {
+                  if (card0) {
+                    card0.style.borderColor = '#27C93F';
+                    card0.style.background = 'var(--surface-subtle)';
+                  }
+                  if (leaf0) {
+                    leaf0.textContent = '✓ Original';
+                    leaf0.style.color = '#27C93F';
+                    leaf0.style.fontSize = '0.68rem';
+                  }
+                  if (status) {
+                    status.textContent = '● 100% Verified Original';
+                    status.style.color = '#27C93F';
+                  }
+                  if (root) {
+                    root.textContent = 'VALID (All 4 Authentic)';
+                    root.style.color = '#27C93F';
+                  }
+                  btn.style.background = '#E64545';
+                  btn.innerHTML = `
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   <span>Simulate an attack on this file</span>
                 `;
-              }
-            });
-          }
-        }
-      },
-      {
-        tag: 'Stage 02 // Monitor',
-        iso: 'ISO 27001 A.8.16',
-        rfc: 'Polling SLA',
-        title: 'Continuous Event Ingestion Agent',
-        desc: 'Background daemon continuously inspects object storage event streams every 10 seconds. Emits created, modified, and deleted deltas while calculating post-change SHA-256 entropy.',
-        alg: 'Storage Delta Engine',
-        sla: '10.0 seconds cycle',
-        invariant: 'Zero Unobserved Writes',
-        target: 'src/monitor/monitorAgent.js',
-        codeTitle: 'monitorAgent.js',
-        code: `// 2. Poll storage adapter and diff against known state
+                }
+              });
+            }
+          },
+        },
+        {
+          tag: 'Stage 02 // Monitor',
+          iso: 'ISO 27001 A.8.16',
+          rfc: 'Polling SLA',
+          title: 'Continuous Event Ingestion Agent',
+          desc: 'Background daemon continuously inspects object storage event streams every 10 seconds. Emits created, modified, and deleted deltas while calculating post-change SHA-256 entropy.',
+          alg: 'Storage Delta Engine',
+          sla: '10.0 seconds cycle',
+          invariant: 'Zero Unobserved Writes',
+          target: 'src/monitor/monitorAgent.js',
+          codeTitle: 'monitorAgent.js',
+          code: `// 2. Poll storage adapter and diff against known state
 const current = await storage.list(bucket);
 const changes = diffEntries(prevListing, current);
 await db.from('change_events').insert(changes.map(c => ({
   bucket, path: c.path, event_type: c.type, observed_sha256: c.sha256
 })));`,
-        renderSandbox: (box) => {
-          box.innerHTML = `
+          renderSandbox: (box) => {
+            box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
               <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Heartbeat Polling Agent</span>
@@ -898,44 +1342,50 @@ await db.from('change_events').insert(changes.map(c => ({
               </div>
             </div>
           `;
-          let pollLeft = 9.4;
-          const pollTimer = setInterval(() => {
-            const count = box.querySelector('#nextPollCount');
-            if (!count) { clearInterval(pollTimer); return; }
-            pollLeft = (pollLeft <= 0.5) ? 10.0 : (pollLeft - 0.5);
-            count.textContent = pollLeft.toFixed(1) + 's remaining';
-          }, 500);
+            let pollLeft = 9.4;
+            const pollTimer = setInterval(() => {
+              const count = box.querySelector('#nextPollCount');
+              if (!count) {
+                clearInterval(pollTimer);
+                return;
+              }
+              pollLeft = pollLeft <= 0.5 ? 10.0 : pollLeft - 0.5;
+              count.textContent = pollLeft.toFixed(1) + 's remaining';
+            }, 500);
 
-          const emitBtn = box.querySelector('#emitChangeEventBtn');
-          if (emitBtn) {
-            emitBtn.addEventListener('click', () => {
-              const status = box.querySelector('#monitorEventStatus');
-              status.innerHTML = '<span style="color:#E0A100;">+1 modified: docs/contract.pdf (sha256 diff)</span>';
-              setTimeout(() => {
-                if (status) status.innerHTML = '<span style="color:var(--text-muted);">Delta: 0 events in current window</span>';
-              }, 3000);
-            });
-          }
-        }
-      },
-      {
-        tag: 'Stage 03 // Detect',
-        iso: 'ISO 27001 A.8.7',
-        rfc: 'Sliding Window',
-        title: 'Sliding-Window Heuristic & Canary Tripwire',
-        desc: 'Evaluates modification volume across a 60-second sliding window: <10% NORMAL, 10-30% SUSPICIOUS, >=30% RANSOMWARE. Any touch on invisible canary decoys triggers instant containment.',
-        alg: 'Sliding Heuristic + Canary',
-        sla: 'Instantaneous (Canary: 0s)',
-        invariant: 'Tripwire = Absolute Containment',
-        target: 'src/detection/detectionEngine.js',
-        codeTitle: 'detectionEngine.js',
-        code: `// 3. Sliding window & canary tripwire
+            const emitBtn = box.querySelector('#emitChangeEventBtn');
+            if (emitBtn) {
+              emitBtn.addEventListener('click', () => {
+                const status = box.querySelector('#monitorEventStatus');
+                status.innerHTML =
+                  '<span style="color:#E0A100;">+1 modified: docs/contract.pdf (sha256 diff)</span>';
+                setTimeout(() => {
+                  if (status)
+                    status.innerHTML =
+                      '<span style="color:var(--text-muted);">Delta: 0 events in current window</span>';
+                }, 3000);
+              });
+            }
+          },
+        },
+        {
+          tag: 'Stage 03 // Detect',
+          iso: 'ISO 27001 A.8.7',
+          rfc: 'Sliding Window',
+          title: 'Sliding-Window Heuristic & Canary Tripwire',
+          desc: 'Evaluates modification volume across a 60-second sliding window: <10% NORMAL, 10-30% SUSPICIOUS, >=30% RANSOMWARE. Any touch on invisible canary decoys triggers instant containment.',
+          alg: 'Sliding Heuristic + Canary',
+          sla: 'Instantaneous (Canary: 0s)',
+          invariant: 'Tripwire = Absolute Containment',
+          target: 'src/detection/detectionEngine.js',
+          codeTitle: 'detectionEngine.js',
+          code: `// 3. Sliding window & canary tripwire
 const rate = changedFiles / totalFiles;
 const canaryTripped = events.some(e => e.is_canary);
 const verdict = canaryTripped || rate >= 0.30 
   ? 'ransomware' : rate >= 0.10 ? 'suspicious' : 'normal';`,
-        renderSandbox: (box) => {
-          box.innerHTML = `
+          renderSandbox: (box) => {
+            box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
               <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Heuristic Threshold Simulator</span>
@@ -954,57 +1404,59 @@ const verdict = canaryTripped || rate >= 0.30
               </div>
             </div>
           `;
-          const slider = box.querySelector('#rateSlider');
-          const rateVal = box.querySelector('#rateValText');
-          const badge = box.querySelector('#verdictBadgeText');
-          const tripBtn = box.querySelector('#tripCanaryBtn');
+            const slider = box.querySelector('#rateSlider');
+            const rateVal = box.querySelector('#rateValText');
+            const badge = box.querySelector('#verdictBadgeText');
+            const tripBtn = box.querySelector('#tripCanaryBtn');
 
-          function updateHeuristic(val) {
-            rateVal.textContent = val + '%';
-            if (val >= 30) {
-              badge.textContent = 'RANSOMWARE';
-              badge.style.color = '#D93636';
-            } else if (val >= 10) {
-              badge.textContent = 'SUSPICIOUS';
-              badge.style.color = '#E0A100';
-            } else {
-              badge.textContent = 'NORMAL';
-              badge.style.color = '#27C93F';
+            function updateHeuristic(val) {
+              rateVal.textContent = val + '%';
+              if (val >= 30) {
+                badge.textContent = 'RANSOMWARE';
+                badge.style.color = '#D93636';
+              } else if (val >= 10) {
+                badge.textContent = 'SUSPICIOUS';
+                badge.style.color = '#E0A100';
+              } else {
+                badge.textContent = 'NORMAL';
+                badge.style.color = '#27C93F';
+              }
             }
-          }
 
-          if (slider) {
-            slider.addEventListener('input', (e) => updateHeuristic(parseInt(e.target.value, 10)));
-          }
+            if (slider) {
+              slider.addEventListener('input', (e) =>
+                updateHeuristic(parseInt(e.target.value, 10))
+              );
+            }
 
-          if (tripBtn) {
-            tripBtn.addEventListener('click', () => {
-              if (slider) slider.value = 45;
-              rateVal.textContent = '45% [CANARY TRIPPED]';
-              badge.textContent = 'RANSOMWARE (CANARY)';
-              badge.style.color = '#D93636';
-            });
-          }
-        }
-      },
-      {
-        tag: 'Stage 04 // Respond',
-        iso: 'ISO 27001 A.8.15',
-        rfc: 'RFC 8032',
-        title: 'Control-Plane IAM Lockdown & Ed25519 Signing',
-        desc: 'Autonomous control-plane enforcement: within 10 seconds, an IAM Deny-All policy isolates the compromised credential. An immutable forensic incident record is generated and signed with Ed25519.',
-        alg: 'Ed25519 (RFC 8032)',
-        sla: '< 10.0s Control-Plane SLA',
-        invariant: 'Immediate Write Revocation',
-        target: 'src/response/responseService.js',
-        codeTitle: 'responseService.js',
-        code: `// 4. Autonomous IAM freeze & RFC 8032 signing
+            if (tripBtn) {
+              tripBtn.addEventListener('click', () => {
+                if (slider) slider.value = 45;
+                rateVal.textContent = '45% [CANARY TRIPPED]';
+                badge.textContent = 'RANSOMWARE (CANARY)';
+                badge.style.color = '#D93636';
+              });
+            }
+          },
+        },
+        {
+          tag: 'Stage 04 // Respond',
+          iso: 'ISO 27001 A.8.15',
+          rfc: 'RFC 8032',
+          title: 'Control-Plane IAM Lockdown & Ed25519 Signing',
+          desc: 'Autonomous control-plane enforcement: within 10 seconds, an IAM Deny-All policy isolates the compromised credential. An immutable forensic incident record is generated and signed with Ed25519.',
+          alg: 'Ed25519 (RFC 8032)',
+          sla: '< 10.0s Control-Plane SLA',
+          invariant: 'Immediate Write Revocation',
+          target: 'src/response/responseService.js',
+          codeTitle: 'responseService.js',
+          code: `// 4. Autonomous IAM freeze & RFC 8032 signing
 await freezeClient.freezeAccount(accountId);
 const record = { incidentId, accountId, frozenAt: new Date().toISOString() };
 const { signature, keyId } = crypto.signRecord(record);
 await db.from('incidents').update({ status: 'frozen', record_signature: signature });`,
-        renderSandbox: (box) => {
-          box.innerHTML = `
+          renderSandbox: (box) => {
+            box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
               <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Cloud IAM Control Plane</span>
@@ -1024,38 +1476,38 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
               </div>
             </div>
           `;
-          const btn = box.querySelector('#recheckSigBtn');
-          if (btn) {
-            btn.addEventListener('click', () => {
-              const sig = box.querySelector('#edSigVal');
-              sig.style.color = 'var(--text)';
-              sig.textContent = 'Verifying curve25519 public key…';
-              setTimeout(() => {
-                sig.style.color = '#27C93F';
-                sig.textContent = '7f3d81b94e098a54c330f1d9a20… [RFC 8032 VALID]';
-              }, 400);
-            });
-          }
-        }
-      },
-      {
-        tag: 'Stage 05 // Audit',
-        iso: 'ISO 27001 A.8.15',
-        rfc: 'Hash-Chained',
-        title: 'Tamper-Evident Forensic Audit Ledger',
-        desc: 'Every detection verdict, containment action, and operator command appends to a cryptographically chained ledger. Each block seals the prior block\'s hash: tampering with any past event visibly breaks the chain.',
-        alg: 'SHA-256 Back-Linked Chain',
-        sla: 'Atomic Append on Event',
-        invariant: 'Any Edit Breaks Downstream Chain',
-        target: 'src/contracts/crypto.contract.js',
-        codeTitle: 'crypto.contract.js',
-        code: `// 5. Append-only tamper-evident hash chain
+            const btn = box.querySelector('#recheckSigBtn');
+            if (btn) {
+              btn.addEventListener('click', () => {
+                const sig = box.querySelector('#edSigVal');
+                sig.style.color = 'var(--text)';
+                sig.textContent = 'Verifying curve25519 public key…';
+                setTimeout(() => {
+                  sig.style.color = '#27C93F';
+                  sig.textContent = '7f3d81b94e098a54c330f1d9a20… [RFC 8032 VALID]';
+                }, 400);
+              });
+            }
+          },
+        },
+        {
+          tag: 'Stage 05 // Audit',
+          iso: 'ISO 27001 A.8.15',
+          rfc: 'Hash-Chained',
+          title: 'Tamper-Evident Forensic Audit Ledger',
+          desc: "Every detection verdict, containment action, and operator command appends to a cryptographically chained ledger. Each block seals the prior block's hash: tampering with any past event visibly breaks the chain.",
+          alg: 'SHA-256 Back-Linked Chain',
+          sla: 'Atomic Append on Event',
+          invariant: 'Any Edit Breaks Downstream Chain',
+          target: 'src/contracts/crypto.contract.js',
+          codeTitle: 'crypto.contract.js',
+          code: `// 5. Append-only tamper-evident hash chain
 const prevHash = ledger.length ? ledger.at(-1).hash : '0'.repeat(64);
 const blockPayload = JSON.stringify({ index, prevHash, timestamp, data });
 const hash = crypto.createHash('sha256').update(blockPayload).digest('hex');
 ledger.push({ index, hash, prevHash, data });`,
-        renderSandbox: (box) => {
-          box.innerHTML = `
+          renderSandbox: (box) => {
+            box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
               <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>Hash-Chained Ledger Blocks</span>
@@ -1081,54 +1533,54 @@ ledger.push({ index, hash, prevHash, data });`,
               </div>
             </div>
           `;
-          let tampered = false;
-          const btn = box.querySelector('#tamperChainBtn');
-          if (btn) {
-            btn.addEventListener('click', () => {
-              tampered = !tampered;
-              const b1 = box.querySelector('#chainBlock1');
-              const b2 = box.querySelector('#chainBlock2');
-              const b1h = box.querySelector('#chainBlock1Hash');
-              const status = box.querySelector('#chainIntegrityStatus');
-              if (tampered) {
-                b1.style.borderColor = '#D93636';
-                b2.style.borderColor = '#D93636';
-                b1h.textContent = 'h: ffff..';
-                b1h.style.color = '#D93636';
-                status.textContent = '▲ CHAIN BROKEN AT BLOCK #1';
-                status.style.color = '#D93636';
-                btn.textContent = 'Repair Chain';
-              } else {
-                b1.style.borderColor = '#27C93F';
-                b2.style.borderColor = '#27C93F';
-                b1h.textContent = 'h: 4a92..';
-                b1h.style.color = 'var(--text-muted)';
-                status.textContent = '● Chain Intact';
-                status.style.color = '#27C93F';
-                btn.textContent = 'Tamper Block #1';
-              }
-            });
-          }
-        }
-      },
-      {
-        tag: 'Stage 06 // Restore',
-        iso: 'ISO 27001 A.8.13',
-        rfc: 'NIST SP 800-38D',
-        title: 'AEAD-Authenticated Verified Decryption',
-        desc: 'Backups encrypted with AES-256-GCM are fetched and verified against their 128-bit authentication tag. Each restored payload is re-hashed and cross-referenced with the initial Merkle baseline.',
-        alg: 'AES-256-GCM (AEAD)',
-        sla: '100% Verification Threshold',
-        invariant: 'Zero Tampered Files Written Back',
-        target: 'src/restore/restoreService.js',
-        codeTitle: 'restoreService.js',
-        code: `// 6. AEAD tag verification & baseline check
+            let tampered = false;
+            const btn = box.querySelector('#tamperChainBtn');
+            if (btn) {
+              btn.addEventListener('click', () => {
+                tampered = !tampered;
+                const b1 = box.querySelector('#chainBlock1');
+                const b2 = box.querySelector('#chainBlock2');
+                const b1h = box.querySelector('#chainBlock1Hash');
+                const status = box.querySelector('#chainIntegrityStatus');
+                if (tampered) {
+                  b1.style.borderColor = '#D93636';
+                  b2.style.borderColor = '#D93636';
+                  b1h.textContent = 'h: ffff..';
+                  b1h.style.color = '#D93636';
+                  status.textContent = '▲ CHAIN BROKEN AT BLOCK #1';
+                  status.style.color = '#D93636';
+                  btn.textContent = 'Repair Chain';
+                } else {
+                  b1.style.borderColor = '#27C93F';
+                  b2.style.borderColor = '#27C93F';
+                  b1h.textContent = 'h: 4a92..';
+                  b1h.style.color = 'var(--text-muted)';
+                  status.textContent = '● Chain Intact';
+                  status.style.color = '#27C93F';
+                  btn.textContent = 'Tamper Block #1';
+                }
+              });
+            }
+          },
+        },
+        {
+          tag: 'Stage 06 // Restore',
+          iso: 'ISO 27001 A.8.13',
+          rfc: 'NIST SP 800-38D',
+          title: 'AEAD-Authenticated Verified Decryption',
+          desc: 'Backups encrypted with AES-256-GCM are fetched and verified against their 128-bit authentication tag. Each restored payload is re-hashed and cross-referenced with the initial Merkle baseline.',
+          alg: 'AES-256-GCM (AEAD)',
+          sla: '100% Verification Threshold',
+          invariant: 'Zero Tampered Files Written Back',
+          target: 'src/restore/restoreService.js',
+          codeTitle: 'restoreService.js',
+          code: `// 6. AEAD tag verification & baseline check
 const { bytes, aeadVerified } = await backup.restoreFile(bucket, path);
 const recomputedHash = hashBuffer(bytes);
 const isValid = aeadVerified && (recomputedHash === expectedSha256);
 if (isValid) await storage.write(bucket, path, bytes);`,
-        renderSandbox: (box) => {
-          box.innerHTML = `
+          renderSandbox: (box) => {
+            box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
               <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
                 <span>AEAD Verification Progress</span>
@@ -1143,393 +1595,499 @@ if (isValid) await storage.write(bucket, path, bytes);`,
               </div>
             </div>
           `;
-          const btn = box.querySelector('#runRestoreCycleBtn');
-          if (btn) {
-            btn.addEventListener('click', () => {
-              const bar = box.querySelector('#restoreProgressBar');
-              const count = box.querySelector('#restoreVerifCount');
-              bar.style.width = '0%';
-              count.textContent = 'Verifying GCM tags…';
-              let progress = 0;
-              const timer = setInterval(() => {
-                progress += 2;
-                bar.style.width = (progress * 6.25) + '%';
-                count.textContent = `${progress} / 16 VALID (${Math.round(progress * 6.25)}%)`;
-                if (progress >= 16) {
-                  clearInterval(timer);
-                  count.textContent = '16 / 16 VALID (100%)';
-                }
-              }, 80);
-            });
-          }
-        }
-      }
-    ];
+            const btn = box.querySelector('#runRestoreCycleBtn');
+            if (btn) {
+              btn.addEventListener('click', () => {
+                const bar = box.querySelector('#restoreProgressBar');
+                const count = box.querySelector('#restoreVerifCount');
+                bar.style.width = '0%';
+                count.textContent = 'Verifying GCM tags…';
+                let progress = 0;
+                const timer = setInterval(() => {
+                  progress += 2;
+                  bar.style.width = progress * 6.25 + '%';
+                  count.textContent = `${progress} / 16 VALID (${Math.round(progress * 6.25)}%)`;
+                  if (progress >= 16) {
+                    clearInterval(timer);
+                    count.textContent = '16 / 16 VALID (100%)';
+                  }
+                }, 80);
+              });
+            }
+          },
+        },
+      ];
 
-    const pipelineNodes = document.querySelectorAll('#pipelineTrack .pipeline-node');
-    const vizStageBadge = document.getElementById('vizStageBadge');
-    const vizIsoBadge = document.getElementById('vizIsoBadge');
-    const vizRfcBadge = document.getElementById('vizRfcBadge');
-    const vizTitle = document.getElementById('vizTitle');
-    const vizDesc = document.getElementById('vizDesc');
-    const vizAlg = document.getElementById('vizAlg');
-    const vizSla = document.getElementById('vizSla');
-    const vizInvariant = document.getElementById('vizInvariant');
-    const vizTarget = document.getElementById('vizTarget');
-    const vizCodeTitle = document.getElementById('vizCodeTitle');
-    const vizSandbox = document.getElementById('vizSandbox');
-    const vizCodeSnippet = document.getElementById('vizCodeSnippet');
+      const pipelineNodes = document.querySelectorAll('#pipelineTrack .pipeline-node');
+      const vizStageBadge = document.getElementById('vizStageBadge');
+      const vizIsoBadge = document.getElementById('vizIsoBadge');
+      const vizRfcBadge = document.getElementById('vizRfcBadge');
+      const vizTitle = document.getElementById('vizTitle');
+      const vizDesc = document.getElementById('vizDesc');
+      const vizAlg = document.getElementById('vizAlg');
+      const vizSla = document.getElementById('vizSla');
+      const vizInvariant = document.getElementById('vizInvariant');
+      const vizTarget = document.getElementById('vizTarget');
+      const vizCodeTitle = document.getElementById('vizCodeTitle');
+      const vizSandbox = document.getElementById('vizSandbox');
+      const vizCodeSnippet = document.getElementById('vizCodeSnippet');
 
-    let currentStageIndex = 0;
-    let autoPlayTimer = null;
-    const autoPlayBtn = document.getElementById('pipelineAutoPlayBtn');
-    const playIcon = document.getElementById('pipelinePlayIcon');
-    const playText = document.getElementById('pipelinePlayText');
+      let currentStageIndex = 0;
+      let autoPlayTimer = null;
+      const autoPlayBtn = document.getElementById('pipelineAutoPlayBtn');
+      const playIcon = document.getElementById('pipelinePlayIcon');
+      const playText = document.getElementById('pipelinePlayText');
 
-    function selectStage(index, userInitiated = false) {
-      if (userInitiated && autoPlayTimer) {
-        stopAutoPlay();
-      }
-
-      currentStageIndex = index;
-      pipelineNodes.forEach((node, i) => {
-        const isActive = (i === index);
-        node.classList.toggle('active', isActive);
-        node.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      });
-
-      const s = pipelineStages[index];
-      if (!s) return;
-
-      if (vizStageBadge) vizStageBadge.textContent = s.tag;
-      if (vizIsoBadge) vizIsoBadge.textContent = s.iso;
-      if (vizRfcBadge) vizRfcBadge.textContent = s.rfc;
-      if (vizTitle) vizTitle.textContent = s.title;
-      if (vizDesc) vizDesc.textContent = s.desc;
-      if (vizAlg) vizAlg.textContent = s.alg;
-      if (vizSla) vizSla.textContent = s.sla;
-      if (vizInvariant) vizInvariant.textContent = s.invariant;
-      if (vizTarget) vizTarget.textContent = s.target;
-      if (vizCodeTitle) vizCodeTitle.textContent = s.codeTitle;
-      if (vizCodeSnippet) vizCodeSnippet.textContent = s.code;
-
-      if (vizSandbox && typeof s.renderSandbox === 'function') {
-        s.renderSandbox(vizSandbox);
-      }
-
-      // Smooth morphing tab switch animation
-      const vizCard = document.getElementById('pipelineVisualizer');
-      if (vizCard) {
-        vizCard.classList.remove('morphing');
-        void vizCard.offsetWidth; // Force reflow
-        vizCard.classList.add('morphing');
-        setTimeout(() => vizCard.classList.remove('morphing'), 420);
-      }
-    }
-
-    pipelineNodes.forEach((node) => {
-      node.addEventListener('click', () => {
-        const idx = parseInt(node.getAttribute('data-stage'), 10);
-        selectStage(idx, true);
-      });
-
-      node.addEventListener('keydown', (e) => {
-        const idx = parseInt(node.getAttribute('data-stage'), 10);
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-          e.preventDefault();
-          const next = (idx + 1) % pipelineNodes.length;
-          pipelineNodes[next].focus();
-          selectStage(next, true);
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-          e.preventDefault();
-          const prev = (idx - 1 + pipelineNodes.length) % pipelineNodes.length;
-          pipelineNodes[prev].focus();
-          selectStage(prev, true);
-        }
-      });
-    });
-
-    function startAutoPlay() {
-      if (autoPlayTimer) clearInterval(autoPlayTimer);
-      if (playIcon) playIcon.textContent = '⏹';
-      if (playText) playText.textContent = 'Pause Walkthrough';
-      if (autoPlayBtn) autoPlayBtn.style.borderColor = 'var(--brand)';
-
-      autoPlayTimer = setInterval(() => {
-        currentStageIndex = (currentStageIndex + 1) % pipelineStages.length;
-        selectStage(currentStageIndex, false);
-      }, 4000);
-    }
-
-    function stopAutoPlay() {
-      if (autoPlayTimer) {
-        clearInterval(autoPlayTimer);
-        autoPlayTimer = null;
-      }
-      if (playIcon) playIcon.textContent = '▶';
-      if (playText) playText.textContent = 'Auto-Play Walkthrough';
-      if (autoPlayBtn) autoPlayBtn.style.borderColor = '';
-    }
-
-    if (autoPlayBtn) {
-      autoPlayBtn.addEventListener('click', () => {
-        if (autoPlayTimer) {
+      function selectStage(index, userInitiated = false) {
+        if (userInitiated && autoPlayTimer) {
           stopAutoPlay();
-        } else {
-          startAutoPlay();
         }
+
+        currentStageIndex = index;
+        pipelineNodes.forEach((node, i) => {
+          const isActive = i === index;
+          node.classList.toggle('active', isActive);
+          node.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        const s = pipelineStages[index];
+        if (!s) return;
+
+        if (vizStageBadge) vizStageBadge.textContent = s.tag;
+        if (vizIsoBadge) vizIsoBadge.textContent = s.iso;
+        if (vizRfcBadge) vizRfcBadge.textContent = s.rfc;
+        if (vizTitle) vizTitle.textContent = s.title;
+        if (vizDesc) vizDesc.textContent = s.desc;
+        if (vizAlg) vizAlg.textContent = s.alg;
+        if (vizSla) vizSla.textContent = s.sla;
+        if (vizInvariant) vizInvariant.textContent = s.invariant;
+        if (vizTarget) vizTarget.textContent = s.target;
+        if (vizCodeTitle) vizCodeTitle.textContent = s.codeTitle;
+        if (vizCodeSnippet) vizCodeSnippet.textContent = s.code;
+
+        if (vizSandbox && typeof s.renderSandbox === 'function') {
+          s.renderSandbox(vizSandbox);
+        }
+
+        // Smooth morphing tab switch animation
+        const vizCard = document.getElementById('pipelineVisualizer');
+        if (vizCard) {
+          vizCard.classList.remove('morphing');
+          void vizCard.offsetWidth; // Force reflow
+          vizCard.classList.add('morphing');
+          setTimeout(() => vizCard.classList.remove('morphing'), 420);
+        }
+      }
+
+      pipelineNodes.forEach((node) => {
+        node.addEventListener('click', () => {
+          const idx = parseInt(node.getAttribute('data-stage'), 10);
+          selectStage(idx, true);
+        });
+
+        node.addEventListener('keydown', (e) => {
+          const idx = parseInt(node.getAttribute('data-stage'), 10);
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            const next = (idx + 1) % pipelineNodes.length;
+            pipelineNodes[next].focus();
+            selectStage(next, true);
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prev = (idx - 1 + pipelineNodes.length) % pipelineNodes.length;
+            pipelineNodes[prev].focus();
+            selectStage(prev, true);
+          }
+        });
       });
-    }
 
-    // Initialize first stage sandbox
-    selectStage(0, false);
+      function startAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+        if (playIcon) playIcon.textContent = '⏹';
+        if (playText) playText.textContent = 'Pause Walkthrough';
+        if (autoPlayBtn) autoPlayBtn.style.borderColor = 'var(--brand)';
 
-    // ── 5. Live SOC Telemetry Terminal Stream Simulation ────────────────────
-    const socBody = document.getElementById('socTerminalBody');
-    const socTabs = document.querySelectorAll('#socTerminalTabs .soc-tab-btn');
-    const triggerSocSpike = document.getElementById('triggerSocSpikeBtn');
-    let currentFilter = 'all';
+        autoPlayTimer = setInterval(() => {
+          currentStageIndex = (currentStageIndex + 1) % pipelineStages.length;
+          selectStage(currentStageIndex, false);
+        }, 4000);
+      }
 
-    const SAMPLE_LOGS = [
-      { filter: 'info', tag: 'INFO', class: 'info', text: 'Storage monitor polled bucket "protected": 16 objects indexed (0 unauthenticated changes)' },
-      { filter: 'crypto', tag: 'CRYPTO', class: 'crypto', text: 'Merkle root verified: e3b0c44298fc...7852b855 matches baseline snapshot #1' },
-      { filter: 'canary', tag: 'CANARY', class: 'canary', text: 'Canary tripwire active: .canary/decoy_tokens.docx integrity clean (hash matches baseline)' },
-      { filter: 'info', tag: 'MONITOR', class: 'info', text: 'Sliding 60s window evaluated: change_rate = 0.00% &lt; 10.0% (VERDICT: NORMAL)' }
-    ];
+      function stopAutoPlay() {
+        if (autoPlayTimer) {
+          clearInterval(autoPlayTimer);
+          autoPlayTimer = null;
+        }
+        if (playIcon) playIcon.textContent = '▶';
+        if (playText) playText.textContent = 'Auto-Play Walkthrough';
+        if (autoPlayBtn) autoPlayBtn.style.borderColor = '';
+      }
 
-    function appendSocLog(tag, typeClass, message, filterType = 'info') {
-      if (!socBody) return;
-      const now = new Date().toTimeString().split(' ')[0];
-      const line = document.createElement('div');
-      line.className = 'soc-log-line';
-      line.setAttribute('data-category', filterType);
-      line.innerHTML = `
+      if (autoPlayBtn) {
+        autoPlayBtn.addEventListener('click', () => {
+          if (autoPlayTimer) {
+            stopAutoPlay();
+          } else {
+            startAutoPlay();
+          }
+        });
+      }
+
+      // Initialize first stage sandbox
+      selectStage(0, false);
+
+      // ── 5. Live SOC Telemetry Terminal Stream Simulation ────────────────────
+      const socBody = document.getElementById('socTerminalBody');
+      const socTabs = document.querySelectorAll('#socTerminalTabs .soc-tab-btn');
+      const triggerSocSpike = document.getElementById('triggerSocSpikeBtn');
+      let currentFilter = 'all';
+
+      const SAMPLE_LOGS = [
+        {
+          filter: 'info',
+          tag: 'INFO',
+          class: 'info',
+          text: 'Storage monitor polled bucket "protected": 16 objects indexed (0 unauthenticated changes)',
+        },
+        {
+          filter: 'crypto',
+          tag: 'CRYPTO',
+          class: 'crypto',
+          text: 'Merkle root verified: e3b0c44298fc...7852b855 matches baseline snapshot #1',
+        },
+        {
+          filter: 'canary',
+          tag: 'CANARY',
+          class: 'canary',
+          text: 'Canary tripwire active: .canary/decoy_tokens.docx integrity clean (hash matches baseline)',
+        },
+        {
+          filter: 'info',
+          tag: 'MONITOR',
+          class: 'info',
+          text: 'Sliding 60s window evaluated: change_rate = 0.00% &lt; 10.0% (VERDICT: NORMAL)',
+        },
+      ];
+
+      function appendSocLog(tag, typeClass, message, filterType = 'info') {
+        if (!socBody) return;
+        const now = new Date().toTimeString().split(' ')[0];
+        const line = document.createElement('div');
+        line.className = 'soc-log-line';
+        line.setAttribute('data-category', filterType);
+        line.innerHTML = `
         <span class="soc-time">[${now}]</span>
         <span class="soc-tag ${typeClass}">${tag}</span>
         <span>${message}</span>
       `;
-      if (currentFilter !== 'all' && filterType !== currentFilter) {
-        line.style.display = 'none';
+        if (currentFilter !== 'all' && filterType !== currentFilter) {
+          line.style.display = 'none';
+        }
+        socBody.appendChild(line);
+        socBody.scrollTop = socBody.scrollHeight;
+        if (socBody.children.length > 50) {
+          socBody.removeChild(socBody.firstChild);
+        }
       }
-      socBody.appendChild(line);
-      socBody.scrollTop = socBody.scrollHeight;
-      if (socBody.children.length > 50) {
-        socBody.removeChild(socBody.firstChild);
-      }
-    }
 
-    // Initial logs
-    SAMPLE_LOGS.forEach(l => appendSocLog(l.tag, l.class, l.text, l.filter));
+      // Initial logs
+      SAMPLE_LOGS.forEach((l) => appendSocLog(l.tag, l.class, l.text, l.filter));
 
-    // Periodic calm telemetry
-    let socInterval = setInterval(() => {
-      const msgs = [
-        { tag: 'POLL', class: 'info', text: 'Bucket "protected" checked: 0 change events observed', cat: 'info' },
-        { tag: 'CANARY', class: 'canary', text: 'Sentinel check: All canary objects untouched', cat: 'canary' },
-        { tag: 'CRYPTO', class: 'crypto', text: 'RFC 6962 DAG leaf verification: 16/16 hashes intact', cat: 'crypto' },
-      ];
-      const pick = msgs[Math.floor(Math.random() * msgs.length)];
-      appendSocLog(pick.tag, pick.class, pick.text, pick.cat);
-    }, 4500);
+      // Periodic calm telemetry
+      let socInterval = setInterval(() => {
+        const msgs = [
+          {
+            tag: 'POLL',
+            class: 'info',
+            text: 'Bucket "protected" checked: 0 change events observed',
+            cat: 'info',
+          },
+          {
+            tag: 'CANARY',
+            class: 'canary',
+            text: 'Sentinel check: All canary objects untouched',
+            cat: 'canary',
+          },
+          {
+            tag: 'CRYPTO',
+            class: 'crypto',
+            text: 'RFC 6962 DAG leaf verification: 16/16 hashes intact',
+            cat: 'crypto',
+          },
+        ];
+        const pick = msgs[Math.floor(Math.random() * msgs.length)];
+        appendSocLog(pick.tag, pick.class, pick.text, pick.cat);
+      }, 4500);
 
-    // Tab filter clicks
-    socTabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        socTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentFilter = tab.getAttribute('data-filter');
-        const lines = socBody.querySelectorAll('.soc-log-line');
-        lines.forEach((line) => {
-          const cat = line.getAttribute('data-category');
-          if (currentFilter === 'all' || cat === currentFilter) {
-            line.style.display = 'flex';
-          } else {
-            line.style.display = 'none';
-          }
+      // Tab filter clicks
+      socTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          socTabs.forEach((t) => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentFilter = tab.getAttribute('data-filter');
+          const lines = socBody.querySelectorAll('.soc-log-line');
+          lines.forEach((line) => {
+            const cat = line.getAttribute('data-category');
+            if (currentFilter === 'all' || cat === currentFilter) {
+              line.style.display = 'flex';
+            } else {
+              line.style.display = 'none';
+            }
+          });
         });
       });
-    });
 
-    // Spike attack simulation in terminal with Laser Threat Flash & Incident Popover
-    const socContainer = document.querySelector('.soc-terminal-container');
-    const incidentCard = document.getElementById('socIncidentAlertCard');
-    const dismissIncidentBtn = document.getElementById('dismissIncidentCardBtn');
-    const viewIncidentProofBtn = document.getElementById('viewIncidentProofBtn');
+      // Spike attack simulation in terminal with Laser Threat Flash & Incident Popover
+      const socContainer = document.querySelector('.soc-terminal-container');
+      const incidentCard = document.getElementById('socIncidentAlertCard');
+      const dismissIncidentBtn = document.getElementById('dismissIncidentCardBtn');
+      const viewIncidentProofBtn = document.getElementById('viewIncidentProofBtn');
 
-    function triggerTerminalAttackSequence() {
-      // Engage red laser hazard border on terminal
-      socContainer?.classList.add('threat-spike-laser');
+      function triggerTerminalAttackSequence() {
+        // Engage red laser hazard border on terminal
+        socContainer?.classList.add('threat-spike-laser');
 
-      appendSocLog('ALERT', 'alert', 'THREAT SPIKE: High-frequency PUT requests detected from account "svc-backup-agent"', 'alert');
-      
-      setTimeout(() => {
-        appendSocLog('CANARY', 'alert', 'TRIPWIRE TRIGGERED: Object ".canary/decoy_tokens.docx" modified! Instant RANSOMWARE verdict!', 'canary');
-      }, 350);
+        appendSocLog(
+          'ALERT',
+          'alert',
+          'THREAT SPIKE: High-frequency PUT requests detected from account "svc-backup-agent"',
+          'alert'
+        );
 
-      setTimeout(() => {
-        appendSocLog('RESPONSE', 'alert', 'IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-backup-agent" [8.2s SLA]', 'alert');
-      }, 750);
+        setTimeout(() => {
+          appendSocLog(
+            'CANARY',
+            'alert',
+            'TRIPWIRE TRIGGERED: Object ".canary/decoy_tokens.docx" modified! Instant RANSOMWARE verdict!',
+            'canary'
+          );
+        }, 350);
 
-      setTimeout(() => {
-        appendSocLog('CRYPTO', 'crypto', 'Ed25519 SIGNATURE: Incident record signed with key ID "ed25519-v1" (RFC 8032)', 'crypto');
-        // Reveal Incident Alert Popover Card inside terminal
-        if (incidentCard) {
-          incidentCard.style.display = 'block';
-          incidentCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }, 1200);
+        setTimeout(() => {
+          appendSocLog(
+            'RESPONSE',
+            'alert',
+            'IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-backup-agent" [8.2s SLA]',
+            'alert'
+          );
+        }, 750);
 
-      setTimeout(() => {
-        appendSocLog('RESTORE', 'restore', 'AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED (100%)', 'restore');
-      }, 1800);
+        setTimeout(() => {
+          appendSocLog(
+            'CRYPTO',
+            'crypto',
+            'Ed25519 SIGNATURE: Incident record signed with key ID "ed25519-v1" (RFC 8032)',
+            'crypto'
+          );
+          // Reveal Incident Alert Popover Card inside terminal
+          if (incidentCard) {
+            incidentCard.style.display = 'block';
+            incidentCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 1200);
 
-      setTimeout(() => {
-        appendSocLog('AUDIT', 'crypto', 'IMMUTABLE CHAIN: Audit block #043 appended with SHA-256 hash continuity', 'crypto');
-      }, 2300);
+        setTimeout(() => {
+          appendSocLog(
+            'RESTORE',
+            'restore',
+            'AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED (100%)',
+            'restore'
+          );
+        }, 1800);
 
-      // Trigger Merkle tree attack scenario in sync
-      const attackBtn = document.querySelector('[data-scenario="attack"]');
-      attackBtn?.click();
-    }
+        setTimeout(() => {
+          appendSocLog(
+            'AUDIT',
+            'crypto',
+            'IMMUTABLE CHAIN: Audit block #043 appended with SHA-256 hash continuity',
+            'crypto'
+          );
+        }, 2300);
 
-    triggerSocSpike?.addEventListener('click', triggerTerminalAttackSequence);
-
-    dismissIncidentBtn?.addEventListener('click', () => {
-      if (incidentCard) incidentCard.style.display = 'none';
-      socContainer?.classList.remove('threat-spike-laser');
-    });
-
-    viewIncidentProofBtn?.addEventListener('click', () => {
-      openMerkleInspector(0, { isCorrupted: true });
-    });
-
-    // ── Interactive CLI Input & Command Handler ─────────────────────────────
-    const socCliForm = document.getElementById('socCliForm');
-    const socCliInput = document.getElementById('socCliInput');
-    const socCliPills = document.querySelectorAll('.soc-cli-pill');
-
-    function runTerminalCommand(cmdText) {
-      if (!cmdText || !cmdText.trim()) return;
-      const trimmed = cmdText.trim();
-
-      // Log prompt command into terminal body
-      appendSocLog('CLI', 'info', `<span class="soc-log-cmd">$ ${trimmed}</span>`, 'info');
-
-      const cmd = trimmed.toLowerCase();
-
-      if (cmd === 'clear') {
-        if (socBody) socBody.innerHTML = '';
-        return;
+        // Trigger Merkle tree attack scenario in sync
+        const attackBtn = document.querySelector('[data-scenario="attack"]');
+        attackBtn?.click();
       }
 
-      if (cmd === 'cloudrdr status' || cmd === 'status') {
-        const statusJson = JSON.stringify({
-          status: "OPERATIONAL",
-          engine: "autonomous-containment-v1",
-          storage_provider: "local_fs",
-          protected_bucket: "protected",
-          monitored_objects: 16,
-          canary_tripwires: 2,
-          sliding_window: "60s (ransomware_threshold: 30%)",
-          iam_freeze_sla: "<10.0s (achieved: 2.1s)",
-          recovery_cipher: "AES-256-GCM / Ed25519"
-        }, null, 2);
-        appendSocLog('STATUS', 'crypto', `<pre class="soc-log-json">${statusJson}</pre>`, 'crypto');
-      } else if (cmd === 'test-canary-tripwire' || cmd === 'canary') {
-        triggerTerminalAttackSequence();
-      } else if (cmd === 'curl /baseline/protected' || cmd === 'baseline') {
-        const baselineJson = JSON.stringify({
-          bucket: "protected",
-          merkle_root: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          file_count: 16,
-          hash_algorithm: "SHA-256 (RFC 6962)",
-          snapshot_id: "snap-98a4d7e1-2026",
-          created_at: new Date().toISOString()
-        }, null, 2);
-        appendSocLog('API', 'crypto', `<pre class="soc-log-json">${baselineJson}</pre>`, 'crypto');
-      } else if (cmd === 'verify-merkle-proof' || cmd === 'merkle') {
-        appendSocLog('CRYPTO', 'crypto', 'RFC 6962 AUDIT PATH: Leaf #0 -> Pair(L0, L1) -> Pair(H01, H23) -> ROOT', 'crypto');
-        appendSocLog('CRYPTO', 'crypto', 'Cryptographic Proof: e3b0c442...7852b855 (100% INVARIANT MATCH)', 'crypto');
-        setTimeout(() => openMerkleInspector(0, { isCorrupted: false }), 400);
-      } else if (cmd === 'help') {
-        const helpText = `Available commands:
+      triggerSocSpike?.addEventListener('click', triggerTerminalAttackSequence);
+
+      dismissIncidentBtn?.addEventListener('click', () => {
+        if (incidentCard) incidentCard.style.display = 'none';
+        socContainer?.classList.remove('threat-spike-laser');
+      });
+
+      viewIncidentProofBtn?.addEventListener('click', () => {
+        openMerkleInspector(0, { isCorrupted: true });
+      });
+
+      // ── Interactive CLI Input & Command Handler ─────────────────────────────
+      const socCliForm = document.getElementById('socCliForm');
+      const socCliInput = document.getElementById('socCliInput');
+      const socCliPills = document.querySelectorAll('.soc-cli-pill');
+
+      function runTerminalCommand(cmdText) {
+        if (!cmdText || !cmdText.trim()) return;
+        const trimmed = cmdText.trim();
+
+        // Log prompt command into terminal body
+        appendSocLog('CLI', 'info', `<span class="soc-log-cmd">$ ${trimmed}</span>`, 'info');
+
+        const cmd = trimmed.toLowerCase();
+
+        if (cmd === 'clear') {
+          if (socBody) socBody.innerHTML = '';
+          return;
+        }
+
+        if (cmd === 'cloudrdr status' || cmd === 'status') {
+          const statusJson = JSON.stringify(
+            {
+              status: 'OPERATIONAL',
+              engine: 'autonomous-containment-v1',
+              storage_provider: 'local_fs',
+              protected_bucket: 'protected',
+              monitored_objects: 16,
+              canary_tripwires: 2,
+              sliding_window: '60s (ransomware_threshold: 30%)',
+              iam_freeze_sla: '<10.0s (achieved: 2.1s)',
+              recovery_cipher: 'AES-256-GCM / Ed25519',
+            },
+            null,
+            2
+          );
+          appendSocLog(
+            'STATUS',
+            'crypto',
+            `<pre class="soc-log-json">${statusJson}</pre>`,
+            'crypto'
+          );
+        } else if (cmd === 'test-canary-tripwire' || cmd === 'canary') {
+          triggerTerminalAttackSequence();
+        } else if (cmd === 'curl /baseline/protected' || cmd === 'baseline') {
+          const baselineJson = JSON.stringify(
+            {
+              bucket: 'protected',
+              merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+              file_count: 16,
+              hash_algorithm: 'SHA-256 (RFC 6962)',
+              snapshot_id: 'snap-98a4d7e1-2026',
+              created_at: new Date().toISOString(),
+            },
+            null,
+            2
+          );
+          appendSocLog(
+            'API',
+            'crypto',
+            `<pre class="soc-log-json">${baselineJson}</pre>`,
+            'crypto'
+          );
+        } else if (cmd === 'verify-merkle-proof' || cmd === 'merkle') {
+          appendSocLog(
+            'CRYPTO',
+            'crypto',
+            'RFC 6962 AUDIT PATH: Leaf #0 -> Pair(L0, L1) -> Pair(H01, H23) -> ROOT',
+            'crypto'
+          );
+          appendSocLog(
+            'CRYPTO',
+            'crypto',
+            'Cryptographic Proof: e3b0c442...7852b855 (100% INVARIANT MATCH)',
+            'crypto'
+          );
+          setTimeout(() => openMerkleInspector(0, { isCorrupted: false }), 400);
+        } else if (cmd === 'help') {
+          const helpText = `Available commands:
   • cloudrdr status          - Query system health & parameters
   • test-canary-tripwire     - Simulate decoy breach & trigger sub-10s IAM freeze
   • curl /baseline/protected - Fetch current baseline Merkle Root JSON
   • verify-merkle-proof      - Verify cryptographic leaf-to-root RFC 6962 proof
   • clear                    - Clear terminal console`;
-        appendSocLog('HELP', 'info', `<pre class="soc-log-json">${helpText}</pre>`, 'info');
-      } else {
-        appendSocLog('ERROR', 'alert', `Command not recognized: "${trimmed}". Type "help" for available commands.`, 'alert');
+          appendSocLog('HELP', 'info', `<pre class="soc-log-json">${helpText}</pre>`, 'info');
+        } else {
+          appendSocLog(
+            'ERROR',
+            'alert',
+            `Command not recognized: "${trimmed}". Type "help" for available commands.`,
+            'alert'
+          );
+        }
+
+        if (socCliInput) socCliInput.value = '';
       }
 
-      if (socCliInput) socCliInput.value = '';
-    }
+      socCliForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        runTerminalCommand(socCliInput?.value);
+      });
 
-    socCliForm?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      runTerminalCommand(socCliInput?.value);
-    });
+      socCliPills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          let cmd = pill.getAttribute('data-cmd');
+          if (cmd) {
+            if (cmd.startsWith('> ')) cmd = cmd.slice(2);
+            if (socCliInput) socCliInput.value = cmd;
+            runTerminalCommand(cmd);
+          }
+        });
+      });
 
-    socCliPills.forEach((pill) => {
-      pill.addEventListener('click', () => {
-        let cmd = pill.getAttribute('data-cmd');
-        if (cmd) {
-          if (cmd.startsWith('> ')) cmd = cmd.slice(2);
-          if (socCliInput) socCliInput.value = cmd;
-          runTerminalCommand(cmd);
+      // ── 6. Cursor Spotlight & Bento Glow Pointer Tracking ────────────────────
+      const spotlightCards = document.querySelectorAll('.spotlight-card');
+      spotlightCards.forEach((card) => {
+        card.addEventListener(
+          'pointermove',
+          (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+          },
+          { passive: true }
+        );
+      });
+
+      // ── 7. Micro-Parallax Dotted Grid Background ────────────────────────────
+      const gridBgs = document.querySelectorAll('.bg-grid-dots');
+      let parallaxTicking = false;
+      window.addEventListener(
+        'mousemove',
+        (e) => {
+          if (!parallaxTicking) {
+            window.requestAnimationFrame(() => {
+              const normX = (e.clientX / window.innerWidth - 0.5) * 16;
+              const normY = (e.clientY / window.innerHeight - 0.5) * 16;
+              gridBgs.forEach((bg) => {
+                bg.style.backgroundPosition = `calc(50% + ${normX.toFixed(1)}px) calc(50% + ${normY.toFixed(1)}px)`;
+              });
+              parallaxTicking = false;
+            });
+            parallaxTicking = true;
+          }
+        },
+        { passive: true }
+      );
+
+      // ── 8. Presentation & Grading Hotkeys (A: Attack, C: Calm, R: Restore) ──
+      window.addEventListener('keydown', (e) => {
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+        if (e.key === 'a' || e.key === 'A') {
+          const attackTab = document.querySelector('[data-scenario="attack"]');
+          attackTab?.click();
+        } else if (e.key === 'c' || e.key === 'C') {
+          const calmTab = document.querySelector('[data-scenario="calm"]');
+          calmTab?.click();
+        } else if (e.key === 'r' || e.key === 'R') {
+          const restoreTab = document.querySelector('[data-scenario="restore"]');
+          restoreTab?.click();
+        } else if (e.key === 't' || e.key === 'T') {
+          startPresentationTour();
+        } else if (e.key === ' ') {
+          e.preventDefault();
+          autoPlayBtn?.click();
         }
       });
-    });
-
-    // ── 6. Cursor Spotlight & Bento Glow Pointer Tracking ────────────────────
-    const spotlightCards = document.querySelectorAll('.spotlight-card');
-    spotlightCards.forEach((card) => {
-      card.addEventListener('pointermove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      }, { passive: true });
-    });
-
-    // ── 7. Micro-Parallax Dotted Grid Background ────────────────────────────
-    const gridBgs = document.querySelectorAll('.bg-grid-dots');
-    let parallaxTicking = false;
-    window.addEventListener('mousemove', (e) => {
-      if (!parallaxTicking) {
-        window.requestAnimationFrame(() => {
-          const normX = ((e.clientX / window.innerWidth) - 0.5) * 16;
-          const normY = ((e.clientY / window.innerHeight) - 0.5) * 16;
-          gridBgs.forEach((bg) => {
-            bg.style.backgroundPosition = `calc(50% + ${normX.toFixed(1)}px) calc(50% + ${normY.toFixed(1)}px)`;
-          });
-          parallaxTicking = false;
-        });
-        parallaxTicking = true;
-      }
-    }, { passive: true });
-
-    // ── 8. Presentation & Grading Hotkeys (A: Attack, C: Calm, R: Restore) ──
-    window.addEventListener('keydown', (e) => {
-      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-      if (e.key === 'a' || e.key === 'A') {
-        const attackTab = document.querySelector('[data-scenario="attack"]');
-        attackTab?.click();
-      } else if (e.key === 'c' || e.key === 'C') {
-        const calmTab = document.querySelector('[data-scenario="calm"]');
-        calmTab?.click();
-      } else if (e.key === 'r' || e.key === 'R') {
-        const restoreTab = document.querySelector('[data-scenario="restore"]');
-        restoreTab?.click();
-      } else if (e.key === 't' || e.key === 'T') {
-        startPresentationTour();
-      } else if (e.key === ' ') {
-        e.preventDefault();
-        autoPlayBtn?.click();
-      }
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

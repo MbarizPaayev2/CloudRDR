@@ -123,7 +123,8 @@ export function updateRestorePanel(state) {
   progressFill.className = 'progress-bar-fill';
   progressFill.style.width = `${pct}%`;
   if (modified > 0 || missing > 0) {
-    progressFill.style.background = 'linear-gradient(90deg, var(--color-warning), var(--color-danger))';
+    progressFill.style.background =
+      'linear-gradient(90deg, var(--color-warning), var(--color-danger))';
   }
 
   progressBar.appendChild(progressFill);
@@ -133,7 +134,9 @@ export function updateRestorePanel(state) {
 
   // 4. Certification Banner
   const banner = document.createElement('div');
-  const isAllValid = Boolean(job.isFullyRestored) || (total > 0 && valid === total && modified === 0 && missing === 0);
+  const isAllValid =
+    Boolean(job.isFullyRestored) ||
+    (total > 0 && valid === total && modified === 0 && missing === 0);
 
   if (isAllValid) {
     banner.className = 'result-banner success';
@@ -143,7 +146,8 @@ export function updateRestorePanel(state) {
     icon.style.fontSize = '1.1rem';
 
     const text = document.createElement('span');
-    text.textContent = '100% VERIFIED: All restored files match pre-attack cryptographic baseline SHA-256 and valid AEAD tags.';
+    text.textContent =
+      '100% VERIFIED: All restored files match pre-attack cryptographic baseline SHA-256 and valid AEAD tags.';
 
     banner.appendChild(icon);
     banner.appendChild(text);

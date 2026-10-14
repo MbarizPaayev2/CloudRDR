@@ -11,7 +11,7 @@ let tourState = {
   timer: null,
   progressTimer: null,
   elapsedSec: 0,
-  totalSec: 45
+  totalSec: 45,
 };
 
 const TOUR_STAGES = [
@@ -24,7 +24,7 @@ const TOUR_STAGES = [
       document.querySelector('[data-scenario="calm"]')?.click();
       document.getElementById('pipelineTrack')?.children[0]?.click();
     },
-    duration: 11
+    duration: 11,
   },
   {
     idx: 2,
@@ -35,7 +35,7 @@ const TOUR_STAGES = [
       document.querySelector('[data-scenario="attack"]')?.click();
       document.getElementById('pipelineTrack')?.children[2]?.click();
     },
-    duration: 11
+    duration: 11,
   },
   {
     idx: 3,
@@ -45,7 +45,7 @@ const TOUR_STAGES = [
     action: () => {
       document.getElementById('pipelineTrack')?.children[3]?.click();
     },
-    duration: 11
+    duration: 11,
   },
   {
     idx: 4,
@@ -56,8 +56,8 @@ const TOUR_STAGES = [
       document.querySelector('[data-scenario="restore"]')?.click();
       document.getElementById('pipelineTrack')?.children[5]?.click();
     },
-    duration: 12
-  }
+    duration: 12,
+  },
 ];
 
 let tourBarEl = null;

@@ -46,7 +46,8 @@ let mockRestoreJobs = {
     started_at: new Date(Date.now() - 86200000).toISOString(),
     finished_at: new Date(Date.now() - 86100000).toISOString(),
     results: Array.from({ length: 16 }, (_, i) => ({
-      path: i === 0 ? 'canary/tripwire_sentinel.docx' : `data/file_${String(i).padStart(2, '0')}.dat`,
+      path:
+        i === 0 ? 'canary/tripwire_sentinel.docx' : `data/file_${String(i).padStart(2, '0')}.dat`,
       expected_sha256: `a${i}b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8${i}a`,
       restored_sha256: `a${i}b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8${i}a`,
       result: 'VALID',
@@ -84,7 +85,11 @@ let mockAuditLog = [
 // ── Mock API Methods ───────────────────────────────────────────────────────
 
 export async function getHealth() {
-  return { status: 'ok', uptime: Math.floor(performance.now() / 1000), timestamp: new Date().toISOString() };
+  return {
+    status: 'ok',
+    uptime: Math.floor(performance.now() / 1000),
+    timestamp: new Date().toISOString(),
+  };
 }
 
 export async function getBaseline(_bucket = CONFIG.BUCKET_NAME) {
@@ -110,7 +115,7 @@ export async function getDetectionRuns(limit = 50) {
       id: `run-${i}`,
       created_at: time,
       change_rate: (Math.sin(i / 5) * 0.04 + 0.02).toFixed(4),
-      threshold: 0.30,
+      threshold: 0.3,
       canary_triggered: false,
       verdict: 'normal',
     });

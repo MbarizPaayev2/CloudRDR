@@ -19,11 +19,18 @@ import os from 'node:os';
 
 import { buildServer } from '../../src/api/server.js';
 import cfg from '../../src/config/index.js';
-import { _resetClientForTests, getSupabaseClient, supaQuery } from '../../src/adapters/db/supabaseClient.js';
+import {
+  _resetClientForTests,
+  getSupabaseClient,
+  supaQuery,
+} from '../../src/adapters/db/supabaseClient.js';
 import { LocalFsStorage } from '../../src/adapters/storage/localFsStorage.js';
 import { _setAdapterForTests } from '../../src/adapters/storage/index.js';
 import { createBaseline } from '../../src/baseline/baselineService.js';
-import { _resetFreezeStateForTests, _isFrozenForTests } from '../../src/contracts/freeze.contract.js';
+import {
+  _resetFreezeStateForTests,
+  _isFrozenForTests,
+} from '../../src/contracts/freeze.contract.js';
 import { _resetBackupStoreForTests, storeBackup } from '../../src/contracts/backup.contract.js';
 import { _resetAuditLogForTests } from '../../src/contracts/crypto.contract.js';
 import { defaultAuditLog } from '../../src/log/auditLog.js';

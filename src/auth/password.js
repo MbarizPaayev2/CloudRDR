@@ -10,8 +10,8 @@ import crypto from 'node:crypto';
 
 const SCRYPT_PARAMS = {
   N: 16384, // CPU/memory cost parameter (2^14)
-  r: 8,     // Block size parameter
-  p: 1,     // Parallelization parameter
+  r: 8, // Block size parameter
+  p: 1, // Parallelization parameter
 };
 const KEY_LEN = 64; // 512 bits
 

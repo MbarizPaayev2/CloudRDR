@@ -31,8 +31,10 @@ function buildConnector(broken) {
 
   // Left oval
   const r1 = document.createElementNS(SVG_NS, 'rect');
-  r1.setAttribute('x', '1'); r1.setAttribute('y', '8');
-  r1.setAttribute('width', '13'); r1.setAttribute('height', '8');
+  r1.setAttribute('x', '1');
+  r1.setAttribute('y', '8');
+  r1.setAttribute('width', '13');
+  r1.setAttribute('height', '8');
   r1.setAttribute('rx', '4');
   r1.setAttribute('fill', 'none');
   r1.setAttribute('stroke', color);
@@ -41,8 +43,10 @@ function buildConnector(broken) {
 
   // Right oval
   const r2 = document.createElementNS(SVG_NS, 'rect');
-  r2.setAttribute('x', '18'); r2.setAttribute('y', '8');
-  r2.setAttribute('width', '13'); r2.setAttribute('height', '8');
+  r2.setAttribute('x', '18');
+  r2.setAttribute('y', '8');
+  r2.setAttribute('width', '13');
+  r2.setAttribute('height', '8');
   r2.setAttribute('rx', '4');
   r2.setAttribute('fill', 'none');
   r2.setAttribute('stroke', color);
@@ -52,8 +56,10 @@ function buildConnector(broken) {
   if (broken) {
     // Gap line to show break
     const gap = document.createElementNS(SVG_NS, 'line');
-    gap.setAttribute('x1', '13'); gap.setAttribute('y1', '12');
-    gap.setAttribute('x2', '19'); gap.setAttribute('y2', '12');
+    gap.setAttribute('x1', '13');
+    gap.setAttribute('y1', '12');
+    gap.setAttribute('x2', '19');
+    gap.setAttribute('y2', '12');
     gap.setAttribute('stroke', '#B3261E');
     gap.setAttribute('stroke-width', '1');
     gap.setAttribute('stroke-dasharray', '2,2');
@@ -61,8 +67,10 @@ function buildConnector(broken) {
   } else {
     // Connecting horizontal bar
     const bar = document.createElementNS(SVG_NS, 'line');
-    bar.setAttribute('x1', '13'); bar.setAttribute('y1', '12');
-    bar.setAttribute('x2', '19'); bar.setAttribute('y2', '12');
+    bar.setAttribute('x1', '13');
+    bar.setAttribute('y1', '12');
+    bar.setAttribute('x2', '19');
+    bar.setAttribute('y2', '12');
     bar.setAttribute('stroke', color);
     bar.setAttribute('stroke-width', '2');
     svg.appendChild(bar);
@@ -136,7 +144,10 @@ export function renderHashChain(entries) {
     node.className = `chain-node ${isBroken ? 'broken-link' : 'valid-link'}`;
     node.setAttribute('tabindex', '0');
     node.setAttribute('title', `Block ${entry.index}: ${entry.valid ? 'valid' : 'BROKEN'}`);
-    node.setAttribute('aria-label', `Audit block ${entry.index}, hash ${shortHash(entry.hash)}, ${entry.valid ? 'valid' : 'chain broken here'}`);
+    node.setAttribute(
+      'aria-label',
+      `Audit block ${entry.index}, hash ${shortHash(entry.hash)}, ${entry.valid ? 'valid' : 'chain broken here'}`
+    );
 
     const idxDiv = document.createElement('div');
     idxDiv.className = 'chain-index';

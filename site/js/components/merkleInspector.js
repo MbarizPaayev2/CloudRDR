@@ -5,7 +5,12 @@
  */
 
 const FILE_REGISTRY = [
-  { name: '.canary/decoy_tokens.docx', type: 'TRIPWIRE CANARY OBJECT', size: '14.2 KB', isCanary: true },
+  {
+    name: '.canary/decoy_tokens.docx',
+    type: 'TRIPWIRE CANARY OBJECT',
+    size: '14.2 KB',
+    isCanary: true,
+  },
   { name: 'finance/q3_earnings.xlsx', type: 'Financial Ledger', size: '84.5 KB' },
   { name: 'database/users.sqlite', type: 'Relational Database', size: '1.2 MB' },
   { name: 'contracts/vendor_nda.pdf', type: 'Legal Agreement', size: '240 KB' },
@@ -20,7 +25,7 @@ const FILE_REGISTRY = [
   { name: 'archives/backup_snap.tar', type: 'Cold Storage Archive', size: '12.0 MB' },
   { name: 'logs/access_audit.log', type: 'Append-Only Access Log', size: '310 KB' },
   { name: 'health/records.enc', type: 'HIPAA Encrypted Store', size: '890 KB' },
-  { name: 'tokens/jwt_sign.key', type: 'Token Signing Secret', size: '2.4 KB' }
+  { name: 'tokens/jwt_sign.key', type: 'Token Signing Secret', size: '2.4 KB' },
 ];
 
 // Deterministic mock hash generator
@@ -42,12 +47,13 @@ let inspectorEl = null;
 export function openMerkleInspector(leafIndex, options = {}) {
   const isCorrupted = options.isCorrupted || false;
   const isRestored = options.isRestored || false;
-  const currentRoot = options.currentRoot || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+  const currentRoot =
+    options.currentRoot || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 
   const file = FILE_REGISTRY[leafIndex] || {
     name: `object_leaf_${leafIndex}.dat`,
     type: 'Protected Cloud Object',
-    size: '42.0 KB'
+    size: '42.0 KB',
   };
 
   const baselineHash = pseudoHash(`file_${leafIndex}_baseline_seed`);
@@ -209,11 +215,13 @@ export function openMerkleInspector(leafIndex, options = {}) {
       aead_tag_128: aeadTag,
       status: isCorrupted ? 'TAMPERED' : 'VALID',
       merkle_root: currentRoot,
-      verified_at: new Date().toISOString()
+      verified_at: new Date().toISOString(),
     };
     navigator.clipboard.writeText(JSON.stringify(proofPayload, null, 2)).then(() => {
       copyBtn.textContent = 'Proof Copied to Clipboard';
-      setTimeout(() => { copyBtn.textContent = 'Copy RFC 6962 Proof (JSON)'; }, 2000);
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy RFC 6962 Proof (JSON)';
+      }, 2000);
     });
   });
 }

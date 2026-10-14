@@ -21,8 +21,11 @@ function formatArchiveDate(iso) {
   if (!iso) return '—';
   try {
     return new Date(iso).toLocaleString([], {
-      year: 'numeric', month: 'short', day: '2-digit',
-      hour: '2-digit', minute: '2-digit',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
     });
   } catch {
     return iso;
@@ -42,8 +45,8 @@ function shortHash(hash) {
 /** Render baseline panel from current state. */
 export function renderBaseline(state) {
   const skeleton = document.getElementById('baselineSkeleton');
-  const content  = document.getElementById('baselineContent');
-  const errEl    = document.getElementById('baselineError');
+  const content = document.getElementById('baselineContent');
+  const errEl = document.getElementById('baselineError');
 
   if (!content) return;
 
@@ -52,11 +55,11 @@ export function renderBaseline(state) {
     if (state.isLoading) {
       skeleton && (skeleton.style.display = 'block');
       content.style.display = 'none';
-      errEl  && (errEl.style.display = 'none');
+      errEl && (errEl.style.display = 'none');
     } else {
       skeleton && (skeleton.style.display = 'none');
       content.style.display = 'none';
-      errEl  && (errEl.style.display = 'block');
+      errEl && (errEl.style.display = 'block');
     }
     return;
   }
@@ -64,7 +67,7 @@ export function renderBaseline(state) {
   // Hide skeleton, show content
   skeleton && (skeleton.style.display = 'none');
   content.style.display = 'block';
-  errEl  && (errEl.style.display = 'none');
+  errEl && (errEl.style.display = 'none');
 
   const b = state.baseline;
 
@@ -125,7 +128,10 @@ export function initBaselineLedger() {
     };
     chip.addEventListener('click', doCopy);
     chip.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doCopy(); }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        doCopy();
+      }
     });
   }
 
@@ -134,7 +140,12 @@ export function initBaselineLedger() {
   if (btn) {
     setButtonContent(btn, 'Capture New Baseline', 'sign', { leading: true });
     btn.addEventListener('click', async () => {
-      if (!window.confirm('Create a new baseline snapshot now?\nThis will seal all current files as the new reference.')) return;
+      if (
+        !window.confirm(
+          'Create a new baseline snapshot now?\nThis will seal all current files as the new reference.'
+        )
+      )
+        return;
       btn.disabled = true;
       btn.setAttribute('aria-busy', 'true');
       setButtonContent(btn, 'Sealing…', 'loader', { spin: true, leading: true });

@@ -20,10 +20,15 @@ function formatTime(iso) {
   if (!iso) return '—';
   try {
     return new Date(iso).toLocaleString([], {
-      month: 'short', day: '2-digit',
-      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
     });
-  } catch { return iso; }
+  } catch {
+    return iso;
+  }
 }
 
 function shortHash(h) {
@@ -42,8 +47,14 @@ function isCanaryPath(p) {
 }
 
 /* ─── Stamp angles per incident slot ─────────────────────────────────────── */
-const TILT_LIST  = ['-1.2deg', '0.8deg', '-0.5deg', '1.5deg', '-0.9deg'];
-const STAMP_ANGLES = { open: '-2deg', frozen: '1.5deg', restoring: '-1deg', resolved: '2.5deg', freeze_failed: '-3deg' };
+const TILT_LIST = ['-1.2deg', '0.8deg', '-0.5deg', '1.5deg', '-0.9deg'];
+const STAMP_ANGLES = {
+  open: '-2deg',
+  frozen: '1.5deg',
+  restoring: '-1deg',
+  resolved: '2.5deg',
+  freeze_failed: '-3deg',
+};
 
 /* ─── Incident list (right rail) ──────────────────────────────────────────── */
 
@@ -53,7 +64,7 @@ const STAMP_ANGLES = { open: '-2deg', frozen: '1.5deg', restoring: '-1deg', reso
  * @param {string|null} selectedId
  */
 export function renderIncidentList(incidents, selectedId) {
-  const listEl   = document.getElementById('incidentList');
+  const listEl = document.getElementById('incidentList');
   const skeleton = document.getElementById('incidentSkeleton');
   if (!listEl) return;
 
@@ -67,11 +78,14 @@ export function renderIncidentList(incidents, selectedId) {
     const empty = document.createElement('div');
     empty.className = 'empty-state';
     const icon = document.createElement('span');
-    icon.className = 'empty-state-icon'; icon.setAttribute('aria-hidden', 'true');
+    icon.className = 'empty-state-icon';
+    icon.setAttribute('aria-hidden', 'true');
     icon.appendChild(createIcon('file', { size: 22 }));
     const lbl = document.createElement('div');
-    lbl.className = 'empty-state-label'; lbl.textContent = 'No incidents on record';
-    empty.appendChild(icon); empty.appendChild(lbl);
+    lbl.className = 'empty-state-label';
+    lbl.textContent = 'No incidents on record';
+    empty.appendChild(icon);
+    empty.appendChild(lbl);
     listEl.appendChild(empty);
     return;
   }
@@ -123,7 +137,10 @@ export function renderIncidentList(incidents, selectedId) {
     };
     item.addEventListener('click', select);
     item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        select();
+      }
     });
 
     // Apply frost if frozen
@@ -143,7 +160,7 @@ export function renderIncidentList(incidents, selectedId) {
 /* ─── Incident Detail Panel ───────────────────────────────────────────────── */
 
 let _activeTabId = 'tab-timeline';
-let _restoreJob  = null;
+let _restoreJob = null;
 let _restorePollingId = null;
 
 /**
@@ -155,7 +172,10 @@ export function renderIncidentDetail(incident) {
   if (!panel) return;
 
   // Stop any previous restore polling
-  if (_restorePollingId) { clearInterval(_restorePollingId); _restorePollingId = null; }
+  if (_restorePollingId) {
+    clearInterval(_restorePollingId);
+    _restorePollingId = null;
+  }
 
   if (!incident) {
     panel.classList.remove('active');
@@ -168,15 +188,18 @@ export function renderIncidentDetail(incident) {
 
   // ── Case file heading ──
   const headRow = document.createElement('div');
-  headRow.style.cssText = 'display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--space-6);gap:var(--space-4);';
+  headRow.style.cssText =
+    'display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--space-6);gap:var(--space-4);';
 
   const titleBlock = document.createElement('div');
   const title = document.createElement('div');
-  title.style.cssText = 'font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:4px;';
+  title.style.cssText =
+    'font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:4px;';
   title.textContent = incident.account_id || 'Unknown Account';
   titleBlock.appendChild(title);
   const subId = document.createElement('div');
-  subId.style.cssText = 'font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);';
+  subId.style.cssText =
+    'font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);';
   subId.textContent = incident.id;
   titleBlock.appendChild(subId);
   headRow.appendChild(titleBlock);
@@ -208,10 +231,10 @@ function buildTabs(incident) {
   tabBar.setAttribute('role', 'tablist');
 
   const tabDefs = [
-    { id: 'tab-timeline',  label: 'Timeline' },
-    { id: 'tab-evidence',  label: 'Evidence' },
+    { id: 'tab-timeline', label: 'Timeline' },
+    { id: 'tab-evidence', label: 'Evidence' },
     { id: 'tab-signature', label: 'Signature' },
-    { id: 'tab-restore',   label: 'Restore' },
+    { id: 'tab-restore', label: 'Restore' },
   ];
 
   tabDefs.forEach(({ id, label }) => {
@@ -261,10 +284,15 @@ function buildTimelinePane(inc) {
   pane.id = 'pane-tab-timeline';
 
   const steps = [
-    { label: 'Ransomware Detected',  time: inc.detected_at,  done: true,  icon: 'alert' },
-    { label: 'Account Frozen',       time: inc.frozen_at,     done: !!inc.frozen_at, icon: 'freeze' },
-    { label: 'Restore Initiated',    time: _restoreJob?.started_at || null, done: !!_restoreJob, icon: 'restore' },
-    { label: 'Verified & Resolved',  time: inc.resolved_at,   done: !!inc.resolved_at, icon: 'check' },
+    { label: 'Ransomware Detected', time: inc.detected_at, done: true, icon: 'alert' },
+    { label: 'Account Frozen', time: inc.frozen_at, done: !!inc.frozen_at, icon: 'freeze' },
+    {
+      label: 'Restore Initiated',
+      time: _restoreJob?.started_at || null,
+      done: !!_restoreJob,
+      icon: 'restore',
+    },
+    { label: 'Verified & Resolved', time: inc.resolved_at, done: !!inc.resolved_at, icon: 'check' },
   ];
 
   const timeline = document.createElement('div');
@@ -310,7 +338,8 @@ function buildEvidencePane(inc) {
   pane.id = 'pane-tab-evidence';
 
   const heading = document.createElement('div');
-  heading.style.cssText = 'font-family:var(--font-stamp);font-size:var(--text-xs);letter-spacing:0.08em;color:var(--ink-ghost);text-transform:uppercase;margin-bottom:var(--space-3);';
+  heading.style.cssText =
+    'font-family:var(--font-stamp);font-size:var(--text-xs);letter-spacing:0.08em;color:var(--ink-ghost);text-transform:uppercase;margin-bottom:var(--space-3);';
   heading.textContent = `${(inc.affected_paths || []).length} Affected Files`;
   pane.appendChild(heading);
 
@@ -373,7 +402,8 @@ function buildSignaturePane(inc) {
 
   if (inc.signing_key_id) {
     const keyId = document.createElement('span');
-    keyId.style.cssText = 'font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);';
+    keyId.style.cssText =
+      'font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);';
     keyId.textContent = `Key: ${inc.signing_key_id}`;
     statusRow.appendChild(keyId);
   }
@@ -382,12 +412,14 @@ function buildSignaturePane(inc) {
   // Signature value (truncated)
   if (inc.record_signature) {
     const sigLabel = document.createElement('div');
-    sigLabel.style.cssText = 'font-family:var(--font-stamp);font-size:var(--text-xs);letter-spacing:0.06em;color:var(--ink-ghost);text-transform:uppercase;margin-bottom:var(--space-1);margin-top:var(--space-3);';
+    sigLabel.style.cssText =
+      'font-family:var(--font-stamp);font-size:var(--text-xs);letter-spacing:0.06em;color:var(--ink-ghost);text-transform:uppercase;margin-bottom:var(--space-1);margin-top:var(--space-3);';
     sigLabel.textContent = 'Record Signature';
     block.appendChild(sigLabel);
 
     const sigVal = document.createElement('div');
-    sigVal.style.cssText = 'font-family:var(--font-mono);font-size:0.6rem;word-break:break-all;color:var(--verdigris);line-height:1.5;';
+    sigVal.style.cssText =
+      'font-family:var(--font-mono);font-size:0.6rem;word-break:break-all;color:var(--verdigris);line-height:1.5;';
     sigVal.textContent = inc.record_signature;
     block.appendChild(sigVal);
   }
@@ -396,8 +428,10 @@ function buildSignaturePane(inc) {
 
   if (!hasSig) {
     const note = document.createElement('div');
-    note.style.cssText = 'font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);margin-top:var(--space-4);';
-    note.textContent = 'Signature will be recorded once the incident record is sealed by the Crypto module.';
+    note.style.cssText =
+      'font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);margin-top:var(--space-4);';
+    note.textContent =
+      'Signature will be recorded once the incident record is sealed by the Crypto module.';
     pane.appendChild(note);
   }
 
@@ -422,7 +456,8 @@ function buildRestorePane(inc) {
     renderRestoreComplete(pane, null);
   } else {
     const msg = document.createElement('div');
-    msg.style.cssText = 'color:var(--ink-ghost);font-family:var(--font-mono);font-size:var(--text-xs);';
+    msg.style.cssText =
+      'color:var(--ink-ghost);font-family:var(--font-mono);font-size:var(--text-xs);';
     msg.textContent = `Cannot restore — incident status: ${inc.status}`;
     pane.appendChild(msg);
   }
@@ -499,7 +534,8 @@ function renderRestoreProgress(pane, inc) {
   const prog = document.createElement('div');
   prog.style.cssText = 'margin-bottom:var(--space-4);';
   const lbl = document.createElement('div');
-  lbl.style.cssText = 'font-family:var(--font-stamp);font-size:var(--text-xs);letter-spacing:0.08em;color:var(--ink-ghost);text-transform:uppercase;margin-bottom:var(--space-2);';
+  lbl.style.cssText =
+    'font-family:var(--font-stamp);font-size:var(--text-xs);letter-spacing:0.08em;color:var(--ink-ghost);text-transform:uppercase;margin-bottom:var(--space-2);';
   lbl.textContent = 'Restoring Files…';
   prog.appendChild(lbl);
   const wrap = document.createElement('div');
@@ -514,10 +550,10 @@ function renderRestoreProgress(pane, inc) {
 
 function renderRestoreComplete(pane, job) {
   const j = job || { total_files: 10, valid_files: 10, modified_files: 0, results: [] };
-  const total   = j.total_files  || j.totalFiles  || 0;
-  const valid   = j.valid_files  || j.validFiles  || 0;
-  const modified= j.modified_files || j.modifiedFiles || 0;
-  const pct     = total > 0 ? Math.round((valid / total) * 100) : 0;
+  const total = j.total_files || j.totalFiles || 0;
+  const valid = j.valid_files || j.validFiles || 0;
+  const modified = j.modified_files || j.modifiedFiles || 0;
+  const pct = total > 0 ? Math.round((valid / total) * 100) : 0;
 
   // Progress bar (complete)
   const barWrap = document.createElement('div');
@@ -532,7 +568,11 @@ function renderRestoreComplete(pane, job) {
   const counters = document.createElement('div');
   counters.className = 'restore-counters';
 
-  [['valid', valid, 'var(--verdigris)'], ['total', total, ''], ['modified', modified, modified > 0 ? 'var(--seal)' : '']].forEach(([lbl, val, clr]) => {
+  [
+    ['valid', valid, 'var(--verdigris)'],
+    ['total', total, ''],
+    ['modified', modified, modified > 0 ? 'var(--seal)' : ''],
+  ].forEach(([lbl, val, clr]) => {
     const c = document.createElement('div');
     c.className = 'restore-counter';
     const num = document.createElement('span');
@@ -564,10 +604,12 @@ function renderRestoreComplete(pane, job) {
     });
 
     const tbody = tbl.createTBody();
-    results.slice(0, 20).forEach((r) => { // cap at 20 rows for layout
+    results.slice(0, 20).forEach((r) => {
+      // cap at 20 rows for layout
       const row = tbody.insertRow();
       const pathCell = row.insertCell();
-      pathCell.style.cssText = 'font-family:var(--font-mono);font-size:0.6rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+      pathCell.style.cssText =
+        'font-family:var(--font-mono);font-size:0.6rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
       pathCell.textContent = r.path || '—';
       const resCell = row.insertCell();
       resCell.appendChild(createSealChip(r.result || 'MISSING'));
@@ -582,9 +624,10 @@ function renderRestoreComplete(pane, job) {
   banner.setAttribute('aria-live', 'polite');
   banner.appendChild(createIcon(pct === 100 ? 'check' : 'alert', { size: 15 }));
   const bannerText = document.createElement('span');
-  bannerText.textContent = pct === 100
-    ? '100% verified against baseline'
-    : `${modified} file${modified !== 1 ? 's' : ''} failed verification`;
+  bannerText.textContent =
+    pct === 100
+      ? '100% verified against baseline'
+      : `${modified} file${modified !== 1 ? 's' : ''} failed verification`;
   banner.appendChild(bannerText);
   pane.appendChild(banner);
 }

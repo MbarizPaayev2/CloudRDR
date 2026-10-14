@@ -57,7 +57,9 @@ export async function telemetryRoutes(fastify) {
       baselineIntegrity: {
         status: hasBaseline ? 'verified' : 'uninitialized',
         label: hasBaseline ? 'Verified' : 'Pending Baseline',
-        detail: hasBaseline ? `Merkle: ${snapshots[0].merkle_root.slice(0, 16)}...` : 'No baseline captured',
+        detail: hasBaseline
+          ? `Merkle: ${snapshots[0].merkle_root.slice(0, 16)}...`
+          : 'No baseline captured',
         lastChecked: snapshots?.[0]?.created_at || now,
       },
       backupService: {
@@ -80,13 +82,14 @@ export async function telemetryRoutes(fastify) {
 
     // Incidents counts
     const incidents = (await supaQuery(db.from('incidents').select('id, status'))) || [];
-    const activeIncidents = incidents.filter((i) => ['open', 'frozen', 'restoring'].includes(i.status));
+    const activeIncidents = incidents.filter((i) =>
+      ['open', 'frozen', 'restoring'].includes(i.status)
+    );
 
     // Detection events in last 24h
     const cutoff = subtractSeconds(86400).toISOString();
-    const recentEvents = (await supaQuery(
-      db.from('change_events').select('id').gte('observed_at', cutoff)
-    )) || [];
+    const recentEvents =
+      (await supaQuery(db.from('change_events').select('id').gte('observed_at', cutoff))) || [];
 
     // Restore jobs stats
     const jobs = (await supaQuery(db.from('restore_jobs').select('*'))) || [];
@@ -97,7 +100,8 @@ export async function telemetryRoutes(fastify) {
       modifiedFilesCount += Number(j.modified_files) || 0;
     }
     const totalRestored = validFilesCount + modifiedFilesCount;
-    const verifiedPct = totalRestored > 0 ? Math.round((validFilesCount / totalRestored) * 100) : 100;
+    const verifiedPct =
+      totalRestored > 0 ? Math.round((validFilesCount / totalRestored) * 100) : 100;
 
     return reply.status(200).send({
       protectedFiles: {
@@ -110,12 +114,14 @@ export async function telemetryRoutes(fastify) {
       },
       activeIncidents: {
         total: activeIncidents.length,
-        critical: activeIncidents.filter((i) => i.status === 'open' || i.status === 'frozen').length,
+        critical: activeIncidents.filter((i) => i.status === 'open' || i.status === 'frozen')
+          .length,
         high: 0,
         label: 'Active Incidents',
-        secondary: activeIncidents.length === 0
-          ? 'Zero active threats (all systems normal)'
-          : `${activeIncidents.length} active threat(s) undergoing containment/recovery`,
+        secondary:
+          activeIncidents.length === 0
+            ? 'Zero active threats (all systems normal)'
+            : `${activeIncidents.length} active threat(s) undergoing containment/recovery`,
       },
       detectionEvents: {
         total: recentEvents.length,
@@ -156,12 +162,10 @@ export async function telemetryRoutes(fastify) {
 
     // Fetch change events and detection runs
     const cutoff = new Date(now - count * stepMinutes * 60 * 1000).toISOString();
-    const events = (await supaQuery(
-      db.from('change_events').select('*').gte('observed_at', cutoff)
-    )) || [];
-    const runs = (await supaQuery(
-      db.from('detection_runs').select('*').gte('created_at', cutoff)
-    )) || [];
+    const events =
+      (await supaQuery(db.from('change_events').select('*').gte('observed_at', cutoff))) || [];
+    const runs =
+      (await supaQuery(db.from('detection_runs').select('*').gte('created_at', cutoff))) || [];
 
     const points = [];
     for (let i = count - 1; i >= 0; i--) {
@@ -214,9 +218,10 @@ export async function telemetryRoutes(fastify) {
     const eventsList = [];
 
     // 1. Incidents events
-    const incidents = (await supaQuery(
-      db.from('incidents').select('*').order('detected_at', { ascending: false }).limit(limit)
-    )) || [];
+    const incidents =
+      (await supaQuery(
+        db.from('incidents').select('*').order('detected_at', { ascending: false }).limit(limit)
+      )) || [];
 
     for (const inc of incidents) {
       eventsList.push({
@@ -224,9 +229,10 @@ export async function telemetryRoutes(fastify) {
         type: inc.status === 'resolved' ? 'incident_resolved' : 'threat_detected',
         icon: inc.status === 'resolved' ? 'shieldCheck' : 'alert',
         severity: inc.status === 'resolved' ? 'Success' : 'Critical',
-        description: inc.status === 'resolved'
-          ? `Incident ${inc.id.slice(0, 8)} successfully recovered & verified`
-          : `Suspected ransomware detected on account: ${inc.account_id}`,
+        description:
+          inc.status === 'resolved'
+            ? `Incident ${inc.id.slice(0, 8)} successfully recovered & verified`
+            : `Suspected ransomware detected on account: ${inc.account_id}`,
         target: inc.account_id,
         identity: inc.signing_key_id || 'detection-engine',
         timestamp: inc.resolved_at || inc.detected_at,
@@ -247,9 +253,10 @@ export async function telemetryRoutes(fastify) {
     }
 
     // 2. Change events (canary triggers or modifications)
-    const changeEvents = (await supaQuery(
-      db.from('change_events').select('*').order('observed_at', { ascending: false }).limit(limit)
-    )) || [];
+    const changeEvents =
+      (await supaQuery(
+        db.from('change_events').select('*').order('observed_at', { ascending: false }).limit(limit)
+      )) || [];
 
     for (const ce of changeEvents) {
       const isCanary = ce.path.includes('canary');
@@ -257,7 +264,7 @@ export async function telemetryRoutes(fastify) {
         id: `evt-ce-${ce.id.slice(0, 8)}`,
         type: isCanary ? 'canary_accessed' : 'file_change',
         icon: isCanary ? 'alert' : 'activity',
-        severity: isCanary ? 'Critical' : (ce.matched_baseline ? 'Info' : 'Warning'),
+        severity: isCanary ? 'Critical' : ce.matched_baseline ? 'Info' : 'Warning',
         description: isCanary
           ? `Canary tripwire file accessed/modified: ${ce.path}`
           : `File ${ce.event_type}: ${ce.path}`,
@@ -295,9 +302,10 @@ export async function telemetryRoutes(fastify) {
     );
     const latestSnapshot = snapshots?.[0] || null;
 
-    const jobs = (await supaQuery(
-      db.from('restore_jobs').select('*').order('started_at', { ascending: false })
-    )) || [];
+    const jobs =
+      (await supaQuery(
+        db.from('restore_jobs').select('*').order('started_at', { ascending: false })
+      )) || [];
     const latestJob = jobs[0] || null;
 
     let verifiedFilesCount = 0;
@@ -360,7 +368,11 @@ export async function telemetryRoutes(fastify) {
     let merkleExplanation = 'No baseline snapshots captured yet.';
     if (latestSnapshot) {
       const files = await supaQuery(
-        db.from('protected_files').select('baseline_sha256').eq('bucket', latestSnapshot.bucket).order('path', { ascending: true })
+        db
+          .from('protected_files')
+          .select('baseline_sha256')
+          .eq('bucket', latestSnapshot.bucket)
+          .order('path', { ascending: true })
       );
       if (files && files.length > 0) {
         const computed = merkleRoot(files.map((f) => f.baseline_sha256));
@@ -447,7 +459,11 @@ export async function telemetryRoutes(fastify) {
     let merkleVerified = true;
     if (latestSnapshot) {
       const files = await supaQuery(
-        db.from('protected_files').select('baseline_sha256').eq('bucket', latestSnapshot.bucket).order('path', { ascending: true })
+        db
+          .from('protected_files')
+          .select('baseline_sha256')
+          .eq('bucket', latestSnapshot.bucket)
+          .order('path', { ascending: true })
       );
       if (files && files.length > 0) {
         const computed = merkleRoot(files.map((f) => f.baseline_sha256));
@@ -503,7 +519,12 @@ export async function telemetryRoutes(fastify) {
 
     if (prefixes.length === 0) {
       prefixes.push(
-        { prefix: 'files/', count: 0, type: 'Corporate Documents & Spreadsheets', status: 'Protected' },
+        {
+          prefix: 'files/',
+          count: 0,
+          type: 'Corporate Documents & Spreadsheets',
+          status: 'Protected',
+        },
         { prefix: 'canary/', count: 1, type: 'Tripwire Sentinels (Zero-Touch)', status: 'Armed' }
       );
     }

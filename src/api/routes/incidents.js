@@ -4,7 +4,11 @@
  * Incident listing and management endpoints.
  */
 
-import { listIncidents, getIncident, updateIncidentStatus } from '../../response/incidentService.js';
+import {
+  listIncidents,
+  getIncident,
+  updateIncidentStatus,
+} from '../../response/incidentService.js';
 import { freezeWithRetry } from '../../response/responseService.js';
 import { startRestore, promoteStagedRestore } from '../../restore/restoreService.js';
 import { appendAuditLog } from '../../contracts/crypto.contract.js';
@@ -12,7 +16,15 @@ import { getSupabaseClient, supaQuery } from '../../adapters/db/supabaseClient.j
 import { ValidationError } from '../../utils/errors.js';
 import { nowISO } from '../../utils/time.js';
 
-const VALID_STATUSES = ['open', 'acknowledged', 'frozen', 'restoring', 'resolved', 'closed', 'freeze_failed'];
+const VALID_STATUSES = [
+  'open',
+  'acknowledged',
+  'frozen',
+  'restoring',
+  'resolved',
+  'closed',
+  'freeze_failed',
+];
 
 /**
  * @param {import('fastify').FastifyInstance} fastify
@@ -135,9 +147,14 @@ export async function incidentRoutes(fastify) {
     const db = getSupabaseClient();
 
     // Fetch related restore jobs
-    const jobs = (await supaQuery(
-      db.from('restore_jobs').select('*').eq('incident_id', id).order('started_at', { ascending: true })
-    )) || [];
+    const jobs =
+      (await supaQuery(
+        db
+          .from('restore_jobs')
+          .select('*')
+          .eq('incident_id', id)
+          .order('started_at', { ascending: true })
+      )) || [];
 
     const timeline = [];
 

@@ -20,6 +20,7 @@ Modern cloud ransomware attacks rarely announce themselves with desktop ransom n
 **CloudRDR** is an enterprise-grade cloud security operations platform designed to detect silent mass modifications, freeze compromised identities at the IAM control plane, preserve immutable cryptographic evidence, and guarantee verified recovery from clean backups.
 
 ### Core Guarantees:
+
 1. **Mathematical Integrity Baseline**: Every protected object receives an immutable SHA-256 fingerprint folded pairwise into a deterministic Merkle tree root anchor.
 2. **Real-Time Sliding-Window Detection**: Flags anomalous change velocity (e.g. >30% modifications within 30 seconds) and triggers immediate response if canary sentinel files are touched.
 3. **Automated Safe Containment**: Restricts write privileges for compromised IAM credentials at the control plane while maintaining read access for forensic and recovery workflows.
@@ -74,10 +75,12 @@ Modern cloud ransomware attacks rarely announce themselves with desktop ransom n
 CloudRDR is preconfigured to run out of the box with zero external cloud dependencies using its built-in local filesystem adapter and in-memory persistence layer.
 
 ### 1. Prerequisites
+
 - **Node.js**: ≥ 18.0.0
 - **npm**: ≥ 9.0.0
 
 ### 2. Installation
+
 ```bash
 git clone https://github.com/MbarizPaayev2/CloudRDR.git
 cd CloudRDR
@@ -85,12 +88,14 @@ npm install
 ```
 
 ### 3. Environment Configuration
+
 ```bash
 cp .env.example .env
 # Default configuration uses local storage adapter and dev API keys
 ```
 
 ### 4. Seed Protected Files & Establish Cryptographic Baseline
+
 ```bash
 npm run seed
 # Creates sample protected documents and canary tripwire files under data/local-storage/protected
@@ -98,6 +103,7 @@ npm run seed
 ```
 
 ### 5. Run the Automated End-to-End Attack Simulation
+
 ```bash
 npm run simulate
 # 1. Seeds clean baseline
@@ -108,17 +114,21 @@ npm run simulate
 ```
 
 ### 6. Start the API Server & SOC Admin Dashboard
+
 ```bash
 npm start
 # Server listens on http://localhost:3000
 ```
+
 Open in your browser:
+
 - **Public Interactive Site**: [http://localhost:3000/](http://localhost:3000/)
 - **SOC Admin Dashboard**: [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
 - **Operator Login**: [http://localhost:3000/login](http://localhost:3000/login)
 - **Account Registration**: [http://localhost:3000/register](http://localhost:3000/register)
 
 ### 7. Run Verification Test Suite
+
 ```bash
 npm test
 # Executes all 74 automated unit & integration tests across 23 test suites
@@ -129,21 +139,25 @@ npm test
 ## Core Security Capabilities
 
 ### 1. File Integrity Monitoring & Merkle Baselines
+
 - Monitors protected object buckets, calculating 64-character SHA-256 content hashes.
 - Builds pairwise Merkle DAGs (`src/crypto/ed25519.js`, `src/contracts/crypto.contract.js`).
 - If even one bit of any protected file is altered, the Merkle root mismatch mathematically proves corruption.
 
 ### 2. Detection Engine & Sentinel Canaries
+
 - Configurable sliding window (default 30 seconds, rate threshold 30%).
 - Integrated canary tripwire monitoring (`tripwire_sentinel.docx`). Any modification or deletion of a canary triggers an immediate `critical` ransomware verdict regardless of change volume.
 - Dynamic threshold adjustment via authenticated API (`POST /detection/config`).
 
 ### 3. Safe Control-Plane IAM Containment
+
 - Safe isolation client with exponential backoff retry logic (`src/response/freezeClient.js`).
 - Restricts write permissions for compromised identities while preserving read permissions for verification.
 - Idempotent and auditable—every containment request generates an audit entry and updates incident records.
 
 ### 4. Authenticated Backup & Staged Quarantine Recovery
+
 - Backup encryption using `AES-256-GCM` with random 96-bit initialization vectors and 128-bit AEAD authentication tags (`src/backup/backupService.js`).
 - **Quarantine Staging**: Decrypted backup files are first extracted to an isolated directory (`data/quarantine/<jobId>/`).
 - **Cryptographic Gate**: Each file is verified against pre-attack baseline SHA-256 fingerprints:
@@ -153,6 +167,7 @@ npm test
 - **Operator Promotion**: Restored files are only written back to live storage after an authorized operator inspects the results and provides explicit confirmation (`POST /incidents/:id/promote`).
 
 ### 5. Tamper-Evident Audit Ledger
+
 - Cryptographic hash-chained audit log (`src/log/auditLog.js`).
 - Genesis block starts with `prevHash = 00...00`. Every event links to the preceding entry:
   $$\text{hash} = \text{SHA-256}(\text{index} \parallel \text{prevHash} \parallel \text{timestamp} \parallel \text{canonicalJson}(\text{data}))$$
@@ -165,63 +180,68 @@ npm test
 All protected endpoints require authentication via session cookie or `Authorization: Bearer <API_KEY>` / `x-api-key: <API_KEY>`.
 
 ### Platform Telemetry & SOC Monitoring
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/health` | System liveness, uptime, and memory status |
-| `GET` | `/status/system` | Live status across detection, storage, baseline, and backup services |
-| `GET` | `/metrics/kpis` | Real-time counts: protected files, active incidents, 24h events, backup health |
-| `GET` | `/telemetry/activity?range=24H` | Bucketed time-series activity data (`1H`, `6H`, `24H`, `7D`) |
-| `GET` | `/events/recent` | Unified chronological security event feed |
-| `GET` | `/storage/overview` | Storage backend health, object inventory, and WORM immutability state |
-| `GET` | `/recovery/health` | Cryptographic recovery health metrics (AEAD checks, baseline hash matches) |
+
+| Method | Endpoint                        | Description                                                                    |
+| ------ | ------------------------------- | ------------------------------------------------------------------------------ |
+| `GET`  | `/health`                       | System liveness, uptime, and memory status                                     |
+| `GET`  | `/status/system`                | Live status across detection, storage, baseline, and backup services           |
+| `GET`  | `/metrics/kpis`                 | Real-time counts: protected files, active incidents, 24h events, backup health |
+| `GET`  | `/telemetry/activity?range=24H` | Bucketed time-series activity data (`1H`, `6H`, `24H`, `7D`)                   |
+| `GET`  | `/events/recent`                | Unified chronological security event feed                                      |
+| `GET`  | `/storage/overview`             | Storage backend health, object inventory, and WORM immutability state          |
+| `GET`  | `/recovery/health`              | Cryptographic recovery health metrics (AEAD checks, baseline hash matches)     |
 
 ### Cryptographic Evidence & Audit Trail
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/integrity/cryptographic` | Real-time Merkle root verification & audit hash-chain integrity check |
-| `POST` | `/evidence/verify` | On-demand forensic validation of incident signatures and hash chains |
-| `GET` | `/audit` | Query tamper-evident audit ledger with chain validity verification |
+
+| Method | Endpoint                   | Description                                                           |
+| ------ | -------------------------- | --------------------------------------------------------------------- |
+| `GET`  | `/integrity/cryptographic` | Real-time Merkle root verification & audit hash-chain integrity check |
+| `POST` | `/evidence/verify`         | On-demand forensic validation of incident signatures and hash chains  |
+| `GET`  | `/audit`                   | Query tamper-evident audit ledger with chain validity verification    |
 
 ### Baseline & Detection Engine
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/baseline` | Compute new baseline snapshot for a bucket (`{ "bucket": "protected" }`) |
-| `GET` | `/baseline/:bucket` | Retrieve latest Merkle root and cataloged file list |
-| `GET` | `/detection/summary` | Current sliding-window velocity, observed rate, and tripwire status |
-| `GET` | `/detection/runs` | Historical detection evaluations and verdicts (`normal`, `suspicious`, `ransomware`) |
-| `POST` | `/detection/config` | Update detection window, suspicious rate, and ransomware rate |
+
+| Method | Endpoint             | Description                                                                          |
+| ------ | -------------------- | ------------------------------------------------------------------------------------ |
+| `POST` | `/baseline`          | Compute new baseline snapshot for a bucket (`{ "bucket": "protected" }`)             |
+| `GET`  | `/baseline/:bucket`  | Retrieve latest Merkle root and cataloged file list                                  |
+| `GET`  | `/detection/summary` | Current sliding-window velocity, observed rate, and tripwire status                  |
+| `GET`  | `/detection/runs`    | Historical detection evaluations and verdicts (`normal`, `suspicious`, `ransomware`) |
+| `POST` | `/detection/config`  | Update detection window, suspicious rate, and ransomware rate                        |
 
 ### Incident Lifecycle & Safe Recovery
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/incidents` | List security incidents (filter by `status`, `accountId`) |
-| `GET` | `/incidents/:id` | Detailed incident record with Ed25519 signature and affected files |
-| `PATCH` | `/incidents/:id/status` | Update incident status (`acknowledged`, `resolved`, `closed`) |
-| `POST` | `/incidents/:id/contain` | Execute safe control-plane write-freeze on compromised account |
-| `GET` | `/incidents/:id/timeline` | Complete chronological timeline from alert to containment and recovery |
-| `POST` | `/incidents/:id/restore` | Stage decrypted backup files in quarantine and verify baseline hashes |
-| `POST` | `/incidents/:id/promote` | Promote verified quarantine files to live storage (`{ "confirmed": true }`) |
-| `GET` | `/restore/:jobId` | Inspect file-level recovery outcomes (`VALID`, `MODIFIED`, `MISSING`) |
+
+| Method  | Endpoint                  | Description                                                                 |
+| ------- | ------------------------- | --------------------------------------------------------------------------- |
+| `GET`   | `/incidents`              | List security incidents (filter by `status`, `accountId`)                   |
+| `GET`   | `/incidents/:id`          | Detailed incident record with Ed25519 signature and affected files          |
+| `PATCH` | `/incidents/:id/status`   | Update incident status (`acknowledged`, `resolved`, `closed`)               |
+| `POST`  | `/incidents/:id/contain`  | Execute safe control-plane write-freeze on compromised account              |
+| `GET`   | `/incidents/:id/timeline` | Complete chronological timeline from alert to containment and recovery      |
+| `POST`  | `/incidents/:id/restore`  | Stage decrypted backup files in quarantine and verify baseline hashes       |
+| `POST`  | `/incidents/:id/promote`  | Promote verified quarantine files to live storage (`{ "confirmed": true }`) |
+| `GET`   | `/restore/:jobId`         | Inspect file-level recovery outcomes (`VALID`, `MODIFIED`, `MISSING`)       |
 
 ### Identity & Authentication
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/auth/register` | Register new SOC operator account with secure password hashing |
-| `POST` | `/api/auth/login` | Authenticate operator credentials and create persistent session |
-| `GET` | `/api/auth/me` | Fetch authenticated operator profile |
-| `POST` | `/api/auth/logout` | Terminate active operator session |
+
+| Method | Endpoint             | Description                                                     |
+| ------ | -------------------- | --------------------------------------------------------------- |
+| `POST` | `/api/auth/register` | Register new SOC operator account with secure password hashing  |
+| `POST` | `/api/auth/login`    | Authenticate operator credentials and create persistent session |
+| `GET`  | `/api/auth/me`       | Fetch authenticated operator profile                            |
+| `POST` | `/api/auth/logout`   | Terminate active operator session                               |
 
 ---
 
 ## Quality & Verification Benchmarks
 
-| Metric | Target | Verified Value | Status |
-|---|---|---|---|
-| **Unit & Integration Tests** | 100% Pass | **74 / 74 Passing** (23 Suites) | ✅ Verified |
-| **ESLint Quality** | 0 Errors | **0 Errors, 0 Warnings** | ✅ Verified |
-| **Tamper Detection (M7)** | Instant | 100% Detected (Broken chain rejected) | ✅ Verified |
-| **AEAD Authentication** | Unconditional | 100% Corrupted blocks rejected | ✅ Verified |
-| **Baseline Accuracy (M9)** | Deterministic | 100% Pre-attack SHA-256 match gate | ✅ Verified |
+| Metric                       | Target        | Verified Value                        | Status      |
+| ---------------------------- | ------------- | ------------------------------------- | ----------- |
+| **Unit & Integration Tests** | 100% Pass     | **74 / 74 Passing** (23 Suites)       | ✅ Verified |
+| **ESLint Quality**           | 0 Errors      | **0 Errors, 0 Warnings**              | ✅ Verified |
+| **Tamper Detection (M7)**    | Instant       | 100% Detected (Broken chain rejected) | ✅ Verified |
+| **AEAD Authentication**      | Unconditional | 100% Corrupted blocks rejected        | ✅ Verified |
+| **Baseline Accuracy (M9)**   | Deterministic | 100% Pre-attack SHA-256 match gate    | ✅ Verified |
 
 ---
 

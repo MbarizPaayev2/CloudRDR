@@ -8,17 +8,21 @@
 ## Quick Start
 
 ### Option A — Via the backend server (recommended)
+
 ```bash
 npm start          # starts Fastify on http://localhost:3000
 ```
+
 Open `http://localhost:3000` in Chrome or Firefox.
 
 ### Option B — Static file server
+
 ```bash
 npx serve dashboard/
 ```
 
 ### Option C — Double-click
+
 Open `dashboard/index.html` directly in Chrome (note: ES modules require a server for cross-origin safety; use Option A or B for full functionality).
 
 ---
@@ -40,14 +44,14 @@ POLL_INTERVAL_MS: 5000,
 
 ## Design System
 
-| Token | Value | Usage |
-|---|---|---|
-| `--paper` | `#EFE6D2` | Page background |
-| `--ink` | `#1B1A17` | Primary text, UI chrome |
-| `--seal` | `#B3261E` | RANSOMWARE / MODIFIED |
-| `--verdigris` | `#2F6F5E` | NORMAL / VALID |
-| `--canary` | `#F2C230` | SUSPICIOUS |
-| `--frost` | `#9CC9D9` | Frozen accounts |
+| Token         | Value     | Usage                   |
+| ------------- | --------- | ----------------------- |
+| `--paper`     | `#EFE6D2` | Page background         |
+| `--ink`       | `#1B1A17` | Primary text, UI chrome |
+| `--seal`      | `#B3261E` | RANSOMWARE / MODIFIED   |
+| `--verdigris` | `#2F6F5E` | NORMAL / VALID          |
+| `--canary`    | `#F2C230` | SUSPICIOUS              |
+| `--frost`     | `#9CC9D9` | Frozen accounts         |
 
 Fonts: **Fraunces** (display/headings, variable weight 200–900) · **Martian Mono** (hashes, paths, data) · **Special Elite** (stamps, labels)
 

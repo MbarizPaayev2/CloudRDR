@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Local data & quarantine (runtime generated)
+data/
+
+# Agent configuration, rules & skill packages
+.agents/
+
+# Knowledge graph generated artifacts & cache
+graphify-out/
+
+# Temporary directories
+temp_design_skills/
+
+# Cache & logs
+.eslintcache
+*.log
+
+# Lockfiles (optional, prettier should not reformat lockfiles)
+package-lock.json

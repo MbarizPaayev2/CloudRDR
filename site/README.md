@@ -2,14 +2,16 @@
 
 > **Cloud Ransomware Detection & Recovery**  
 > 3rd-year University Information Security Capstone (ISMS, Cloud Security, Cryptography)  
-> *Aesthetic:* Calm, light, minimal, modern developer tool experience.
+> _Aesthetic:_ Calm, light, minimal, modern developer tool experience.
 
 ---
 
 ## 1. Quick Start Guide
 
 ### Option A: Direct Local Static Execution (Zero Dependencies)
+
 Double-click `index.html` or serve with any zero-config local HTTP server:
+
 ```bash
 # Using npx serve (recommended)
 npx serve site
@@ -17,9 +19,11 @@ npx serve site
 # Or using Python built-in server
 python -m http.server 3001 --directory site
 ```
+
 Open **`http://localhost:3001`** in any modern web browser.
 
 ### Option B: Full Stack Live Backend
+
 1. Start the Fastify backend server in project root:
    ```bash
    npm start

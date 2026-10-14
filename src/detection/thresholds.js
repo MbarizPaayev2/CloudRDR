@@ -43,15 +43,22 @@ export function getThresholds() {
 export function updateThresholds(updates = {}) {
   const current = getThresholds();
   _runtimeThresholds = {
-    windowSeconds: typeof updates.windowSeconds === 'number' && updates.windowSeconds > 0
-      ? updates.windowSeconds
-      : current.windowSeconds,
-    suspiciousRate: typeof updates.suspiciousRate === 'number' && updates.suspiciousRate >= 0 && updates.suspiciousRate <= 1
-      ? updates.suspiciousRate
-      : current.suspiciousRate,
-    ransomwareRate: typeof updates.ransomwareRate === 'number' && updates.ransomwareRate >= 0 && updates.ransomwareRate <= 1
-      ? updates.ransomwareRate
-      : current.ransomwareRate,
+    windowSeconds:
+      typeof updates.windowSeconds === 'number' && updates.windowSeconds > 0
+        ? updates.windowSeconds
+        : current.windowSeconds,
+    suspiciousRate:
+      typeof updates.suspiciousRate === 'number' &&
+      updates.suspiciousRate >= 0 &&
+      updates.suspiciousRate <= 1
+        ? updates.suspiciousRate
+        : current.suspiciousRate,
+    ransomwareRate:
+      typeof updates.ransomwareRate === 'number' &&
+      updates.ransomwareRate >= 0 &&
+      updates.ransomwareRate <= 1
+        ? updates.ransomwareRate
+        : current.ransomwareRate,
     allowlistedAccounts: Array.isArray(updates.allowlistedAccounts)
       ? updates.allowlistedAccounts
       : current.allowlistedAccounts,

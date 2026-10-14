@@ -30,7 +30,6 @@ const DEFAULTS = {
   BUCKET_NAME: 'protected',
 };
 
-
 // Safe storage abstraction (browser localStorage with Node.js fallback)
 const storage =
   typeof window !== 'undefined' && window.localStorage

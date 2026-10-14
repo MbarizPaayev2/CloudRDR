@@ -15,22 +15,22 @@
 import { showToast } from './toast.js';
 
 /* ── Layout constants ────────────────────────────────────────────────────── */
-const SVG_NS  = 'http://www.w3.org/2000/svg';
-const LEAF_R  = 9;       // leaf circle radius
-const NODE_R  = 7;       // internal node radius
-const ROOT_R  = 11;      // root node radius
-const LEAF_ROW_Y  = 240; // Y position of leaf row
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const LEAF_R = 9; // leaf circle radius
+const NODE_R = 7; // internal node radius
+const ROOT_R = 11; // root node radius
+const LEAF_ROW_Y = 240; // Y position of leaf row
 const COLORS = {
-  healthy:   '#10B981',   // cyber emerald
-  corrupt:   '#EF4444',   // laser crimson
-  restored:  '#10B981',   // cyber emerald
-  missing:   '#64748B',   // slate-500
-  internal:  '#1E293B',   // slate-800
-  internalC: '#7F1D1D',   // dark crimson
-  edge:      'rgba(255, 255, 255, 0.16)',
-  edgeC:     'rgba(239, 68, 68, 0.6)',
-  root:      '#38BDF8',   // sky blue
-  rootC:     '#EF4444',   // laser crimson
+  healthy: '#10B981', // cyber emerald
+  corrupt: '#EF4444', // laser crimson
+  restored: '#10B981', // cyber emerald
+  missing: '#64748B', // slate-500
+  internal: '#1E293B', // slate-800
+  internalC: '#7F1D1D', // dark crimson
+  edge: 'rgba(255, 255, 255, 0.16)',
+  edgeC: 'rgba(239, 68, 68, 0.6)',
+  root: '#38BDF8', // sky blue
+  rootC: '#EF4444', // laser crimson
 };
 
 /** @type {SVGSVGElement|null} */
@@ -105,8 +105,10 @@ function svgEl(tag, attrs = {}) {
  */
 function drawEdge(from, to, key) {
   const line = svgEl('line', {
-    x1: from.x, y1: from.y,
-    x2: to.x,   y2: to.y,
+    x1: from.x,
+    y1: from.y,
+    x2: to.x,
+    y2: to.y,
     stroke: COLORS.edge,
     'stroke-width': 1.5,
     'stroke-linecap': 'round',
@@ -136,7 +138,8 @@ function drawTree(layout) {
   for (let li = 1; li < layout.layers.length - 1; li++) {
     for (const node of layout.layers[li]) {
       const circle = svgEl('circle', {
-        cx: node.x, cy: node.y,
+        cx: node.x,
+        cy: node.y,
         r: NODE_R,
         fill: COLORS.internal,
         stroke: COLORS.edge,
@@ -156,7 +159,8 @@ function drawTree(layout) {
     class: 'merkle-root-interactive',
   });
   const rootCircle = svgEl('circle', {
-    cx: rootNode.x, cy: rootNode.y,
+    cx: rootNode.x,
+    cy: rootNode.y,
     r: ROOT_R,
     fill: COLORS.root,
     stroke: 'none',
@@ -185,7 +189,8 @@ function drawTree(layout) {
 
   // Root label
   const rootLabel = svgEl('text', {
-    x: rootNode.x, y: rootNode.y - 18,
+    x: rootNode.x,
+    y: rootNode.y - 18,
     'text-anchor': 'middle',
     'font-family': "'JetBrains Mono', monospace",
     'font-size': '8',
@@ -206,7 +211,8 @@ function drawTree(layout) {
       style: 'cursor: pointer;',
     });
     const circle = svgEl('circle', {
-      cx: leaf.x, cy: leaf.y,
+      cx: leaf.x,
+      cy: leaf.y,
       r: LEAF_R,
       fill: COLORS.healthy,
       stroke: 'white',
@@ -221,7 +227,11 @@ function drawTree(layout) {
       if (navigator?.clipboard?.writeText) {
         navigator.clipboard.writeText(fakeHash).catch(() => {});
       }
-      showToast(`Leaf #${leaf.index} [${state.toUpperCase()}] · Hash copied: ${fakeHash.slice(0, 18)}…`, state === 'corrupt' ? 'threat' : 'info', 2500);
+      showToast(
+        `Leaf #${leaf.index} [${state.toUpperCase()}] · Hash copied: ${fakeHash.slice(0, 18)}…`,
+        state === 'corrupt' ? 'threat' : 'info',
+        2500
+      );
     };
 
     g.addEventListener('click', onLeafActivate);
@@ -293,15 +303,18 @@ export function setLeafState(index, state) {
  */
 export function animateCorruption(corruptIndices, baseDelayMs = 0) {
   corruptIndices.forEach((idx, i) => {
-    setTimeout(() => {
-      setLeafState(idx, 'corrupt');
-      // Animate the leaf element: scale up briefly
-      const entry = _leafEls.get(idx);
-      if (entry) {
-        entry.el.setAttribute('r', LEAF_R + 3);
-        setTimeout(() => entry.el.setAttribute('r', LEAF_R), 200);
-      }
-    }, baseDelayMs + i * 120);
+    setTimeout(
+      () => {
+        setLeafState(idx, 'corrupt');
+        // Animate the leaf element: scale up briefly
+        const entry = _leafEls.get(idx);
+        if (entry) {
+          entry.el.setAttribute('r', LEAF_R + 3);
+          setTimeout(() => entry.el.setAttribute('r', LEAF_R), 200);
+        }
+      },
+      baseDelayMs + i * 120
+    );
   });
 
   // After leaves, corrupt root
@@ -330,14 +343,17 @@ export function animateCorruption(corruptIndices, baseDelayMs = 0) {
  */
 export function animateRestore(indices, baseDelayMs = 0) {
   indices.forEach((idx, i) => {
-    setTimeout(() => {
-      setLeafState(idx, 'restored');
-      const entry = _leafEls.get(idx);
-      if (entry) {
-        entry.el.setAttribute('r', LEAF_R + 3);
-        setTimeout(() => entry.el.setAttribute('r', LEAF_R), 200);
-      }
-    }, baseDelayMs + i * 100);
+    setTimeout(
+      () => {
+        setLeafState(idx, 'restored');
+        const entry = _leafEls.get(idx);
+        if (entry) {
+          entry.el.setAttribute('r', LEAF_R + 3);
+          setTimeout(() => entry.el.setAttribute('r', LEAF_R), 200);
+        }
+      },
+      baseDelayMs + i * 100
+    );
   });
 
   const totalDelay = baseDelayMs + indices.length * 100 + 500;

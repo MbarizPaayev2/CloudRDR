@@ -31,9 +31,14 @@ function buildChartData(points) {
       : pt.timeLabel || '—';
     labels.push(t);
     normalData.push(pt.normalModifications ?? Math.round((pt.change_rate || 0) * 50));
-    suspiciousData.push(pt.suspiciousModifications ?? (pt.verdict === 'ransomware' ? 22 : pt.verdict === 'suspicious' ? 7 : 0));
+    suspiciousData.push(
+      pt.suspiciousModifications ??
+        (pt.verdict === 'ransomware' ? 22 : pt.verdict === 'suspicious' ? 7 : 0)
+    );
 
-    const isIncident = Boolean(pt.incidentMarker || pt.canary_triggered || pt.verdict === 'ransomware');
+    const isIncident = Boolean(
+      pt.incidentMarker || pt.canary_triggered || pt.verdict === 'ransomware'
+    );
     pointStyles.push(isIncident ? 'rectRot' : 'circle');
     pointRadius.push(isIncident ? 6 : 3);
   }

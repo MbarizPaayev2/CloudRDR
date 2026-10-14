@@ -58,7 +58,11 @@ export function initBaselinePanel() {
   btn.addEventListener('click', async () => {
     if (isCapturing) return;
 
-    if (!confirm('Capture a new cryptographic SHA-256 baseline and compute Merkle tree root for protected bucket?')) {
+    if (
+      !confirm(
+        'Capture a new cryptographic SHA-256 baseline and compute Merkle tree root for protected bucket?'
+      )
+    ) {
       return;
     }
 
@@ -96,7 +100,8 @@ export function updateBaselinePanel(state) {
   // 2. File Count
   const fileCountEl = document.getElementById('baselineFileCount');
   if (fileCountEl) {
-    fileCountEl.textContent = baseline?.file_count !== undefined ? String(baseline.file_count) : '—';
+    fileCountEl.textContent =
+      baseline?.file_count !== undefined ? String(baseline.file_count) : '—';
   }
 
   // 3. Snapshot Date

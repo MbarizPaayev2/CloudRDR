@@ -16,8 +16,8 @@ let _wasTriggered = false;
  * @param {string} verdict
  */
 export function updateCanaryCage(canaryTriggered, verdict) {
-  const wrap   = document.getElementById('canaryCageWrap');
-  const text   = document.getElementById('canaryStatusText');
+  const wrap = document.getElementById('canaryCageWrap');
+  const text = document.getElementById('canaryStatusText');
 
   if (!wrap || !text) return;
 

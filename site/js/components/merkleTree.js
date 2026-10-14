@@ -31,7 +31,7 @@ export function initMerkleTree(containerEl, options = {}) {
     height - 72, // L1 (8 nodes)
     height - 120, // L2 (4 nodes)
     height - 165, // L3 (2 nodes)
-    26,          // L4 Root Apex
+    26, // L4 Root Apex
   ];
 
   let idCounter = 0;
@@ -229,7 +229,7 @@ export function initMerkleTree(containerEl, options = {}) {
     { name: 'archives/backup_snap.tar', type: 'Protected Object', size: '12.0 MB' },
     { name: 'logs/access_audit.log', type: 'Protected Object', size: '310 KB' },
     { name: 'health/records.enc', type: 'Protected Object', size: '890 KB' },
-    { name: 'tokens/jwt_sign.key', type: 'Protected Object', size: '2.4 KB' }
+    { name: 'tokens/jwt_sign.key', type: 'Protected Object', size: '2.4 KB' },
   ];
 
   // Tooltip container
@@ -263,11 +263,15 @@ export function initMerkleTree(containerEl, options = {}) {
       const svgRect = svgEl.getBoundingClientRect();
       const scaleX = svgRect.width / width;
       const scaleY = svgRect.height / height;
-      const posX = (node.x * scaleX);
-      const posY = (node.y * scaleY);
+      const posX = node.x * scaleX;
+      const posY = node.y * scaleY;
 
       if (node.level === 0) {
-        const file = FILE_METADATA[node.index] || { name: `file_${node.index}.dat`, type: 'Object', size: '20 KB' };
+        const file = FILE_METADATA[node.index] || {
+          name: `file_${node.index}.dat`,
+          type: 'Object',
+          size: '20 KB',
+        };
         tooltip.innerHTML = `
           <div style="font-weight:700;color:var(--text);margin-bottom:2px;">${file.name}</div>
           <div style="color:var(--text-muted);font-size:0.68rem;margin-bottom:3px;">${file.type} &middot; ${file.size}</div>
@@ -312,11 +316,11 @@ export function initMerkleTree(containerEl, options = {}) {
       if (rootDisplay && rootDisplay.getAttribute('data-full-hash')) {
         rootHash = rootDisplay.getAttribute('data-full-hash');
       }
-      const leafIdx = node.level === 0 ? node.index : (node.index % 16);
+      const leafIdx = node.level === 0 ? node.index : node.index % 16;
       const isCorrupted = currentCorrupted.has(leafIdx);
       openMerkleInspector(leafIdx, {
         isCorrupted,
-        currentRoot: rootHash
+        currentRoot: rootHash,
       });
     });
   });
@@ -335,12 +339,17 @@ export function initMerkleTree(containerEl, options = {}) {
         hash = rootDisplay.getAttribute('data-full-hash');
       }
     }
-    navigator.clipboard.writeText(hash).then(() => {
-      const codeEl = copyBtn.querySelector('code');
-      const origText = codeEl ? codeEl.textContent : '';
-      if (codeEl) codeEl.textContent = 'COPIED TO CLIPBOARD!';
-      setTimeout(() => { if (codeEl) codeEl.textContent = origText; }, 1600);
-    }).catch(() => {});
+    navigator.clipboard
+      .writeText(hash)
+      .then(() => {
+        const codeEl = copyBtn.querySelector('code');
+        const origText = codeEl ? codeEl.textContent : '';
+        if (codeEl) codeEl.textContent = 'COPIED TO CLIPBOARD!';
+        setTimeout(() => {
+          if (codeEl) codeEl.textContent = origText;
+        }, 1600);
+      })
+      .catch(() => {});
   });
 
   // Return update function
@@ -355,7 +364,9 @@ export function initMerkleTree(containerEl, options = {}) {
     const pulseEl = containerEl.querySelector('#merkleHeaderPulse');
     if (rootEl && badgeEl) {
       if (hasCorrupt) {
-        const fullHash = appState.currentRootHash || 'a8f9c1b34e62d590e8b211f49a2cd7081bc598e213ad459bc76319802d354aef';
+        const fullHash =
+          appState.currentRootHash ||
+          'a8f9c1b34e62d590e8b211f49a2cd7081bc598e213ad459bc76319802d354aef';
         rootEl.textContent = fullHash.slice(0, 16) + '...';
         rootEl.setAttribute('data-full-hash', fullHash);
         rootEl.style.color = 'var(--status-ransomware)';
@@ -363,7 +374,9 @@ export function initMerkleTree(containerEl, options = {}) {
         badgeEl.textContent = 'Differs from Baseline';
         if (pulseEl) pulseEl.className = 'merkle-badge-pulse compromised';
       } else {
-        const fullHash = appState.baseline?.merkle_root || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+        const fullHash =
+          appState.baseline?.merkle_root ||
+          'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
         rootEl.textContent = fullHash.slice(0, 16) + '...';
         rootEl.setAttribute('data-full-hash', fullHash);
         rootEl.style.color = 'var(--text)';
@@ -421,10 +434,13 @@ export function initMerkleTree(containerEl, options = {}) {
 
     // Update link visuals
     links.forEach((link) => {
-      const line = linksGroup.querySelector(`[data-source="${link.source.id}"][data-target="${link.target.id}"]`);
+      const line = linksGroup.querySelector(
+        `[data-source="${link.source.id}"][data-target="${link.target.id}"]`
+      );
       if (!line) return;
 
-      const isCompromised = affectedNodeIds.has(link.target.id) && affectedNodeIds.has(link.source.id);
+      const isCompromised =
+        affectedNodeIds.has(link.target.id) && affectedNodeIds.has(link.source.id);
       if (isCompromised) {
         line.setAttribute('stroke', 'var(--status-ransomware)');
         line.setAttribute('stroke-dasharray', '4,3');
@@ -440,7 +456,9 @@ export function initMerkleTree(containerEl, options = {}) {
     if (particlesGroup) {
       particlesGroup.innerHTML = '';
       if (hasCorrupt) {
-        const activeLinks = links.filter(l => affectedNodeIds.has(l.target.id) && affectedNodeIds.has(l.source.id));
+        const activeLinks = links.filter(
+          (l) => affectedNodeIds.has(l.target.id) && affectedNodeIds.has(l.source.id)
+        );
         activeLinks.forEach((link, idx) => {
           const p = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
           p.setAttribute('r', '3.5');
@@ -453,7 +471,7 @@ export function initMerkleTree(containerEl, options = {}) {
           const endX = link.source.x;
           const endY = link.source.y;
           const duration = 520;
-          const startTime = performance.now() + (idx * 55);
+          const startTime = performance.now() + idx * 55;
 
           function step(now) {
             if (now < startTime) {
@@ -485,7 +503,9 @@ export function initMerkleTree(containerEl, options = {}) {
                 halo.setAttribute('stroke-width', '2');
                 halo.setAttribute('class', 'merkle-apex-halo');
                 particlesGroup.appendChild(halo);
-                setTimeout(() => { halo.remove(); }, 2000);
+                setTimeout(() => {
+                  halo.remove();
+                }, 2000);
               }
             }
           }

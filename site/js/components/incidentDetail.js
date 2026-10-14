@@ -16,7 +16,9 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
 
   const detectedStr = new Date(incident.detected_at).toLocaleString();
   const frozenStr = incident.frozen_at ? new Date(incident.frozen_at).toLocaleString() : 'Pending';
-  const resolvedStr = incident.resolved_at ? new Date(incident.resolved_at).toLocaleString() : 'Not resolved';
+  const resolvedStr = incident.resolved_at
+    ? new Date(incident.resolved_at).toLocaleString()
+    : 'Not resolved';
 
   containerEl.innerHTML = `
     <div class="panel" style="margin-top:var(--space-6);">
@@ -142,7 +144,11 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
   const resultsWrap = containerEl.querySelector('#restoreResultsTableWrap');
 
   restoreBtn?.addEventListener('click', async () => {
-    if (!confirm('Proceed with cryptographic restore? Any file failing AEAD authentication will not be written back.')) {
+    if (
+      !confirm(
+        'Proceed with cryptographic restore? Any file failing AEAD authentication will not be written back.'
+      )
+    ) {
       return;
     }
 
@@ -151,7 +157,7 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
 
     try {
       const { job_id } = await startRestore(incident.id);
-      
+
       // Animate progress simulation
       const total = incident.affected_paths?.length || 16;
       let valid = 0;
@@ -185,13 +191,17 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
               <tr><th>Object Path</th><th>Status</th><th>Integrity Check</th></tr>
             </thead>
             <tbody>
-              ${fileResults.map((r) => `
+              ${fileResults
+                .map(
+                  (r) => `
                 <tr>
                   <td><code class="mono">${r.path}</code></td>
                   <td><span class="status-chip valid">${r.result}</span></td>
                   <td>SHA-256 match &amp; AEAD tag valid</td>
                 </tr>
-              `).join('')}
+              `
+                )
+                .join('')}
             </tbody>
           </table>
         </div>

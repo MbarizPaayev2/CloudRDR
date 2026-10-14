@@ -38,9 +38,17 @@ describe('CloudRDR Authentication & User Management', () => {
       const hash = hashPassword(pwd);
 
       assert.equal(verifyPassword(pwd, hash), true, 'Correct password must verify');
-      assert.equal(verifyPassword('WrongPassword123!', hash), false, 'Wrong password must be rejected');
+      assert.equal(
+        verifyPassword('WrongPassword123!', hash),
+        false,
+        'Wrong password must be rejected'
+      );
       assert.equal(verifyPassword('', hash), false, 'Empty password must be rejected');
-      assert.equal(verifyPassword(pwd, 'invalid$hash$format'), false, 'Malformed hash must not throw');
+      assert.equal(
+        verifyPassword(pwd, 'invalid$hash$format'),
+        false,
+        'Malformed hash must not throw'
+      );
     });
   });
 

@@ -82,9 +82,7 @@ export function updateAuditLog(state) {
       // Genesis block verification
       const isGenesisValid =
         current.valid !== false &&
-        (!current.prevHash ||
-          current.prevHash === '0'.repeat(64) ||
-          /^0+$/.test(current.prevHash));
+        (!current.prevHash || current.prevHash === '0'.repeat(64) || /^0+$/.test(current.prevHash));
       if (!isGenesisValid) {
         isChainValid = false;
         firstBrokenIndex = 0;

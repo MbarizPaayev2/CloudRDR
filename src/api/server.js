@@ -49,7 +49,6 @@ export async function buildServer(options = {}) {
     credentials: true,
   });
 
-
   // 2. Rate limiting
   await app.register(rateLimit, {
     max: 100,
@@ -88,7 +87,11 @@ export async function buildServer(options = {}) {
     const authHeader = request.headers['authorization'];
     const customHeader = request.headers['x-api-key'];
 
-    const apiKeyToken = customHeader || (authHeader?.startsWith('Bearer ') && authHeader.slice(7) === cfg.api.key ? cfg.api.key : null);
+    const apiKeyToken =
+      customHeader ||
+      (authHeader?.startsWith('Bearer ') && authHeader.slice(7) === cfg.api.key
+        ? cfg.api.key
+        : null);
 
     // 1. Authorized via valid API Key
     if (apiKeyToken && apiKeyToken === cfg.api.key) {

@@ -1,102 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Security Incidents — CloudRDR Demo</title>
-  <meta name="description" content="Active and historical ransomware incidents and cryptographic recovery tracking." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security Incidents — CloudRDR Demo</title>
+    <meta
+      name="description"
+      content="Active and historical ransomware incidents and cryptographic recovery tracking."
+    />
 
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
-  <link rel="alternate icon" href="../assets/favicon.ico" />
-  <link rel="stylesheet" href="../css/tokens.css" />
-  <link rel="stylesheet" href="../css/base.css" />
-  <link rel="stylesheet" href="../css/components.css" />
-  <link rel="stylesheet" href="../css/pages.css" />
-</head>
-<body>
-  <a href="#main-content" class="skip-to-content">Skip to incidents table</a>
-  <div id="site-header-container"></div>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+    <link rel="alternate icon" href="../assets/favicon.ico" />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-to-content">Skip to incidents table</a>
+    <div id="site-header-container"></div>
 
-  <div class="demo-layout">
-    <!-- Left Sidebar -->
-    <aside class="demo-sidebar" aria-label="Demo navigation">
-      <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;padding:0 14px;margin-bottom:8px;">
-        SOC Console
-      </div>
-      <a href="index.html" class="sidebar-nav-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>Dashboard</span>
-      </a>
-      <a href="incidents.html" class="sidebar-nav-item active">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <span>Incidents</span>
-      </a>
-      <a href="audit.html" class="sidebar-nav-item">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        <span>Audit Log</span>
-      </a>
-    </aside>
-
-    <!-- Main Workspace -->
-    <main class="demo-main" id="main-content" tabindex="-1" style="padding:var(--space-6);">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6);">
-        <div>
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">
-            Containment Queue
-          </span>
-          <h1 style="font-size:var(--text-2xl);font-weight:600;margin-top:2px;">Security Incidents</h1>
+    <div class="demo-layout">
+      <!-- Left Sidebar -->
+      <aside class="demo-sidebar" aria-label="Demo navigation">
+        <div
+          style="
+            font-family: var(--font-mono);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 0 14px;
+            margin-bottom: 8px;
+          "
+        >
+          SOC Console
         </div>
-        <a href="index.html" class="btn btn-secondary btn-sm">← Back to Dashboard</a>
-      </div>
+        <a href="index.html" class="sidebar-nav-item">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="incidents.html" class="sidebar-nav-item active">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+            />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <span>Incidents</span>
+        </a>
+        <a href="audit.html" class="sidebar-nav-item">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+          </svg>
+          <span>Audit Log</span>
+        </a>
+      </aside>
 
-      <div class="panel">
-        <div id="incidentsTableContainer"></div>
-      </div>
+      <!-- Main Workspace -->
+      <main class="demo-main" id="main-content" tabindex="-1" style="padding: var(--space-6)">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-6);
+          "
+        >
+          <div>
+            <span
+              style="
+                font-family: var(--font-mono);
+                font-size: var(--text-xs);
+                color: var(--text-muted);
+                text-transform: uppercase;
+              "
+            >
+              Containment Queue
+            </span>
+            <h1 style="font-size: var(--text-2xl); font-weight: 600; margin-top: 2px">
+              Security Incidents
+            </h1>
+          </div>
+          <a href="index.html" class="btn btn-secondary btn-sm">← Back to Dashboard</a>
+        </div>
 
-      <!-- Container for selected incident detail -->
-      <div id="incidentDetailContainer"></div>
-    </main>
-  </div>
+        <div class="panel">
+          <div id="incidentsTableContainer"></div>
+        </div>
 
-  <div id="site-footer-container"></div>
+        <!-- Container for selected incident detail -->
+        <div id="incidentDetailContainer"></div>
+      </main>
+    </div>
 
-  <script type="module">
-    import { initSharedNav } from '../js/components/nav.js';
-    import { renderIncidentTable } from '../js/components/incidentTable.js';
-    import { renderIncidentDetail } from '../js/components/incidentDetail.js';
-    import { getState, subscribe } from '../js/state.js';
-    import { startPolling } from '../js/main.js';
-    import * as api from '../js/api.js';
+    <div id="site-footer-container"></div>
 
-    initSharedNav({ activePage: 'demo', basePath: '../' });
+    <script type="module">
+      import { initSharedNav } from '../js/components/nav.js';
+      import { renderIncidentTable } from '../js/components/incidentTable.js';
+      import { renderIncidentDetail } from '../js/components/incidentDetail.js';
+      import { getState, subscribe } from '../js/state.js';
+      import { startPolling } from '../js/main.js';
+      import * as api from '../js/api.js';
 
-    const tableContainer = document.getElementById('incidentsTableContainer');
-    const detailContainer = document.getElementById('incidentDetailContainer');
+      initSharedNav({ activePage: 'demo', basePath: '../' });
 
-    function showDetail(incidentId) {
-      const state = getState();
-      const inc = state.incidents.find((i) => i.id === incidentId);
-      if (inc) {
-        renderIncidentDetail(detailContainer, inc, () => {
-          detailContainer.innerHTML = '';
-        });
-        detailContainer.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        // Fetch if not in state
-        api.getIncident(incidentId).then((fetchedInc) => {
-          renderIncidentDetail(detailContainer, fetchedInc, () => {
+      const tableContainer = document.getElementById('incidentsTableContainer');
+      const detailContainer = document.getElementById('incidentDetailContainer');
+
+      function showDetail(incidentId) {
+        const state = getState();
+        const inc = state.incidents.find((i) => i.id === incidentId);
+        if (inc) {
+          renderIncidentDetail(detailContainer, inc, () => {
             detailContainer.innerHTML = '';
           });
           detailContainer.scrollIntoView({ behavior: 'smooth' });
-        });
+        } else {
+          // Fetch if not in state
+          api.getIncident(incidentId).then((fetchedInc) => {
+            renderIncidentDetail(detailContainer, fetchedInc, () => {
+              detailContainer.innerHTML = '';
+            });
+            detailContainer.scrollIntoView({ behavior: 'smooth' });
+          });
+        }
       }
-    }
 
-    subscribe((state) => {
-      renderIncidentTable(tableContainer, state.incidents, showDetail);
-    });
+      subscribe((state) => {
+        renderIncidentTable(tableContainer, state.incidents, showDetail);
+      });
 
-    startPolling();
-  </script>
-</body>
+      startPolling();
+    </script>
+  </body>
 </html>

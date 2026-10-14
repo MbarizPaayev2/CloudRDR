@@ -67,7 +67,9 @@ export function validatePasswordStrength(password) {
   const hasLetter = /[a-zA-Z]/.test(password);
   const hasNumberOrSymbol = /[\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
   if (!hasLetter || !hasNumberOrSymbol) {
-    throw new ValidationError('Password must contain at least one letter and one number or symbol.');
+    throw new ValidationError(
+      'Password must contain at least one letter and one number or symbol.'
+    );
   }
 }
 
@@ -83,7 +85,14 @@ export function validatePasswordStrength(password) {
  * @param {string} [params.userAgent] - Request User-Agent
  * @returns {Promise<{ user: Object, token: string, expiresAt: string }>}
  */
-export async function register({ fullName, email, password, confirmPassword, ip = '', userAgent = '' }) {
+export async function register({
+  fullName,
+  email,
+  password,
+  confirmPassword,
+  ip = '',
+  userAgent = '',
+}) {
   if (!fullName || typeof fullName !== 'string' || fullName.trim().length < 2) {
     throw new ValidationError('Full name must be at least 2 characters.');
   }
@@ -161,7 +170,10 @@ export async function register({ fullName, email, password, confirmPassword, ip 
     timestamp: now,
   });
 
-  logger.info({ userId: newUser.id, email: normalizedEmail }, 'auth: internal user successfully registered');
+  logger.info(
+    { userId: newUser.id, email: normalizedEmail },
+    'auth: internal user successfully registered'
+  );
 
   return {
     user: sanitizeUser(newUser),
@@ -223,9 +235,7 @@ export async function login({ email, password, ip = '', userAgent = '' }) {
   }
 
   // Update last_login_at
-  await supaQuery(
-    db.from('internal_users').update({ last_login_at: now }).eq('id', user.id)
-  );
+  await supaQuery(db.from('internal_users').update({ last_login_at: now }).eq('id', user.id));
   user.last_login_at = now;
 
   // Create persistent session
@@ -301,9 +311,7 @@ export async function validateSession(token) {
 
   // Update last_active_at
   const now = new Date().toISOString();
-  await supaQuery(
-    db.from('user_sessions').update({ last_active_at: now }).eq('id', session.id)
-  );
+  await supaQuery(db.from('user_sessions').update({ last_active_at: now }).eq('id', session.id));
 
   return {
     user: sanitizeUser(user),
@@ -328,9 +336,7 @@ export async function logout(token) {
   );
 
   if (session) {
-    await supaQuery(
-      db.from('user_sessions').update({ revoked: true }).eq('id', session.id)
-    );
+    await supaQuery(db.from('user_sessions').update({ revoked: true }).eq('id', session.id));
 
     await appendAuditLog({
       type: 'AUTH_LOGOUT',

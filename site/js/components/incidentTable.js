@@ -28,11 +28,7 @@ export function renderIncidentTable(containerEl, incidents = [], onSelectInciden
   const rows = incidents
     .map((inc) => {
       const statusClass =
-        inc.status === 'resolved'
-          ? 'valid'
-          : inc.status === 'frozen'
-          ? 'frozen'
-          : 'modified';
+        inc.status === 'resolved' ? 'valid' : inc.status === 'frozen' ? 'frozen' : 'modified';
 
       const detectedTime = new Date(inc.detected_at).toLocaleString();
       const filesCount = inc.affected_paths?.length || 0;

@@ -105,7 +105,9 @@ export async function playStory(onProgress = () => {}) {
     await sleep(2400);
 
     // ── STAGE 6: Cryptographic Recovery Verification ───────────────────────
-    onProgress('Stage 6/6: Starting AEAD verified recovery. Re-hashing every leaf against baseline.');
+    onProgress(
+      'Stage 6/6: Starting AEAD verified recovery. Re-hashing every leaf against baseline.'
+    );
     setState({
       verdict: 'suspicious',
       storyStep: 'Verifying decrypted backup blobs',
@@ -128,7 +130,9 @@ export async function playStory(onProgress = () => {}) {
 
     const auditBlock = {
       index: state.auditLog.length,
-      prev_hash: state.auditLog[state.auditLog.length - 1]?.hash || '0000000000000000000000000000000000000000000000000000000000000000',
+      prev_hash:
+        state.auditLog[state.auditLog.length - 1]?.hash ||
+        '0000000000000000000000000000000000000000000000000000000000000000',
       hash: 'fa9021bc87123de458129034feab0912cb84ef92a17013c72b892a0149e01fbc',
       action: 'INCIDENT_RESOLVED_100_VERIFIED',
       timestamp: new Date().toISOString(),

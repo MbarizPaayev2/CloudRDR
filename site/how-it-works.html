@@ -1,499 +1,1002 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How It Works — CloudRDR Cryptographic Defense</title>
-  <meta name="description" content="In-depth architectural walkthrough of the 6-stage autonomous ransomware detection and recovery lifecycle." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How It Works — CloudRDR Cryptographic Defense</title>
+    <meta
+      name="description"
+      content="In-depth architectural walkthrough of the 6-stage autonomous ransomware detection and recovery lifecycle."
+    />
 
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="alternate icon" href="assets/favicon.ico" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/pages.css" />
-</head>
-<body>
-  <a href="#main-content" class="skip-to-content">Skip to main content</a>
-  <div id="site-header-container"></div>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="alternate icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    <div id="site-header-container"></div>
 
-  <main id="main-content" class="section-pad" tabindex="-1">
-    <div class="container" style="max-width:1060px;">
-      <div style="margin-bottom:var(--space-10);">
-        <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;letter-spacing:1.5px;">Cryptographic Pipeline Walkthrough</span>
-        <h1 style="font-size:var(--text-2xl);font-weight:600;margin-top:var(--space-2);">How CloudRDR defends cloud storage</h1>
-        <p style="font-size:var(--text-lg);color:var(--text-muted);margin-top:var(--space-3);max-width:760px;">
-          A real-time interactive guide to the 6-stage autonomous detection, sub-10s IAM containment, and AEAD-verified recovery lifecycle.
-        </p>
-      </div>
+    <main id="main-content" class="section-pad" tabindex="-1">
+      <div class="container" style="max-width: 1060px">
+        <div style="margin-bottom: var(--space-10)">
+          <span
+            style="
+              font-family: var(--font-mono);
+              font-size: var(--text-xs);
+              color: var(--brand);
+              text-transform: uppercase;
+              letter-spacing: 1.5px;
+            "
+            >Cryptographic Pipeline Walkthrough</span
+          >
+          <h1 style="font-size: var(--text-2xl); font-weight: 600; margin-top: var(--space-2)">
+            How CloudRDR defends cloud storage
+          </h1>
+          <p
+            style="
+              font-size: var(--text-lg);
+              color: var(--text-muted);
+              margin-top: var(--space-3);
+              max-width: 760px;
+            "
+          >
+            A real-time interactive guide to the 6-stage autonomous detection, sub-10s IAM
+            containment, and AEAD-verified recovery lifecycle.
+          </p>
+        </div>
 
-      <!-- ── THE 6 CONNECTED PIPELINE STAGES ──────────────────────────────── -->
-      <div id="timelineContainer" class="how-timeline-container">
-        <!-- Vertical Neon Beam Track & Dynamic Fill -->
-        <div class="how-timeline-track"></div>
-        <div id="timelineBeamFill" class="how-timeline-beam-fill"></div>
-        
-        <!-- Step 1 -->
-        <article id="stage-0" class="how-stage-item active" data-stage-idx="0">
-          <div class="how-stage-pin">01</div>
-          <div class="how-stage-card spotlight-card">
-            <div class="stage-text-col">
-              <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);margin-bottom:4px;font-weight:600;">STAGE 01 // IMMUTABLE BASELINE</div>
-              <h2 style="font-size:1.25rem;margin-bottom:8px;">1. Establishing the cryptographic baseline</h2>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.6;">
-                Before any attack occurs, every file in the protected bucket is read via streaming SHA-256 hashing without buffering the full file into server RAM. The resulting cryptographic digests are sorted deterministically and assembled into a binary Merkle tree.
-              </p>
-              <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:var(--text);">What you will see in the demo:</strong> The Baseline Panel shows the total protected files and the 64-character Merkle root hash. In the Merkle DAG, all 16 leaves appear healthy green.
-              </div>
-            </div>
-            <!-- Micro-Diagram 01 -->
-            <div class="stage-diagram-col" id="microDiagram0">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;">Merkle Tree Assembly</span>
-                <button type="button" id="recalcMerkleBtn" style="background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.4);color:#38BDF8;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Fold Tree</button>
-              </div>
-              <div style="text-align:center;margin-bottom:6px;">
-                <div id="merkleRootChip" class="micro-node-chip highlight" style="display:inline-block;padding:5px 12px;border-color:#10B981;color:#10B981;font-weight:700;">
-                  ROOT: e3b0c442…7852b855
+        <!-- ── THE 6 CONNECTED PIPELINE STAGES ──────────────────────────────── -->
+        <div id="timelineContainer" class="how-timeline-container">
+          <!-- Vertical Neon Beam Track & Dynamic Fill -->
+          <div class="how-timeline-track"></div>
+          <div id="timelineBeamFill" class="how-timeline-beam-fill"></div>
+
+          <!-- Step 1 -->
+          <article id="stage-0" class="how-stage-item active" data-stage-idx="0">
+            <div class="how-stage-pin">01</div>
+            <div class="how-stage-card spotlight-card">
+              <div class="stage-text-col">
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: var(--text-xs);
+                    color: var(--brand);
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  STAGE 01 // IMMUTABLE BASELINE
+                </div>
+                <h2 style="font-size: 1.25rem; margin-bottom: 8px">
+                  1. Establishing the cryptographic baseline
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6">
+                  Before any attack occurs, every file in the protected bucket is read via streaming
+                  SHA-256 hashing without buffering the full file into server RAM. The resulting
+                  cryptographic digests are sorted deterministically and assembled into a binary
+                  Merkle tree.
+                </p>
+                <div
+                  class="panel-subtle"
+                  style="
+                    margin-top: auto;
+                    padding: 10px 14px;
+                    border-radius: 6px;
+                    font-size: 0.82rem;
+                  "
+                >
+                  <strong style="color: var(--text)">What you will see in the demo:</strong> The
+                  Baseline Panel shows the total protected files and the 64-character Merkle root
+                  hash. In the Merkle DAG, all 16 leaves appear healthy green.
                 </div>
               </div>
-              <svg class="micro-tree-svg" viewBox="0 0 280 40" style="width:100%;height:32px;display:block;">
-                <line id="lineRootL" x1="140" y1="2" x2="70" y2="38" />
-                <line id="lineRootR" x1="140" y1="2" x2="210" y2="38" />
-              </svg>
-              <div style="display:flex;justify-content:space-around;margin-bottom:4px;">
-                <div class="micro-node-chip" id="chipH01">H01 (Left)</div>
-                <div class="micro-node-chip" id="chipH23">H23 (Right)</div>
-              </div>
-              <svg class="micro-tree-svg" viewBox="0 0 280 30" style="width:100%;height:24px;display:block;">
-                <line x1="70" y1="2" x2="35" y2="28" />
-                <line x1="70" y1="2" x2="105" y2="28" />
-                <line x1="210" y1="2" x2="175" y2="28" />
-                <line x1="210" y1="2" x2="245" y2="28" />
-              </svg>
-              <div style="display:flex;justify-content:space-between;gap:4px;">
-                <div class="micro-node-chip" style="font-size:0.6rem;">L0: payroll</div>
-                <div class="micro-node-chip" style="font-size:0.6rem;">L1: contract</div>
-                <div class="micro-node-chip" style="font-size:0.6rem;">L2: keys.pem</div>
-                <div class="micro-node-chip" style="font-size:0.6rem;">L3: db.dump</div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Step 2 -->
-        <article id="stage-1" class="how-stage-item" data-stage-idx="1">
-          <div class="how-stage-pin">02</div>
-          <div class="how-stage-card spotlight-card">
-            <div class="stage-text-col">
-              <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);margin-bottom:4px;font-weight:600;">STAGE 02 // REAL-TIME TELEMETRY</div>
-              <h2 style="font-size:1.25rem;margin-bottom:8px;">2. Sliding-window polling agent</h2>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.6;">
-                A lightweight background monitor agent observes bucket storage events (file creations, modifications, and deletions) on a 10-second polling cadence. It computes rolling change counts within a 60-second sliding time window.
-              </p>
-              <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:var(--text);">What you will see in the demo:</strong> The Detection Velocity Chart plots change rates in real time, comparing current file activity against configured threshold lines.
-              </div>
-            </div>
-            <!-- Micro-Diagram 02 -->
-            <div class="stage-diagram-col">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;">10s Storage Radar</span>
-                <span style="font-family:var(--font-mono);font-size:0.65rem;color:#10B981;background:rgba(16,185,129,0.12);padding:2px 6px;border-radius:4px;">POLLING ACTIVE</span>
-              </div>
-              <div class="radar-scope">
-                <div class="radar-ring r1"></div>
-                <div class="radar-ring r2"></div>
-                <div class="radar-crosshair-h"></div>
-                <div class="radar-crosshair-v"></div>
-                <div class="radar-sweep-beam"></div>
-                <div class="radar-blip b1" title="Object 1 (payroll_q3.xlsx)"></div>
-                <div class="radar-blip b2" title="Object 2 (vault.key)"></div>
-                <div class="radar-blip b3" title="Object 3 (database.sql)"></div>
-              </div>
-              <div style="margin-top:8px;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);text-align:center;">
-                Cadence: <span style="color:var(--brand);">10.0s</span> | Objects Tracked: <span style="color:var(--text);font-weight:600;">16</span> | State: <span style="color:#10B981;">Clean</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Step 3 -->
-        <article id="stage-2" class="how-stage-item" data-stage-idx="2">
-          <div class="how-stage-pin">03</div>
-          <div class="how-stage-card spotlight-card">
-            <div class="stage-text-col">
-              <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-ransomware);margin-bottom:4px;font-weight:600;">STAGE 03 // VELOCITY TRIPWIRE</div>
-              <h2 style="font-size:1.25rem;margin-bottom:8px;">3. Velocity and canary threshold classification</h2>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.6;">
-                The engine evaluates the change rate (unique modified files / total files). Changes under 10% are classified as <span class="status-chip valid">NORMAL</span>, 10–30% as <span class="status-chip" style="background:var(--status-suspicious-subtle);color:var(--status-suspicious);">SUSPICIOUS</span>, and 30%+ as <span class="status-chip modified">RANSOMWARE</span>. In addition, decoy canary files (such as <code>canary/tripwire_sentinel.docx</code>) act as zero-tolerance tripwires: modifying or deleting any canary triggers an immediate ransomware verdict regardless of rate.
-              </p>
-              <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:var(--text);">What you will see in the demo:</strong> The Verdict Badge switches to pulsing red RANSOMWARE, and the Canary Sentinel Card displays the exact timestamp the decoy was touched.
-              </div>
-            </div>
-            <!-- Micro-Diagram 03 -->
-            <div class="stage-diagram-col" id="microDiagramCanary">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--status-ransomware);text-transform:uppercase;">Zero-Tolerance Tripwire</span>
-                <button type="button" id="tripCanaryBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Touch Canary</button>
-              </div>
-              <div id="canaryBoxCard" class="canary-box">
-                <div class="canary-hazard-stripes"></div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D93636" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                  <div>
-                    <div style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:var(--text);">canary/tripwire_sentinel.docx</div>
-                    <div id="canaryStatusText" style="font-size:0.65rem;color:var(--text-muted);">Status: Armed Sentinel (Zero modifications allowed)</div>
+              <!-- Micro-Diagram 01 -->
+              <div class="stage-diagram-col" id="microDiagram0">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 8px;
+                  "
+                >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.68rem;
+                      color: var(--brand);
+                      text-transform: uppercase;
+                    "
+                    >Merkle Tree Assembly</span
+                  >
+                  <button
+                    type="button"
+                    id="recalcMerkleBtn"
+                    style="
+                      background: rgba(56, 189, 248, 0.15);
+                      border: 1px solid rgba(56, 189, 248, 0.4);
+                      color: #38bdf8;
+                      font-size: 0.65rem;
+                      padding: 3px 8px;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    "
+                  >
+                    Fold Tree
+                  </button>
+                </div>
+                <div style="text-align: center; margin-bottom: 6px">
+                  <div
+                    id="merkleRootChip"
+                    class="micro-node-chip highlight"
+                    style="
+                      display: inline-block;
+                      padding: 5px 12px;
+                      border-color: #10b981;
+                      color: #10b981;
+                      font-weight: 700;
+                    "
+                  >
+                    ROOT: e3b0c442…7852b855
                   </div>
                 </div>
-              </div>
-              <div style="margin-top:8px;font-family:var(--font-mono);font-size:0.64rem;color:var(--text-muted);display:flex;justify-content:space-between;">
-                <span>Velocity Threshold: &ge;30%</span>
-                <span style="color:#D93636;font-weight:600;">Tripwire Latency: 0ms SLA</span>
+                <svg
+                  class="micro-tree-svg"
+                  viewBox="0 0 280 40"
+                  style="width: 100%; height: 32px; display: block"
+                >
+                  <line id="lineRootL" x1="140" y1="2" x2="70" y2="38" />
+                  <line id="lineRootR" x1="140" y1="2" x2="210" y2="38" />
+                </svg>
+                <div style="display: flex; justify-content: space-around; margin-bottom: 4px">
+                  <div class="micro-node-chip" id="chipH01">H01 (Left)</div>
+                  <div class="micro-node-chip" id="chipH23">H23 (Right)</div>
+                </div>
+                <svg
+                  class="micro-tree-svg"
+                  viewBox="0 0 280 30"
+                  style="width: 100%; height: 24px; display: block"
+                >
+                  <line x1="70" y1="2" x2="35" y2="28" />
+                  <line x1="70" y1="2" x2="105" y2="28" />
+                  <line x1="210" y1="2" x2="175" y2="28" />
+                  <line x1="210" y1="2" x2="245" y2="28" />
+                </svg>
+                <div style="display: flex; justify-content: space-between; gap: 4px">
+                  <div class="micro-node-chip" style="font-size: 0.6rem">L0: payroll</div>
+                  <div class="micro-node-chip" style="font-size: 0.6rem">L1: contract</div>
+                  <div class="micro-node-chip" style="font-size: 0.6rem">L2: keys.pem</div>
+                  <div class="micro-node-chip" style="font-size: 0.6rem">L3: db.dump</div>
+                </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- Step 4 -->
-        <article id="stage-3" class="how-stage-item" data-stage-idx="3">
-          <div class="how-stage-pin">04</div>
-          <div class="how-stage-card spotlight-card">
-            <div class="stage-text-col">
-              <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-frozen);margin-bottom:4px;font-weight:600;">STAGE 04 // IMMEDIATE CONTAINMENT</div>
-              <h2 style="font-size:1.25rem;margin-bottom:8px;">4. Sub-10s automated IAM account freeze</h2>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.6;">
-                Upon a ransomware verdict, CloudRDR immediately attaches an IAM Deny-All write policy to the compromised cloud credentials. All write, overwrite, and delete API calls are blocked at the cloud control plane in under 10 seconds. An incident case file is generated and signed with an RFC 8032 Ed25519 asymmetric signature.
-              </p>
-              <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:var(--text);">What you will see in the demo:</strong> The Account Status badge turns frost-blue with label <span class="status-chip frozen">FROZEN (READ-ONLY)</span> and a new case file appears in the Incidents queue.
+          <!-- Step 2 -->
+          <article id="stage-1" class="how-stage-item" data-stage-idx="1">
+            <div class="how-stage-pin">02</div>
+            <div class="how-stage-card spotlight-card">
+              <div class="stage-text-col">
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: var(--text-xs);
+                    color: var(--brand);
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  STAGE 02 // REAL-TIME TELEMETRY
+                </div>
+                <h2 style="font-size: 1.25rem; margin-bottom: 8px">
+                  2. Sliding-window polling agent
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6">
+                  A lightweight background monitor agent observes bucket storage events (file
+                  creations, modifications, and deletions) on a 10-second polling cadence. It
+                  computes rolling change counts within a 60-second sliding time window.
+                </p>
+                <div
+                  class="panel-subtle"
+                  style="
+                    margin-top: auto;
+                    padding: 10px 14px;
+                    border-radius: 6px;
+                    font-size: 0.82rem;
+                  "
+                >
+                  <strong style="color: var(--text)">What you will see in the demo:</strong> The
+                  Detection Velocity Chart plots change rates in real time, comparing current file
+                  activity against configured threshold lines.
+                </div>
+              </div>
+              <!-- Micro-Diagram 02 -->
+              <div class="stage-diagram-col">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 8px;
+                  "
+                >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.68rem;
+                      color: var(--brand);
+                      text-transform: uppercase;
+                    "
+                    >10s Storage Radar</span
+                  >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.65rem;
+                      color: #10b981;
+                      background: rgba(16, 185, 129, 0.12);
+                      padding: 2px 6px;
+                      border-radius: 4px;
+                    "
+                    >POLLING ACTIVE</span
+                  >
+                </div>
+                <div class="radar-scope">
+                  <div class="radar-ring r1"></div>
+                  <div class="radar-ring r2"></div>
+                  <div class="radar-crosshair-h"></div>
+                  <div class="radar-crosshair-v"></div>
+                  <div class="radar-sweep-beam"></div>
+                  <div class="radar-blip b1" title="Object 1 (payroll_q3.xlsx)"></div>
+                  <div class="radar-blip b2" title="Object 2 (vault.key)"></div>
+                  <div class="radar-blip b3" title="Object 3 (database.sql)"></div>
+                </div>
+                <div
+                  style="
+                    margin-top: 8px;
+                    font-family: var(--font-mono);
+                    font-size: 0.65rem;
+                    color: var(--text-muted);
+                    text-align: center;
+                  "
+                >
+                  Cadence: <span style="color: var(--brand)">10.0s</span> | Objects Tracked:
+                  <span style="color: var(--text); font-weight: 600">16</span> | State:
+                  <span style="color: #10b981">Clean</span>
+                </div>
               </div>
             </div>
-            <!-- Micro-Diagram 04 -->
-            <div class="stage-diagram-col">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--status-frozen);text-transform:uppercase;">Sub-10s Containment</span>
-                <span style="font-family:var(--font-mono);font-size:0.65rem;color:#7DD3FC;background:rgba(14,165,233,0.15);padding:2px 6px;border-radius:4px;">POLICY ACTIVE</span>
-              </div>
-              <div class="frost-lock-card">
-                <div class="frost-lock-icon">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </article>
+
+          <!-- Step 3 -->
+          <article id="stage-2" class="how-stage-item" data-stage-idx="2">
+            <div class="how-stage-pin">03</div>
+            <div class="how-stage-card spotlight-card">
+              <div class="stage-text-col">
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: var(--text-xs);
+                    color: var(--status-ransomware);
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  STAGE 03 // VELOCITY TRIPWIRE
                 </div>
-                <div class="ed25519-seal-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Ed25519 Signed // Key: 7f4a…e8b1</span>
+                <h2 style="font-size: 1.25rem; margin-bottom: 8px">
+                  3. Velocity and canary threshold classification
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6">
+                  The engine evaluates the change rate (unique modified files / total files).
+                  Changes under 10% are classified as <span class="status-chip valid">NORMAL</span>,
+                  10–30% as
+                  <span
+                    class="status-chip"
+                    style="
+                      background: var(--status-suspicious-subtle);
+                      color: var(--status-suspicious);
+                    "
+                    >SUSPICIOUS</span
+                  >, and 30%+ as <span class="status-chip modified">RANSOMWARE</span>. In addition,
+                  decoy canary files (such as <code>canary/tripwire_sentinel.docx</code>) act as
+                  zero-tolerance tripwires: modifying or deleting any canary triggers an immediate
+                  ransomware verdict regardless of rate.
+                </p>
+                <div
+                  class="panel-subtle"
+                  style="
+                    margin-top: auto;
+                    padding: 10px 14px;
+                    border-radius: 6px;
+                    font-size: 0.82rem;
+                  "
+                >
+                  <strong style="color: var(--text)">What you will see in the demo:</strong> The
+                  Verdict Badge switches to pulsing red RANSOMWARE, and the Canary Sentinel Card
+                  displays the exact timestamp the decoy was touched.
                 </div>
               </div>
-              <div style="margin-top:8px;font-family:var(--font-mono);font-size:0.64rem;color:var(--text-muted);text-align:center;">
-                IAM Write API: <b style="color:#38BDF8;">DENIED</b> | Freeze Latency: <b style="color:#10B981;">2.1s (&lt;10s SLA)</b>
+              <!-- Micro-Diagram 03 -->
+              <div class="stage-diagram-col" id="microDiagramCanary">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 8px;
+                  "
+                >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.68rem;
+                      color: var(--status-ransomware);
+                      text-transform: uppercase;
+                    "
+                    >Zero-Tolerance Tripwire</span
+                  >
+                  <button
+                    type="button"
+                    id="tripCanaryBtn"
+                    style="
+                      background: rgba(217, 54, 54, 0.15);
+                      border: 1px solid rgba(217, 54, 54, 0.4);
+                      color: #ff8080;
+                      font-size: 0.65rem;
+                      padding: 3px 8px;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    "
+                  >
+                    Touch Canary
+                  </button>
+                </div>
+                <div id="canaryBoxCard" class="canary-box">
+                  <div class="canary-hazard-stripes"></div>
+                  <div style="display: flex; align-items: center; gap: 8px">
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#D93636"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                      />
+                      <line x1="12" y1="9" x2="12" y2="13" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                    <div>
+                      <div
+                        style="
+                          font-family: var(--font-mono);
+                          font-size: 0.72rem;
+                          font-weight: 700;
+                          color: var(--text);
+                        "
+                      >
+                        canary/tripwire_sentinel.docx
+                      </div>
+                      <div
+                        id="canaryStatusText"
+                        style="font-size: 0.65rem; color: var(--text-muted)"
+                      >
+                        Status: Armed Sentinel (Zero modifications allowed)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    margin-top: 8px;
+                    font-family: var(--font-mono);
+                    font-size: 0.64rem;
+                    color: var(--text-muted);
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <span>Velocity Threshold: &ge;30%</span>
+                  <span style="color: #d93636; font-weight: 600">Tripwire Latency: 0ms SLA</span>
+                </div>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- Step 5 -->
-        <article id="stage-4" class="how-stage-item" data-stage-idx="4">
-          <div class="how-stage-pin">05</div>
-          <div class="how-stage-card spotlight-card">
-            <div class="stage-text-col">
-              <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);margin-bottom:4px;font-weight:600;">STAGE 05 // TAMPER-EVIDENT AUDIT</div>
-              <h2 style="font-size:1.25rem;margin-bottom:8px;">5. Cryptographic hash-chained audit ledger</h2>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.6;">
-                Every security action (baseline seal, freeze policy attachment, incident sign, restore) is appended to a hash-chained audit log. Each entry embeds the SHA-256 digest of the previous entry. If an attacker gains database access and modifies a record, the subsequent block links visibly break.
-              </p>
-              <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:var(--text);">What you will see in the demo:</strong> The Audit Log page displays linked blocks. Visitors can click "Tamper with Entry #1" to witness the cryptographic chain immediately invalidate.
+          <!-- Step 4 -->
+          <article id="stage-3" class="how-stage-item" data-stage-idx="3">
+            <div class="how-stage-pin">04</div>
+            <div class="how-stage-card spotlight-card">
+              <div class="stage-text-col">
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: var(--text-xs);
+                    color: var(--status-frozen);
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  STAGE 04 // IMMEDIATE CONTAINMENT
+                </div>
+                <h2 style="font-size: 1.25rem; margin-bottom: 8px">
+                  4. Sub-10s automated IAM account freeze
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6">
+                  Upon a ransomware verdict, CloudRDR immediately attaches an IAM Deny-All write
+                  policy to the compromised cloud credentials. All write, overwrite, and delete API
+                  calls are blocked at the cloud control plane in under 10 seconds. An incident case
+                  file is generated and signed with an RFC 8032 Ed25519 asymmetric signature.
+                </p>
+                <div
+                  class="panel-subtle"
+                  style="
+                    margin-top: auto;
+                    padding: 10px 14px;
+                    border-radius: 6px;
+                    font-size: 0.82rem;
+                  "
+                >
+                  <strong style="color: var(--text)">What you will see in the demo:</strong> The
+                  Account Status badge turns frost-blue with label
+                  <span class="status-chip frozen">FROZEN (READ-ONLY)</span> and a new case file
+                  appears in the Incidents queue.
+                </div>
+              </div>
+              <!-- Micro-Diagram 04 -->
+              <div class="stage-diagram-col">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 8px;
+                  "
+                >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.68rem;
+                      color: var(--status-frozen);
+                      text-transform: uppercase;
+                    "
+                    >Sub-10s Containment</span
+                  >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.65rem;
+                      color: #7dd3fc;
+                      background: rgba(14, 165, 233, 0.15);
+                      padding: 2px 6px;
+                      border-radius: 4px;
+                    "
+                    >POLICY ACTIVE</span
+                  >
+                </div>
+                <div class="frost-lock-card">
+                  <div class="frost-lock-icon">
+                    <svg
+                      width="26"
+                      height="26"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                  </div>
+                  <div class="ed25519-seal-badge">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span>Ed25519 Signed // Key: 7f4a…e8b1</span>
+                  </div>
+                </div>
+                <div
+                  style="
+                    margin-top: 8px;
+                    font-family: var(--font-mono);
+                    font-size: 0.64rem;
+                    color: var(--text-muted);
+                    text-align: center;
+                  "
+                >
+                  IAM Write API: <b style="color: #38bdf8">DENIED</b> | Freeze Latency:
+                  <b style="color: #10b981">2.1s (&lt;10s SLA)</b>
+                </div>
               </div>
             </div>
-            <!-- Micro-Diagram 05 -->
-            <div class="stage-diagram-col" id="microDiagramChain">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;">Hash-Chained Ledger</span>
-                <button type="button" id="tamperChainBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Tamper #02</button>
+          </article>
+
+          <!-- Step 5 -->
+          <article id="stage-4" class="how-stage-item" data-stage-idx="4">
+            <div class="how-stage-pin">05</div>
+            <div class="how-stage-card spotlight-card">
+              <div class="stage-text-col">
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: var(--text-xs);
+                    color: var(--text-muted);
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  STAGE 05 // TAMPER-EVIDENT AUDIT
+                </div>
+                <h2 style="font-size: 1.25rem; margin-bottom: 8px">
+                  5. Cryptographic hash-chained audit ledger
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6">
+                  Every security action (baseline seal, freeze policy attachment, incident sign,
+                  restore) is appended to a hash-chained audit log. Each entry embeds the SHA-256
+                  digest of the previous entry. If an attacker gains database access and modifies a
+                  record, the subsequent block links visibly break.
+                </p>
+                <div
+                  class="panel-subtle"
+                  style="
+                    margin-top: auto;
+                    padding: 10px 14px;
+                    border-radius: 6px;
+                    font-size: 0.82rem;
+                  "
+                >
+                  <strong style="color: var(--text)">What you will see in the demo:</strong> The
+                  Audit Log page displays linked blocks. Visitors can click "Tamper with Entry #1"
+                  to witness the cryptographic chain immediately invalidate.
+                </div>
               </div>
-              <div class="chain-blocks-row">
-                <div class="chain-block-item">
-                  <div style="color:var(--brand);font-weight:700;">#01 BASE</div>
-                  <div style="color:#64748B;font-size:0.6rem;">h: a1b2…</div>
+              <!-- Micro-Diagram 05 -->
+              <div class="stage-diagram-col" id="microDiagramChain">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 8px;
+                  "
+                >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.68rem;
+                      color: var(--brand);
+                      text-transform: uppercase;
+                    "
+                    >Hash-Chained Ledger</span
+                  >
+                  <button
+                    type="button"
+                    id="tamperChainBtn"
+                    style="
+                      background: rgba(217, 54, 54, 0.15);
+                      border: 1px solid rgba(217, 54, 54, 0.4);
+                      color: #ff8080;
+                      font-size: 0.65rem;
+                      padding: 3px 8px;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    "
+                  >
+                    Tamper #02
+                  </button>
                 </div>
-                <span class="chain-link-icon" id="link01">&rarr;</span>
-                <div class="chain-block-item" id="chainBlock02">
-                  <div style="color:var(--brand);font-weight:700;">#02 FREEZE</div>
-                  <div id="chainHash02" style="color:#64748B;font-size:0.6rem;">h: c3d4…</div>
+                <div class="chain-blocks-row">
+                  <div class="chain-block-item">
+                    <div style="color: var(--brand); font-weight: 700">#01 BASE</div>
+                    <div style="color: #64748b; font-size: 0.6rem">h: a1b2…</div>
+                  </div>
+                  <span class="chain-link-icon" id="link01">&rarr;</span>
+                  <div class="chain-block-item" id="chainBlock02">
+                    <div style="color: var(--brand); font-weight: 700">#02 FREEZE</div>
+                    <div id="chainHash02" style="color: #64748b; font-size: 0.6rem">h: c3d4…</div>
+                  </div>
+                  <span class="chain-link-icon" id="link02">&rarr;</span>
+                  <div class="chain-block-item" id="chainBlock03">
+                    <div style="color: var(--brand); font-weight: 700">#03 RESTORE</div>
+                    <div style="color: #64748b; font-size: 0.6rem">h: e5f6…</div>
+                  </div>
                 </div>
-                <span class="chain-link-icon" id="link02">&rarr;</span>
-                <div class="chain-block-item" id="chainBlock03">
-                  <div style="color:var(--brand);font-weight:700;">#03 RESTORE</div>
-                  <div style="color:#64748B;font-size:0.6rem;">h: e5f6…</div>
+                <div
+                  id="chainStatusMsg"
+                  style="
+                    margin-top: 10px;
+                    font-family: var(--font-mono);
+                    font-size: 0.65rem;
+                    color: #10b981;
+                    text-align: center;
+                  "
+                >
+                  Chain valid: Every block incorporates prev_hash
                 </div>
-              </div>
-              <div id="chainStatusMsg" style="margin-top:10px;font-family:var(--font-mono);font-size:0.65rem;color:#10B981;text-align:center;">
-                Chain valid: Every block incorporates prev_hash
               </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- Step 6 -->
-        <article id="stage-5" class="how-stage-item" data-stage-idx="5">
-          <div class="how-stage-pin">06</div>
-          <div class="how-stage-card spotlight-card">
-            <div class="stage-text-col">
-              <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-healthy);margin-bottom:4px;font-weight:600;">STAGE 06 // VERIFIED RESTORE</div>
-              <h2 style="font-size:1.25rem;margin-bottom:8px;">6. AEAD authenticated recovery and 100% verification</h2>
-              <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.6;">
-                CloudRDR restores files from AES-256-GCM encrypted backup storage. The recovery process validates the GCM authentication tag before returning plaintext bytes. Every restored file is re-hashed with SHA-256 and matched against the pre-attack baseline. If any hash differs or tag fails, the file is rejected. The incident only transitions to resolved when 100% of files are verified.
-              </p>
-              <div class="panel-subtle" style="margin-top:auto;padding:10px 14px;border-radius:6px;font-size:0.82rem;">
-                <strong style="color:var(--text);">What you will see in the demo:</strong> The Restore progress bar fills, leaves return to green on the Merkle tree, and a final "100% verified" banner confirms that the Merkle Root matches the original baseline.
+          <!-- Step 6 -->
+          <article id="stage-5" class="how-stage-item" data-stage-idx="5">
+            <div class="how-stage-pin">06</div>
+            <div class="how-stage-card spotlight-card">
+              <div class="stage-text-col">
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: var(--text-xs);
+                    color: var(--status-healthy);
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  STAGE 06 // VERIFIED RESTORE
+                </div>
+                <h2 style="font-size: 1.25rem; margin-bottom: 8px">
+                  6. AEAD authenticated recovery and 100% verification
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6">
+                  CloudRDR restores files from AES-256-GCM encrypted backup storage. The recovery
+                  process validates the GCM authentication tag before returning plaintext bytes.
+                  Every restored file is re-hashed with SHA-256 and matched against the pre-attack
+                  baseline. If any hash differs or tag fails, the file is rejected. The incident
+                  only transitions to resolved when 100% of files are verified.
+                </p>
+                <div
+                  class="panel-subtle"
+                  style="
+                    margin-top: auto;
+                    padding: 10px 14px;
+                    border-radius: 6px;
+                    font-size: 0.82rem;
+                  "
+                >
+                  <strong style="color: var(--text)">What you will see in the demo:</strong> The
+                  Restore progress bar fills, leaves return to green on the Merkle tree, and a final
+                  "100% verified" banner confirms that the Merkle Root matches the original
+                  baseline.
+                </div>
+              </div>
+              <!-- Micro-Diagram 06 -->
+              <div class="stage-diagram-col" id="microDiagramRestore">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 8px;
+                  "
+                >
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.68rem;
+                      color: var(--status-healthy);
+                      text-transform: uppercase;
+                    "
+                    >100% AEAD Verified</span
+                  >
+                  <button
+                    type="button"
+                    id="testAeadBtn"
+                    style="
+                      background: rgba(16, 185, 129, 0.15);
+                      border: 1px solid rgba(16, 185, 129, 0.4);
+                      color: #10b981;
+                      font-size: 0.65rem;
+                      padding: 3px 8px;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    "
+                  >
+                    Verify Tags
+                  </button>
+                </div>
+                <div class="aead-restore-visual">
+                  <div class="aead-shield-icon" id="aeadShieldIcon">
+                    <svg
+                      width="26"
+                      height="26"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <polyline points="9 12 11 14 15 10" />
+                    </svg>
+                  </div>
+                  <div
+                    id="aeadProgressText"
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.72rem;
+                      font-weight: 700;
+                      color: #10b981;
+                    "
+                  >
+                    16 / 16 VALID (100%)
+                  </div>
+                  <div class="aead-bar-track">
+                    <div id="aeadBarFill" class="aead-bar-fill"></div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    margin-top: 8px;
+                    font-family: var(--font-mono);
+                    font-size: 0.64rem;
+                    color: var(--text-muted);
+                    text-align: center;
+                  "
+                >
+                  AES-256-GCM AEAD Tag &amp; SHA-256 Baseline Match
+                </div>
               </div>
             </div>
-            <!-- Micro-Diagram 06 -->
-            <div class="stage-diagram-col" id="microDiagramRestore">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--status-healthy);text-transform:uppercase;">100% AEAD Verified</span>
-                <button type="button" id="testAeadBtn" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10B981;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Verify Tags</button>
-              </div>
-              <div class="aead-restore-visual">
-                <div class="aead-shield-icon" id="aeadShieldIcon">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                </div>
-                <div id="aeadProgressText" style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:#10B981;">
-                  16 / 16 VALID (100%)
-                </div>
-                <div class="aead-bar-track">
-                  <div id="aeadBarFill" class="aead-bar-fill"></div>
-                </div>
-              </div>
-              <div style="margin-top:8px;font-family:var(--font-mono);font-size:0.64rem;color:var(--text-muted);text-align:center;">
-                AES-256-GCM AEAD Tag &amp; SHA-256 Baseline Match
-              </div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- ── PLAIN-LANGUAGE GLOSSARY ────────────────────────────────────────── -->
-      <section style="margin-top:var(--space-16);">
-        <h2 style="margin-bottom:var(--space-6);">Plain-language security glossary</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-4);">
-          <div class="panel">
-            <h3>SHA-256</h3>
-            <p>A mathematical algorithm that converts any file into an exact 64-character fingerprint. If even a single byte inside the file changes, the entire fingerprint changes completely.</p>
-          </div>
-
-          <div class="panel">
-            <h3>Merkle tree</h3>
-            <p>A hierarchical tree of hashes where pairs of file fingerprints are combined repeatedly until they form a single "Root Hash". This single root proves the integrity of thousands of files at once.</p>
-          </div>
-
-          <div class="panel">
-            <h3>Canary (decoy) file</h3>
-            <p>A silent trap file placed inside cloud storage that legitimate staff never touch. If any process attempts to modify or delete it, the system immediately recognizes a ransomware attack.</p>
-          </div>
-
-          <div class="panel">
-            <h3>Ed25519 digital signature</h3>
-            <p>A modern public-key cryptographic signature that proves an incident record was officially created by CloudRDR and has not been altered by an attacker.</p>
-          </div>
-
-          <div class="panel">
-            <h3>AES-256-GCM &amp; AEAD</h3>
-            <p>Authenticated Encryption with Associated Data. It encrypts backup files with military-grade 256-bit keys and includes an authentication tag that detects any unauthorized tampering before decrypting.</p>
-          </div>
-
-          <div class="panel">
-            <h3>Hash chain</h3>
-            <p>A continuous sequence of log records where each record contains the fingerprint of the previous record. This makes it impossible to delete or rewrite past audit logs without detection.</p>
-          </div>
+          </article>
         </div>
-      </section>
 
-    </div>
-  </main>
+        <!-- ── PLAIN-LANGUAGE GLOSSARY ────────────────────────────────────────── -->
+        <section style="margin-top: var(--space-16)">
+          <h2 style="margin-bottom: var(--space-6)">Plain-language security glossary</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-4)">
+            <div class="panel">
+              <h3>SHA-256</h3>
+              <p>
+                A mathematical algorithm that converts any file into an exact 64-character
+                fingerprint. If even a single byte inside the file changes, the entire fingerprint
+                changes completely.
+              </p>
+            </div>
 
-  <div id="site-footer-container"></div>
+            <div class="panel">
+              <h3>Merkle tree</h3>
+              <p>
+                A hierarchical tree of hashes where pairs of file fingerprints are combined
+                repeatedly until they form a single "Root Hash". This single root proves the
+                integrity of thousands of files at once.
+              </p>
+            </div>
 
-  <script type="module">
-    import { initSharedNav } from './js/components/nav.js';
-    import './js/motion.js';
-    initSharedNav({ activePage: 'how', basePath: '' });
+            <div class="panel">
+              <h3>Canary (decoy) file</h3>
+              <p>
+                A silent trap file placed inside cloud storage that legitimate staff never touch. If
+                any process attempts to modify or delete it, the system immediately recognizes a
+                ransomware attack.
+              </p>
+            </div>
 
-    // ── 1. Spotlight Cursor Glow on Stage Panels ─────────────────────────────
-    const spotlightCards = document.querySelectorAll('.spotlight-card');
-    spotlightCards.forEach((card) => {
-      card.addEventListener('pointermove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      }, { passive: true });
-    });
+            <div class="panel">
+              <h3>Ed25519 digital signature</h3>
+              <p>
+                A modern public-key cryptographic signature that proves an incident record was
+                officially created by CloudRDR and has not been altered by an attacker.
+              </p>
+            </div>
 
-    // ── 2. Scroll Sync: Connected Beam Fill & Active Stage Pins ──────────────
-    const stageItems = document.querySelectorAll('.how-stage-item');
-    const beamFill = document.getElementById('timelineBeamFill');
-    const timelineContainer = document.getElementById('timelineContainer');
+            <div class="panel">
+              <h3>AES-256-GCM &amp; AEAD</h3>
+              <p>
+                Authenticated Encryption with Associated Data. It encrypts backup files with
+                military-grade 256-bit keys and includes an authentication tag that detects any
+                unauthorized tampering before decrypting.
+              </p>
+            </div>
 
-    function updateBeamProgress() {
-      if (!timelineContainer || !beamFill) return;
-      const rect = timelineContainer.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // Calculate how far we scrolled through the container
-      const start = rect.top;
-      const total = rect.height;
-      const progress = Math.min(Math.max((viewportHeight * 0.45 - start) / total, 0), 1);
-      beamFill.style.height = `${(progress * 100).toFixed(1)}%`;
+            <div class="panel">
+              <h3>Hash chain</h3>
+              <p>
+                A continuous sequence of log records where each record contains the fingerprint of
+                the previous record. This makes it impossible to delete or rewrite past audit logs
+                without detection.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
 
-      // Determine active stage
-      let activeIdx = 0;
-      stageItems.forEach((stage, idx) => {
-        const sRect = stage.getBoundingClientRect();
-        if (sRect.top <= viewportHeight * 0.5) {
-          activeIdx = idx;
-        }
+    <div id="site-footer-container"></div>
+
+    <script type="module">
+      import { initSharedNav } from './js/components/nav.js';
+      import './js/motion.js';
+      initSharedNav({ activePage: 'how', basePath: '' });
+
+      // ── 1. Spotlight Cursor Glow on Stage Panels ─────────────────────────────
+      const spotlightCards = document.querySelectorAll('.spotlight-card');
+      spotlightCards.forEach((card) => {
+        card.addEventListener(
+          'pointermove',
+          (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+          },
+          { passive: true }
+        );
       });
 
-      stageItems.forEach((stage, idx) => {
-        stage.classList.toggle('active', idx === activeIdx);
-      });
-    }
+      // ── 2. Scroll Sync: Connected Beam Fill & Active Stage Pins ──────────────
+      const stageItems = document.querySelectorAll('.how-stage-item');
+      const beamFill = document.getElementById('timelineBeamFill');
+      const timelineContainer = document.getElementById('timelineContainer');
 
-    window.addEventListener('scroll', updateBeamProgress, { passive: true });
-    window.addEventListener('resize', updateBeamProgress, { passive: true });
-    updateBeamProgress();
+      function updateBeamProgress() {
+        if (!timelineContainer || !beamFill) return;
+        const rect = timelineContainer.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
 
-    // ── 4. Micro-Diagram Interactions ────────────────────────────────────────
-    
-    // 01 Merkle Fold Animation
-    const recalcMerkleBtn = document.getElementById('recalcMerkleBtn');
-    const merkleRootChip = document.getElementById('merkleRootChip');
-    const chipH01 = document.getElementById('chipH01');
-    const chipH23 = document.getElementById('chipH23');
-    const lineL = document.getElementById('lineRootL');
-    const lineR = document.getElementById('lineRootR');
+        // Calculate how far we scrolled through the container
+        const start = rect.top;
+        const total = rect.height;
+        const progress = Math.min(Math.max((viewportHeight * 0.45 - start) / total, 0), 1);
+        beamFill.style.height = `${(progress * 100).toFixed(1)}%`;
 
-    if (recalcMerkleBtn) {
-      recalcMerkleBtn.addEventListener('click', () => {
-        lineL?.classList.add('pulse');
-        lineR?.classList.add('pulse');
-        chipH01?.classList.add('highlight');
-        chipH23?.classList.add('highlight');
-        merkleRootChip.style.transform = 'scale(1.08)';
-        merkleRootChip.textContent = 'HASHING PAIRS…';
+        // Determine active stage
+        let activeIdx = 0;
+        stageItems.forEach((stage, idx) => {
+          const sRect = stage.getBoundingClientRect();
+          if (sRect.top <= viewportHeight * 0.5) {
+            activeIdx = idx;
+          }
+        });
 
-        setTimeout(() => {
-          merkleRootChip.textContent = 'ROOT: e3b0c442…7852b855';
-          merkleRootChip.style.transform = 'scale(1)';
-          lineL?.classList.remove('pulse');
-          lineR?.classList.remove('pulse');
+        stageItems.forEach((stage, idx) => {
+          stage.classList.toggle('active', idx === activeIdx);
+        });
+      }
+
+      window.addEventListener('scroll', updateBeamProgress, { passive: true });
+      window.addEventListener('resize', updateBeamProgress, { passive: true });
+      updateBeamProgress();
+
+      // ── 4. Micro-Diagram Interactions ────────────────────────────────────────
+
+      // 01 Merkle Fold Animation
+      const recalcMerkleBtn = document.getElementById('recalcMerkleBtn');
+      const merkleRootChip = document.getElementById('merkleRootChip');
+      const chipH01 = document.getElementById('chipH01');
+      const chipH23 = document.getElementById('chipH23');
+      const lineL = document.getElementById('lineRootL');
+      const lineR = document.getElementById('lineRootR');
+
+      if (recalcMerkleBtn) {
+        recalcMerkleBtn.addEventListener('click', () => {
+          lineL?.classList.add('pulse');
+          lineR?.classList.add('pulse');
+          chipH01?.classList.add('highlight');
+          chipH23?.classList.add('highlight');
+          merkleRootChip.style.transform = 'scale(1.08)';
+          merkleRootChip.textContent = 'HASHING PAIRS…';
+
           setTimeout(() => {
-            chipH01?.classList.remove('highlight');
-            chipH23?.classList.remove('highlight');
-          }, 300);
-        }, 600);
-      });
-    }
+            merkleRootChip.textContent = 'ROOT: e3b0c442…7852b855';
+            merkleRootChip.style.transform = 'scale(1)';
+            lineL?.classList.remove('pulse');
+            lineR?.classList.remove('pulse');
+            setTimeout(() => {
+              chipH01?.classList.remove('highlight');
+              chipH23?.classList.remove('highlight');
+            }, 300);
+          }, 600);
+        });
+      }
 
-    // 03 Canary Tripwire Interactive Trigger
-    const tripCanaryBtn = document.getElementById('tripCanaryBtn');
-    const canaryBoxCard = document.getElementById('canaryBoxCard');
-    const canaryStatusText = document.getElementById('canaryStatusText');
-    let isCanaryTripped = false;
+      // 03 Canary Tripwire Interactive Trigger
+      const tripCanaryBtn = document.getElementById('tripCanaryBtn');
+      const canaryBoxCard = document.getElementById('canaryBoxCard');
+      const canaryStatusText = document.getElementById('canaryStatusText');
+      let isCanaryTripped = false;
 
-    if (tripCanaryBtn && canaryBoxCard) {
-      tripCanaryBtn.addEventListener('click', () => {
-        isCanaryTripped = !isCanaryTripped;
-        if (isCanaryTripped) {
-          canaryBoxCard.classList.add('tripped');
-          canaryStatusText.innerHTML = '<b style="color:#FF8080;">TRIPWIRE FIRED:</b> 0ms zero-tolerance ransomware verdict issued';
-          tripCanaryBtn.textContent = 'Reset Sentinel';
-          tripCanaryBtn.style.background = 'rgba(56,189,248,0.15)';
-          tripCanaryBtn.style.borderColor = '#38BDF8';
-          tripCanaryBtn.style.color = '#38BDF8';
-        } else {
-          canaryBoxCard.classList.remove('tripped');
-          canaryStatusText.textContent = 'Status: Armed Sentinel (Zero modifications allowed)';
-          tripCanaryBtn.textContent = 'Touch Canary';
-          tripCanaryBtn.style.background = 'rgba(217,54,54,0.15)';
-          tripCanaryBtn.style.borderColor = 'rgba(217,54,54,0.4)';
-          tripCanaryBtn.style.color = '#FF8080';
-        }
-      });
-    }
-
-    // 05 Hash Chain Tamper Demonstration
-    const tamperChainBtn = document.getElementById('tamperChainBtn');
-    const chainBlock02 = document.getElementById('chainBlock02');
-    const chainHash02 = document.getElementById('chainHash02');
-    const link02 = document.getElementById('link02');
-    const chainStatusMsg = document.getElementById('chainStatusMsg');
-    let isChainTampered = false;
-
-    if (tamperChainBtn) {
-      tamperChainBtn.addEventListener('click', () => {
-        isChainTampered = !isChainTampered;
-        if (isChainTampered) {
-          chainBlock02?.classList.add('tampered');
-          link02?.classList.add('broken');
-          if (chainHash02) chainHash02.textContent = 'h: [MUTATED]';
-          if (chainStatusMsg) {
-            chainStatusMsg.style.color = '#D93636';
-            chainStatusMsg.textContent = 'CHAIN BROKEN: Block #03 prev_hash does not match #02!';
+      if (tripCanaryBtn && canaryBoxCard) {
+        tripCanaryBtn.addEventListener('click', () => {
+          isCanaryTripped = !isCanaryTripped;
+          if (isCanaryTripped) {
+            canaryBoxCard.classList.add('tripped');
+            canaryStatusText.innerHTML =
+              '<b style="color:#FF8080;">TRIPWIRE FIRED:</b> 0ms zero-tolerance ransomware verdict issued';
+            tripCanaryBtn.textContent = 'Reset Sentinel';
+            tripCanaryBtn.style.background = 'rgba(56,189,248,0.15)';
+            tripCanaryBtn.style.borderColor = '#38BDF8';
+            tripCanaryBtn.style.color = '#38BDF8';
+          } else {
+            canaryBoxCard.classList.remove('tripped');
+            canaryStatusText.textContent = 'Status: Armed Sentinel (Zero modifications allowed)';
+            tripCanaryBtn.textContent = 'Touch Canary';
+            tripCanaryBtn.style.background = 'rgba(217,54,54,0.15)';
+            tripCanaryBtn.style.borderColor = 'rgba(217,54,54,0.4)';
+            tripCanaryBtn.style.color = '#FF8080';
           }
-          tamperChainBtn.textContent = 'Restore Chain';
-          tamperChainBtn.style.color = '#38BDF8';
-          tamperChainBtn.style.borderColor = '#38BDF8';
-        } else {
-          chainBlock02?.classList.remove('tampered');
-          link02?.classList.remove('broken');
-          if (chainHash02) chainHash02.textContent = 'h: c3d4…';
-          if (chainStatusMsg) {
-            chainStatusMsg.style.color = '#10B981';
-            chainStatusMsg.textContent = 'Chain valid: Every block incorporates prev_hash';
-          }
-          tamperChainBtn.textContent = 'Tamper #02';
-          tamperChainBtn.style.color = '#FF8080';
-          tamperChainBtn.style.borderColor = 'rgba(217,54,54,0.4)';
-        }
-      });
-    }
+        });
+      }
 
-    // 06 AEAD Verification Re-run
-    const testAeadBtn = document.getElementById('testAeadBtn');
-    const aeadBarFill = document.getElementById('aeadBarFill');
-    const aeadProgressText = document.getElementById('aeadProgressText');
-    const aeadShieldIcon = document.getElementById('aeadShieldIcon');
+      // 05 Hash Chain Tamper Demonstration
+      const tamperChainBtn = document.getElementById('tamperChainBtn');
+      const chainBlock02 = document.getElementById('chainBlock02');
+      const chainHash02 = document.getElementById('chainHash02');
+      const link02 = document.getElementById('link02');
+      const chainStatusMsg = document.getElementById('chainStatusMsg');
+      let isChainTampered = false;
 
-    if (testAeadBtn && aeadBarFill && aeadProgressText) {
-      testAeadBtn.addEventListener('click', () => {
-        aeadBarFill.style.width = '0%';
-        aeadProgressText.textContent = 'Checking GCM tags…';
-        aeadProgressText.style.color = '#38BDF8';
-        if (aeadShieldIcon) aeadShieldIcon.style.transform = 'scale(0.9)';
-
-        let p = 0;
-        const timer = setInterval(() => {
-          p += 4;
-          aeadBarFill.style.width = `${p}%`;
-          aeadProgressText.textContent = `${Math.round(p * 0.16)} / 16 VALID (${p}%)`;
-          if (p >= 100) {
-            clearInterval(timer);
-            aeadProgressText.textContent = '16 / 16 VALID (100%)';
-            aeadProgressText.style.color = '#10B981';
-            if (aeadShieldIcon) {
-              aeadShieldIcon.style.transform = 'scale(1.1)';
-              setTimeout(() => aeadShieldIcon.style.transform = 'scale(1)', 250);
+      if (tamperChainBtn) {
+        tamperChainBtn.addEventListener('click', () => {
+          isChainTampered = !isChainTampered;
+          if (isChainTampered) {
+            chainBlock02?.classList.add('tampered');
+            link02?.classList.add('broken');
+            if (chainHash02) chainHash02.textContent = 'h: [MUTATED]';
+            if (chainStatusMsg) {
+              chainStatusMsg.style.color = '#D93636';
+              chainStatusMsg.textContent = 'CHAIN BROKEN: Block #03 prev_hash does not match #02!';
             }
+            tamperChainBtn.textContent = 'Restore Chain';
+            tamperChainBtn.style.color = '#38BDF8';
+            tamperChainBtn.style.borderColor = '#38BDF8';
+          } else {
+            chainBlock02?.classList.remove('tampered');
+            link02?.classList.remove('broken');
+            if (chainHash02) chainHash02.textContent = 'h: c3d4…';
+            if (chainStatusMsg) {
+              chainStatusMsg.style.color = '#10B981';
+              chainStatusMsg.textContent = 'Chain valid: Every block incorporates prev_hash';
+            }
+            tamperChainBtn.textContent = 'Tamper #02';
+            tamperChainBtn.style.color = '#FF8080';
+            tamperChainBtn.style.borderColor = 'rgba(217,54,54,0.4)';
           }
-        }, 40);
-      });
-    }
-  </script>
-</body>
+        });
+      }
+
+      // 06 AEAD Verification Re-run
+      const testAeadBtn = document.getElementById('testAeadBtn');
+      const aeadBarFill = document.getElementById('aeadBarFill');
+      const aeadProgressText = document.getElementById('aeadProgressText');
+      const aeadShieldIcon = document.getElementById('aeadShieldIcon');
+
+      if (testAeadBtn && aeadBarFill && aeadProgressText) {
+        testAeadBtn.addEventListener('click', () => {
+          aeadBarFill.style.width = '0%';
+          aeadProgressText.textContent = 'Checking GCM tags…';
+          aeadProgressText.style.color = '#38BDF8';
+          if (aeadShieldIcon) aeadShieldIcon.style.transform = 'scale(0.9)';
+
+          let p = 0;
+          const timer = setInterval(() => {
+            p += 4;
+            aeadBarFill.style.width = `${p}%`;
+            aeadProgressText.textContent = `${Math.round(p * 0.16)} / 16 VALID (${p}%)`;
+            if (p >= 100) {
+              clearInterval(timer);
+              aeadProgressText.textContent = '16 / 16 VALID (100%)';
+              aeadProgressText.style.color = '#10B981';
+              if (aeadShieldIcon) {
+                aeadShieldIcon.style.transform = 'scale(1.1)';
+                setTimeout(() => (aeadShieldIcon.style.transform = 'scale(1)'), 250);
+              }
+            }
+          }, 40);
+        });
+      }
+    </script>
+  </body>
 </html>

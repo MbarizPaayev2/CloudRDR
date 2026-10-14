@@ -66,7 +66,9 @@ export function initHashChain(containerEl) {
       .map((block, idx) => {
         const isBlockTampered = isTampered && idx >= 1;
         const currentHash = isBlockTampered
-          ? (idx === 1 ? '000000_MODIFIED_HASH_0000' : 'INVALID_CHAIN_LINK')
+          ? idx === 1
+            ? '000000_MODIFIED_HASH_0000'
+            : 'INVALID_CHAIN_LINK'
           : block.hash.slice(0, 16) + '...';
 
         const prevHash = block.prev_hash.slice(0, 12) + '...';

@@ -3,7 +3,9 @@
  * CloudRDR Base Styles & Layout Foundations
  */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,7 +21,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) #080B12;
+  scrollbar-color: rgba(255, 255, 255, 0.2) #080b12;
 }
 
 /* ── Global Dark Cyber Scrollbar ─────────────────────────────────────────── */
@@ -29,7 +31,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #080B12;
+  background: #080b12;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -39,15 +41,14 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38BDF8;
+  background: #38bdf8;
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) #080B12;
+  scrollbar-color: rgba(255, 255, 255, 0.2) #080b12;
 }
-
 
 body {
   background-color: var(--bg);
@@ -55,7 +56,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: background-color var(--dur-mid) var(--ease), color var(--dur-mid) var(--ease);
+  transition:
+    background-color var(--dur-mid) var(--ease),
+    color var(--dur-mid) var(--ease);
 }
 
 /* Attack State indicator: subtle top border */
@@ -64,7 +67,12 @@ body.attack-active {
 }
 
 /* ── Typography & Readability ────────────────────────────────────────────── */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   color: var(--text);
   line-height: 1.15;
@@ -112,7 +120,10 @@ a:hover {
   color: var(--brand-hover);
 }
 
-code, pre, .mono, .tabular-nums {
+code,
+pre,
+.mono,
+.tabular-nums {
   font-family: var(--font-mono);
   font-size: 0.9em;
   font-variant-numeric: tabular-nums;
@@ -133,7 +144,7 @@ main:focus {
   top: -60px;
   left: 20px;
   background: var(--brand);
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 8px 16px;
   border-radius: var(--radius-sm);
   font-weight: 600;
@@ -163,13 +174,18 @@ main:focus {
 
 /* Dotted grid for hero background with tranquil opacity */
 .bg-grid-dots {
-  background-image: radial-gradient(var(--grid-dots, rgba(100, 116, 139, 0.03)) 1px, transparent 1px);
+  background-image: radial-gradient(
+    var(--grid-dots, rgba(100, 116, 139, 0.03)) 1px,
+    transparent 1px
+  );
   background-size: 24px 24px;
 }
 
 /* ── Motion Accessibility ────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

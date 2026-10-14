@@ -66,15 +66,22 @@ export async function detectionRoutes(fastify) {
 
   // POST /detection/config - update detection thresholds
   fastify.post('/detection/config', async (request, reply) => {
-    const { windowSeconds, suspiciousRate, ransomwareRate, allowlistedAccounts } = request.body || {};
+    const { windowSeconds, suspiciousRate, ransomwareRate, allowlistedAccounts } =
+      request.body || {};
 
     if (windowSeconds !== undefined && (typeof windowSeconds !== 'number' || windowSeconds <= 0)) {
       throw new ValidationError('windowSeconds must be a positive number');
     }
-    if (suspiciousRate !== undefined && (typeof suspiciousRate !== 'number' || suspiciousRate < 0 || suspiciousRate > 1)) {
+    if (
+      suspiciousRate !== undefined &&
+      (typeof suspiciousRate !== 'number' || suspiciousRate < 0 || suspiciousRate > 1)
+    ) {
       throw new ValidationError('suspiciousRate must be a float between 0.0 and 1.0');
     }
-    if (ransomwareRate !== undefined && (typeof ransomwareRate !== 'number' || ransomwareRate < 0 || ransomwareRate > 1)) {
+    if (
+      ransomwareRate !== undefined &&
+      (typeof ransomwareRate !== 'number' || ransomwareRate < 0 || ransomwareRate > 1)
+    ) {
       throw new ValidationError('ransomwareRate must be a float between 0.0 and 1.0');
     }
 

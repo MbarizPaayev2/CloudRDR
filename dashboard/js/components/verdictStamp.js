@@ -57,9 +57,10 @@ export function updateVerdictStamp(verdict, canaryTriggered = false) {
   // 2. Verdict sub-text
   const subEl = document.getElementById('verdictSub');
   if (subEl) {
-    subEl.textContent = canaryTriggered && verdict === 'ransomware'
-      ? 'Canary file touched — attack confirmed'
-      : cfg.sub;
+    subEl.textContent =
+      canaryTriggered && verdict === 'ransomware'
+        ? 'Canary file touched — attack confirmed'
+        : cfg.sub;
   }
 
   // 3. Stamp overlay

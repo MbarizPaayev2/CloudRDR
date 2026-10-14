@@ -201,7 +201,8 @@ function openIncidentModal(incident) {
   _dom.incidentModalBody.replaceChildren();
 
   const headerBox = document.createElement('div');
-  headerBox.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-sm);';
+  headerBox.style.cssText =
+    'display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-sm);';
   headerBox.innerHTML = `
     <div>
       <div style="font-weight:700;color:var(--text-primary);font-family:var(--font-mono);">${incident.id}</div>
@@ -232,15 +233,18 @@ function openIncidentModal(incident) {
 
   // Affected Objects List
   const filesTitle = document.createElement('div');
-  filesTitle.style.cssText = 'font-weight:600;font-size:0.8rem;text-transform:uppercase;color:var(--text-muted);margin-top:6px;';
+  filesTitle.style.cssText =
+    'font-weight:600;font-size:0.8rem;text-transform:uppercase;color:var(--text-muted);margin-top:6px;';
   filesTitle.textContent = `Affected Storage Objects (${incident.affected_paths?.length || 0})`;
   _dom.incidentModalBody.appendChild(filesTitle);
 
   const fileListBox = document.createElement('div');
-  fileListBox.style.cssText = 'max-height:160px;overflow-y:auto;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px;display:flex;flex-direction:column;gap:4px;';
+  fileListBox.style.cssText =
+    'max-height:160px;overflow-y:auto;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px;display:flex;flex-direction:column;gap:4px;';
   for (const p of incident.affected_paths || []) {
     const row = document.createElement('div');
-    row.style.cssText = 'font-family:var(--font-mono);font-size:0.75rem;display:flex;align-items:center;gap:6px;color:var(--text-secondary);';
+    row.style.cssText =
+      'font-family:var(--font-mono);font-size:0.75rem;display:flex;align-items:center;gap:6px;color:var(--text-secondary);';
     const isCanary = p.includes('canary');
     row.innerHTML = `<span style="color:${isCanary ? 'var(--threat-red)' : 'var(--accent-teal)'};">${isCanary ? '⚠️' : '📄'}</span> <span>${p}</span>`;
     fileListBox.appendChild(row);
@@ -272,7 +276,8 @@ function openIncidentModal(incident) {
   if (incident.status !== 'frozen' && incident.status !== 'resolved') {
     const containBtn = document.createElement('button');
     containBtn.className = 'btn btn-danger';
-    containBtn.style.cssText = 'font-size:0.8rem;padding:6px 12px;background:var(--threat-red);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:600;';
+    containBtn.style.cssText =
+      'font-size:0.8rem;padding:6px 12px;background:var(--threat-red);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:600;';
     containBtn.textContent = 'Isolate Account (IAM Freeze)';
     containBtn.onclick = () => {
       _dom.incidentModalBackdrop.classList.remove('show');
@@ -326,7 +331,12 @@ function openIncidentModal(incident) {
 }
 
 /* ─── Render Incidents Table (Section 7) ──────────────────────────────────── */
-function renderIncidentsTable(incidents = [], searchQuery = '', severityFilter = 'all', statusFilter = 'all') {
+function renderIncidentsTable(
+  incidents = [],
+  searchQuery = '',
+  severityFilter = 'all',
+  statusFilter = 'all'
+) {
   if (!_dom.incidentsTableBody) return;
   _dom.incidentsTableBody.replaceChildren();
 
@@ -357,8 +367,15 @@ function renderIncidentsTable(incidents = [], searchQuery = '', severityFilter =
   for (const inc of filtered) {
     const tr = document.createElement('tr');
     const sev = inc.severity || 'Critical';
-    const statusLabel = inc.status === 'frozen' ? 'Contained (Frozen)' : inc.status === 'resolved' ? 'Recovery Verified' : inc.status;
-    const detectedStr = inc.detected_at ? new Date(inc.detected_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—';
+    const statusLabel =
+      inc.status === 'frozen'
+        ? 'Contained (Frozen)'
+        : inc.status === 'resolved'
+          ? 'Recovery Verified'
+          : inc.status;
+    const detectedStr = inc.detected_at
+      ? new Date(inc.detected_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      : '—';
     const shortIdStr = inc.id.length > 20 ? inc.id.slice(0, 12) + '...' + inc.id.slice(-6) : inc.id;
 
     tr.innerHTML = `
@@ -411,7 +428,13 @@ function renderSecurityEvents(events = []) {
 
     const meta = document.createElement('div');
     meta.className = 'event-meta';
-    const timeStr = evt.timestamp ? new Date(evt.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'just now';
+    const timeStr = evt.timestamp
+      ? new Date(evt.timestamp).toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        })
+      : 'just now';
     meta.innerHTML = `<span>${timeStr}</span> &bull; <span>${evt.identity || 'system'}</span>`;
 
     content.appendChild(desc);
@@ -428,12 +451,16 @@ function updateUI(state) {
   // 1. Status Strip
   const sys = state.systemStatus;
   if (sys) {
-    if (_dom.statusLabelDetection) _dom.statusLabelDetection.textContent = sys.detectionEngine.label;
-    if (_dom.statusDetailDetection) _dom.statusDetailDetection.textContent = sys.detectionEngine.detail;
+    if (_dom.statusLabelDetection)
+      _dom.statusLabelDetection.textContent = sys.detectionEngine.label;
+    if (_dom.statusDetailDetection)
+      _dom.statusDetailDetection.textContent = sys.detectionEngine.detail;
     if (_dom.statusLabelStorage) _dom.statusLabelStorage.textContent = sys.cloudStorage.label;
     if (_dom.statusDetailStorage) _dom.statusDetailStorage.textContent = sys.cloudStorage.detail;
-    if (_dom.statusLabelBaseline) _dom.statusLabelBaseline.textContent = sys.baselineIntegrity.label;
-    if (_dom.statusDetailBaseline) _dom.statusDetailBaseline.textContent = sys.baselineIntegrity.detail;
+    if (_dom.statusLabelBaseline)
+      _dom.statusLabelBaseline.textContent = sys.baselineIntegrity.label;
+    if (_dom.statusDetailBaseline)
+      _dom.statusDetailBaseline.textContent = sys.baselineIntegrity.detail;
     if (_dom.statusLabelBackup) _dom.statusLabelBackup.textContent = sys.backupService.label;
     if (_dom.statusDetailBackup) _dom.statusDetailBackup.textContent = sys.backupService.detail;
   }
@@ -464,7 +491,8 @@ function updateUI(state) {
   if (det) {
     const ratePct = Math.round(det.currentObservedRate * 100);
     const threshPct = Math.round(det.modificationThreshold * 100);
-    if (_dom.gaugeVelocityText) _dom.gaugeVelocityText.textContent = `${ratePct}% observed (Threshold: ${threshPct}%)`;
+    if (_dom.gaugeVelocityText)
+      _dom.gaugeVelocityText.textContent = `${ratePct}% observed (Threshold: ${threshPct}%)`;
     if (_dom.gaugeVelocityFill) {
       _dom.gaugeVelocityFill.style.width = `${Math.min(ratePct, 100)}%`;
       if (ratePct >= threshPct || det.canaryTriggered) {
@@ -476,8 +504,12 @@ function updateUI(state) {
     if (_dom.cfgThreshold) _dom.cfgThreshold.textContent = `${threshPct}% per window`;
     if (_dom.cfgWindow) _dom.cfgWindow.textContent = `${det.windowSeconds} seconds`;
     if (_dom.cfgCanaryAlert) {
-      _dom.cfgCanaryAlert.textContent = det.canaryTriggered ? `Tripped (${det.canaryPath.split('/').pop()})` : 'Armed (Clean)';
-      _dom.cfgCanaryAlert.className = det.canaryTriggered ? 'mono text-red font-semibold' : 'mono text-green font-semibold';
+      _dom.cfgCanaryAlert.textContent = det.canaryTriggered
+        ? `Tripped (${det.canaryPath.split('/').pop()})`
+        : 'Armed (Clean)';
+      _dom.cfgCanaryAlert.className = det.canaryTriggered
+        ? 'mono text-red font-semibold'
+        : 'mono text-green font-semibold';
     }
     if (_dom.detectionStatusBadge) {
       if (det.canaryTriggered || ratePct >= threshPct) {
@@ -534,7 +566,7 @@ async function launchSimulation() {
     setState({
       detectionSummary: {
         status: 'active',
-        modificationThreshold: 0.30,
+        modificationThreshold: 0.3,
         windowSeconds: 30,
         currentObservedRate: 0.44,
         verdict: 'ransomware',
@@ -583,7 +615,10 @@ function wireEvents() {
         } else if (navTarget === 'audit') {
           document.getElementById('audit-section')?.scrollIntoView({ behavior: 'smooth' });
         } else if (navTarget === 'settings') {
-          showToast('Dashboard Settings: Local Storage, 30s sliding window, API origin: localhost:3000', 'info');
+          showToast(
+            'Dashboard Settings: Local Storage, 30s sliding window, API origin: localhost:3000',
+            'info'
+          );
         }
       });
     });
@@ -647,7 +682,10 @@ function wireEvents() {
   document.getElementById('userProfileBtn')?.addEventListener('click', () => {
     const cached = localStorage.getItem('cloudrdr_user');
     const u = cached ? JSON.parse(cached) : null;
-    showToast(`Operator: ${u?.fullName || 'SOC Lead'} &bull; Role: ${u?.role?.toUpperCase() || 'ANALYST'} &bull; Status: Active`, 'info');
+    showToast(
+      `Operator: ${u?.fullName || 'SOC Lead'} &bull; Role: ${u?.role?.toUpperCase() || 'ANALYST'} &bull; Status: Active`,
+      'info'
+    );
   });
 
   document.getElementById('userSettingsBtn')?.addEventListener('click', () => {
@@ -719,7 +757,10 @@ function wireEvents() {
   });
 
   document.getElementById('viewEvidenceBtn')?.addEventListener('click', () => {
-    showToast('Forensic bundle #1 signed with Ed25519 HSM Key: 4a7e91bd8f26... (Immutable)', 'info');
+    showToast(
+      'Forensic bundle #1 signed with Ed25519 HSM Key: 4a7e91bd8f26... (Immutable)',
+      'info'
+    );
   });
 
   // Modal Close Handlers
@@ -750,7 +791,10 @@ function wireEvents() {
       closeConfirmModal();
       _dom.notificationDropdown?.classList.remove('show');
       _dom.userDropdown?.classList.remove('show');
-    } else if (e.key.toLowerCase() === 'r' && !['input', 'textarea'].includes(document.activeElement?.tagName?.toLowerCase())) {
+    } else if (
+      e.key.toLowerCase() === 'r' &&
+      !['input', 'textarea'].includes(document.activeElement?.tagName?.toLowerCase())
+    ) {
       e.preventDefault();
       _dom.headerRefreshBtn?.click();
     }

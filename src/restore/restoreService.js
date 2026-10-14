@@ -32,7 +32,11 @@ import logger from '../utils/logger.js';
  * @returns {Promise<Object>} Restore summary report
  */
 export async function startRestore(incidentId, options = {}) {
-  const { stageOnly = false, applyImmediately = true, quarantineDir = './data/quarantine' } = options;
+  const {
+    stageOnly = false,
+    applyImmediately = true,
+    quarantineDir = './data/quarantine',
+  } = options;
   const db = getSupabaseClient();
   const storage = await getStorageAdapter();
 
@@ -283,7 +287,10 @@ export async function promoteStagedRestore(jobId, options = {}) {
       await storage.write(bucket, item.path, data);
       appliedCount++;
     } catch (err) {
-      logger.error({ path: item.path, err: err.message }, 'Failed to write staged file to live storage');
+      logger.error(
+        { path: item.path, err: err.message },
+        'Failed to write staged file to live storage'
+      );
     }
   }
 

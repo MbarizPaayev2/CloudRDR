@@ -121,7 +121,8 @@ export function updateIncidentDetail(state) {
 
   // 2. Timeline Progress Bar
   const st = incident.status || 'open';
-  const isFrozen = Boolean(incident.frozen_at) || st === 'frozen' || st === 'restoring' || st === 'resolved';
+  const isFrozen =
+    Boolean(incident.frozen_at) || st === 'frozen' || st === 'restoring' || st === 'resolved';
   const isRestoringSt = st === 'restoring' || isRestoring;
   const isResolved = st === 'resolved';
 
@@ -160,8 +161,16 @@ export function updateIncidentDetail(state) {
   const metaItems = [
     { label: 'Victim Account', value: incident.account_id || 'unknown', mono: true },
     { label: 'Detected At', value: formatDate(incident.detected_at), mono: false },
-    { label: 'Containment (IAM Freeze)', value: incident.frozen_at ? formatDate(incident.frozen_at) : 'Pending', mono: false },
-    { label: 'Resolution Time', value: incident.resolved_at ? formatDate(incident.resolved_at) : 'Unresolved', mono: false },
+    {
+      label: 'Containment (IAM Freeze)',
+      value: incident.frozen_at ? formatDate(incident.frozen_at) : 'Pending',
+      mono: false,
+    },
+    {
+      label: 'Resolution Time',
+      value: incident.resolved_at ? formatDate(incident.resolved_at) : 'Unresolved',
+      mono: false,
+    },
   ];
 
   for (const m of metaItems) {

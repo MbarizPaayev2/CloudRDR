@@ -140,7 +140,9 @@ export function initSharedNav(options = {}) {
   themeBtn?.addEventListener('click', () => {
     // Spring feedback
     themeBtn.style.transform = 'scale(0.88) rotate(15deg)';
-    setTimeout(() => { themeBtn.style.transform = ''; }, 160);
+    setTimeout(() => {
+      themeBtn.style.transform = '';
+    }, 160);
 
     const current = getEffectiveTheme();
     const next = current === 'dark' ? 'light' : 'dark';

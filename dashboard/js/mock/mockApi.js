@@ -157,7 +157,7 @@ export const mockApi = {
   async getDetectionEngineSummary() {
     return {
       status: 'active',
-      modificationThreshold: 0.30,
+      modificationThreshold: 0.3,
       windowSeconds: 30,
       currentObservedRate: 0.44,
       verdict: 'ransomware',
@@ -537,7 +537,12 @@ export const mockApi = {
       versioning: 'Enabled',
       immutability: 'Active (WORM Policies)',
       prefixes: [
-        { prefix: 'files/', count: 38, type: 'Corporate Spreadsheets & Documents', status: 'Protected' },
+        {
+          prefix: 'files/',
+          count: 38,
+          type: 'Corporate Spreadsheets & Documents',
+          status: 'Protected',
+        },
         { prefix: 'canary/', count: 2, type: 'Tripwire Sentinels (Zero-Touch)', status: 'Armed' },
         { prefix: 'evidence/', count: 5, type: 'Forensic Incident Bundles', status: 'Immutable' },
         { prefix: 'backup/', count: 50, type: 'AES-256-GCM Encrypted Backups', status: 'Verified' },

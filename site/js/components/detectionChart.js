@@ -117,8 +117,8 @@ export function initDetectionChart(canvasEl) {
     });
 
     const velocityData = slice.map((r) => Number(r.change_rate));
-    const suspLine = slice.map(() => 0.10);
-    const rsomLine = slice.map(() => 0.30);
+    const suspLine = slice.map(() => 0.1);
+    const rsomLine = slice.map(() => 0.3);
 
     chart.data.labels = labels;
     chart.data.datasets[0].data = velocityData;

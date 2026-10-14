@@ -150,7 +150,7 @@ export const api = {
   async getIncidents() {
     if (CONFIG.USE_MOCK) return mockApi.getIncidents();
     const data = await httpRequest('/incidents');
-    return Array.isArray(data) ? data : (data?.incidents || []);
+    return Array.isArray(data) ? data : data?.incidents || [];
   },
 
   /**

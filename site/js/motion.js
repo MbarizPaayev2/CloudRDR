@@ -10,7 +10,8 @@
  * Respects prefers-reduced-motion for accessibility.
  */
 
-const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion =
+  window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
  * Spring easing presets (KaTeX / Bezier approximations of Framer Motion springs)

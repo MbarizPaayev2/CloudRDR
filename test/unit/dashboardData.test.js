@@ -145,4 +145,3 @@ describe('Dashboard Data Layer - Mock API & State Store', () => {
     assert.equal(tamperedBrokenIndex, 3);
   });
 });
-

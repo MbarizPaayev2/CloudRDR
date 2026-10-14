@@ -25,7 +25,9 @@ function buildSealSVG(type) {
   if (type === 'valid') {
     // Intact seal: filled circle with checkmark
     const circle = document.createElementNS(NS, 'circle');
-    circle.setAttribute('cx', '7'); circle.setAttribute('cy', '7'); circle.setAttribute('r', '6');
+    circle.setAttribute('cx', '7');
+    circle.setAttribute('cy', '7');
+    circle.setAttribute('r', '6');
     circle.setAttribute('fill', '#2F6F5E');
     svg.appendChild(circle);
     const check = document.createElementNS(NS, 'polyline');
@@ -35,30 +37,37 @@ function buildSealSVG(type) {
     check.setAttribute('stroke-width', '1.5');
     check.setAttribute('stroke-linecap', 'round');
     svg.appendChild(check);
-
   } else if (type === 'modified') {
     // Cracked seal: filled circle + crack lines
     const circle = document.createElementNS(NS, 'circle');
-    circle.setAttribute('cx', '7'); circle.setAttribute('cy', '7'); circle.setAttribute('r', '6');
+    circle.setAttribute('cx', '7');
+    circle.setAttribute('cy', '7');
+    circle.setAttribute('r', '6');
     circle.setAttribute('fill', '#B3261E');
     svg.appendChild(circle);
     // Crack 1
     const c1 = document.createElementNS(NS, 'polyline');
     c1.setAttribute('points', '5,4 7,7 5,10');
-    c1.setAttribute('fill', 'none'); c1.setAttribute('stroke', '#EFE6D2');
-    c1.setAttribute('stroke-width', '1.2'); c1.setAttribute('stroke-linecap', 'round');
+    c1.setAttribute('fill', 'none');
+    c1.setAttribute('stroke', '#EFE6D2');
+    c1.setAttribute('stroke-width', '1.2');
+    c1.setAttribute('stroke-linecap', 'round');
     svg.appendChild(c1);
     // Crack 2
     const c2 = document.createElementNS(NS, 'line');
-    c2.setAttribute('x1', '7'); c2.setAttribute('y1', '7');
-    c2.setAttribute('x2', '10'); c2.setAttribute('y2', '5.5');
-    c2.setAttribute('stroke', '#EFE6D2'); c2.setAttribute('stroke-width', '1');
+    c2.setAttribute('x1', '7');
+    c2.setAttribute('y1', '7');
+    c2.setAttribute('x2', '10');
+    c2.setAttribute('y2', '5.5');
+    c2.setAttribute('stroke', '#EFE6D2');
+    c2.setAttribute('stroke-width', '1');
     svg.appendChild(c2);
-
   } else {
     // Missing: empty circle outline only
     const circle = document.createElementNS(NS, 'circle');
-    circle.setAttribute('cx', '7'); circle.setAttribute('cy', '7'); circle.setAttribute('r', '5.5');
+    circle.setAttribute('cx', '7');
+    circle.setAttribute('cy', '7');
+    circle.setAttribute('r', '5.5');
     circle.setAttribute('fill', 'none');
     circle.setAttribute('stroke', '#9C8F78');
     circle.setAttribute('stroke-width', '1.2');

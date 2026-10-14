@@ -7,6 +7,7 @@ Whenever you work on this project, adhere strictly to the installed skills and m
 Every time a user provides a prompt or request, internalize these four core foundations before writing code:
 
 ### 1. Ponytail — Lazy Senior Dev Mode
+
 - **The best code is the code never written.** Solve the whole problem with the least new code.
 - Take the first option that fully works:
   1. Does it need to exist? Skip features, options, and flexibility nobody asked for.
@@ -19,6 +20,7 @@ Every time a user provides a prompt or request, internalize these four core foun
 - End responses with 1–2 lines on what was skipped/unchecked and any risk the user must know.
 
 ### 2. Graphify — Architecture & Knowledge Graph
+
 - Knowledge graph resides at `graphify-out/`.
 - For codebase and architectural questions:
   - Run `graphify query "<question>"` (CLI) or `query_graph` (MCP).
@@ -28,12 +30,14 @@ Every time a user provides a prompt or request, internalize these four core foun
 - After modifying code files in this session, run `graphify update .` to keep the AST graph current.
 
 ### 3. Headroom — Context & Memory Optimization
+
 - Prevent context window bloat.
 - Read files with precise line slices (`StartLine`, `EndLine`).
 - Never dump megabytes of build or test logs; isolate relevant errors.
 - Use `headroom diff`, `headroom sg` (ast-grep), and `headroom loc` (scc) for structural insight.
 
 ### 4. Codeburn — Token Spend & Waste Elimination
+
 - Avoid polling loops or repetitive checking steps.
 - Prefer surgical edits (`replace_file_content`) over rewriting entire files.
 - Run `npx codeburn optimize` to audit token waste and inspect consumption patterns.
@@ -43,6 +47,7 @@ Every time a user provides a prompt or request, internalize these four core foun
 ## Active Skills in `.agents/skills/` (120 Installed Skills)
 
 ### 1. Motion, Framer Motion & Animation Engines (23 Skills)
+
 - `motion-framer`: Modern animation library for React/JS (Motion v11+ / Framer Motion): variants, gestures (whileHover, whileTap, whileDrag), layout animations, AnimatePresence, springs, and scroll effects
 - `gsap-scrolltrigger`: GreenSock Animation Platform with ScrollTrigger: timelines, pinning, scrubbing, and scroll-driven choreography
 - `animejs`: Lightweight JavaScript animation engine for DOM, CSS, SVG path morphing, and staggered sequences
@@ -68,6 +73,7 @@ Every time a user provides a prompt or request, internalize these four core foun
 - `awesome-claude-video-skills`: Curated directory and best practices for video, motion graphics, and Remotion/HyperFrames
 
 ### 2. Frontend Engineering, Design Systems & Visual Craft (36 Skills)
+
 - `impeccable`: Peak design director craft, zero-slop UI, bounded iteration, and uncompromising aesthetics
 - `frontend-design`: Intentional visual design, typography, layout, and distinctive creative direction
 - `modern-web-design`: Modern web design guidelines, responsive grids, balanced whitespace, and contemporary patterns
@@ -106,6 +112,7 @@ Every time a user provides a prompt or request, internalize these four core foun
 - `emil-prototype`: Rapid interactive prototyping with high visual fidelity
 
 ### 3. 3D Web, WebGL, WebXR & Creative Engineering (12 Skills)
+
 - `threejs-webgl`: Full Three.js 3D development: scenes, cameras, lighting, PBR materials, shaders, and rendering
 - `react-three-fiber`: Declarative 3D scenes with React Three Fiber (R3F) for configurators and immersive web apps
 - `web3d-integration-patterns`: Multi-library orchestration combining Three.js, GSAP, R3F, Motion, and React Spring
@@ -120,6 +127,7 @@ Every time a user provides a prompt or request, internalize these four core foun
 - `algorithmic-art`: Generative art, particle flow fields, and seeded randomness with p5.js
 
 ### 4. Security, Threat Modeling, Pentesting & Compliance (14 Skills)
+
 - `strix-managed-pentesting-with-strix`: Automated security audits, cloud pentesting, and remediation with Strix
 - `strix-web-app-penetration-testing`: End-to-end black-box web app testing (auth bypass, IDOR, injection, SSRF, XSS)
 - `strix-api-security-testing`: REST and GraphQL API vulnerability discovery and exploitation
@@ -136,6 +144,7 @@ Every time a user provides a prompt or request, internalize these four core foun
 - `eu-ai-act-reviewer`: EU AI Act classification, risk assessment, transparency, and compliance checklists
 
 ### 5. Testing, Verification, Performance & Framework Best Practices (14 Skills)
+
 - `webapp-testing`: Browser-based verification, screenshot capture, and frontend debugging with Playwright
 - `playwright-dev`: Playwright development, API extensions, MCP tools, and CLI commands
 - `playwright-test-results`: Query Playwright CI test results and flaky tests from aggregated DuckDB database
@@ -152,6 +161,7 @@ Every time a user provides a prompt or request, internalize these four core foun
 - `emil-write-swift`: Modern Swift 6 concurrency, actor safety, and performance patterns
 
 ### 6. Core Foundations, Architecture & Engineering Efficiency (21 Skills)
+
 - `ponytail`: Lazy senior dev mode: the smallest change that fully solves the task
 - `ponytail-audit`: Quality audit of a whole repo: bugs, load limits, bloat, and deletion candidates
 - `ponytail-debt`: Audit shortcut comments and list deferred technical debt ledger
@@ -173,4 +183,3 @@ Every time a user provides a prompt or request, internalize these four core foun
 - `bencium-aeo`: Answer Engine Optimization for AI citations (ChatGPT, Claude, Gemini, AI Overviews)
 - `hungarian-humanizer`: Natural language localization and AI marker elimination
 - `insurgent-campaign`: Strategic project execution and high-momentum milestones
-

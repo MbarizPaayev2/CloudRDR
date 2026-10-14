@@ -8,90 +8,92 @@
 
 :root {
   /* ── Canvas & Surface Hierarchy (Matches site/ --bg, --surface, --surface-subtle) ── */
-  --bg-canvas:        #0C0E14;   /* Obsidian Cyber Dark background */
-  --bg-sidebar:       #0F131C;   /* Left navigation sidebar */
-  --bg-panel:         #141822;   /* Elevated panels, cards, data tables */
-  --bg-panel-elev:    #1B2130;   /* Interactive hover states, modals, popovers */
-  --bg-subtle:        #181E2B;   /* Form inputs, pill badges, nested blocks */
-  --bg-glass:         rgba(15, 19, 28, 0.94);
+  --bg-canvas: #0c0e14; /* Obsidian Cyber Dark background */
+  --bg-sidebar: #0f131c; /* Left navigation sidebar */
+  --bg-panel: #141822; /* Elevated panels, cards, data tables */
+  --bg-panel-elev: #1b2130; /* Interactive hover states, modals, popovers */
+  --bg-subtle: #181e2b; /* Form inputs, pill badges, nested blocks */
+  --bg-glass: rgba(15, 19, 28, 0.94);
 
   /* ── Borders & Dividers ─────────────────────────────────────────────────── */
-  --border:           rgba(255, 255, 255, 0.09);
-  --border-subtle:    rgba(255, 255, 255, 0.05);
-  --border-card:      #222B3D;
-  --border-focus:     #38BDF8;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-card: #222b3d;
+  --border-focus: #38bdf8;
 
   /* ── Typography Colors ──────────────────────────────────────────────────── */
-  --text-primary:     #F4F6FB;
-  --text-secondary:   #A0AABF;
-  --text-muted:       #6E7A91;
-  --text-inverse:     #0C0E14;
+  --text-primary: #f4f6fb;
+  --text-secondary: #a0aabf;
+  --text-muted: #6e7a91;
+  --text-inverse: #0c0e14;
 
   /* ── Primary Brand & Navigation Accents (Matches site/ brand identity) ──── */
-  --brand:              #4360FF;   /* High-contrast brand indigo */
-  --brand-hover:        #5D76FF;
-  --brand-subtle:       rgba(67, 96, 255, 0.16);
-  --brand-border:       rgba(67, 96, 255, 0.35);
+  --brand: #4360ff; /* High-contrast brand indigo */
+  --brand-hover: #5d76ff;
+  --brand-subtle: rgba(67, 96, 255, 0.16);
+  --brand-border: rgba(67, 96, 255, 0.35);
 
-  --accent-cyan:        #38BDF8;   /* Cyber Cyan accent (from CloudRDR logo 'R') */
-  --accent-cyan-hover:  #0EA5E9;
+  --accent-cyan: #38bdf8; /* Cyber Cyan accent (from CloudRDR logo 'R') */
+  --accent-cyan-hover: #0ea5e9;
   --accent-cyan-subtle: rgba(56, 189, 248, 0.12);
-  --accent-cyan-border: rgba(56, 189, 248, 0.30);
+  --accent-cyan-border: rgba(56, 189, 248, 0.3);
 
-  --accent-teal:        #38BDF8;   /* Default brand active indicator */
-  --accent-teal-hover:  #0EA5E9;
+  --accent-teal: #38bdf8; /* Default brand active indicator */
+  --accent-teal-hover: #0ea5e9;
   --accent-teal-subtle: rgba(56, 189, 248, 0.12);
-  --accent-teal-border: rgba(56, 189, 248, 0.30);
+  --accent-teal-border: rgba(56, 189, 248, 0.3);
 
   /* ── Security Status Accents (WCAG AA/AAA compliant) ─────────────────────── */
-  --threat-red:         #E64545;   /* Critical ransomware alerts */
-  --threat-red-text:    #F87171;
-  --threat-red-subtle:  rgba(230, 69, 69, 0.18);
-  --threat-red-border:  rgba(230, 69, 69, 0.35);
+  --threat-red: #e64545; /* Critical ransomware alerts */
+  --threat-red-text: #f87171;
+  --threat-red-subtle: rgba(230, 69, 69, 0.18);
+  --threat-red-border: rgba(230, 69, 69, 0.35);
 
-  --warning-amber:        #F0B11A;   /* Suspicious threshold warnings */
-  --warning-amber-text:   #FBBF24;
+  --warning-amber: #f0b11a; /* Suspicious threshold warnings */
+  --warning-amber-text: #fbbf24;
   --warning-amber-subtle: rgba(240, 177, 26, 0.18);
   --warning-amber-border: rgba(240, 177, 26, 0.35);
 
-  --healthy-green:        #27B97F;   /* Verified healthy states */
-  --healthy-green-text:   #34D399;
+  --healthy-green: #27b97f; /* Verified healthy states */
+  --healthy-green-text: #34d399;
   --healthy-green-subtle: rgba(39, 185, 127, 0.18);
   --healthy-green-border: rgba(39, 185, 127, 0.35);
 
-  --status-frozen:        #58B3DA;
+  --status-frozen: #58b3da;
   --status-frozen-subtle: rgba(88, 179, 218, 0.18);
 
-  --neutral-gray:         #64748B;
-  --neutral-gray-subtle:  rgba(100, 116, 139, 0.14);
-  --neutral-gray-border:  rgba(100, 116, 139, 0.28);
+  --neutral-gray: #64748b;
+  --neutral-gray-subtle: rgba(100, 116, 139, 0.14);
+  --neutral-gray-border: rgba(100, 116, 139, 0.28);
 
   /* Compatibility Aliases for component stylesheets */
-  --bg-app:          var(--bg-canvas);
-  --bg-surface:      var(--bg-panel);
+  --bg-app: var(--bg-canvas);
+  --bg-surface: var(--bg-panel);
   --bg-surface-elev: var(--bg-panel-elev);
-  --threat:          var(--threat-red);
-  --threat-bg:       var(--threat-red-subtle);
-  --threat-border:   var(--threat-red-border);
-  --normal:          var(--healthy-green);
-  --normal-bg:       var(--healthy-green-subtle);
-  --normal-border:   var(--healthy-green-border);
-  --warning:         var(--warning-amber);
-  --warning-bg:      var(--warning-amber-subtle);
-  --warning-border:  var(--warning-amber-border);
+  --threat: var(--threat-red);
+  --threat-bg: var(--threat-red-subtle);
+  --threat-border: var(--threat-red-border);
+  --normal: var(--healthy-green);
+  --normal-bg: var(--healthy-green-subtle);
+  --normal-border: var(--healthy-green-border);
+  --warning: var(--warning-amber);
+  --warning-bg: var(--warning-amber-subtle);
+  --warning-border: var(--warning-amber-border);
 
   /* ── Typography Families ───────────────────────────────────────────────── */
-  --font-sans:  'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans:
+    'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Typography Scale */
-  --text-xs:    0.75rem;
-  --text-sm:    0.85rem;
-  --text-base:  0.95rem;
-  --text-md:    1.08rem;
-  --text-lg:    1.30rem;
-  --text-xl:    1.75rem;
-  --text-2xl:   2.25rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.85rem;
+  --text-base: 0.95rem;
+  --text-md: 1.08rem;
+  --text-lg: 1.3rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
 
   /* ── Spacing Scale ─────────────────────────────────────────────────────── */
   --space-1: 0.25rem;
@@ -103,28 +105,30 @@
   --space-8: 2rem;
 
   /* ── Structural Radii ──────────────────────────────────────────────────── */
-  --radius-xs:   4px;
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   14px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
   --radius-pill: 9999px;
   --radius-full: 9999px;
 
   /* ── Layout Dimensions ─────────────────────────────────────────────────── */
-  --sidebar-w:           255px;
+  --sidebar-w: 255px;
   --sidebar-collapsed-w: 68px;
-  --header-h:            58px;
+  --header-h: 58px;
 
   /* ── Subtle Elevation & Transitions ────────────────────────────────────── */
-  --shadow-subtle:   0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
   --shadow-dropdown: 0 12px 30px -5px rgba(0, 0, 0, 0.7), 0 8px 12px -6px rgba(0, 0, 0, 0.5);
-  --ease:            cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-fast:        140ms;
-  --dur-mid:         220ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 140ms;
+  --dur-mid: 220ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

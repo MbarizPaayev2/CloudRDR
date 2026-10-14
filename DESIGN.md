@@ -17,36 +17,40 @@
 ## 2. Color Palette & Design Tokens
 
 ### Base Surfaces
+
 ```css
---bg-app:          #050811;   /* Deep OLED black canvas */
---bg-surface:      #0B101D;   /* Primary card and panel surface */
---bg-surface-elev: #11182B;   /* Elevated interactive panels and modal popovers */
---bg-subtle:       #18223B;   /* Monospace code blocks, inputs, and chip pills */
---bg-glass:        rgba(11, 16, 29, 0.82); /* Glassmorphism floating navbar */
+--bg-app: #050811; /* Deep OLED black canvas */
+--bg-surface: #0b101d; /* Primary card and panel surface */
+--bg-surface-elev: #11182b; /* Elevated interactive panels and modal popovers */
+--bg-subtle: #18223b; /* Monospace code blocks, inputs, and chip pills */
+--bg-glass: rgba(11, 16, 29, 0.82); /* Glassmorphism floating navbar */
 ```
 
 ### Borders & Doppelrand
+
 ```css
---border-subtle:   rgba(255, 255, 255, 0.07);
---border-medium:   rgba(255, 255, 255, 0.12);
---border-active:   #3B82F6;
+--border-subtle: rgba(255, 255, 255, 0.07);
+--border-medium: rgba(255, 255, 255, 0.12);
+--border-active: #3b82f6;
 ```
 
 ### Typography Tones
+
 ```css
---text-primary:    #F8FAFC;   /* 98% pure heading white */
---text-secondary:  #94A3B8;   /* Slate-400 crisp reading text */
---text-muted:      #64748B;   /* Slate-500 subtle telemetry metadata */
+--text-primary: #f8fafc; /* 98% pure heading white */
+--text-secondary: #94a3b8; /* Slate-400 crisp reading text */
+--text-muted: #64748b; /* Slate-500 subtle telemetry metadata */
 ```
 
 ### Security Status Accents
-| Status | Hex | Token | Usage |
-|---|---|---|---|
-| **Ransomware / Breach** | `#EF4444` | `--threat` | Laser Crimson. Critical alerts, freeze trigger, affected file tags |
-| **Normal / Verified** | `#10B981` | `--normal` | Cyber Emerald. Clean baseline, Merkle root match, AEAD PASS |
-| **Suspicious Activity** | `#F59E0B` | `--warning` | Warm Amber. High change-rate warning (10%–30%) |
-| **IAM Cryo-Lock** | `#06B6D4` | `--frost` | Cryo Cyan. IAM bucket freeze, immutable quarantine state |
-| **Enterprise Brand** | `#3B82F6` | `--brand` | Electric Cobalt. Primary CTAs, active tab indicators, focus rings |
+
+| Status                  | Hex       | Token       | Usage                                                              |
+| ----------------------- | --------- | ----------- | ------------------------------------------------------------------ |
+| **Ransomware / Breach** | `#EF4444` | `--threat`  | Laser Crimson. Critical alerts, freeze trigger, affected file tags |
+| **Normal / Verified**   | `#10B981` | `--normal`  | Cyber Emerald. Clean baseline, Merkle root match, AEAD PASS        |
+| **Suspicious Activity** | `#F59E0B` | `--warning` | Warm Amber. High change-rate warning (10%–30%)                     |
+| **IAM Cryo-Lock**       | `#06B6D4` | `--frost`   | Cryo Cyan. IAM bucket freeze, immutable quarantine state           |
+| **Enterprise Brand**    | `#3B82F6` | `--brand`   | Electric Cobalt. Primary CTAs, active tab indicators, focus rings  |
 
 ---
 
@@ -77,7 +81,9 @@ Derived from **Design Motion Principles** (Emil Kowalski + Jakub Krehel lenses):
 5. **Accessibility Requirement**: Full `@media (prefers-reduced-motion: reduce)` support:
    ```css
    @media (prefers-reduced-motion: reduce) {
-     *, *::before, *::after {
+     *,
+     *::before,
+     *::after {
        animation-duration: 0.01ms !important;
        transition-duration: 0.01ms !important;
        scroll-behavior: auto !important;
