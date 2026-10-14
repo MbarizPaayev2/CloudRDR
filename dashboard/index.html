@@ -164,6 +164,10 @@
             <span class="nav-icon" id="navIconAudit"></span>
             <span class="nav-text">Audit Logs</span>
           </button>
+          <button type="button" class="nav-item" data-nav="agent" title="Deploy Monitoring Agent">
+            <span class="nav-icon" id="navIconAgent"></span>
+            <span class="nav-text">Deploy Agent</span>
+          </button>
         </nav>
 
         <!-- Sidebar Footer -->
@@ -1523,6 +1527,287 @@
                   <div class="summary-row">
                     <span class="text-secondary">Framework</span>
                     <span class="mono font-semibold">Fastify Backend + Vanilla SOC Frontend</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ── View 9: Agent Deployment & Telemetry Node ──────────────────────── -->
+          <div class="dashboard-view" id="view-agent" data-view="agent">
+            <div class="view-header">
+              <div>
+                <h1 class="view-title">Agent Deployment &amp; Telemetry Node</h1>
+                <p class="view-subtitle">
+                  Lightweight, zero-privilege 24/7 background monitoring agent for cloud buckets and
+                  decoy canary tripwires.
+                </p>
+              </div>
+              <div class="view-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPingAgent">
+                  <span class="btn-icon" id="iconPingAgent"></span>
+                  Ping Agent Node
+                </button>
+                <a
+                  href="/api/agent/download"
+                  class="btn btn-primary btn-sm"
+                  download="cloudrdr-agent.js"
+                  id="btnDownloadAgentDirect"
+                >
+                  <span class="btn-icon" id="iconDownloadAgentDirect"></span>
+                  Download Agent (JS)
+                </a>
+              </div>
+            </div>
+
+            <section class="grid-2col" style="margin-top: 16px">
+              <!-- Left Column: Agent Heartbeat & Telemetry Status -->
+              <div style="display: flex; flex-direction: column; gap: 16px">
+                <div class="panel-card">
+                  <div class="panel-card-header">
+                    <div class="panel-card-titles">
+                      <h2>Agent Telemetry &amp; Health</h2>
+                      <p>Real-time background monitor node heartbeat and status</p>
+                    </div>
+                    <span class="canary-sentinel-badge armed" id="agentStatusBadge">
+                      HEALTHY • ACTIVE
+                    </span>
+                  </div>
+
+                  <div class="detection-summary-rows">
+                    <div class="summary-row">
+                      <span class="text-secondary">Agent Version</span>
+                      <span class="mono font-semibold" id="agentMetricVersion"
+                        >v0.1.0 (Core Daemon)</span
+                      >
+                    </div>
+                    <div class="summary-row">
+                      <span class="text-secondary">Monitored Bucket</span>
+                      <span class="mono font-semibold" id="agentMetricBucket"
+                        >protected (local-storage)</span
+                      >
+                    </div>
+                    <div class="summary-row">
+                      <span class="text-secondary">Polling Interval</span>
+                      <span class="mono font-semibold" id="agentMetricInterval">10 seconds</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="text-secondary">Sliding Detection Window</span>
+                      <span class="mono font-semibold" id="agentMetricWindow">60 seconds</span>
+                    </div>
+                    <div class="summary-row">
+                      <span class="text-secondary">Heartbeat Latency</span>
+                      <span class="mono font-semibold text-teal" id="agentMetricLatency"
+                        >12 ms (Sub-second SLA)</span
+                      >
+                    </div>
+                    <div class="summary-row">
+                      <span class="text-secondary">Zero-Touch Canaries</span>
+                      <span class="mono font-semibold text-teal"
+                        >canary/tripwire_sentinel.docx (Armed)</span
+                      >
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 14px; display: flex; gap: 8px">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnPingAgentCard">
+                      Run Live Ping Test
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnRestartAgent">
+                      Restart Daemon
+                    </button>
+                  </div>
+                </div>
+
+                <div class="panel-card">
+                  <div class="panel-card-header">
+                    <div class="panel-card-titles">
+                      <h2>Security &amp; Architecture Boundaries</h2>
+                      <p>Design principles enforcing zero trust and minimal attack surface</p>
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 10px;
+                      font-size: 0.85rem;
+                      color: var(--text-secondary);
+                      line-height: 1.5;
+                    "
+                  >
+                    <div>
+                      <strong style="color: var(--text-primary)"
+                        >&bull; Zero Plaintext Secrets:</strong
+                      >
+                      The agent consumes pre-signed session tokens and never requires AWS root or
+                      full cloud administrative keys.
+                    </div>
+                    <div>
+                      <strong style="color: var(--text-primary)"
+                        >&bull; Read-Only Bucket Access:</strong
+                      >
+                      Only reads object metadata and calculates in-memory SHA-256 hashes without
+                      ever altering production files.
+                    </div>
+                    <div>
+                      <strong style="color: var(--text-primary)"
+                        >&bull; Autonomous Tripwire Containment:</strong
+                      >
+                      Breaches of canary files dispatch instant IAM deny-all signals within &lt; 4
+                      seconds without operator lag.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Direct Downloads & 1-Line Commands -->
+              <div style="display: flex; flex-direction: column; gap: 16px">
+                <!-- Direct Download Artifacts -->
+                <div class="panel-card">
+                  <div class="panel-card-header">
+                    <div class="panel-card-titles">
+                      <h2>Direct Package Downloads</h2>
+                      <p>Single-click downloadable install scripts and configuration templates</p>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: 1fr 1fr;
+                      gap: 10px;
+                      margin-top: 8px;
+                    "
+                  >
+                    <a
+                      href="/api/agent/install.sh"
+                      download="install.sh"
+                      class="btn btn-secondary"
+                      style="justify-content: flex-start; gap: 10px; padding: 12px"
+                    >
+                      <span style="font-size: 1.2rem">🐧</span>
+                      <div style="text-align: left">
+                        <div style="font-weight: 600; color: var(--text-primary)">install.sh</div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted)">
+                          Linux / macOS Bash
+                        </div>
+                      </div>
+                    </a>
+
+                    <a
+                      href="/api/agent/install.ps1"
+                      download="install.ps1"
+                      class="btn btn-secondary"
+                      style="justify-content: flex-start; gap: 10px; padding: 12px"
+                    >
+                      <span style="font-size: 1.2rem">🪟</span>
+                      <div style="text-align: left">
+                        <div style="font-weight: 600; color: var(--text-primary)">install.ps1</div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted)">
+                          Windows PowerShell
+                        </div>
+                      </div>
+                    </a>
+
+                    <a
+                      href="/api/agent/download"
+                      download="cloudrdr-agent.js"
+                      class="btn btn-secondary"
+                      style="justify-content: flex-start; gap: 10px; padding: 12px"
+                    >
+                      <span style="font-size: 1.2rem">⚡</span>
+                      <div style="text-align: left">
+                        <div style="font-weight: 600; color: var(--text-primary)">
+                          cloudrdr-agent.js
+                        </div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted)">
+                          Standalone Node.js Daemon
+                        </div>
+                      </div>
+                    </a>
+
+                    <a
+                      href="/api/agent/docker-compose.yml"
+                      download="docker-compose.yml"
+                      class="btn btn-secondary"
+                      style="justify-content: flex-start; gap: 10px; padding: 12px"
+                    >
+                      <span style="font-size: 1.2rem">🐳</span>
+                      <div style="text-align: left">
+                        <div style="font-weight: 600; color: var(--text-primary)">
+                          docker-compose.yml
+                        </div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted)">
+                          Container Deployment
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- 1-Line Terminal Deployment -->
+                <div class="panel-card">
+                  <div class="panel-card-header">
+                    <div class="panel-card-titles">
+                      <h2>One-Line Terminal Deployment</h2>
+                      <p>Run instantly in terminal or CI/CD container host</p>
+                    </div>
+                  </div>
+
+                  <!-- Platform switcher tabs -->
+                  <div
+                    style="
+                      display: flex;
+                      gap: 6px;
+                      margin: 10px 0;
+                      border-bottom: 1px solid var(--border);
+                      padding-bottom: 8px;
+                    "
+                    id="agentCmdTabs"
+                  >
+                    <button type="button" class="time-btn active" data-cmd="bash">
+                      Linux / macOS
+                    </button>
+                    <button type="button" class="time-btn" data-cmd="ps">PowerShell</button>
+                    <button type="button" class="time-btn" data-cmd="docker">Docker</button>
+                    <button type="button" class="time-btn" data-cmd="npm">Node / NPM</button>
+                  </div>
+
+                  <div
+                    style="
+                      position: relative;
+                      background: var(--bg-subtle);
+                      border: 1px solid var(--border);
+                      border-radius: var(--radius-sm);
+                      padding: 14px;
+                      font-family: var(--font-mono);
+                      font-size: 0.8rem;
+                      color: var(--accent-teal);
+                    "
+                  >
+                    <code id="agentCmdSnippet"
+                      >curl -sSL http://localhost:3000/api/agent/install.sh | bash</code
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                      id="btnCopyAgentCmd"
+                      style="
+                        position: absolute;
+                        top: 8px;
+                        right: 8px;
+                        padding: 4px 10px;
+                        font-size: 0.72rem;
+                      "
+                    >
+                      Copy
+                    </button>
+                  </div>
+
+                  <div style="margin-top: 10px; font-size: 0.75rem; color: var(--text-muted)">
+                    Requires Node.js &ge; 18 or Docker runtime. The daemon immediately establishes
+                    local socket telemetry with the SOC dashboard.
                   </div>
                 </div>
               </div>

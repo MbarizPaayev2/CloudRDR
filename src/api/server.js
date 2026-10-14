@@ -27,6 +27,7 @@ import { restoreRoutes } from './routes/restore.js';
 import { dashboardRoutes } from './routes/dashboard.js';
 import { authRoutes, extractSessionToken } from './routes/auth.js';
 import { telemetryRoutes } from './routes/telemetry.js';
+import { agentRoutes } from './routes/agent.js';
 import { validateSession } from '../auth/authService.js';
 
 /**
@@ -65,6 +66,7 @@ export async function buildServer(options = {}) {
       request.url.startsWith('/login') ||
       request.url.startsWith('/register') ||
       request.url.startsWith('/api/auth') ||
+      request.url.startsWith('/api/agent') ||
       request.url.startsWith('/site') ||
       request.url.startsWith('/demo') ||
       request.url.startsWith('/how-it-works') ||
@@ -158,6 +160,7 @@ export async function buildServer(options = {}) {
   await app.register(incidentRoutes);
   await app.register(restoreRoutes);
   await app.register(telemetryRoutes);
+  await app.register(agentRoutes);
   await app.register(dashboardRoutes);
 
   return app;
