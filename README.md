@@ -70,6 +70,19 @@ Modern cloud ransomware attacks rarely announce themselves with desktop ransom n
 
 ---
 
+## 🧠 Codebase Knowledge Graph & AST Architecture
+
+CloudRDR maintains a continuous Abstract Syntax Tree (AST) knowledge graph mapping all 680+ structural symbols, modules, cryptographic boundaries, and operational controllers across 32 topological clusters.
+
+<div align="center">
+  <img src="docs/assets/knowledge-graph.png" alt="CloudRDR Codebase Knowledge Graph (683 nodes, 1603 edges)" width="100%" />
+  <p><em>Interactive Graphify Knowledge Graph visualizing 683 nodes, 1,603 dependency edges, and 32 domain clusters across detection engine, cryptographic contracts, and SOC frontend.</em></p>
+</div>
+
+> 💡 **Canlı İnteraktiv Baxış**: Layihənin bütün arxitektura qrafını brauzerdə interaktiv (böyüdüb-kiçiltmə, axtarış, klaster filtri) şəkildə açmaq üçün birbaşa [`graphify-out/graph.html`](graphify-out/graph.html) faylını istənilən brauzerdə aça bilərsiniz.
+
+---
+
 ## Quick Start (Local Demo in Under 3 Minutes)
 
 CloudRDR is preconfigured to run out of the box with zero external cloud dependencies using its built-in local filesystem adapter and in-memory persistence layer.
