@@ -15,7 +15,7 @@ loadDotenv();
  * @param {string} key
  * @returns {string}
  */
-function requireString(key) {
+function _requireString(key) {
   const v = process.env[key];
   if (!v || v.trim() === '') {
     throw new Error(`[config] Missing required env var: ${key}`);

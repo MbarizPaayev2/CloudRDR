@@ -41,7 +41,11 @@ export async function agentRoutes(fastify) {
   });
 
   // ── 2. Linux / macOS Bash Installer (curl -sSL ... | bash) ────────────────
-  fastify.get('/api/agent/install.sh', async (_request, reply) => {
+  fastify.get('/api/agent/install.sh', async (request, reply) => {
+    const proto = request.headers['x-forwarded-proto'] || (request.socket.encrypted ? 'https' : 'http');
+    const host = request.headers.host || 'localhost:3000';
+    const serverUrl = `${proto}://${host}`;
+
     const installScript = `#!/usr/bin/env bash
 # ==============================================================================
 # CloudRDR Enterprise Monitoring Agent — Linux / macOS Automated Installer
@@ -58,7 +62,7 @@ echo ""
 INSTALL_DIR="/opt/cloudrdr-agent"
 SERVICE_NAME="cloudrdr-agent"
 BUCKET="\${1:-protected}"
-ENDPOINT="\${CLOUDRDR_ENDPOINT:-http://localhost:3000}"
+ENDPOINT="\${CLOUDRDR_ENDPOINT:-${serverUrl}}"
 
 echo "[*] Checking system dependencies..."
 if ! command -v node >/dev/null 2>&1; then
@@ -140,13 +144,17 @@ echo ""
   });
 
   // ── 3. Windows PowerShell Installer (iwr ... | iex) ───────────────────────
-  fastify.get('/api/agent/install.ps1', async (_request, reply) => {
+  fastify.get('/api/agent/install.ps1', async (request, reply) => {
+    const proto = request.headers['x-forwarded-proto'] || (request.socket.encrypted ? 'https' : 'http');
+    const host = request.headers.host || 'localhost:3000';
+    const serverUrl = `${proto}://${host}`;
+
     const psScript = `# ==============================================================================
 # CloudRDR Enterprise Monitoring Agent — Windows PowerShell Installer
 # ==============================================================================
 param(
   [string]$Bucket = "protected",
-  [string]$Endpoint = "http://localhost:3000"
+  [string]$Endpoint = "${serverUrl}"
 )
 
 Write-Host ""

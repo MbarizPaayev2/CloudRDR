@@ -207,6 +207,8 @@ export async function dashboardRoutes(fastify) {
   fastify.get('/login', handleLogin);
   fastify.get('/login/', handleLogin);
   fastify.get('/login.html', handleLogin);
+  fastify.get('/dashboard/login', handleLogin);
+  fastify.get('/dashboard/login.html', handleLogin);
 
   // Registration Page (redirect to dashboard if already authenticated)
   const handleRegister = async (request, reply) => {
@@ -219,6 +221,8 @@ export async function dashboardRoutes(fastify) {
   fastify.get('/register', handleRegister);
   fastify.get('/register/', handleRegister);
   fastify.get('/register.html', handleRegister);
+  fastify.get('/dashboard/register', handleRegister);
+  fastify.get('/dashboard/register.html', handleRegister);
 
   // Protected Admin SOC Dashboard (redirect to /login if unauthenticated)
   const handleDashboard = async (request, reply) => {

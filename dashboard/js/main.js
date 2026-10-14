@@ -929,13 +929,17 @@ function wireEvents() {
     );
   });
 
+  const origin = window.location.origin || 'http://localhost:3000';
   const cmdMap = {
-    bash: 'curl -sSL http://localhost:3000/api/agent/install.sh | bash',
-    ps: 'irm http://localhost:3000/api/agent/install.ps1 | iex',
-    docker: 'curl -O http://localhost:3000/api/agent/docker-compose.yml && docker compose up -d',
+    bash: `curl -sSL ${origin}/api/agent/install.sh | bash`,
+    ps: `irm ${origin}/api/agent/install.ps1 | iex`,
+    docker: `curl -O ${origin}/api/agent/docker-compose.yml && docker compose up -d`,
     npm: 'npm run monitor',
   };
   const agentCmdSnippet = document.getElementById('agentCmdSnippet');
+  if (agentCmdSnippet) {
+    agentCmdSnippet.textContent = cmdMap.bash;
+  }
   const agentCmdTabs = document.getElementById('agentCmdTabs');
   if (agentCmdTabs) {
     const tabBtns = agentCmdTabs.querySelectorAll('button');

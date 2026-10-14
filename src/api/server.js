@@ -59,9 +59,10 @@ export async function buildServer(options = {}) {
   // 3. API Key Authentication Hook (except /health)
   app.addHook('onRequest', async (request, reply) => {
     // Whitelist public frontend pages, assets, and /health
+    const routeUrl = request.routeOptions?.url || request.url;
     const isPublicRoute =
-      request.routerPath === '/health' ||
-      request.routerPath === '/' ||
+      routeUrl === '/health' ||
+      routeUrl === '/' ||
       request.url === '/' ||
       request.url.startsWith('/login') ||
       request.url.startsWith('/register') ||
