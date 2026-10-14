@@ -15,15 +15,21 @@ const STORAGE_KEYS = {
   BUCKET_NAME: 'cloudrdr_bucket_name',
 };
 
+const defaultOrigin =
+  typeof window !== 'undefined' && window.location?.origin?.startsWith('http')
+    ? window.location.origin
+    : 'http://localhost:3000';
+
 // Safe defaults
 const DEFAULTS = {
-  API_BASE_URL: 'http://localhost:3000',
-  API_KEY: 'change-me-before-running',
+  API_BASE_URL: defaultOrigin,
+  API_KEY: 'dev-secret-key-12345',
   POLL_INTERVAL_MS: 5000,
   USE_MOCK: true, // Default to true so demo opens immediately with full story
   THEME: 'dark',
   BUCKET_NAME: 'protected',
 };
+
 
 // Safe storage abstraction (browser localStorage with Node.js fallback)
 const storage =
