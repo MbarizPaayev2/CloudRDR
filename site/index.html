@@ -483,12 +483,12 @@
               <div>
                 <div class="visualizer-meta-badges">
                   <span id="vizStageBadge" class="brand-badge">Stage 01 // Baseline</span>
-                  <span id="vizIsoBadge" class="status-chip valid">ISO 27001 A.8.9</span>
+                  <span id="vizBadge1" class="status-chip valid">Automated Protection</span>
                   <span
-                    id="vizRfcBadge"
+                    id="vizBadge2"
                     class="status-chip missing"
                     style="border: 1px solid var(--border)"
-                    >RFC 6962</span
+                    >Tamper-Proof</span
                   >
                 </div>
                 <h3 id="vizTitle" class="visualizer-title">
@@ -501,36 +501,30 @@
                   unauthorized tampering.
                 </p>
                 <div class="visualizer-spec-grid" id="vizSpecGrid">
-                  <div class="spec-chip">
-                    <div class="spec-chip-label">Algorithm</div>
-                    <div class="spec-chip-val" id="vizAlg">SHA-256 Pairwise Tree</div>
+                  <div class="spec-chip spec-chip-full">
+                    <div class="spec-chip-label">🎯 Primary Objective</div>
+                    <div class="spec-chip-val" id="vizGoal">
+                      Record original digital fingerprints of all protected files
+                    </div>
                   </div>
                   <div class="spec-chip">
-                    <div class="spec-chip-label">SLA / Window</div>
-                    <div class="spec-chip-val" id="vizSla">&lt; 450ms per 1k files</div>
+                    <div class="spec-chip-label">⚡ Detection Speed</div>
+                    <div class="spec-chip-val" id="vizSpeed">Sub-second cryptographic hashing</div>
                   </div>
                   <div class="spec-chip">
-                    <div class="spec-chip-label">Integrity Invariant</div>
-                    <div class="spec-chip-val" id="vizInvariant">Root Mismatch = Tampered</div>
-                  </div>
-                  <div class="spec-chip">
-                    <div class="spec-chip-label">Backend Target</div>
-                    <div class="spec-chip-val" id="vizTarget">src/baseline/baselineService.js</div>
+                    <div class="spec-chip-label">🛡️ Security Guarantee</div>
+                    <div class="spec-chip-val" id="vizOutcome">
+                      Instant detection if even 1 byte is modified
+                    </div>
                   </div>
                 </div>
               </div>
               <div style="display: flex; align-items: center; gap: 10px; margin-top: auto">
                 <a
-                  href="how-it-works.html"
-                  class="btn btn-secondary"
-                  style="font-size: 0.75rem; padding: 6px 14px"
-                  >Read Full Protocol Specs ↗</a
-                >
-                <a
                   href="demo/index.html"
                   class="btn btn-primary"
-                  style="font-size: 0.75rem; padding: 6px 14px"
-                  >Inspect in Live Demo →</a
+                  style="font-size: 0.8rem; padding: 8px 18px"
+                  >Inspect in Live Interactive Demo →</a
                 >
               </div>
             </div>
@@ -547,8 +541,8 @@
                   <span
                     style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f"
                   ></span>
-                  <span style="margin-left: 8px; font-weight: 600; color: #c0c8d8" id="vizCodeTitle"
-                    >baselineService.js</span
+                  <span style="margin-left: 8px; font-weight: 600; color: #c0c8d8" id="vizSimTitle"
+                    >Live File Integrity & Tamper Sandbox</span
                   >
                 </div>
                 <span
@@ -564,15 +558,13 @@
                   <span
                     style="width: 5px; height: 5px; background: #27c93f; border-radius: 50%"
                   ></span>
-                  ACTIVE
+                  LIVE SIMULATOR
                 </span>
               </div>
 
               <div class="live-interactive-sandbox" id="vizSandbox">
                 <!-- Dynamically populated sandbox widget -->
               </div>
-
-              <pre class="live-code-snippet" id="vizCodeSnippet"></pre>
             </div>
           </div>
         </div>
@@ -1190,23 +1182,14 @@
       const pipelineStages = [
         {
           tag: 'Stage 01 // Baseline',
-          iso: 'ISO 27001 A.8.9',
-          rfc: 'RFC 6962',
+          badge1: 'Automated Protection',
+          badge2: 'Tamper-Proof',
           title: 'Take a Cryptographic Fingerprint of Every File',
           desc: 'Before any file can be attacked, CloudRDR records a unique cryptographic fingerprint (SHA-256) of every file while the system is safe. If even one byte of a file changes later, its fingerprint changes too—letting us immediately spot unauthorized tampering.',
-          alg: 'SHA-256 Pairwise Tree',
-          sla: '< 450ms per 1k files',
-          invariant: 'Root Mismatch = Tampered',
-          target: 'src/baseline/baselineService.js',
-          codeTitle: 'baselineService.js',
-          code: `// 1. Compute deterministic Merkle Root over bucket objects
-const leaves = files.map(f => hashBuffer(f.bytes));
-const merkleRoot = crypto.merkleRoot(leaves);
-await db.from('baseline_snapshots').insert({
-  bucket: 'protected',
-  merkle_root: merkleRoot,
-  file_count: files.length
-});`,
+          goal: 'Record original digital fingerprints of all protected files',
+          speed: 'Sub-second cryptographic hashing',
+          outcome: 'Instant detection if even 1 byte is modified',
+          simTitle: 'Live File Integrity & Tamper Sandbox',
           renderSandbox: (box) => {
             box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
@@ -1304,21 +1287,14 @@ await db.from('baseline_snapshots').insert({
         },
         {
           tag: 'Stage 02 // Monitor',
-          iso: 'ISO 27001 A.8.16',
-          rfc: 'Polling SLA',
-          title: 'Continuous Event Ingestion Agent',
-          desc: 'Background daemon continuously inspects object storage event streams every 10 seconds. Emits created, modified, and deleted deltas while calculating post-change SHA-256 entropy.',
-          alg: 'Storage Delta Engine',
-          sla: '10.0 seconds cycle',
-          invariant: 'Zero Unobserved Writes',
-          target: 'src/monitor/monitorAgent.js',
-          codeTitle: 'monitorAgent.js',
-          code: `// 2. Poll storage adapter and diff against known state
-const current = await storage.list(bucket);
-const changes = diffEntries(prevListing, current);
-await db.from('change_events').insert(changes.map(c => ({
-  bucket, path: c.path, event_type: c.type, observed_sha256: c.sha256
-})));`,
+          badge1: '24/7 Background Agent',
+          badge2: 'Zero Overhead',
+          title: 'Continuously Watch Storage for File Changes',
+          desc: 'CloudRDR silently monitors file storage 24/7 in the background. Every 10 seconds, it automatically catalogs new files, edited files, and deleted files without slowing down server or user performance.',
+          goal: 'Track every file creation, modification, and deletion event',
+          speed: 'Automated continuous check every 10 seconds',
+          outcome: 'Zero unobserved file changes across all cloud buckets',
+          simTitle: 'Real-Time Storage Event Stream',
           renderSandbox: (box) => {
             box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
@@ -1358,7 +1334,7 @@ await db.from('change_events').insert(changes.map(c => ({
               emitBtn.addEventListener('click', () => {
                 const status = box.querySelector('#monitorEventStatus');
                 status.innerHTML =
-                  '<span style="color:#E0A100;">+1 modified: docs/contract.pdf (sha256 diff)</span>';
+                  '<span style="color:#E0A100;">+1 modified: docs/contract.pdf (fingerprint diff)</span>';
                 setTimeout(() => {
                   if (status)
                     status.innerHTML =
@@ -1370,20 +1346,14 @@ await db.from('change_events').insert(changes.map(c => ({
         },
         {
           tag: 'Stage 03 // Detect',
-          iso: 'ISO 27001 A.8.7',
-          rfc: 'Sliding Window',
-          title: 'Sliding-Window Heuristic & Canary Tripwire',
-          desc: 'Evaluates modification volume across a 60-second sliding window: <10% NORMAL, 10-30% SUSPICIOUS, >=30% RANSOMWARE. Any touch on invisible canary decoys triggers instant containment.',
-          alg: 'Sliding Heuristic + Canary',
-          sla: 'Instantaneous (Canary: 0s)',
-          invariant: 'Tripwire = Absolute Containment',
-          target: 'src/detection/detectionEngine.js',
-          codeTitle: 'detectionEngine.js',
-          code: `// 3. Sliding window & canary tripwire
-const rate = changedFiles / totalFiles;
-const canaryTripped = events.some(e => e.is_canary);
-const verdict = canaryTripped || rate >= 0.30 
-  ? 'ransomware' : rate >= 0.10 ? 'suspicious' : 'normal';`,
+          badge1: 'Intelligent Heuristics',
+          badge2: 'Canary Trap',
+          title: 'Spot Ransomware Mass Encryption Instantly',
+          desc: 'If a burst of files are rapidly modified (over 30% within 60 seconds), or if an attacker touches our hidden canary decoy files, CloudRDR immediately flags an active ransomware attack and triggers defense.',
+          goal: 'Distinguish normal user edits from mass ransomware encryption',
+          speed: 'Instant detection (0-second trigger on canary decoys)',
+          outcome: 'Automated ransomware verdict before damage can spread',
+          simTitle: 'Ransomware Threshold & Tripwire Simulator',
           renderSandbox: (box) => {
             box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
@@ -1441,20 +1411,14 @@ const verdict = canaryTripped || rate >= 0.30
         },
         {
           tag: 'Stage 04 // Respond',
-          iso: 'ISO 27001 A.8.15',
-          rfc: 'RFC 8032',
-          title: 'Control-Plane IAM Lockdown & Ed25519 Signing',
-          desc: 'Autonomous control-plane enforcement: within 10 seconds, an IAM Deny-All policy isolates the compromised credential. An immutable forensic incident record is generated and signed with Ed25519.',
-          alg: 'Ed25519 (RFC 8032)',
-          sla: '< 10.0s Control-Plane SLA',
-          invariant: 'Immediate Write Revocation',
-          target: 'src/response/responseService.js',
-          codeTitle: 'responseService.js',
-          code: `// 4. Autonomous IAM freeze & RFC 8032 signing
-await freezeClient.freezeAccount(accountId);
-const record = { incidentId, accountId, frozenAt: new Date().toISOString() };
-const { signature, keyId } = crypto.signRecord(record);
-await db.from('incidents').update({ status: 'frozen', record_signature: signature });`,
+          badge1: 'Automated Lockdown',
+          badge2: 'Digital Signature',
+          title: 'Lock Down Attacker Access Within Seconds',
+          desc: 'The moment ransomware is detected, CloudRDR locks down cloud credentials in under 10 seconds to stop the encryption in its tracks. A tamper-proof forensic incident report is cryptographically signed.',
+          goal: 'Isolate compromised accounts and block all write permissions',
+          speed: 'Emergency lockdown in under 10 seconds (< 10s SLA)',
+          outcome: 'Ransomware is neutralized while recovery safely begins',
+          simTitle: 'Cloud IAM Lockdown Controller',
           renderSandbox: (box) => {
             box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
@@ -1468,7 +1432,7 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
                   <span style="color:#D93636;">Write/Delete: DENIED</span>
                 </div>
                 <div style="font-size:0.65rem;color:var(--text-muted);">Ed25519 Signature:</div>
-                <div id="edSigVal" style="font-size:0.68rem;color:#27C93F;word-break:break-all;">7f3d81b94e098a54c330f1d9a20... [RFC 8032 VALID]</div>
+                <div id="edSigVal" style="font-size:0.68rem;color:#27C93F;word-break:break-all;">7f3d81b94e098a54c330f1d9a20... [AUTHENTICATED]</div>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;">
                 <span style="font-size:0.68rem;color:var(--text-muted);">SLA Latency: <strong>3.2s</strong> &lt; 10s maximum</span>
@@ -1481,10 +1445,10 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
               btn.addEventListener('click', () => {
                 const sig = box.querySelector('#edSigVal');
                 sig.style.color = 'var(--text)';
-                sig.textContent = 'Verifying curve25519 public key…';
+                sig.textContent = 'Verifying cryptographic public key…';
                 setTimeout(() => {
                   sig.style.color = '#27C93F';
-                  sig.textContent = '7f3d81b94e098a54c330f1d9a20… [RFC 8032 VALID]';
+                  sig.textContent = '7f3d81b94e098a54c330f1d9a20… [AUTHENTICATED]';
                 }, 400);
               });
             }
@@ -1492,20 +1456,14 @@ await db.from('incidents').update({ status: 'frozen', record_signature: signatur
         },
         {
           tag: 'Stage 05 // Audit',
-          iso: 'ISO 27001 A.8.15',
-          rfc: 'Hash-Chained',
-          title: 'Tamper-Evident Forensic Audit Ledger',
-          desc: "Every detection verdict, containment action, and operator command appends to a cryptographically chained ledger. Each block seals the prior block's hash: tampering with any past event visibly breaks the chain.",
-          alg: 'SHA-256 Back-Linked Chain',
-          sla: 'Atomic Append on Event',
-          invariant: 'Any Edit Breaks Downstream Chain',
-          target: 'src/contracts/crypto.contract.js',
-          codeTitle: 'crypto.contract.js',
-          code: `// 5. Append-only tamper-evident hash chain
-const prevHash = ledger.length ? ledger.at(-1).hash : '0'.repeat(64);
-const blockPayload = JSON.stringify({ index, prevHash, timestamp, data });
-const hash = crypto.createHash('sha256').update(blockPayload).digest('hex');
-ledger.push({ index, hash, prevHash, data });`,
+          badge1: 'Immutable History',
+          badge2: 'Tamper-Evident',
+          title: 'Maintain an Unbreakable Evidence Chain',
+          desc: 'Every detection verdict, lockdown action, and operator recovery command is permanently chained into a cryptographic ledger. Each record locks the previous one, making forensic evidence tamper-proof.',
+          goal: 'Create an unalterable forensic record of all security events',
+          speed: 'Instant atomic append upon each security action',
+          outcome: 'Guaranteed proof that incident logs were never modified',
+          simTitle: 'Cryptographic Audit Block Ledger',
           renderSandbox: (box) => {
             box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
@@ -1565,33 +1523,27 @@ ledger.push({ index, hash, prevHash, data });`,
         },
         {
           tag: 'Stage 06 // Restore',
-          iso: 'ISO 27001 A.8.13',
-          rfc: 'NIST SP 800-38D',
-          title: 'AEAD-Authenticated Verified Decryption',
-          desc: 'Backups encrypted with AES-256-GCM are fetched and verified against their 128-bit authentication tag. Each restored payload is re-hashed and cross-referenced with the initial Merkle baseline.',
-          alg: 'AES-256-GCM (AEAD)',
-          sla: '100% Verification Threshold',
-          invariant: 'Zero Tampered Files Written Back',
-          target: 'src/restore/restoreService.js',
-          codeTitle: 'restoreService.js',
-          code: `// 6. AEAD tag verification & baseline check
-const { bytes, aeadVerified } = await backup.restoreFile(bucket, path);
-const recomputedHash = hashBuffer(bytes);
-const isValid = aeadVerified && (recomputedHash === expectedSha256);
-if (isValid) await storage.write(bucket, path, bytes);`,
+          badge1: 'Verified Recovery',
+          badge2: 'Zero Ransom Paid',
+          title: 'Safely Restore Files to 100% Original State',
+          desc: 'CloudRDR fetches safe, encrypted backups and verifies each file against the initial baseline fingerprint before writing it back. Any tampered or corrupted file is rejected, guaranteeing pristine recovery.',
+          goal: 'Restore every encrypted file back to its exact original state',
+          speed: 'Parallel automated restore & cryptographic verification',
+          outcome: '100% authentic files restored with zero ransom paid',
+          simTitle: 'Authenticated Backup Restoration Engine',
           renderSandbox: (box) => {
             box.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:0.75rem;">
               <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-muted);">
-                <span>AEAD Verification Progress</span>
+                <span>Recovery Verification Progress</span>
                 <span id="restoreVerifCount" style="color:#27C93F;font-weight:700;">16 / 16 VALID (100%)</span>
               </div>
               <div style="background:var(--surface-subtle);height:8px;border-radius:4px;overflow:hidden;margin-bottom:10px;">
                 <div id="restoreProgressBar" style="width:100%;height:100%;background:#27C93F;transition:width 0.4s ease;"></div>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:6px 10px;border-radius:4px;border:1px solid var(--border);">
-                <div style="font-size:0.68rem;color:var(--text-muted);">Status: <b style="color:#27C93F;">Incident Ready to Close</b></div>
-                <button type="button" id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run AEAD Verify</button>
+                <div style="font-size:0.68rem;color:var(--text-muted);">Status: <b style="color:#27C93F;">Pristine Files Restored</b></div>
+                <button type="button" id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run Recovery Verification</button>
               </div>
             </div>
           `;
@@ -1601,7 +1553,7 @@ if (isValid) await storage.write(bucket, path, bytes);`,
                 const bar = box.querySelector('#restoreProgressBar');
                 const count = box.querySelector('#restoreVerifCount');
                 bar.style.width = '0%';
-                count.textContent = 'Verifying GCM tags…';
+                count.textContent = 'Verifying backup hashes…';
                 let progress = 0;
                 const timer = setInterval(() => {
                   progress += 2;
@@ -1620,17 +1572,15 @@ if (isValid) await storage.write(bucket, path, bytes);`,
 
       const pipelineNodes = document.querySelectorAll('#pipelineTrack .pipeline-node');
       const vizStageBadge = document.getElementById('vizStageBadge');
-      const vizIsoBadge = document.getElementById('vizIsoBadge');
-      const vizRfcBadge = document.getElementById('vizRfcBadge');
+      const vizBadge1 = document.getElementById('vizBadge1');
+      const vizBadge2 = document.getElementById('vizBadge2');
       const vizTitle = document.getElementById('vizTitle');
       const vizDesc = document.getElementById('vizDesc');
-      const vizAlg = document.getElementById('vizAlg');
-      const vizSla = document.getElementById('vizSla');
-      const vizInvariant = document.getElementById('vizInvariant');
-      const vizTarget = document.getElementById('vizTarget');
-      const vizCodeTitle = document.getElementById('vizCodeTitle');
+      const vizGoal = document.getElementById('vizGoal');
+      const vizSpeed = document.getElementById('vizSpeed');
+      const vizOutcome = document.getElementById('vizOutcome');
+      const vizSimTitle = document.getElementById('vizSimTitle');
       const vizSandbox = document.getElementById('vizSandbox');
-      const vizCodeSnippet = document.getElementById('vizCodeSnippet');
 
       let currentStageIndex = 0;
       let autoPlayTimer = null;
@@ -1654,16 +1604,14 @@ if (isValid) await storage.write(bucket, path, bytes);`,
         if (!s) return;
 
         if (vizStageBadge) vizStageBadge.textContent = s.tag;
-        if (vizIsoBadge) vizIsoBadge.textContent = s.iso;
-        if (vizRfcBadge) vizRfcBadge.textContent = s.rfc;
+        if (vizBadge1) vizBadge1.textContent = s.badge1;
+        if (vizBadge2) vizBadge2.textContent = s.badge2;
         if (vizTitle) vizTitle.textContent = s.title;
         if (vizDesc) vizDesc.textContent = s.desc;
-        if (vizAlg) vizAlg.textContent = s.alg;
-        if (vizSla) vizSla.textContent = s.sla;
-        if (vizInvariant) vizInvariant.textContent = s.invariant;
-        if (vizTarget) vizTarget.textContent = s.target;
-        if (vizCodeTitle) vizCodeTitle.textContent = s.codeTitle;
-        if (vizCodeSnippet) vizCodeSnippet.textContent = s.code;
+        if (vizGoal) vizGoal.textContent = s.goal;
+        if (vizSpeed) vizSpeed.textContent = s.speed;
+        if (vizOutcome) vizOutcome.textContent = s.outcome;
+        if (vizSimTitle) vizSimTitle.textContent = s.simTitle;
 
         if (vizSandbox && typeof s.renderSandbox === 'function') {
           s.renderSandbox(vizSandbox);
