@@ -2280,9 +2280,9 @@
     "semantic_hash": ""
   },
   "dashboard/landing.html": {
-    "mtime": 1791978814.0402486,
-    "seen": 1791978861.7414746,
-    "ast_hash": "08bc9fe33ec762653f6535262cb19093",
+    "mtime": 1791979385.0174596,
+    "seen": 1791979437.3835702,
+    "ast_hash": "e2ef63335d5a028bbc7a9646e0f64c87",
     "semantic_hash": ""
   },
   "docs/grc/01_THREAT_MODEL_STRIDE.md": {
@@ -4983,6 +4983,168 @@
     "mtime": 1791977688.4048615,
     "seen": 1791978108.154947,
     "ast_hash": "710104ed8bae55ef912b717c95a90b32",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/report-schema.json": {
+    "mtime": 1791979070.232972,
+    "seen": 1791979436.9667168,
+    "ast_hash": "e705ada366ad4025f55f943c95d9f590",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/validate-coverage-ledger.cjs": {
+    "mtime": 1791979070.232972,
+    "seen": 1791979436.9667227,
+    "ast_hash": "5a66be64317f177ecef5d150b1abf1d9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/validate-coverage-ledger.test.cjs": {
+    "mtime": 1791979070.233972,
+    "seen": 1791979436.966727,
+    "ast_hash": "3bc35b09cbd0d46c65457de04cef10a3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/validate-findings.cjs": {
+    "mtime": 1791979070.234972,
+    "seen": 1791979436.9667299,
+    "ast_hash": "b924a4aca31ed6095f6c1603b97a552c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/validate-findings.test.cjs": {
+    "mtime": 1791979070.234972,
+    "seen": 1791979436.9667327,
+    "ast_hash": "135077736a6939252acbff7ca706c32a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/AI-AND-LLM.md": {
+    "mtime": 1791979070.2234552,
+    "seen": 1791979437.1986954,
+    "ast_hash": "c5abfaece0f58d5d5058fa07b29791ad",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/ATTACK-CLASSES.md": {
+    "mtime": 1791979070.224456,
+    "seen": 1791979437.1987011,
+    "ast_hash": "b33b760ff50ffdc0eda5d928f80fb107",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/CLIENT-SIDE.md": {
+    "mtime": 1791979070.224456,
+    "seen": 1791979437.1987038,
+    "ast_hash": "f535193f9c655e348e5b904f7f67d34e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/CLOUD-AND-DEPLOYMENT.md": {
+    "mtime": 1791979070.2259655,
+    "seen": 1791979437.1987066,
+    "ast_hash": "3396934a06bfa86a84596e661f875300",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/DATA-ISOLATION-AND-LIFECYCLE.md": {
+    "mtime": 1791979070.2259655,
+    "seen": 1791979437.1987102,
+    "ast_hash": "33d0561cb12415d388a6449d90d2ff3f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/DESKTOP-MOBILE-AND-LOCAL-IPC.md": {
+    "mtime": 1791979070.2269728,
+    "seen": 1791979437.1987143,
+    "ast_hash": "f0d96ab77876c447d64ba1cef6f3da5e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/HUNTING.md": {
+    "mtime": 1791979070.2279725,
+    "seen": 1791979437.1987185,
+    "ast_hash": "5cb64bcc2971ceb4a7f955ffd741d25f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/MEMORY-SAFETY-AND-BINARY.md": {
+    "mtime": 1791979070.2279725,
+    "seen": 1791979437.198722,
+    "ast_hash": "8d3d5783e9710a299c2c1cbef8ca7463",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/PROTOCOLS-RPC-AND-MESSAGING.md": {
+    "mtime": 1791979070.2289724,
+    "seen": 1791979437.1987247,
+    "ast_hash": "5137eb203d4b236a081210bb77b21131",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/RECONNAISSANCE.md": {
+    "mtime": 1791979070.2289724,
+    "seen": 1791979437.1987274,
+    "ast_hash": "95ea170b99be883a9f704bfee29b9443",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/RESOURCE-EXHAUSTION-AND-AVAILABILITY.md": {
+    "mtime": 1791979070.2299762,
+    "seen": 1791979437.19873,
+    "ast_hash": "92a3e104467a5fc71a6ba34bf97828ef",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/SKILL.md": {
+    "mtime": 1791979070.2299762,
+    "seen": 1791979437.1987329,
+    "ast_hash": "cec212c92a709bfffce1cbb1daca0df1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/SUPPLY-CHAIN-AND-RELEASE.md": {
+    "mtime": 1791979070.2309725,
+    "seen": 1791979437.1987357,
+    "ast_hash": "ea6e73711ef3d3acc1201633a172d4b0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/VALIDATION-AND-REPORTING.md": {
+    "mtime": 1791979070.2319722,
+    "seen": 1791979437.198738,
+    "ast_hash": "df9bbf7f5058f0f7eaba098b4ce830a2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/cloudflare-security-audit/WEB-PROTOCOL-AND-AUTH.md": {
+    "mtime": 1791979070.2319722,
+    "seen": 1791979437.1987405,
+    "ast_hash": "53943d99f2a3484ce8f37de2be783f8b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/security-auditor/SKILL.md": {
+    "mtime": 1791979068.7564633,
+    "seen": 1791979437.3269308,
+    "ast_hash": "192cb9309f6958f740ae89791b4f852a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-design-system/SKILL.md": {
+    "mtime": 1791979068.7934794,
+    "seen": 1791979437.3356657,
+    "ast_hash": "bcf4012f9e8fbe6495c302d3f64af2aa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/tailwind-design-system/resources/implementation-playbook.md": {
+    "mtime": 1791979068.7944791,
+    "seen": 1791979437.3356712,
+    "ast_hash": "9388a3bfe6c8b0ee0dda85e3d891ac97",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threat-modeling-expert/SKILL.md": {
+    "mtime": 1791979068.8139954,
+    "seen": 1791979437.3422809,
+    "ast_hash": "d618294b638a67e42c38cead85828ee8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/ui-ux-designer/SKILL.md": {
+    "mtime": 1791979068.820999,
+    "seen": 1791979437.3448482,
+    "ast_hash": "7223c7d23ea6a1eb6128c773053ee3ee",
+    "semantic_hash": ""
+  },
+  ".agents/skills/wcag-audit-patterns/SKILL.md": {
+    "mtime": 1791979068.8309996,
+    "seen": 1791979437.378069,
+    "ast_hash": "4eb9fc915d125ed3f325109b8e2433f0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/wcag-audit-patterns/resources/implementation-playbook.md": {
+    "mtime": 1791979068.832995,
+    "seen": 1791979437.3780758,
+    "ast_hash": "cc4378619297228b831d9b60d4f4b1c8",
     "semantic_hash": ""
   }
 }

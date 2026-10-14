@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CloudRDR — Autonomous Cloud Ransomware Containment & Cryptographic Recovery</title>
   <meta name="description" content="Autonomous ransomware containment, Merkle tree cryptographic integrity proof, and AEAD verified recovery for cloud object storage." />
+  
+  <!-- Cloudflare Security Audit: Strict Client-Side Defense & CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' http://localhost:3000;" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
   <!-- Premium Typography: Geist & Geist Mono (Vercel / Linear Developer Tier) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1304,6 +1308,70 @@
       }
     }
 
+    /* ── STRIDE Threat Modeling Table (Cloudflare Security Audit) ────────── */
+    .threat-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .threat-table th {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .threat-table td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+
+    .threat-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .threat-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .threat-badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .threat-s { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .threat-t { background: rgba(239, 68, 68, 0.15); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .threat-r { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .threat-i { background: rgba(139, 92, 246, 0.15); color: #C084FC; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .threat-d { background: rgba(239, 68, 68, 0.15); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .threat-e { background: rgba(6, 182, 212, 0.15); color: #67E8F9; border: 1px solid rgba(6, 182, 212, 0.3); }
+
+    .flaw-cell {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+    }
+
+    .control-cell {
+      color: #FFFFFF;
+      font-weight: 500;
+      font-size: 0.88rem;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1350,6 +1418,7 @@
           <li><a href="#pillars">Core Pillars</a></li>
           <li><a href="#lifecycle">6-Stage Defense</a></li>
           <li><a href="#audit-chain">Audit Ledger</a></li>
+          <li><a href="#threat-matrix">Threat Matrix</a></li>
           <li><a href="#code-suite">Developer API</a></li>
         </ul>
 
@@ -1742,6 +1811,74 @@
             <div id="block2Sig" style="color:var(--emerald);font-size:0.7rem;margin-top:6px;">✓ ED25519 SIGNATURE VALID</div>
           </div>
 
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── STRIDE THREAT MITIGATION MATRIX (Cloudflare Security Audit) ───── -->
+    <section class="section-wrap" id="threat-matrix">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="eyebrow-badge">Threat Modeling & Security Posture</div>
+          <h2 class="section-title">STRIDE Defense & Resilience Matrix</h2>
+          <p class="section-desc">
+            Systematic threat modeling aligned with Cloudflare security audit standards, mitigating zero-day ransomware across the complete attack lifecycle.
+          </p>
+        </div>
+
+        <div class="doppel-shell" style="overflow-x:auto;">
+          <div class="doppel-core" style="padding:0;">
+            <table class="threat-table" aria-label="STRIDE Threat Mitigation Matrix">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 14%;">Threat Vector</th>
+                  <th scope="col" style="width: 22%;">Attacker Objective</th>
+                  <th scope="col" style="width: 30%;">Legacy Backup Vulnerability</th>
+                  <th scope="col" style="width: 34%;">CloudRDR Cryptographic Control</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="threat-badge threat-s">S // Spoofing</span></td>
+                  <td><strong>Identity Impersonation</strong></td>
+                  <td class="flaw-cell">Compromised service account silently issues bulk updates without rate throttling.</td>
+                  <td class="control-cell">Sliding-window velocity tripline + isolated service-role IAM containment.</td>
+                </tr>
+                <tr>
+                  <td><span class="threat-badge threat-t">T // Tampering</span></td>
+                  <td><strong>Ransomware Encryption</strong></td>
+                  <td class="flaw-cell">Attacker encrypts stored blobs; legacy backups overwrite clean versions on schedule.</td>
+                  <td class="control-cell">Strict Merkle Root hash comparison + AES-256-GCM AEAD tag validation prior to restore.</td>
+                </tr>
+                <tr>
+                  <td><span class="threat-badge threat-r">R // Repudiation</span></td>
+                  <td><strong>Log Deletion / Alteration</strong></td>
+                  <td class="flaw-cell">Audit logs in plain text are purged or rewritten by the attacker to cover tracks.</td>
+                  <td class="control-cell">Cryptographic hash-chained audit ledger + RFC 8032 Ed25519 digital signatures.</td>
+                </tr>
+                <tr>
+                  <td><span class="threat-badge threat-i">I // Info Disclosure</span></td>
+                  <td><strong>Exfiltration & Extortion</strong></td>
+                  <td class="flaw-cell">Plaintext backups exposed if bucket ACL permissions are widened.</td>
+                  <td class="control-cell">Client-side authenticated encryption (AEAD) + strict CSP & zero-trust control planes.</td>
+                </tr>
+                <tr>
+                  <td><span class="threat-badge threat-d">D // Denial of Service</span></td>
+                  <td><strong>Bucket Deletion / Lockdown</strong></td>
+                  <td class="flaw-cell">Attacker invokes bulk DELETE API, permanently wiping operational data.</td>
+                  <td class="control-cell">Tripwire canary files trigger automated sub-10s IAM freeze locking out delete APIs.</td>
+                </tr>
+                <tr>
+                  <td><span class="threat-badge threat-e">E // Elevation of Priv</span></td>
+                  <td><strong>Privilege Escalation</strong></td>
+                  <td class="flaw-cell">Lateral movement grants write access across all tenant storage partitions.</td>
+                  <td class="control-cell">Row Level Security (RLS) denying anon/auth roles, restricted solely to service-role token.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </div>
@@ -2146,7 +2283,7 @@ const { signature, keyId } = signRecord(incidentRecord);`
       });
     });
 
-    // 9. Global Keyboard Shortcuts (D for SOC, 1-4 for sections)
+    // 9. Global Keyboard Shortcuts (D for SOC, 1-6 for sections)
     window.addEventListener('keydown', (e) => {
       const target = e.target;
       const isEditing = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
@@ -2167,6 +2304,12 @@ const { signature, keyId } = signRecord(incidentRecord);`
       } else if (e.key === '4') {
         e.preventDefault();
         document.getElementById('audit-chain')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === '5') {
+        e.preventDefault();
+        document.getElementById('threat-matrix')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === '6') {
+        e.preventDefault();
+        document.getElementById('code-suite')?.scrollIntoView({ behavior: 'smooth' });
       }
     });
 
