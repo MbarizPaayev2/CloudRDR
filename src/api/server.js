@@ -55,12 +55,14 @@ export async function buildServer(options = {}) {
 
   // 3. API Key Authentication Hook (except /health)
   app.addHook('onRequest', async (request, reply) => {
-    // Whitelist /health, /dashboard, / and OPTIONS pre-flight
+    // Whitelist /health, /dashboard, /landing, / and OPTIONS pre-flight
     const isPublicRoute =
       request.routerPath === '/health' ||
       request.routerPath === '/dashboard' ||
+      request.routerPath === '/landing' ||
       request.routerPath === '/' ||
       request.url === '/' ||
+      request.url === '/landing' ||
       request.url === '/favicon.ico' ||
       request.url.startsWith('/dashboard') ||
       request.url.startsWith('/css') ||

@@ -18,9 +18,9 @@ let _chart = null;
  * Map of verdict → line color for the trace segments.
  * We use a uniform ink-dark line for simplicity (verdict shown elsewhere).
  */
-const TRACE_COLOR   = '#1B1A17';
-const THRESHOLD_CLR = '#B3261E';
-const CANARY_CLR    = '#B3261E';
+const TRACE_COLOR   = '#38BDF8';
+const THRESHOLD_CLR = '#EF4444';
+const CANARY_CLR    = '#EF4444';
 
 /**
  * Build Chart.js data structure from detection runs.
@@ -69,11 +69,11 @@ export function initDetectionChart(canvas, runs) {
       datasets: [
         {
           // Threshold — constant horizontal wax line
-          label: 'Threshold',
+          label: 'Ransomware Threshold (30%)',
           data: threshData,
           borderColor: THRESHOLD_CLR,
           borderWidth: 1.5,
-          borderDash: [6, 4],
+          borderDash: [5, 4],
           pointRadius: 0,
           fill: false,
           tension: 0,
@@ -81,18 +81,18 @@ export function initDetectionChart(canvas, runs) {
         },
         {
           // Change rate trace
-          label: 'Change Rate %',
+          label: 'Sliding Change Rate %',
           data: rateData,
           borderColor: TRACE_COLOR,
           borderWidth: 2,
-          backgroundColor: 'rgba(27,26,23,0.06)',
+          backgroundColor: 'rgba(56, 189, 248, 0.1)',
           fill: 'origin',
           tension: 0.35,
           pointBackgroundColor: pointColors,
           pointBorderColor: pointColors,
           pointRadius,
           pointStyle: pointStyles,
-          pointHoverRadius: 8,
+          pointHoverRadius: 7,
           order: 2,
         },
       ],
@@ -108,26 +108,26 @@ export function initDetectionChart(canvas, runs) {
           position: 'top',
           align: 'end',
           labels: {
-            font: { family: "'Special Elite', 'Courier New', monospace", size: 10 },
-            color: '#5A5040',
-            boxWidth: 20,
+            font: { family: "'Inter', sans-serif", size: 10, weight: '500' },
+            color: '#94A3B8',
+            boxWidth: 16,
             padding: 10,
           },
         },
         tooltip: {
-          backgroundColor: '#1B1A17',
-          titleColor: '#EFE6D2',
-          bodyColor: '#D5C5A8',
-          borderColor: '#5A5040',
+          backgroundColor: '#101726',
+          titleColor: '#F8FAFC',
+          bodyColor: '#94A3B8',
+          borderColor: 'rgba(255,255,255,0.12)',
           borderWidth: 1,
-          titleFont: { family: "'Martian Mono', monospace", size: 10 },
-          bodyFont: { family: "'Martian Mono', monospace", size: 10 },
+          titleFont: { family: "'JetBrains Mono', monospace", size: 10 },
+          bodyFont: { family: "'JetBrains Mono', monospace", size: 10 },
           padding: 8,
           callbacks: {
             label: (ctx) => {
               if (ctx.datasetIndex === 1) {
                 const run = runs[ctx.dataIndex];
-                const suffix = run?.canary_triggered ? ' ⚠ CANARY' : '';
+                const suffix = run?.canary_triggered ? ' ⚠ TRIPWIRE BREACH' : '';
                 return ` Change rate: ${ctx.raw}%${suffix}`;
               }
               return ` Threshold: ${ctx.raw}%`;
@@ -138,31 +138,31 @@ export function initDetectionChart(canvas, runs) {
       scales: {
         x: {
           grid: {
-            color: 'rgba(27,26,23,0.06)',
+            color: 'rgba(255, 255, 255, 0.05)',
             lineWidth: 1,
           },
           ticks: {
-            font: { family: "'Martian Mono', monospace", size: 9 },
-            color: '#9C8F78',
+            font: { family: "'JetBrains Mono', monospace", size: 9 },
+            color: '#64748B',
             maxRotation: 0,
             maxTicksLimit: 8,
           },
-          border: { color: '#D5C5A8' },
+          border: { color: 'rgba(255, 255, 255, 0.08)' },
         },
         y: {
           beginAtZero: true,
           min: 0,
           suggestedMax: 60,
           grid: {
-            color: 'rgba(27,26,23,0.06)',
+            color: 'rgba(255, 255, 255, 0.05)',
             lineWidth: 1,
           },
           ticks: {
-            font: { family: "'Martian Mono', monospace", size: 9 },
-            color: '#9C8F78',
+            font: { family: "'JetBrains Mono', monospace", size: 9 },
+            color: '#64748B',
             callback: (v) => `${v}%`,
           },
-          border: { color: '#D5C5A8' },
+          border: { color: 'rgba(255, 255, 255, 0.08)' },
         },
       },
     },

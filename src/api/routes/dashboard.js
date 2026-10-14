@@ -60,7 +60,11 @@ async function serveFile(relPath, reply) {
  */
 export async function dashboardRoutes(fastify) {
   fastify.get('/', async (_request, reply) => {
-    return serveFile('index.html', reply);
+    return serveFile('landing.html', reply);
+  });
+
+  fastify.get('/landing', async (_request, reply) => {
+    return serveFile('landing.html', reply);
   });
 
   fastify.get('/dashboard', async (_request, reply) => {

@@ -19,16 +19,16 @@ const NODE_R  = 7;       // internal node radius
 const ROOT_R  = 11;      // root node radius
 const LEAF_ROW_Y  = 240; // Y position of leaf row
 const COLORS = {
-  healthy:   '#2F6F5E',   // verdigris
-  corrupt:   '#B3261E',   // seal
-  restored:  '#2F6F5E',   // verdigris (same as healthy after restore)
-  missing:   '#9C8F78',   // ink-ghost
-  internal:  '#D5C5A8',   // paper-deep
-  internalC: '#E8A0A0',   // tinted red when corrupted subtree
-  edge:      '#9C8F78',
-  edgeC:     '#D4524A',
-  root:      '#1B1A17',   // ink
-  rootC:     '#B3261E',   // seal
+  healthy:   '#10B981',   // cyber emerald
+  corrupt:   '#EF4444',   // laser crimson
+  restored:  '#10B981',   // cyber emerald
+  missing:   '#64748B',   // slate-500
+  internal:  '#1E293B',   // slate-800
+  internalC: '#7F1D1D',   // dark crimson
+  edge:      'rgba(255, 255, 255, 0.16)',
+  edgeC:     'rgba(239, 68, 68, 0.6)',
+  root:      '#38BDF8',   // sky blue
+  rootC:     '#EF4444',   // laser crimson
 };
 
 /** @type {SVGSVGElement|null} */
@@ -160,9 +160,10 @@ function drawTree(layout) {
   const rootLabel = svgEl('text', {
     x: rootNode.x, y: rootNode.y - 18,
     'text-anchor': 'middle',
-    'font-family': "'Martian Mono', monospace",
+    'font-family': "'JetBrains Mono', monospace",
     'font-size': '8',
-    fill: COLORS.edge,
+    'font-weight': '600',
+    fill: '#94A3B8',
   });
   rootLabel.textContent = 'ROOT';
   _svg.appendChild(rootLabel);

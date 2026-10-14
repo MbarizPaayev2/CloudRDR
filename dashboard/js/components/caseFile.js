@@ -78,8 +78,8 @@ export function renderIncidentList(incidents, selectedId) {
   incidents.forEach((inc, i) => {
     const item = document.createElement('div');
     item.className = `case-file-item doc-enter${inc.id === selectedId ? ' selected' : ''}`;
-    item.style.setProperty('--doc-tilt', TILT_LIST[i % TILT_LIST.length]);
-    item.style.animationDelay = `${i * 0.07}s`;
+    item.style.setProperty('--doc-tilt', '0deg');
+    item.style.animationDelay = `${i * 0.05}s`;
     item.setAttribute('role', 'listitem');
     item.setAttribute('tabindex', '0');
     item.setAttribute('aria-label', `Case file: ${inc.account_id}, status ${inc.status}`);
@@ -109,7 +109,7 @@ export function renderIncidentList(incidents, selectedId) {
     stampRow.className = 'case-file-stamp-row';
     const stamp = document.createElement('span');
     stamp.className = `status-stamp ${inc.status || 'open'}`;
-    stamp.style.setProperty('--stamp-angle', STAMP_ANGLES[inc.status] || '-2deg');
+    stamp.style.setProperty('--stamp-angle', '0deg');
     stamp.textContent = (inc.status || 'open').toUpperCase();
     stampRow.appendChild(stamp);
     item.appendChild(stampRow);

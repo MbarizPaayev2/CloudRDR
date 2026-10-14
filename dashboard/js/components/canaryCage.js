@@ -23,21 +23,21 @@ export function updateCanaryCage(canaryTriggered, verdict) {
 
   if (canaryTriggered || verdict === 'ransomware') {
     wrap.className = 'canary-cage-wrap triggered';
-    text.textContent = 'Silent — Canary file touched';
-    text.style.color = 'var(--seal)';
+    text.textContent = 'TRIPWIRE BREACH DETECTED';
+    text.style.color = 'var(--threat)';
 
     // Show a warning label if newly triggered
     if (!_wasTriggered) {
       const flash = document.createElement('div');
       flash.style.cssText = `
-        font-family: var(--font-stamp);
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        color: var(--seal);
-        margin-top: 4px;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--threat);
+        margin-top: 3px;
       `;
-      flash.textContent = '⚠ TRIPWIRE BREACHED';
-      // Remove any existing flash
+      flash.textContent = '⚠ CANARY FILE TAMPERED';
       const old = wrap.querySelector('.canary-flash');
       if (old) old.remove();
       flash.className = 'canary-flash';
@@ -46,9 +46,8 @@ export function updateCanaryCage(canaryTriggered, verdict) {
     _wasTriggered = true;
   } else {
     wrap.className = 'canary-cage-wrap healthy';
-    text.textContent = 'Singing';
-    text.style.color = 'var(--verdigris)';
-    // Remove flash if present
+    text.textContent = 'Tripwire Sentinel Armed';
+    text.style.color = 'var(--normal)';
     const flash = wrap.querySelector('.canary-flash');
     if (flash) flash.remove();
     _wasTriggered = false;

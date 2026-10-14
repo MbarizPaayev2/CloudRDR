@@ -1,54 +1,86 @@
 /**
  * @file dashboard/css/tokens.css
- * CloudRDR — The Notary's Archive Design Tokens
- * Archival palette, authentic Fraunces/Martian Mono/Special Elite typography scale.
+ * CloudRDR Enterprise SOC — Corporate Security Design Tokens
+ * Typography: Inter (UI) + JetBrains Mono (Hashes & Telemetry)
+ * Palette: Deep Slate / Obsidian Midnight with Emerald / Crimson / Cobalt accents
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Martian+Mono:wght@300;400;600;700&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* ── The Notary's Archival Palette ────────────────────────────────────── */
-  --paper:          #EFE6D2;   /* primary warm parchment background */
-  --paper-dark:     #E3D6BD;   /* document card surface, panels */
-  --paper-deep:     #D5C5A8;   /* deep tone: ruled lines, border creases */
-  --paper-subtle:   #F7F2E7;   /* light highlight parchment */
+  /* ── Canvas & Surface Hierarchy ─────────────────────────────────────── */
+  --bg-app:          #090D16;   /* obsidian deepest background */
+  --bg-surface:      #101726;   /* primary cards & panels */
+  --bg-surface-elev: #172136;   /* elevated interactive panels */
+  --bg-subtle:       #1E2B45;   /* inputs, chips, borders */
+  --bg-glass:        rgba(16, 23, 38, 0.85);
 
-  --ink:            #1B1A17;   /* deep carbon ink for typography & rules */
-  --ink-faint:      #5A5040;   /* secondary archival ink, labels */
-  --ink-ghost:      #9C8F78;   /* ledger lines, watermark tones */
+  /* Border Tones */
+  --border-subtle:   rgba(255, 255, 255, 0.08);
+  --border-medium:   rgba(255, 255, 255, 0.14);
+  --border-active:   #3B82F6;
 
-  /* Cryptographic State Accents */
-  --seal:           #B3261E;   /* Seal Red: RANSOMWARE, cracked seal, broken link */
-  --seal-light:     rgba(179, 38, 30, 0.12);
-  --seal-mid:       #D4524A;
+  /* Typography Colors */
+  --text-primary:    #F8FAFC;   /* 98% contrast pure heading white */
+  --text-secondary:  #94A3B8;   /* slate-400 clear body */
+  --text-muted:      #64748B;   /* slate-500 subtle labels */
+  --text-inverse:    #0B0F19;
 
-  --verdigris:      #2F6F5E;   /* Verdigris Green: NORMAL, intact seal, valid link */
-  --verdigris-light:rgba(47, 111, 94, 0.12);
-  --verdigris-mid:  #4A8C7A;
+  /* Security Status Accents */
+  --threat:          #EF4444;   /* Crimson - Ransomware / Attack */
+  --threat-bg:       rgba(239, 68, 68, 0.12);
+  --threat-border:   rgba(239, 68, 68, 0.35);
+  --threat-glow:     rgba(239, 68, 68, 0.35);
 
-  --canary:         #F2C230;   /* Canary Yellow: SUSPICIOUS, sentinel active */
-  --canary-light:   rgba(242, 194, 48, 0.15);
-  --canary-mid:     #C89A10;
+  --normal:          #10B981;   /* Emerald - Normal / Verified / Baseline */
+  --normal-bg:       rgba(16, 185, 129, 0.12);
+  --normal-border:   rgba(16, 185, 129, 0.35);
+  --normal-glow:     rgba(16, 185, 129, 0.35);
 
-  --frost:          #9CC9D9;   /* Frost Blue: Frozen account IAM policy */
-  --frost-light:    rgba(156, 201, 217, 0.22);
-  --frost-mid:      #5FA8C0;
+  --warning:         #F59E0B;   /* Amber - Suspicious rate */
+  --warning-bg:      rgba(245, 158, 11, 0.14);
+  --warning-border:  rgba(245, 158, 11, 0.35);
+
+  --brand:           #3B82F6;   /* Cobalt Electric Blue */
+  --brand-hover:     #2563EB;
+  --brand-bg:        rgba(59, 130, 246, 0.14);
+  --brand-border:    rgba(59, 130, 246, 0.35);
+
+  --frost:           #06B6D4;   /* Cyan - Cryo IAM Lock */
+  --frost-bg:        rgba(6, 182, 212, 0.14);
+  --frost-border:    rgba(6, 182, 212, 0.35);
+
+  /* Compatibility Aliases for components */
+  --paper:           var(--bg-app);
+  --paper-dark:      var(--bg-surface);
+  --paper-deep:      var(--bg-subtle);
+  --ink:             var(--text-primary);
+  --ink-faint:       var(--text-secondary);
+  --ink-ghost:       var(--text-muted);
+  --seal:            var(--threat);
+  --seal-light:      var(--threat-bg);
+  --verdigris:       var(--normal);
+  --verdigris-light: var(--normal-bg);
+  --canary:          var(--warning);
+  --canary-light:    var(--warning-bg);
+  --canary-mid:      var(--warning);
+  --frost-mid:       var(--frost);
+  --frost-light:     var(--frost-bg);
 
   /* ── Typography Families ─────────────────────────────────────────────── */
-  --font-display:  'Fraunces', Georgia, 'Times New Roman', serif;
-  --font-mono:     'Martian Mono', 'Courier New', monospace;
-  --font-stamp:    'Special Elite', 'Courier New', monospace;
+  --font-display:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:       'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --font-stamp:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Typographic Hierarchy (Extreme scale jumps: 200 vs 800) */
+  /* Typography Scale */
   --text-xs:    0.72rem;
   --text-sm:    0.85rem;
-  --text-base:  1rem;
-  --text-md:    1.25rem;
-  --text-lg:    1.6rem;
-  --text-xl:    2.4rem;
-  --text-2xl:   3.6rem;
-  --text-hero:  5.5rem;
-  --text-ghost: 8rem;
+  --text-base:  0.95rem;
+  --text-md:    1.15rem;
+  --text-lg:    1.4rem;
+  --text-xl:    1.9rem;
+  --text-2xl:   2.8rem;
+  --text-hero:  3.6rem;
 
   /* ── Spacing Scale ───────────────────────────────────────────────────── */
   --space-1: 0.25rem;
@@ -59,33 +91,32 @@
   --space-8: 2rem;
   --space-12: 3rem;
 
-  /* ── Structure & Borders ─────────────────────────────────────────────── */
-  --border-hair: 0.5px solid var(--paper-deep);
-  --border-rule: 1px solid var(--paper-deep);
-  --border-ink:  1.5px solid var(--ink);
-  --border-seal: 2px solid var(--seal);
+  /* ── Structural Radii ────────────────────────────────────────────────── */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-full: 9999px;
 
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  /* ── Shadows & Elevation ─────────────────────────────────────────────── */
+  --shadow-sm:   0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md:   0 4px 14px -1px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg:   0 12px 30px -4px rgba(0, 0, 0, 0.65), 0 4px 10px -2px rgba(0, 0, 0, 0.5);
+  --shadow-doc:  var(--shadow-md);
+  --shadow-lift: var(--shadow-lg);
 
-  /* Ink-bleed & Paper Shadows */
-  --shadow-doc:  3px 4px 14px rgba(27, 26, 23, 0.14), 0 1px 3px rgba(27, 26, 23, 0.08);
-  --shadow-lift: 6px 8px 24px rgba(27, 26, 23, 0.2), 0 2px 6px rgba(27, 26, 23, 0.12);
-  --shadow-stamp:inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  /* ── Motion ──────────────────────────────────────────────────────────── */
+  --dur-fast:   140ms;
+  --dur-mid:    240ms;
+  --dur-slow:   380ms;
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-desk:  var(--ease);
+  --ease-stamp: var(--ease);
 
-  /* ── Motion Timings ──────────────────────────────────────────────────── */
-  --dur-fast:   120ms;
-  --dur-mid:    280ms;
-  --dur-slow:   480ms;
-  --dur-story:  650ms;
-  --ease-stamp: cubic-bezier(0.34, 1.56, 0.64, 1); /* rubber-stamp overshoot */
-  --ease-desk:  cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* ── Layout Dimensions ───────────────────────────────────────────────── */
-  --sidebar-w:    330px;
+  /* ── Dimensions ──────────────────────────────────────────────────────── */
+  --sidebar-w:    320px;
   --right-rail-w: 320px;
-  --header-h:     54px;
+  --header-h:     56px;
 }
 
 @media (prefers-reduced-motion: reduce) {

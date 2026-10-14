@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudRDR — Autonomous Cloud Ransomware Detection & Cryptographic Recovery</title>
+  <meta name="description" content="CloudRDR: Autonomous ransomware containment, Merkle tree cryptographic integrity proof, and AEAD verified recovery for cloud object storage." />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+
+  <style>
+    /* ── Landing Page Styling (Corporate Dark Slate Theme) ─────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #090D16;
+      --bg-surface: #101726;
+      --bg-elevated: #172136;
+      --bg-subtle: #1E2B45;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-faint: #64748B;
+      --brand: #3B82F6;
+      --brand-hover: #2563EB;
+      --emerald: #10B981;
+      --crimson: #EF4444;
+      --amber: #F59E0B;
+      --cyan: #06B6D4;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 60%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(239, 68, 68, 0.06) 0%, transparent 40%);
+      overflow-x: hidden;
+    }
+
+    /* ── Navigation Bar ───────────────────────────────────────────────────── */
+    .landing-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(16, 23, 38, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: #FFFFFF;
+    }
+
+    .btn-nav-cta {
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      color: #FFFFFF !important;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.6);
+    }
+
+    /* ── Hero Section ─────────────────────────────────────────────────────── */
+    .hero-section {
+      padding: 5rem 5% 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #60A5FA;
+      margin-bottom: 2rem;
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+    }
+
+    .hero-title {
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: #FFFFFF;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #60A5FA, #34D399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    .btn-hero-primary {
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(37, 99, 235, 0.65);
+    }
+
+    .btn-hero-secondary {
+      background: var(--bg-surface);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid var(--border-light);
+      transition: all 0.15s ease;
+    }
+
+    .btn-hero-secondary:hover {
+      background: var(--bg-elevated);
+      border-color: var(--brand);
+    }
+
+    /* ── Metrics Banner ───────────────────────────────────────────────────── */
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto 5rem;
+      padding: 2rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .metric-col {
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric-col:last-child {
+      border-right: none;
+    }
+
+    .metric-big {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .metric-big.emerald { color: var(--emerald); }
+    .metric-big.blue { color: #38BDF8; }
+    .metric-big.amber { color: var(--amber); }
+
+    .metric-desc {
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    /* ── Section Container ────────────────────────────────────────────────── */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #38BDF8;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── The Problem vs Solution ──────────────────────────────────────────── */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .compare-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .compare-card.problem {
+      border-top: 3px solid var(--crimson);
+    }
+
+    .compare-card.solution {
+      border-top: 3px solid var(--emerald);
+      background: linear-gradient(180deg, rgba(23, 33, 54, 0.4) 0%, rgba(16, 23, 38, 0.4) 100%);
+    }
+
+    .compare-heading {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-heading.problem { color: var(--crimson); }
+    .compare-heading.solution { color: var(--emerald); }
+
+    .compare-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .compare-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .compare-list li strong {
+      color: var(--text);
+    }
+
+    /* ── 6-Step Cryptographic Lifecycle ───────────────────────────────────── */
+    .lifecycle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .lifecycle-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .lifecycle-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-light);
+    }
+
+    .step-number {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #38BDF8;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .step-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .step-crypto-badge {
+      margin-top: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--emerald);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Live Demo Walkthrough Section ────────────────────────────────────── */
+    .demo-preview-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 3rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .demo-scenario-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .scenario-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .scenario-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .scenario-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #38BDF8;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .scenario-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+    }
+
+    .scenario-content p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .demo-box-preview {
+      background: #090D16;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .demo-box-preview .verdict-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--crimson);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    }
+
+    /* ── Tech Stack Grid ──────────────────────────────────────────────────── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .stack-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stack-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .stack-item p {
+      font-size: 0.8rem;
+      color: var(--text-faint);
+    }
+
+    /* ── Call to Action Banner ────────────────────────────────────────────── */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.25) 0%, rgba(16, 185, 129, 0.15) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 14px;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .cta-banner h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 1rem;
+    }
+
+    .cta-banner p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────────────────── */
+    .landing-footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 5%;
+      text-align: center;
+      color: var(--text-faint);
+      font-size: 0.85rem;
+    }
+
+    .landing-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .landing-footer a:hover {
+      color: #FFFFFF;
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-title { font-size: 2.4rem; }
+      .metrics-bar { grid-template-columns: 1fr 1fr; }
+      .comparison-grid, .lifecycle-grid, .demo-scenario-grid, .stack-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Top Navigation Bar ─────────────────────────────────────────────── -->
+  <nav class="landing-nav" role="navigation" aria-label="Main Navigation">
+    <a href="/landing" class="brand-logo">
+      CloudRDR
+      <span class="brand-badge">SEC-OPS</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#how-it-works">Lifecycle</a></li>
+      <li><a href="#merkle-proof">Cryptographic Proof</a></li>
+      <li><a href="#demo">Live Demo Guide</a></li>
+      <li><a href="#tech-stack">Tech Stack</a></li>
+    </ul>
+
+    <a href="/dashboard" class="btn-nav-cta">
+      Launch SOC Console →
+    </a>
+  </nav>
+
+  <!-- ── Hero Section ───────────────────────────────────────────────────── -->
+  <header class="hero-section">
+    <div class="hero-pill">
+      <span class="hero-pill-dot"></span>
+      Autonomous Cloud Ransomware Defense &amp; Cryptographic Recovery
+    </div>
+
+    <h1 class="hero-title">
+      Ransomware Encrypts.<br />
+      <span>CloudRDR Proves &amp; Recovers.</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Most security solutions only alert after an attacker has already corrupted your storage.
+      CloudRDR watches your cloud buckets in real time, triggers decoy canaries, freezes attacker IAM access in under 10 seconds,
+      and uses <strong>Merkle Trees</strong> and <strong>AEAD authentication</strong> to mathematically prove every restored file is 100% authentic.
+    </p>
+
+    <div class="hero-actions">
+      <a href="/dashboard" class="btn-hero-primary">
+        Launch Live SOC Console →
+      </a>
+      <a href="#how-it-works" class="btn-hero-secondary">
+        How the Defense Works ↓
+      </a>
+    </div>
+
+    <!-- ── Key Metrics Bar ──────────────────────────────────────────────── -->
+    <div class="metrics-bar">
+      <div class="metric-col">
+        <div class="metric-big blue">&lt; 10s</div>
+        <div class="metric-desc">Containment SLA (IAM Freeze)</div>
+      </div>
+      <div class="metric-col">
+        <div class="metric-big emerald">100%</div>
+        <div class="metric-desc">Cryptographic Verification Gate</div>
+      </div>
+      <div class="metric-col">
+        <div class="metric-big amber">60s</div>
+        <div class="metric-desc">Sliding Anomaly Detection Window</div>
+      </div>
+      <div class="metric-col">
+        <div class="metric-big">0</div>
+        <div class="metric-desc">Unverified Files Accepted</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── The Problem vs The Solution ────────────────────────────────────── -->
+  <section class="section-wrap" id="problem">
+    <div class="section-header">
+      <div class="section-eyebrow">The Architectural Gap</div>
+      <h2 class="section-title">Why Traditional Cloud Backups Fail Against Modern Ransomware</h2>
+      <p class="section-sub">Modern ransomware operates stealthily, modifying cloud objects slowly or poisoning backups before executing bulk encryption.</p>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- Traditional Blind Backup -->
+      <div class="compare-card problem">
+        <h3 class="compare-heading problem">
+          <span>✕</span> Traditional Backup &amp; DR
+        </h3>
+        <ul class="compare-list">
+          <li>
+            <span>⚠</span>
+            <div><strong>Blind Periodic Snapshots:</strong> Backups run on fixed schedules (daily/hourly). Ransomware modifying files between snapshots goes completely undetected.</div>
+          </li>
+          <li>
+            <span>⚠</span>
+            <div><strong>Backup Poisoning:</strong> Attackers encrypt data first, wait for the infected files to be backed up, and overwrite healthy snapshots.</div>
+          </li>
+          <li>
+            <span>⚠</span>
+            <div><strong>No Integrity Proof:</strong> Restoring files is done blindly based on file names. Zero cryptographic checks verify whether restored bytes match pre-attack state.</div>
+          </li>
+          <li>
+            <span>⚠</span>
+            <div><strong>Delayed Manual Response:</strong> Security teams take hours or days to manually revoke compromised IAM credentials.</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CloudRDR Cryptographic Defense -->
+      <div class="compare-card solution">
+        <h3 class="compare-heading solution">
+          <span>✓</span> CloudRDR Autonomous Defense
+        </h3>
+        <ul class="compare-list">
+          <li>
+            <span>🛡</span>
+            <div><strong>Merkle Root Fingerprint:</strong> The entire storage bucket is hashed into a single 64-character Merkle root. Any single byte modification changes the root instantly.</div>
+          </li>
+          <li>
+            <span>🛡</span>
+            <div><strong>Sub-Second Tripwire Canaries:</strong> Decoy files placed in the bucket immediately trigger a full ransomware verdict the millisecond an attacker touches them.</div>
+          </li>
+          <li>
+            <span>🛡</span>
+            <div><strong>Automated &lt;10s IAM Freeze:</strong> The attacking cloud account is instantly locked with a deny-all write policy to stop encryption spread.</div>
+          </li>
+          <li>
+            <span>🛡</span>
+            <div><strong>100% AEAD Verified Restore:</strong> Backup data is decrypted with AES-256-GCM authentication tags and re-hashed against the original Merkle baseline. Only 100% VALID files are written back.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6-Step Cryptographic Defense Lifecycle ─────────────────────────── -->
+  <section class="section-wrap" id="how-it-works">
+    <div class="section-header">
+      <div class="section-eyebrow">End-to-End Pipeline</div>
+      <h2 class="section-title">The 6-Step Defense Lifecycle</h2>
+      <p class="section-sub">How CloudRDR safeguards protected cloud buckets from initial baseline to verified recovery.</p>
+    </div>
+
+    <div class="lifecycle-grid">
+      <!-- Step 1 -->
+      <div class="lifecycle-card">
+        <div class="step-number">STEP 01</div>
+        <h3 class="step-title">Cryptographic Baseline</h3>
+        <p class="step-text">Every protected file gets a SHA-256 hash. All hashes are compiled into a pairwise Merkle tree, yielding a single root hash stored securely as the immutable reference state.</p>
+        <div class="step-crypto-badge">SHA-256 Merkle DAG</div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="lifecycle-card">
+        <div class="step-number">STEP 02</div>
+        <h3 class="step-title">Sliding Window Monitor</h3>
+        <p class="step-text">A background monitor agent polls storage events (created, modified, deleted) and tracks the file change velocity across a sliding 60-second time window.</p>
+        <div class="step-crypto-badge">60s Sliding Anomaly Window</div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="lifecycle-card">
+        <div class="step-number">STEP 03</div>
+        <h3 class="step-title">Anomaly &amp; Tripwire Detection</h3>
+        <p class="step-text">Modifications &lt;10% are NORMAL, 10–30% are SUSPICIOUS, &ge;30% trigger RANSOMWARE. Modifying ANY decoy canary file immediately triggers RANSOMWARE regardless of rate.</p>
+        <div class="step-crypto-badge">Heuristic Velocity + Canary Trap</div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="lifecycle-card">
+        <div class="step-number">STEP 04</div>
+        <h3 class="step-title">Automated Account Freeze</h3>
+        <p class="step-text">An automated IAM policy applies a write-freeze to the compromised account in &lt;10 seconds. An immutable incident record is generated and digitally signed with Ed25519.</p>
+        <div class="step-crypto-badge">Ed25519 Signed Audit Record</div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="lifecycle-card">
+        <div class="step-number">STEP 05</div>
+        <h3 class="step-title">Hash-Chained Audit Ledger</h3>
+        <p class="step-text">Every incident, freeze, and telemetry event is appended to an immutable, hash-chained audit log where each block contains the SHA-256 of the prior block. Tampering is mathematically impossible.</p>
+        <div class="step-crypto-badge">Tamper-Evident Hash Chain</div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="lifecycle-card">
+        <div class="step-number">STEP 06</div>
+        <h3 class="step-title">100% Verified AEAD Restore</h3>
+        <p class="step-text">Encrypted AES-256-GCM backups are decrypted with AEAD tag authentication. Restored bytes are re-hashed against the original baseline: VALID, MODIFIED, or MISSING. Resolved only at 100% VALID.</p>
+        <div class="step-crypto-badge">AES-256-GCM + Baseline Re-Hash</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Live Attack Simulation Guide ────────────────────────────────────── -->
+  <section class="section-wrap" id="demo">
+    <div class="section-header">
+      <div class="section-eyebrow">Interactive Live Demo</div>
+      <h2 class="section-title">Experience the Attack &amp; Recovery in Real-Time</h2>
+      <p class="section-sub">CloudRDR includes an autonomous simulation engine allowing professors, evaluators, and engineers to observe the attack lifecycle.</p>
+    </div>
+
+    <div class="demo-preview-card">
+      <div class="demo-scenario-grid">
+        <div>
+          <ul class="scenario-steps">
+            <li class="scenario-step">
+              <div class="scenario-num">1</div>
+              <div class="scenario-content">
+                <h4>Baseline Operational State</h4>
+                <p>The SOC console displays all Merkle leaves in green (intact), sliding rate at 0%, and Canary Sentinel actively armed.</p>
+              </div>
+            </li>
+            <li class="scenario-step">
+              <div class="scenario-num">2</div>
+              <div class="scenario-content">
+                <h4>Attack Velocity Spike &amp; Tripwire Breach</h4>
+                <p>Ransomware encrypts 45% of bucket files and touches <code>canary/tripwire_sentinel.docx</code>. The verdict slams into RANSOMWARE, the screen pulses red, and the canary triggers an alert.</p>
+              </div>
+            </li>
+            <li class="scenario-step">
+              <div class="scenario-num">3</div>
+              <div class="scenario-content">
+                <h4>Merkle DAG Corruption Climb</h4>
+                <p>On the live Merkle DAG, leaves turn red one by one. The corruption climbs up the parent branches to the root node, mutating the root hash.</p>
+              </div>
+            </li>
+            <li class="scenario-step">
+              <div class="scenario-num">4</div>
+              <div class="scenario-content">
+                <h4>IAM Cryo-Freeze &amp; Case Signing</h4>
+                <p>The account card is covered with a cryo-frost lock overlay, and an Ed25519-signed incident record is logged in the hash chain.</p>
+              </div>
+            </li>
+            <li class="scenario-step">
+              <div class="scenario-num">5</div>
+              <div class="scenario-content">
+                <h4>Verified Cryptographic Restoration</h4>
+                <p>The operator authorizes restore: leaves re-seal in green one by one, the root returns to the exact baseline hash, and a "100% VERIFIED ✓" certificate confirms zero corruption.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="demo-box-preview">
+          <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);margin-bottom:8px;">SIMULATION TELEMETRY VERDICT</div>
+          <div class="verdict-tag">RANSOMWARE BREACH</div>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.5rem;">
+            Click below to open the live SOC Console and press <strong>"▶ Run Attack Simulation"</strong> to see the defense in action.
+          </p>
+          <a href="/dashboard" class="btn-hero-primary" style="display:inline-flex;">
+            Open Live SOC Console →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tech Stack ─────────────────────────────────────────────────────── -->
+  <section class="section-wrap" id="tech-stack">
+    <div class="section-header">
+      <div class="section-eyebrow">Enterprise Architecture</div>
+      <h2 class="section-title">Built with Zero-Trust Cryptographic Foundations</h2>
+      <p class="section-sub">Engineered using modern standards with zero framework overhead for maximum auditability and performance.</p>
+    </div>
+
+    <div class="stack-grid">
+      <div class="stack-item">
+        <h4>Node.js 18+ &amp; Fastify</h4>
+        <p>Ultra-low latency asynchronous runtime with rate-limiting, CORS, and schema validation.</p>
+      </div>
+      <div class="stack-item">
+        <h4>Node Native Crypto</h4>
+        <p>Zero external crypto dependencies: hardware-accelerated SHA-256, Ed25519, and AES-256-GCM.</p>
+      </div>
+      <div class="stack-item">
+        <h4>Supabase Postgres</h4>
+        <p>PostgreSQL schema with Row-Level Security (RLS) policies and partial index optimization.</p>
+      </div>
+      <div class="stack-item">
+        <h4>Zero-Build Frontend</h4>
+        <p>Pure ES Modules, custom CSS properties, Chart.js, and zero webpack/vite overhead.</p>
+      </div>
+    </div>
+
+    <!-- ── Call to Action Banner ────────────────────────────────────────── -->
+    <div class="cta-banner">
+      <h2>Ready to Inspect the Forensic Evidence?</h2>
+      <p>Launch the live SOC dashboard to monitor bucket integrity, inspect case files, and run the automated attack simulation.</p>
+      <a href="/dashboard" class="btn-hero-primary" style="font-size:1.1rem;padding:16px 36px;">
+        Launch Live SOC Console →
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="landing-footer" role="contentinfo">
+    <div style="margin-bottom: 1rem;">
+      <a href="/dashboard">Live SOC Console</a>
+      ·
+      <a href="#problem">The Problem</a>
+      ·
+      <a href="#how-it-works">Lifecycle</a>
+      ·
+      <a href="/health">Health API</a>
+    </div>
+    <p>CloudRDR — Cloud Ransomware Detection &amp; Cryptographic Recovery. University Information Security Project.</p>
+  </footer>
+
+</body>
+</html>
