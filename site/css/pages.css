@@ -1456,3 +1456,468 @@ body.ambient-threat-active .site-header {
     transform: translateY(0) scale(1);
   }
 }
+
+/* ── HOW IT WORKS: STICKY STEP RAIL ──────────────────────────────────────── */
+.how-sticky-rail {
+  position: sticky;
+  top: 56px;
+  z-index: 85;
+  background: rgba(10, 15, 26, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 8px var(--space-4);
+  transition: all 0.3s var(--ease);
+}
+
+.how-rail-inner {
+  max-width: 1020px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.how-rail-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.how-rail-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+
+.how-rail-step:hover {
+  color: var(--text-main);
+  border-color: rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.how-rail-step.active {
+  color: #FFFFFF;
+  background: rgba(47, 75, 255, 0.18);
+  border-color: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+}
+
+.how-rail-step.active .rail-dot {
+  background: #38BDF8;
+  box-shadow: 0 0 8px #38BDF8;
+}
+
+.rail-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 0.25s var(--ease);
+}
+
+.how-rail-arrow {
+  color: var(--text-muted);
+  opacity: 0.35;
+  font-size: 0.7rem;
+  user-select: none;
+}
+
+/* ── HOW IT WORKS: CONNECTED TIMELINE BEAM ───────────────────────────────── */
+.how-timeline-container {
+  position: relative;
+  padding-left: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 640px) {
+  .how-timeline-container {
+    padding-left: 48px;
+    gap: var(--space-6);
+  }
+}
+
+.how-timeline-track {
+  position: absolute;
+  left: 21px;
+  top: 30px;
+  bottom: 60px;
+  width: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.how-timeline-beam-fill {
+  position: absolute;
+  left: 21px;
+  top: 30px;
+  width: 3px;
+  height: 0%;
+  max-height: calc(100% - 90px);
+  background: linear-gradient(180deg, #38BDF8 0%, #2F4BFF 45%, #10B981 100%);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7), 0 0 20px rgba(16, 185, 129, 0.4);
+  border-radius: 2px;
+  pointer-events: none;
+  transition: height 0.12s linear;
+}
+
+.how-stage-item {
+  position: relative;
+  scroll-margin-top: 130px;
+}
+
+.how-stage-pin {
+  position: absolute;
+  left: -64px;
+  top: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0A0F1A;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.3s var(--ease);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 640px) {
+  .how-stage-pin {
+    left: -48px;
+    width: 36px;
+    height: 36px;
+    font-size: 0.72rem;
+  }
+}
+
+.how-stage-item.active .how-stage-pin {
+  border-color: #38BDF8;
+  color: #FFFFFF;
+  background: #0F172A;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2), 0 0 18px rgba(56, 189, 248, 0.55);
+  animation: pinPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes pinPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25), 0 0 16px rgba(56, 189, 248, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(56, 189, 248, 0.1), 0 0 28px rgba(56, 189, 248, 0.7);
+  }
+}
+
+/* ── HOW IT WORKS: STAGE CARDS & MICRO-DIAGRAMS ──────────────────────────── */
+.how-stage-card {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-6);
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .how-stage-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+}
+
+.stage-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-diagram-col {
+  background: rgba(10, 15, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  min-height: 220px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ── 01 Baseline Merkle Tree Animation ───────────────────────────────────── */
+.micro-tree-svg line {
+  stroke: rgba(56, 189, 248, 0.3);
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
+}
+
+.micro-tree-svg line.pulse {
+  stroke: #38BDF8;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px #38BDF8);
+}
+
+.micro-node-chip {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #94A3B8;
+  text-align: center;
+  transition: all 0.3s var(--ease);
+}
+
+.micro-node-chip.highlight {
+  border-color: #38BDF8;
+  color: #FFFFFF;
+  background: rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+/* ── 02 Radar Sweep Telemetry ────────────────────────────────────────────── */
+.radar-scope {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, rgba(10, 15, 26, 0.9) 70%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+}
+
+.radar-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(56, 189, 248, 0.25);
+}
+.radar-ring.r1 { inset: 20px; }
+.radar-ring.r2 { inset: 45px; }
+
+.radar-crosshair-h {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(56, 189, 248, 0.2);
+}
+.radar-crosshair-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(56, 189, 248, 0.2);
+}
+
+.radar-sweep-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.45) 0%, transparent 70%);
+  transform-origin: 100% 100%;
+  animation: radarSpin 3.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radarSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-blip {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: blipFade 3.5s infinite ease-in-out;
+}
+.radar-blip.b1 { top: 32px; left: 40px; animation-delay: 0.4s; }
+.radar-blip.b2 { top: 88px; left: 95px; animation-delay: 1.8s; }
+.radar-blip.b3 { top: 45px; left: 105px; animation-delay: 2.6s; }
+
+@keyframes blipFade {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  35% { opacity: 1; transform: scale(1.3); }
+  70% { opacity: 0.4; transform: scale(1); }
+}
+
+/* ── 03 Tripwire Canary Hazard ───────────────────────────────────────────── */
+.canary-box {
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(217, 54, 54, 0.06);
+  border: 1px solid rgba(217, 54, 54, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease);
+}
+
+.canary-box.tripped {
+  background: rgba(217, 54, 54, 0.16);
+  border-color: #D93636;
+  box-shadow: 0 0 18px rgba(217, 54, 54, 0.4);
+}
+
+.canary-hazard-stripes {
+  height: 4px;
+  background: repeating-linear-gradient(45deg, #D93636, #D93636 10px, transparent 10px, transparent 20px);
+  margin-bottom: 8px;
+}
+
+/* ── 04 Frost Lock & Seal ────────────────────────────────────────────────── */
+.frost-lock-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.frost-lock-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1.5px solid #38BDF8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38BDF8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  animation: frostHalo 3s infinite ease-in-out;
+}
+
+@keyframes frostHalo {
+  0%, 100% { box-shadow: 0 0 12px rgba(56, 189, 248, 0.25); }
+  50% { box-shadow: 0 0 24px rgba(56, 189, 248, 0.65); }
+}
+
+.ed25519-seal-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  background: rgba(14, 165, 233, 0.15);
+  color: #7DD3FC;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── 05 Hash Chain Blocks ────────────────────────────────────────────────── */
+.chain-blocks-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.chain-block-item {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  transition: all 0.3s var(--ease);
+}
+
+.chain-block-item.tampered {
+  border-color: #D93636;
+  background: rgba(217, 54, 54, 0.15);
+  color: #FF8080;
+  box-shadow: 0 0 12px rgba(217, 54, 54, 0.3);
+}
+
+.chain-link-icon {
+  color: #38BDF8;
+  opacity: 0.7;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.chain-link-icon.broken {
+  color: #D93636;
+  animation: shakeBroken 0.4s ease;
+}
+
+@keyframes shakeBroken {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* ── 06 AEAD Verification Shield ─────────────────────────────────────────── */
+.aead-restore-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.aead-shield-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1.5px solid #10B981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10B981;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+  transition: all 0.3s var(--ease);
+}
+
+.aead-bar-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.aead-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  transition: width 0.3s ease;
+}
+
