@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CloudRDR — Forensic Evidence Archive</title>
+  <title>CloudRDR — The Notary's Archive (Forensic Evidence & Recovery)</title>
 
-  <!-- Preconnect for Google Fonts -->
+  <!-- Preconnect Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Design tokens (loads Google Fonts via @import) -->
+  <!-- The Notary's Archive Design System -->
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- Chart.js — pinned, cdnjs -->
+  <!-- Pinned Chart.js from cdnjs -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.3/chart.umd.min.js"
     integrity="sha512-VwSvzTMCLaHLMuY19fYH5oPFBONYXw+4MNEPUrqHB7r+GEpKZNveMbY0F/VfxLQzBLDI5b7WiJZ0aqdLJeNA=="
@@ -27,80 +27,70 @@
 <body>
 <div id="app">
 
-  <!-- ── Global error banner ─────────────────────────────────────────── -->
+  <!-- ── Global Error Banner ─────────────────────────────────────────── -->
   <div id="global-error-banner" role="alert" aria-live="assertive">
     <span id="global-error-text"></span>
-    <button class="err-dismiss" id="global-error-dismiss" aria-label="Dismiss error">✕</button>
+    <button class="err-dismiss" id="global-error-dismiss" aria-label="Dismiss notification">✕</button>
   </div>
 
   <!-- ── Site Header ──────────────────────────────────────────────────── -->
   <header class="site-header" role="banner">
-    <!-- Wordmark -->
     <div class="wordmark" aria-label="CloudRDR — Forensic Evidence Archive">
       CloudRDR
-      <em>Forensic Evidence Archive</em>
+      <em>The Notary's Archive</em>
     </div>
 
-    <!-- Header controls -->
     <nav class="header-controls" aria-label="Dashboard controls">
-
-      <!-- Bucket + timestamp -->
       <div class="header-meta">
         <span>Bucket: <strong class="bucket-name" id="headerBucket">protected</strong></span>
         <time id="headerUpdated" aria-label="Last updated"></time>
       </div>
 
-      <!-- Health indicator -->
-      <div class="health-badge" aria-live="polite" aria-label="System health">
+      <div class="health-badge" aria-live="polite" aria-label="System status">
         <span class="health-dot loading" id="healthDot" aria-hidden="true"></span>
         <span id="healthText">Connecting…</span>
       </div>
 
-      <!-- Demo mode toggle -->
-      <label class="demo-toggle-wrap" title="Toggle between mock data and live API">
-        <input type="checkbox" id="demoModeToggle" aria-label="Demo mode" checked />
+      <label class="demo-toggle-wrap" title="Toggle between mock demonstration and live API">
+        <input type="checkbox" id="demoModeToggle" aria-label="Demo mode toggle" checked />
         <span id="demoModeLabel">Demo</span>
       </label>
 
-      <!-- Play story button -->
-      <button class="header-btn play-story" id="playStoryBtn" aria-label="Play full demo story">
+      <button class="header-btn play-story" id="playStoryBtn" aria-label="Play full attack and recovery narrative">
         ▶ Play Story
       </button>
 
-      <!-- Manual refresh -->
-      <button class="header-btn" id="manualRefreshBtn" aria-label="Refresh data now">
+      <button class="header-btn" id="manualRefreshBtn" aria-label="Refresh telemetry now">
         ↻ Refresh
       </button>
     </nav>
   </header>
 
-  <!-- ── Main workspace: three columns ────────────────────────────────── -->
+  <!-- ── Three-Zone Asymmetric Desk Layout ────────────────────────────── -->
   <main class="workspace" role="main">
 
-    <!-- ── LEFT SIDEBAR: Sealed Ledger + Baseline ──────────────────── -->
-    <aside class="sidebar" aria-label="Sealed ledger and baseline">
+    <!-- ── LEFT SIDEBAR: The Sealed Ledger & Canary Sentinel ───────── -->
+    <aside class="sidebar" aria-label="Sealed ledger and sentinel">
 
-      <!-- Verdict display -->
-      <div class="sidebar-section" id="verdict-zone" aria-live="polite" aria-label="Current threat verdict">
-        <div class="section-label">Current Verdict</div>
-        <div class="verdict-word normal" id="verdictWord" aria-label="Verdict: NORMAL">
+      <!-- Verdict Stamp Zone -->
+      <div class="sidebar-section" id="verdict-zone" aria-live="polite" aria-label="Threat verdict">
+        <div class="section-label">Verdict</div>
+        <div class="verdict-word normal" id="verdictWord" aria-label="Current verdict: NORMAL">
           NORMAL
         </div>
-        <div class="verdict-sub" id="verdictSub">All systems operating within parameters</div>
-        <!-- Stamp overlay (for ransomware) -->
-        <div style="margin-top: 0.75rem;">
+        <div class="verdict-sub" id="verdictSub">Storage integrity intact — continuous Merkle verification</div>
+        <div style="margin-top: 0.6rem;">
           <span class="status-stamp" id="verdictStampEl" style="display:none;" aria-hidden="true"></span>
         </div>
       </div>
 
-      <!-- Canary Cage -->
+      <!-- Canary Sentinel Cage -->
       <div class="sidebar-section">
         <div class="section-label">Canary Sentinel</div>
         <div class="canary-cage-wrap healthy" id="canaryCageWrap" aria-live="polite">
-          <!-- Inline canary SVG -->
-          <svg id="canary-bird" width="48" height="48" viewBox="0 0 48 48"
-               aria-label="Canary sentinel bird" role="img" focusable="false">
-            <title>Canary sentinel</title>
+          <svg id="canary-bird" width="44" height="44" viewBox="0 0 48 48"
+               aria-label="Canary sentinel" role="img" focusable="false">
+            <title>Tripwire Canary</title>
             <!-- Body -->
             <ellipse cx="24" cy="28" rx="12" ry="10" fill="#F2C230"/>
             <!-- Wing -->
@@ -109,7 +99,7 @@
             <circle cx="32" cy="18" r="9" fill="#F2C230"/>
             <!-- Eye -->
             <circle cx="35" cy="16" r="2.5" fill="#1B1A17"/>
-            <circle cx="35.8" cy="15.2" r="0.8" fill="white"/>
+            <circle cx="35.8" cy="15.2" r="0.8" fill="#FFFFFF"/>
             <!-- Beak -->
             <polygon points="40,18 44,17 40,20" fill="#C89A10"/>
             <!-- Tail feathers -->
@@ -117,8 +107,6 @@
             <!-- Feet -->
             <line x1="20" y1="38" x2="18" y2="44" stroke="#C89A10" stroke-width="2" stroke-linecap="round"/>
             <line x1="26" y1="38" x2="28" y2="44" stroke="#C89A10" stroke-width="2" stroke-linecap="round"/>
-            <line x1="18" y1="44" x2="15" y2="46" stroke="#C89A10" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="18" y1="44" x2="21" y2="47" stroke="#C89A10" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <div>
             <div class="canary-status-text" id="canaryStatusText">Singing</div>
@@ -129,18 +117,16 @@
         </div>
       </div>
 
-      <!-- Sealed Ledger / Baseline Panel -->
+      <!-- Sealed Ledger Baseline -->
       <div class="sidebar-section" id="baseline-panel">
-        <div class="section-label">Sealed Ledger</div>
+        <div class="section-label">The Sealed Ledger</div>
 
-        <!-- Skeleton loaders -->
         <div id="baselineSkeleton">
-          <div class="skeleton skeleton-row" style="width:100%;height:12px;"></div>
-          <div class="skeleton skeleton-row" style="width:80%;height:12px;"></div>
+          <div class="skeleton skeleton-row" style="width:100%;height:12px;margin-bottom:6px;"></div>
+          <div class="skeleton skeleton-row" style="width:80%;height:12px;margin-bottom:6px;"></div>
           <div class="skeleton skeleton-row" style="width:60%;height:12px;margin-bottom:1rem;"></div>
         </div>
 
-        <!-- Baseline content -->
         <div id="baselineContent" style="display:none;">
           <div class="metric-row">
             <div class="metric-item">
@@ -153,13 +139,13 @@
             </div>
           </div>
 
-          <table class="ledger-table" aria-label="Baseline snapshot details">
+          <table class="ledger-table" aria-label="Baseline ledger snapshot details">
             <tbody>
               <tr>
                 <td>Merkle Root</td>
                 <td>
-                  <div class="hash-chip" id="merkleRootChip" role="button"
-                       tabindex="0" aria-label="Copy Merkle root hash">
+                  <div class="hash-chip" id="merkleRootChip" role="button" tabindex="0"
+                       aria-label="Copy Merkle root hash">
                     <span class="hash-text" id="merkleRootText">—</span>
                     <span class="copy-icon" aria-hidden="true">⎘</span>
                   </div>
@@ -170,123 +156,104 @@
                 <td><time id="baselineDate">—</time></td>
               </tr>
               <tr>
-                <td>Created By</td>
+                <td>Notary Identity</td>
                 <td id="baselineCreatedBy">—</td>
               </tr>
             </tbody>
           </table>
 
-          <button class="btn-baseline" id="createBaselineBtn"
-                  aria-label="Create new baseline snapshot">
+          <button class="btn-baseline" id="createBaselineBtn" aria-label="Create new cryptographic baseline">
             Create New Baseline
           </button>
         </div>
 
-        <!-- Error state -->
         <div id="baselineError" style="display:none;">
           <div class="empty-state">
-            <span class="empty-state-icon" aria-hidden="true">📋</span>
             <div class="empty-state-label">No baseline recorded</div>
           </div>
         </div>
       </div>
 
-      <!-- Chain health summary in sidebar -->
+      <!-- Chain Status in Sidebar -->
       <div class="sidebar-section" id="chain-summary-section">
-        <div class="section-label">Audit Chain</div>
+        <div class="section-label">Audit Log Chain</div>
         <div id="chainSummaryText" style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-faint);">
-          Checking…
+          Verifying links…
         </div>
       </div>
 
     </aside>
 
-    <!-- ── CENTER AREA ────────────────────────────────────────────────── -->
+    <!-- ── CENTER AREA: Merkle Tree Hero, Chart & Detail ────────────── -->
     <div class="center-area">
 
-      <!-- Hero zone: Merkle Tree -->
-      <section class="hero-zone doc-enter" aria-label="Merkle tree integrity view"
-               id="merkle-hero" style="--doc-tilt: 0deg;">
-        <!-- Ghost watermark -->
+      <!-- Merkle Tree Hero Section -->
+      <section class="hero-zone doc-enter" id="merkle-hero" aria-label="Merkle tree integrity view">
         <div class="hero-watermark" aria-hidden="true">MERKLE</div>
 
         <div id="merkle-tree-container">
-          <div style="display:flex; align-items:flex-start; gap: var(--space-6); width:100%;">
-            <!-- Tree SVG fills the left portion -->
-            <div style="flex:1; min-width:0;">
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-3);">
-                <div>
-                  <div class="merkle-label">Merkle Integrity Tree</div>
-                  <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);margin-top:2px;">
-                    Root: <span class="merkle-root-hash" id="merkleRootDisplay">—</span>
-                  </div>
-                </div>
-                <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);text-align:right;">
-                  <span id="treeLeafCount">—</span> leaves<br/>
-                  <span id="treeCorruptCount" style="color:var(--seal);">0 corrupt</span>
-                </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-3); width:100%;">
+            <div>
+              <div class="merkle-label">Merkle Tree Integrity</div>
+              <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);margin-top:2px;">
+                Root: <span class="merkle-root-hash" id="merkleRootDisplay">—</span>
               </div>
-              <svg id="merkle-svg" role="img" aria-label="Merkle tree diagram" focusable="false">
-                <title>Merkle integrity tree</title>
-                <!-- Populated by merkleTree.js -->
-              </svg>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);text-align:right;">
+              <span id="treeLeafCount">—</span> leaves sealed<br/>
+              <span id="treeCorruptCount" style="color:var(--seal);font-weight:700;">0 corrupt</span>
             </div>
           </div>
+
+          <svg id="merkle-svg" role="img" aria-label="Cryptographic Merkle tree" focusable="false">
+            <title>Living Merkle integrity tree</title>
+          </svg>
         </div>
       </section>
 
-      <!-- Detection chart -->
-      <section class="chart-zone doc-enter" aria-label="Change rate detection chart"
-               style="--doc-tilt: 0deg; animation-delay: 0.1s;">
+      <!-- Ink-pen Detection Chart -->
+      <section class="chart-zone doc-enter" style="animation-delay: 0.1s;" aria-label="Sliding window telemetry">
         <div class="chart-heading">
-          Change Rate — Sliding Window
+          Change Rate Telemetry (60s Sliding Window)
           <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--ink-ghost);">
-            <span id="chartLatestRate">—</span> current
+            Latest: <strong id="chartLatestRate" style="color:var(--ink);">—</strong>
           </span>
         </div>
         <div class="chart-canvas-wrap">
-          <canvas id="detectionChartCanvas" aria-label="Line chart of file change rate over time"></canvas>
+          <canvas id="detectionChartCanvas" aria-label="Line chart of change rate over time"></canvas>
         </div>
-        <!-- Skeleton -->
         <div id="chartSkeleton">
-          <div class="skeleton" style="width:100%;height:160px;border-radius:2px;"></div>
+          <div class="skeleton" style="width:100%;height:165px;"></div>
         </div>
       </section>
 
-      <!-- Incident detail: full-width below chart, shown when selected -->
-      <section id="incident-detail-panel" aria-label="Incident case file detail"
-               aria-live="polite">
-        <!-- Populated by caseFile.js -->
+      <!-- Tabbed Case File Detail Drawer -->
+      <section id="incident-detail-panel" aria-label="Incident case file detail" aria-live="polite">
+        <!-- Managed dynamically by caseFile.js -->
       </section>
 
-      <!-- Hash chain / Audit log -->
-      <section id="hash-chain-container" aria-label="Hash-chained audit ledger"
-               class="doc-enter" style="animation-delay: 0.2s;">
-        <div class="chain-heading">Hash-Chained Audit Ledger</div>
-        <div class="chain-scroll" id="chainScroll" role="list" aria-label="Audit log chain links">
-          <!-- Populated by hashChain.js -->
-          <div class="skeleton" style="width:100%;height:60px;border-radius:3px;"></div>
+      <!-- Hash Chain Audit Ledger -->
+      <section id="hash-chain-container" class="doc-enter" style="animation-delay: 0.2s;" aria-label="Hash chain ledger">
+        <div class="chain-heading">Hash-Chained Audit Ledger (Tamper-Evident)</div>
+        <div class="chain-scroll" id="chainScroll" role="list" aria-label="Cryptographic audit blocks">
+          <div class="skeleton" style="width:100%;height:60px;"></div>
         </div>
       </section>
 
     </div>
 
-    <!-- ── RIGHT RAIL: Case Files ─────────────────────────────────────── -->
-    <aside class="right-rail" aria-label="Case files">
+    <!-- ── RIGHT RAIL: Manila Folder Case Files ──────────────────────── -->
+    <aside class="right-rail" aria-label="Case files queue">
       <div class="rail-header">
-        <div class="section-label" style="margin-bottom:0;">Case Files</div>
+        <div class="section-label" style="margin-bottom:0;">Case Files Queue</div>
       </div>
 
-      <!-- Incident list -->
-      <div class="case-file-list" id="incidentList" role="list" aria-label="Incidents">
-        <!-- Skeleton -->
+      <div class="case-file-list" id="incidentList" role="list" aria-label="Active and archived incidents">
         <div id="incidentSkeleton">
-          <div class="skeleton" style="width:100%;height:80px;border-radius:2px;margin-bottom:1rem;"></div>
-          <div class="skeleton" style="width:100%;height:80px;border-radius:2px;"></div>
+          <div class="skeleton" style="width:100%;height:85px;margin-bottom:1rem;"></div>
+          <div class="skeleton" style="width:100%;height:85px;"></div>
         </div>
-        <!-- Populated by caseFile.js -->
       </div>
-
     </aside>
 
   </main>
@@ -295,12 +262,12 @@
   <footer class="updated-line" aria-live="polite">
     Last verified: <time id="footerUpdated">—</time>
     &nbsp;·&nbsp;
-    <span id="footerMode">Demo mode</span>
+    <span id="footerMode">Demo mode (mock data)</span>
   </footer>
 
-</div><!-- /#app -->
+</div>
 
-<!-- ── Entry point ────────────────────────────────────────────────────── -->
+<!-- Application Main Module -->
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

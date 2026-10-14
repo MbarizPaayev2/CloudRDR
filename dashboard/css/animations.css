@@ -1,14 +1,14 @@
 /**
  * @file dashboard/css/animations.css
- * CloudRDR — The Notary's Archive
- * All keyframe animations and orchestrated entrance sequences.
+ * CloudRDR — The Notary's Archive Animations
+ * High-impact moments: stamp slam, corruption climb, frost creep, chain break.
  */
 
-/* ── Page-load entrance: documents laid on a desk ───────────────────────── */
+/* ── Entrance: Document laid on desk ───────────────────────────────────── */
 @keyframes slideOnDesk {
   from {
     opacity: 0;
-    transform: translateY(18px) rotate(var(--doc-tilt, 0deg));
+    transform: translateY(16px) rotate(var(--doc-tilt, 0deg));
   }
   to {
     opacity: 1;
@@ -16,115 +16,113 @@
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* ── Stamp slam: scale down + slight wobble ─────────────────────────────── */
+/* ── Rubber Stamp Slam ─────────────────────────────────────────────────── */
 @keyframes stampSlam {
-  0%   { transform: scale(2.4) rotate(-8deg); opacity: 0; }
-  60%  { transform: scale(0.92) rotate(var(--stamp-angle, -3deg)); opacity: 1; }
-  78%  { transform: scale(1.05) rotate(var(--stamp-angle, -3deg)); }
-  90%  { transform: scale(0.97) rotate(var(--stamp-angle, -3deg)); }
-  100% { transform: scale(1) rotate(var(--stamp-angle, -3deg)); opacity: 1; }
+  0% {
+    transform: scale(2.6) rotate(-12deg);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(0.92) rotate(var(--stamp-angle, -3deg));
+    opacity: 1;
+  }
+  82% {
+    transform: scale(1.06) rotate(var(--stamp-angle, -3deg));
+  }
+  100% {
+    transform: scale(1) rotate(var(--stamp-angle, -3deg));
+    opacity: 1;
+  }
 }
 
-/* ── Merkle leaf corruption: clean → contaminated ──────────────────────── */
-@keyframes leafFlip {
-  0%   { fill: var(--verdigris); }
-  40%  { fill: var(--canary); transform: scale(1.15); }
-  100% { fill: var(--seal); }
-}
-
-/* ── Merkle leaf restore: sealed again ──────────────────────────────────── */
-@keyframes leafRestore {
-  0%   { fill: var(--seal); }
-  50%  { fill: var(--canary-light); transform: scale(1.1); }
-  100% { fill: var(--verdigris); }
-}
-
-/* ── Canary bob (healthy) ────────────────────────────────────────────────── */
+/* ── Canary Sentinel Bobbing ───────────────────────────────────────────── */
 @keyframes canaryBob {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%       { transform: translateY(-3px) rotate(2deg); }
-  75%       { transform: translateY(-1px) rotate(-1.5deg); }
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3.5px) rotate(2deg);
+  }
+  75% {
+    transform: translateY(-1.5px) rotate(-1.5deg);
+  }
 }
 
-/* ── Frost creep ─────────────────────────────────────────────────────────── */
+/* ── Frost Creep Overlay ───────────────────────────────────────────────── */
 @keyframes frostCreep {
-  from { opacity: 0; clip-path: inset(0 100% 0 0); }
-  to   { opacity: 1; clip-path: inset(0 0% 0 0); }
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+  }
 }
 
-/* ── Page-edge red wash (ransomware alert) ──────────────────────────────── */
+/* ── Active Ransomware Ambient Red Wash ────────────────────────────────── */
 @keyframes redWash {
-  0%   { box-shadow: inset 0 0 0px rgba(179,38,30,0); }
-  50%  { box-shadow: inset 0 0 80px rgba(179,38,30,0.22); }
-  100% { box-shadow: inset 0 0 60px rgba(179,38,30,0.16); }
+  0%, 100% {
+    box-shadow: inset 0 0 0px rgba(179, 38, 30, 0);
+  }
+  50% {
+    box-shadow: inset 0 0 90px rgba(179, 38, 30, 0.22);
+  }
 }
 
-/* ── Number count-up shimmer ────────────────────────────────────────────── */
+/* ── Chain Link Break Tremor ───────────────────────────────────────────── */
+@keyframes linkBreak {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-5px) rotate(-4deg); }
+  50%  { transform: translateX(5px) rotate(3deg); }
+  75%  { transform: translateX(-3px) rotate(-1deg); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Number Count-up Tick ──────────────────────────────────────────────── */
 @keyframes countUp {
-  from { opacity: 0.4; transform: translateY(4px); }
+  from { opacity: 0.3; transform: translateY(4px); }
   to   { opacity: 1;   transform: translateY(0); }
 }
 
-/* ── Chain link break ──────────────────────────────────────────────────── */
-@keyframes linkBreak {
-  0%   { transform: translateX(0) rotate(0deg); }
-  30%  { transform: translateX(-4px) rotate(-4deg); }
-  60%  { transform: translateX(4px) rotate(3deg); }
-  100% { transform: translateX(0) rotate(0deg); }
+/* ── Verification Banner Reveal ────────────────────────────────────────── */
+@keyframes bannerReveal {
+  from {
+    opacity: 0;
+    transform: scaleX(0.85) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1) translateY(0);
+  }
 }
 
-/* ── Pulse (canary / threat) ────────────────────────────────────────────── */
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.55; }
-}
-
-/* ── Skeleton shimmer ────────────────────────────────────────────────────── */
+/* ── Archival Paper Shimmer Loader ─────────────────────────────────────── */
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
   100% { background-position: 400px 0; }
 }
 
-/* ── Reveal for restoration banner ─────────────────────────────────────── */
-@keyframes bannerReveal {
-  from { opacity: 0; transform: scaleX(0.8) translateY(12px); }
-  to   { opacity: 1; transform: scaleX(1) translateY(0); }
+/* ── Pulse ─────────────────────────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
 }
 
-/* ── Ink drop (decorative) ──────────────────────────────────────────────── */
-@keyframes inkDrop {
-  from { transform: scale(0); opacity: 0.6; }
-  to   { transform: scale(1); opacity: 0; }
-}
-
-/* ── Apply entrance animations (via JS adding .entered class) ──────────── */
+/* ── Applied Classes ───────────────────────────────────────────────────── */
 .doc-enter {
   opacity: 0;
 }
 .doc-enter.entered {
-  animation: slideOnDesk var(--dur-story) var(--ease-out) both;
+  animation: slideOnDesk var(--dur-story) var(--ease-desk) both;
 }
 
-.stamp-enter {
-  opacity: 0;
-}
-.stamp-enter.stamped {
-  animation: stampSlam 420ms var(--ease-stamp) both;
-}
-
-/* ── Active threat: page edges pulse red ────────────────────────────────── */
 body.verdict-ransomware {
-  animation: redWash 3s ease-in-out infinite;
+  animation: redWash 2.6s ease-in-out infinite;
 }
 
-/* ── Skeleton loading ────────────────────────────────────────────────────── */
 .skeleton {
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   background: linear-gradient(
     90deg,
     var(--paper-dark) 25%,
@@ -132,5 +130,5 @@ body.verdict-ransomware {
     var(--paper-dark) 75%
   );
   background-size: 400px 100%;
-  animation: shimmer 1.4s linear infinite;
+  animation: shimmer 1.5s linear infinite;
 }

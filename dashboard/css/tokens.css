@@ -1,54 +1,56 @@
 /**
  * @file dashboard/css/tokens.css
- * CloudRDR — The Notary's Archive
- * Design tokens: palette, typography scale, spacing, motion.
+ * CloudRDR — The Notary's Archive Design Tokens
+ * Archival palette, authentic Fraunces/Martian Mono/Special Elite typography scale.
  */
 
-/* ── Google Fonts ────────────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Martian+Mono:wght@300;400;700&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Martian+Mono:wght@300;400;600;700&family=Special+Elite&display=swap');
 
 :root {
-  /* ── Archival Palette ───────────────────────────────────────────────── */
-  --paper:          #EFE6D2;   /* dominant background */
-  --paper-dark:     #E3D6BD;   /* slightly deeper: panels, cards */
-  --paper-deep:     #D5C5A8;   /* deepest: borders, ruled lines */
-  --ink:            #1B1A17;   /* dominant text */
-  --ink-faint:      #5A5040;   /* secondary text, labels */
-  --ink-ghost:      #9C8F78;   /* tertiary, placeholders */
+  /* ── The Notary's Archival Palette ────────────────────────────────────── */
+  --paper:          #EFE6D2;   /* primary warm parchment background */
+  --paper-dark:     #E3D6BD;   /* document card surface, panels */
+  --paper-deep:     #D5C5A8;   /* deep tone: ruled lines, border creases */
+  --paper-subtle:   #F7F2E7;   /* light highlight parchment */
 
-  --seal:           #B3261E;   /* RANSOMWARE / MODIFIED / broken chain */
-  --seal-light:     #F9EAEA;   /* seal tint backgrounds */
-  --seal-mid:       #D4524A;   /* seal mid-tone for hover */
+  --ink:            #1B1A17;   /* deep carbon ink for typography & rules */
+  --ink-faint:      #5A5040;   /* secondary archival ink, labels */
+  --ink-ghost:      #9C8F78;   /* ledger lines, watermark tones */
 
-  --verdigris:      #2F6F5E;   /* NORMAL / VALID / chain intact */
-  --verdigris-light:#E8F4F1;   /* verdigris tint */
-  --verdigris-mid:  #4A8C7A;   /* mid-tone */
+  /* Cryptographic State Accents */
+  --seal:           #B3261E;   /* Seal Red: RANSOMWARE, cracked seal, broken link */
+  --seal-light:     rgba(179, 38, 30, 0.12);
+  --seal-mid:       #D4524A;
 
-  --canary:         #F2C230;   /* SUSPICIOUS / canary cage active */
-  --canary-light:   #FDF7E3;   /* canary tint */
-  --canary-mid:     #C89A10;   /* canary mid-tone */
+  --verdigris:      #2F6F5E;   /* Verdigris Green: NORMAL, intact seal, valid link */
+  --verdigris-light:rgba(47, 111, 94, 0.12);
+  --verdigris-mid:  #4A8C7A;
 
-  --frost:          #9CC9D9;   /* FROZEN account overlay */
-  --frost-light:    #EEF7FB;   /* frost tint */
-  --frost-mid:      #5FA8C0;   /* frost mid-tone */
+  --canary:         #F2C230;   /* Canary Yellow: SUSPICIOUS, sentinel active */
+  --canary-light:   rgba(242, 194, 48, 0.15);
+  --canary-mid:     #C89A10;
 
-  /* ── Typography ─────────────────────────────────────────────────────── */
+  --frost:          #9CC9D9;   /* Frost Blue: Frozen account IAM policy */
+  --frost-light:    rgba(156, 201, 217, 0.22);
+  --frost-mid:      #5FA8C0;
+
+  /* ── Typography Families ─────────────────────────────────────────────── */
   --font-display:  'Fraunces', Georgia, 'Times New Roman', serif;
   --font-mono:     'Martian Mono', 'Courier New', monospace;
   --font-stamp:    'Special Elite', 'Courier New', monospace;
 
-  /* Scale — Fraunces optical-size from 9 to 144 */
-  --text-xs:    0.7rem;    /* 11.2px */
-  --text-sm:    0.82rem;   /* 13.1px */
-  --text-base:  1rem;      /* 16px */
-  --text-md:    1.2rem;    /* 19.2px */
-  --text-lg:    1.5rem;    /* 24px */
-  --text-xl:    2.2rem;    /* 35.2px */
-  --text-2xl:   3.5rem;    /* 56px */
-  --text-hero:  6rem;      /* 96px — verdict hero */
-  --text-ghost: 10rem;     /* 160px — decorative watermark text */
+  /* Typographic Hierarchy (Extreme scale jumps: 200 vs 800) */
+  --text-xs:    0.72rem;
+  --text-sm:    0.85rem;
+  --text-base:  1rem;
+  --text-md:    1.25rem;
+  --text-lg:    1.6rem;
+  --text-xl:    2.4rem;
+  --text-2xl:   3.6rem;
+  --text-hero:  5.5rem;
+  --text-ghost: 8rem;
 
-  /* ── Spacing ─────────────────────────────────────────────────────────── */
+  /* ── Spacing Scale ───────────────────────────────────────────────────── */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -56,38 +58,36 @@
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-12: 3rem;
-  --space-16: 4rem;
 
-  /* ── Borders & Radius ────────────────────────────────────────────────── */
+  /* ── Structure & Borders ─────────────────────────────────────────────── */
   --border-hair: 0.5px solid var(--paper-deep);
   --border-rule: 1px solid var(--paper-deep);
-  --border-ink:  1px solid var(--ink);
+  --border-ink:  1.5px solid var(--ink);
   --border-seal: 2px solid var(--seal);
-  --radius-sm:   3px;
-  --radius-md:   6px;
-  --radius-fold: 0 0 12px 0;  /* document corner fold */
 
-  /* ── Shadow (ink-bleed) ──────────────────────────────────────────────── */
-  --shadow-doc: 2px 3px 12px rgba(27,26,23,0.18), 0 1px 3px rgba(27,26,23,0.12);
-  --shadow-lift: 4px 6px 20px rgba(27,26,23,0.22), 0 2px 6px rgba(27,26,23,0.14);
-  --shadow-stamp: inset 0 1px 0 rgba(255,255,255,0.1);
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
 
-  /* ── Motion ──────────────────────────────────────────────────────────── */
+  /* Ink-bleed & Paper Shadows */
+  --shadow-doc:  3px 4px 14px rgba(27, 26, 23, 0.14), 0 1px 3px rgba(27, 26, 23, 0.08);
+  --shadow-lift: 6px 8px 24px rgba(27, 26, 23, 0.2), 0 2px 6px rgba(27, 26, 23, 0.12);
+  --shadow-stamp:inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  /* ── Motion Timings ──────────────────────────────────────────────────── */
   --dur-fast:   120ms;
   --dur-mid:    280ms;
   --dur-slow:   480ms;
-  --dur-story:  600ms;
-  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-stamp: cubic-bezier(0.34, 1.56, 0.64, 1); /* overshoot for stamp slam */
+  --dur-story:  650ms;
+  --ease-stamp: cubic-bezier(0.34, 1.56, 0.64, 1); /* rubber-stamp overshoot */
+  --ease-desk:  cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* ── Layout ──────────────────────────────────────────────────────────── */
-  --sidebar-w:      320px;    /* left sidebar (ledger + baseline) */
-  --right-rail-w:   300px;    /* right rail (case file list) */
-  --header-h:       54px;
-  --column-gap:     var(--space-6);
+  /* ── Layout Dimensions ───────────────────────────────────────────────── */
+  --sidebar-w:    330px;
+  --right-rail-w: 320px;
+  --header-h:     54px;
 }
 
-/* ── Reduced motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
