@@ -157,12 +157,15 @@
           <!-- User Avatar Dropdown -->
           <div style="position:relative;">
             <button type="button" class="user-profile-btn" id="userMenuBtn" aria-label="User profile menu" title="User Menu">
-              <div class="user-avatar-pill">SO</div>
+              <div class="user-avatar-pill" id="userAvatarPill">SO</div>
             </button>
             <div class="dropdown-menu" id="userDropdown">
               <div style="padding:10px 14px;border-bottom:1px solid var(--border);">
-                <div style="font-weight:600;font-size:0.85rem;color:var(--text-primary);">Security Officer</div>
-                <div style="font-size:0.75rem;color:var(--text-muted);">soc-lead@cloudrdr.internal</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                  <span id="userFullNameLabel" style="font-weight:600;font-size:0.85rem;color:var(--text-primary);">Security Officer</span>
+                  <span id="userRoleBadge" class="status-badge valid" style="font-size:0.65rem;padding:1px 6px;">Analyst</span>
+                </div>
+                <div id="userEmailLabel" style="font-size:0.75rem;color:var(--text-muted);margin-top:2px;">soc-lead@cloudrdr.internal</div>
               </div>
               <button type="button" class="dropdown-item" id="userProfileBtn">Profile</button>
               <button type="button" class="dropdown-item" id="userSettingsBtn">Account Settings</button>

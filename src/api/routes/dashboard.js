@@ -8,6 +8,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { extractSessionToken } from './auth.js';
+import { validateSession } from '../../auth/authService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,7 +39,7 @@ const MIME_TYPES = {
  */
 async function serveFile(relPath, reply) {
   // Normalize and prevent directory traversal
-  const safePath = path.normalize(relPath).replace(/^(\.\.[\/\\])+/, '');
+  const safePath = path.normalize(relPath).replace(/^(\.\.[/\\])+/, '');
   const filePath = path.join(DASHBOARD_DIR, safePath);
 
   if (!filePath.startsWith(DASHBOARD_DIR)) {
@@ -51,7 +53,7 @@ async function serveFile(relPath, reply) {
     const ext = path.extname(targetPath).toLowerCase();
     const mime = MIME_TYPES[ext] || 'application/octet-stream';
     return reply.type(mime).send(content);
-  } catch (_err) {
+  } catch {
     return reply.status(404).send('Not Found');
   }
 }
@@ -62,7 +64,7 @@ async function serveFile(relPath, reply) {
  * @param {import('fastify').FastifyReply} reply
  */
 async function serveSiteFile(relPath, reply) {
-  const safePath = path.normalize(relPath || 'index.html').replace(/^(\.\.[\/\\])+/, '');
+  const safePath = path.normalize(relPath || 'index.html').replace(/^(\.\.[/\\])+/, '');
   const filePath = path.join(SITE_DIR, safePath);
 
   if (!filePath.startsWith(SITE_DIR)) {
@@ -76,7 +78,7 @@ async function serveSiteFile(relPath, reply) {
     const ext = path.extname(targetPath).toLowerCase();
     const mime = MIME_TYPES[ext] || 'application/octet-stream';
     return reply.type(mime).send(content);
-  } catch (_err) {
+  } catch {
     return reply.status(404).send('Not Found');
   }
 }
@@ -88,7 +90,7 @@ async function serveSiteFile(relPath, reply) {
  * @param {import('fastify').FastifyReply} reply
  */
 async function serveAsset(folder, file, reply) {
-  const safeFile = path.normalize(file).replace(/^(\.\.[\/\\])+/, '');
+  const safeFile = path.normalize(file).replace(/^(\.\.[/\\])+/, '');
   const siteAssetPath = path.join(SITE_DIR, folder, safeFile);
   const dashboardAssetPath = path.join(DASHBOARD_DIR, folder, safeFile);
 
@@ -96,12 +98,12 @@ async function serveAsset(folder, file, reply) {
     const content = await fs.readFile(siteAssetPath);
     const ext = path.extname(siteAssetPath).toLowerCase();
     return reply.type(MIME_TYPES[ext] || 'application/octet-stream').send(content);
-  } catch (_e) {
+  } catch {
     try {
       const content = await fs.readFile(dashboardAssetPath);
       const ext = path.extname(dashboardAssetPath).toLowerCase();
       return reply.type(MIME_TYPES[ext] || 'application/octet-stream').send(content);
-    } catch (_e2) {
+    } catch {
       return reply.status(404).send('Not Found');
     }
   }
@@ -186,30 +188,54 @@ export async function dashboardRoutes(fastify) {
     return serveSiteFile(path.join('demo', file), reply);
   });
 
-  // ── Legacy / Alternative Dashboard Views ─────────────────────────────────
-  fastify.get('/dashboard', async (_request, reply) => {
-    return serveFile('index.html', reply);
-  });
+  // ── Authentication & Dashboard Route Handlers ────────────────────────────
+  async function checkAuth(request) {
+    const token = extractSessionToken(request);
+    if (!token) return null;
+    const sessionData = await validateSession(token);
+    return sessionData ? sessionData.user : null;
+  }
 
-  fastify.get('/dashboard/', async (_request, reply) => {
-    return serveFile('index.html', reply);
-  });
+  // Login Page (redirect to dashboard if already authenticated)
+  const handleLogin = async (request, reply) => {
+    const user = await checkAuth(request);
+    if (user) {
+      return reply.redirect('/dashboard');
+    }
+    return serveFile('login.html', reply);
+  };
+  fastify.get('/login', handleLogin);
+  fastify.get('/login/', handleLogin);
+  fastify.get('/login.html', handleLogin);
 
-  fastify.get('/dashboard/index.html', async (_request, reply) => {
-    return serveFile('index.html', reply);
-  });
+  // Registration Page (redirect to dashboard if already authenticated)
+  const handleRegister = async (request, reply) => {
+    const user = await checkAuth(request);
+    if (user) {
+      return reply.redirect('/dashboard');
+    }
+    return serveFile('register.html', reply);
+  };
+  fastify.get('/register', handleRegister);
+  fastify.get('/register/', handleRegister);
+  fastify.get('/register.html', handleRegister);
 
-  fastify.get('/admin', async (_request, reply) => {
+  // Protected Admin SOC Dashboard (redirect to /login if unauthenticated)
+  const handleDashboard = async (request, reply) => {
+    const user = await checkAuth(request);
+    if (!user) {
+      const redirectTarget = request.url || '/dashboard';
+      return reply.redirect(`/login?redirect=${encodeURIComponent(redirectTarget)}`);
+    }
     return serveFile('index.html', reply);
-  });
+  };
 
-  fastify.get('/admin/', async (_request, reply) => {
-    return serveFile('index.html', reply);
-  });
-
-  fastify.get('/admin/index.html', async (_request, reply) => {
-    return serveFile('index.html', reply);
-  });
+  fastify.get('/dashboard', handleDashboard);
+  fastify.get('/dashboard/', handleDashboard);
+  fastify.get('/dashboard/index.html', handleDashboard);
+  fastify.get('/admin', handleDashboard);
+  fastify.get('/admin/', handleDashboard);
+  fastify.get('/admin/index.html', handleDashboard);
 
   fastify.get('/landing', async (_request, reply) => {
     return serveFile('landing.html', reply);

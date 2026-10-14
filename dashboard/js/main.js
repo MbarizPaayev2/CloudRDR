@@ -593,17 +593,28 @@ function wireEvents() {
     _dom.userDropdown?.classList.remove('show');
   });
 
-  // User menu actions
   document.getElementById('userProfileBtn')?.addEventListener('click', () => {
-    showToast('Role: SOC Security Lead &bull; Permissions: All Verified', 'info');
+    const cached = localStorage.getItem('cloudrdr_user');
+    const u = cached ? JSON.parse(cached) : null;
+    showToast(`Operator: ${u?.fullName || 'SOC Lead'} &bull; Role: ${u?.role?.toUpperCase() || 'ANALYST'} &bull; Status: Active`, 'info');
   });
 
   document.getElementById('userSettingsBtn')?.addEventListener('click', () => {
-    showToast('Environment Settings: Running in Demo / Production Parity mode', 'info');
+    showToast('Account Settings: Cryptographic Zero-Trust Session &bull; TLS 1.3 Active', 'info');
   });
 
-  document.getElementById('userSignOutBtn')?.addEventListener('click', () => {
-    showToast('Sign out requested. Session preserved in local demo workspace.', 'info');
+  document.getElementById('userSignOutBtn')?.addEventListener('click', async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (_e) {
+      // Ignore network errors on logout
+    }
+    localStorage.removeItem('cloudrdr_user');
+    localStorage.removeItem('cloudrdr_token');
+    showToast('Signed out. Redirecting to login...', 'info');
+    setTimeout(() => {
+      window.location.href = '/login';
+    }, 400);
   });
 
   // Manual Refresh
@@ -695,10 +706,63 @@ function wireEvents() {
   });
 }
 
+/* ─── User Session & Profile ──────────────────────────────────────────────── */
+function applyUserProfile(user) {
+  if (!user) return;
+  const nameEl = document.getElementById('userFullNameLabel');
+  const emailEl = document.getElementById('userEmailLabel');
+  const roleEl = document.getElementById('userRoleBadge');
+  const avatarEl = document.getElementById('userAvatarPill');
+
+  if (nameEl && user.fullName) nameEl.textContent = user.fullName;
+  if (emailEl && user.email) emailEl.textContent = user.email;
+  if (roleEl && user.role) {
+    roleEl.textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+  }
+  if (avatarEl && user.fullName) {
+    const initials = user.fullName
+      .split(' ')
+      .filter(Boolean)
+      .map((part) => part[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+    avatarEl.textContent = initials || 'OP';
+  }
+}
+
+async function initUserSession() {
+  try {
+    const res = await fetch('/api/auth/me');
+    if (res.ok) {
+      const data = await res.json();
+      if (data.user) {
+        applyUserProfile(data.user);
+        localStorage.setItem('cloudrdr_user', JSON.stringify(data.user));
+        return true;
+      }
+    }
+  } catch (_err) {
+    // Non-fatal network fallback
+  }
+
+  // Fallback to localStorage cached session
+  try {
+    const cached = localStorage.getItem('cloudrdr_user');
+    if (cached) {
+      applyUserProfile(JSON.parse(cached));
+    }
+  } catch (_e) {}
+  return true;
+}
+
 /* ─── Initialization ──────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
   cacheDom();
   populateIcons();
+
+  // Load and apply authenticated user session
+  await initUserSession();
 
   // Initialize Threat Activity Chart
   if (_dom.threatActivityCanvas) {

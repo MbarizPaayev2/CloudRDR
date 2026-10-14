@@ -80,7 +80,7 @@ describe('HTTP API - Authentication and Endpoints', () => {
     assert.ok(body.error.message);
   });
 
-  it('GET / and GET /dashboard render HTML web dashboard unauthenticated', async () => {
+  it('GET / renders marketing overview unauthenticated, and GET /dashboard redirects unauthenticated requests to /login', async () => {
     const resRoot = await app.inject({
       method: 'GET',
       url: '/',
@@ -89,12 +89,27 @@ describe('HTTP API - Authentication and Endpoints', () => {
     assert.ok(resRoot.headers['content-type']?.includes('text/html'));
     assert.ok(resRoot.body.includes('CloudRDR'));
 
-    const resDash = await app.inject({
+    // Unauthenticated GET /dashboard redirects to /login
+    const resDashUnauth = await app.inject({
       method: 'GET',
       url: '/dashboard',
     });
-    assert.equal(resDash.statusCode, 200);
-    assert.ok(resDash.headers['content-type']?.includes('text/html'));
-    assert.ok(resDash.body.includes('CloudRDR'));
+    assert.equal(resDashUnauth.statusCode, 302);
+    assert.ok(resDashUnauth.headers.location?.startsWith('/login'));
+
+    // Public auth pages render unauthenticated
+    const resLogin = await app.inject({
+      method: 'GET',
+      url: '/login',
+    });
+    assert.equal(resLogin.statusCode, 200);
+    assert.ok(resLogin.body.includes('Sign In to CloudRDR'));
+
+    const resRegister = await app.inject({
+      method: 'GET',
+      url: '/register',
+    });
+    assert.equal(resRegister.statusCode, 200);
+    assert.ok(resRegister.body.includes('Register Internal Account'));
   });
 });

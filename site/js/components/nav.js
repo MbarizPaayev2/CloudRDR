@@ -58,6 +58,8 @@ export function initSharedNav(options = {}) {
               <!-- Dynamically populated icon -->
             </button>
 
+            <a href="/login" class="nav-link" style="font-size:0.8rem;padding:4px 8px;font-weight:600;">Sign In</a>
+
             <a href="/dashboard" class="btn btn-primary btn-sm">
               SOC Console &rarr;
             </a>

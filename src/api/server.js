@@ -25,6 +25,8 @@ import { detectionRoutes } from './routes/detection.js';
 import { incidentRoutes } from './routes/incidents.js';
 import { restoreRoutes } from './routes/restore.js';
 import { dashboardRoutes } from './routes/dashboard.js';
+import { authRoutes, extractSessionToken } from './routes/auth.js';
+import { validateSession } from '../auth/authService.js';
 
 /**
  * Build and configure the Fastify application.
@@ -60,6 +62,9 @@ export async function buildServer(options = {}) {
       request.routerPath === '/health' ||
       request.routerPath === '/' ||
       request.url === '/' ||
+      request.url.startsWith('/login') ||
+      request.url.startsWith('/register') ||
+      request.url.startsWith('/api/auth') ||
       request.url.startsWith('/site') ||
       request.url.startsWith('/demo') ||
       request.url.startsWith('/how-it-works') ||
@@ -82,16 +87,29 @@ export async function buildServer(options = {}) {
     const authHeader = request.headers['authorization'];
     const customHeader = request.headers['x-api-key'];
 
-    const token = customHeader || (authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null);
+    const apiKeyToken = customHeader || (authHeader?.startsWith('Bearer ') && authHeader.slice(7) === cfg.api.key ? cfg.api.key : null);
 
-    if (!token || token !== cfg.api.key) {
-      return reply.status(401).send({
-        error: {
-          code: 'unauthorized',
-          message: 'Invalid or missing API key',
-        },
-      });
+    // 1. Authorized via valid API Key
+    if (apiKeyToken && apiKeyToken === cfg.api.key) {
+      return;
     }
+
+    // 2. Authorized via valid User Session Token
+    const sessionToken = extractSessionToken(request);
+    if (sessionToken) {
+      const sessionData = await validateSession(sessionToken);
+      if (sessionData) {
+        request.user = sessionData.user;
+        return;
+      }
+    }
+
+    return reply.status(401).send({
+      error: {
+        code: 'unauthorized',
+        message: 'Valid API key or authenticated user session required',
+      },
+    });
   });
 
   // 4. Global Error Handler - consistent error format: { error: { code, message } }
@@ -130,6 +148,7 @@ export async function buildServer(options = {}) {
 
   // 5. Register route modules
   await app.register(healthRoutes);
+  await app.register(authRoutes);
   await app.register(baselineRoutes);
   await app.register(detectionRoutes);
   await app.register(incidentRoutes);

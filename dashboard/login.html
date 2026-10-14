@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — CloudRDR Security Operations</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="auth-page-canvas">
+  <div class="auth-card-container">
+    <div class="auth-card-header">
+      <a href="/" class="auth-brand-logo" title="Back to CloudRDR Overview">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-teal);">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4" stroke="#10B981" stroke-width="2"/>
+        </svg>
+      </a>
+      <h1 class="auth-title">Sign In to CloudRDR</h1>
+      <p class="auth-subtitle">Cloud Ransomware Detection & Recovery</p>
+      <div class="auth-badge">
+        <span class="badge-dot"></span>
+        <span>INTERNAL SECURITY PLATFORM</span>
+      </div>
+    </div>
+
+    <!-- Feedback alert box -->
+    <div id="authAlert" class="auth-alert" role="alert" aria-live="assertive">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px;">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span id="authAlertText">Invalid credentials. Please try again.</span>
+    </div>
+
+    <form id="loginForm" class="auth-form" novalidate>
+      <!-- Email field -->
+      <div class="form-group">
+        <label for="emailInput" class="form-label">Internal Email Address</label>
+        <div class="form-input-wrapper">
+          <span class="form-input-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L1 7"/>
+            </svg>
+          </span>
+          <input
+            type="email"
+            id="emailInput"
+            name="email"
+            class="form-input"
+            placeholder="operator@cloudrdr.internal"
+            autocomplete="email"
+            required
+            aria-required="true"
+          />
+        </div>
+        <div id="emailError" class="form-field-error"></div>
+      </div>
+
+      <!-- Password field -->
+      <div class="form-group">
+        <div class="form-label">
+          <label for="passwordInput">Password</label>
+        </div>
+        <div class="form-input-wrapper">
+          <span class="form-input-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </span>
+          <input
+            type="password"
+            id="passwordInput"
+            name="password"
+            class="form-input has-toggle"
+            placeholder="••••••••••••"
+            autocomplete="current-password"
+            required
+            aria-required="true"
+          />
+          <button type="button" id="togglePasswordBtn" class="form-toggle-pwd" aria-label="Toggle password visibility" title="Show password">
+            <svg id="eyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <div id="passwordError" class="form-field-error"></div>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" id="submitBtn" class="btn-auth-submit">
+        <span id="btnText">Authenticate &amp; Enter SOC</span>
+        <svg id="btnSpinner" class="anim-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;">
+          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+        </svg>
+      </button>
+    </form>
+
+    <div class="auth-card-footer">
+      Don't have an internal account? <a href="/register" id="toRegisterLink">Register new analyst</a>
+    </div>
+  </div>
+
+  <div class="auth-page-foot-notes">
+    CloudRDR Enterprise Security &bull; Cryptographic Zero-Trust Baseline Verification &bull; Ed25519 Signed
+  </div>
+
+  <script type="module">
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const alertBox = document.getElementById('authAlert');
+    const alertText = document.getElementById('authAlertText');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const togglePwdBtn = document.getElementById('togglePasswordBtn');
+
+    // Toggle password visibility
+    togglePwdBtn?.addEventListener('click', () => {
+      const isPwd = passwordInput.type === 'password';
+      passwordInput.type = isPwd ? 'text' : 'password';
+      togglePwdBtn.title = isPwd ? 'Hide password' : 'Show password';
+    });
+
+    function showAlert(msg, isSuccess = false) {
+      alertText.textContent = msg;
+      alertBox.className = `auth-alert show ${isSuccess ? 'success' : 'error'}`;
+    }
+
+    function clearErrors() {
+      alertBox.className = 'auth-alert';
+      emailError.textContent = '';
+      passwordError.textContent = '';
+      emailInput.classList.remove('is-invalid');
+      passwordInput.classList.remove('is-invalid');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      let hasError = false;
+      if (!email) {
+        emailError.textContent = 'Please enter your internal email address.';
+        emailInput.classList.add('is-invalid');
+        hasError = true;
+      }
+      if (!password) {
+        passwordError.textContent = 'Please enter your password.';
+        passwordInput.classList.add('is-invalid');
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      // Loading state
+      submitBtn.disabled = true;
+      btnText.textContent = 'Authenticating...';
+      btnSpinner.style.display = 'inline-block';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          showAlert(data.error?.message || 'Authentication failed. Please verify your credentials.');
+          return;
+        }
+
+        showAlert('Authentication verified. Redirecting to SOC dashboard...', true);
+
+        // Store user in localStorage for instant client rendering
+        if (data.user) {
+          localStorage.setItem('cloudrdr_user', JSON.stringify(data.user));
+          if (data.token) localStorage.setItem('cloudrdr_token', data.token);
+        }
+
+        // Determine destination redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        const destination = urlParams.get('redirect') || '/dashboard';
+
+        setTimeout(() => {
+          window.location.href = destination;
+        }, 300);
+      } catch (err) {
+        showAlert('Network or server connection error. Please try again.');
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Authenticate & Enter SOC';
+        btnSpinner.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

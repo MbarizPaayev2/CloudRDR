@@ -16,6 +16,8 @@
  */
 
 import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
 import { createClient } from '@supabase/supabase-js';
 import cfg from '../../config/index.js';
 import logger from '../../utils/logger.js';
@@ -33,7 +35,48 @@ const _memoryDb = {
   incidents: [],
   restore_jobs: [],
   restore_results: [],
+  internal_users: [],
+  user_sessions: [],
 };
+
+// Attempt to load persisted local auth data if available
+try {
+  const authStorePath = path.resolve(process.cwd(), 'data', 'users-storage.json');
+  if (fs.existsSync(authStorePath)) {
+    const raw = fs.readFileSync(authStorePath, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed.internal_users)) _memoryDb.internal_users = parsed.internal_users;
+    if (Array.isArray(parsed.user_sessions)) _memoryDb.user_sessions = parsed.user_sessions;
+  }
+} catch {
+  // Non-fatal fallback
+}
+
+function _persistAuthStorageIfApplicable(tableName) {
+  if (tableName === 'internal_users' || tableName === 'user_sessions') {
+    try {
+      const dataDir = path.resolve(process.cwd(), 'data');
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
+      const authStorePath = path.join(dataDir, 'users-storage.json');
+      fs.writeFileSync(
+        authStorePath,
+        JSON.stringify(
+          {
+            internal_users: _memoryDb.internal_users || [],
+            user_sessions: _memoryDb.user_sessions || [],
+          },
+          null,
+          2
+        ),
+        'utf8'
+      );
+    } catch {
+      // Non-fatal
+    }
+  }
+}
 
 /**
  * Creates an in-memory PostgREST query builder mock.
@@ -52,7 +95,9 @@ export function createInMemorySupabaseClient() {
 
     const builder = {
       select(_cols = '*') {
-        operation = 'select';
+        if (!['insert', 'update', 'delete'].includes(operation)) {
+          operation = 'select';
+        }
         return builder;
       },
       insert(rows) {
@@ -147,6 +192,10 @@ export function createInMemorySupabaseClient() {
         } else {
           // select
           result = table.filter((row) => filters.every((fn) => fn(row)));
+        }
+
+        if (['insert', 'update', 'delete'].includes(operation)) {
+          _persistAuthStorageIfApplicable(tableName);
         }
 
         if (orderSpec) {
