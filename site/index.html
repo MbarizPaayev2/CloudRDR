@@ -135,76 +135,158 @@
       </div>
     </section>
 
-    <!-- ── 3. HOW IT WORKS (6 STEPS HORIZONTAL STEPPER & DETAIL DRAWER) ────── -->
+    <!-- ── 3. HOW THE DEFENSE SYSTEM WORKS (CONNECTED PIPELINE & VISUALIZER) ── -->
     <section class="section-pad bg-grid-dots">
       <div class="container">
         <div class="section-head reveal-on-scroll">
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Architecture</span>
-          <h2 class="section-title">How the defense system works</h2>
-          <p class="section-desc">Click any stage below to inspect its cryptographic specifications, data contracts, and ISO 27001 mappings.</p>
+          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Architecture &amp; Protocol Flow</span>
+          <h2 class="section-title">Autonomous 6-stage defense lifecycle</h2>
+          <p class="section-desc">From initial cryptographic baseline to verifiable AEAD recovery. Click any stage to test its interactive sandbox and inspect protocol specifications.</p>
         </div>
 
-        <div class="stepper-horizontal" id="stepperCards">
-          <div class="step-card selected reveal-on-scroll stagger-1" data-step="0">
-            <div class="step-number">Step 01</div>
-            <h3>Baseline</h3>
-            <p>Every file gets a SHA-256 fingerprint. Hashes assemble into a single Merkle root.</p>
+        <div class="pipeline-controls-bar reveal-on-scroll">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="brand-badge" style="background:var(--brand-subtle);color:var(--brand);font-size:0.75rem;">Connected Pipeline Flow</span>
+            <span style="font-size:var(--text-xs);color:var(--text-muted);font-family:var(--font-mono);">Automated Control Plane • Cryptographic Proofs</span>
           </div>
-
-          <div class="step-card reveal-on-scroll stagger-2" data-step="1">
-            <div class="step-number">Step 02</div>
-            <h3>Monitor</h3>
-            <p>A background agent continuously polls bucket event streams every 10 seconds.</p>
-          </div>
-
-          <div class="step-card reveal-on-scroll stagger-3" data-step="2">
-            <div class="step-number">Step 03</div>
-            <h3>Detect</h3>
-            <p>Sliding 60-second window. Rate &ge;30% or touching decoy canaries trips ransomware verdict.</p>
-          </div>
-
-          <div class="step-card reveal-on-scroll stagger-4" data-step="3">
-            <div class="step-number">Step 04</div>
-            <h3>Respond</h3>
-            <p>Attacking account is frozen read-only via cloud IAM. Incident signed with Ed25519.</p>
-          </div>
-
-          <div class="step-card reveal-on-scroll stagger-5" data-step="4">
-            <div class="step-number">Step 05</div>
-            <h3>Audit</h3>
-            <p>All decisions enter a hash-chained ledger. Altering past blocks breaks downstream links.</p>
-          </div>
-
-          <div class="step-card reveal-on-scroll stagger-6" data-step="5">
-            <div class="step-number">Step 06</div>
-            <h3>Restore</h3>
-            <p>AES-256-GCM backups decrypted. Incident closes only when 100% of files match baseline.</p>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button id="pipelineAutoPlayBtn" class="btn btn-secondary" style="font-size:0.75rem;padding:6px 14px;font-family:var(--font-mono);">
+              <span id="pipelinePlayIcon">▶</span> <span id="pipelinePlayText">Auto-Play Walkthrough</span>
+            </button>
           </div>
         </div>
 
-        <!-- Interactive Step Detail Drawer -->
-        <div class="step-detail-drawer reveal-on-scroll" id="stepDetailDrawer">
-          <div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:var(--space-2);">
-              <span id="drawerStepTag" class="brand-badge">Step 01 // Baseline</span>
-              <span id="drawerIsoTag" class="status-chip valid">ISO 27001 A.8.9</span>
+        <div class="pipeline-flow-track" id="pipelineTrack" role="tablist" aria-label="CloudRDR Pipeline Stages">
+          <!-- Step 1 -->
+          <div class="pipeline-node active reveal-on-scroll stagger-1" data-stage="0" role="tab" aria-selected="true" tabindex="0">
+            <div class="pipeline-node-top">
+              <span class="pipeline-step-idx">01</span>
+              <div class="pipeline-icon-box" title="Baseline Merkle Root">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M12 6.5v4M12 10.5l-4.5 5.5M12 10.5l4.5 5.5"/></svg>
+              </div>
             </div>
-            <h3 id="drawerStepTitle" style="font-size:var(--text-xl);margin-bottom:var(--space-2);">Continuous Canonical Merkle Snapshot</h3>
-            <p id="drawerStepDesc" style="color:var(--text-muted);font-size:0.9rem;line-height:1.6;margin-bottom:var(--space-4);">
-              Captures SHA-256 digests across all storage bucket objects. Hashes are deterministically ordered and computed into a pairwise Merkle DAG, producing a single 64-character root hash.
-            </p>
-            <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--brand);">
-              Backend module: <code id="drawerModule" style="background:var(--surface-subtle);padding:2px 6px;border-radius:4px;">src/baseline/baselineService.js</code>
+            <div class="pipeline-node-title">Baseline</div>
+            <div class="pipeline-node-subtitle">SHA-256 Merkle Root</div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="pipeline-node reveal-on-scroll stagger-2" data-stage="1" role="tab" aria-selected="false" tabindex="0">
+            <div class="pipeline-node-top">
+              <span class="pipeline-step-idx">02</span>
+              <div class="pipeline-icon-box" title="Storage Event Polling">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6a6 6 0 1 0 6 6"/><circle cx="12" cy="12" r="2"/><path d="M12 12l5-5"/></svg>
+              </div>
+            </div>
+            <div class="pipeline-node-title">Monitor</div>
+            <div class="pipeline-node-subtitle">10s Event Polling</div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="pipeline-node reveal-on-scroll stagger-3" data-stage="2" role="tab" aria-selected="false" tabindex="0">
+            <div class="pipeline-node-top">
+              <span class="pipeline-step-idx">03</span>
+              <div class="pipeline-icon-box" title="Heuristic &amp; Canary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+            </div>
+            <div class="pipeline-node-title">Detect</div>
+            <div class="pipeline-node-subtitle">Sliding Window &amp; Canary</div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="pipeline-node reveal-on-scroll stagger-4" data-stage="3" role="tab" aria-selected="false" tabindex="0">
+            <div class="pipeline-node-top">
+              <span class="pipeline-step-idx">04</span>
+              <div class="pipeline-icon-box" title="IAM Freeze &amp; Ed25519">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="9.5" y="10" width="5" height="4" rx="1"/><path d="M10.5 10V8.5a1.5 1.5 0 0 1 3 0V10"/></svg>
+              </div>
+            </div>
+            <div class="pipeline-node-title">Respond</div>
+            <div class="pipeline-node-subtitle">IAM Freeze &amp; Ed25519</div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="pipeline-node reveal-on-scroll stagger-5" data-stage="4" role="tab" aria-selected="false" tabindex="0">
+            <div class="pipeline-node-top">
+              <span class="pipeline-step-idx">05</span>
+              <div class="pipeline-icon-box" title="Hash-Chained Audit Log">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              </div>
+            </div>
+            <div class="pipeline-node-title">Audit</div>
+            <div class="pipeline-node-subtitle">SHA-256 Hash-Chain</div>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="pipeline-node reveal-on-scroll stagger-6" data-stage="5" role="tab" aria-selected="false" tabindex="0">
+            <div class="pipeline-node-top">
+              <span class="pipeline-step-idx">06</span>
+              <div class="pipeline-icon-box" title="AEAD Verified Decryption">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><polyline points="9 16 11.5 18.5 15 14"/></svg>
+              </div>
+            </div>
+            <div class="pipeline-node-title">Restore</div>
+            <div class="pipeline-node-subtitle">AEAD Verified Recovery</div>
+          </div>
+        </div>
+
+        <!-- Featured Stage Visualizer Card -->
+        <div class="pipeline-visualizer-card reveal-on-scroll" id="pipelineVisualizer">
+          <div class="visualizer-spec-col">
+            <div>
+              <div class="visualizer-meta-badges">
+                <span id="vizStageBadge" class="brand-badge">Stage 01 // Baseline</span>
+                <span id="vizIsoBadge" class="status-chip valid">ISO 27001 A.8.9</span>
+                <span id="vizRfcBadge" class="status-chip missing" style="border:1px solid var(--border);">RFC 6962</span>
+              </div>
+              <h3 id="vizTitle" class="visualizer-title">Deterministic Merkle Tree Snapshot</h3>
+              <p id="vizDesc" class="visualizer-desc">
+                Captures SHA-256 digests across all protected bucket objects. Hashes are deterministically ordered and folded pairwise into a single Merkle root hash.
+              </p>
+              <div class="visualizer-spec-grid" id="vizSpecGrid">
+                <div class="spec-chip">
+                  <div class="spec-chip-label">Algorithm</div>
+                  <div class="spec-chip-val" id="vizAlg">SHA-256 Pairwise Tree</div>
+                </div>
+                <div class="spec-chip">
+                  <div class="spec-chip-label">SLA / Window</div>
+                  <div class="spec-chip-val" id="vizSla">&lt; 450ms per 1k files</div>
+                </div>
+                <div class="spec-chip">
+                  <div class="spec-chip-label">Integrity Invariant</div>
+                  <div class="spec-chip-val" id="vizInvariant">Root Mismatch = Tampered</div>
+                </div>
+                <div class="spec-chip">
+                  <div class="spec-chip-label">Backend Target</div>
+                  <div class="spec-chip-val" id="vizTarget">src/baseline/baselineService.js</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:auto;">
+              <a href="how-it-works.html" class="btn btn-secondary" style="font-size:0.75rem;padding:6px 14px;">Read Full Protocol Specs ↗</a>
+              <a href="demo/index.html" class="btn btn-primary" style="font-size:0.75rem;padding:6px 14px;">Inspect in Live Demo →</a>
             </div>
           </div>
-          <div class="step-code-preview" id="drawerCodePreview">// 1. Compute deterministic Merkle Root
-const leaves = files.map(f => hashBuffer(f.bytes));
-const merkleRoot = crypto.merkleRoot(leaves);
-await db.from('baseline_snapshots').insert({
-  bucket: 'protected',
-  merkle_root: merkleRoot,
-  file_count: files.length
-});</div>
+
+          <div class="visualizer-live-box">
+            <div class="live-box-header">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span style="width:8px;height:8px;border-radius:50%;background:#FF5F56;"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:#FFBD2E;"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:#27C93F;"></span>
+                <span style="margin-left:8px;font-weight:600;color:#C0C8D8;" id="vizCodeTitle">baselineService.js</span>
+              </div>
+              <span id="vizEngineState" style="color:#27C93F;font-size:0.68rem;display:flex;align-items:center;gap:4px;">
+                <span style="width:5px;height:5px;background:#27C93F;border-radius:50%;"></span> ACTIVE
+              </span>
+            </div>
+
+            <div class="live-interactive-sandbox" id="vizSandbox">
+              <!-- Dynamically populated sandbox widget -->
+            </div>
+
+            <pre class="live-code-snippet" id="vizCodeSnippet"></pre>
+          </div>
         </div>
       </div>
     </section>
@@ -503,110 +585,503 @@ await db.from('baseline_snapshots').insert({
       });
     }
 
-    // ── 4. Interactive Step Detail Drawer Logic ─────────────────────────────
-    const stepData = [
+    // ── 4. Interactive Pipeline Stages & Visualizer Logic ───────────────────
+    const pipelineStages = [
       {
-        tag: 'Step 01 // Baseline',
+        tag: 'Stage 01 // Baseline',
         iso: 'ISO 27001 A.8.9',
-        title: 'Continuous Canonical Merkle Snapshot',
-        desc: 'Captures SHA-256 digests across all storage bucket objects. Hashes are deterministically ordered and computed into a pairwise Merkle DAG, producing a single 64-character root hash.',
-        module: 'src/baseline/baselineService.js',
-        code: `// 1. Compute deterministic Merkle Root
+        rfc: 'RFC 6962',
+        title: 'Deterministic Merkle Tree Snapshot',
+        desc: 'Every file in the storage bucket receives a SHA-256 fingerprint. Hashes are sorted deterministically and folded into a pairwise Merkle DAG, establishing an immutable cryptographic anchor.',
+        alg: 'SHA-256 Pairwise Tree',
+        sla: '< 450ms per 1k files',
+        invariant: 'Root Mismatch = Tampered',
+        target: 'src/baseline/baselineService.js',
+        codeTitle: 'baselineService.js',
+        code: `// 1. Compute deterministic Merkle Root over bucket objects
 const leaves = files.map(f => hashBuffer(f.bytes));
 const merkleRoot = crypto.merkleRoot(leaves);
 await db.from('baseline_snapshots').insert({
   bucket: 'protected',
   merkle_root: merkleRoot,
   file_count: files.length
-});`
+});`,
+        renderSandbox: (box) => {
+          box.innerHTML = `
+            <div style="font-family:var(--font-mono);font-size:0.75rem;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+                <span>Merkle Leaves (4 Sample Blocks)</span>
+                <span id="merkleStatusText" style="color:#27C93F;">● 100% Invariant Match</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;">
+                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:#718096;">f1.pdf</div>
+                  <div id="leafHash0" style="color:#E2E8F0;font-size:0.68rem;">a4f1..</div>
+                </div>
+                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:#718096;">f2.db</div>
+                  <div id="leafHash1" style="color:#E2E8F0;font-size:0.68rem;">98e2..</div>
+                </div>
+                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:#718096;">f3.key</div>
+                  <div id="leafHash2" style="color:#E2E8F0;font-size:0.68rem;">0b7c..</div>
+                </div>
+                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;text-align:center;">
+                  <div style="font-size:0.65rem;color:#718096;">f4.env</div>
+                  <div id="leafHash3" style="color:#E2E8F0;font-size:0.68rem;">c3d9..</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
+                <div style="font-size:0.7rem;color:#718096;">Root: <span id="merkleRootVal" style="color:#27C93F;font-weight:600;">e3b0c44298fc1c149afb7852b855</span></div>
+                <button id="recalcMerkleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Mutate Leaf ⚡</button>
+              </div>
+            </div>
+          `;
+          let mutated = false;
+          const btn = box.querySelector('#recalcMerkleBtn');
+          if (btn) {
+            btn.addEventListener('click', () => {
+              mutated = !mutated;
+              const leaf0 = box.querySelector('#leafHash0');
+              const status = box.querySelector('#merkleStatusText');
+              const root = box.querySelector('#merkleRootVal');
+              if (mutated) {
+                leaf0.textContent = 'd99a..';
+                leaf0.parentElement.style.borderColor = '#D93636';
+                status.textContent = '▲ Root Mismatch (Tampered)';
+                status.style.color = '#D93636';
+                root.textContent = '7f8a10bc33182a4d91a1820491ab';
+                root.style.color = '#D93636';
+                btn.textContent = 'Restore Baseline ↺';
+              } else {
+                leaf0.textContent = 'a4f1..';
+                leaf0.parentElement.style.borderColor = '#27C93F';
+                status.textContent = '● 100% Invariant Match';
+                status.style.color = '#27C93F';
+                root.textContent = 'e3b0c44298fc1c149afb7852b855';
+                root.style.color = '#27C93F';
+                btn.textContent = 'Mutate Leaf ⚡';
+              }
+            });
+          }
+        }
       },
       {
-        tag: 'Step 02 // Monitor',
+        tag: 'Stage 02 // Monitor',
         iso: 'ISO 27001 A.8.16',
-        title: 'Storage Event Ingestion Agent',
-        desc: 'Polls bucket event streams every 10 seconds. Emits created, modified, and deleted notifications while hashing modified objects to observe content entropy.',
-        module: 'src/monitor/monitorAgent.js',
-        code: `// 2. Poll storage adapter and emit change delta
+        rfc: 'Polling SLA',
+        title: 'Continuous Event Ingestion Agent',
+        desc: 'Background daemon continuously inspects object storage event streams every 10 seconds. Emits created, modified, and deleted deltas while calculating post-change SHA-256 entropy.',
+        alg: 'Storage Delta Engine',
+        sla: '10.0 seconds cycle',
+        invariant: 'Zero Unobserved Writes',
+        target: 'src/monitor/monitorAgent.js',
+        codeTitle: 'monitorAgent.js',
+        code: `// 2. Poll storage adapter and diff against known state
 const current = await storage.list(bucket);
 const changes = diffEntries(prevListing, current);
 await db.from('change_events').insert(changes.map(c => ({
   bucket, path: c.path, event_type: c.type, observed_sha256: c.sha256
-})));`
+})));`,
+        renderSandbox: (box) => {
+          box.innerHTML = `
+            <div style="font-family:var(--font-mono);font-size:0.75rem;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+                <span>Heartbeat Polling Agent</span>
+                <span style="color:#27C93F;">● Polling Active</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                <div style="background:#111624;padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
+                  <div style="font-size:0.65rem;color:#718096;">Bucket Monitored</div>
+                  <div style="color:#E2E8F0;font-weight:600;">"protected" (16 objects)</div>
+                </div>
+                <div style="background:#111624;padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
+                  <div style="font-size:0.65rem;color:#718096;">Next Poll Interval</div>
+                  <div id="nextPollCount" style="color:#2F4BFF;font-weight:600;">9.4s remaining</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
+                <span id="monitorEventStatus" style="font-size:0.7rem;color:#A0AEC0;">Delta: 0 events in current window</span>
+                <button id="emitChangeEventBtn" style="background:rgba(255,255,255,0.08);color:#FFF;border:1px solid rgba(255,255,255,0.15);padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Simulate Write Event ⚡</button>
+              </div>
+            </div>
+          `;
+          let pollLeft = 9.4;
+          const pollTimer = setInterval(() => {
+            const count = box.querySelector('#nextPollCount');
+            if (!count) { clearInterval(pollTimer); return; }
+            pollLeft = (pollLeft <= 0.5) ? 10.0 : (pollLeft - 0.5);
+            count.textContent = pollLeft.toFixed(1) + 's remaining';
+          }, 500);
+
+          const emitBtn = box.querySelector('#emitChangeEventBtn');
+          if (emitBtn) {
+            emitBtn.addEventListener('click', () => {
+              const status = box.querySelector('#monitorEventStatus');
+              status.innerHTML = '<span style="color:#E0A100;">+1 modified: docs/contract.pdf (sha256 diff)</span>';
+              setTimeout(() => {
+                if (status) status.innerHTML = '<span style="color:#A0AEC0;">Delta: 0 events in current window</span>';
+              }, 3000);
+            });
+          }
+        }
       },
       {
-        tag: 'Step 03 // Detect',
+        tag: 'Stage 03 // Detect',
         iso: 'ISO 27001 A.8.7',
+        rfc: 'Sliding Window',
         title: 'Sliding-Window Heuristic & Canary Tripwire',
-        desc: 'Evaluates file modification rate within a 60-second sliding window. Touching any canary file or rate >=30% immediately issues a RANSOMWARE verdict.',
-        module: 'src/detection/detectionEngine.js',
+        desc: 'Evaluates modification volume across a 60-second sliding window: <10% NORMAL, 10-30% SUSPICIOUS, >=30% RANSOMWARE. Any touch on invisible canary decoys triggers instant containment.',
+        alg: 'Sliding Heuristic + Canary',
+        sla: 'Instantaneous (Canary: 0s)',
+        invariant: 'Tripwire = Absolute Containment',
+        target: 'src/detection/detectionEngine.js',
+        codeTitle: 'detectionEngine.js',
         code: `// 3. Sliding window & canary tripwire
 const rate = changedFiles / totalFiles;
 const canaryTripped = events.some(e => e.is_canary);
 const verdict = canaryTripped || rate >= 0.30 
-  ? 'ransomware' : rate >= 0.10 ? 'suspicious' : 'normal';`
+  ? 'ransomware' : rate >= 0.10 ? 'suspicious' : 'normal';`,
+        renderSandbox: (box) => {
+          box.innerHTML = `
+            <div style="font-family:var(--font-mono);font-size:0.75rem;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+                <span>Heuristic Threshold Simulator</span>
+                <span id="verdictBadgeText" style="color:#27C93F;font-weight:700;">NORMAL</span>
+              </div>
+              <div style="margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#718096;margin-bottom:4px;">
+                  <span>Change Rate: <b id="rateValText" style="color:#E2E8F0;">0%</b></span>
+                  <span>Threshold: 30% Ransomware</span>
+                </div>
+                <input type="range" id="rateSlider" min="0" max="100" value="0" style="width:100%;cursor:pointer;accent-color:#2F4BFF;">
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
+                <span style="font-size:0.68rem;color:#A0AEC0;">Decoy: .canary/salary.xlsx</span>
+                <button id="tripCanaryBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Trip Canary Decoy ⚡</button>
+              </div>
+            </div>
+          `;
+          const slider = box.querySelector('#rateSlider');
+          const rateVal = box.querySelector('#rateValText');
+          const badge = box.querySelector('#verdictBadgeText');
+          const tripBtn = box.querySelector('#tripCanaryBtn');
+
+          function updateHeuristic(val) {
+            rateVal.textContent = val + '%';
+            if (val >= 30) {
+              badge.textContent = 'RANSOMWARE';
+              badge.style.color = '#D93636';
+            } else if (val >= 10) {
+              badge.textContent = 'SUSPICIOUS';
+              badge.style.color = '#E0A100';
+            } else {
+              badge.textContent = 'NORMAL';
+              badge.style.color = '#27C93F';
+            }
+          }
+
+          if (slider) {
+            slider.addEventListener('input', (e) => updateHeuristic(parseInt(e.target.value, 10)));
+          }
+
+          if (tripBtn) {
+            tripBtn.addEventListener('click', () => {
+              if (slider) slider.value = 45;
+              rateVal.textContent = '45% [CANARY TRIPPED]';
+              badge.textContent = 'RANSOMWARE (CANARY)';
+              badge.style.color = '#D93636';
+            });
+          }
+        }
       },
       {
-        tag: 'Step 04 // Respond',
+        tag: 'Stage 04 // Respond',
         iso: 'ISO 27001 A.8.15',
+        rfc: 'RFC 8032',
         title: 'Control-Plane IAM Lockdown & Ed25519 Signing',
-        desc: 'Injects an IAM deny-all policy on the compromised account within 10 seconds. Creates an immutable incident record signed with Ed25519.',
-        module: 'src/response/responseService.js',
+        desc: 'Autonomous control-plane enforcement: within 10 seconds, an IAM Deny-All policy isolates the compromised credential. An immutable forensic incident record is generated and signed with Ed25519.',
+        alg: 'Ed25519 (RFC 8032)',
+        sla: '< 10.0s Control-Plane SLA',
+        invariant: 'Immediate Write Revocation',
+        target: 'src/response/responseService.js',
+        codeTitle: 'responseService.js',
         code: `// 4. Autonomous IAM freeze & RFC 8032 signing
 await freezeClient.freezeAccount(accountId);
 const record = { incidentId, accountId, frozenAt: new Date().toISOString() };
 const { signature, keyId } = crypto.signRecord(record);
-await db.from('incidents').update({ status: 'frozen', record_signature: signature });`
+await db.from('incidents').update({ status: 'frozen', record_signature: signature });`,
+        renderSandbox: (box) => {
+          box.innerHTML = `
+            <div style="font-family:var(--font-mono);font-size:0.75rem;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+                <span>Cloud IAM Control Plane</span>
+                <span id="accountStatusTag" style="color:#4FA3C7;">● ACCOUNT FROZEN (READ-ONLY)</span>
+              </div>
+              <div style="background:#111624;padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#718096;margin-bottom:3px;">
+                  <span>Identity: <code style="color:#E2E8F0;">acc-attacker-9014</code></span>
+                  <span style="color:#D93636;">Write/Delete: DENIED</span>
+                </div>
+                <div style="font-size:0.65rem;color:#718096;">Ed25519 Signature:</div>
+                <div id="edSigVal" style="font-size:0.68rem;color:#27C93F;word-break:break-all;">7f3d81b94e098a54c330f1d9a20... [RFC 8032 VALID]</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:0.68rem;color:#718096;">SLA Latency: <strong>3.2s</strong> &lt; 10s maximum</span>
+                <button id="recheckSigBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Verify Signature ↗</button>
+              </div>
+            </div>
+          `;
+          const btn = box.querySelector('#recheckSigBtn');
+          if (btn) {
+            btn.addEventListener('click', () => {
+              const sig = box.querySelector('#edSigVal');
+              sig.style.color = '#FFF';
+              sig.textContent = 'Verifying curve25519 public key...';
+              setTimeout(() => {
+                sig.style.color = '#27C93F';
+                sig.textContent = '7f3d81b94e098a54c330f1d9a20... [RFC 8032 VALID]';
+              }, 400);
+            });
+          }
+        }
       },
       {
-        tag: 'Step 05 // Audit',
+        tag: 'Stage 05 // Audit',
         iso: 'ISO 27001 A.8.15',
-        title: 'Tamper-Evident Hash-Chained Audit Ledger',
-        desc: 'Appends incident state transitions into a SHA-256 hash-chained log. Any modification of past records cryptographically invalidates all downstream blocks.',
-        module: 'src/contracts/crypto.contract.js',
+        rfc: 'Hash-Chained',
+        title: 'Tamper-Evident Forensic Audit Ledger',
+        desc: 'Every detection verdict, containment action, and operator command appends to a cryptographically chained ledger. Each block seals the prior block\'s hash: tampering with any past event visibly breaks the chain.',
+        alg: 'SHA-256 Back-Linked Chain',
+        sla: 'Atomic Append on Event',
+        invariant: 'Any Edit Breaks Downstream Chain',
+        target: 'src/contracts/crypto.contract.js',
+        codeTitle: 'crypto.contract.js',
         code: `// 5. Append-only tamper-evident hash chain
 const prevHash = ledger.length ? ledger.at(-1).hash : '0'.repeat(64);
 const blockPayload = JSON.stringify({ index, prevHash, timestamp, data });
 const hash = crypto.createHash('sha256').update(blockPayload).digest('hex');
-ledger.push({ index, hash, prevHash, data });`
+ledger.push({ index, hash, prevHash, data });`,
+        renderSandbox: (box) => {
+          box.innerHTML = `
+            <div style="font-family:var(--font-mono);font-size:0.75rem;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+                <span>Hash-Chained Ledger Blocks</span>
+                <span id="chainIntegrityStatus" style="color:#27C93F;">● Chain Intact</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;">
+                <div style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;">
+                  <div style="font-size:0.65rem;color:#718096;">#0 Baseline</div>
+                  <div style="font-size:0.65rem;color:#A0AEC0;">h: e3b0..</div>
+                </div>
+                <div id="chainBlock1" style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;">
+                  <div style="font-size:0.65rem;color:#718096;">#1 Freeze</div>
+                  <div id="chainBlock1Hash" style="font-size:0.65rem;color:#A0AEC0;">h: 4a92..</div>
+                </div>
+                <div id="chainBlock2" style="background:#111624;padding:6px;border-radius:4px;border:1px solid #27C93F;">
+                  <div style="font-size:0.65rem;color:#718096;">#2 Restore</div>
+                  <div id="chainBlock2Prev" style="font-size:0.65rem;color:#A0AEC0;">prev: 4a92..</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
+                <span style="font-size:0.68rem;color:#718096;">Tamper test demo:</span>
+                <button id="tamperChainBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Tamper Block #1 ⚡</button>
+              </div>
+            </div>
+          `;
+          let tampered = false;
+          const btn = box.querySelector('#tamperChainBtn');
+          if (btn) {
+            btn.addEventListener('click', () => {
+              tampered = !tampered;
+              const b1 = box.querySelector('#chainBlock1');
+              const b2 = box.querySelector('#chainBlock2');
+              const b1h = box.querySelector('#chainBlock1Hash');
+              const status = box.querySelector('#chainIntegrityStatus');
+              if (tampered) {
+                b1.style.borderColor = '#D93636';
+                b2.style.borderColor = '#D93636';
+                b1h.textContent = 'h: ffff..';
+                b1h.style.color = '#D93636';
+                status.textContent = '▲ CHAIN BROKEN AT BLOCK #1';
+                status.style.color = '#D93636';
+                btn.textContent = 'Repair Chain ↺';
+              } else {
+                b1.style.borderColor = '#27C93F';
+                b2.style.borderColor = '#27C93F';
+                b1h.textContent = 'h: 4a92..';
+                b1h.style.color = '#A0AEC0';
+                status.textContent = '● Chain Intact';
+                status.style.color = '#27C93F';
+                btn.textContent = 'Tamper Block #1 ⚡';
+              }
+            });
+          }
+        }
       },
       {
-        tag: 'Step 06 // Restore',
+        tag: 'Stage 06 // Restore',
         iso: 'ISO 27001 A.8.13',
+        rfc: 'NIST SP 800-38D',
         title: 'AEAD-Authenticated Verified Decryption',
-        desc: 'Decrypts AES-256-GCM backups, verifies the 128-bit authentication tag, and checks the SHA-256 against baseline. Requires 100% VALID match to close incident.',
-        module: 'src/restore/restoreService.js',
+        desc: 'Backups encrypted with AES-256-GCM are fetched and verified against their 128-bit authentication tag. Each restored payload is re-hashed and cross-referenced with the initial Merkle baseline.',
+        alg: 'AES-256-GCM (AEAD)',
+        sla: '100% Verification Threshold',
+        invariant: 'Zero Tampered Files Written Back',
+        target: 'src/restore/restoreService.js',
+        codeTitle: 'restoreService.js',
         code: `// 6. AEAD tag verification & baseline check
 const { bytes, aeadVerified } = await backup.restoreFile(bucket, path);
 const recomputedHash = hashBuffer(bytes);
 const isValid = aeadVerified && (recomputedHash === expectedSha256);
-if (isValid) await storage.write(bucket, path, bytes);`
+if (isValid) await storage.write(bucket, path, bytes);`,
+        renderSandbox: (box) => {
+          box.innerHTML = `
+            <div style="font-family:var(--font-mono);font-size:0.75rem;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:#A0AEC0;">
+                <span>AEAD Verification Progress</span>
+                <span id="restoreVerifCount" style="color:#27C93F;font-weight:700;">16 / 16 VALID (100%)</span>
+              </div>
+              <div style="background:#111624;height:8px;border-radius:4px;overflow:hidden;margin-bottom:10px;">
+                <div id="restoreProgressBar" style="width:100%;height:100%;background:#27C93F;transition:width 0.4s ease;"></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;background:#0F1420;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.08);">
+                <div style="font-size:0.68rem;color:#718096;">Status: <b style="color:#27C93F;">Incident Ready to Close</b></div>
+                <button id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run AEAD Verify ⚡</button>
+              </div>
+            </div>
+          `;
+          const btn = box.querySelector('#runRestoreCycleBtn');
+          if (btn) {
+            btn.addEventListener('click', () => {
+              const bar = box.querySelector('#restoreProgressBar');
+              const count = box.querySelector('#restoreVerifCount');
+              bar.style.width = '0%';
+              count.textContent = 'Verifying GCM tags...';
+              let progress = 0;
+              const timer = setInterval(() => {
+                progress += 2;
+                bar.style.width = (progress * 6.25) + '%';
+                count.textContent = `${progress} / 16 VALID (${Math.round(progress * 6.25)}%)`;
+                if (progress >= 16) {
+                  clearInterval(timer);
+                  count.textContent = '16 / 16 VALID (100%)';
+                }
+              }, 80);
+            });
+          }
+        }
       }
     ];
 
-    const stepCards = document.querySelectorAll('#stepperCards .step-card');
-    const drawerTag = document.getElementById('drawerStepTag');
-    const drawerIso = document.getElementById('drawerIsoTag');
-    const drawerTitle = document.getElementById('drawerStepTitle');
-    const drawerDesc = document.getElementById('drawerStepDesc');
-    const drawerModule = document.getElementById('drawerModule');
-    const drawerCode = document.getElementById('drawerCodePreview');
+    const pipelineNodes = document.querySelectorAll('#pipelineTrack .pipeline-node');
+    const vizStageBadge = document.getElementById('vizStageBadge');
+    const vizIsoBadge = document.getElementById('vizIsoBadge');
+    const vizRfcBadge = document.getElementById('vizRfcBadge');
+    const vizTitle = document.getElementById('vizTitle');
+    const vizDesc = document.getElementById('vizDesc');
+    const vizAlg = document.getElementById('vizAlg');
+    const vizSla = document.getElementById('vizSla');
+    const vizInvariant = document.getElementById('vizInvariant');
+    const vizTarget = document.getElementById('vizTarget');
+    const vizCodeTitle = document.getElementById('vizCodeTitle');
+    const vizSandbox = document.getElementById('vizSandbox');
+    const vizCodeSnippet = document.getElementById('vizCodeSnippet');
 
-    stepCards.forEach((card) => {
-      card.addEventListener('click', () => {
-        stepCards.forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        const idx = parseInt(card.getAttribute('data-step'), 10);
-        const data = stepData[idx];
-        if (data) {
-          drawerTag.textContent = data.tag;
-          drawerIso.textContent = data.iso;
-          drawerTitle.textContent = data.title;
-          drawerDesc.textContent = data.desc;
-          drawerModule.textContent = data.module;
-          drawerCode.textContent = data.code;
+    let currentStageIndex = 0;
+    let autoPlayTimer = null;
+    const autoPlayBtn = document.getElementById('pipelineAutoPlayBtn');
+    const playIcon = document.getElementById('pipelinePlayIcon');
+    const playText = document.getElementById('pipelinePlayText');
+
+    function selectStage(index, userInitiated = false) {
+      if (userInitiated && autoPlayTimer) {
+        stopAutoPlay();
+      }
+
+      currentStageIndex = index;
+      pipelineNodes.forEach((node, i) => {
+        const isActive = (i === index);
+        node.classList.toggle('active', isActive);
+        node.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      const s = pipelineStages[index];
+      if (!s) return;
+
+      if (vizStageBadge) vizStageBadge.textContent = s.tag;
+      if (vizIsoBadge) vizIsoBadge.textContent = s.iso;
+      if (vizRfcBadge) vizRfcBadge.textContent = s.rfc;
+      if (vizTitle) vizTitle.textContent = s.title;
+      if (vizDesc) vizDesc.textContent = s.desc;
+      if (vizAlg) vizAlg.textContent = s.alg;
+      if (vizSla) vizSla.textContent = s.sla;
+      if (vizInvariant) vizInvariant.textContent = s.invariant;
+      if (vizTarget) vizTarget.textContent = s.target;
+      if (vizCodeTitle) vizCodeTitle.textContent = s.codeTitle;
+      if (vizCodeSnippet) vizCodeSnippet.textContent = s.code;
+
+      if (vizSandbox && typeof s.renderSandbox === 'function') {
+        s.renderSandbox(vizSandbox);
+      }
+    }
+
+    pipelineNodes.forEach((node) => {
+      node.addEventListener('click', () => {
+        const idx = parseInt(node.getAttribute('data-stage'), 10);
+        selectStage(idx, true);
+      });
+
+      node.addEventListener('keydown', (e) => {
+        const idx = parseInt(node.getAttribute('data-stage'), 10);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = (idx + 1) % pipelineNodes.length;
+          pipelineNodes[next].focus();
+          selectStage(next, true);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = (idx - 1 + pipelineNodes.length) % pipelineNodes.length;
+          pipelineNodes[prev].focus();
+          selectStage(prev, true);
         }
       });
     });
+
+    function startAutoPlay() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (playIcon) playIcon.textContent = '⏹';
+      if (playText) playText.textContent = 'Pause Walkthrough';
+      if (autoPlayBtn) autoPlayBtn.style.borderColor = 'var(--brand)';
+
+      autoPlayTimer = setInterval(() => {
+        currentStageIndex = (currentStageIndex + 1) % pipelineStages.length;
+        selectStage(currentStageIndex, false);
+      }, 4000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+      if (playIcon) playIcon.textContent = '▶';
+      if (playText) playText.textContent = 'Auto-Play Walkthrough';
+      if (autoPlayBtn) autoPlayBtn.style.borderColor = '';
+    }
+
+    if (autoPlayBtn) {
+      autoPlayBtn.addEventListener('click', () => {
+        if (autoPlayTimer) {
+          stopAutoPlay();
+        } else {
+          startAutoPlay();
+        }
+      });
+    }
+
+    // Initialize first stage sandbox
+    selectStage(0, false);
 
     // ── 5. Live SOC Telemetry Terminal Stream Simulation ────────────────────
     const socBody = document.getElementById('socTerminalBody');
