@@ -25,7 +25,6 @@ export function initSharedNav(options = {}) {
               <path d="m9 12 2 2 4-4"/>
             </svg>
             CloudRDR
-            <span class="brand-badge">Academic Project</span>
           </a>
 
           <ul class="nav-links" id="mainNavLinks">
@@ -75,7 +74,7 @@ export function initSharedNav(options = {}) {
       <footer class="site-footer" role="contentinfo">
         <div class="container footer-inner">
           <div>
-            <strong>CloudRDR</strong> // Information Security, Year 3 University Capstone (ISMS, Cloud Security, Cryptography)
+            <strong>CloudRDR</strong> — Cloud Ransomware Detection &amp; Cryptographic Recovery Platform
           </div>
           <ul class="footer-links">
             <li><a href="${basePath}how-it-works.html">How It Works</a></li>
