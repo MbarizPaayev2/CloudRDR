@@ -149,7 +149,8 @@ export const api = {
    */
   async getIncidents() {
     if (CONFIG.USE_MOCK) return mockApi.getIncidents();
-    return httpRequest('/incidents');
+    const data = await httpRequest('/incidents');
+    return Array.isArray(data) ? data : (data?.incidents || []);
   },
 
   /**
@@ -159,6 +160,79 @@ export const api = {
   async getIncidentById(id) {
     if (CONFIG.USE_MOCK) return mockApi.getIncidentById(id);
     return httpRequest(`/incidents/${encodeURIComponent(id)}`);
+  },
+
+  /**
+   * Safe Containment: Trigger IAM write isolation lock
+   * @param {string} incidentId
+   */
+  async containIncident(incidentId) {
+    if (CONFIG.USE_MOCK) return { success: true, status: 'frozen' };
+    return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/contain`, {
+      method: 'POST',
+    });
+  },
+
+  /**
+   * Acknowledge alert or transition incident state
+   * @param {string} incidentId
+   * @param {string} status
+   * @param {string} [note]
+   */
+  async updateIncidentStatus(incidentId, status, note = '') {
+    if (CONFIG.USE_MOCK) return { success: true };
+    return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, note }),
+    });
+  },
+
+  /**
+   * Retrieve forensic timeline for incident
+   * @param {string} incidentId
+   */
+  async getIncidentTimeline(incidentId) {
+    if (CONFIG.USE_MOCK) return [];
+    const res = await httpRequest(`/incidents/${encodeURIComponent(incidentId)}/timeline`);
+    return res?.timeline || [];
+  },
+
+  /**
+   * Update detection thresholds at runtime
+   * @param {Object} config
+   */
+  async updateDetectionConfig(config) {
+    if (CONFIG.USE_MOCK) return { success: true, thresholds: config };
+    return httpRequest('/detection/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(config),
+    });
+  },
+
+  /**
+   * On-demand cryptographic evidence verification
+   */
+  async verifyCryptographicEvidence() {
+    if (CONFIG.USE_MOCK) return { verified: true };
+    return httpRequest('/evidence/verify', {
+      method: 'POST',
+    });
+  },
+
+  /**
+   * Promote staged restore to live storage
+   * @param {string} incidentId
+   * @param {string} jobId
+   */
+  async promoteRestore(incidentId, jobId) {
+    if (CONFIG.USE_MOCK) return { success: true };
+    return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/promote`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jobId, confirmed: true }),
+    });
   },
 
   /**

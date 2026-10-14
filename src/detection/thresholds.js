@@ -16,11 +16,16 @@ export const DEFAULT_THRESHOLDS = {
   allowlistedAccounts: [],
 };
 
+let _runtimeThresholds = null;
+
 /**
- * Retrieve active detection thresholds from configuration.
+ * Retrieve active detection thresholds from configuration or runtime override.
  * @returns {typeof DEFAULT_THRESHOLDS}
  */
 export function getThresholds() {
+  if (_runtimeThresholds) {
+    return { ..._runtimeThresholds };
+  }
   return {
     windowSeconds: cfg.detection.windowSeconds ?? DEFAULT_THRESHOLDS.windowSeconds,
     suspiciousRate: cfg.detection.suspiciousRate ?? DEFAULT_THRESHOLDS.suspiciousRate,
@@ -28,6 +33,37 @@ export function getThresholds() {
     allowlistedAccounts:
       cfg.detection.allowlistedAccounts ?? DEFAULT_THRESHOLDS.allowlistedAccounts,
   };
+}
+
+/**
+ * Update active detection thresholds at runtime.
+ * @param {Partial<typeof DEFAULT_THRESHOLDS>} updates
+ * @returns {typeof DEFAULT_THRESHOLDS}
+ */
+export function updateThresholds(updates = {}) {
+  const current = getThresholds();
+  _runtimeThresholds = {
+    windowSeconds: typeof updates.windowSeconds === 'number' && updates.windowSeconds > 0
+      ? updates.windowSeconds
+      : current.windowSeconds,
+    suspiciousRate: typeof updates.suspiciousRate === 'number' && updates.suspiciousRate >= 0 && updates.suspiciousRate <= 1
+      ? updates.suspiciousRate
+      : current.suspiciousRate,
+    ransomwareRate: typeof updates.ransomwareRate === 'number' && updates.ransomwareRate >= 0 && updates.ransomwareRate <= 1
+      ? updates.ransomwareRate
+      : current.ransomwareRate,
+    allowlistedAccounts: Array.isArray(updates.allowlistedAccounts)
+      ? updates.allowlistedAccounts
+      : current.allowlistedAccounts,
+  };
+  return { ..._runtimeThresholds };
+}
+
+/**
+ * Reset thresholds to default config (for tests).
+ */
+export function resetThresholdsForTests() {
+  _runtimeThresholds = null;
 }
 
 /**

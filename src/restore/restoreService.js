@@ -7,30 +7,48 @@
  * writes verified files back to storage, and closes resolved incidents.
  */
 
+import nodePath from 'node:path';
+import fs from 'node:fs/promises';
 import { getStorageAdapter } from '../adapters/storage/index.js';
 import { getSupabaseClient, supaQuery } from '../adapters/db/supabaseClient.js';
 import * as backup from '../contracts/backup.contract.js';
 import * as crypto from '../contracts/crypto.contract.js';
 import { verifyFileBytes } from './verifyRestore.js';
 import * as incidentService from '../response/incidentService.js';
-import { NotFoundError } from '../utils/errors.js';
+import { NotFoundError, ValidationError } from '../utils/errors.js';
 import { nowISO } from '../utils/time.js';
 import logger from '../utils/logger.js';
 
 /**
  * Start and execute a verified restore job for an incident.
+ * Decrypts files from AES-256-GCM backup, stages them in an isolated quarantine
+ * folder, verifies AEAD tags + SHA-256 baselines, and applies to storage if confirmed.
  *
  * @param {string} incidentId
+ * @param {Object} [options={}]
+ * @param {boolean} [options.stageOnly=false] When true, stages in quarantine without modifying live storage
+ * @param {boolean} [options.applyImmediately=true]
+ * @param {string} [options.quarantineDir='./data/quarantine']
  * @returns {Promise<Object>} Restore summary report
  */
-export async function startRestore(incidentId) {
+export async function startRestore(incidentId, options = {}) {
+  const { stageOnly = false, applyImmediately = true, quarantineDir = './data/quarantine' } = options;
   const db = getSupabaseClient();
   const storage = await getStorageAdapter();
 
   // 1. Fetch incident
   const incident = await incidentService.getIncident(incidentId);
-  const bucket = incident.record_json?.bucket || 'protected';
   const affectedPaths = incident.affected_paths || [];
+  let bucket = incident.record_json?.bucket || incident.bucket;
+  if (!bucket && affectedPaths.length > 0) {
+    const match = await supaQuery(
+      db.from('protected_files').select('bucket').eq('path', affectedPaths[0]).limit(1)
+    );
+    if (match?.[0]?.bucket) {
+      bucket = match[0].bucket;
+    }
+  }
+  bucket = bucket || 'protected';
 
   if (affectedPaths.length === 0) {
     logger.warn({ incidentId }, 'restoreService: no affected paths found for incident');
@@ -55,6 +73,7 @@ export async function startRestore(incidentId) {
   let validCount = 0;
   let modifiedCount = 0;
   let missingCount = 0;
+  const jobQuarantinePath = nodePath.resolve(quarantineDir, job.id);
 
   // 4. Process each affected file
   for (const path of affectedPaths) {
@@ -76,6 +95,13 @@ export async function startRestore(incidentId) {
       // Call backup service (decrypts & verifies AEAD tag)
       const { bytes, aeadVerified } = await backup.restoreFile(bucket, path, versionRef);
 
+      // Stage in quarantine folder first before touching storage
+      const stagedFilePath = nodePath.join(jobQuarantinePath, path);
+      if (bytes) {
+        await fs.mkdir(nodePath.dirname(stagedFilePath), { recursive: true });
+        await fs.writeFile(stagedFilePath, bytes);
+      }
+
       // Verify restored content against baseline hash
       const verification = verifyFileBytes({
         restoredBytes: bytes,
@@ -96,9 +122,16 @@ export async function startRestore(incidentId) {
 
       if (verification.result === 'VALID') {
         validCount++;
-        // CRITICAL: Only write back to storage if verified VALID
-        await storage.write(bucket, path, bytes);
-        logger.info({ bucket, path }, 'restoreService: file verified VALID and written back');
+        // CRITICAL: Only write back to storage if verified VALID and not stage-only
+        if (applyImmediately && !stageOnly) {
+          await storage.write(bucket, path, bytes);
+          logger.info({ bucket, path }, 'restoreService: file verified VALID and written back');
+        } else {
+          logger.info(
+            { bucket, path, stagedFilePath },
+            'restoreService: file verified VALID and staged in quarantine'
+          );
+        }
       } else if (verification.result === 'MODIFIED') {
         modifiedCount++;
         logger.error(
@@ -115,6 +148,7 @@ export async function startRestore(incidentId) {
         expectedSha256,
         restoredSha256: verification.restoredSha256,
         result: verification.result,
+        stagedPath: bytes ? stagedFilePath : null,
       });
     } catch (err) {
       modifiedCount++;
@@ -150,12 +184,17 @@ export async function startRestore(incidentId) {
       .eq('id', job.id)
   );
 
-  // 6. Set incident to resolved ONLY if 100% VALID
-  if (is100PercentValid) {
+  // 6. Set incident to resolved ONLY if 100% VALID and applied to storage
+  if (is100PercentValid && applyImmediately && !stageOnly) {
     await incidentService.updateIncidentStatus(incidentId, 'resolved', {
       resolved_at: finishedAt,
     });
     logger.info({ incidentId, jobId: job.id }, 'restoreService: incident RESOLVED (100% VALID)');
+  } else if (is100PercentValid && stageOnly) {
+    logger.info(
+      { incidentId, jobId: job.id },
+      'restoreService: restore job staged in quarantine (awaiting operator confirmation)'
+    );
   } else {
     logger.warn(
       { incidentId, validCount, total: affectedPaths.length },
@@ -173,6 +212,8 @@ export async function startRestore(incidentId) {
     modifiedCount,
     missingCount,
     totalFiles: affectedPaths.length,
+    quarantinePath: jobQuarantinePath,
+    appliedToLiveStorage: applyImmediately && !stageOnly,
   });
 
   return {
@@ -184,8 +225,90 @@ export async function startRestore(incidentId) {
     modifiedFiles: modifiedCount,
     missingFiles: missingCount,
     isFullyRestored: is100PercentValid,
+    quarantinePath: jobQuarantinePath,
+    isStaged: true,
+    isApplied: applyImmediately && !stageOnly,
     finishedAt,
     results: fileResults,
+  };
+}
+
+/**
+ * Explicitly promote and apply staged restore files to live storage after operator confirmation.
+ *
+ * @param {string} jobId
+ * @param {Object} options
+ * @param {boolean} options.confirmed Must be explicitly true
+ * @param {string} [options.actor='operator']
+ * @returns {Promise<Object>}
+ */
+export async function promoteStagedRestore(jobId, options = {}) {
+  if (options.confirmed !== true) {
+    throw new ValidationError(
+      'Explicit confirmation (confirmed: true) is required before overwriting live storage files'
+    );
+  }
+
+  const db = getSupabaseClient();
+  const storage = await getStorageAdapter();
+
+  const jobs = await supaQuery(db.from('restore_jobs').select('*').eq('id', jobId).limit(1));
+  if (!jobs || jobs.length === 0) {
+    throw new NotFoundError(`Restore job not found: ${jobId}`);
+  }
+  const job = jobs[0];
+
+  const results = await supaQuery(
+    db.from('restore_results').select('*').eq('restore_job_id', jobId).eq('result', 'VALID')
+  );
+
+  const incident = await incidentService.getIncident(job.incident_id);
+  let bucket = incident.record_json?.bucket || incident.bucket;
+  if (!bucket && results.length > 0) {
+    const match = await supaQuery(
+      db.from('protected_files').select('bucket').eq('path', results[0].path).limit(1)
+    );
+    if (match?.[0]?.bucket) {
+      bucket = match[0].bucket;
+    }
+  }
+  bucket = bucket || 'protected';
+  const quarantineDir = nodePath.resolve('./data/quarantine', jobId);
+
+  let appliedCount = 0;
+  for (const item of results) {
+    const stagedFile = nodePath.join(quarantineDir, item.path);
+    try {
+      const data = await fs.readFile(stagedFile);
+      await storage.write(bucket, item.path, data);
+      appliedCount++;
+    } catch (err) {
+      logger.error({ path: item.path, err: err.message }, 'Failed to write staged file to live storage');
+    }
+  }
+
+  const finishedAt = nowISO();
+  await incidentService.updateIncidentStatus(job.incident_id, 'resolved', {
+    resolved_at: finishedAt,
+  });
+
+  crypto.appendAuditLog({
+    event: 'staged_restore_promoted',
+    jobId,
+    incidentId: job.incident_id,
+    appliedFiles: appliedCount,
+    actor: options.actor || 'soc-operator',
+    timestamp: finishedAt,
+  });
+
+  logger.info({ jobId, appliedCount }, 'restoreService: staged files promoted to live storage');
+
+  return {
+    success: true,
+    jobId,
+    incidentId: job.incident_id,
+    appliedFiles: appliedCount,
+    resolvedAt: finishedAt,
   };
 }
 

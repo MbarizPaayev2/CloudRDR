@@ -247,6 +247,57 @@ function openIncidentModal(incident) {
   }
   _dom.incidentModalBody.appendChild(fileListBox);
 
+  // Operational Action Controls (Containment & Alert Acknowledgment)
+  const actionsBox = document.createElement('div');
+  actionsBox.style.cssText = 'display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;';
+
+  if (incident.status === 'open') {
+    const ackBtn = document.createElement('button');
+    ackBtn.className = 'btn btn-secondary';
+    ackBtn.style.cssText = 'font-size:0.8rem;padding:6px 12px;';
+    ackBtn.textContent = 'Acknowledge Alert';
+    ackBtn.onclick = async () => {
+      try {
+        await api.updateIncidentStatus(incident.id, 'acknowledged', 'Acknowledged by SOC operator');
+        showToast(`Incident ${incident.id.slice(0, 8)} acknowledged`, 'info');
+        _dom.incidentModalBackdrop.classList.remove('show');
+        await refreshAll();
+      } catch (err) {
+        showToast(`Failed to acknowledge: ${err.message}`, 'threat');
+      }
+    };
+    actionsBox.appendChild(ackBtn);
+  }
+
+  if (incident.status !== 'frozen' && incident.status !== 'resolved') {
+    const containBtn = document.createElement('button');
+    containBtn.className = 'btn btn-danger';
+    containBtn.style.cssText = 'font-size:0.8rem;padding:6px 12px;background:var(--threat-red);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;font-weight:600;';
+    containBtn.textContent = 'Isolate Account (IAM Freeze)';
+    containBtn.onclick = () => {
+      _dom.incidentModalBackdrop.classList.remove('show');
+      openConfirmModal(
+        'Confirm Immediate Account Isolation?',
+        `This will dispatch an automated IAM deny-all write freeze for account ${incident.account_id} to halt encryption in progress. Read access for recovery will be maintained.`,
+        async () => {
+          showToast('Applying containment policy...', 'info');
+          try {
+            await api.containIncident(incident.id);
+            showToast(`Account ${incident.account_id} isolated successfully!`, 'success');
+            await refreshAll();
+          } catch (err) {
+            showToast(`Containment failed: ${err.message}`, 'threat');
+          }
+        }
+      );
+    };
+    actionsBox.appendChild(containBtn);
+  }
+
+  if (actionsBox.children.length > 0) {
+    _dom.incidentModalBody.appendChild(actionsBox);
+  }
+
   // Configure Restore Button
   if (incident.status === 'resolved') {
     _dom.modalRestoreBtn.style.display = 'none';

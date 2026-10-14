@@ -197,11 +197,19 @@ export class EncryptedBackupStore {
   }
 
   /**
-   * Clear all backup files (for tests).
+   * Clear backup files (optionally for a specific bucket).
+   * @param {string} [bucket]
    */
-  clear() {
+  clear(bucket = null) {
     try {
-      fsSync.rmSync(this.baseDir, { recursive: true, force: true });
+      if (bucket) {
+        const target = path.join(this.baseDir, bucket);
+        if (fsSync.existsSync(target)) {
+          fsSync.rmSync(target, { recursive: true, force: true });
+        }
+      } else {
+        fsSync.rmSync(this.baseDir, { recursive: true, force: true });
+      }
     } catch {
       // ignore
     }

@@ -26,6 +26,7 @@ import { incidentRoutes } from './routes/incidents.js';
 import { restoreRoutes } from './routes/restore.js';
 import { dashboardRoutes } from './routes/dashboard.js';
 import { authRoutes, extractSessionToken } from './routes/auth.js';
+import { telemetryRoutes } from './routes/telemetry.js';
 import { validateSession } from '../auth/authService.js';
 
 /**
@@ -153,6 +154,7 @@ export async function buildServer(options = {}) {
   await app.register(detectionRoutes);
   await app.register(incidentRoutes);
   await app.register(restoreRoutes);
+  await app.register(telemetryRoutes);
   await app.register(dashboardRoutes);
 
   return app;

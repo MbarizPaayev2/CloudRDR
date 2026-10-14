@@ -132,6 +132,13 @@ export class AuditLog {
   clear() {
     this.entries = [];
     this._initialized = false;
+    if (this.logFilePath && fsSync.existsSync(this.logFilePath)) {
+      try {
+        fsSync.unlinkSync(this.logFilePath);
+      } catch {
+        // ignore
+      }
+    }
   }
 }
 

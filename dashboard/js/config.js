@@ -25,7 +25,7 @@ const DEFAULTS = {
   API_BASE_URL: defaultOrigin,
   API_KEY: 'dev-secret-key-12345',
   POLL_INTERVAL_MS: 5000,
-  USE_MOCK: true, // Default to true so demo opens immediately with full story
+  USE_MOCK: false, // Connect directly to real Fastify backend APIs
   THEME: 'dark',
   BUCKET_NAME: 'protected',
 };

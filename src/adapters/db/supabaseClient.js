@@ -39,42 +39,48 @@ const _memoryDb = {
   user_sessions: [],
 };
 
-// Attempt to load persisted local auth data if available
+let _isTestMode = process.env.NODE_ENV === 'test';
+
+// Attempt to load persisted local data if available
 try {
+  const dbStorePath = path.resolve(process.cwd(), 'data', 'db-storage.json');
+  if (fs.existsSync(dbStorePath)) {
+    const raw = fs.readFileSync(dbStorePath, 'utf8');
+    const parsed = JSON.parse(raw);
+    for (const key of Object.keys(parsed)) {
+      if (Array.isArray(parsed[key])) {
+        _memoryDb[key] = parsed[key];
+      }
+    }
+  }
+
+  // Backwards compatibility with users-storage.json
   const authStorePath = path.resolve(process.cwd(), 'data', 'users-storage.json');
   if (fs.existsSync(authStorePath)) {
     const raw = fs.readFileSync(authStorePath, 'utf8');
     const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed.internal_users)) _memoryDb.internal_users = parsed.internal_users;
-    if (Array.isArray(parsed.user_sessions)) _memoryDb.user_sessions = parsed.user_sessions;
+    if (Array.isArray(parsed.internal_users) && _memoryDb.internal_users.length === 0) {
+      _memoryDb.internal_users = parsed.internal_users;
+    }
+    if (Array.isArray(parsed.user_sessions) && _memoryDb.user_sessions.length === 0) {
+      _memoryDb.user_sessions = parsed.user_sessions;
+    }
   }
 } catch {
   // Non-fatal fallback
 }
 
-function _persistAuthStorageIfApplicable(tableName) {
-  if (tableName === 'internal_users' || tableName === 'user_sessions') {
-    try {
-      const dataDir = path.resolve(process.cwd(), 'data');
-      if (!fs.existsSync(dataDir)) {
-        fs.mkdirSync(dataDir, { recursive: true });
-      }
-      const authStorePath = path.join(dataDir, 'users-storage.json');
-      fs.writeFileSync(
-        authStorePath,
-        JSON.stringify(
-          {
-            internal_users: _memoryDb.internal_users || [],
-            user_sessions: _memoryDb.user_sessions || [],
-          },
-          null,
-          2
-        ),
-        'utf8'
-      );
-    } catch {
-      // Non-fatal
+function _persistAuthStorageIfApplicable(_tableName) {
+  if (_isTestMode) return;
+  try {
+    const dataDir = path.resolve(process.cwd(), 'data');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
     }
+    const dbStorePath = path.join(dataDir, 'db-storage.json');
+    fs.writeFileSync(dbStorePath, JSON.stringify(_memoryDb, null, 2), 'utf8');
+  } catch {
+    // Non-fatal
   }
 }
 
@@ -299,6 +305,7 @@ export function _setClientForTests(client) {
  * @returns {void}
  */
 export function _resetClientForTests() {
+  _isTestMode = true;
   _client = null;
   for (const k of Object.keys(_memoryDb)) {
     _memoryDb[k] = [];

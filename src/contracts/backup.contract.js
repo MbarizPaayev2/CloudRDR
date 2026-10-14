@@ -59,9 +59,10 @@ export function _setBackupProviderForTests(fn) {
 }
 
 /**
- * Clear test backup store.
+ * Clear test backup store (optionally for a specific bucket).
+ * @param {string} [bucket]
  */
-export function _resetBackupStoreForTests() {
-  defaultBackupStore.clear();
+export function _resetBackupStoreForTests(bucket = null) {
+  defaultBackupStore.clear(bucket);
   _customBackupProvider = null;
 }
