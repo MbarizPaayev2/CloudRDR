@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — CloudRDR Cryptographic Defense</title>
+  <meta name="description" content="In-depth architectural walkthrough of the 6-stage autonomous ransomware detection and recovery lifecycle." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <div id="site-header-container"></div>
+
+  <main id="main-content" class="section-pad">
+    <div class="container-narrow">
+      <div style="margin-bottom:var(--space-12);">
+        <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">System Walkthrough</span>
+        <h1 style="font-size:var(--text-2xl);font-weight:600;margin-top:var(--space-2);">How CloudRDR defends cloud storage</h1>
+        <p style="font-size:var(--text-lg);margin-top:var(--space-4);">
+          A step-by-step technical guide explaining how CloudRDR detects ransomware activity, isolates attackers, and cryptographically proves data authenticity.
+        </p>
+      </div>
+
+      <!-- ── THE 6 DETAILED STAGES ────────────────────────────────────────── -->
+      <div style="display:flex;flex-direction:column;gap:var(--space-8);">
+        
+        <!-- Step 1 -->
+        <article class="panel">
+          <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);margin-bottom:4px;">STAGE 01 // IMMUTABLE BASELINE</div>
+          <h2>1. Establishing the cryptographic baseline</h2>
+          <p>
+            Before any attack occurs, every file in the protected bucket is read via streaming SHA-256 hashing without buffering the full file into server RAM. The resulting cryptographic digests are sorted deterministically and assembled into a binary Merkle tree.
+          </p>
+          <div class="panel-subtle" style="margin:var(--space-4) 0;">
+            <strong>What you will see in the demo:</strong> The Baseline Panel shows the total protected files and the 64-character Merkle root hash. In the Merkle DAG, all 16 leaves appear healthy green.
+          </div>
+        </article>
+
+        <!-- Step 2 -->
+        <article class="panel">
+          <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);margin-bottom:4px;">STAGE 02 // REAL-TIME TELEMETRY</div>
+          <h2>2. Sliding-window polling agent</h2>
+          <p>
+            A lightweight background monitor agent observes bucket storage events (file creations, modifications, and deletions) on a 10-second polling cadence. It computes rolling change counts within a 60-second sliding time window.
+          </p>
+          <div class="panel-subtle" style="margin:var(--space-4) 0;">
+            <strong>What you will see in the demo:</strong> The Detection Velocity Chart plots change rates in real time, comparing current file activity against configured threshold lines.
+          </div>
+        </article>
+
+        <!-- Step 3 -->
+        <article class="panel">
+          <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-ransomware);margin-bottom:4px;">STAGE 03 // VELOCITY TRIPWIRE</div>
+          <h2>3. Velocity and canary threshold classification</h2>
+          <p>
+            The engine evaluates the change rate (unique modified files / total files). Changes under 10% are classified as <span class="status-chip valid">NORMAL</span>, 10–30% as <span class="status-chip" style="background:var(--status-suspicious-subtle);color:var(--status-suspicious);">SUSPICIOUS</span>, and 30%+ as <span class="status-chip modified">RANSOMWARE</span>. In addition, decoy canary files (such as <code>canary/tripwire_sentinel.docx</code>) act as zero-tolerance tripwires: modifying or deleting any canary triggers an immediate ransomware verdict regardless of rate.
+          </p>
+          <div class="panel-subtle" style="margin:var(--space-4) 0;">
+            <strong>What you will see in the demo:</strong> The Verdict Badge switches to pulsing red RANSOMWARE, and the Canary Sentinel Card displays the exact timestamp the decoy was touched.
+          </div>
+        </article>
+
+        <!-- Step 4 -->
+        <article class="panel">
+          <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-frozen);margin-bottom:4px;">STAGE 04 // IMMEDIATE CONTAINMENT</div>
+          <h2>4. Sub-10s automated IAM account freeze</h2>
+          <p>
+            Upon a ransomware verdict, CloudRDR immediately attaches an IAM Deny-All write policy to the compromised cloud credentials. All write, overwrite, and delete API calls are blocked at the cloud control plane in under 10 seconds. An incident case file is generated and signed with an RFC 8032 Ed25519 asymmetric signature.
+          </p>
+          <div class="panel-subtle" style="margin:var(--space-4) 0;">
+            <strong>What you will see in the demo:</strong> The Account Status badge turns frost-blue with label <span class="status-chip frozen">FROZEN (READ-ONLY)</span> and a new case file appears in the Incidents queue.
+          </div>
+        </article>
+
+        <!-- Step 5 -->
+        <article class="panel">
+          <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);margin-bottom:4px;">STAGE 05 // TAMPER-EVIDENT AUDIT</div>
+          <h2>5. Cryptographic hash-chained audit ledger</h2>
+          <p>
+            Every security action (baseline seal, freeze policy attachment, incident sign, restore) is appended to a hash-chained audit log. Each entry embeds the SHA-256 digest of the previous entry. If an attacker gains database access and modifies a record, the subsequent block links visibly break.
+          </p>
+          <div class="panel-subtle" style="margin:var(--space-4) 0;">
+            <strong>What you will see in the demo:</strong> The Audit Log page displays linked blocks. Visitors can click "Tamper with Entry #1" to witness the cryptographic chain immediately invalidate.
+          </div>
+        </article>
+
+        <!-- Step 6 -->
+        <article class="panel">
+          <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-healthy);margin-bottom:4px;">STAGE 06 // VERIFIED RESTORE</div>
+          <h2>6. AEAD authenticated recovery and 100% verification</h2>
+          <p>
+            CloudRDR restores files from AES-256-GCM encrypted backup storage. The recovery process validates the GCM authentication tag before returning plaintext bytes. Every restored file is re-hashed with SHA-256 and matched against the pre-attack baseline. If any hash differs or tag fails, the file is rejected. The incident only transitions to resolved when 100% of files are verified.
+          </p>
+          <div class="panel-subtle" style="margin:var(--space-4) 0;">
+            <strong>What you will see in the demo:</strong> The Restore progress bar fills, leaves return to green on the Merkle tree, and a final "100% verified" banner confirms that the Merkle Root matches the original baseline.
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ── PLAIN-LANGUAGE GLOSSARY ────────────────────────────────────────── -->
+      <section style="margin-top:var(--space-16);">
+        <h2 style="margin-bottom:var(--space-6);">Plain-language security glossary</h2>
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);">
+          <div class="panel">
+            <h3>SHA-256</h3>
+            <p>A mathematical algorithm that converts any file into an exact 64-character fingerprint. If even a single byte inside the file changes, the entire fingerprint changes completely.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Merkle tree</h3>
+            <p>A hierarchical tree of hashes where pairs of file fingerprints are combined repeatedly until they form a single "Root Hash". This single root proves the integrity of thousands of files at once.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Canary (decoy) file</h3>
+            <p>A silent trap file placed inside cloud storage that legitimate staff never touch. If any process attempts to modify or delete it, the system immediately recognizes a ransomware attack.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Ed25519 digital signature</h3>
+            <p>A modern public-key cryptographic signature that proves an incident record was officially created by CloudRDR and has not been altered by an attacker.</p>
+          </div>
+
+          <div class="panel">
+            <h3>AES-256-GCM &amp; AEAD</h3>
+            <p>Authenticated Encryption with Associated Data. It encrypts backup files with military-grade 256-bit keys and includes an authentication tag that detects any unauthorized tampering before decrypting.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Hash chain</h3>
+            <p>A continuous sequence of log records where each record contains the fingerprint of the previous record. This makes it impossible to delete or rewrite past audit logs without detection.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initSharedNav } from './js/components/nav.js';
+    initSharedNav({ activePage: 'how', basePath: '' });
+  </script>
+</body>
+</html>

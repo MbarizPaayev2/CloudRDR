@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISMS Documents &amp; Governance — CloudRDR</title>
+  <meta name="description" content="Downloadable security governance and compliance documentation for the CloudRDR capstone project." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <div id="site-header-container"></div>
+
+  <main id="main-content" class="section-pad">
+    <div class="container-narrow">
+      <div style="margin-bottom:var(--space-12);">
+        <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Institutional Compliance</span>
+        <h1 style="font-size:var(--text-2xl);font-weight:600;margin-top:var(--space-2);">ISMS documents &amp; deliverables</h1>
+        <p style="font-size:var(--text-lg);margin-top:var(--space-4);">
+          Formal ISO/IEC 27001 aligned security policies, risk analyses, and operational playbooks authored for the university capstone review.
+        </p>
+      </div>
+
+      <div class="docs-list">
+        <!-- Doc 1 -->
+        <a href="#download" class="doc-item" onclick="alert('Downloading: CloudRDR_Risk_Register_ISO27001.pdf'); return false;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">ISMS-01 // RISK MANAGEMENT</div>
+            <h3 style="font-size:var(--text-lg);margin:2px 0;">Information Security Risk Register</h3>
+            <p style="font-size:var(--text-sm);margin:0;">Quantitative assessment of cloud ransomware threats, asset valuations, and STRIDE mitigation controls.</p>
+          </div>
+          <span class="btn btn-secondary btn-sm">PDF (1.2 MB) ↓</span>
+        </a>
+
+        <!-- Doc 2 -->
+        <a href="#download" class="doc-item" onclick="alert('Downloading: CloudRDR_BCP_DRP_Plan.pdf'); return false;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">ISMS-02 // CONTINUITY</div>
+            <h3 style="font-size:var(--text-lg);margin:2px 0;">Business Continuity &amp; Disaster Recovery Plan (BCP/DRP)</h3>
+            <p style="font-size:var(--text-sm);margin:0;">RTO under 15 minutes, RPO under 60 seconds, and dual-region failover recovery procedures.</p>
+          </div>
+          <span class="btn btn-secondary btn-sm">PDF (880 KB) ↓</span>
+        </a>
+
+        <!-- Doc 3 -->
+        <a href="#download" class="doc-item" onclick="alert('Downloading: CloudRDR_Incident_Response_Playbook.pdf'); return false;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">ISMS-03 // OPERATIONS</div>
+            <h3 style="font-size:var(--text-lg);margin:2px 0;">Incident Response Plan &amp; Cryo-Lock Playbook</h3>
+            <p style="font-size:var(--text-sm);margin:0;">Automated sub-10s IAM containment steps, escalation protocols, and cryptographic post-mortem procedures.</p>
+          </div>
+          <span class="btn btn-secondary btn-sm">PDF (1.5 MB) ↓</span>
+        </a>
+
+        <!-- Doc 4 -->
+        <a href="#download" class="doc-item" onclick="alert('Downloading: CloudRDR_Statement_of_Applicability.pdf'); return false;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">ISMS-04 // COMPLIANCE</div>
+            <h3 style="font-size:var(--text-lg);margin:2px 0;">Statement of Applicability (SoA)</h3>
+            <p style="font-size:var(--text-sm);margin:0;">ISO/IEC 27001:2022 Annex A control justifications, exclusions, and cryptographic key management policies.</p>
+          </div>
+          <span class="btn btn-secondary btn-sm">PDF (640 KB) ↓</span>
+        </a>
+
+        <!-- Doc 5 -->
+        <a href="#download" class="doc-item" onclick="alert('Downloading: CloudRDR_Forensics_Evidence_Policy.pdf'); return false;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">ISMS-05 // FORENSICS</div>
+            <h3 style="font-size:var(--text-lg);margin:2px 0;">Evidence &amp; Forensic Chain of Custody Policy</h3>
+            <p style="font-size:var(--text-sm);margin:0;">Ed25519 digital signature requirements and append-only hash chain audit trail specifications.</p>
+          </div>
+          <span class="btn btn-secondary btn-sm">PDF (950 KB) ↓</span>
+        </a>
+
+        <!-- Doc 6 -->
+        <a href="#download" class="doc-item" onclick="alert('Downloading: CloudRDR_Final_Capstone_Technical_Report.pdf'); return false;">
+          <div>
+            <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">ACADEMIC REPORT</div>
+            <h3 style="font-size:var(--text-lg);margin:2px 0;">Final Capstone Technical Architecture Report</h3>
+            <p style="font-size:var(--text-sm);margin:0;">Complete 50-page engineering report detailing mathematical Merkle proofs, fastify benchmarks, and attack harnesses.</p>
+          </div>
+          <span class="btn btn-primary btn-sm">PDF (4.8 MB) ↓</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initSharedNav } from './js/components/nav.js';
+    initSharedNav({ activePage: 'docs', basePath: '' });
+  </script>
+</body>
+</html>

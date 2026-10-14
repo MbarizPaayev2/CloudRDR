@@ -1,0 +1,137 @@
+/**
+ * @file site/css/tokens.css
+ * CloudRDR Design System Tokens
+ * Calm, light, minimal, modern aesthetic.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ── Light Mode Palette (Default) ────────────────────────────────────────── */
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --surface-subtle: #F2F2EE;
+  
+  --text: #16181D;
+  --text-muted: #6A6F7A;
+  --border: #E4E4DF;
+
+  /* ONE brand accent */
+  --brand: #2F4BFF;
+  --brand-hover: #223CCE;
+  --brand-subtle: rgba(47, 75, 255, 0.08);
+
+  /* Status colors — strictly reserved for status */
+  --status-healthy: #1F9D6B;
+  --status-healthy-subtle: rgba(31, 157, 107, 0.12);
+
+  --status-suspicious: #E0A100;
+  --status-suspicious-subtle: rgba(224, 161, 0, 0.12);
+
+  --status-ransomware: #D93636;
+  --status-ransomware-subtle: rgba(217, 54, 54, 0.12);
+
+  --status-frozen: #4FA3C7;
+  --status-frozen-subtle: rgba(79, 163, 199, 0.12);
+
+  /* ── Typography Families ─────────────────────────────────────────────────── */
+  --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Typography Scale */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1.0625rem; /* 17px */
+  --text-lg: 1.25rem;     /* 20px */
+  --text-xl: 1.5rem;      /* 24px */
+  --text-2xl: 2.25rem;    /* 36px - Section titles */
+  --text-hero: clamp(3rem, 6vw, 5.25rem); /* 48-84px - Hero */
+
+  /* ── Spacing Scale ───────────────────────────────────────────────────────── */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  --space-24: 6rem;    /* 96px */
+
+  /* ── Structural Radii ────────────────────────────────────────────────────── */
+  --radius-sm: 6px;    /* Controls, inputs, buttons, chips */
+  --radius-md: 12px;   /* Panels, cards, dialogs */
+  --radius-full: 9999px;
+
+  /* ── Subtle Elevation (Single soft level) ─────────────────────────────────── */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
+  --shadow-panel: 0 2px 8px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.03);
+
+  /* ── Motion Timings ──────────────────────────────────────────────────────── */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 160ms;
+  --dur-mid: 280ms;
+  --dur-slow: 480ms;
+}
+
+/* ── Dark Mode Token Overrides ────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C0E14;
+    --surface: #141822;
+    --surface-subtle: #1B2130;
+    
+    --text: #F4F6FB;
+    --text-muted: #8E95A5;
+    --border: rgba(255, 255, 255, 0.09);
+
+    --brand: #4360FF;
+    --brand-hover: #5D76FF;
+    --brand-subtle: rgba(67, 96, 255, 0.16);
+
+    --status-healthy: #27B97F;
+    --status-healthy-subtle: rgba(39, 185, 127, 0.18);
+
+    --status-suspicious: #F0B11A;
+    --status-suspicious-subtle: rgba(240, 177, 26, 0.18);
+
+    --status-ransomware: #E64545;
+    --status-ransomware-subtle: rgba(230, 69, 69, 0.22);
+
+    --status-frozen: #58B3DA;
+    --status-frozen-subtle: rgba(88, 179, 218, 0.18);
+
+    --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-panel: 0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0C0E14;
+  --surface: #141822;
+  --surface-subtle: #1B2130;
+  
+  --text: #F4F6FB;
+  --text-muted: #8E95A5;
+  --border: rgba(255, 255, 255, 0.09);
+
+  --brand: #4360FF;
+  --brand-hover: #5D76FF;
+  --brand-subtle: rgba(67, 96, 255, 0.16);
+
+  --status-healthy: #27B97F;
+  --status-healthy-subtle: rgba(39, 185, 127, 0.18);
+
+  --status-suspicious: #F0B11A;
+  --status-suspicious-subtle: rgba(240, 177, 26, 0.18);
+
+  --status-ransomware: #E64545;
+  --status-ransomware-subtle: rgba(230, 69, 69, 0.22);
+
+  --status-frozen: #58B3DA;
+  --status-frozen-subtle: rgba(88, 179, 218, 0.18);
+
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-panel: 0 8px 30px rgba(0, 0, 0, 0.5);
+}

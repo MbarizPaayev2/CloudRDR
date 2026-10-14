@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Team &amp; Governance — CloudRDR</title>
+  <meta name="description" content="Meet the cross-functional engineering team behind the CloudRDR Information Security Capstone." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <div id="site-header-container"></div>
+
+  <main id="main-content" class="section-pad">
+    <div class="container">
+      <div style="margin-bottom:var(--space-12);">
+        <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Engineering Governance</span>
+        <h1 style="font-size:var(--text-2xl);font-weight:600;margin-top:var(--space-2);">Project team &amp; responsibilities</h1>
+        <p style="font-size:var(--text-lg);margin-top:var(--space-4);">
+          Developed as a 3rd-year Information Security Capstone. Each team member owns a specialized domain of the defense pipeline.
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <!-- Role 1 -->
+        <div class="team-card">
+          <div class="team-role">Project Manager &amp; GRC</div>
+          <div class="team-name">Governance Lead</div>
+          <p style="margin-top:var(--space-3);font-size:var(--text-sm);">
+            Owns ISMS risk registers, ISO/IEC 27001 compliance mappings, Statement of Applicability (SoA), and project milestone delivery.
+          </p>
+        </div>
+
+        <!-- Role 2 -->
+        <div class="team-card">
+          <div class="team-role">Backend Engineer</div>
+          <div class="team-name">Core Systems Lead</div>
+          <p style="margin-top:var(--space-3);font-size:var(--text-sm);">
+            Engineered the Fastify HTTP REST API, background telemetry event polling loop, sliding-window rate calculation, and Supabase Postgres adapters.
+          </p>
+        </div>
+
+        <!-- Role 3 -->
+        <div class="team-card">
+          <div class="team-role">Cryptography Engineer</div>
+          <div class="team-name">Security Primitives Lead</div>
+          <p style="margin-top:var(--space-3);font-size:var(--text-sm);">
+            Designed the streaming SHA-256 pipeline, Bitcoin-style Merkle DAG root generation, RFC 8032 Ed25519 incident signing, and AES-256-GCM AEAD restore verification.
+          </p>
+        </div>
+
+        <!-- Role 4 -->
+        <div class="team-card">
+          <div class="team-role">DevOps &amp; Cloud Architect</div>
+          <div class="team-name">Infrastructure Lead</div>
+          <p style="margin-top:var(--space-3);font-size:var(--text-sm);">
+            Engineered sub-10s automated IAM bucket lockdown policies, Supabase Row-Level Security (RLS) enforcement, and CI/CD security scanning.
+          </p>
+        </div>
+
+        <!-- Role 5 -->
+        <div class="team-card">
+          <div class="team-role">Frontend &amp; UX Engineer</div>
+          <div class="team-name">Product Designer</div>
+          <p style="margin-top:var(--space-3);font-size:var(--text-sm);">
+            Built the public website, interactive SVG Merkle DAG visualizer, real-time Chart.js telemetry monitor, and accessible SOC incident response console.
+          </p>
+        </div>
+
+        <!-- Role 6 -->
+        <div class="team-card">
+          <div class="team-role">QA &amp; Security Auditor</div>
+          <div class="team-name">Adversarial Testing Lead</div>
+          <p style="margin-top:var(--space-3);font-size:var(--text-sm);">
+            Authored the 50-suite automated test harness, Strix AI penetration testing benchmarks, attack simulation harnesses, and boundary condition verification.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initSharedNav } from './js/components/nav.js';
+    initSharedNav({ activePage: 'team', basePath: '' });
+  </script>
+</body>
+</html>

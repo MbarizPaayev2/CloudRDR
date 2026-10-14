@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incident Detail — CloudRDR Demo</title>
+  <meta name="description" content="Detailed forensic case file and cryptographic restore workspace." />
+
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to incident detail</a>
+  <div id="site-header-container"></div>
+
+  <div class="demo-layout">
+    <aside class="demo-sidebar" aria-label="Demo navigation">
+      <div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;padding:0 14px;margin-bottom:8px;">
+        SOC Console
+      </div>
+      <a href="index.html" class="sidebar-nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="incidents.html" class="sidebar-nav-item active">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Incidents</span>
+      </a>
+      <a href="audit.html" class="sidebar-nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <span>Audit Log</span>
+      </a>
+    </aside>
+
+    <main class="demo-main" id="main-content" style="padding:var(--space-6);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6);">
+        <a href="incidents.html" class="btn btn-secondary btn-sm">← Back to All Incidents</a>
+      </div>
+
+      <div id="singleIncidentContainer"></div>
+    </main>
+  </div>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initSharedNav } from '../js/components/nav.js';
+    import { renderIncidentDetail } from '../js/components/incidentDetail.js';
+    import { getIncident, getIncidents } from '../js/api.js';
+
+    initSharedNav({ activePage: 'demo', basePath: '../' });
+
+    const container = document.getElementById('singleIncidentContainer');
+    const params = new URLSearchParams(window.location.search);
+    const incidentId = params.get('id');
+
+    async function load() {
+      try {
+        let inc;
+        if (incidentId) {
+          inc = await getIncident(incidentId);
+        } else {
+          const all = await getIncidents();
+          inc = all[0];
+        }
+
+        if (inc) {
+          renderIncidentDetail(container, inc, () => {
+            window.location.href = 'incidents.html';
+          });
+        } else {
+          container.innerHTML = `<div class="empty-state"><p>No incident found.</p></div>`;
+        }
+      } catch (err) {
+        container.innerHTML = `<div class="empty-state"><p>Error loading incident: ${err.message}</p></div>`;
+      }
+    }
+
+    load();
+  </script>
+</body>
+</html>

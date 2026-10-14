@@ -65,6 +65,7 @@ export async function buildServer(options = {}) {
       request.url === '/landing' ||
       request.url === '/favicon.ico' ||
       request.url.startsWith('/dashboard') ||
+      request.url.startsWith('/site') ||
       request.url.startsWith('/css') ||
       request.url.startsWith('/js') ||
       request.method === 'OPTIONS';

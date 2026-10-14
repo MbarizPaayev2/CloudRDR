@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CloudRDR — Don't just detect ransomware. Prove the recovery.</title>
+  <meta name="description" content="Cloud Ransomware Detection & Recovery: sub-10s autonomous containment, Merkle tree cryptographic proof, and AEAD verified recovery for cloud object storage." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Shared Top Navigation Header Container -->
+  <div id="site-header-container"></div>
+
+  <main id="main-content">
+    <!-- ── 1. HERO SECTION ────────────────────────────────────────────────── -->
+    <section class="hero-section bg-grid-dots">
+      <div class="container hero-grid">
+        <div>
+          <h1>Don't just detect ransomware. Prove the recovery.</h1>
+          <p class="hero-subtitle">
+            CloudRDR detects secret cloud file encryption within seconds, freezes the attacking account at the IAM control plane, and uses cryptographic Merkle trees to prove every restored file is an authentic original.
+          </p>
+          <div class="hero-cta-group">
+            <a href="demo/index.html" class="btn btn-primary">
+              Open the demo ↗
+            </a>
+            <a href="how-it-works.html" class="btn btn-secondary">
+              How it works
+            </a>
+          </div>
+        </div>
+
+        <!-- Memorable Element: Live Looping Hero Merkle Tree Illustration -->
+        <div class="hero-preview-box">
+          <div id="heroMerkleTree"></div>
+          <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:10px;">
+            Live preview: Continuous cryptographic Merkle integrity proof
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2. THE PROBLEM ─────────────────────────────────────────────────── -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="section-head">
+          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--status-ransomware);text-transform:uppercase;">The Threat</span>
+          <h2 class="section-title">What ransomware does to cloud object storage</h2>
+          <p class="section-desc">Traditional endpoint antivirus cannot protect remote buckets when cloud credentials leak.</p>
+        </div>
+
+        <div class="problems-grid">
+          <div class="problem-card">
+            <div class="problem-num">01 / Silent overwrite</div>
+            <h3>Silent blob encryption</h3>
+            <p>Attackers steal API keys or service tokens and overwrite thousands of storage objects with encrypted blobs without changing file extensions.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-num">02 / Poisoned backups</div>
+            <h3>Backup pipeline poisoning</h3>
+            <p>Scheduled cloud backups automatically sync the newly encrypted files, overwriting good historical copies before security teams notice.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-num">03 / Zero proof of integrity</div>
+            <h3>Unverifiable recovery</h3>
+            <p>When organizations pay ransoms or restore from cold archives, they have no cryptographic proof whether restored files were tampered with or truncated.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 3. HOW IT WORKS (6 STEPS HORIZONTAL STEPPER) ────────────────────── -->
+    <section class="section-pad bg-grid-dots">
+      <div class="container">
+        <div class="section-head">
+          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Architecture</span>
+          <h2 class="section-title">How the defense system works</h2>
+          <p class="section-desc">Six automated stages that close the loop from baseline capture to 100% verified restore.</p>
+        </div>
+
+        <div class="stepper-horizontal">
+          <div class="step-card">
+            <div class="step-number">Step 01</div>
+            <h3>Baseline</h3>
+            <p>Every file gets a SHA-256 fingerprint. Hashes assemble into a single Merkle root.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">Step 02</div>
+            <h3>Monitor</h3>
+            <p>A background agent continuously polls bucket event streams every 10 seconds.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">Step 03</div>
+            <h3>Detect</h3>
+            <p>Sliding 60-second window. Rate &ge;30% or touching decoy canaries trips ransomware verdict.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">Step 04</div>
+            <h3>Respond</h3>
+            <p>Attacking account is frozen read-only via cloud IAM. Incident signed with Ed25519.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">Step 05</div>
+            <h3>Audit</h3>
+            <p>All decisions enter a hash-chained ledger. Altering past blocks breaks downstream links.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">Step 06</div>
+            <h3>Restore</h3>
+            <p>AES-256-GCM backups decrypted. Incident closes only when 100% of files match baseline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 4. WHAT MAKES US DIFFERENT ────────────────────────────────────── -->
+    <section class="section-pad">
+      <div class="container">
+        <div class="section-head">
+          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">Comparison</span>
+          <h2 class="section-title">What makes CloudRDR different</h2>
+          <p class="section-desc">Comparing legacy cloud backup approaches against autonomous cryptographic defense.</p>
+        </div>
+
+        <table class="comparison-table" aria-label="Comparison between Typical Tools and CloudRDR">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 25%;">Capability</th>
+              <th scope="col" style="width: 35%;">Typical Cloud Backup Tools</th>
+              <th scope="col" style="width: 40%;" class="col-diff">CloudRDR Autonomous Defense</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Primary objective</strong></td>
+              <td>Detect and generate email alert notifications</td>
+              <td class="col-diff">Detect, freeze attacker IAM, and cryptographically prove restore</td>
+            </tr>
+            <tr>
+              <td><strong>Containment speed</strong></td>
+              <td>Hours or days waiting for manual human triage</td>
+              <td class="col-diff">Sub-10 seconds automated IAM control-plane lockdown</td>
+            </tr>
+            <tr>
+              <td><strong>Tamper detection</strong></td>
+              <td>Relies on OS file timestamps and size heuristics</td>
+              <td class="col-diff">Deterministic Merkle tree root hash calculation</td>
+            </tr>
+            <tr>
+              <td><strong>Audit log security</strong></td>
+              <td>Plaintext database records easily modified or purged</td>
+              <td class="col-diff">Hash-chained ledger signed with RFC 8032 Ed25519</td>
+            </tr>
+            <tr>
+              <td><strong>Restore guarantee</strong></td>
+              <td>Blind file overwrite with no post-restore verification</td>
+              <td class="col-diff">AES-256-GCM with AEAD tag check and 100% baseline match gate</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── 5. DEMO PREVIEW ────────────────────────────────────────────────── -->
+    <section class="section-pad bg-grid-dots">
+      <div class="container">
+        <div class="hero-preview-box" style="padding:var(--space-8);text-align:center;">
+          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--brand);text-transform:uppercase;">Interactive SOC Console</span>
+          <h2 style="font-size:var(--text-2xl);margin:var(--space-2) 0 var(--space-4) 0;">Experience the full attack narrative</h2>
+          <p style="margin:0 auto var(--space-6) auto;">
+            Launch the interactive Security Operations Center (SOC) dashboard. Witness an attack spike, watch corruption climb the Merkle tree in real time, and trigger the verified recovery.
+          </p>
+          <a href="demo/index.html" class="btn btn-primary">
+            Launch Interactive Demo ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 6. TEAM AND DOCUMENTS PREVIEW ──────────────────────────────────── -->
+    <section class="section-pad">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);">
+          <div>
+            <h3>Project Team &amp; Governance</h3>
+            <p style="margin-bottom:var(--space-4);">Developed for Year-3 Information Security by a cross-functional engineering team covering ISMS compliance, cryptography, DevOps, and testing.</p>
+            <a href="team.html" class="btn btn-secondary btn-sm">Meet the team →</a>
+          </div>
+          <div>
+            <h3>ISMS Documentation</h3>
+            <p style="margin-bottom:var(--space-4);">Complete institutional security documentation including Risk Register, BCP/DRP plans, and Incident Response Playbooks.</p>
+            <a href="docs.html" class="btn btn-secondary btn-sm">Browse documents →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer Container -->
+  <div id="site-footer-container"></div>
+
+  <!-- Shared Scripts & Hero Looping Animation -->
+  <script type="module">
+    import { initSharedNav } from './js/components/nav.js';
+    import { initMerkleTree } from './js/components/merkleTree.js';
+
+    initSharedNav({ activePage: 'home', basePath: '' });
+
+    // Memorable Element: Hero Live Looping Merkle Tree Illustration
+    const heroTreeContainer = document.getElementById('heroMerkleTree');
+    if (heroTreeContainer) {
+      const updateTree = initMerkleTree(heroTreeContainer, { compact: true });
+      
+      // Gentle loop: Calm -> 3 leaves red -> climb -> recover
+      let loopStage = 0;
+      setInterval(() => {
+        loopStage = (loopStage + 1) % 4;
+        if (loopStage === 0) {
+          // Calm
+          updateTree({
+            corruptedLeaves: new Set(),
+            currentRootHash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
+          });
+        } else if (loopStage === 1) {
+          // Attack touches canary and leaf 1
+          updateTree({
+            corruptedLeaves: new Set([0, 1]),
+            currentRootHash: '00000000_TAMPERED_0000',
+            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
+          });
+        } else if (loopStage === 2) {
+          // Corruption climbs to leaf 4 and 7
+          updateTree({
+            corruptedLeaves: new Set([0, 1, 4, 7]),
+            currentRootHash: '00000000_TAMPERED_0000',
+            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
+          });
+        } else {
+          // Recovering
+          updateTree({
+            corruptedLeaves: new Set([0]),
+            currentRootHash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+            baseline: { merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
+          });
+        }
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
