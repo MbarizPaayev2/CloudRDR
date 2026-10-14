@@ -33,7 +33,7 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
           <span class="status-chip ${incident.status === 'resolved' ? 'valid' : 'modified'}">
             ${incident.status}
           </span>
-          <button id="closeDetailBtn" class="btn btn-secondary btn-sm" aria-label="Close Case File">✕</button>
+          <button id="closeDetailBtn" class="btn btn-secondary btn-sm" aria-label="Close Case File">&times;</button>
         </div>
       </div>
 
@@ -81,7 +81,7 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
           </code>
           <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:var(--text-xs);color:var(--text-muted);">
             <span>Key ID: <strong class="mono">${incident.signing_key_id || 'ed25519-prod-key-01'}</strong></span>
-            <span style="color:var(--status-healthy);font-weight:600;">✓ VALID & UNTAMPERED</span>
+            <span style="color:var(--status-healthy);font-weight:600;">VALID &amp; UNTAMPERED</span>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
             Restore encrypted files from authenticated AES-256-GCM backups. Each recovered file is re-hashed to match its pre-attack baseline SHA-256 fingerprint.
           </p>
           <button id="runRestoreBtn" class="btn btn-primary" ${incident.status === 'resolved' ? 'disabled' : ''}>
-            ${incident.status === 'resolved' ? '✓ Incident Already Restored' : 'Start Verified Restore'}
+            ${incident.status === 'resolved' ? 'Incident Already Restored' : 'Start Verified Restore'}
           </button>
         </div>
 
@@ -177,7 +177,7 @@ export function renderIncidentDetail(containerEl, incident, onClose = () => {}) 
 
       resultsWrap.innerHTML = `
         <div style="padding:12px;background:var(--status-healthy-subtle);border:1px solid var(--status-healthy);border-radius:var(--radius-sm);color:var(--status-healthy);font-weight:600;margin:12px 0;">
-          ✓ 100% Verified — All ${total} files match baseline SHA-256 and AEAD authentication tags.
+          100% Verified — All ${total} files match baseline SHA-256 and AEAD authentication tags.
         </div>
         <div class="table-wrap">
           <table class="data-table">

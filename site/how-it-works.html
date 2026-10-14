@@ -51,7 +51,7 @@
             <div class="stage-diagram-col" id="microDiagram0">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;">Merkle Tree Assembly</span>
-                <button type="button" id="recalcMerkleBtn" style="background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.4);color:#38BDF8;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Fold Tree ⚡</button>
+                <button type="button" id="recalcMerkleBtn" style="background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.4);color:#38BDF8;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Fold Tree</button>
               </div>
               <div style="text-align:center;margin-bottom:6px;">
                 <div id="merkleRootChip" class="micro-node-chip highlight" style="display:inline-block;padding:5px 12px;border-color:#10B981;color:#10B981;font-weight:700;">
@@ -137,7 +137,7 @@
             <div class="stage-diagram-col" id="microDiagramCanary">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--status-ransomware);text-transform:uppercase;">Zero-Tolerance Tripwire</span>
-                <button type="button" id="tripCanaryBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Touch Canary 💥</button>
+                <button type="button" id="tripCanaryBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Touch Canary</button>
               </div>
               <div id="canaryBoxCard" class="canary-box">
                 <div class="canary-hazard-stripes"></div>
@@ -211,26 +211,26 @@
             <div class="stage-diagram-col" id="microDiagramChain">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--brand);text-transform:uppercase;">Hash-Chained Ledger</span>
-                <button type="button" id="tamperChainBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Tamper #02 ⚡</button>
+                <button type="button" id="tamperChainBtn" style="background:rgba(217,54,54,0.15);border:1px solid rgba(217,54,54,0.4);color:#FF8080;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Tamper #02</button>
               </div>
               <div class="chain-blocks-row">
                 <div class="chain-block-item">
                   <div style="color:var(--brand);font-weight:700;">#01 BASE</div>
                   <div style="color:#64748B;font-size:0.6rem;">h: a1b2…</div>
                 </div>
-                <span class="chain-link-icon" id="link01">➔</span>
+                <span class="chain-link-icon" id="link01">&rarr;</span>
                 <div class="chain-block-item" id="chainBlock02">
                   <div style="color:var(--brand);font-weight:700;">#02 FREEZE</div>
                   <div id="chainHash02" style="color:#64748B;font-size:0.6rem;">h: c3d4…</div>
                 </div>
-                <span class="chain-link-icon" id="link02">➔</span>
+                <span class="chain-link-icon" id="link02">&rarr;</span>
                 <div class="chain-block-item" id="chainBlock03">
                   <div style="color:var(--brand);font-weight:700;">#03 RESTORE</div>
                   <div style="color:#64748B;font-size:0.6rem;">h: e5f6…</div>
                 </div>
               </div>
               <div id="chainStatusMsg" style="margin-top:10px;font-family:var(--font-mono);font-size:0.65rem;color:#10B981;text-align:center;">
-                ✓ Chain valid: Every block incorporates prev_hash
+                Chain valid: Every block incorporates prev_hash
               </div>
             </div>
           </div>
@@ -254,7 +254,7 @@
             <div class="stage-diagram-col" id="microDiagramRestore">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                 <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--status-healthy);text-transform:uppercase;">100% AEAD Verified</span>
-                <button type="button" id="testAeadBtn" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10B981;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Verify Tags ⚡</button>
+                <button type="button" id="testAeadBtn" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10B981;font-size:0.65rem;padding:3px 8px;border-radius:4px;cursor:pointer;">Verify Tags</button>
               </div>
               <div class="aead-restore-visual">
                 <div class="aead-shield-icon" id="aeadShieldIcon">
@@ -410,15 +410,15 @@
         isCanaryTripped = !isCanaryTripped;
         if (isCanaryTripped) {
           canaryBoxCard.classList.add('tripped');
-          canaryStatusText.innerHTML = '<b style="color:#FF8080;">TRIPWIRE FIRED!</b> ➔ 0ms zero-tolerance ransomware verdict issued';
-          tripCanaryBtn.textContent = 'Reset Sentinel ↺';
+          canaryStatusText.innerHTML = '<b style="color:#FF8080;">TRIPWIRE FIRED:</b> 0ms zero-tolerance ransomware verdict issued';
+          tripCanaryBtn.textContent = 'Reset Sentinel';
           tripCanaryBtn.style.background = 'rgba(56,189,248,0.15)';
           tripCanaryBtn.style.borderColor = '#38BDF8';
           tripCanaryBtn.style.color = '#38BDF8';
         } else {
           canaryBoxCard.classList.remove('tripped');
           canaryStatusText.textContent = 'Status: Armed Sentinel (Zero modifications allowed)';
-          tripCanaryBtn.textContent = 'Touch Canary 💥';
+          tripCanaryBtn.textContent = 'Touch Canary';
           tripCanaryBtn.style.background = 'rgba(217,54,54,0.15)';
           tripCanaryBtn.style.borderColor = 'rgba(217,54,54,0.4)';
           tripCanaryBtn.style.color = '#FF8080';
@@ -443,9 +443,9 @@
           if (chainHash02) chainHash02.textContent = 'h: [MUTATED]';
           if (chainStatusMsg) {
             chainStatusMsg.style.color = '#D93636';
-            chainStatusMsg.textContent = '✗ CHAIN BROKEN: Block #03 prev_hash does not match #02!';
+            chainStatusMsg.textContent = 'CHAIN BROKEN: Block #03 prev_hash does not match #02!';
           }
-          tamperChainBtn.textContent = 'Restore Chain ↺';
+          tamperChainBtn.textContent = 'Restore Chain';
           tamperChainBtn.style.color = '#38BDF8';
           tamperChainBtn.style.borderColor = '#38BDF8';
         } else {
@@ -454,9 +454,9 @@
           if (chainHash02) chainHash02.textContent = 'h: c3d4…';
           if (chainStatusMsg) {
             chainStatusMsg.style.color = '#10B981';
-            chainStatusMsg.textContent = '✓ Chain valid: Every block incorporates prev_hash';
+            chainStatusMsg.textContent = 'Chain valid: Every block incorporates prev_hash';
           }
-          tamperChainBtn.textContent = 'Tamper #02 ⚡';
+          tamperChainBtn.textContent = 'Tamper #02';
           tamperChainBtn.style.color = '#FF8080';
           tamperChainBtn.style.borderColor = 'rgba(217,54,54,0.4)';
         }

@@ -60,16 +60,16 @@ export function openMerkleInspector(leafIndex, options = {}) {
   const aeadTag = pseudoHash(`aead_mac_128_${leafIndex}`).slice(0, 32);
 
   // Status configuration
-  let statusBadge = `<span class="status-chip valid">🟢 100% BASELINE VERIFIED</span>`;
+  let statusBadge = `<span class="status-chip valid">100% BASELINE VERIFIED</span>`;
   let entropyStatus = `<span style="color:var(--status-healthy);">Low (4.12 bits/byte · Plaintext Structured)</span>`;
   let tagStatus = `<span style="color:var(--status-healthy);font-weight:600;">AUTHENTIC (Tag matches baseline)</span>`;
 
   if (isCorrupted) {
-    statusBadge = `<span class="status-chip modified">🔴 CRYPTOGRAPHIC TAMPERING DETECTED</span>`;
+    statusBadge = `<span class="status-chip modified">CRYPTOGRAPHIC TAMPERING DETECTED</span>`;
     entropyStatus = `<span style="color:var(--status-ransomware);font-weight:700;">High (7.98 bits/byte · Ransomware Ciphertext)</span>`;
     tagStatus = `<span style="color:var(--status-ransomware);font-weight:600;">INVALID (AEAD Tag Check Failed)</span>`;
   } else if (isRestored) {
-    statusBadge = `<span class="status-chip valid" style="background:rgba(39,201,63,0.18);">🛡️ NIST AES-256-GCM AEAD RESTORED</span>`;
+    statusBadge = `<span class="status-chip valid" style="background:rgba(39,201,63,0.18);">NIST AES-256-GCM AEAD RESTORED</span>`;
   }
 
   if (!inspectorEl) {
@@ -133,7 +133,7 @@ export function openMerkleInspector(leafIndex, options = {}) {
 
         <!-- Section 3: RFC 6962 Merkle Proof Path -->
         <div class="inspector-section">
-          <div class="inspector-section-label">3. RFC 6962 Audit Proof Path (Leaf ➔ Merkle Root)</div>
+          <div class="inspector-section-label">3. RFC 6962 Audit Proof Path (Leaf &rarr; Merkle Root)</div>
           <div class="inspector-proof-steps">
             <div class="proof-step">
               <span class="proof-idx">L0</span>
@@ -147,7 +147,7 @@ export function openMerkleInspector(leafIndex, options = {}) {
               <div class="proof-content">
                 <span class="proof-tag">Sibling Pair:</span>
                 <code class="mono">${siblingHash.slice(0, 24)}...${siblingHash.slice(-8)}</code>
-                <span style="color:var(--text-muted);font-size:0.65rem;">➔ Folded Parent: ${parentHash.slice(0, 16)}...</span>
+                <span style="color:var(--text-muted);font-size:0.65rem;">&rarr; Folded Parent: ${parentHash.slice(0, 16)}...</span>
               </div>
             </div>
             <div class="proof-step">
@@ -166,7 +166,7 @@ export function openMerkleInspector(leafIndex, options = {}) {
 
       <div class="inspector-footer">
         <button id="copyProofJsonBtn" class="btn btn-secondary btn-sm" style="font-size:0.75rem;">
-          📋 Copy RFC 6962 Proof (JSON)
+          Copy RFC 6962 Proof (JSON)
         </button>
         <button id="closeInspectorDoneBtn" class="btn btn-primary btn-sm" style="font-size:0.75rem;">
           Done
@@ -212,8 +212,8 @@ export function openMerkleInspector(leafIndex, options = {}) {
       verified_at: new Date().toISOString()
     };
     navigator.clipboard.writeText(JSON.stringify(proofPayload, null, 2)).then(() => {
-      copyBtn.textContent = '✓ Proof Copied to Clipboard!';
-      setTimeout(() => { copyBtn.textContent = '📋 Copy RFC 6962 Proof (JSON)'; }, 2000);
+      copyBtn.textContent = 'Proof Copied to Clipboard';
+      setTimeout(() => { copyBtn.textContent = 'Copy RFC 6962 Proof (JSON)'; }, 2000);
     });
   });
 }

@@ -22,7 +22,7 @@ export function initHashChain(containerEl) {
           <h2 class="panel-title">Hash-Chained Audit Ledger</h2>
         </div>
         <button id="tamperEntryBtn" class="btn btn-secondary btn-sm" title="Simulate attacker modifying history">
-          ⚡ Tamper with Entry #1
+          Tamper with Entry #1
         </button>
       </div>
 
@@ -31,7 +31,7 @@ export function initHashChain(containerEl) {
       </p>
 
       <div id="tamperNotice" style="display:none;padding:12px;background:var(--status-ransomware-subtle);border:1px solid var(--status-ransomware);border-radius:var(--radius-sm);color:var(--status-ransomware);font-size:var(--text-sm);margin-bottom:16px;">
-        <strong>✕ Chain integrity broken!</strong> Entry #1 payload was altered. Previous hash pointer mismatch detected.
+        <strong>Chain integrity broken:</strong> Entry #1 payload was altered. Previous hash pointer mismatch detected.
       </div>
 
       <div class="chain-scroll-row" id="chainBlocksContainer">
@@ -59,7 +59,7 @@ export function initHashChain(containerEl) {
     }
 
     if (tamperBtn) {
-      tamperBtn.textContent = isTampered ? '✓ Restore Valid Chain' : '⚡ Tamper with Entry #1';
+      tamperBtn.textContent = isTampered ? 'Restore Valid Chain' : 'Tamper with Entry #1';
     }
 
     blocksContainer.innerHTML = blocks
@@ -86,10 +86,10 @@ export function initHashChain(containerEl) {
               Hash: <span class="mono" style="color:${isBlockTampered ? 'var(--status-ransomware)' : 'var(--brand)'};">${currentHash}</span>
             </div>
             <div style="font-size:0.7rem;margin-top:6px;color:${isBlockTampered ? 'var(--status-ransomware)' : 'var(--status-healthy)'};font-weight:600;">
-              ${isBlockTampered ? '✕ LINK INVALID' : '✓ ED25519 VERIFIED'}
+              ${isBlockTampered ? 'LINK INVALID' : 'ED25519 VERIFIED'}
             </div>
           </div>
-          ${idx < blocks.length - 1 ? `<span class="chain-link-arrow" style="color:${isBlockTampered ? 'var(--status-ransomware)' : 'var(--text-muted)'};">→</span>` : ''}
+          ${idx < blocks.length - 1 ? `<span class="chain-link-arrow" style="color:${isBlockTampered ? 'var(--status-ransomware)' : 'var(--text-muted)'};">&rarr;</span>` : ''}
         `;
       })
       .join('');

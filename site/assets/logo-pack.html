@@ -26,41 +26,41 @@
 </head>
 <body>
 
-  <a href="../index.html" class="nav-back">← Əsas Səhifəyə Qayıt</a>
-  <h2>CloudRDR — Rəsmi İngiliscə Loqo Paketi (4K PNG)</h2>
-  <p class="hint">İstədiyiniz şəklin üzərinə <b>Sağ Klik ➔ "Copy image"</b> edib birbaşa Word/PowerPoint-ə yapışdıra və ya <b>.PNG</b> kimi endirə bilərsiniz.</p>
+  <a href="../index.html" class="nav-back">&larr; Back to Overview</a>
+  <h2>CloudRDR — Official High-Resolution Logo Pack (4K PNG)</h2>
+  <p class="hint">Right-click any logo and select <b>"Copy image"</b> to paste directly into documents and slide decks, or click below to download as high-resolution PNG.</p>
 
-  <!-- 1. ŞƏFFAF FONLU PNG (AÇIQ SƏNƏDLƏR ÜÇÜN) -->
+  <!-- 1. TRANSPARENT PNG (LIGHT DOCUMENTS) -->
   <div class="box">
-    <h3>1. Şəffaf Fonlu PNG (Word / PDF Sənədləri Üçün)</h3>
+    <h3>1. Transparent PNG (Light Documents &amp; Reports)</h3>
     <div class="checker"><img id="png-trans-light" alt="CloudRDR Transparent Light PNG" /></div>
-    <a id="dl-trans-light" class="dl" download="CloudRDR_Logo_Transparent_Light.png">⬇ Şəffaf PNG Yüklə (3200×960 px)</a>
+    <a id="dl-trans-light" class="dl" download="CloudRDR_Logo_Transparent_Light.png">Download Transparent PNG (3200&times;960 px)</a>
   </div>
 
-  <!-- 2. AĞ FONLU PNG -->
+  <!-- 2. SOLID WHITE PNG -->
   <div class="box">
-    <h3>2. Ağ Fonlu PNG (Rəsmi Hesabatlar Üçün)</h3>
+    <h3>2. Solid White Background PNG (Formal Print &amp; PDFs)</h3>
     <img id="png-white" alt="CloudRDR White PNG" />
-    <a id="dl-white" class="dl" download="CloudRDR_Logo_White.png">⬇ Ağ Fonlu PNG Yüklə (3200×960 px)</a>
+    <a id="dl-white" class="dl" download="CloudRDR_Logo_White.png">Download White Background PNG (3200&times;960 px)</a>
   </div>
 
-  <!-- 3. TÜND FONLU PNG (DASHBOARD VƏ SLAYDLAR ÜÇÜN) -->
+  <!-- 3. DARK BACKGROUND PNG -->
   <div class="box">
-    <h3>3. Tünd Fonlu PNG (Dashboard və Təqdimat Üçün)</h3>
+    <h3>3. Dark Background PNG (Terminal &amp; Presentation Decks)</h3>
     <img id="png-dark" alt="CloudRDR Dark PNG" />
-    <a id="dl-dark" class="dl" download="CloudRDR_Logo_Dark.png">⬇ Tünd Fonlu PNG Yüklə (3200×960 px)</a>
+    <a id="dl-dark" class="dl" download="CloudRDR_Logo_Dark.png">Download Dark Background PNG (3200&times;960 px)</a>
   </div>
 
-  <!-- 4. ŞƏFFAF FONLU PNG (TÜND SLAYDLAR ÜÇÜN) -->
+  <!-- 4. TRANSPARENT DARK MODE PNG -->
   <div class="box">
-    <h3>4. Şəffaf Fonlu Tünd Rejim PNG (Tünd Slaydlar və Veb Üçün)</h3>
+    <h3>4. Transparent PNG (Dark Mode UI &amp; Web)</h3>
     <div style="background:#090D16; padding:10px; border-radius:10px;"><img id="png-trans-dark" alt="CloudRDR Transparent Dark PNG" /></div>
-    <a id="dl-trans-dark" class="dl" download="CloudRDR_Logo_Transparent_Dark.png">⬇ Tünd Rejim Şəffaf PNG Yüklə (3200×960 px)</a>
+    <a id="dl-trans-dark" class="dl" download="CloudRDR_Logo_Transparent_Dark.png">Download Dark Mode Transparent PNG (3200&times;960 px)</a>
   </div>
 
-  <!-- Gizli SVG Şablonları -->
+  <!-- Hidden SVG Templates -->
   <div style="display:none;">
-    <!-- AÇIQ VERSİYA -->
+    <!-- LIGHT VERSION -->
     <svg id="svg-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="3200" height="960">
       <defs>
         <linearGradient id="tfL" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#0284C7"/></linearGradient>
@@ -90,7 +90,7 @@
       </g>
     </svg>
 
-    <!-- TÜND VERSİYA -->
+    <!-- DARK VERSION -->
     <svg id="svg-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="3200" height="960">
       <defs>
         <linearGradient id="dBg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0B1120"/><stop offset="100%" stop-color="#060911"/></linearGradient>
@@ -141,20 +141,20 @@
     }
 
     window.onload = function() {
-      // 1. Ağ fonlu PNG
+      // 1. Light background PNG
       const svgWhite = document.getElementById('svg-light');
       renderToPNG(svgWhite, 'png-white', 'dl-white');
 
-      // 2. Şəffaf fonlu PNG (Açıq sənədlər üçün)
+      // 2. Transparent light PNG
       const svgTransLight = svgWhite.cloneNode(true);
       svgTransLight.querySelector('#bg-light').remove();
       renderToPNG(svgTransLight, 'png-trans-light', 'dl-trans-light');
 
-      // 3. Tünd fonlu PNG
+      // 3. Solid dark PNG
       const svgDark = document.getElementById('svg-dark');
       renderToPNG(svgDark, 'png-dark', 'dl-dark');
 
-      // 4. Şəffaf fonlu PNG (Tünd slaydlar üçün)
+      // 4. Transparent dark PNG
       const svgTransDark = svgDark.cloneNode(true);
       svgTransDark.querySelector('#bg-dark').remove();
       renderToPNG(svgTransDark, 'png-trans-dark', 'dl-trans-dark');

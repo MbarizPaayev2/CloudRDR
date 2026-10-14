@@ -30,11 +30,12 @@
             CloudRDR detects secret cloud file encryption within seconds, freezes the attacking account at the IAM control plane, and uses cryptographic Merkle trees to prove every restored file is an authentic original.
           </p>
           <div class="hero-cta-group hero-animate-cta">
-            <button type="button" id="startPresentationTourBtn" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
-              <span>🎬</span> <span>Start 45s Presentation Tour</span>
+            <button type="button" id="startPresentationTourBtn" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>Start 45s Presentation Tour</span>
             </button>
             <a href="demo/index.html" class="btn btn-secondary">
-              Open the demo ↗
+              Open the demo
             </a>
             <a href="how-it-works.html" class="btn btn-secondary">
               How it works
@@ -340,7 +341,7 @@
                 STREAM ACTIVE
               </span>
               <button type="button" id="triggerSocSpikeBtn" class="hero-pill-btn" style="background:#D93636;color:#FFF;border-color:#D93636;font-size:0.68rem;">
-                Simulate Attack Event ⚡
+                Simulate Attack Event
               </button>
             </div>
           </div>
@@ -352,7 +353,7 @@
                 <span class="soc-incident-pulse-dot"></span>
                 <span>CRITICAL ALERT // INCIDENT #CR-8032 GENERATED</span>
               </div>
-              <button type="button" id="dismissIncidentCardBtn" class="soc-incident-btn dismiss" title="Acknowledge Alert" aria-label="Acknowledge and dismiss incident alert">Dismiss ✕</button>
+              <button type="button" id="dismissIncidentCardBtn" class="soc-incident-btn dismiss" title="Acknowledge Alert" aria-label="Acknowledge and dismiss incident alert">Dismiss</button>
             </div>
             <div class="soc-incident-grid">
               <div class="soc-incident-field">
@@ -373,7 +374,7 @@
               </div>
             </div>
             <div class="soc-incident-actions">
-              <button type="button" id="viewIncidentProofBtn" class="soc-incident-btn" style="background:#0284C7;color:#FFF;">Inspect Cryptographic Proof 🔍</button>
+              <button type="button" id="viewIncidentProofBtn" class="soc-incident-btn" style="background:#0284C7;color:#FFF;">Inspect Cryptographic Proof</button>
             </div>
           </div>
 
@@ -736,7 +737,7 @@ await db.from('baseline_snapshots').insert({
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:8px 10px;border-radius:4px;border:1px solid var(--border);">
                 <div style="font-size:0.7rem;color:var(--text-muted);">Root: <span id="merkleRootVal" style="color:#27C93F;font-weight:600;">e3b0c44298fc1c149afb7852b855</span></div>
-                <button type="button" id="recalcMerkleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Mutate Leaf ⚡</button>
+                <button type="button" id="recalcMerkleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Mutate Leaf</button>
               </div>
             </div>
           `;
@@ -755,7 +756,7 @@ await db.from('baseline_snapshots').insert({
                 status.style.color = '#D93636';
                 root.textContent = '7f8a10bc33182a4d91a1820491ab';
                 root.style.color = '#D93636';
-                btn.textContent = 'Restore Baseline ↺';
+                btn.textContent = 'Restore Baseline';
               } else {
                 leaf0.textContent = 'a4f1..';
                 leaf0.parentElement.style.borderColor = '#27C93F';
@@ -763,7 +764,7 @@ await db.from('baseline_snapshots').insert({
                 status.style.color = '#27C93F';
                 root.textContent = 'e3b0c44298fc1c149afb7852b855';
                 root.style.color = '#27C93F';
-                btn.textContent = 'Mutate Leaf ⚡';
+                btn.textContent = 'Mutate Leaf';
               }
             });
           }
@@ -805,7 +806,7 @@ await db.from('change_events').insert(changes.map(c => ({
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:8px 10px;border-radius:4px;border:1px solid var(--border);">
                 <span id="monitorEventStatus" style="font-size:0.7rem;color:var(--text-muted);">Delta: 0 events in current window</span>
-                <button type="button" id="emitChangeEventBtn" style="background:var(--surface-subtle);color:var(--text);border:1px solid var(--border);padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Simulate Write Event ⚡</button>
+                <button type="button" id="emitChangeEventBtn" style="background:var(--surface-subtle);color:var(--text);border:1px solid var(--border);padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Simulate Write Event</button>
               </div>
             </div>
           `;
@@ -861,7 +862,7 @@ const verdict = canaryTripped || rate >= 0.30
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:6px 10px;border-radius:4px;border:1px solid var(--border);">
                 <span style="font-size:0.68rem;color:var(--text-muted);">Decoy: .canary/salary.xlsx</span>
-                <button type="button" id="tripCanaryBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Trip Canary Decoy ⚡</button>
+                <button type="button" id="tripCanaryBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Trip Canary Decoy</button>
               </div>
             </div>
           `;
@@ -988,7 +989,7 @@ ledger.push({ index, hash, prevHash, data });`,
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:6px 10px;border-radius:4px;border:1px solid var(--border);">
                 <span style="font-size:0.68rem;color:var(--text-muted);">Tamper test demo:</span>
-                <button type="button" id="tamperChainBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Tamper Block #1 ⚡</button>
+                <button type="button" id="tamperChainBtn" style="background:#D93636;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Tamper Block #1</button>
               </div>
             </div>
           `;
@@ -1008,7 +1009,7 @@ ledger.push({ index, hash, prevHash, data });`,
                 b1h.style.color = '#D93636';
                 status.textContent = '▲ CHAIN BROKEN AT BLOCK #1';
                 status.style.color = '#D93636';
-                btn.textContent = 'Repair Chain ↺';
+                btn.textContent = 'Repair Chain';
               } else {
                 b1.style.borderColor = '#27C93F';
                 b2.style.borderColor = '#27C93F';
@@ -1016,7 +1017,7 @@ ledger.push({ index, hash, prevHash, data });`,
                 b1h.style.color = 'var(--text-muted)';
                 status.textContent = '● Chain Intact';
                 status.style.color = '#27C93F';
-                btn.textContent = 'Tamper Block #1 ⚡';
+                btn.textContent = 'Tamper Block #1';
               }
             });
           }
@@ -1050,7 +1051,7 @@ if (isValid) await storage.write(bucket, path, bytes);`,
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface);padding:6px 10px;border-radius:4px;border:1px solid var(--border);">
                 <div style="font-size:0.68rem;color:var(--text-muted);">Status: <b style="color:#27C93F;">Incident Ready to Close</b></div>
-                <button type="button" id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run AEAD Verify ⚡</button>
+                <button type="button" id="runRestoreCycleBtn" style="background:#2F4BFF;color:#FFF;border:none;padding:4px 8px;border-radius:3px;font-size:0.68rem;cursor:pointer;">Re-Run AEAD Verify</button>
               </div>
             </div>
           `;
@@ -1271,18 +1272,18 @@ if (isValid) await storage.write(bucket, path, bytes);`,
       // Engage red laser hazard border on terminal
       socContainer?.classList.add('threat-spike-laser');
 
-      appendSocLog('ALERT', 'alert', '⚠️ THREAT SPIKE: High-frequency PUT requests detected from account "svc-backup-agent"', 'alert');
+      appendSocLog('ALERT', 'alert', 'THREAT SPIKE: High-frequency PUT requests detected from account "svc-backup-agent"', 'alert');
       
       setTimeout(() => {
-        appendSocLog('CANARY', 'alert', '🚨 TRIPWIRE TRIGGERED: Object ".canary/decoy_tokens.docx" modified! Instant RANSOMWARE verdict!', 'canary');
+        appendSocLog('CANARY', 'alert', 'TRIPWIRE TRIGGERED: Object ".canary/decoy_tokens.docx" modified! Instant RANSOMWARE verdict!', 'canary');
       }, 350);
 
       setTimeout(() => {
-        appendSocLog('RESPONSE', 'alert', '🔒 IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-backup-agent" [8.2s SLA]', 'alert');
+        appendSocLog('RESPONSE', 'alert', 'IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-backup-agent" [8.2s SLA]', 'alert');
       }, 750);
 
       setTimeout(() => {
-        appendSocLog('CRYPTO', 'crypto', '🔏 Ed25519 SIGNATURE: Incident record signed with key ID "ed25519-v1" (RFC 8032)', 'crypto');
+        appendSocLog('CRYPTO', 'crypto', 'Ed25519 SIGNATURE: Incident record signed with key ID "ed25519-v1" (RFC 8032)', 'crypto');
         // Reveal Incident Alert Popover Card inside terminal
         if (incidentCard) {
           incidentCard.style.display = 'block';
@@ -1291,11 +1292,11 @@ if (isValid) await storage.write(bucket, path, bytes);`,
       }, 1200);
 
       setTimeout(() => {
-        appendSocLog('RESTORE', 'restore', '🛡️ AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED (100%)', 'restore');
+        appendSocLog('RESTORE', 'restore', 'AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED (100%)', 'restore');
       }, 1800);
 
       setTimeout(() => {
-        appendSocLog('AUDIT', 'crypto', '⛓️ IMMUTABLE CHAIN: Audit block #043 appended with SHA-256 hash continuity', 'crypto');
+        appendSocLog('AUDIT', 'crypto', 'IMMUTABLE CHAIN: Audit block #043 appended with SHA-256 hash continuity', 'crypto');
       }, 2300);
 
       // Trigger Merkle tree attack scenario in sync
@@ -1359,8 +1360,8 @@ if (isValid) await storage.write(bucket, path, bytes);`,
         }, null, 2);
         appendSocLog('API', 'crypto', `<pre class="soc-log-json">${baselineJson}</pre>`, 'crypto');
       } else if (cmd === 'verify-merkle-proof' || cmd === 'merkle') {
-        appendSocLog('CRYPTO', 'crypto', '🔬 RFC 6962 AUDIT PATH: Leaf #0 -> Pair(L0, L1) -> Pair(H01, H23) -> ROOT', 'crypto');
-        appendSocLog('CRYPTO', 'crypto', '✓ Cryptographic Proof: e3b0c442...7852b855 (100% INVARIANT MATCH)', 'crypto');
+        appendSocLog('CRYPTO', 'crypto', 'RFC 6962 AUDIT PATH: Leaf #0 -> Pair(L0, L1) -> Pair(H01, H23) -> ROOT', 'crypto');
+        appendSocLog('CRYPTO', 'crypto', 'Cryptographic Proof: e3b0c442...7852b855 (100% INVARIANT MATCH)', 'crypto');
         setTimeout(() => openMerkleInspector(0, { isCorrupted: false }), 400);
       } else if (cmd === 'help') {
         const helpText = `Available commands:
