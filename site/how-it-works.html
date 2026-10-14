@@ -16,23 +16,6 @@
   <a href="#main-content" class="skip-to-content">Skip to main content</a>
   <div id="site-header-container"></div>
 
-  <!-- ── STICKY STEP RAIL (Breadcrumb Guide) ────────────────────────────── -->
-  <nav id="howStickyRail" class="how-sticky-rail" aria-label="Walkthrough Stages">
-    <div class="how-rail-inner">
-      <button class="how-rail-step active" data-step="0"><span class="rail-dot"></span>01 Baseline</button>
-      <span class="how-rail-arrow">➔</span>
-      <button class="how-rail-step" data-step="1"><span class="rail-dot"></span>02 Monitor</button>
-      <span class="how-rail-arrow">➔</span>
-      <button class="how-rail-step" data-step="2"><span class="rail-dot"></span>03 Detect</button>
-      <span class="how-rail-arrow">➔</span>
-      <button class="how-rail-step" data-step="3"><span class="rail-dot"></span>04 Respond</button>
-      <span class="how-rail-arrow">➔</span>
-      <button class="how-rail-step" data-step="4"><span class="rail-dot"></span>05 Audit</button>
-      <span class="how-rail-arrow">➔</span>
-      <button class="how-rail-step" data-step="5"><span class="rail-dot"></span>06 Restore</button>
-    </div>
-  </nav>
-
   <main id="main-content" class="section-pad">
     <div class="container" style="max-width:1060px;">
       <div style="margin-bottom:var(--space-10);">
@@ -349,23 +332,11 @@
       }, { passive: true });
     });
 
-    // ── 2. Sticky Rail Navigation & Smooth Scroll ────────────────────────────
-    const railButtons = document.querySelectorAll('#howStickyRail .how-rail-step');
+    // ── 2. Scroll Sync: Connected Beam Fill & Active Stage Pins ──────────────
     const stageItems = document.querySelectorAll('.how-stage-item');
     const beamFill = document.getElementById('timelineBeamFill');
     const timelineContainer = document.getElementById('timelineContainer');
 
-    railButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const idx = btn.getAttribute('data-step');
-        const target = document.getElementById(`stage-${idx}`);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
-    });
-
-    // ── 3. Scroll Sync: Connected Beam Fill & Active Stage Pins ──────────────
     function updateBeamProgress() {
       if (!timelineContainer || !beamFill) return;
       const rect = timelineContainer.getBoundingClientRect();
@@ -388,10 +359,6 @@
 
       stageItems.forEach((stage, idx) => {
         stage.classList.toggle('active', idx === activeIdx);
-      });
-
-      railButtons.forEach((btn, idx) => {
-        btn.classList.toggle('active', idx === activeIdx);
       });
     }
 
