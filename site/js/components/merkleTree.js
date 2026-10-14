@@ -16,27 +16,21 @@ export function initMerkleTree(containerEl, options = {}) {
   if (!containerEl) return;
 
   const isCompact = options.compact || false;
-  const width = isCompact ? 500 : 780;
-  const height = isCompact ? 220 : 280;
+  const width = isCompact ? 540 : 780;
+  const height = isCompact ? 230 : 280;
 
   // 16 Leaves (Level 0) up to Root (Level 4)
-  // Levels:
-  // L4: Root (1 node)
-  // L3: 2 nodes
-  // L2: 4 nodes
-  // L1: 8 nodes
-  // L0: 16 leaves
   const leavesCount = 16;
   const nodes = [];
   const links = [];
 
-  // Generate hierarchy coordinates
+  // Generate hierarchy coordinates with generous vertical breathing room
   const levelHeights = [
-    height - 35, // L0 Leaves
-    height - 95, // L1
-    height - 150, // L2
-    height - 200, // L3
-    25,           // L4 Root
+    height - 24, // L0 Leaves
+    height - 72, // L1 (8 nodes)
+    height - 120, // L2 (4 nodes)
+    height - 165, // L3 (2 nodes)
+    26,          // L4 Root Apex
   ];
 
   let idCounter = 0;
@@ -87,30 +81,40 @@ export function initMerkleTree(containerEl, options = {}) {
 
   const rootNode = currentLevel[0];
 
-  // Render SVG Markup
+  // Render SVG Markup with High-End Layout
   containerEl.innerHTML = `
     <div class="merkle-panel-inner">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <div>
-          <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;">
-            Merkle Root Integrity DAG (16 Leaves)
-          </span>
-          <div style="margin-top:2px;display:flex;align-items:center;gap:8px;">
-            <code id="merkleRootHashDisplay" class="mono" style="font-size:0.8rem;color:var(--text);background:var(--surface-subtle);padding:3px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);">
-              e3b0c44298fc...7852b855
-            </code>
-            <span id="merkleMatchBadge" class="status-chip valid">Matches Baseline</span>
+      <div class="merkle-panel-header">
+        <div class="merkle-header-left">
+          <div class="merkle-title-row">
+            <span class="merkle-badge-pulse" id="merkleHeaderPulse"></span>
+            <span class="merkle-header-title">Root Integrity DAG</span>
+            <span class="merkle-leaf-counter">16 Leaves</span>
+          </div>
+          <div class="merkle-hash-row">
+            <div class="merkle-hash-pill" id="copyRootBtn" role="button" tabindex="0" title="Click to copy full Merkle root SHA-256 hash" aria-label="Copy Merkle Root Hash">
+              <span class="hash-prefix">ROOT:</span>
+              <code id="merkleRootHashDisplay" class="mono">e3b0c44298fc...7852b855</code>
+              <svg class="copy-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
           </div>
         </div>
-        <button id="copyRootBtn" class="copy-hash-btn" aria-label="Copy Merkle Root Hash" title="Copy Root Digest">
-          Copy Root
-        </button>
+        <div class="merkle-header-right">
+          <span id="merkleMatchBadge" class="status-chip valid">Matches Baseline</span>
+        </div>
       </div>
 
-      <svg class="merkle-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Interactive Merkle Tree">
+      <svg class="merkle-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cryptographic Merkle Tree DAG">
         <g class="merkle-links-group"></g>
         <g class="merkle-nodes-group"></g>
       </svg>
+
+      <div class="merkle-tree-legend">
+        <span class="legend-item"><span class="legend-dot canary"></span> Canary Decoy</span>
+        <span class="legend-item"><span class="legend-dot protected"></span> 15 Protected Blobs</span>
+        <span class="legend-item"><span class="legend-dot parent"></span> Pairwise Parents</span>
+        <span class="legend-item"><span class="legend-dot apex"></span> Root Apex</span>
+      </div>
     </div>
   `;
 
@@ -142,24 +146,63 @@ export function initMerkleTree(containerEl, options = {}) {
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circle.setAttribute('cx', node.x);
     circle.setAttribute('cy', node.y);
-    const radius = node.level === 4 ? 12 : node.level === 0 ? 6 : 8;
+
+    let radius = 6;
+    let strokeColor = 'var(--status-healthy)';
+    let fillColor = 'var(--surface)';
+    let strokeWidth = '2';
+
+    if (node.level === 4) {
+      radius = 11;
+      strokeColor = 'var(--brand)';
+      strokeWidth = '2.5';
+    } else if (node.level === 0) {
+      if (node.index === 0) {
+        radius = 7;
+        strokeColor = '#FF5F56';
+        fillColor = 'rgba(255, 95, 86, 0.15)';
+      } else {
+        radius = 5.5;
+        strokeColor = 'var(--status-healthy)';
+      }
+    } else {
+      radius = 6;
+      strokeColor = 'var(--border)';
+      strokeWidth = '1.75';
+    }
+
     circle.setAttribute('r', radius);
-    circle.setAttribute('fill', 'var(--surface)');
-    circle.setAttribute('stroke', 'var(--status-healthy)');
-    circle.setAttribute('stroke-width', node.level === 4 ? '3' : '2');
+    circle.setAttribute('fill', fillColor);
+    circle.setAttribute('stroke', strokeColor);
+    circle.setAttribute('stroke-width', strokeWidth);
     circle.setAttribute('class', 'merkle-node-circle');
 
     g.appendChild(circle);
 
-    if (node.level === 4 || node.level === 0) {
+    // Only label Root Apex and Canary Leaf — completely eliminates 15 overlapping text labels!
+    if (node.level === 4) {
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       text.setAttribute('x', node.x);
-      text.setAttribute('y', node.level === 4 ? node.y - 16 : node.y + 16);
+      text.setAttribute('y', node.y - 15);
       text.setAttribute('text-anchor', 'middle');
       text.setAttribute('font-family', 'var(--font-mono)');
-      text.setAttribute('font-size', node.level === 4 ? '11px' : '9px');
-      text.setAttribute('fill', 'var(--text-muted)');
-      text.textContent = node.label;
+      text.setAttribute('font-size', '9px');
+      text.setAttribute('font-weight', '700');
+      text.setAttribute('letter-spacing', '0.04em');
+      text.setAttribute('fill', 'var(--brand)');
+      text.textContent = 'ROOT (SHA-256)';
+      g.appendChild(text);
+    } else if (node.level === 0 && node.index === 0) {
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', node.x);
+      text.setAttribute('y', node.y + 16);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-family', 'var(--font-mono)');
+      text.setAttribute('font-size', '8px');
+      text.setAttribute('font-weight', '700');
+      text.setAttribute('letter-spacing', '0.05em');
+      text.setAttribute('fill', '#FF5F56');
+      text.textContent = 'CANARY';
       g.appendChild(text);
     }
 
@@ -260,13 +303,26 @@ export function initMerkleTree(containerEl, options = {}) {
     });
   });
 
-  // Wire Copy Button
+  // Wire Copy Pill / Button
   const copyBtn = containerEl.querySelector('#copyRootBtn');
   copyBtn?.addEventListener('click', () => {
-    const state = getState();
-    navigator.clipboard.writeText(state.currentRootHash);
-    copyBtn.textContent = 'Copied!';
-    setTimeout(() => { copyBtn.textContent = 'Copy Root'; }, 1800);
+    let hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+    try {
+      const state = getState();
+      if (state && state.currentRootHash) hash = state.currentRootHash;
+    } catch {
+      // In standalone scenarios or hero, use displayed root
+      const rootDisplay = containerEl.querySelector('#merkleRootHashDisplay');
+      if (rootDisplay && rootDisplay.getAttribute('data-full-hash')) {
+        hash = rootDisplay.getAttribute('data-full-hash');
+      }
+    }
+    navigator.clipboard.writeText(hash).then(() => {
+      const codeEl = copyBtn.querySelector('code');
+      const origText = codeEl ? codeEl.textContent : '';
+      if (codeEl) codeEl.textContent = 'COPIED TO CLIPBOARD!';
+      setTimeout(() => { if (codeEl) codeEl.textContent = origText; }, 1600);
+    }).catch(() => {});
   });
 
   // Return update function
@@ -275,20 +331,27 @@ export function initMerkleTree(containerEl, options = {}) {
     currentCorrupted = corrupted;
     const hasCorrupt = corrupted.size > 0;
 
-    // Update root text
+    // Update root text & status badge
     const rootEl = containerEl.querySelector('#merkleRootHashDisplay');
     const badgeEl = containerEl.querySelector('#merkleMatchBadge');
+    const pulseEl = containerEl.querySelector('#merkleHeaderPulse');
     if (rootEl && badgeEl) {
       if (hasCorrupt) {
-        rootEl.textContent = (appState.currentRootHash || 'TAMPERED').slice(0, 20) + '...';
+        const fullHash = appState.currentRootHash || 'a8f9c1b34e62d590e8b211f49a2cd7081bc598e213ad459bc76319802d354aef';
+        rootEl.textContent = fullHash.slice(0, 16) + '...';
+        rootEl.setAttribute('data-full-hash', fullHash);
         rootEl.style.color = 'var(--status-ransomware)';
         badgeEl.className = 'status-chip modified';
         badgeEl.textContent = 'Differs from Baseline';
+        if (pulseEl) pulseEl.className = 'merkle-badge-pulse compromised';
       } else {
-        rootEl.textContent = (appState.baseline?.merkle_root || 'e3b0c442...').slice(0, 20) + '...';
+        const fullHash = appState.baseline?.merkle_root || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+        rootEl.textContent = fullHash.slice(0, 16) + '...';
+        rootEl.setAttribute('data-full-hash', fullHash);
         rootEl.style.color = 'var(--text)';
         badgeEl.className = 'status-chip valid';
         badgeEl.textContent = 'Matches Baseline';
+        if (pulseEl) pulseEl.className = 'merkle-badge-pulse';
       }
     }
 
@@ -317,9 +380,24 @@ export function initMerkleTree(containerEl, options = {}) {
       if (isAffected) {
         circle.setAttribute('stroke', 'var(--status-ransomware)');
         circle.setAttribute('fill', 'var(--status-ransomware-subtle)');
+        if (node.level === 4) {
+          circle.style.filter = 'drop-shadow(0 0 8px rgba(217, 54, 54, 0.7))';
+        }
       } else {
-        circle.setAttribute('stroke', 'var(--status-healthy)');
-        circle.setAttribute('fill', 'var(--surface)');
+        circle.style.filter = 'none';
+        if (node.level === 4) {
+          circle.setAttribute('stroke', 'var(--brand)');
+          circle.setAttribute('fill', 'var(--surface)');
+        } else if (node.level === 0 && node.index === 0) {
+          circle.setAttribute('stroke', '#FF5F56');
+          circle.setAttribute('fill', 'rgba(255, 95, 86, 0.15)');
+        } else if (node.level === 0) {
+          circle.setAttribute('stroke', 'var(--status-healthy)');
+          circle.setAttribute('fill', 'var(--surface)');
+        } else {
+          circle.setAttribute('stroke', 'var(--border)');
+          circle.setAttribute('fill', 'var(--surface)');
+        }
       }
     });
 
@@ -331,10 +409,12 @@ export function initMerkleTree(containerEl, options = {}) {
       const isCompromised = affectedNodeIds.has(link.target.id) && affectedNodeIds.has(link.source.id);
       if (isCompromised) {
         line.setAttribute('stroke', 'var(--status-ransomware)');
-        line.setAttribute('stroke-dasharray', '3,3');
+        line.setAttribute('stroke-dasharray', '4,3');
+        line.setAttribute('stroke-width', '2');
       } else {
         line.setAttribute('stroke', 'var(--border)');
         line.removeAttribute('stroke-dasharray');
+        line.setAttribute('stroke-width', '1.5');
       }
     });
   };

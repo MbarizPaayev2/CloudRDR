@@ -44,17 +44,42 @@
 
         <!-- Memorable Element: Live Looping & Interactive Hero Merkle Tree Illustration -->
         <div class="hero-preview-box hero-animate-preview">
-          <!-- Interactive Scenario Controls -->
-          <div class="hero-tree-controls" id="heroTreeControls" aria-label="Interactive Tree Scenarios">
-            <button class="hero-pill-btn active" data-scenario="loop" title="Loop continuous attack and recovery narrative">▶ Auto Narrative</button>
-            <button class="hero-pill-btn" data-scenario="calm" title="Inspect calm baseline integrity state">🟢 Calm</button>
-            <button class="hero-pill-btn" data-scenario="attack" title="Simulate canary breach and climbing corruption">🔴 Attack</button>
-            <button class="hero-pill-btn" data-scenario="restore" title="Watch AEAD verified recovery restore leaves">🛡️ Restore</button>
+          <!-- Sleek Segmented Scenario Controls -->
+          <div class="hero-tree-toolbar" id="heroTreeControls" role="toolbar" aria-label="Interactive Tree Scenarios">
+            <div class="tree-toolbar-group">
+              <button class="tree-tab-btn active" data-scenario="loop" title="Loop continuous attack and recovery narrative">
+                <span class="tab-indicator-dot"></span>
+                <span>Auto Narrative</span>
+              </button>
+            </div>
+            <div class="tree-toolbar-divider"></div>
+            <div class="tree-toolbar-group">
+              <button class="tree-tab-btn" data-scenario="calm" title="Inspect calm baseline integrity state">
+                <span class="tab-status-dot calm"></span>
+                <span>Calm</span>
+              </button>
+              <button class="tree-tab-btn" data-scenario="attack" title="Simulate canary breach and climbing corruption">
+                <span class="tab-status-dot attack"></span>
+                <span>Attack</span>
+              </button>
+              <button class="tree-tab-btn" data-scenario="restore" title="Watch AEAD verified recovery restore leaves">
+                <span class="tab-status-dot restore"></span>
+                <span>Restore</span>
+              </button>
+            </div>
           </div>
 
           <div id="heroMerkleTree"></div>
-          <div id="heroTreeStatusCaption" style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:8px;">
-            Live narrative: Continuous cryptographic Merkle integrity proof
+
+          <!-- Structured Telemetry Banner -->
+          <div class="hero-telemetry-banner" id="heroTelemetryBanner">
+            <div class="telemetry-lead">
+              <span class="telemetry-live-dot" id="heroTelemetryDot"></span>
+              <span class="telemetry-state-pill" id="heroTelemetryPill">BASELINE VERIFIED</span>
+            </div>
+            <div class="telemetry-text" id="heroTreeStatusCaption">
+              All 16 protected file fingerprints match baseline Merkle root (RFC 6962 canonical DAG).
+            </div>
           </div>
         </div>
       </div>
@@ -490,7 +515,9 @@
     // ── 3. Memorable Element: Hero Merkle Tree with Interactive Scenarios ──
     const heroTreeContainer = document.getElementById('heroMerkleTree');
     const heroStatusCaption = document.getElementById('heroTreeStatusCaption');
-    const controlButtons = document.querySelectorAll('#heroTreeControls .hero-pill-btn');
+    const heroTelemetryDot = document.getElementById('heroTelemetryDot');
+    const heroTelemetryPill = document.getElementById('heroTelemetryPill');
+    const controlButtons = document.querySelectorAll('#heroTreeControls .tree-tab-btn');
 
     if (heroTreeContainer) {
       const updateTree = initMerkleTree(heroTreeContainer, { compact: true });
@@ -502,19 +529,28 @@
           corruptedLeaves: new Set(),
           currentRootHash: BASELINE_ROOT,
           baseline: { merkle_root: BASELINE_ROOT },
-          caption: 'Baseline calm: All 16 leaf fingerprints match baseline Merkle root.'
+          pillText: 'BASELINE VERIFIED',
+          pillClass: 'telemetry-state-pill',
+          dotClass: 'telemetry-live-dot',
+          caption: 'Baseline calm: All 16 file fingerprints cryptographically verified against baseline root.'
         },
         attack: {
           corruptedLeaves: new Set([0, 1, 4, 7]),
           currentRootHash: TAMPERED_ROOT,
           baseline: { merkle_root: BASELINE_ROOT },
+          pillText: 'RANSOMWARE ALERT',
+          pillClass: 'telemetry-state-pill compromised',
+          dotClass: 'telemetry-live-dot compromised',
           caption: 'Attack detected! Decoy canary tripped and 4 leaves modified. Corruption climbs to root.'
         },
         restore: {
           corruptedLeaves: new Set([0]),
           currentRootHash: BASELINE_ROOT,
           baseline: { merkle_root: BASELINE_ROOT },
-          caption: 'Verified recovery in progress: Decrypted AES-256-GCM blocks re-verified with baseline.'
+          pillText: 'AEAD RESTORING',
+          pillClass: 'telemetry-state-pill restoring',
+          dotClass: 'telemetry-live-dot',
+          caption: 'Verified recovery in progress: Decrypted AES-256-GCM blocks re-verified against baseline.'
         }
       };
 
@@ -530,9 +566,12 @@
             currentRootHash: sc.currentRootHash,
             baseline: sc.baseline
           });
-          if (heroStatusCaption) {
-            heroStatusCaption.textContent = sc.caption;
+          if (heroStatusCaption) heroStatusCaption.textContent = sc.caption;
+          if (heroTelemetryPill) {
+            heroTelemetryPill.textContent = sc.pillText;
+            heroTelemetryPill.className = sc.pillClass;
           }
+          if (heroTelemetryDot) heroTelemetryDot.className = sc.dotClass;
         }
       }
 
@@ -548,19 +587,24 @@
           } else if (loopStage === 1) {
             // Subtle initial touch on canary
             updateTree({
-              corruptedLeaves: new Set([0, 2]),
+              corruptedLeaves: new Set([0]),
               currentRootHash: TAMPERED_ROOT,
               baseline: { merkle_root: BASELINE_ROOT }
             });
             if (heroStatusCaption) {
               heroStatusCaption.textContent = 'Canary touched: Instant ransomware tripwire verdict triggered!';
             }
+            if (heroTelemetryPill) {
+              heroTelemetryPill.textContent = 'CANARY TRIPPED';
+              heroTelemetryPill.className = 'telemetry-state-pill compromised';
+            }
+            if (heroTelemetryDot) heroTelemetryDot.className = 'telemetry-live-dot compromised';
           } else if (loopStage === 2) {
             renderScenario('attack');
           } else {
             renderScenario('restore');
           }
-        }, 3000);
+        }, 3200);
       }
 
       // Initial start
