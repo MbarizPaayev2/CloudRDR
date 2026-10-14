@@ -19,12 +19,28 @@ export function initSharedNav(options = {}) {
     headerContainer.innerHTML = `
       <header class="site-header" role="banner">
         <div class="container header-inner">
-          <a href="${basePath}index.html" class="site-brand" aria-label="CloudRDR Homepage">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--brand);">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <path d="m9 12 2 2 4-4"/>
+          <a href="${basePath}index.html" class="site-brand" aria-label="CloudRDR Homepage" style="display:flex;align-items:center;gap:8px;">
+            <svg width="24" height="24" viewBox="0 0 240 240" style="flex-shrink:0;">
+              <defs>
+                <linearGradient id="nav_tfD" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#0284C7"/></linearGradient>
+                <linearGradient id="nav_lfD" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0284C7"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
+                <linearGradient id="nav_rfD" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#10B981"/><stop offset="100%" stop-color="#047857"/></linearGradient>
+                <linearGradient id="nav_rgD" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#38BDF8"/><stop offset="50%" stop-color="#6366F1"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+              </defs>
+              <g transform="translate(120, 124)">
+                <path d="M 65,-55 A 85,85 0 1,0 75,40" fill="none" stroke="url(#nav_rgD)" stroke-width="14" stroke-linecap="round" />
+                <polygon points="84,22 86,52 58,42" fill="#10B981" />
+                <path d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25" fill="none" stroke="#E2E8F0" stroke-width="10" stroke-linecap="round" />
+                <polygon points="0,-42 42,-18 0,6 -42,-18" fill="url(#nav_tfD)" />
+                <polygon points="-42,-18 0,6 0,54 -42,30" fill="url(#nav_lfD)" />
+                <polygon points="0,6 42,-18 42,30 0,54" fill="url(#nav_rfD)" />
+                <polyline points="-20,-18 0,-30 20,-18" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" />
+                <line x1="0" y1="6" x2="0" y2="36" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" />
+                <circle cx="0" cy="6" r="6" fill="#FFFFFF" /><circle cx="0" cy="-30" r="4.5" fill="#FFFFFF" />
+                <circle cx="-20" cy="-18" r="4.5" fill="#FFFFFF" /><circle cx="20" cy="-18" r="4.5" fill="#FFFFFF" />
+              </g>
             </svg>
-            CloudRDR
+            <span>Cloud<span style="color:#38BDF8">R</span><span style="color:#0EA5E9">D</span><span style="color:#10B981">R</span></span>
           </a>
 
           <ul class="nav-links" id="mainNavLinks">
@@ -33,6 +49,7 @@ export function initSharedNav(options = {}) {
             <li><a href="${basePath}demo/index.html" class="nav-link ${activePage === 'demo' ? 'active' : ''}">Live Demo</a></li>
             <li><a href="${basePath}team.html" class="nav-link ${activePage === 'team' ? 'active' : ''}">Team</a></li>
             <li><a href="${basePath}docs.html" class="nav-link ${activePage === 'docs' ? 'active' : ''}">ISMS Docs</a></li>
+            <li><a href="${basePath}brand-kit.html" class="nav-link ${activePage === 'brand' ? 'active' : ''}">Brand Kit</a></li>
           </ul>
 
           <div class="header-actions">
