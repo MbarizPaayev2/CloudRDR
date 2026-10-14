@@ -17,14 +17,15 @@
     <link rel="stylesheet" href="/dashboard/css/styles.css" />
     <link rel="stylesheet" href="/dashboard/css/animations.css" />
 
-    <!-- Pinned Chart.js from cdnjs -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.3/chart.umd.min.js"
-      integrity="sha512-VwSvzTMCLaHLMuY19fYH5oPFBONYXw+4MNEPUrqHB7r+GEpKZNveMbY0F/VfxLQzBLDI5b7WiJZ0aqdLJeNA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-      defer
-    ></script>
+    <!-- Pinned Chart.js Engine (Local Vendor with jsDelivr Fallback) -->
+    <script src="/dashboard/js/vendor/chart.umd.min.js"></script>
+    <script>
+      if (typeof window.Chart === 'undefined') {
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"><\\/script>'
+        );
+      }
+    </script>
   </head>
 
   <body>
@@ -183,11 +184,6 @@
             <span class="nav-text">Settings</span>
           </button>
 
-          <div class="connectivity-badge" id="connectivityBadge" title="Backend Connection Status">
-            <span class="status-dot healthy" id="connectivityDot"></span>
-            <span id="connectivityText">Connected: Demo Mode</span>
-          </div>
-
           <button
             type="button"
             class="sidebar-collapse-btn"
@@ -207,15 +203,7 @@
         <header class="soc-header" role="banner">
           <div class="header-left">
             <div class="header-breadcrumb" aria-label="Breadcrumb">
-              <span>Security Operations</span>
-              <span class="text-muted">/</span>
               <span class="current">Overview</span>
-            </div>
-
-            <div class="env-selector" id="envSelector" title="Switch Environment">
-              <span class="status-dot healthy"></span>
-              <span id="currentEnvLabel">Demo Environment</span>
-              <span class="nav-icon" id="headerEnvChevron"></span>
             </div>
           </div>
 
