@@ -39,12 +39,13 @@ export async function buildServer(options = {}) {
     disableRequestLogging: !options.enableLogger,
   });
 
-  // 1. CORS - restricted to configured dashboard origin
+  // 1. CORS - support multi-IP LAN and dashboard origin
   await app.register(cors, {
-    origin: cfg.api.dashboardOrigin,
+    origin: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
+
 
   // 2. Rate limiting
   await app.register(rateLimit, {
