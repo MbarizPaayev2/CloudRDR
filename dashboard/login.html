@@ -106,10 +106,6 @@
         </a>
         <h1 class="auth-title" style="margin-top: 6px">Sign In to CloudRDR</h1>
         <p class="auth-subtitle">Cloud Ransomware Detection &amp; Recovery</p>
-        <div class="auth-badge">
-          <span class="badge-dot"></span>
-          <span>INTERNAL SECURITY PLATFORM</span>
-        </div>
       </div>
 
       <!-- Feedback alert box -->
@@ -133,7 +129,7 @@
       <form id="loginForm" class="auth-form" novalidate>
         <!-- Email field -->
         <div class="form-group">
-          <label for="emailInput" class="form-label">Internal Email Address</label>
+          <label for="emailInput" class="form-label">Email Address</label>
           <div class="form-input-wrapper">
             <span class="form-input-icon">
               <svg
@@ -217,7 +213,7 @@
 
         <!-- Submit button -->
         <button type="submit" id="submitBtn" class="btn-auth-submit">
-          <span id="btnText">Authenticate &amp; Enter SOC</span>
+          <span id="btnText">Sign In</span>
           <svg
             id="btnSpinner"
             class="anim-spin"
@@ -235,14 +231,9 @@
       </form>
 
       <div class="auth-card-footer">
-        Don't have an internal account?
-        <a href="/register" id="toRegisterLink">Register new analyst</a>
+        Don't have an account?
+        <a href="/register" id="toRegisterLink">Register</a>
       </div>
-    </div>
-
-    <div class="auth-page-foot-notes">
-      CloudRDR Enterprise Security &bull; Cryptographic Zero-Trust Baseline Verification &bull;
-      Ed25519 Signed
     </div>
 
     <script type="module">

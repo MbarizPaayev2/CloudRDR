@@ -110,6 +110,6 @@ describe('HTTP API - Authentication and Endpoints', () => {
       url: '/register',
     });
     assert.equal(resRegister.statusCode, 200);
-    assert.ok(resRegister.body.includes('Register Internal Account'));
+    assert.ok(resRegister.body.includes('Register Account'));
   });
 });
