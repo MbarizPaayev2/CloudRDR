@@ -579,8 +579,8 @@
         </div>
       </section>
 
-      <!-- ── LIVE SOC TELEMETRY TERMINAL ────────────────────────────────────── -->
-      <section class="section-pad">
+      <!-- ── INTERACTIVE 4-STAGE DEFENSE PIPELINE ──────────────────────────── -->
+      <section class="section-pad" id="pipeline-section">
         <div class="container">
           <div class="section-head reveal-on-scroll">
             <span
@@ -589,162 +589,197 @@
                 font-size: var(--text-xs);
                 color: var(--brand);
                 text-transform: uppercase;
+                letter-spacing: 0.05em;
               "
-              >Real-Time Pipeline Telemetry</span
+              >Avtomatlaşdırılmış Müdafiə Konveyeri</span
             >
-            <h2 class="section-title">Live containment &amp; recovery telemetry</h2>
+            <h2 class="section-title">Canlı Aşkarlama, Təcrid &amp; Bərpa Konveyeri</h2>
             <p class="section-desc">
-              Live event processing log from the Fastify backend, showing sliding rate calculations,
-              canary tripwires, and Ed25519 signing.
+              Hücumun başladığı andan tam bərpaya qədər olan 4 kritik təhlükəsizlik mərhələsini real vaxtda izləyin və ya canlı simulyasiyanı işə salın.
             </p>
           </div>
 
-          <div class="soc-terminal-container reveal-on-scroll">
-            <div class="soc-terminal-header">
-              <div class="soc-terminal-dots">
-                <span class="soc-dot red"></span>
-                <span class="soc-dot yellow"></span>
-                <span class="soc-dot green"></span>
+          <div class="security-pipeline-card reveal-on-scroll" id="securityPipelineCard">
+            <!-- Header bar with status and trigger buttons -->
+            <div class="pipeline-header-bar">
+              <div class="pipeline-header-titles">
+                <h3>
+                  <span>🛡️ 4-Mərhələli Avtonom Müdafiə Zənciri</span>
+                </h3>
+                <p>Kriptoqrafik bütövlük, sürət analitikası, sub-second IAM kilidi və sıfır-etibarlı bərpa</p>
               </div>
-              <div class="soc-terminal-tabs" id="socTerminalTabs">
-                <button type="button" class="soc-tab-btn active" data-filter="all">
-                  All Telemetry
-                </button>
-                <button type="button" class="soc-tab-btn" data-filter="canary">
-                  Canary Alerts
-                </button>
-                <button type="button" class="soc-tab-btn" data-filter="crypto">
-                  Crypto Proofs
-                </button>
-                <button type="button" class="soc-tab-btn" data-filter="restore">
-                  AEAD Restore
-                </button>
-              </div>
-              <div style="display: flex; align-items: center; gap: 12px">
+
+              <div class="pipeline-btn-group">
                 <span
                   style="
                     display: inline-flex;
                     align-items: center;
                     gap: 6px;
-                    color: #27c93f;
-                    font-size: 0.7rem;
+                    color: #10b981;
+                    font-size: 0.75rem;
+                    font-family: var(--font-mono);
+                    font-weight: 600;
+                    margin-right: 8px;
                   "
                 >
                   <span
                     style="
-                      width: 6px;
-                      height: 6px;
-                      background: #27c93f;
+                      width: 8px;
+                      height: 8px;
+                      background: #10b981;
                       border-radius: 50%;
-                      box-shadow: 0 0 6px #27c93f;
+                      box-shadow: 0 0 8px #10b981;
                     "
                   ></span>
-                  STREAM ACTIVE
+                  STREAM AKTİV
                 </span>
+
                 <button
                   type="button"
-                  id="triggerSocSpikeBtn"
-                  class="hero-pill-btn"
+                  id="btnRunPipelineAttack"
+                  class="btn btn-primary"
                   style="
                     background: #d93636;
-                    color: #fff;
                     border-color: #d93636;
-                    font-size: 0.68rem;
+                    color: #fff;
+                    font-size: 0.8rem;
+                    padding: 8px 16px;
+                    font-weight: 600;
                   "
                 >
-                  Simulate Attack Event
+                  ⚔️ Hücum Simulyasiyasını Başlat
+                </button>
+
+                <button
+                  type="button"
+                  id="btnResetPipeline"
+                  class="btn btn-secondary"
+                  style="font-size: 0.8rem; padding: 8px 14px;"
+                >
+                  🔄 Sıfırla
                 </button>
               </div>
             </div>
 
-            <!-- Incident Popover Alert Card -->
-            <div
-              id="socIncidentAlertCard"
-              class="soc-incident-card"
-              style="display: none"
-              role="alert"
-            >
-              <div class="soc-incident-header">
-                <div class="soc-incident-title">
-                  <span class="soc-incident-pulse-dot"></span>
-                  <span>CRITICAL ALERT // INCIDENT #CR-8032 GENERATED</span>
+            <!-- 4 Visual Stage Cards Grid -->
+            <div class="pipeline-stages-grid">
+              <!-- Stage 1: Baseline & Canary -->
+              <div class="pipeline-stage-box" id="stage1Box">
+                <div class="stage-step-num">
+                  <span>Mərhələ 01</span>
+                  <span>🛡️</span>
+                </div>
+                <div class="stage-name">Baseline &amp; Tələlər</div>
+                <span class="stage-badge-chip green" id="stage1Badge">ARMED (TƏMİZ)</span>
+                <ul class="stage-points-list">
+                  <li><span>•</span> <strong>Merkle DAG Ağacı:</strong> 50 faylın O(1) tam təsdiqi</li>
+                  <li><span>•</span> <strong>2 Decoy Tripwire:</strong> <code>canary/tripwire.docx</code></li>
+                  <li><span>•</span> <strong>Zero-Touch Decoys:</strong> Giriş anında həyəcan</li>
+                </ul>
+                <div class="stage-metric-footer">
+                  <span class="text-secondary">Vəziyyət:</span>
+                  <span class="mono font-semibold text-green" id="stage1Metric">50/50 Qorunur</span>
+                </div>
+              </div>
+
+              <!-- Stage 2: Velocity & Detection -->
+              <div class="pipeline-stage-box" id="stage2Box">
+                <div class="stage-step-num">
+                  <span>Mərhələ 02</span>
+                  <span>⚡</span>
+                </div>
+                <div class="stage-name">Sürət &amp; Aşkarlama</div>
+                <span class="stage-badge-chip green" id="stage2Badge">NORMAL İZLƏMƏ</span>
+                <ul class="stage-points-list">
+                  <li><span>•</span> <strong>Sürüşən Pəncərə:</strong> 30s intervallar üzrə analiz</li>
+                  <li><span>•</span> <strong>Təhlükə Həddi:</strong> &gt; 30% kütləvi dəyişiklik</li>
+                  <li><span>•</span> <strong>Hevristik Filtr:</strong> Adi dəyişiklikləri ayırır</li>
+                </ul>
+                <div class="stage-metric-footer">
+                  <span class="text-secondary">Dəyişiklik Sürəti:</span>
+                  <span class="mono font-semibold text-teal" id="stage2Metric">0.0% (Hədd: 30%)</span>
+                </div>
+              </div>
+
+              <!-- Stage 3: Automated IAM Freeze -->
+              <div class="pipeline-stage-box" id="stage3Box">
+                <div class="stage-step-num">
+                  <span>Mərhələ 03</span>
+                  <span>🔒</span>
+                </div>
+                <div class="stage-name">Ani Bloklama (Freeze)</div>
+                <span class="stage-badge-chip green" id="stage3Badge">STANDBY (HAZIR)</span>
+                <ul class="stage-points-list">
+                  <li><span>•</span> <strong>Sub-Second SLA:</strong> &lt; 4.0s dərhal təcrid</li>
+                  <li><span>•</span> <strong>IAM Siyasəti:</strong> Deny-All Write-Lock aktiv</li>
+                  <li><span>•</span> <strong>Ed25519 İmza:</strong> RFC 8032 HSM sübut zənciri</li>
+                </ul>
+                <div class="stage-metric-footer">
+                  <span class="text-secondary">Giriş Nəzarəti:</span>
+                  <span class="mono font-semibold text-green" id="stage3Metric">Yazma Aktiv</span>
+                </div>
+              </div>
+
+              <!-- Stage 4: Zero-Trust Recovery -->
+              <div class="pipeline-stage-box" id="stage4Box">
+                <div class="stage-step-num">
+                  <span>Mərhələ 04</span>
+                  <span>🔄</span>
+                </div>
+                <div class="stage-name">Sıfır-Etibarlı Bərpa</div>
+                <span class="stage-badge-chip green" id="stage4Badge">100% TƏSDİQLƏNİB</span>
+                <ul class="stage-points-list">
+                  <li><span>•</span> <strong>AES-256-GCM AEAD:</strong> Kriptoqrafik teq yoxlaması</li>
+                  <li><span>•</span> <strong>SHA-256 Baseline:</strong> Bayt-bayt bərabərlik</li>
+                  <li><span>•</span> <strong>Karantin Sahəsi:</strong> Təsdiqsiz fayl ötürülmür</li>
+                </ul>
+                <div class="stage-metric-footer" id="stage4MetricFooter">
+                  <span class="text-secondary">Bərpa Qapıları:</span>
+                  <span class="mono font-semibold text-green" id="stage4Metric">4/4 Valid</span>
                 </div>
                 <button
                   type="button"
-                  id="dismissIncidentCardBtn"
-                  class="soc-incident-btn dismiss"
-                  title="Acknowledge Alert"
-                  aria-label="Acknowledge and dismiss incident alert"
+                  id="btnAuthorizePipelineRestore"
+                  class="btn btn-primary"
+                  style="
+                    display: none;
+                    margin-top: 10px;
+                    width: 100%;
+                    font-size: 0.78rem;
+                    padding: 6px 12px;
+                    background: #10b981;
+                    border-color: #10b981;
+                    font-weight: 600;
+                  "
                 >
-                  Dismiss
-                </button>
-              </div>
-              <div class="soc-incident-grid">
-                <div class="soc-incident-field">
-                  <span class="field-lbl">Compromised Credential</span>
-                  <span class="field-val" style="color: #ff8080">svc-backup-agent (IAM Role)</span>
-                </div>
-                <div class="soc-incident-field">
-                  <span class="field-lbl">SLA Response Time</span>
-                  <span class="field-val" style="color: #38bdf8">8.2 seconds (&lt;10.0s SLA)</span>
-                </div>
-                <div class="soc-incident-field">
-                  <span class="field-lbl">Ed25519 Signature</span>
-                  <span class="field-val" style="color: #cbd5e1">3a9f01bc…481d (RFC 8032)</span>
-                </div>
-                <div class="soc-incident-field">
-                  <span class="field-lbl">Restore Integrity</span>
-                  <span class="field-val" style="color: #10b981"
-                    >100% AEAD VALID (AES-256-GCM)</span
-                  >
-                </div>
-              </div>
-              <div class="soc-incident-actions">
-                <button
-                  type="button"
-                  id="viewIncidentProofBtn"
-                  class="soc-incident-btn"
-                  style="background: #0284c7; color: #fff"
-                >
-                  Inspect Cryptographic Proof
+                  🛡️ Bərpanı Təsdiqlə (1-Click)
                 </button>
               </div>
             </div>
 
-            <div class="soc-terminal-body" id="socTerminalBody" role="log" aria-live="polite">
-              <!-- Dynamic stream logs injected here -->
-            </div>
-
-            <!-- Interactive CLI Input & Command Pills -->
-            <div class="soc-terminal-cli-bar">
-              <div class="soc-cli-pills" id="socCliPills">
-                <span class="soc-cli-pills-label">Quick Commands:</span>
-                <button type="button" class="soc-cli-pill" data-cmd="cloudrdr status">
-                  > cloudrdr status
-                </button>
-                <button type="button" class="soc-cli-pill" data-cmd="test-canary-tripwire">
-                  > test-canary-tripwire
-                </button>
-                <button type="button" class="soc-cli-pill" data-cmd="curl /baseline/protected">
-                  > curl /baseline/protected
-                </button>
-                <button type="button" class="soc-cli-pill" data-cmd="verify-merkle-proof">
-                  > verify-merkle-proof
-                </button>
-                <button type="button" class="soc-cli-pill" data-cmd="help">> help</button>
-                <button type="button" class="soc-cli-pill" data-cmd="clear">> clear</button>
+            <!-- Live Event Feed Cards -->
+            <div class="pipeline-journal-box">
+              <div class="pipeline-journal-header">
+                <span>🔴 Canlı Hadisə Jurnalı (Real-Time Security Feed)</span>
+                <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #10b981;">● FASTIFY BACKEND CONNECTED</span>
               </div>
-              <form id="socCliForm" class="soc-cli-input-form" autocomplete="off">
-                <span class="soc-cli-prompt">cloudrdr@edge:~$</span>
-                <input
-                  type="text"
-                  id="socCliInput"
-                  class="soc-cli-input"
-                  placeholder="Type a command (e.g. status, test-canary-tripwire, help)…"
-                  spellcheck="false"
-                />
-                <button type="submit" class="soc-cli-submit-btn">Run ↵</button>
-              </form>
+              <div class="pipeline-journal-list" id="pipelineJournalList">
+                <div class="pipeline-journal-item">
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">KRİPTO</span>
+                  <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:31:16</span>
+                  <span style="color: var(--text-secondary);">Merkle Root təsdiqləndi: <code>e3b0c442...7852b855</code> (Snapshot #1 ilə 100% uyğundur).</span>
+                </div>
+                <div class="pipeline-journal-item">
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">TƏLƏ</span>
+                  <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:31:16</span>
+                  <span style="color: var(--text-secondary);">Canary tripwire aktivdir: <code>canary/tripwire.docx</code> tam bütöv vəziyyətdədir.</span>
+                </div>
+                <div class="pipeline-journal-item">
+                  <span class="stage-badge-chip green" style="margin: 0; padding: 2px 6px;">İZLƏMƏ</span>
+                  <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">22:31:20</span>
+                  <span style="color: var(--text-secondary);">30s sürüşən pəncərə analizi: Anomaliya dərəcəsi = 0.00% &lt; 30.0% (VERDİKT: NORMAL).</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1790,301 +1825,262 @@
       // Initialize first stage sandbox
       selectStage(0, false);
 
-      // ── 5. Live SOC Telemetry Terminal Stream Simulation ────────────────────
-      const socBody = document.getElementById('socTerminalBody');
-      const socTabs = document.querySelectorAll('#socTerminalTabs .soc-tab-btn');
-      const triggerSocSpike = document.getElementById('triggerSocSpikeBtn');
-      let currentFilter = 'all';
+      // ── 5. Interactive 4-Stage Defense Pipeline Controller ───────────────────
+      const btnRunPipelineAttack = document.getElementById('btnRunPipelineAttack');
+      const btnResetPipeline = document.getElementById('btnResetPipeline');
+      const btnAuthorizePipelineRestore = document.getElementById('btnAuthorizePipelineRestore');
+      const pipelineJournalList = document.getElementById('pipelineJournalList');
 
-      const SAMPLE_LOGS = [
-        {
-          filter: 'info',
-          tag: 'INFO',
-          class: 'info',
-          text: 'Storage monitor polled bucket "protected": 16 objects indexed (0 unauthenticated changes)',
-        },
-        {
-          filter: 'crypto',
-          tag: 'CRYPTO',
-          class: 'crypto',
-          text: 'Merkle root verified: e3b0c44298fc...7852b855 matches baseline snapshot #1',
-        },
-        {
-          filter: 'canary',
-          tag: 'CANARY',
-          class: 'canary',
-          text: 'Canary tripwire active: .canary/decoy_tokens.docx integrity clean (hash matches baseline)',
-        },
-        {
-          filter: 'info',
-          tag: 'MONITOR',
-          class: 'info',
-          text: 'Sliding 60s window evaluated: change_rate = 0.00% &lt; 10.0% (VERDICT: NORMAL)',
-        },
-      ];
+      const stage1Box = document.getElementById('stage1Box');
+      const stage1Badge = document.getElementById('stage1Badge');
+      const stage1Metric = document.getElementById('stage1Metric');
 
-      function appendSocLog(tag, typeClass, message, filterType = 'info') {
-        if (!socBody) return;
-        const now = new Date().toTimeString().split(' ')[0];
-        const line = document.createElement('div');
-        line.className = 'soc-log-line';
-        line.setAttribute('data-category', filterType);
-        line.innerHTML = `
-        <span class="soc-time">[${now}]</span>
-        <span class="soc-tag ${typeClass}">${tag}</span>
-        <span>${message}</span>
-      `;
-        if (currentFilter !== 'all' && filterType !== currentFilter) {
-          line.style.display = 'none';
-        }
-        socBody.appendChild(line);
-        socBody.scrollTop = socBody.scrollHeight;
-        if (socBody.children.length > 50) {
-          socBody.removeChild(socBody.firstChild);
+      const stage2Box = document.getElementById('stage2Box');
+      const stage2Badge = document.getElementById('stage2Badge');
+      const stage2Metric = document.getElementById('stage2Metric');
+
+      const stage3Box = document.getElementById('stage3Box');
+      const stage3Badge = document.getElementById('stage3Badge');
+      const stage3Metric = document.getElementById('stage3Metric');
+
+      const stage4Box = document.getElementById('stage4Box');
+      const stage4Badge = document.getElementById('stage4Badge');
+      const stage4Metric = document.getElementById('stage4Metric');
+
+      let pipelineAttackInProgress = false;
+      let attackTimeouts = [];
+
+      function getNowTimeStr() {
+        return new Date().toTimeString().split(' ')[0];
+      }
+
+      function appendPipelineEvent(tagText, tagClass, messageText) {
+        if (!pipelineJournalList) return;
+        const item = document.createElement('div');
+        item.className = 'pipeline-journal-item';
+        item.innerHTML = `
+          <span class="stage-badge-chip ${tagClass}" style="margin: 0; padding: 2px 6px;">${tagText}</span>
+          <span class="mono" style="color: var(--text-muted); font-size: 0.72rem;">${getNowTimeStr()}</span>
+          <span style="color: var(--text-secondary);">${messageText}</span>
+        `;
+        pipelineJournalList.prepend(item);
+        if (pipelineJournalList.children.length > 20) {
+          pipelineJournalList.removeChild(pipelineJournalList.lastChild);
         }
       }
 
-      // Initial logs
-      SAMPLE_LOGS.forEach((l) => appendSocLog(l.tag, l.class, l.text, l.filter));
+      function resetPipelineClean() {
+        attackTimeouts.forEach(clearTimeout);
+        attackTimeouts = [];
+        pipelineAttackInProgress = false;
 
-      // Periodic calm telemetry
-      let socInterval = setInterval(() => {
-        const msgs = [
-          {
-            tag: 'POLL',
-            class: 'info',
-            text: 'Bucket "protected" checked: 0 change events observed',
-            cat: 'info',
-          },
-          {
-            tag: 'CANARY',
-            class: 'canary',
-            text: 'Sentinel check: All canary objects untouched',
-            cat: 'canary',
-          },
-          {
-            tag: 'CRYPTO',
-            class: 'crypto',
-            text: 'RFC 6962 DAG leaf verification: 16/16 hashes intact',
-            cat: 'crypto',
-          },
-        ];
-        const pick = msgs[Math.floor(Math.random() * msgs.length)];
-        appendSocLog(pick.tag, pick.class, pick.text, pick.cat);
-      }, 4500);
+        // Stage 1 Clean
+        if (stage1Box) stage1Box.classList.remove('active-threat');
+        if (stage1Badge) {
+          stage1Badge.className = 'stage-badge-chip green';
+          stage1Badge.textContent = 'ARMED (TƏMİZ)';
+        }
+        if (stage1Metric) {
+          stage1Metric.className = 'mono font-semibold text-green';
+          stage1Metric.textContent = '50/50 Qorunur';
+        }
 
-      // Tab filter clicks
-      socTabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          socTabs.forEach((t) => t.classList.remove('active'));
-          tab.classList.add('active');
-          currentFilter = tab.getAttribute('data-filter');
-          const lines = socBody.querySelectorAll('.soc-log-line');
-          lines.forEach((line) => {
-            const cat = line.getAttribute('data-category');
-            if (currentFilter === 'all' || cat === currentFilter) {
-              line.style.display = 'flex';
-            } else {
-              line.style.display = 'none';
-            }
-          });
-        });
-      });
+        // Stage 2 Clean
+        if (stage2Box) stage2Box.classList.remove('active-threat');
+        if (stage2Badge) {
+          stage2Badge.className = 'stage-badge-chip green';
+          stage2Badge.textContent = 'NORMAL İZLƏMƏ';
+        }
+        if (stage2Metric) {
+          stage2Metric.className = 'mono font-semibold text-teal';
+          stage2Metric.textContent = '0.0% (Hədd: 30%)';
+        }
 
-      // Spike attack simulation in terminal with Laser Threat Flash & Incident Popover
-      const socContainer = document.querySelector('.soc-terminal-container');
-      const incidentCard = document.getElementById('socIncidentAlertCard');
-      const dismissIncidentBtn = document.getElementById('dismissIncidentCardBtn');
-      const viewIncidentProofBtn = document.getElementById('viewIncidentProofBtn');
+        // Stage 3 Clean
+        if (stage3Box) stage3Box.classList.remove('active-threat');
+        if (stage3Badge) {
+          stage3Badge.className = 'stage-badge-chip green';
+          stage3Badge.textContent = 'STANDBY (HAZIR)';
+        }
+        if (stage3Metric) {
+          stage3Metric.className = 'mono font-semibold text-green';
+          stage3Metric.textContent = 'Yazma Aktiv';
+        }
 
-      function triggerTerminalAttackSequence() {
-        // Engage red laser hazard border on terminal
-        socContainer?.classList.add('threat-spike-laser');
+        // Stage 4 Clean
+        if (stage4Box) stage4Box.classList.remove('active-threat');
+        if (stage4Badge) {
+          stage4Badge.className = 'stage-badge-chip green';
+          stage4Badge.textContent = '100% TƏSDİQLƏNİB';
+        }
+        if (stage4Metric) {
+          stage4Metric.className = 'mono font-semibold text-green';
+          stage4Metric.textContent = '4/4 Valid';
+        }
+        if (btnAuthorizePipelineRestore) {
+          btnAuthorizePipelineRestore.style.display = 'none';
+        }
 
-        appendSocLog(
-          'ALERT',
-          'alert',
-          'THREAT SPIKE: High-frequency PUT requests detected from account "svc-backup-agent"',
-          'alert'
-        );
+        appendPipelineEvent('SİSTEM', 'green', 'Bütün müdafiə mərhələləri ilkin təmiz vəziyyətə sıfırlandı. Monitorinq aktivdir.');
+      }
 
-        setTimeout(() => {
-          appendSocLog(
-            'CANARY',
-            'alert',
-            'TRIPWIRE TRIGGERED: Object ".canary/decoy_tokens.docx" modified! Instant RANSOMWARE verdict!',
-            'canary'
-          );
+      function runPipelineAttackSequence() {
+        if (pipelineAttackInProgress) return;
+        pipelineAttackInProgress = true;
+        attackTimeouts.forEach(clearTimeout);
+        attackTimeouts = [];
+
+        // Reset first
+        if (stage1Box) stage1Box.classList.remove('active-threat');
+        if (stage2Box) stage2Box.classList.remove('active-threat');
+        if (stage3Box) stage3Box.classList.remove('active-threat');
+        if (stage4Box) stage4Box.classList.remove('active-threat');
+        if (btnAuthorizePipelineRestore) btnAuthorizePipelineRestore.style.display = 'none';
+
+        appendPipelineEvent('HÜCUM', 'red', 'Kütləvi şifrələyici zərərverici (Ransomware) simulyasiyası başladıldı...');
+
+        // Step 1: Canary Tripwire breached (350ms)
+        const t1 = setTimeout(() => {
+          if (stage1Box) stage1Box.classList.add('active-threat');
+          if (stage1Badge) {
+            stage1Badge.className = 'stage-badge-chip red';
+            stage1Badge.textContent = '🚨 CANARY POZULDU';
+          }
+          if (stage1Metric) {
+            stage1Metric.className = 'mono font-semibold text-red';
+            stage1Metric.textContent = 'canary/tripwire.docx Dəyişdirildi!';
+          }
+          appendPipelineEvent('TƏLƏ', 'red', 'CANARY TƏLƏSİ POZULDU: "canary/tripwire.docx" modifikasiya olundu. Təcili reaksiya triggerləndi!');
         }, 350);
+        attackTimeouts.push(t1);
 
-        setTimeout(() => {
-          appendSocLog(
-            'RESPONSE',
-            'alert',
-            'IAM LOCKDOWN: Attaching Deny-All inline policy to account "svc-backup-agent" [8.2s SLA]',
-            'alert'
-          );
-        }, 750);
-
-        setTimeout(() => {
-          appendSocLog(
-            'CRYPTO',
-            'crypto',
-            'Ed25519 SIGNATURE: Incident record signed with key ID "ed25519-v1" (RFC 8032)',
-            'crypto'
-          );
-          // Reveal Incident Alert Popover Card inside terminal
-          if (incidentCard) {
-            incidentCard.style.display = 'block';
-            incidentCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Step 2: Velocity Spikes (850ms)
+        const t2 = setTimeout(() => {
+          if (stage2Box) stage2Box.classList.add('active-threat');
+          if (stage2Badge) {
+            stage2Badge.className = 'stage-badge-chip red';
+            stage2Badge.textContent = 'HÜCUM TƏSDİQLƏNDİ';
           }
-        }, 1200);
+          if (stage2Metric) {
+            stage2Metric.className = 'mono font-semibold text-red';
+            stage2Metric.textContent = '44.0% Sürət (> 30% Hədd)';
+          }
+          appendPipelineEvent('AŞKARLAMA', 'red', 'Kütləvi şifrələmə sürəti təsdiqləndi: 30s pəncərədə 44.0% dəyişiklik (> 30% kritik hədd). VERDİKT: RANSOMWARE!');
+        }, 850);
+        attackTimeouts.push(t2);
 
-        setTimeout(() => {
-          appendSocLog(
-            'RESTORE',
-            'restore',
-            'AEAD RESTORE: Decrypted AES-256-GCM ciphertext, AEAD auth tag VERIFIED (100%)',
-            'restore'
-          );
-        }, 1800);
+        // Step 3: Sub-second IAM Freeze (1400ms)
+        const t3 = setTimeout(() => {
+          if (stage3Box) stage3Box.classList.add('active-threat');
+          if (stage3Badge) {
+            stage3Badge.className = 'stage-badge-chip amber';
+            stage3Badge.textContent = '🔒 IAM FREEZE (3.8s SLA)';
+          }
+          if (stage3Metric) {
+            stage3Metric.className = 'mono font-semibold text-amber';
+            stage3Metric.textContent = 'Yazma Bloklandı (Deny-All)';
+          }
+          appendPipelineEvent('TƏCRİD', 'amber', 'Sub-second IAM Freeze tətbiq edildi (3.8s). "svc-backup-agent" üçün bütün yazma/silmə hüquqları donduruldu. Ed25519 sübut aktı imzalandı.');
+        }, 1400);
+        attackTimeouts.push(t3);
 
-        setTimeout(() => {
-          appendSocLog(
-            'AUDIT',
-            'crypto',
-            'IMMUTABLE CHAIN: Audit block #043 appended with SHA-256 hash continuity',
-            'crypto'
-          );
-        }, 2300);
-
-        // Trigger Merkle tree attack scenario in sync
-        const attackBtn = document.querySelector('[data-scenario="attack"]');
-        attackBtn?.click();
+        // Step 4: Ready for Restore (1950ms)
+        const t4 = setTimeout(() => {
+          if (stage4Box) stage4Box.classList.add('active-threat');
+          if (stage4Badge) {
+            stage4Badge.className = 'stage-badge-chip amber';
+            stage4Badge.textContent = 'BƏRPA GÖZLƏYİR';
+          }
+          if (stage4Metric) {
+            stage4Metric.className = 'mono font-semibold text-amber';
+            stage4Metric.textContent = 'AES-256-GCM Hazır';
+          }
+          if (btnAuthorizePipelineRestore) {
+            btnAuthorizePipelineRestore.style.display = 'block';
+          }
+          appendPipelineEvent('BƏRPA', 'amber', 'AES-256-GCM şifrələnmiş ehtiyat nüsxələr hazırlandı. İcazə gözlənilir: Aşağıdakı "Bərpanı Təsdiqlə" düyməsinə klikləyin.');
+        }, 1950);
+        attackTimeouts.push(t4);
       }
 
-      triggerSocSpike?.addEventListener('click', triggerTerminalAttackSequence);
-
-      dismissIncidentBtn?.addEventListener('click', () => {
-        if (incidentCard) incidentCard.style.display = 'none';
-        socContainer?.classList.remove('threat-spike-laser');
-      });
-
-      viewIncidentProofBtn?.addEventListener('click', () => {
-        openMerkleInspector(0, { isCorrupted: true });
-      });
-
-      // ── Interactive CLI Input & Command Handler ─────────────────────────────
-      const socCliForm = document.getElementById('socCliForm');
-      const socCliInput = document.getElementById('socCliInput');
-      const socCliPills = document.querySelectorAll('.soc-cli-pill');
-
-      function runTerminalCommand(cmdText) {
-        if (!cmdText || !cmdText.trim()) return;
-        const trimmed = cmdText.trim();
-
-        // Log prompt command into terminal body
-        appendSocLog('CLI', 'info', `<span class="soc-log-cmd">$ ${trimmed}</span>`, 'info');
-
-        const cmd = trimmed.toLowerCase();
-
-        if (cmd === 'clear') {
-          if (socBody) socBody.innerHTML = '';
-          return;
+      function authorizePipelineRestore() {
+        if (btnAuthorizePipelineRestore) {
+          btnAuthorizePipelineRestore.style.display = 'none';
         }
-
-        if (cmd === 'cloudrdr status' || cmd === 'status') {
-          const statusJson = JSON.stringify(
-            {
-              status: 'OPERATIONAL',
-              engine: 'autonomous-containment-v1',
-              storage_provider: 'local_fs',
-              protected_bucket: 'protected',
-              monitored_objects: 16,
-              canary_tripwires: 2,
-              sliding_window: '60s (ransomware_threshold: 30%)',
-              iam_freeze_sla: '<10.0s (achieved: 2.1s)',
-              recovery_cipher: 'AES-256-GCM / Ed25519',
-            },
-            null,
-            2
-          );
-          appendSocLog(
-            'STATUS',
-            'crypto',
-            `<pre class="soc-log-json">${statusJson}</pre>`,
-            'crypto'
-          );
-        } else if (cmd === 'test-canary-tripwire' || cmd === 'canary') {
-          triggerTerminalAttackSequence();
-        } else if (cmd === 'curl /baseline/protected' || cmd === 'baseline') {
-          const baselineJson = JSON.stringify(
-            {
-              bucket: 'protected',
-              merkle_root: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-              file_count: 16,
-              hash_algorithm: 'SHA-256 (RFC 6962)',
-              snapshot_id: 'snap-98a4d7e1-2026',
-              created_at: new Date().toISOString(),
-            },
-            null,
-            2
-          );
-          appendSocLog(
-            'API',
-            'crypto',
-            `<pre class="soc-log-json">${baselineJson}</pre>`,
-            'crypto'
-          );
-        } else if (cmd === 'verify-merkle-proof' || cmd === 'merkle') {
-          appendSocLog(
-            'CRYPTO',
-            'crypto',
-            'RFC 6962 AUDIT PATH: Leaf #0 -> Pair(L0, L1) -> Pair(H01, H23) -> ROOT',
-            'crypto'
-          );
-          appendSocLog(
-            'CRYPTO',
-            'crypto',
-            'Cryptographic Proof: e3b0c442...7852b855 (100% INVARIANT MATCH)',
-            'crypto'
-          );
-          setTimeout(() => openMerkleInspector(0, { isCorrupted: false }), 400);
-        } else if (cmd === 'help') {
-          const helpText = `Available commands:
-  • cloudrdr status          - Query system health & parameters
-  • test-canary-tripwire     - Simulate decoy breach & trigger sub-10s IAM freeze
-  • curl /baseline/protected - Fetch current baseline Merkle Root JSON
-  • verify-merkle-proof      - Verify cryptographic leaf-to-root RFC 6962 proof
-  • clear                    - Clear terminal console`;
-          appendSocLog('HELP', 'info', `<pre class="soc-log-json">${helpText}</pre>`, 'info');
-        } else {
-          appendSocLog(
-            'ERROR',
-            'alert',
-            `Command not recognized: "${trimmed}". Type "help" for available commands.`,
-            'alert'
-          );
+        if (stage4Badge) {
+          stage4Badge.className = 'stage-badge-chip green';
+          stage4Badge.textContent = '🔄 BƏRPA EDİLİR...';
         }
+        if (stage4Metric) {
+          stage4Metric.className = 'mono font-semibold text-teal';
+          stage4Metric.textContent = 'AEAD Teq Yoxlanılır...';
+        }
+        appendPipelineEvent('BƏRPA', 'teal', 'AES-256-GCM AEAD teq təsdiqi başladı. Bayt-bayt bütövlük yoxlanılır...');
 
-        if (socCliInput) socCliInput.value = '';
+        setTimeout(() => {
+          if (stage4Badge) {
+            stage4Badge.className = 'stage-badge-chip green';
+            stage4Badge.textContent = '100% TƏSDİQLƏNDİ';
+          }
+          if (stage4Metric) {
+            stage4Metric.className = 'mono font-semibold text-green';
+            stage4Metric.textContent = '50/50 Valid (0 İtgi)';
+          }
+          appendPipelineEvent('AEAD TƏSDİQ', 'green', 'Bütün fayllar 100% AEAD ilə təsdiqləndi. SHA-256 baseline ilə Merkle invariantı tam bərpa olundu!');
+
+          setTimeout(() => {
+            // Calm reset of stages
+            if (stage1Box) stage1Box.classList.remove('active-threat');
+            if (stage1Badge) {
+              stage1Badge.className = 'stage-badge-chip green';
+              stage1Badge.textContent = 'ARMED (TƏMİZ)';
+            }
+            if (stage1Metric) {
+              stage1Metric.className = 'mono font-semibold text-green';
+              stage1Metric.textContent = '50/50 Qorunur';
+            }
+
+            if (stage2Box) stage2Box.classList.remove('active-threat');
+            if (stage2Badge) {
+              stage2Badge.className = 'stage-badge-chip green';
+              stage2Badge.textContent = 'NORMAL İZLƏMƏ';
+            }
+            if (stage2Metric) {
+              stage2Metric.className = 'mono font-semibold text-teal';
+              stage2Metric.textContent = '0.0% (Hədd: 30%)';
+            }
+
+            if (stage3Box) stage3Box.classList.remove('active-threat');
+            if (stage3Badge) {
+              stage3Badge.className = 'stage-badge-chip green';
+              stage3Badge.textContent = 'STANDBY (HAZIR)';
+            }
+            if (stage3Metric) {
+              stage3Metric.className = 'mono font-semibold text-green';
+              stage3Metric.textContent = 'Yazma Aktiv';
+            }
+
+            pipelineAttackInProgress = false;
+            appendPipelineEvent('SİSTEM', 'green', 'Sistem tam şəkildə ilkin təmiz vəziyyətə qayıtdı. İnsident uğurla aradan qaldırıldı.');
+          }, 1200);
+        }, 800);
       }
 
-      socCliForm?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        runTerminalCommand(socCliInput?.value);
-      });
+      btnRunPipelineAttack?.addEventListener('click', runPipelineAttackSequence);
+      btnResetPipeline?.addEventListener('click', resetPipelineClean);
+      btnAuthorizePipelineRestore?.addEventListener('click', authorizePipelineRestore);
 
-      socCliPills.forEach((pill) => {
-        pill.addEventListener('click', () => {
-          let cmd = pill.getAttribute('data-cmd');
-          if (cmd) {
-            if (cmd.startsWith('> ')) cmd = cmd.slice(2);
-            if (socCliInput) socCliInput.value = cmd;
-            runTerminalCommand(cmd);
-          }
-        });
-      });
+      // Periodic subtle telemetry in journal
+      setInterval(() => {
+        if (pipelineAttackInProgress) return;
+        const telemetryEvents = [
+          { tag: 'KRİPTO', cls: 'green', text: 'RFC 6962 Merkle DAG: 50/50 fayl bütövlüyü təsdiqləndi.' },
+          { tag: 'TƏLƏ', cls: 'green', text: 'Canary tripwire sağlamdır: "canary/tripwire.docx" modifikasiya olunmayıb.' },
+          { tag: 'İZLƏMƏ', cls: 'green', text: 'Sürüşən pəncərə analizi: dəyişiklik dərəcəsi 0.00% (Anomaliya yoxdur).' }
+        ];
+        const randomEvt = telemetryEvents[Math.floor(Math.random() * telemetryEvents.length)];
+        appendPipelineEvent(randomEvt.tag, randomEvt.cls, randomEvt.text);
+      }, 7000);
 
       // ── 6. Cursor Spotlight & Bento Glow Pointer Tracking ────────────────────
       const spotlightCards = document.querySelectorAll('.spotlight-card');
