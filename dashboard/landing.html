@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CloudRDR — Autonomous Cloud Ransomware Detection & Cryptographic Recovery</title>
-  <meta name="description" content="CloudRDR: Autonomous ransomware containment, Merkle tree cryptographic integrity proof, and AEAD verified recovery for cloud object storage." />
+  <title>CloudRDR — Autonomous Cloud Ransomware Containment & Cryptographic Recovery</title>
+  <meta name="description" content="Autonomous ransomware containment, Merkle tree cryptographic integrity proof, and AEAD verified recovery for cloud object storage." />
 
-  <!-- Google Fonts: Geist & Geist Mono (Linear / Vercel Tier) -->
+  <!-- Premium Typography: Geist & Geist Mono (Vercel / Linear Developer Tier) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" />
 
   <style>
-    /* ── High-End Visual Design System (Agency-Grade) ────────────────────────── */
+    /* ── High-End Visual Design System & Tokens ────────────────────────────── */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -20,24 +20,39 @@
     }
 
     :root {
-      --bg: #050811;
-      --bg-surface: #0B101D;
-      --bg-elevated: #11182B;
-      --bg-subtle: #18223B;
+      --bg: #030712;
+      --bg-surface: #080D1A;
+      --bg-elevated: #0E1626;
+      --bg-subtle: #152035;
       --text: #F8FAFC;
+      --text-secondary: #CBD5E1;
       --text-muted: #94A3B8;
       --text-faint: #64748B;
+      
       --brand: #3B82F6;
-      --brand-hover: #2563EB;
+      --brand-glow: rgba(59, 130, 246, 0.4);
       --emerald: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
       --crimson: #EF4444;
+      --crimson-glow: rgba(239, 68, 68, 0.35);
       --amber: #F59E0B;
       --cyan: #06B6D4;
+      --purple: #8B5CF6;
+
       --border: rgba(255, 255, 255, 0.08);
       --border-light: rgba(255, 255, 255, 0.14);
-      --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      --border-active: rgba(59, 130, 246, 0.5);
+
+      --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-mono: 'Geist Mono', 'JetBrains Mono', monospace;
-      --ease: cubic-bezier(0.32, 0.72, 0, 1);
+
+      --ease: cubic-bezier(0.2, 0, 0, 1);
+      --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+      --ease-subtle: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
     }
 
     html {
@@ -48,6 +63,7 @@
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
@@ -57,7 +73,7 @@
       position: relative;
     }
 
-    /* ── Atmospheric Ambient Orbs (GPU Safe, Zero Lag) ───────────────────── */
+    /* ── Atmospheric Cyber Background (GPU-Safe Zero Lag) ──────────────────── */
     .ambient-canvas {
       position: fixed;
       inset: 0;
@@ -68,40 +84,58 @@
 
     .ambient-orb-1 {
       position: absolute;
-      top: -15%;
-      left: 10%;
-      width: 700px;
-      height: 700px;
+      top: -20%;
+      left: 15%;
+      width: 750px;
+      height: 750px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.14) 0%, transparent 65%);
-      filter: blur(60px);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.16) 0%, transparent 65%);
+      filter: blur(80px);
     }
 
     .ambient-orb-2 {
       position: absolute;
-      top: 45%;
-      right: -5%;
-      width: 650px;
-      height: 650px;
+      top: 40%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.09) 0%, transparent 65%);
-      filter: blur(70px);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 65%);
+      filter: blur(90px);
     }
 
     .ambient-orb-3 {
       position: absolute;
-      bottom: -10%;
-      left: 20%;
-      width: 800px;
-      height: 800px;
+      bottom: -15%;
+      left: 25%;
+      width: 850px;
+      height: 850px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
-      filter: blur(80px);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.09) 0%, transparent 70%);
+      filter: blur(95px);
+    }
+
+    /* Subtle Technical Grid Lines */
+    .ambient-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 20%, black 40%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 40%, transparent 80%);
     }
 
     .content-wrapper {
       position: relative;
       z-index: 1;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
     /* ── Floating Island Navbar ───────────────────────────────────────────── */
@@ -119,12 +153,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
-      background: rgba(11, 16, 29, 0.78);
+      padding: 0 22px;
+      background: rgba(8, 13, 26, 0.82);
       backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid var(--border-light);
       border-radius: 9999px;
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 32px -6px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+      transition: border-color 0.2s var(--ease);
+    }
+
+    .landing-nav:hover {
+      border-color: rgba(255, 255, 255, 0.22);
     }
 
     .brand-logo {
@@ -135,13 +175,18 @@
       color: #FFFFFF;
       font-weight: 800;
       font-size: 1.25rem;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
+    }
+
+    .brand-logo svg {
+      color: var(--brand);
     }
 
     .brand-badge {
+      font-family: var(--font-mono);
       font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       padding: 2px 8px;
       border-radius: 9999px;
       background: linear-gradient(135deg, #2563EB, #1D4ED8);
@@ -153,41 +198,43 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.8rem;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
       transition: color 0.2s var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .nav-links a:hover {
       color: #FFFFFF;
     }
 
-    /* Island Button Pattern (Button-in-Button) */
     .btn-island-nav {
       background: linear-gradient(135deg, #2563EB, #1D4ED8);
       color: #FFFFFF;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       padding: 6px 6px 6px 16px;
       border-radius: 9999px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
       transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
     }
 
     .btn-island-nav:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.65);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.65);
     }
 
     .btn-island-nav:active {
@@ -198,7 +245,7 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.22);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -210,14 +257,7 @@
       transform: scale(1.1) translateX(1px);
     }
 
-    /* ── Container Scale ──────────────────────────────────────────────────── */
-    .container {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── Doppelrand (Double-Bezel) Card Architecture ───────────────────────── */
+    /* ── Doppelrand (Double-Bezel) Cards with Dynamic Mouse Spotlight ───────── */
     .doppel-shell {
       position: relative;
       background: radial-gradient(
@@ -226,7 +266,7 @@
         rgba(255, 255, 255, 0.025) 50%
       );
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 24px;
+      border-radius: var(--radius-xl);
       padding: 6px;
       transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
       will-change: transform, border-color;
@@ -239,7 +279,7 @@
 
     .doppel-core {
       background: var(--bg-surface);
-      border-radius: 18px;
+      border-radius: 22px;
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.04);
       padding: 2.25rem;
@@ -248,20 +288,25 @@
       flex-direction: column;
     }
 
-    /* ── Eyebrow Tags ─────────────────────────────────────────────────────── */
+    /* ── Hero Section ─────────────────────────────────────────────────────── */
+    .hero-section {
+      padding: 85px 0 60px;
+      text-align: center;
+    }
+
     .eyebrow-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 14px;
+      padding: 5px 16px;
       border-radius: 9999px;
       background: rgba(59, 130, 246, 0.12);
       border: 1px solid rgba(59, 130, 246, 0.3);
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       font-weight: 600;
       color: #60A5FA;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.15em;
       margin-bottom: 2rem;
     }
 
@@ -271,26 +316,26 @@
       border-radius: 50%;
       background: var(--emerald);
       box-shadow: 0 0 10px var(--emerald);
+      animation: pulse-dot 2s infinite ease-in-out;
     }
 
-    /* ── Hero Section ─────────────────────────────────────────────────────── */
-    .hero-section {
-      padding: 90px 0 80px;
-      text-align: center;
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
     .hero-title {
-      font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+      font-size: clamp(2.8rem, 5.8vw, 4.8rem);
       font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1.08;
-      margin-bottom: 1.6rem;
+      letter-spacing: -0.045em;
+      line-height: 1.06;
+      margin-bottom: 1.5rem;
       color: #FFFFFF;
       text-wrap: balance;
     }
 
     .hero-title span.gradient-text {
-      background: linear-gradient(135deg, #60A5FA 0%, #34D399 100%);
+      background: linear-gradient(135deg, #60A5FA 0%, #34D399 50%, #38BDF8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -298,8 +343,8 @@
     .hero-subtitle {
       font-size: 1.25rem;
       color: var(--text-muted);
-      max-width: 820px;
-      margin: 0 auto 3rem;
+      max-width: 840px;
+      margin: 0 auto 2.8rem;
       line-height: 1.65;
       font-weight: 400;
       text-wrap: balance;
@@ -310,10 +355,9 @@
       align-items: center;
       justify-content: center;
       gap: 1.25rem;
-      margin-bottom: 4.5rem;
+      margin-bottom: 2.5rem;
     }
 
-    /* Primary Hero Island Button */
     .btn-hero-primary {
       background: linear-gradient(135deg, #2563EB, #1D4ED8);
       color: #FFFFFF;
@@ -322,7 +366,7 @@
       padding: 10px 10px 10px 28px;
       border-radius: 9999px;
       text-decoration: none;
-      box-shadow: 0 6px 24px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.55);
       transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
       display: inline-flex;
       align-items: center;
@@ -331,7 +375,7 @@
 
     .btn-hero-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.7);
+      box-shadow: 0 12px 36px rgba(37, 99, 235, 0.75);
     }
 
     .btn-hero-primary:active {
@@ -372,11 +416,233 @@
       color: #FFFFFF;
     }
 
-    .btn-hero-secondary:active {
+    /* ── Quick-Terminal CLI Pills ────────────────────────────────────────── */
+    .quick-terminal-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 3.5rem;
+    }
+
+    .terminal-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(8, 13, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #E2E8F0;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s var(--ease);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .terminal-pill:hover {
+      border-color: var(--brand);
+      background: rgba(14, 22, 38, 0.95);
+      transform: translateY(-1px);
+    }
+
+    .terminal-pill:active {
       transform: scale(0.98);
     }
 
-    /* ── Metrics Doppelrand Bar ───────────────────────────────────────────── */
+    .terminal-prompt {
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .copy-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      transition: all 0.2s var(--ease);
+    }
+
+    .terminal-pill:hover .copy-badge {
+      background: rgba(59, 130, 246, 0.25);
+      color: #93C5FD;
+    }
+
+    .terminal-pill.copied .copy-badge {
+      background: rgba(16, 185, 129, 0.25);
+      color: var(--emerald);
+    }
+
+    /* ── Interactive Hero SOC Cockpit Teaser (The Showpiece) ─────────────── */
+    .hero-cockpit-shell {
+      max-width: 1100px;
+      margin: 0 auto 5rem;
+      text-align: left;
+    }
+
+    .cockpit-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .cockpit-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cockpit-dot-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cockpit-dot-indicator.breach {
+      background: var(--crimson);
+      box-shadow: 0 0 14px var(--crimson);
+      animation: pulse-breach 0.8s infinite;
+    }
+
+    @keyframes pulse-breach {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.2); }
+    }
+
+    .cockpit-title {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+    }
+
+    .cockpit-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cockpit-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s var(--ease);
+    }
+
+    .cockpit-btn:hover {
+      background: var(--bg-subtle);
+      border-color: var(--brand);
+      color: #FFFFFF;
+    }
+
+    .cockpit-btn.btn-attack {
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.12);
+      color: #FCA5A5;
+    }
+
+    .cockpit-btn.btn-attack:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: var(--crimson);
+      color: #FFFFFF;
+    }
+
+    .cockpit-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+    }
+
+    .cockpit-tree-area {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .cockpit-tree-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cockpit-tree-svg-wrap {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cockpit-sidebar-area {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cockpit-stat-tile {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cockpit-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .cockpit-stat-val {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Metrics Ribbon ───────────────────────────────────────────────────── */
     .metrics-shell {
       max-width: 1100px;
       margin: 0 auto 5rem;
@@ -423,15 +689,15 @@
 
     .section-header {
       text-align: center;
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto 4rem;
     }
 
     .section-title {
-      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
       font-weight: 900;
       letter-spacing: -0.035em;
-      line-height: 1.15;
+      line-height: 1.14;
       margin-bottom: 1rem;
       color: #FFFFFF;
       text-wrap: balance;
@@ -444,111 +710,156 @@
       text-wrap: balance;
     }
 
-    /* ── Comparison 2-Column Grid (Problem vs Solution) ───────────────────── */
-    .comparison-grid {
+    /* ── Interactive Pillar Deep Dives (Tabbed & Interactive) ─────────────── */
+    .pillar-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
       margin-bottom: 3rem;
     }
 
-    .comp-title {
+    .pillar-card-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
     }
 
-    .comp-badge {
+    .pillar-pill {
+      font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 3px 10px;
       border-radius: 9999px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60A5FA;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      letter-spacing: 0.05em;
     }
 
-    .comp-badge.problem {
-      background: rgba(239, 68, 68, 0.15);
-      color: var(--crimson);
-      border: 1px solid rgba(239, 68, 68, 0.35);
+    .pillar-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.025em;
     }
 
-    .comp-badge.solution {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-    }
-
-    .comp-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .comp-list li {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
+    .pillar-desc {
+      font-size: 0.95rem;
       color: var(--text-muted);
-      font-size: 0.98rem;
-      line-height: 1.55;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
     }
 
-    .comp-list li strong {
+    /* Interactive Velocity Gauge / Slider */
+    .velocity-simulator-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin-top: auto;
+    }
+
+    .velocity-slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .velocity-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: var(--bg-subtle);
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    .velocity-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 10px var(--brand);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .velocity-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .velocity-readout-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    /* Interactive Leaf Tampering Inspector */
+    .leaf-inspect-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-top: auto;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    .leaf-inspect-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .leaf-inspect-item:last-child {
+      border-bottom: none;
+    }
+
+    .btn-tamper-toggle {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-light);
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+    }
+
+    .btn-tamper-toggle:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--crimson);
       color: #FFFFFF;
     }
 
-    .comp-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 800;
-      margin-top: 2px;
-    }
-
-    .comp-icon.cross {
-      background: rgba(239, 68, 68, 0.18);
-      color: var(--crimson);
-    }
-
-    .comp-icon.check {
-      background: rgba(16, 185, 129, 0.18);
-      color: var(--emerald);
-    }
-
-    /* ── Asymmetrical Bento Grid (6-Step Lifecycle) ────────────────────────── */
+    /* ── Asymmetric Bento Grid (Lifecycle Defense) ────────────────────────── */
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 1.5rem;
     }
 
-    .bento-col-8 {
-      grid-column: span 8;
-    }
-
-    .bento-col-4 {
-      grid-column: span 4;
-    }
-
-    .bento-col-6 {
-      grid-column: span 6;
-    }
+    .bento-col-8 { grid-column: span 8; }
+    .bento-col-4 { grid-column: span 4; }
+    .bento-col-6 { grid-column: span 6; }
 
     .step-num-pill {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 700;
@@ -601,7 +912,50 @@
       font-weight: 600;
     }
 
-    /* ── Interactive Attack Simulator Blueprint ───────────────────────────── */
+    /* ── Interactive Blockchain Audit Log Inspector ──────────────────────── */
+    .audit-chain-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .audit-block-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+    }
+
+    .audit-block-card.tampered {
+      border-color: var(--crimson);
+      background: rgba(28, 13, 20, 0.85);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .audit-block-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: var(--bg-subtle);
+      color: #94A3B8;
+      width: fit-content;
+    }
+
+    .audit-block-hash {
+      color: #38BDF8;
+      word-break: break-all;
+    }
+
+    /* ── Interactive Simulation Phase Stepper ─────────────────────────────── */
     .sim-timeline-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -610,18 +964,23 @@
 
     .sim-phase-card {
       border-top: 3px solid var(--brand);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s var(--ease), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
     }
 
-    .sim-phase-card.breach {
-      border-top-color: var(--crimson);
+    .sim-phase-card:hover {
+      transform: translateY(-2px);
     }
 
-    .sim-phase-card.lock {
-      border-top-color: var(--cyan);
-    }
+    .sim-phase-card.breach { border-top-color: var(--crimson); }
+    .sim-phase-card.lock { border-top-color: var(--cyan); }
+    .sim-phase-card.restore { border-top-color: var(--emerald); }
 
-    .sim-phase-card.restore {
-      border-top-color: var(--emerald);
+    .sim-phase-card.active {
+      background: var(--bg-elevated);
+      border-top-width: 4px;
+      box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.4);
     }
 
     .sim-phase-time {
@@ -645,254 +1004,9 @@
       line-height: 1.5;
     }
 
-    /* ── Tech Stack Grid ─────────────────────────────────────────────────── */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .stack-role-badge {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 9999px;
-      background: var(--bg-subtle);
-      color: #94A3B8;
-      display: inline-block;
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-    }
-
-    .stack-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 0.6rem;
-    }
-
-    .stack-detail {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    /* ── Call To Action Banner ────────────────────────────────────────────── */
-    .cta-shell {
-      margin: 80px 0;
-      text-align: center;
-    }
-
-    .cta-core {
-      padding: 4.5rem 2rem;
-      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.18) 0%, var(--bg-surface) 75%);
-    }
-
-    .cta-title {
-      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
-      font-weight: 900;
-      letter-spacing: -0.035em;
-      color: #FFFFFF;
-      margin-bottom: 1.25rem;
-      text-wrap: balance;
-    }
-
-    .cta-desc {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 2.5rem;
-      text-wrap: balance;
-    }
-
-    /* ── Footer ───────────────────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 0;
-      color: var(--text-faint);
-      font-size: 0.88rem;
-    }
-
-    .footer-flex {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    /* ── Responsive Mobile Overrides ──────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .bento-col-8, .bento-col-4, .bento-col-6 {
-        grid-column: span 12;
-      }
-      .comparison-grid, .sim-timeline-grid, .stack-grid, .metrics-bar {
-        grid-template-columns: 1fr;
-      }
-      .metric-col {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 1rem;
-      }
-      .nav-links {
-        display: none;
-      }
-      .footer-flex {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-    }
-
-    /* ── Vercel Web Interface Guidelines & Motion Principles ──────────────── */
-    :focus-visible {
-      outline: 2px solid var(--brand);
-      outline-offset: 3px;
-    }
-
-    .skip-link {
-      position: fixed;
-      top: -80px;
-      left: 20px;
-      background: var(--brand);
-      color: #FFFFFF;
-      padding: 10px 18px;
-      border-radius: 9999px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-decoration: none;
-      z-index: 10000;
-      transition: top 0.2s var(--ease);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    }
-
-    .skip-link:focus-visible {
-      top: 20px;
-    }
-
-    section, [id] {
-      scroll-margin-top: 5.5rem;
-    }
-
-    .hero-title, .section-title, .feature-title, h1, h2, h3 {
-      text-wrap: balance;
-    }
-
-    .stat-number, .step-num, code, time, .metric-val {
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* ── Quick-Terminal CLI Pills ────────────────────────────────────────── */
-    .quick-terminal-bar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 2rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .terminal-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      background: rgba(11, 16, 29, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border-light);
-      border-radius: 12px;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      color: #E2E8F0;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s var(--ease);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .terminal-pill:hover {
-      border-color: var(--brand);
-      background: rgba(17, 24, 43, 0.95);
-      transform: translateY(-1px);
-    }
-
-    .terminal-pill:active {
-      transform: scale(0.98);
-    }
-
-    .terminal-prompt {
-      color: var(--brand);
-      font-weight: 700;
-    }
-
-    .copy-badge {
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
-      transition: all 0.2s var(--ease);
-    }
-
-    .terminal-pill:hover .copy-badge {
-      background: rgba(59, 130, 246, 0.2);
-      color: #93C5FD;
-    }
-
-    .terminal-pill.copied .copy-badge {
-      background: rgba(16, 185, 129, 0.25);
-      color: var(--emerald);
-    }
-
-    /* ── Keyboard Shortcut Badges (<kbd>) ───────────────────────────────── */
-    .kbd-shortcut {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      font-weight: 600;
-      line-height: 1;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: var(--text-muted);
-      margin-left: 6px;
-      vertical-align: middle;
-      user-select: none;
-    }
-
-    .btn-island-nav:hover .kbd-shortcut,
-    .btn-hero-primary:hover .kbd-shortcut {
-      background: rgba(255, 255, 255, 0.2);
-      color: #FFFFFF;
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* ── Interactive Simulation Phase Cards ─────────────────────────────── */
-    .sim-phase-card {
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
-    }
-
-    .sim-phase-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .sim-phase-card.active {
-      background: var(--bg-elevated);
-      border-top-width: 4px;
-      box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.4);
-    }
-
     .sim-state-inspector {
       margin-top: 2rem;
-      background: rgba(11, 16, 29, 0.95);
+      background: rgba(8, 13, 26, 0.95);
       border: 1px solid var(--border-light);
       border-radius: 18px;
       padding: 1.5rem 2rem;
@@ -926,6 +1040,121 @@
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    /* ── Tabbed Code & CLI Suite ─────────────────────────────────────────── */
+    .code-tabs-wrap {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .code-tabs-nav {
+      display: flex;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1rem;
+    }
+
+    .code-tab-btn {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 12px 18px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .code-tab-btn:hover {
+      color: #FFFFFF;
+    }
+
+    .code-tab-btn.active {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+    }
+
+    .code-content-pane {
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #E2E8F0;
+      overflow-x: auto;
+    }
+
+    /* ── Keyboard Shortcut Badges (<kbd>) ───────────────────────────────── */
+    .kbd-shortcut {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text-muted);
+      margin-left: 6px;
+      vertical-align: middle;
+      user-select: none;
+    }
+
+    .btn-island-nav:hover .kbd-shortcut,
+    .btn-hero-primary:hover .kbd-shortcut {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ── Call To Action Banner ────────────────────────────────────────────── */
+    .cta-shell {
+      margin: 80px 0;
+      text-align: center;
+    }
+
+    .cta-core {
+      padding: 5rem 2rem;
+      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.2) 0%, var(--bg-surface) 75%);
+    }
+
+    .cta-title {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      color: #FFFFFF;
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+
+    .cta-desc {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      text-wrap: balance;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 0;
+      color: var(--text-faint);
+      font-size: 0.88rem;
+    }
+
+    .footer-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     /* ── Scroll Entrance Animations ─────────────────────────────────────── */
@@ -1006,6 +1235,75 @@
     .toast-threat { border-left: 3px solid #EF4444; }
     .toast-threat .toast-icon { color: #EF4444; background: rgba(239, 68, 68, 0.2); }
 
+    /* ── Accessibility & Guidelines ─────────────────────────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -80px;
+      left: 20px;
+      background: var(--brand);
+      color: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      z-index: 10000;
+      transition: top 0.2s var(--ease);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .skip-link:focus-visible {
+      top: 20px;
+    }
+
+    section, [id] {
+      scroll-margin-top: 5.5rem;
+    }
+
+    .hero-title, .section-title, h1, h2, h3 {
+      text-wrap: balance;
+    }
+
+    code, time, .metric-big, .inspector-val {
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 992px) {
+      .cockpit-grid, .pillar-grid, .bento-col-8, .bento-col-4, .bento-col-6 {
+        grid-column: span 12;
+      }
+      .cockpit-grid {
+        grid-template-columns: 1fr;
+      }
+      .metrics-bar, .sim-timeline-grid, .audit-chain-wrap {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .metrics-bar, .sim-timeline-grid, .audit-chain-wrap {
+        grid-template-columns: 1fr;
+      }
+      .metric-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1rem;
+      }
+      .footer-flex {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1022,11 +1320,12 @@
 
 <body>
 
-  <!-- Accessible Skip Link (WCAG 2.2 AA / Vercel Web Interface Guidelines) -->
+  <!-- Accessible Skip Link -->
   <a href="#hero" class="skip-link">Skip to main content</a>
 
-  <!-- Ambient Light Orbs -->
+  <!-- Ambient Light Orbs & Grid -->
   <div class="ambient-canvas" aria-hidden="true">
+    <div class="ambient-grid"></div>
     <div class="ambient-orb-1"></div>
     <div class="ambient-orb-2"></div>
     <div class="ambient-orb-3"></div>
@@ -1038,15 +1337,20 @@
     <div class="nav-island-container">
       <nav class="landing-nav" role="navigation" aria-label="Main Navigation">
         <a href="/" class="brand-logo">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
           CloudRDR
-          <span class="brand-badge">SEC-OPS</span>
+          <span class="brand-badge">Autonomous SOC</span>
         </a>
 
         <ul class="nav-links">
-          <li><a href="#problem">The Problem</a></li>
-          <li><a href="#how-it-works">6-Step Defense</a></li>
-          <li><a href="#simulation">Live Simulation</a></li>
-          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#interactive-cockpit">Live Demo</a></li>
+          <li><a href="#pillars">Core Pillars</a></li>
+          <li><a href="#lifecycle">6-Stage Defense</a></li>
+          <li><a href="#audit-chain">Audit Ledger</a></li>
+          <li><a href="#code-suite">Developer API</a></li>
         </ul>
 
         <a href="/dashboard" class="btn-island-nav" title="Launch Security Operations Center Console (Shortcut: D)">
@@ -1068,23 +1372,22 @@
 
         <h1 class="hero-title">
           Don't Just Detect Ransomware.<br />
-          <span class="gradient-text">Prove It Intact With Cryptography.</span>
+          <span class="gradient-text">Mathematically Prove It Intact.</span>
         </h1>
 
         <p class="hero-subtitle">
-          Traditional solutions alert too late and restore unverified backups. CloudRDR watches your cloud bucket, 
-          freezes compromised accounts in under 10 seconds, and mathematically proves every restored file matches 
-          its pre-attack SHA-256 baseline.
+          Continuous SHA-256 Merkle tree verification, sub-10s automated IAM account freeze, 
+          and AEAD-authenticated cryptographic recovery. Protecting cloud object storage from zero-day encryption.
         </p>
 
         <div class="hero-actions">
           <a href="/dashboard" class="btn-hero-primary" title="Launch Security Operations Center Console (Shortcut: D)">
-            <span>Launch Live Defense Console</span>
+            <span>Launch Live SOC Console</span>
             <kbd class="kbd-shortcut">D</kbd>
             <span class="hero-btn-icon" aria-hidden="true">▶</span>
           </a>
-          <a href="#simulation" class="btn-hero-secondary">
-            Test Interactive Stepper ↓
+          <a href="#interactive-cockpit" class="btn-hero-secondary">
+            Test Live Cockpit Below ↓
           </a>
         </div>
 
@@ -1107,7 +1410,75 @@
           </div>
         </div>
 
-        <!-- Metrics Doppelrand Banner -->
+        <!-- ── HERO SHOWPIECE: Interactive Mini SOC Cockpit ─────────────── -->
+        <div class="hero-cockpit-shell doppel-shell" id="interactive-cockpit">
+          <div class="doppel-core">
+            
+            <div class="cockpit-header">
+              <div class="cockpit-title-wrap">
+                <div class="cockpit-dot-indicator" id="heroDot"></div>
+                <div>
+                  <div class="cockpit-title">Bucket: <span style="color:#60A5FA;">protected</span> · Real-Time Telemetry Stream</div>
+                  <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);margin-top:2px;" id="heroSubStatus">
+                    Continuous Merkle Tree DAG verification active
+                  </div>
+                </div>
+              </div>
+
+              <div class="cockpit-controls">
+                <button class="cockpit-btn btn-attack" id="heroAttackBtn" title="Simulate 40% bulk alteration breach">
+                  <span>⚡ Inject Attack (40%)</span>
+                </button>
+                <button class="cockpit-btn" id="heroRestoreBtn" title="Trigger AEAD authenticated restore">
+                  <span>↺ Restore Baseline</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cockpit-grid">
+              
+              <!-- SVG Merkle Visualizer -->
+              <div class="cockpit-tree-area">
+                <div class="cockpit-tree-meta">
+                  <span>MERKLE ROOT DAG: <strong id="heroMerkleHash" style="color:#38BDF8;">e3b0c442…855</strong></span>
+                  <span id="heroLeafState">8/8 Leaves Sealed</span>
+                </div>
+
+                <div class="cockpit-tree-svg-wrap">
+                  <svg id="hero-merkle-svg" viewBox="0 0 500 160" width="100%" height="160" style="overflow:visible;"></svg>
+                </div>
+              </div>
+
+              <!-- Live Telemetry Sidebar -->
+              <div class="cockpit-sidebar-area">
+                <div class="cockpit-stat-tile">
+                  <span class="cockpit-stat-label">Real-Time Threat Verdict</span>
+                  <span class="cockpit-stat-val" id="heroVerdictVal" style="color:var(--emerald);">
+                    ● NORMAL
+                  </span>
+                </div>
+
+                <div class="cockpit-stat-tile">
+                  <span class="cockpit-stat-label">IAM Account Status</span>
+                  <span class="cockpit-stat-val" id="heroIamVal" style="color:#60A5FA;">
+                    READ_WRITE
+                  </span>
+                </div>
+
+                <div class="cockpit-stat-tile">
+                  <span class="cockpit-stat-label">Sentinel Tripwire</span>
+                  <span class="cockpit-stat-val" id="heroSentinelVal" style="color:var(--emerald);">
+                    ARMED (Green Pulse)
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Metrics Ribbon -->
         <div class="metrics-shell doppel-shell">
           <div class="metrics-bar doppel-core">
             <div class="metric-col">
@@ -1124,7 +1495,7 @@
             </div>
             <div class="metric-col">
               <div class="metric-big" style="color:#A78BFA;">SHA-256</div>
-              <div class="metric-sub">Merkle Tree DAG Root</div>
+              <div class="metric-sub">Pairwise Merkle Tree Root</div>
             </div>
           </div>
         </div>
@@ -1132,90 +1503,116 @@
       </div>
     </header>
 
-    <!-- ── The Problem vs Solution ──────────────────────────────────────── -->
-    <section class="section-wrap" id="problem">
+    <!-- ── CORE PILLARS & INTERACTIVE LABS ───────────────────────────────── -->
+    <section class="section-wrap" id="pillars">
       <div class="container">
         
         <div class="section-header">
-          <div class="eyebrow-badge">Comparative Analysis</div>
-          <h2 class="section-title">Why Legacy Defenses Fail Against Cloud Ransomware</h2>
+          <div class="eyebrow-badge">Cryptographic Foundations</div>
+          <h2 class="section-title">The Four Pillars of Zero-Trust Recovery</h2>
           <p class="section-desc">
-            When modern ransomware attacks cloud storage, it modifies hundreds of objects per minute. 
-            Legacy monitoring and manual backups create blind spots that cause total data loss.
+            Explore the exact mathematical and operational mechanisms that make cloud ransomware encryption physically unviable.
           </p>
         </div>
 
-        <div class="comparison-grid">
+        <div class="pillar-grid">
           
-          <!-- Legacy Card -->
+          <!-- Pillar 1: Merkle Integrity -->
           <div class="doppel-shell">
             <div class="doppel-core">
-              <div class="comp-title">
-                <span class="comp-badge problem">The Status Quo</span>
-                Traditional Backup & Antivirus
+              <div class="pillar-card-header">
+                <span class="pillar-pill">PILLAR 01 // DATA STRUCTURE</span>
+                <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-faint);">RFC 6962 / Bitcoin DAG</span>
               </div>
-              <ul class="comp-list">
-                <li>
-                  <span class="comp-icon cross">✕</span>
-                  <div>
-                    <strong>Signature-Only Antivirus:</strong> Zero-day ransomware executes without triggering signature heuristics until the entire bucket is encrypted.
-                  </div>
-                </li>
-                <li>
-                  <span class="comp-icon cross">✕</span>
-                  <div>
-                    <strong>Delayed Manual Response:</strong> Security teams take an average of 45+ minutes to revoke IAM keys, allowing total encryption of all cloud buckets.
-                  </div>
-                </li>
-                <li>
-                  <span class="comp-icon cross">✕</span>
-                  <div>
-                    <strong>Unverified Restoration:</strong> Backups are restored blindly without verifying whether corrupted, poisoned, or modified bytes exist inside the backup.
-                  </div>
-                </li>
-                <li>
-                  <span class="comp-icon cross">✕</span>
-                  <div>
-                    <strong>Malleable Audit Logs:</strong> Attackers tamper with flat database logs to erase traces of credential theft and privilege escalation.
-                  </div>
-                </li>
-              </ul>
+              <h3 class="pillar-title">Pairwise Merkle Tree Hashes</h3>
+              <p class="pillar-desc">
+                Every file in storage is fingerprinted via SHA-256 and paired hierarchically: \(H(L_1 \parallel L_2)\). 
+                A single corrupted byte flips the entire Merkle Root, creating mathematical proof of tampering.
+              </p>
+
+              <!-- Interactive Leaf Tamper Simulator -->
+              <div class="leaf-inspect-box">
+                <div style="color:var(--text-faint);margin-bottom:8px;font-size:0.7rem;text-transform:uppercase;">Interactive Leaf Tampering Test:</div>
+                <div class="leaf-inspect-item">
+                  <span>📄 contracts_2026.pdf</span>
+                  <button class="btn-tamper-toggle" id="tamperLeafBtn">Corrupt 1 Byte</button>
+                </div>
+                <div class="leaf-inspect-item">
+                  <span style="color:var(--text-muted);">Calculated Leaf Hash:</span>
+                  <span id="tamperLeafHash" style="color:var(--emerald);">4f89d12a...7c8</span>
+                </div>
+                <div class="leaf-inspect-item">
+                  <span style="color:var(--text-muted);">Resulting Merkle Root:</span>
+                  <span id="tamperRootHash" style="color:#38BDF8;">e3b0c442...855 (VALID)</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- CloudRDR Card -->
+          <!-- Pillar 2: Sliding Window Rate & Canaries -->
           <div class="doppel-shell">
             <div class="doppel-core">
-              <div class="comp-title">
-                <span class="comp-badge solution">CloudRDR Defense</span>
-                Zero-Trust Cryptographic Pipeline
+              <div class="pillar-card-header">
+                <span class="pillar-pill">PILLAR 02 // DETECTION ENGINE</span>
+                <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-faint);">Sliding Window 60s</span>
               </div>
-              <ul class="comp-list">
-                <li>
-                  <span class="comp-icon check">✓</span>
-                  <div>
-                    <strong>Sliding-Window & Canary Sentinels:</strong> Instant detection via change velocity thresholds (30% in 60s) and tripwire canary decoys.
-                  </div>
-                </li>
-                <li>
-                  <span class="comp-icon check">✓</span>
-                  <div>
-                    <strong>Autonomous Cryo-Lock in &lt;10s:</strong> The attacker's cloud IAM credential is systematically frozen with a strict deny-all policy.
-                  </div>
-                </li>
-                <li>
-                  <span class="comp-icon check">✓</span>
-                  <div>
-                    <strong>AES-256-GCM AEAD Pure Verification:</strong> Every restored file is cryptographically re-hashed. Only files matching the pre-attack baseline are restored.
-                  </div>
-                </li>
-                <li>
-                  <span class="comp-icon check">✓</span>
-                  <div>
-                    <strong>Ed25519 Signed & Chained Logs:</strong> Incidents are signed with RFC 8032 Ed25519 keys, and all events form a tamper-evident SHA-256 hash chain.
-                  </div>
-                </li>
-              </ul>
+              <h3 class="pillar-title">Velocity & Sentinel Tripwires</h3>
+              <p class="pillar-desc">
+                Ransomware encrypts in bulk. CloudRDR measures the unique file change rate over a 60-second window. 
+                Canary decoy files trigger instant containment regardless of threshold.
+              </p>
+
+              <!-- Interactive Velocity Gauge -->
+              <div class="velocity-simulator-box">
+                <div class="velocity-slider-labels">
+                  <span>Change Rate: <strong id="velocityRateLabel">12%</strong></span>
+                  <span id="velocityVerdictBadge" style="color:var(--amber);font-weight:700;">● SUSPICIOUS</span>
+                </div>
+                <input type="range" class="velocity-slider" id="velocitySlider" min="0" max="100" value="12" />
+                <div class="velocity-readout-row">
+                  <span style="color:var(--text-faint);">Normal &lt;10%</span>
+                  <span style="color:var(--amber);">Suspicious 10–29%</span>
+                  <span style="color:var(--crimson);">Ransomware ≥30%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 3: Sub-10s Automated IAM Cryo-Lock -->
+          <div class="doppel-shell">
+            <div class="doppel-core">
+              <div class="pillar-card-header">
+                <span class="pillar-pill">PILLAR 03 // CONTAINMENT</span>
+                <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-faint);">&lt; 10s SLA Engine</span>
+              </div>
+              <h3 class="pillar-title">Sub-10s Automated Cryo-Lock</h3>
+              <p class="pillar-desc">
+                When ransomware is confirmed, CloudRDR executes an automated deny-all IAM write policy in under 10 seconds. 
+                Human responders take 45+ minutes; CloudRDR halts the attacker while 95%+ of data is untouched.
+              </p>
+              <div class="crypto-spec-box">
+                <span class="tag">CONTAINMENT</span>
+                <span>Idempotent IAM Deny-All Policy Attached in 2.1s Average</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 4: Pure AEAD Recovery -->
+          <div class="doppel-shell">
+            <div class="doppel-core">
+              <div class="pillar-card-header">
+                <span class="pillar-pill">PILLAR 04 // RECOVERY</span>
+                <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-faint);">AES-256-GCM AEAD</span>
+              </div>
+              <h3 class="pillar-title">100% Cryptographically Verified Restore</h3>
+              <p class="pillar-desc">
+                Backups are decrypted with AES-256-GCM. The 128-bit authentication tag must verify before plaintext is emitted. 
+                Restored bytes are re-hashed against the original baseline. Zero corrupted bytes written.
+              </p>
+              <div class="crypto-spec-box">
+                <span class="tag">VERIFICATION</span>
+                <span>AEAD Tag Checked + SHA-256 Match = VALID Status</span>
+              </div>
             </div>
           </div>
 
@@ -1224,117 +1621,74 @@
       </div>
     </section>
 
-    <!-- ── 6-Step Defense Lifecycle (Bento Grid) ────────────────────────── -->
-    <section class="section-wrap" id="how-it-works">
+    <!-- ── 6-STAGE DEFENSE LIFECYCLE ─────────────────────────────────────── -->
+    <section class="section-wrap" id="lifecycle">
       <div class="container">
         
         <div class="section-header">
-          <div class="eyebrow-badge">System Workflow</div>
-          <h2 class="section-title">The 6-Step Cryptographic Defense Lifecycle</h2>
+          <div class="eyebrow-badge">Operational Lifecycle</div>
+          <h2 class="section-title">The Complete Zero-Trust Defense Lifecycle</h2>
           <p class="section-desc">
-            How CloudRDR establishes continuous baseline integrity, isolates attackers automatically, 
-            and executes verified recovery without administrative delays.
+            How CloudRDR moves from baseline initialization to automated recovery without human intervention.
           </p>
         </div>
 
         <div class="bento-grid">
           
-          <!-- Step 1: Merkle Baseline (Col 8) -->
           <div class="bento-col-8 doppel-shell">
             <div class="doppel-core">
-              <span class="step-num-pill">Stage 01 // Baseline Integrity</span>
-              <h3 class="step-card-title">Continuous SHA-256 Merkle Tree DAG</h3>
+              <span class="step-num-pill">Stage 01 // Baseline Seal</span>
+              <h3 class="step-card-title">Cryptographic Baseline Genesis</h3>
               <p class="step-card-desc">
-                Every protected cloud file is hashed via SHA-256. Hashes are pairwise-combined into a 
-                cryptographic Merkle tree. The single 64-character Root Hash acts as an immutable fingerprint 
-                of the entire cloud storage state. If a single byte in any file is modified, the root immediately changes.
+                On initialization, CloudRDR walks the entire cloud bucket, streams each object through SHA-256, 
+                and computes the Merkle Root DAG. Sentinel canaries are strategically planted as tripwires.
               </p>
               <div class="crypto-spec-box">
-                <span class="tag">CRYPTO SPEC</span>
-                Pairwise SHA-256 Merkle Root // Bitcoin-style duplicate padding
+                <span class="tag">SECURITY</span>
+                Database stores SHA-256 hashes only. No sensitive file contents stored.
               </div>
             </div>
           </div>
 
-          <!-- Step 2: Canary Sentinel (Col 4) -->
           <div class="bento-col-4 doppel-shell">
             <div class="doppel-core">
-              <span class="step-num-pill">Stage 02 // Sentinel Decoys</span>
-              <h3 class="step-card-title">Canary Tripwire Sentinels</h3>
+              <span class="step-num-pill">Stage 02 // Telemetry</span>
+              <h3 class="step-card-title">Sliding-Window Polling</h3>
               <p class="step-card-desc">
-                Decoy files (e.g. <code>.canary.docx</code>) are strategically placed in high-value directories. 
-                Ransomware encrypts sequentially; touching ANY canary immediately escalates to a 100% ransomware verdict in 0 seconds.
+                Lightweight polling agent observes file creation, modification, and deletion events every 10 seconds.
+              </p>
+              <div class="crypto-spec-box">
+                <span class="tag">WINDOW</span>
+                60s sliding window
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-col-4 doppel-shell">
+            <div class="doppel-core">
+              <span class="step-num-pill">Stage 03 // Velocity Tripwire</span>
+              <h3 class="step-card-title">Threshold Classification</h3>
+              <p class="step-card-desc">
+                Calculates unique altered files over total files. If &ge;30% change or canary touched, verdict triggers.
+              </p>
+              <div class="crypto-spec-box">
+                <span class="tag">ALGORITHM</span>
+                ChangeRate &ge; 0.30
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-col-8 doppel-shell">
+            <div class="doppel-core">
+              <span class="step-num-pill">Stage 04 // Immediate Containment</span>
+              <h3 class="step-card-title">Sub-10s Automated Cryo-Lock</h3>
+              <p class="step-card-desc">
+                Immediately attaches an IAM write-deny policy to the compromised bucket. Write, overwrite, and delete 
+                APIs are immediately rejected at the cloud control plane. The incident record is signed with Ed25519.
               </p>
               <div class="crypto-spec-box">
                 <span class="tag">LATENCY</span>
-                0s Threshold Bypass on Canary Touch
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3: Cloud IAM Freeze (Col 4) -->
-          <div class="bento-col-4 doppel-shell">
-            <div class="doppel-core">
-              <span class="step-num-pill">Stage 03 // Containment</span>
-              <h3 class="step-card-title">Autonomous Cloud Cryo-Lock</h3>
-              <p class="step-card-desc">
-                Upon a ransomware verdict, CloudRDR executes an automated IAM freeze in under 10 seconds. 
-                The attacker's credentials are stripped of write/delete privileges, isolating the threat before more files are compromised.
-              </p>
-              <div class="crypto-spec-box">
-                <span class="tag">IAM POLICY</span>
-                Deny-All Write/Delete // Read-Only Recovery
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 4: Incident Signing & Hash-Chain (Col 8) -->
-          <div class="bento-col-8 doppel-shell">
-            <div class="doppel-core">
-              <span class="step-num-pill">Stage 04 // Forensics & Audit</span>
-              <h3 class="step-card-title">RFC 8032 Ed25519 Incident Signing & Hash-Chained Log</h3>
-              <p class="step-card-desc">
-                Every incident is captured in canonical JSON and cryptographically signed using an Ed25519 keypair. 
-                Concurrently, telemetry events are recorded in an append-only hash chain where 
-                <code>Hash[N] = SHA-256(Hash[N-1] + EventData)</code>. Any alteration by an attacker or insider 
-                breaks the chain and is detected instantly.
-              </p>
-              <div class="crypto-spec-box">
-                <span class="tag">SIGNATURE</span>
-                Ed25519 Asymmetric Signature + SHA-256 Blockchain Ledger
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 5: Pure Verification (Col 6) -->
-          <div class="bento-col-6 doppel-shell">
-            <div class="doppel-core">
-              <span class="step-num-pill">Stage 05 // Cryptographic Verification</span>
-              <h3 class="step-card-title">AES-256-GCM AEAD Tag Authentication</h3>
-              <p class="step-card-desc">
-                Encrypted backups are retrieved using AES-256-GCM. The 128-bit authentication tag proves authenticity 
-                and integrity with Additional Authenticated Data (AAD) before decryption releases plaintext bytes.
-              </p>
-              <div class="crypto-spec-box">
-                <span class="tag">CIPHER</span>
-                AES-256-GCM with 96-bit Nonce & 128-bit Tag
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 6: 100% Proven Restore (Col 6) -->
-          <div class="bento-col-6 doppel-shell">
-            <div class="doppel-core">
-              <span class="step-num-pill">Stage 06 // Self-Healing</span>
-              <h3 class="step-card-title">100% Proven Restore & Root Re-Stamping</h3>
-              <p class="step-card-desc">
-                Decrypted files are re-hashed and checked against the pre-attack baseline. Only files with 
-                VERIFIED status are written back to storage. Once all leaves return to their original hashes, 
-                the Merkle root returns to normal and the incident is marked RESOLVED.
-              </p>
-              <div class="crypto-spec-box">
-                <span class="tag">OUTCOME</span>
-                Zero Corrupted Writes // 100% Baseline Convergence
+                Detection-to-freeze latency under 10 seconds SLA
               </div>
             </div>
           </div>
@@ -1344,151 +1698,86 @@
       </div>
     </section>
 
-    <!-- ── Live Simulation Walkthrough ───────────────────────────────────── -->
-    <section class="section-wrap" id="simulation">
+    <!-- ── INTERACTIVE BLOCKCHAIN AUDIT LEDGER ───────────────────────────── -->
+    <section class="section-wrap" id="audit-chain">
       <div class="container">
         
         <div class="section-header">
-          <div class="eyebrow-badge">Interactive Demo</div>
-          <h2 class="section-title">What Happens When You Click "Run Attack Simulation"</h2>
+          <div class="eyebrow-badge">Immutable Ledger</div>
+          <h2 class="section-title">Cryptographic Hash-Chained Audit Trail</h2>
           <p class="section-desc">
-            Inside the live SOC Console, you can trigger an end-to-end simulated ransomware attack. 
-            Here is the chronological sequence of defense mechanisms you will witness.
+            Attackers cannot tamper with incident records. Every security decision is linked via SHA-256 and signed with Ed25519.
           </p>
         </div>
 
-        <div class="sim-timeline-grid" id="simPhaseGrid">
-          
-          <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card active" data-phase="1" role="button" tabindex="0" aria-label="Phase 1: Calm Baseline. Click to inspect telemetry.">
-              <div class="sim-phase-time">PHASE 01 // 0.0s</div>
-              <h3 class="sim-phase-title">Calm Baseline</h3>
-              <p class="sim-phase-desc">
-                All 20+ leaves of the Merkle Tree are calm Cyber Emerald. Root hash matches baseline. Sentinel beacon pulses green.
-              </p>
-            </div>
-          </div>
-
-          <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card breach" data-phase="2" role="button" tabindex="0" aria-label="Phase 2: Tampering & Canary Strike. Click to inspect telemetry.">
-              <div class="sim-phase-time">PHASE 02 // 1.2s</div>
-              <h3 class="sim-phase-title">Tampering & Canary Strike</h3>
-              <p class="sim-phase-desc">
-                40% of files are modified. Sentinel detects canary tampering. Verdict flips to RANSOMWARE (red pulse). Merkle root changes.
-              </p>
-            </div>
-          </div>
-
-          <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card lock" data-phase="3" role="button" tabindex="0" aria-label="Phase 3: Cryo-Lock & Ed25519. Click to inspect telemetry.">
-              <div class="sim-phase-time">PHASE 03 // 2.0s</div>
-              <h3 class="sim-phase-title">Cryo-Lock & Ed25519</h3>
-              <p class="sim-phase-desc">
-                Attacker account status transitions to FROZEN (&lt;10s SLA). Incident is signed with Ed25519 and chained to the audit log.
-              </p>
-            </div>
-          </div>
-
-          <div class="doppel-shell">
-            <div class="doppel-core sim-phase-card restore" data-phase="4" role="button" tabindex="0" aria-label="Phase 4: Verified Pure Recovery. Click to inspect telemetry.">
-              <div class="sim-phase-time">PHASE 04 // 3.5s</div>
-              <h3 class="sim-phase-title">Verified Pure Recovery</h3>
-              <p class="sim-phase-desc">
-                Files are decrypted via AES-256-GCM. Hashes are re-verified. Merkle tree re-stamps back to green. Incident marked RESOLVED.
-              </p>
-            </div>
-          </div>
-
+        <div style="text-align:center;margin-bottom:1.5rem;">
+          <button class="cockpit-btn" id="tamperChainBtn" style="padding:8px 18px;font-size:0.85rem;">
+            <span>⚡ Simulate Attacker Modifying Block #1</span>
+          </button>
         </div>
 
-        <!-- Interactive Phase State Inspector Console -->
-        <div class="sim-state-inspector" id="simInspector" aria-live="polite" aria-label="Simulated phase telemetry inspector">
-          <div class="inspector-item">
-            <span class="inspector-label">Real-Time Threat Verdict</span>
-            <span class="inspector-val" id="inspVerdict" style="color:var(--emerald);">
-              <span style="font-size:0.75rem;">●</span> NORMAL
-            </span>
+        <div class="audit-chain-wrap" id="auditChainContainer">
+          
+          <div class="audit-block-card" id="auditBlock0">
+            <span class="audit-block-badge">BLOCK #0 · GENESIS</span>
+            <div style="color:var(--text-muted);font-size:0.75rem;">Action: Baseline Seal Established</div>
+            <div>PrevHash: <span style="color:var(--text-faint);">0000000000000000…</span></div>
+            <div>BlockHash: <span class="audit-block-hash" id="block0Hash">a8f902bc91e7...41d</span></div>
+            <div style="color:var(--emerald);font-size:0.7rem;margin-top:6px;">✓ ED25519 SIGNATURE VALID</div>
           </div>
 
-          <div class="inspector-item">
-            <span class="inspector-label">Sentinel Tripwire</span>
-            <span class="inspector-val" id="inspSentinel" style="color:var(--emerald);">
-              ARMED (Green Pulse)
-            </span>
+          <div class="audit-block-card" id="auditBlock1">
+            <span class="audit-block-badge">BLOCK #1 · RANSOMWARE ALERT</span>
+            <div style="color:var(--text-muted);font-size:0.75rem;" id="block1Payload">Payload: Account acc-01 Frozen</div>
+            <div>PrevHash: <span class="audit-block-hash" id="block1PrevHash">a8f902bc91e7...41d</span></div>
+            <div>BlockHash: <span class="audit-block-hash" id="block1Hash">7b140cd5e921...39f</span></div>
+            <div id="block1Sig" style="color:var(--emerald);font-size:0.7rem;margin-top:6px;">✓ ED25519 SIGNATURE VALID</div>
           </div>
 
-          <div class="inspector-item">
-            <span class="inspector-label">Cloud IAM Access State</span>
-            <span class="inspector-val" id="inspIam" style="color:#60A5FA;">
-              READ_WRITE (Active)
-            </span>
+          <div class="audit-block-card" id="auditBlock2">
+            <span class="audit-block-badge">BLOCK #2 · RESTORE VERIFIED</span>
+            <div style="color:var(--text-muted);font-size:0.75rem;">Action: 100% Hashes Re-verified</div>
+            <div>PrevHash: <span class="audit-block-hash" id="block2PrevHash">7b140cd5e921...39f</span></div>
+            <div>BlockHash: <span class="audit-block-hash" id="block2Hash">3ef871b6d081...a12</span></div>
+            <div id="block2Sig" style="color:var(--emerald);font-size:0.7rem;margin-top:6px;">✓ ED25519 SIGNATURE VALID</div>
           </div>
 
-          <div class="inspector-item">
-            <span class="inspector-label">Merkle Root Integrity</span>
-            <span class="inspector-val" id="inspMerkle" style="color:#38BDF8;">
-              100% INTACT (e3b0c442…)
-            </span>
-          </div>
-
-          <div class="inspector-item">
-            <span class="inspector-label">Audit Log Signature</span>
-            <span class="inspector-val" id="inspAudit" style="color:#A78BFA;">
-              BLOCK #0 (GENESIS)
-            </span>
-          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ── Tech Stack & Architecture ────────────────────────────────────── -->
-    <section class="section-wrap" id="architecture">
+    <!-- ── DEVELOPER CODE & CLI SUITE ────────────────────────────────────── -->
+    <section class="section-wrap" id="code-suite">
       <div class="container">
         
         <div class="section-header">
-          <div class="eyebrow-badge">Engineering Rigor</div>
-          <h2 class="section-title">Zero-Trust Enterprise Stack</h2>
+          <div class="eyebrow-badge">Developer API & CLI</div>
+          <h2 class="section-title">Engineered For Zero Overhead</h2>
           <p class="section-desc">
-            Built from scratch for high performance, zero external framework overhead, and complete cryptographic compliance.
+            Production Fastify REST endpoints, native Node.js crypto primitives, and automated test harnesses.
           </p>
         </div>
 
-        <div class="stack-grid">
-          
-          <div class="doppel-shell">
-            <div class="doppel-core">
-              <span class="stack-role-badge">BACKEND ARCHITECTURE</span>
-              <h3 class="stack-title">Fastify & Node.js 18+</h3>
-              <p class="stack-detail">
-                Ultra-fast REST API with sub-millisecond response times, strict rate limiting, schema validation, 
-                and structured JSON telemetry logging via Pino.
-              </p>
-            </div>
+        <div class="code-tabs-wrap">
+          <div class="code-tabs-nav">
+            <button class="code-tab-btn active" data-tab="cli">CLI Attack Harness</button>
+            <button class="code-tab-btn" data-tab="api">Fastify REST API</button>
+            <button class="code-tab-btn" data-tab="crypto">Crypto Primitives</button>
           </div>
 
-          <div class="doppel-shell">
-            <div class="doppel-core">
-              <span class="stack-role-badge">CRYPTOGRAPHIC PRIMITIVES</span>
-              <h3 class="stack-title">Node Crypto Built-ins</h3>
-              <p class="stack-detail">
-                Pairwise SHA-256 Merkle trees, RFC 8032 Ed25519 digital signatures, AES-256-GCM with 128-bit AEAD tags, 
-                and constant-time hash comparisons.
-              </p>
-            </div>
-          </div>
+          <div class="code-content-pane" id="codePane">
+<pre><code># Full simulated attack cycle: seeds files, modifies 40%, triggers detection → freeze → restore
+$ npm run simulate
 
-          <div class="doppel-shell">
-            <div class="doppel-core">
-              <span class="stack-role-badge">STORAGE & DATABASE</span>
-              <h3 class="stack-title">Supabase & Local Adapter</h3>
-              <p class="stack-detail">
-                Dual storage architecture: production-grade Supabase PostgreSQL with strict RLS policies, 
-                paired with a local filesystem adapter for instant offline testing and demos.
-              </p>
-            </div>
-          </div>
+# Run 50 unit and integration test suites
+$ npm test
 
+# Output:
+# pass 50
+# fail 0
+# duration_ms 1928ms (100% verified)</code></pre>
+          </div>
         </div>
 
       </div>
@@ -1503,8 +1792,9 @@
             Open the live Security Operations Center (SOC) console, inspect the Merkle tree, 
             and trigger the full attack-to-recovery simulation in real time.
           </p>
-          <a href="/dashboard" class="btn-hero-primary" style="margin: 0 auto;">
+          <a href="/dashboard" class="btn-hero-primary" style="margin: 0 auto;" title="Launch Security Operations Center Console (Shortcut: D)">
             <span>Enter Security Operations Center (SOC)</span>
+            <kbd class="kbd-shortcut">D</kbd>
             <span class="hero-btn-icon" aria-hidden="true">↗</span>
           </a>
         </div>
@@ -1528,7 +1818,7 @@
   <!-- Global Toast Notification Container -->
   <div id="toast-container" class="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
 
-  <!-- Interactive Capabilities Module -->
+  <!-- ── Interactive Engine Module ──────────────────────────────────────── -->
   <script type="module">
     // 1. Toast Notification Helper
     function showToast(message, type = 'info', duration = 3000) {
@@ -1599,96 +1889,264 @@
       });
     });
 
-    // 4. Interactive Simulation Phase Stepper
-    const phaseData = {
-      1: {
-        verdict: 'NORMAL',
-        verdictColor: 'var(--emerald)',
-        sentinel: 'ARMED (Green Pulse)',
-        sentinelColor: 'var(--emerald)',
-        iam: 'READ_WRITE (Active)',
-        iamColor: '#60A5FA',
-        merkle: '100% INTACT (e3b0c442…)',
-        merkleColor: '#38BDF8',
-        audit: 'BLOCK #0 (GENESIS)',
-        toast: 'Phase 1: Baseline established. Continuous Merkle tree integrity verification active.',
-        toastType: 'info'
-      },
-      2: {
-        verdict: 'SUSPICIOUS',
-        verdictColor: 'var(--amber)',
-        sentinel: 'TRIPWIRE ACCELERATING (15% alter)',
-        sentinelColor: 'var(--amber)',
-        iam: 'EVALUATING (Sliding window 60s)',
-        iamColor: 'var(--amber)',
-        merkle: '3 LEAVES ALTERED',
-        merkleColor: 'var(--amber)',
-        audit: 'BLOCK #1 (ANOMALY DETECTED)',
-        toast: 'Phase 2: Bulk file alteration rate crossed suspicious threshold (15%).',
-        toastType: 'warning'
-      },
-      3: {
-        verdict: 'RANSOMWARE',
-        verdictColor: 'var(--crimson)',
-        sentinel: 'CANARY COMPROMISED (Tampered)',
-        sentinelColor: 'var(--crimson)',
-        iam: 'FROZEN (<10s IAM Deny-All)',
-        iamColor: 'var(--crimson)',
-        merkle: 'DAG ROOT COMPROMISED',
-        merkleColor: 'var(--crimson)',
-        audit: 'BLOCK #2 (Ed25519 CRYPTO SIGNED)',
-        toast: 'Phase 3: RANSOMWARE BREACH! Automated account freeze locked under 10 seconds.',
-        toastType: 'threat'
-      },
-      4: {
-        verdict: 'RESOLVED',
-        verdictColor: 'var(--emerald)',
-        sentinel: 'RE-SEALED (Sentinel Restored)',
-        sentinelColor: 'var(--emerald)',
-        iam: 'RESTORE COMPLETED (Validated)',
-        iamColor: 'var(--emerald)',
-        merkle: '100% RE-SEALED (Baseline Verified)',
-        merkleColor: '#38BDF8',
-        audit: 'BLOCK #3 (AUDIT CHAIN SEALED)',
-        toast: 'Phase 4: AES-256-GCM AEAD restore verified. 100% cryptographic hashes re-stamped.',
-        toastType: 'success'
+    // 4. Hero Live Interactive Cockpit Merkle Tree
+    const heroSvg = document.getElementById('hero-merkle-svg');
+    const heroDot = document.getElementById('heroDot');
+    const heroSubStatus = document.getElementById('heroSubStatus');
+    const heroMerkleHash = document.getElementById('heroMerkleHash');
+    const heroLeafState = document.getElementById('heroLeafState');
+    const heroVerdictVal = document.getElementById('heroVerdictVal');
+    const heroIamVal = document.getElementById('heroIamVal');
+    const heroSentinelVal = document.getElementById('heroSentinelVal');
+
+    const heroLeafNodes = [];
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+
+    function initHeroTree() {
+      if (!heroSvg) return;
+      while (heroSvg.firstChild) heroSvg.removeChild(heroSvg.firstChild);
+      heroLeafNodes.length = 0;
+
+      const leafCount = 8;
+      const spacing = 500 / (leafCount + 1);
+      const leafY = 130;
+      const rootX = 250;
+      const rootY = 25;
+
+      // Draw Root
+      const rootCircle = document.createElementNS(SVG_NS, 'circle');
+      rootCircle.setAttribute('cx', rootX);
+      rootCircle.setAttribute('cy', rootY);
+      rootCircle.setAttribute('r', '10');
+      rootCircle.setAttribute('fill', '#38BDF8');
+      heroSvg.appendChild(rootCircle);
+
+      // Draw Leaves & Edges
+      for (let i = 0; i < leafCount; i++) {
+        const lx = spacing * (i + 1);
+        const ly = leafY;
+
+        // Line
+        const line = document.createElementNS(SVG_NS, 'line');
+        line.setAttribute('x1', rootX);
+        line.setAttribute('y1', rootY);
+        line.setAttribute('x2', lx);
+        line.setAttribute('y2', ly);
+        line.setAttribute('stroke', 'rgba(255,255,255,0.12)');
+        line.setAttribute('stroke-width', '1.5');
+        heroSvg.insertBefore(line, heroSvg.firstChild);
+
+        // Leaf Circle
+        const circle = document.createElementNS(SVG_NS, 'circle');
+        circle.setAttribute('cx', lx);
+        circle.setAttribute('cy', ly);
+        circle.setAttribute('r', '8');
+        circle.setAttribute('fill', '#10B981');
+        circle.style.transition = 'all 0.3s ease';
+        heroSvg.appendChild(circle);
+
+        heroLeafNodes.push({ circle, line });
       }
+    }
+
+    initHeroTree();
+
+    // Hero Attack Simulation Trigger
+    let heroBreached = false;
+    document.getElementById('heroAttackBtn')?.addEventListener('click', () => {
+      if (heroBreached) return;
+      heroBreached = true;
+
+      // Corrupt 4 leaves
+      [1, 3, 4, 6].forEach((idx, i) => {
+        setTimeout(() => {
+          heroLeafNodes[idx].circle.setAttribute('fill', '#EF4444');
+          heroLeafNodes[idx].circle.setAttribute('r', '11');
+          heroLeafNodes[idx].line.setAttribute('stroke', 'rgba(239, 68, 68, 0.5)');
+        }, i * 150);
+      });
+
+      setTimeout(() => {
+        heroDot.className = 'cockpit-dot-indicator breach';
+        heroSubStatus.textContent = 'RANSOMWARE BREACH DETECTED — ACCOUNT FROZEN';
+        heroSubStatus.style.color = '#EF4444';
+        heroMerkleHash.textContent = '8a12f901…c41 (COMPROMISED)';
+        heroMerkleHash.style.color = '#EF4444';
+        heroLeafState.textContent = '4/8 Leaves Corrupt';
+        heroVerdictVal.style.color = '#EF4444';
+        heroVerdictVal.textContent = '⚡ RANSOMWARE';
+        heroIamVal.style.color = '#EF4444';
+        heroIamVal.textContent = 'FROZEN (<10s SLA)';
+        heroSentinelVal.style.color = '#EF4444';
+        heroSentinelVal.textContent = 'CANARY TAMPERED';
+
+        showToast('CRITICAL BREACH: 40% bulk alteration detected. IAM Cryo-Lock enforced.', 'threat', 3500);
+      }, 700);
+    });
+
+    // Hero Restore Baseline Trigger
+    document.getElementById('heroRestoreBtn')?.addEventListener('click', () => {
+      heroBreached = false;
+      heroLeafNodes.forEach((node, i) => {
+        setTimeout(() => {
+          node.circle.setAttribute('fill', '#10B981');
+          node.circle.setAttribute('r', '8');
+          node.line.setAttribute('stroke', 'rgba(255,255,255,0.12)');
+        }, i * 80);
+      });
+
+      setTimeout(() => {
+        heroDot.className = 'cockpit-dot-indicator';
+        heroSubStatus.textContent = 'Continuous Merkle Tree DAG verification active';
+        heroSubStatus.style.color = 'var(--text-muted)';
+        heroMerkleHash.textContent = 'e3b0c442…855 (VERIFIED)';
+        heroMerkleHash.style.color = '#38BDF8';
+        heroLeafState.textContent = '8/8 Leaves Sealed';
+        heroVerdictVal.style.color = '#10B981';
+        heroVerdictVal.textContent = '● NORMAL';
+        heroIamVal.style.color = '#60A5FA';
+        heroIamVal.textContent = 'READ_WRITE';
+        heroSentinelVal.style.color = '#10B981';
+        heroSentinelVal.textContent = 'ARMED (Green Pulse)';
+
+        showToast('AEAD Restore verified: 100% cryptographic hashes re-stamped.', 'success', 3000);
+      }, 700);
+    });
+
+    // 5. Interactive Velocity Simulator Slider
+    const vSlider = document.getElementById('velocitySlider');
+    const vLabel = document.getElementById('velocityRateLabel');
+    const vBadge = document.getElementById('velocityVerdictBadge');
+
+    vSlider?.addEventListener('input', (e) => {
+      const val = Number(e.target.value);
+      vLabel.textContent = `${val}%`;
+
+      if (val < 10) {
+        vBadge.textContent = '● NORMAL';
+        vBadge.style.color = 'var(--emerald)';
+      } else if (val < 30) {
+        vBadge.textContent = '● SUSPICIOUS';
+        vBadge.style.color = 'var(--amber)';
+      } else {
+        vBadge.textContent = '⚡ RANSOMWARE';
+        vBadge.style.color = 'var(--crimson)';
+      }
+    });
+
+    // 6. Interactive Leaf Tampering Test
+    let leafTampered = false;
+    document.getElementById('tamperLeafBtn')?.addEventListener('click', () => {
+      leafTampered = !leafTampered;
+      const leafHash = document.getElementById('tamperLeafHash');
+      const rootHash = document.getElementById('tamperRootHash');
+      const btn = document.getElementById('tamperLeafBtn');
+
+      if (leafTampered) {
+        btn.textContent = 'Revert';
+        btn.style.borderColor = 'var(--crimson)';
+        leafHash.textContent = '9a77cc01...e3b (TAMPERED)';
+        leafHash.style.color = 'var(--crimson)';
+        rootHash.textContent = '8f12a93c...011 (MISMATCH)';
+        rootHash.style.color = 'var(--crimson)';
+        showToast('Leaf byte altered! Merkle root calculation instantly fails.', 'threat', 2500);
+      } else {
+        btn.textContent = 'Corrupt 1 Byte';
+        btn.style.borderColor = 'var(--border-light)';
+        leafHash.textContent = '4f89d12a...7c8 (CLEAN)';
+        leafHash.style.color = 'var(--emerald)';
+        rootHash.textContent = 'e3b0c442...855 (VALID)';
+        rootHash.style.color = '#38BDF8';
+        showToast('Baseline restored. Root verified.', 'success', 2000);
+      }
+    });
+
+    // 7. Interactive Audit Chain Tamper Simulator
+    let chainTampered = false;
+    document.getElementById('tamperChainBtn')?.addEventListener('click', () => {
+      chainTampered = !chainTampered;
+      const b1 = document.getElementById('auditBlock1');
+      const b2 = document.getElementById('auditBlock2');
+      const p1 = document.getElementById('block1Payload');
+      const h1 = document.getElementById('block1Hash');
+      const s1 = document.getElementById('block1Sig');
+      const s2 = document.getElementById('block2Sig');
+      const btn = document.getElementById('tamperChainBtn');
+
+      if (chainTampered) {
+        btn.querySelector('span').textContent = '↺ Restore Chain Integrity';
+        b1.classList.add('tampered');
+        b2.classList.add('tampered');
+        p1.textContent = 'Payload: [UNAUTHORIZED_MODIFICATION]';
+        p1.style.color = '#EF4444';
+        h1.textContent = '00000000_TAMPERED_0000';
+        h1.style.color = '#EF4444';
+        s1.textContent = '✕ ED25519 SIGNATURE BROKEN';
+        s1.style.color = '#EF4444';
+        s2.textContent = '✕ PREV_HASH MISMATCH (CHAIN BROKEN)';
+        s2.style.color = '#EF4444';
+        showToast('Tampering detected! Immutable blockchain link invalidates all subsequent blocks.', 'threat', 3500);
+      } else {
+        btn.querySelector('span').textContent = '⚡ Simulate Attacker Modifying Block #1';
+        b1.classList.remove('tampered');
+        b2.classList.remove('tampered');
+        p1.textContent = 'Payload: Account acc-01 Frozen';
+        p1.style.color = 'var(--text-muted)';
+        h1.textContent = '7b140cd5e921...39f';
+        h1.style.color = '#38BDF8';
+        s1.textContent = '✓ ED25519 SIGNATURE VALID';
+        s1.style.color = 'var(--emerald)';
+        s2.textContent = '✓ ED25519 SIGNATURE VALID';
+        s2.style.color = 'var(--emerald)';
+        showToast('Chain integrity restored. All signatures re-validated.', 'success', 2500);
+      }
+    });
+
+    // 8. Tabbed Code Suite Switcher
+    const codeTabs = {
+      cli: `# Full simulated attack cycle: seeds files, modifies 40%, triggers detection → freeze → restore
+$ npm run simulate
+
+# Run 50 unit and integration test suites
+$ npm test
+
+# Output:
+# pass 50
+# fail 0
+# duration_ms 1928ms (100% verified)`,
+      api: `// GET /baseline/:bucket — Retrieve snapshot + Merkle root
+HTTP/1.1 200 OK
+{
+  "bucket": "protected",
+  "merkle_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "file_count": 20
+}
+
+// POST /incidents/:id/restore — Trigger verified restore
+HTTP/1.1 202 Accepted
+{ "job_id": "8f3b21-4a1d-9102", "status": "running" }`,
+      crypto: `import { hashStream, merkleRoot, signRecord } from './crypto.js';
+
+// Pairwise Bitcoin-style Merkle Root calculation
+const root = merkleRoot(leafHashes);
+
+// RFC 8032 Ed25519 asymmetric incident signing
+const { signature, keyId } = signRecord(incidentRecord);`
     };
 
-    const phaseCards = document.querySelectorAll('.sim-phase-card');
-    phaseCards.forEach((card) => {
-      const activate = () => {
-        phaseCards.forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-        const phase = card.getAttribute('data-phase');
-        const data = phaseData[phase];
-        if (data) {
-          const vEl = document.getElementById('inspVerdict');
-          const sEl = document.getElementById('inspSentinel');
-          const iEl = document.getElementById('inspIam');
-          const mEl = document.getElementById('inspMerkle');
-          const aEl = document.getElementById('inspAudit');
-
-          if (vEl) { vEl.style.color = data.verdictColor; vEl.textContent = `● ${data.verdict}`; }
-          if (sEl) { sEl.style.color = data.sentinelColor; sEl.textContent = data.sentinel; }
-          if (iEl) { iEl.style.color = data.iamColor; iEl.textContent = data.iam; }
-          if (mEl) { mEl.style.color = data.merkleColor; mEl.textContent = data.merkle; }
-          if (aEl) { aEl.textContent = data.audit; }
-
-          showToast(data.toast, data.toastType, 2800);
-        }
-      };
-
-      card.addEventListener('click', activate);
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          activate();
+    document.querySelectorAll('.code-tab-btn').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.code-tab-btn').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const key = tab.getAttribute('data-tab');
+        const codePane = document.getElementById('codePane');
+        if (codePane && codeTabs[key]) {
+          codePane.innerHTML = `<pre><code>${codeTabs[key]}</code></pre>`;
         }
       });
     });
 
-    // 5. Global Keyboard Shortcuts (D for SOC, 1-4 for sections)
+    // 9. Global Keyboard Shortcuts (D for SOC, 1-4 for sections)
     window.addEventListener('keydown', (e) => {
       const target = e.target;
       const isEditing = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
@@ -1699,20 +2157,20 @@
         window.location.href = '/dashboard';
       } else if (e.key === '1') {
         e.preventDefault();
-        document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('interactive-cockpit')?.scrollIntoView({ behavior: 'smooth' });
       } else if (e.key === '2') {
         e.preventDefault();
-        document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' });
       } else if (e.key === '3') {
         e.preventDefault();
-        document.getElementById('simulation')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('lifecycle')?.scrollIntoView({ behavior: 'smooth' });
       } else if (e.key === '4') {
         e.preventDefault();
-        document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('audit-chain')?.scrollIntoView({ behavior: 'smooth' });
       }
     });
 
-    // 6. Intersection Observer for Scroll Entrance
+    // 10. Intersection Observer for Smooth Scroll Reveal
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
