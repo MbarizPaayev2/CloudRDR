@@ -1,17 +1,17 @@
 # Graph Report - CloudRDR  (2026-10-14)
 
 ## Corpus Check
-- 862 files · ~1,274,677 words
+- 1113 files · ~2,344,397 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 24 file(s) not represented in the graph (top: (none) 8, .css 6, .toml 4)
+- Unclassified: 33 file(s) not represented in the graph (top: .css 14, (none) 9, .toml 4)
 
 ## Summary
-- 11968 nodes · 16451 edges · 864 communities (681 shown, 183 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 298 edges (avg confidence: 0.9)
+- 17770 nodes · 23260 edges · 1202 communities (1004 shown, 198 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 521 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7ee42705`
+- Built from commit: `f7f86e69`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -25,26 +25,26 @@
 - package.json
 - DesignSystemGenerator
 - validate-tokens.cjs
-- citations.mjs
+- sys
 - spacing
 - crypto.contract.js
 - site/js/mock/mockApi.js
 - live-browser.js
-- supabaseClient.js
+- ref_node_fs
 - html-token-validator.py
 - dashboard/js/state.js
 - caseFile.js
-- Client-Side and Browser Hunting
-- connectSSE
-- getSupabaseClient
+- Anime.js Timeline Guide
+- resumeSession
+- run-metrics-harness.js
 - Supply Chain and Release Hunting
 - generate-slide.py
 - slide_search_core.py
 - server.js
 - json
 - inspect.mjs
-- test_core.py
-- setLiveState
+- GSAP Easing Functions - Visual Guide
+- Individual Hook Reference
 - detectionEngine.js
 - color
 - 4. Component Stylings
@@ -59,7 +59,7 @@
 - lint.mjs
 - card
 - Components
-- syncPageChatFocus
+- initPageChat
 - Design System Inspired by Mastercard
 - duration
 - Page
@@ -69,19 +69,19 @@
 - validate-coverage-ledger.cjs
 - input
 - radius
-- $impeccable hooks
-- test_catalog_summary_line_endings.py
+- .on
+- pathlib
 - dashboard/js/components/merkleTree.js
 - mongodb/DESIGN.md
 - rules.mjs
 - nvidia/DESIGN.md
-- showToast
+- connectSSE
 - workspace-resolver.mjs
 - $type
 - radius
 - bmw/DESIGN.md
 - cursor/DESIGN.md
-- TestStackFlagWithDesignSystem
+- Three.js WebGL/WebGPU Development
 - expo/DESIGN.md
 - validate-findings.cjs
 - padding-y
@@ -96,8 +96,8 @@
 - primary-foreground
 - ring
 - secondary-foreground
-- colorize.md
-- contract.mjs
+- Anime.js Stagger Guide
+- GSAP & ScrollTrigger Development
 - el
 - Design System Inspired by Lamborghini
 - mistral.ai/DESIGN.md
@@ -188,7 +188,7 @@
 - CloudRDR — Cloud Ransomware Detection & Recovery
 - The run
 - SKILL: Industrial Brutalism & Tactical Telemetry UI
-- AI-Slop Motion Patterns
+- animate
 - tasteskill: Anti-Slop Frontend Skill
 - Appendix B - Canonical Sources (read these before reinventing)
 - Copywriting Formulas
@@ -235,7 +235,7 @@
 - Critique — judging the render
 - 11. COMPONENT EXECUTION GUIDELINES
 - 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE
-- 4. STRIDE Threat Analysis
+- AuditLog
 - MonitorAgent
 - Mandatory Pre-Flight Checklist (Run Before Every Task)
 - 9. AI TELLS (Forbidden Patterns)
@@ -244,8 +244,8 @@
 - Ponytail Help
 - Accessibility Reference
 - CloudRDR — Threshold Sweep Experiment Report
-- lineOf
-- Creation Gotchas
+- scanners/index.mjs
+- PlayCanvas Optimization Guide
 - Jakub Krehel's Animation Principles
 - Motion Cookbook
 - 2. Easing & Timing
@@ -267,7 +267,7 @@
 - 29. ANTI-AI-SLOP RULES
 - 5. IMAGE COUNT & PAGE SLICING
 - Design System Template
-- captureElementToBlob
+- Scroll Reveal Libraries
 - new-work.md
 - initGlobalBar
 - 12. THE BLOCK LIBRARY (Contract - Implementations Land Here Iteratively)
@@ -283,12 +283,12 @@
 - Awesome DESIGN.md — Design System Specifications
 - Codeburn — AI Spend & Token Waste Optimization
 - Responsive Design Reference
-- 14. Scroll-Driven Animations (Jhey)
+- GSAP ScrollTrigger Starter Template
 - perplexity-ask/package.json
-- 3. Visual Effects
-- 7. CSS Custom Properties & @property (Jhey)
+- Web Accessibility Guide (WCAG AAA Compliance)
+- Web Performance Optimization Checklist
 - investigation-brief.mjs
-- name
+- Implementation Workflow
 - sanitizers/index.mjs
 - live.md
 - 7. DIAL DEFINITIONS (Technical Reference)
@@ -391,7 +391,7 @@
 - x.ai/README.md
 - zapier/README.md
 - references/create.md
-- build-minutes-fanout.mjs
+- A-Frame Community Components Library
 - ATTACK-CLASSES.md
 - Motion Specification Template
 - Lift-Test Templates
@@ -426,7 +426,7 @@
 - evaluation.py
 - Anti-Vanity Diagnostic Lenses
 - AEO Content Optimization Skill
-- text
+- Component Customization Guide
 - onAnnotDown
 - Capabilities
 - route-normalize.mjs
@@ -465,14 +465,14 @@
 - 5. Re-render Optimization
 - Agentic UX Design - Relationship-Centric Interfaces
 - display-labels.mjs
-- ref_node_fs
+- backupService.js
 - Article 50: interaction, marking, and disclosure
 - Generate Report
 - Negentropy Lens
 - 7. JavaScript Performance
 - Quick Reference
 - Process
-- test_skill_script_paths.py
+- GSAP ScrollTrigger Examples
 - vercel-optimize
 - Tailwind Design System
 - primitive
@@ -491,14 +491,14 @@
 - Init flow
 - New visual work
 - Kill Criteria Template
-- confirmed
+- validate-findings.test.cjs
 - Innovative UX Designer V3
 - EU AI Act Reviewer
 - reference/critique.md
 - Simplify the Design
 - Hardening Dimensions
-- k
-- L
+- Individual Hooks
+- PixiJS Performance Optimization Guide
 - Channel Tier Stack
 - mcp-builder/SKILL.md
 - Playwright Library Architecture: Client, Server, and Dispatchers
@@ -507,10 +507,10 @@
 - dashboard/js/config.js
 - 6. Rendering Performance
 - Patterns and Guidelines
-- View Transitions in Next.js
+- name
 - View Transitions in Next.js
 - Patterns and Guidelines
-- validate-findings.test.cjs
+- Anime.js
 - Doctrine
 - AI Visibility Assessment Framework
 - Code Conventions
@@ -529,7 +529,7 @@
 - Responsive Design Essentials
 - React Composition Patterns
 - Design Principles
-- Responsive Design
+- sound.mjs
 - Sector Riders
 - playwright-dev/SKILL.md
 - Playwright Trace System - Comprehensive Guide
@@ -550,7 +550,7 @@
 - iOS platform
 - Operate mode depth (and Read notes)
 - Shape
-- qt
+- Babylon.js Engine Skill
 - Asymmetry Audit Table
 - WebView (iOS Safari) Backend Reference
 - React Best Practices
@@ -568,8 +568,8 @@
 - The Spec Driven Development Extension
 - Android platform
 - Persona-Based Design Testing
-- sys
-- undeclared-dep.mjs
+- package_skill.py
+- stroke
 - Quality Checklist
 - Bisecting a Regression Across Published Playwright Versions
 - 3.1 Core Event Types
@@ -596,6 +596,7 @@
 - Playwright Issue Triage
 - 1. Eliminating Waterfalls
 - 2. Bundle Size Optimization
+- react-view-transitions/AGENTS.md
 - Summary: Relationship Design Readiness
 - Common Mistakes
 - framework-support.mjs
@@ -619,18 +620,18 @@
 - Phase 6: Solution Validation Checklist
 - Phase 2: Systems Thinking Checklist
 - Post-Mortem Checklist
-- Example 6: The Framework Migration Temptation
+- PixiJS Starter Template
 - The Five Pillars
 - Questions to Always Ask
 - The Foundation: Loyalty
 - The Architect Process
-- CloudRDR — Risk Register v1 & Asset Classification
+- Awesome Claude Video Skills
 - Visualize: Direction Comps & Asset Production
-- ye
+- Spline Interactive - Browser-Based 3D Design and Animation
 - Evaluation Process
 - Advanced MCP Features
 - Advanced FastMCP Features
-- .update
+- .display
 - Adding CLI Commands
 - React Best Practices
 - React View Transitions Skill
@@ -638,9 +639,9 @@
 - Quick Start: Minimum Viable Relationship (MVR)
 - Common Implementation Pitfalls
 - The Five Pillars of Agentic UX
-- unoptimized-image.mjs
+- A-Frame WebXR Skill
 - Security Audit
-- dashboard/js/components/detectionChart.js
+- core.mjs
 - queries.mjs
 - API service
 - Content site
@@ -655,15 +656,15 @@
 - verify-and-regen.mjs
 - AI, LLM, and Agent Hunting
 - Quick Pre-Meeting Checklist
-- Example 4: AI-Assisted Legacy Refactoring
+- Lightweight 3D Effects Skill
 - AI Operational Loyalty
-- Region map
-- lib/budget-summary.mjs
+- Pen
+- Barba.js
 - Flipping the Switch: From Decay to Growth
 - Server Layer
 - platform-fluid-compute.mjs
 - 8. Trace Loading (traceLoader.ts)
-- grade-recommendation.mjs
+- Design Engineering
 - Example 1: EU B2B Relationship Cockpit (Automotive Service Networks)
 - Memory Architecture: Technical Patterns
 - Relationship Metrics: Implementation Guide
@@ -716,6 +717,7 @@
 - use-cache-date-stamp-isr-write-amplifier.md
 - workflow-resumable-stream-routes.md
 - Voice
+- os
 - Quick Testing Protocol
 - Tools & Resources
 - How to Use This Repository
@@ -832,11 +834,11 @@
 - large-static-asset.mjs
 - Semaphore
 - 2.4 Navigable
-- dashboard/js/components/incidentDetail.js
-- Phase 6: Produce target-neutral reports from final records
-- isr-overrevalidation.mjs
-- observability-events-attribution.mjs
-- select-candidates.mjs
+- Micro-Interaction Patterns Catalog
+- PixiJS Filters & Visual Effects Guide
+- PixiJS 2D Rendering Skill
+- Substance 3D Painter Python API Reference
+- Blender Web Pipeline
 - 1.4 Distinguishable
 - WCAG Audit Patterns
 - doctor.md
@@ -863,65 +865,399 @@
 - Fix Strix findings and verify
 - Test against the OWASP Top 10
 - Pentest a web application
-- cost-coverage.mjs
-- Impeccable Documenter
-- external-api-slow.mjs
-- statusBar.js
-- cold-start.mjs
+- Lightweight 3D Effects - Starter Template
+- After Effects to Lottie Export Guide
+- Web Design Trends 2024-2025
 - restorePanel.js
+- PlayCanvas Engine API Reference
+- Spring Physics Deep Dive
+- R3FComponentGenerator
+- renderDesignVisual
+- PlayCanvas Engine Skill
+- Babylon.js Real-World Examples
+- Barba.js + GSAP Integration Guide
+- React Spring API Reference
+- Animated Component Libraries
+- Expo Animation Recipes
+- GSAP ScrollTrigger Integration with Locomotive Scroll
+- Lottie Animations
+- Motion Starter Template
+- React Spring Physics
+- Drei Helpers
+- Rive Interactive - State Machine-Based Vector Animation
+- AOS Examples and Integration Patterns
+- Lottie Performance Optimization Guide
+- PlayCanvas Examples
+- Substance 3D Painter Export Presets
+- InputManager
+- Substance 3D Texturing
+- Three.js Materials Comprehensive Guide
+- A-Frame Starter Template
+- Babylon.js Starter Template
+- Motion & Framer Motion
+- Locomotive Scroll Starter Template
+- MotionAnimationGenerator
+- aggregate_benchmark.py
+- Hooks
+- generate_review.py
+- PBR Texture Channel Guide
+- Three.js Performance Optimization Checklist
+- GSAP & ScrollTrigger API Quick Reference
+- TimelineBuilder
+- Vanta.js Effects Reference
+- setup_vanta.py
+- Modern Web Design Assets
+- Web 3D Integration Patterns
+- Magic UI Component Catalog
+- React Bits Component Library Reference
+- Barba.js Transition Patterns Library
+- Locomotive Scroll
+- R3FSceneSetup
+- Lightweight 3D Effects - Production Examples
+- React Three Fiber Starter Template
+- Spline React API Reference
+- starter_babylon/package.json
+- chiptune.mjs
+- VariantBuilder
+- ant.mjs
+- Animation Audit Playbook
+- React Three Fiber - Real-World Component Examples
+- Locomotive Scroll API Reference
+- starter_motion/package.json
+- Substance 3D Texturing Assets
+- aframe-webxr/scripts/component_builder.py
+- textures.mjs
+- Write Swift
+- CameraController
+- AOS API Reference
+- starter_scene/main.js
+- A-Frame WebXR Examples
+- Anime.js - Assets
+- music.mjs
+- Framer Motion Reference
+- Apple Design
+- generate_zdog.py
+- A-Frame API Reference
+- aframe-webxr/scripts/scene_generator.py
+- number
+- Prototyping Variants
+- Lottie API Reference
+- Spline Interactive - Assets
+- scan-codebase.mjs
+- size
+- dashboard.js
+- DesignAuditor
+- playcanvas-engine/scripts/project_generator.py
+- Popmotion API Reference
+- Event Handler Props
+- Performance
+- Glossary
+- Breaking UI
+- The Fixes
+- starter_lightweight/main.js
+- Shape Types
+- generate_config.py
+- starter_r3f/package.json
+- Three.js Starter Scene
+- test_relevance_evaluator.py
+- Core Components
+- Animated Component Libraries - Assets
+- CSS Animations Reference
+- Next.js Animations
+- PlayCanvas Starter Template
+- React Spring Physics - Assets
+- Starter Templates
+- lerp
+- Animation Recipes
+- Finding Animation Opportunities
+- Building Animations
+- Animation Standards Reference
+- bean.mjs
+- ref_react
+- Easing and Timing Reference
+- starter_scroll/main.js
+- starter_locomotive/package.json
+- integration_helper.py
+- starter_motion/src/App.jsx
+- PixiJS API Reference
+- substance-3d-texturing/scripts/batch_export.py
+- props_generator.py
+- babylonjs-engine/scripts/scene_generator.py
+- ambient.mjs
+- Lottie Starter Template
+- config_builder.py
+- 3D Model Optimization Strategies
+- Worst-Case Catalog
+- Reviewing Animations
+- Configuration Options Details
+- Primitives
+- Babylon.js API Reference
+- Memory Safety, Binary, and Kernel Hunting
+- embed-tokens.cjs
+- The list
+- Zdog API Reference
+- Advanced Techniques
+- Appearance Properties
+- Motion / Framer Motion Examples
+- Data Attributes
+- Properties
+- app-store-card.tsx
+- GSAP & ScrollTrigger Common Patterns
+- Hierarchy
+- Motion & Framer Motion - Complete API Reference
+- Hooks
+- Built-in Filters
+- Graphics
+- Global Configuration Options
+- JavaScript API
+- Anime.js API Reference
+- generate_lods.py
+- claude-animation/package.json
+- Terminal mode (flag-triggered fallback)
+- Working With Sonner
+- Vanilla-Tilt.js Patterns Reference
+- Core Classes
+- Directional Zoom Out
+- Guidelines & Rules
+- A-Frame WebXR Integration Guide
+- Examples
+- BABYLON.StandardMaterial
+- Blender glTF Export Complete Guide
+- Motion: timing, acting, camera
+- Component Building Principles
+- Animation
+- Core Design Principles (2024-2025)
+- Resources
+- Common Design Patterns
+- Application
+- update
+- Integration with Drei Helpers
+- Common Patterns
+- Diagonal Fades
+- Easing Functions
+- Core Classes
+- rendering-mode-mislabel.mjs
+- Testing and Debugging
+- BABYLON.Texture
+- Blender Web Pipeline Assets
+- multi-step-flow.tsx
+- Animate Skill for Claude Code
+- Anti-Checklist
+- document.md
+- Common Pitfalls
+- Performance Optimization
+- Common Pitfalls
+- PixiJS Examples and Patterns
+- Container
+- Events
+- PlayCanvas Editor Workflow Guide
+- dependencies
+- React Three Fiber
+- Performance Optimization
+- Common Pitfalls & Solutions
+- Rive Interactive - Assets
+- AOS Animation Catalog
+- Optimization Tips
+- Disable Options
+- Three.js API Quick Reference
+- Lights
+- cache-components-suspense-dedupe.mjs
+- AR Mode Configuration
+- Common Issues
+- Controller Systems
+- VR Mode Configuration
+- Hand Tracking
+- Performance Optimization
+- Timeline
+- Helpers
+- Colors
+- Cameras
+- Lights
+- BABYLON.Mesh
+- BABYLON.Scene
+- Blender Python API Quick Reference
+- clip-path for Animation
+- Performance Rules
+- Scroll-Triggered Animations
+- Pinning Patterns
+- Advanced Techniques
+- Common Patterns
+- Modern Web Design
+- Performance Optimization
+- Accessibility Best Practices
+- Best Practices Summary
+- Scroll-Based Animations
+- Utilities
+- Gesture Props
+- Transition Options
+- DisplayObject
+- ParticleContainer
+- Customization
+- devDependencies
+- Best Practices
+- Anchor Placement Values
+- Constants
+- Animation
+- Component API
+- AR Hit Testing
+- Platform Support
+- Stagger
+- Property Parameters
+- Properties
+- Animations
+- BABYLON.Engine
+- Physics
+- 10. Button & Interactive Feedback (Emil)
+- 11. CSS Transitions vs Keyframes (Emil)
+- Spring Animations
+- Stagger Animations
+- Text Animations
+- Navigation & UI
+- Framework Integration
+- Methods
+- Rotation Options
+- Advanced Layout Animations
+- Modal & Dialog Patterns
+- Loading States
+- Page Transitions
+- AnimatePresence
+- Particle Systems
+- Interactive Elements
+- Filters and Effects
+- Basic Applications
+- Performance Optimization
+- Game Development
+- Animation Patterns
+- Custom Shaders
+- starter_pixijs/main.js
+- Assets
+- Utility Classes
+- Sprite
+- Texture
+- Performance Optimization
+- Editor-Code Integration
+- Script Workflow
+- Core Concepts
+- Resources
+- Directional Fades
+- Directional Zoom In
+- Quick Reference
+- Flip Animations
+- Slide Animations
+- Constants
+- Controls
+- Entity
+- 1. Enter & Exit Animations
+- Scroll Progress Indicators
+- Integration Patterns
+- Horizontal Scrolling
+- Parallax Effects
+- Timeline Sequences
+- Image Reveals
+- Common Gotchas
+- Best Practices
+- Axis Control
+- Getting Started
+- Events
+- Glare Effect
+- Troubleshooting
+- Integration with Other Skills
+- Navigation Menus
+- List Animations
+- Shared Element Transitions
+- Complex Gestures
+- Form Animations
+- Animation Props
+- Variants
+- Event Info Types
+- Layout Props
+- Advanced Techniques
+- UI Components
+- Text
+- Quick Start
+- Asset Pipeline
+- Tips & Best Practices
+- Scene Management
+- Project Setup
+- Quick Reference
+- Publishing & Deployment
+- Animation Combinations
+- Custom Animations
+- Geometry
+- Math Utilities
+- Mesh
+- Loaders
+- Callbacks
+- Animation Instance
+- toast-stacking.tsx
+- Responsive Patterns
+- starter_locomotive/main.js
+- Framework Integration
+- Debugging in Editor
+- Version Control
+- Editor vs Engine-Only
+- Animation
+- Post-Processing
+- Materials
+- Controls
+- Textures
+- starter_aframe/main.js
+- awesome-claude-video-skills/SKILL.md
+- sound.md
+- traps.md
 
 ## God Nodes (most connected - your core abstractions)
-1. `search()` - 43 edges
-2. `verifyClaim()` - 42 edges
-3. `CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE` - 39 edges
-4. `CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION` - 39 edges
-5. `DesignSystemGenerator` - 38 edges
-6. `search_stack()` - 35 edges
-7. `connectSSE()` - 34 edges
-8. `setLiveState()` - 33 edges
-9. `resumeSession()` - 33 edges
-10. `renderReport()` - 33 edges
+1. `clamp()` - 48 edges
+2. `search()` - 43 edges
+3. `verifyClaim()` - 42 edges
+4. `stroke()` - 41 edges
+5. `CORE DIRECTIVE: IMAGE-FIRST WEBSITE DESIGN TO CODE` - 39 edges
+6. `CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION` - 39 edges
+7. `fill()` - 38 edges
+8. `DesignSystemGenerator` - 38 edges
+9. `ellipse()` - 35 edges
+10. `search_stack()` - 35 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `9. Performance — measure, then choose` --references--> `updateUI()`  [INFERRED]
+  .agents/skills/emil-write-swift/SKILL.md → dashboard/js/main.js
 - `Step 2: Reuse the page, then start` --references--> `boot()`  [INFERRED]
   .agents/skills/impeccable/reference/generate.md → dashboard/js/main.js
 - `3. Non-Functional Requirements (NFR)` --references--> `LocalFsStorage`  [INFERRED]
   docs/grc/02_REQUIREMENTS_AND_SCOPE_FREEZE.md → src/adapters/storage/localFsStorage.js
-- `2.1 Component Breakdown` --references--> `MonitorAgent`  [INFERRED]
-  docs/grc/01_THREAT_MODEL_STRIDE.md → src/monitor/monitorAgent.js
 - `1. RFC 8032 Ed25519 Signatures (`src/crypto/ed25519.js`)` --references--> `generateEd25519KeyPair()`  [INFERRED]
   README.md → src/crypto/ed25519.js
-- `2. Hash-Chained Audit Ledger & Chain Verifier (`src/log/`)` --references--> `AuditLog`  [INFERRED]
-  README.md → src/log/auditLog.js
+- `2.1 Component Breakdown` --references--> `MonitorAgent`  [INFERRED]
+  docs/grc/01_THREAT_MODEL_STRIDE.md → src/monitor/monitorAgent.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (864 total, 183 thin omitted)
+## Communities (1202 total, 198 thin omitted)
 
 ### Community 0 - "assets.mjs"
 Cohesion: 0.08
-Nodes (36): AIC_FIELDS, AIC_HEADERS, applyThumb(), ARCHIVE_LICENCE, args, argv, commonsApi(), commonsInfo() (+28 more)
+Nodes (57): AIC_FIELDS, AIC_HEADERS, applyThumb(), ARCHIVE_LICENCE, args, argv, base(), commonsApi() (+49 more)
 
 ### Community 1 - "validate_data.py"
 Cohesion: 0.07
-Nodes (43): read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract(), _check_catalog_contract() (+35 more)
+Nodes (44): read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, TestGeneratedCatalogContract, _catalog_date(), _check_app_interface_contract() (+36 more)
 
 ### Community 2 - "gray"
 Cohesion: 0.11
 Nodes (19): $type, $value, $type, $value, $type, $value, $type, $value (+11 more)
 
 ### Community 3 - "core.py"
-Cohesion: 0.03
-Nodes (39): _contains_phrase(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature(), _get_bm25(), _legacy_successor_guidance() (+31 more)
+Cohesion: 0.02
+Nodes (45): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _exact_match_diagnostic(), _exact_row_identity(), _exact_stack_identifier(), _file_signature() (+37 more)
 
 ### Community 4 - "draw.mjs"
-Cohesion: 0.08
-Nodes (45): adjustments(), argv, assetQueries(), ASSETS_PATH, briefStop(), briefWords(), deal(), dealHero() (+37 more)
+Cohesion: 0.07
+Nodes (51): claude-animation, Hard rules, Quick start, Read first, The loop, adjustments(), argv, assetQueries() (+43 more)
 
 ### Community 5 - "design_system.py"
-Cohesion: 0.03
-Nodes (35): ansi_ljust(), _button_outline_text_color(), _contrast_ratio(), _derive_dark_palette(), _detect_page_type(), _filter_anti_patterns_for_mode(), format_ascii_box(), add_wrapped() (+27 more)
+Cohesion: 0.04
+Nodes (33): ansi_ljust(), _button_outline_text_color(), _contrast_ratio(), _derive_dark_palette(), _detect_page_type(), _filter_anti_patterns_for_mode(), format_ascii_box(), add_wrapped() (+25 more)
 
 ### Community 6 - "package.json"
 Cohesion: 0.05
@@ -929,23 +1265,23 @@ Nodes (40): dependencies, dotenv, fastify, @fastify/cors, @fastify/rate-limit, p
 
 ### Community 7 - "DesignSystemGenerator"
 Cohesion: 0.05
-Nodes (22): Act on the receipt, Assemble and review, Plan and asset review, Plan, capture, serve, The contract (read once), Command guidance, No-argument routing: the context-aware menu, Workflow questions (+14 more)
+Nodes (14): DesignSystemGenerator, _resolve_dial(), apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), _validate_action(), TestReasoningMatch, read_rows() (+6 more)
 
 ### Community 8 - "validate-tokens.cjs"
-Cohesion: 0.08
-Nodes (28): args, fs, minimal, MINIMAL_TOKENS, path, projectRoot, tokensPath, wrapStyle (+20 more)
+Cohesion: 0.13
+Nodes (20): flattenTokens(), fs, generateCSS(), generateTailwind(), main(), parseArgs(), path, resolveReference() (+12 more)
 
-### Community 9 - "citations.mjs"
-Cohesion: 0.16
-Nodes (21): compareVersion(), HERE, isKnownUrl(), LIBRARY_PATH, libraryForStack(), loadLibrary(), lookupSkillRule(), lookupUrl() (+13 more)
+### Community 9 - "sys"
+Cohesion: 0.03
+Nodes (49): interactive_mode(), main(), print_magic_ui_instructions(), print_react_bits_instructions(), generate_animation(), interactive_mode(), list_animation_types(), main() (+41 more)
 
 ### Community 10 - "spacing"
 Cohesion: 0.06
 Nodes (34): $type, $value, $type, $value, $type, $value, $type, $value (+26 more)
 
 ### Community 11 - "crypto.contract.js"
-Cohesion: 0.07
-Nodes (34): RFC-8785, 4.2 Tampering (Data Integrity), 4.5 Denial of Service (Availability), 1. RFC 8032 Ed25519 Signatures (`src/crypto/ed25519.js`), 2. Hash-Chained Audit Ledger & Chain Verifier (`src/log/`), 3. AES-256-GCM Authenticated Encryption (`src/backup/backupService.js`), Cryptography & Integrity Modules (`src/crypto/`, `src/log/`, `src/backup/`), runMetricsHarness() (+26 more)
+Cohesion: 0.11
+Nodes (23): RFC-8785, 4.5 Denial of Service (Availability), hashBuffer, hashStream, RFC-8032, merkleRoot, signRecord, verifyRecord (+15 more)
 
 ### Community 12 - "site/js/mock/mockApi.js"
 Cohesion: 0.08
@@ -953,11 +1289,11 @@ Nodes (31): createBaseline(), getAuditLog(), getBaseline(), getDetectionRuns(), 
 
 ### Community 13 - "live-browser.js"
 Cohesion: 0.03
-Nodes (121): addManualContextText(), applyGlobalBarLabelState(), applyPlaceholderSizingStyles(), bindEditBadgeProxy(), bufferToBase64(), buildCollapsible(), buildColorModels(), buildListHtml() (+113 more)
+Nodes (139): addManualContextText(), applyEditing(), applyGlobalBarLabelState(), applyLiveBarPreference(), applyOriginalAttrsToSvelteAnchor(), applyPlaceholderSizingStyles(), averageRgb01(), bindEditBadgeProxy() (+131 more)
 
-### Community 14 - "supabaseClient.js"
-Cohesion: 0.15
-Nodes (7): @supabase/supabase-js, main(), createInMemorySupabaseClient(), _memoryDb, getStorageAdapter(), createBaseline(), logger
+### Community 14 - "ref_node_fs"
+Cohesion: 0.10
+Nodes (10): args(), run(), @supabase/supabase-js, createInMemorySupabaseClient(), _memoryDb, _resetClientForTests(), _setAdapterForTests(), GENESIS_PREV_HASH (+2 more)
 
 ### Community 15 - "html-token-validator.py"
 Cohesion: 0.12
@@ -965,30 +1301,30 @@ Nodes (12): get_context(), is_allowed_exception(), is_allowed_rgba(), is_inside_
 
 ### Community 16 - "dashboard/js/state.js"
 Cohesion: 0.13
-Nodes (17): api, formatDate(), initBaselinePanel(), shortenHash(), updateBaselinePanel(), formatTime(), shortenId(), updateIncidentList() (+9 more)
+Nodes (22): api, formatDate(), initBaselinePanel(), shortenHash(), updateBaselinePanel(), formatDate(), isCanaryPath(), triggerRestore() (+14 more)
 
 ### Community 17 - "caseFile.js"
 Cohesion: 0.13
-Nodes (23): buildEvidencePane(), buildRestorePane(), buildSignaturePane(), buildTabs(), buildTimelinePane(), formatTime(), handleRestoreClick(), isCanaryPath() (+15 more)
+Nodes (24): buildEvidencePane(), buildRestorePane(), buildSignaturePane(), buildTabs(), buildTimelinePane(), formatTime(), handleRestoreClick(), isCanaryPath() (+16 more)
 
-### Community 18 - "Client-Side and Browser Hunting"
-Cohesion: 0.20
-Nodes (10): Client-Side and Browser Hunting, Core discipline (include in every agent prompt for this domain), Cross-origin messaging and network attack classes (subagent_type: `general`), Cross-site information leak classes (subagent_type: `general`), DOM and object-state attack classes (subagent_type: `general`), Service-worker and browser-storage attack classes (subagent_type: `general`), UI-redress and navigation attack classes (subagent_type: `general`), Universal moves (apply across the above) (+2 more)
+### Community 18 - "Anime.js Timeline Guide"
+Cohesion: 0.04
+Nodes (48): 1. Sequential Animations, 1. Use Relative Offsets, 2. Batch Similar Animations, 2. Overlapping Animations, 3. Set Default Parameters, 3. Staggered Timeline, 4. Multi-Stage Animation, 5. Looping Timeline (+40 more)
 
-### Community 19 - "connectSSE"
-Cohesion: 0.06
-Nodes (84): abortSvelteComponentInjection(), applyParamDefaults(), applyParamValue(), applySavedSessionMeta(), checkpointPayload(), clampVariantIndex(), closedClipPath(), commitAcceptedVariantToDom() (+76 more)
+### Community 19 - "resumeSession"
+Cohesion: 0.07
+Nodes (65): applyParamDefaults(), applyParamValue(), applySavedSessionMeta(), checkpointPayload(), clampVariantIndex(), clearHandled(), closedClipPath(), commitAcceptedVariantToDom() (+57 more)
 
-### Community 20 - "getSupabaseClient"
-Cohesion: 0.21
-Nodes (19): main(), getSupabaseClient(), supaQuery(), incidentRoutes(), freezeAccount(), unfreezeAccount(), createIncident(), getIncident() (+11 more)
+### Community 20 - "run-metrics-harness.js"
+Cohesion: 0.12
+Nodes (19): 1. Asset Classification Framework, 2. Asset Inventory & Criticality Assessment, 3. Risk Assessment Methodology, 4. Risk Register v1, 5. Risk Treatment & Monitoring Summary, CloudRDR — Risk Register v1 & Asset Classification, runMetricsHarness(), appendAuditLog() (+11 more)
 
 ### Community 21 - "Supply Chain and Release Hunting"
 Cohesion: 0.22
 Nodes (8): CI and automation attack classes (subagent_type: `general`), Core discipline (include in every agent prompt for this domain), Dependency and build-input attack classes (subagent_type: `general`), Release and update attack classes (subagent_type: `general`), Supply Chain and Release Hunting, Universal moves (apply across the above), Validation rules (apply before reporting ANY finding here), When to use this file
 
 ### Community 22 - "generate-slide.py"
-Cohesion: 0.14
+Cohesion: 0.13
 Nodes (11): _e(), generate_chart_slide(), generate_cta_slide(), generate_deck(), generate_metrics_slide(), generate_problem_slide(), generate_solution_slide(), generate_testimonial_slide() (+3 more)
 
 ### Community 23 - "slide_search_core.py"
@@ -996,24 +1332,24 @@ Cohesion: 0.08
 Nodes (17): format_context(), format_result(), main(), BM25, calculate_pattern_break(), detect_domain(), get_background_config(), get_color_for_emotion() (+9 more)
 
 ### Community 24 - "server.js"
-Cohesion: 0.12
-Nodes (20): baselineRoutes(), DASHBOARD_DIR, dashboardRoutes(), __dirname, __filename, MIME_TYPES, serveFile(), serveSiteFile() (+12 more)
+Cohesion: 0.14
+Nodes (28): main(), main(), getSupabaseClient(), supaQuery(), getStorageAdapter(), baselineRoutes(), detectionRoutes(), healthRoutes() (+20 more)
 
 ### Community 25 - "json"
-Cohesion: 0.05
-Nodes (25): build_run(), embed_file(), find_runs(), _find_runs_recursive(), generate_html(), get_mime_type(), _kill_port(), load_previous_iteration() (+17 more)
+Cohesion: 0.06
+Nodes (20): generate_html(), main(), _call_claude(), improve_description(), main(), find_project_root(), main(), run_eval() (+12 more)
 
 ### Community 26 - "inspect.mjs"
-Cohesion: 0.11
+Cohesion: 0.12
 Nodes (12): allow, args, asJson, fails, HEIGHT, merged, outDir, report (+4 more)
 
-### Community 27 - "test_core.py"
-Cohesion: 0.08
-Nodes (6): BM25, detect_domain(), _search_csv(), TestBm25CoreBehavior, TestDomainDetection, TestTokenizer
+### Community 27 - "GSAP Easing Functions - Visual Guide"
+Cohesion: 0.04
+Nodes (48): 1. Power Easings (Most Common), 1. Start with power2.out, 1. What's the purpose?, 2. Back Easings (Overshoot), 2. How noticeable should it be?, 2. Match Easing to Content, 3. Be Consistent, 3. Elastic Easings (Spring/Rubber Band) (+40 more)
 
-### Community 28 - "setLiveState"
-Cohesion: 0.09
-Nodes (58): applyEditing(), beginNewLiveConfiguration(), buildLocatorForLeaf(), buildPickedAnchorSnapshot(), cancelEditing(), cancelEditingToPicking(), cancelInsertConfigure(), clearAnnotations() (+50 more)
+### Community 28 - "Individual Hook Reference"
+Cohesion: 0.06
+Nodes (30): after, afterEnter, afterLeave, afterOnce, Async Hooks, Barba.js API Reference, before, beforeEnter (+22 more)
 
 ### Community 29 - "detectionEngine.js"
 Cohesion: 0.27
@@ -1048,16 +1384,16 @@ Cohesion: 0.06
 Nodes (85): findRecContradictions(), asArray(), buildScriptHasMigrationSideEffect(), cacheInvalidationFileCache, cacheLifeNeedsContentFreshnessProof(), cleanHeaderValue(), compilePattern(), configContainsTag() (+77 more)
 
 ### Community 38 - "dashboard/js/main.js"
-Cohesion: 0.25
-Nodes (18): updateCanaryCage(), animateCorruption(), animateRestore(), setLeafState(), updateConfig(), boot(), initChart(), initDemoToggle() (+10 more)
+Cohesion: 0.15
+Nodes (24): updateCanaryCage(), renderCaseFile(), buildChartData(), initDetectionChart(), updateDetectionChart(), animateCorruption(), animateRestore(), initMerkleTree() (+16 more)
 
 ### Community 39 - "design-tokens-starter.json"
 Cohesion: 0.15
 Nodes (12): component, $type, $value, dark, semantic, $schema, $type, $value (+4 more)
 
 ### Community 40 - "lint.mjs"
-Cohesion: 0.17
-Nodes (11): args, asJson, byId, EXT, files, findings, R, roots (+3 more)
+Cohesion: 0.15
+Nodes (12): line(), args, asJson, byId, EXT, files, findings, R (+4 more)
 
 ### Community 41 - "card"
 Cohesion: 0.20
@@ -1067,9 +1403,9 @@ Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
 Cohesion: 0.05
 Nodes (43): **`agent-console-card`**, **`announcement-bar`**, **`blog-filter-chip`**, Brand & Accent, Breakpoints, **`button-pill-outline`**, **`button-primary`**, **`button-secondary`** (+35 more)
 
-### Community 43 - "syncPageChatFocus"
-Cohesion: 0.07
-Nodes (57): agentHasWorkInFlight(), armPageChatForTyping(), attachSteerFocusDebug(), attachSteerFocusGuard(), buildSteerProcessingDots(), buildSteerQueueHint(), clearSteerAwaitTimer(), clearSteerFocusRecoverTimer() (+49 more)
+### Community 43 - "initPageChat"
+Cohesion: 0.09
+Nodes (46): agentHasWorkInFlight(), armPageChatForTyping(), attachSteerFocusDebug(), buildSteerProcessingDots(), buildSteerQueueHint(), clearSteerAwaitTimer(), collapsePageChat(), expandPageChat() (+38 more)
 
 ### Community 44 - "Design System Inspired by Mastercard"
 Cohesion: 0.05
@@ -1080,12 +1416,12 @@ Cohesion: 0.20
 Nodes (10): fast, normal, slow, $type, $value, $type, $value, duration (+2 more)
 
 ### Community 46 - "Page"
-Cohesion: 0.18
-Nodes (9): Attack Classes, Attack classes — choose and split based on Phase 1, Browser, Page, sleep(), ChannelOwner — Base Class, Client Layer, Connection (+1 more)
+Cohesion: 0.20
+Nodes (8): Attack classes — choose and split based on Phase 1, Browser, Page, sleep(), ChannelOwner — Base Class, Client Layer, Connection, Representative Client Classes
 
 ### Community 47 - "baselineLedger.js"
-Cohesion: 0.22
-Nodes (14): formatArchiveDate(), initBaselineLedger(), renderBaseline(), shortHash(), buildConnector(), renderHashChain(), shortEvent(), shortHash() (+6 more)
+Cohesion: 0.26
+Nodes (11): formatArchiveDate(), initBaselineLedger(), renderBaseline(), shortHash(), buildConnector(), renderHashChain(), shortEvent(), shortHash() (+3 more)
 
 ### Community 48 - "button"
 Cohesion: 0.20
@@ -1107,17 +1443,17 @@ Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
 Cohesion: 0.11
 Nodes (27): $type, $value, lg, sm, $type, $value, $type, $value (+19 more)
 
-### Community 53 - "$impeccable hooks"
-Cohesion: 0.33
-Nodes (6): Constraints, Failure modes, Flow, $impeccable hooks, Routing, Triage findings
+### Community 53 - ".on"
+Cohesion: 0.20
+Nodes (9): Example, Properties, Sound, Constraints, Failure modes, Flow, $impeccable hooks, Routing (+1 more)
 
-### Community 54 - "test_catalog_summary_line_endings.py"
-Cohesion: 0.06
-Nodes (8): _run(), test_flags_hardcoded_hex_sharing_line_with_token(), test_token_only_line_reports_no_violation(), CatalogSummaryLineEndingsTest, _load_generator(), TestFixtureValidation, TestMetricMath, TestThresholdGate
+### Community 54 - "pathlib"
+Cohesion: 0.04
+Nodes (27): generate_imports(), generate_mesh_code(), interactive_mode(), main(), create_about_html(), create_contact_html(), create_css(), create_index_html() (+19 more)
 
 ### Community 55 - "dashboard/js/components/merkleTree.js"
-Cohesion: 0.16
-Nodes (18): COLORS, computeLayout(), drawEdge(), drawTree(), walkEdges(), _edgeEls, getLeafCount(), initMerkleTree() (+10 more)
+Cohesion: 0.17
+Nodes (15): COLORS, computeLayout(), drawEdge(), drawTree(), walkEdges(), _edgeEls, getLeafCount(), _internalEls (+7 more)
 
 ### Community 56 - "mongodb/DESIGN.md"
 Cohesion: 0.05
@@ -1131,13 +1467,13 @@ Nodes (5): colourFamily(), hexToHsl(), inRange(), judge(), RULE_IDS
 Cohesion: 0.05
 Nodes (41): Border Radius Scale, Brand & Accent, Breakpoints, Buttons, Cards, Collapsing Strategy, Colors, Components (+33 more)
 
-### Community 59 - "showToast"
-Cohesion: 0.11
-Nodes (33): abandonForeignSession(), abandonSupersededGo(), cleanup(), cleanupAcceptedSession(), clearHandled(), clearMountErrorCard(), clearScrollY(), clearSession() (+25 more)
+### Community 59 - "connectSSE"
+Cohesion: 0.08
+Nodes (66): abandonForeignSession(), abandonSupersededGo(), abortSvelteComponentInjection(), buildInsertPlaceholderSnapshotFromDom(), buildPickedAnchorSnapshot(), cancelEditing(), cancelEditingToPicking(), captureAndEmit() (+58 more)
 
 ### Community 60 - "workspace-resolver.mjs"
-Cohesion: 0.07
-Nodes (54): buildPackageLookup(), buildResolver(), DEFAULT_RESOLVE_OPTIONS, detectMonorepoRoot(), escapeRegExp(), expandParts(), expandResolvedSpecifier(), expandPureBarrel() (+46 more)
+Cohesion: 0.11
+Nodes (34): buildPackageLookup(), DEFAULT_RESOLVE_OPTIONS, escapeRegExp(), expandParts(), expandResolvedSpecifier(), expandPureBarrel(), expandSuffixFanout(), expandWorkspaceGlob() (+26 more)
 
 ### Community 61 - "$type"
 Cohesion: 0.60
@@ -1154,6 +1490,10 @@ Nodes (40): Border Radius Scale, Brand & Accent, Brand Signature, Breakpoints, B
 ### Community 64 - "cursor/DESIGN.md"
 Cohesion: 0.05
 Nodes (40): AI Timeline (signature), Border Radius Scale, Brand & Accent, Breakpoints, Buttons, Cards, Code, Collapsing Strategy (+32 more)
+
+### Community 65 - "Three.js WebGL/WebGPU Development"
+Cohesion: 0.04
+Nodes (48): 1. Creating Meshes with Materials, 1. Geometry Reuse, 1. Not Updating Aspect Ratio on Resize, 1. Use Animation Clocks for Consistent Timing, 2. Camera Setup Guidelines, 2. Creating New Objects in Animation Loop, 2. Lighting Strategies, 2. Use InstancedMesh for Repeated Objects (+40 more)
 
 ### Community 66 - "expo/DESIGN.md"
 Cohesion: 0.05
@@ -1180,8 +1520,8 @@ Cohesion: 0.05
 Nodes (40): Border Radius Scale, Brand & Accent, Breakpoints, Buttons, Cards & Containers, Collapsing Strategy, Colors, Comparison Table (+32 more)
 
 ### Community 72 - "lib/render-report.mjs"
-Cohesion: 0.10
-Nodes (51): formatCandidateLabel(), formatKind(), formatRoute(), asArray(), assertValidObservations(), candidateForDisplay(), canonicalRefOf(), compactFinalText() (+43 more)
+Cohesion: 0.08
+Nodes (57): classifyService(), computeCostCoverage(), escapeCell(), renderCostCoverageMarkdown(), SERVICE_DIMENSION, formatCandidateLabel(), formatKind(), formatRoute() (+49 more)
 
 ### Community 73 - "components/auditLog.js"
 Cohesion: 0.83
@@ -1211,13 +1551,13 @@ Nodes (3): ring, $type, $value
 Cohesion: 0.67
 Nodes (3): secondary-foreground, $type, $value
 
-### Community 80 - "colorize.md"
-Cohesion: 0.25
-Nodes (7): Apply at system scale, Audit before choosing, Choose a strategy, Contrast and perception, Live-mode signature params, Verify, Visitor mode
+### Community 80 - "Anime.js Stagger Guide"
+Cohesion: 0.04
+Nodes (46): 1. Sequential List Reveal, 2. Grid Expand from Center, 3. Wave Effect, 4. Diagonal Wipe, 5. Text Character Reveal, 6. Circular Stagger, 7. Alternating Direction, Advanced Techniques (+38 more)
 
-### Community 81 - "contract.mjs"
-Cohesion: 0.39
-Nodes (6): CandidateContractError, candidateLabel(), nonEmptyString(), VALID_SCOPES, validateCandidate(), validateCandidates()
+### Community 81 - "GSAP & ScrollTrigger Development"
+Cohesion: 0.04
+Nodes (46): 1. Fade In On Scroll, 1. Multiple Tweens on Same Element, 1. Use `will-change` CSS, 2. Limit Repaints, 2. Not Using Loops for Multiple Elements, 2. Pin Element While Scrolling, 3. Dispose of ScrollTriggers, 3. Forgetting to Register Plugins (+38 more)
 
 ### Community 82 - "el"
 Cohesion: 0.07
@@ -1272,8 +1612,8 @@ Cohesion: 0.05
 Nodes (39): Badges & Status, Border Radius Scale, Brand & Accent, Breakpoints, Buttons, Cards & Containers, Collapsing Strategy, Colors (+31 more)
 
 ### Community 95 - "mintlify/DESIGN.md"
-Cohesion: 0.07
-Nodes (26): Border Radius Scale, Brand & Accent, Breakpoints, Collapsing Strategy, Colors, Decorative Depth, Do, Do's and Don'ts (+18 more)
+Cohesion: 0.08
+Nodes (24): Border Radius Scale, Breakpoints, Collapsing Strategy, Decorative Depth, Do, Do's and Don'ts, Don't, Elevation & Depth (+16 more)
 
 ### Community 96 - "miro/DESIGN.md"
 Cohesion: 0.05
@@ -1548,8 +1888,8 @@ Cohesion: 0.11
 Nodes (18): AI & LLM Platforms, Automotive, Awesome DESIGN.md, Backend, Database & DevOps, Collection, Contributing, Design & Creative Tools, Developer Tools & IDEs (+10 more)
 
 ### Community 164 - "support-topics.mjs"
-Cohesion: 0.14
-Nodes (25): HERE, KNOWN_CANDIDATE_KINDS, loadSupportTopics(), matchesCandidateKind(), matchesCandidateMetrics(), matchesCandidateRoutePatterns(), matchesFrameworks(), matchesOptionalList() (+17 more)
+Cohesion: 0.08
+Nodes (45): compareVersion(), HERE, isKnownUrl(), LIBRARY_PATH, libraryForStack(), loadLibrary(), lookupSkillRule(), lookupUrl() (+37 more)
 
 ### Community 165 - "Analysis & Synthesis Instructions"
 Cohesion: 0.11
@@ -1579,9 +1919,9 @@ Nodes (16): 10. Report, 1. Read the brief and the project, 2. Write the argument
 Cohesion: 0.12
 Nodes (16): 1. Skill Meta, 2.1 Swiss Industrial Print, 2.2 Tactical Telemetry & CRT Terminal, 2. Visual Archetypes, 3.1 Macro-Typography (Structural Headers), 3.2 Micro-Typography (Data & Telemetry), 3.3 Textural Contrast (Artistic Disruption), 3. Typographic Architecture (+8 more)
 
-### Community 172 - "AI-Slop Motion Patterns"
-Cohesion: 0.13
-Nodes (14): AI-Slop Motion Patterns, Anti-Checklist, Blur-everywhere entrances, Bouncy-springs-on-utility-actions, From Emil's Perspective (Purposeful Restraint), From Jakub's Perspective (Production Polish), From Jhey's Perspective (Creative Learning), General Motion Design Mistakes (+6 more)
+### Community 172 - "animate"
+Cohesion: 0.07
+Nodes (32): AI-Slop Motion Patterns, Blur-everywhere entrances, Bouncy-springs-on-utility-actions, Hover-scale-on-everything, Motion-on-mount-for-static-content, Pulsing indicators, Stagger-spam-on-every-list, Uniform-fade-in-on-every-element (+24 more)
 
 ### Community 173 - "tasteskill: Anti-Slop Frontend Skill"
 Cohesion: 0.13
@@ -1748,8 +2088,8 @@ Cohesion: 0.20
 Nodes (9): 1. Objectives & Metrics, 2. Disaster Recovery Scenarios & Playbooks, CloudRDR — BCP/DRP, Incident Response Plan (NIST SP 800-61), SoA & Capstone Slides, Scenario A: Mass Ransomware Attack (Active Encryption Wave), Scenario B: Accidental / Malicious Sentinel Deletion, SECTION 1: Business Continuity Plan (BCP) & Disaster Recovery Plan (DRP), SECTION 2: Incident Response Plan (NIST SP 800-61 Rev 2 Alignment), SECTION 3: Statement of Applicability (SoA) (+1 more)
 
 ### Community 214 - "design-motion-principles/SKILL.md"
-Cohesion: 0.11
-Nodes (13): Accessibility, Functional vs. Decorative Motion, Implementation Checklist, Motion Sensitivity Considerations, Respect User Preferences, Combined Recommendations, Lens Reference Summary, Mode selection (+5 more)
+Cohesion: 0.12
+Nodes (11): Accessibility, Functional vs. Decorative Motion, Implementation Checklist, Motion Sensitivity Considerations, Respect User Preferences, Accessibility omissions, Context blindness, Creation Gotchas (+3 more)
 
 ### Community 215 - "Human Architect Mindset - Reference"
 Cohesion: 0.04
@@ -1767,13 +2107,13 @@ Nodes (9): 11. COMPONENT EXECUTION GUIDELINES, 3D Cascading Card Deck, Diagonal 
 Cohesion: 0.22
 Nodes (9): 18. EXTRA CREATIVITY & IMPLEMENTATION EDGE, Composition variety check, Conversion focus, Cross-section contrast, CTA specificity, Cultural / tonal alignment, Data-viz restraint, Image variety inside one comp (+1 more)
 
-### Community 219 - "4. STRIDE Threat Analysis"
-Cohesion: 0.14
-Nodes (13): 1. Executive Summary & Objective, 2.1 Component Breakdown, 2.2 Data Flow Diagram (DFD) & Trust Boundaries, 2. System Architecture & Trust Boundaries, 3. Threat Actor Profiles, 4.1 Spoofing (Identity & Authenticity), 4.3 Repudiation (Audit & Accountability), 4.4 Information Disclosure (Confidentiality) (+5 more)
+### Community 219 - "AuditLog"
+Cohesion: 0.08
+Nodes (19): 1. Executive Summary & Objective, 2.1 Component Breakdown, 2.2 Data Flow Diagram (DFD) & Trust Boundaries, 2. System Architecture & Trust Boundaries, 3. Threat Actor Profiles, 4.1 Spoofing (Identity & Authenticity), 4.2 Tampering (Data Integrity), 4.3 Repudiation (Audit & Accountability) (+11 more)
 
 ### Community 220 - "MonitorAgent"
-Cohesion: 0.12
-Nodes (11): 1. Executive Summary, 2. ISO 27001:2022 Management Clauses Assessment, 3.1 Theme 5: Organizational Controls, 3.2 Theme 8: Technological Controls, 3. Annex A Controls Gap Analysis Matrix, 4. Gap Remediation Action Plan (Roadmap), 5. Conclusion & Auditor Statement, CloudRDR — ISMS Gap Analysis (ISO/IEC 27001:2022) (+3 more)
+Cohesion: 0.07
+Nodes (24): CountUp, 3. Modify Scroll Trigger Points, `destroy()`, `init()`, Instance Methods, `off(event, callback)`, `on(event, callback)`, `scrollTo(target, options)` (+16 more)
 
 ### Community 221 - "Mandatory Pre-Flight Checklist (Run Before Every Task)"
 Cohesion: 0.18
@@ -1803,21 +2143,21 @@ Nodes (44): Accessibility Reference, Accessible Modal, Accessible Tabs, Accessib
 Cohesion: 0.25
 Nodes (7): 1. Executive Summary & Objective, 2.1 Test Dataset Structure, 2.2 Metrics Formulations, 2. Experimental Methodology, 3. Results Matrix, 4. Key Findings & Engineering Recommendations, CloudRDR — Threshold Sweep Experiment Report
 
-### Community 228 - "lineOf"
-Cohesion: 0.09
-Nodes (28): apply(), metadata, apply(), metadata, MODE_PATTERNS, countMatches(), findRepeated(), metadata (+20 more)
+### Community 228 - "scanners/index.mjs"
+Cohesion: 0.12
+Nodes (22): isApplicable(), metadata, scan(), isApplicable(), metadata, scan(), scanners, metadata (+14 more)
 
-### Community 229 - "Creation Gotchas"
-Cohesion: 0.29
-Nodes (6): Accessibility omissions, Context blindness, Creation Gotchas, Motion that shouldn't exist, Performance failures, Wrong defaults
+### Community 229 - "PlayCanvas Optimization Guide"
+Cohesion: 0.04
+Nodes (46): 1. Asset Cleanup, 1. Asset Loading Strategy, 1. Detect Mobile, 1. Reduce Draw Calls, 1. Reduce Update Frequency, 1. Texture Compression, 2. Entity Pooling, 2. Event-Based Instead of Polling (+38 more)
 
 ### Community 230 - "Jakub Krehel's Animation Principles"
 Cohesion: 0.29
 Nodes (6): Common Mistakes (Jakub's Perspective), Core Philosophy: Invisible Enhancement, Jakub Krehel's Animation Principles, Jakub vs. Emil vs. Jhey, Signature Techniques (decision context — code in cookbook), When to Apply Jakub's Mindset
 
 ### Community 231 - "Motion Cookbook"
-Cohesion: 0.06
-Nodes (31): 10. Button & Interactive Feedback (Emil), 11. CSS Transitions vs Keyframes (Emil), 12. Spring Physics (Emil), 13. Origin-Aware Animations (Emil), 1. Enter & Exit Animations, 4. Optical Alignment, 5. Icon & State Animations (Jakub), 6. Shared Layout Animations (Jakub) (+23 more)
+Cohesion: 0.07
+Nodes (29): 12. Spring Physics (Emil), 13. Origin-Aware Animations (Emil), 14. Scroll-Driven Animations (Jhey), 3. Visual Effects, 4. Optical Alignment, 5. Icon & State Animations (Jakub), 6. Shared Layout Animations (Jakub), 7. CSS Custom Properties & @property (Jhey) (+21 more)
 
 ### Community 232 - "2. Easing & Timing"
 Cohesion: 0.29
@@ -1895,17 +2235,17 @@ Nodes (6): 5. IMAGE COUNT & PAGE SLICING, Continuity Rule, Counting rule, Format
 Cohesion: 0.05
 Nodes (41): 1. Brand Color System, 1. Component Variations, 1. Spacing Scale, 2. Grid System, 2. Responsive Breakpoints, 2. Typography Pairing, 3. Accessibility Standards, 3. Dark Mode Palette (+33 more)
 
-### Community 251 - "captureElementToBlob"
-Cohesion: 0.12
-Nodes (21): averageRgb01(), captureAndEmit(), captureChromeNodes(), captureElementFromRenderedAncestor(), captureElementToBlob(), compileShader(), cssColorToRgb01(), dominantRgb01() (+13 more)
+### Community 251 - "Scroll Reveal Libraries"
+Cohesion: 0.04
+Nodes (46): 1. Disable on Mobile Devices, 1. Forgetting to Refresh After DOM Changes, 1. Landing Page Hero Section, 2. Animations Not Working in React, 2. Feature Cards Grid, 2. Use Once for Better Performance, 3. Alternating Content Sections, 3. Optimize Throttle and Debounce (+38 more)
 
 ### Community 252 - "new-work.md"
 Cohesion: 0.06
-Nodes (29): Recommended Actions, Craft (deprecated alias), Pitfalls, Style guidelines, The frontmatter: token schema, The markdown body: eight sections (canonical order), Two paths, When to run (+21 more)
+Nodes (27): Recommended Actions, Craft (deprecated alias), Impeccable Documenter, Input Contract, Output Contract, Workflow, Apply, Live-mode signature params (+19 more)
 
 ### Community 253 - "initGlobalBar"
-Cohesion: 0.09
-Nodes (40): agentStatusText(), applyLiveBarPreference(), barPaletteForTheme(), brandMarkSvg(), buildDesignHeader(), buildParamsPanel(), designPanelCss(), detectPageTheme() (+32 more)
+Cohesion: 0.06
+Nodes (70): agentStatusText(), attachSteerFocusGuard(), barPaletteForTheme(), beginNewLiveConfiguration(), brandMarkSvg(), buildParamsPanel(), cancelInsertConfigure(), clearInsertPicking() (+62 more)
 
 ### Community 254 - "12. THE BLOCK LIBRARY (Contract - Implementations Land Here Iteratively)"
 Cohesion: 0.40
@@ -1959,37 +2299,37 @@ Nodes (3): Agent Guidelines for Token Waste Elimination, Codeburn — AI Spend &
 Cohesion: 0.05
 Nodes (39): Accessibility Considerations, Best Practices Summary, Breakpoint Strategy, Browser DevTools, Card Grid, Common Responsive Patterns, CSS Grid Responsive Pattern, Flexbox Responsive Pattern (+31 more)
 
-### Community 267 - "14. Scroll-Driven Animations (Jhey)"
-Cohesion: 0.50
-Nodes (4): 14. Scroll-Driven Animations (Jhey), Duration Control Pattern, Progressive Enhancement, The Core Problem
+### Community 267 - "GSAP ScrollTrigger Starter Template"
+Cohesion: 0.04
+Nodes (45): 1. Change Colors, 2. Adjust Animation Timing, 4. Enable Debug Markers, 5. Add Your Own Sections, Add Timeline Sequences, Additional Optimizations, Advanced, 🔧 Advanced Customization (+37 more)
 
 ### Community 268 - "perplexity-ask/package.json"
 Cohesion: 0.05
 Nodes (39): author, bin, perplexity-mcp, bugs, url, dependencies, axios, dotenv (+31 more)
 
-### Community 269 - "3. Visual Effects"
-Cohesion: 0.50
-Nodes (4): 3. Visual Effects, Blur as a Signal (Jakub), Gradients & Color Spaces (Jakub), Shadows Instead of Borders (Jakub)
+### Community 269 - "Web Accessibility Guide (WCAG AAA Compliance)"
+Cohesion: 0.04
+Nodes (45): Accessible Accordion, Accessible Modal, Alt Text Guidelines, Animation Guidelines, ARIA Attributes, Automated Testing Tools, Checking Contrast, Color Blindness Considerations (+37 more)
 
-### Community 270 - "7. CSS Custom Properties & @property (Jhey)"
-Cohesion: 0.50
-Nodes (4): 7. CSS Custom Properties & @property (Jhey), Decompose Complex Transforms, Scoped Variables for Dynamic Behavior (Jhey), Type Specification Unlocks Animation
+### Community 270 - "Web Performance Optimization Checklist"
+Cohesion: 0.04
+Nodes (45): 3D & WebGL Optimization, 60 FPS Checklist, Animation Performance, Bundle Analysis, Caching & CDN, Chrome DevTools, Code Splitting, Core Web Vitals (+37 more)
 
 ### Community 271 - "investigation-brief.mjs"
 Cohesion: 0.12
-Nodes (38): absoluteBriefPath(), briefRoots(), buildBrief(), cachePolicyGuidance(), capBriefFiles(), citationSubset(), closestAncestorLayoutFiles(), inferFrameworkPlaybook() (+30 more)
+Nodes (37): absoluteBriefPath(), briefRoots(), buildBrief(), cachePolicyGuidance(), capBriefFiles(), closestAncestorLayoutFiles(), inferFrameworkPlaybook(), inferPlaybook() (+29 more)
 
-### Community 272 - "name"
-Cohesion: 0.10
-Nodes (21): name(), Seed mode, Step 1: Route through new-work's workshop, Step 2: Write seed DESIGN.md, Step 3: Confirm, Choosing Animation Style, Next.js Implementation Additions, Same-Route Dynamic Segment Transitions (+13 more)
+### Community 272 - "Implementation Workflow"
+Cohesion: 0.25
+Nodes (8): Implementation Workflow, Step 1: Audit the App, Step 2: Add CSS Recipes, Step 3: Isolate Persistent Elements, Step 4: Add Directional Page Transitions, Step 5: Add Suspense Reveals, Step 6: Add Shared Element Transitions, Step 7: Verify Each Navigation Path
 
 ### Community 273 - "sanitizers/index.mjs"
-Cohesion: 0.11
-Nodes (14): applyDollarStrip(), stripDollarLiterals(), metadata, STRING_FIELDS, metadata, STRING_FIELDS, metadata, STRING_FIELDS (+6 more)
+Cohesion: 0.09
+Nodes (20): sanitizeCitations(), applyDollarStrip(), stripDollarLiterals(), metadata, STRING_FIELDS, metadata, STRING_FIELDS, metadata (+12 more)
 
 ### Community 274 - "live.md"
-Cohesion: 0.07
-Nodes (25): Step 1: Parse the request, Step 2: Reuse the page, then start, Step 3: Generate, Step 4: Accept and close, Cleanup, Exit, First-time setup, Handle `accept` (+17 more)
+Cohesion: 0.06
+Nodes (33): Apply at system scale, Audit before choosing, Choose a strategy, Contrast and perception, Live-mode signature params, Verify, Visitor mode, Step 1: Parse the request (+25 more)
 
 ### Community 275 - "7. DIAL DEFINITIONS (Technical Reference)"
 Cohesion: 0.50
@@ -2032,24 +2372,24 @@ Cohesion: 0.50
 Nodes (3): CLI Usage, Principles, UI Skills — Design Engineering Toolkit
 
 ### Community 285 - "gate-investigations.mjs"
-Cohesion: 0.17
-Nodes (18): applyAuthDisqualifier(), AUTH_ROUTE_REGEX, isAuthRoute(), applyHardGates(), FLAGS_ENDPOINT, flagsEndpointReason(), isFlagsEndpointCandidate(), isWorkflowRuntimeEndpointCandidate() (+10 more)
+Cohesion: 0.09
+Nodes (32): applyAuthDisqualifier(), AUTH_ROUTE_REGEX, isAuthRoute(), CandidateContractError, candidateLabel(), nonEmptyString(), VALID_SCOPES, validateCandidate() (+24 more)
 
 ### Community 286 - "Innovative Designer for impact"
 Cohesion: 0.06
-Nodes (35): Accessibility Standards, After Getting Context, Color & Contrast, Common Patterns to Avoid, Component Library & Tools, Core Design Philosophy, Core Philosophy, Creative Reframing Prompts (+27 more)
+Nodes (31): Accessibility Standards, After Getting Context, Color & Contrast, Common Patterns to Avoid, Core Design Philosophy, Core Philosophy, Creative Reframing Prompts, Design Decision Checklist (+23 more)
 
 ### Community 288 - "mountSvelteComponentVariant"
-Cohesion: 0.09
-Nodes (36): acceptedDomAlreadyClean(), applyOriginalAttrsToSvelteAnchor(), clearHandledWrapperReloadStamp(), commitAcceptedSvelteComponentToDom(), componentModuleCandidates(), deferredRecoverySuperseded(), describeMountFailure(), detectDevServerBase() (+28 more)
+Cohesion: 0.12
+Nodes (25): acceptedDomAlreadyClean(), clearHandledWrapperReloadStamp(), commitAcceptedSvelteComponentToDom(), componentModuleCandidates(), deferredRecoverySuperseded(), describeMountFailure(), detectDevServerBase(), ensureAcceptedDomClean() (+17 more)
 
-### Community 375 - "build-minutes-fanout.mjs"
-Cohesion: 0.67
-Nodes (3): gate(), metadata, unique()
+### Community 375 - "A-Frame Community Components Library"
+Cohesion: 0.04
+Nodes (44): A-Frame Community Components Library, aframe-alongpath-component, aframe-blink-controls, aframe-click-drag-component, aframe-effects, aframe-environment-component, aframe-event-set-component (Built-in), aframe-extras (Model Extensions) (+36 more)
 
 ### Community 376 - "ATTACK-CLASSES.md"
-Cohesion: 0.08
-Nodes (15): Binary loading and runtime attack classes (subagent_type: `general`), Bounds, integer, and representation attack classes (subagent_type: `general`), Core discipline (include in every agent prompt for this domain), FFI and ABI attack classes (subagent_type: `general`), Kernel and privileged-interface attack classes (subagent_type: `general`), Lifetime, type, and concurrency attack classes (subagent_type: `general`), Memory Safety, Binary, and Kernel Hunting, Universal moves (apply across the above) (+7 more)
+Cohesion: 0.09
+Nodes (16): Attack Classes, Client-Side and Browser Hunting, Core discipline (include in every agent prompt for this domain), Cross-origin messaging and network attack classes (subagent_type: `general`), Cross-site information leak classes (subagent_type: `general`), DOM and object-state attack classes (subagent_type: `general`), Service-worker and browser-storage attack classes (subagent_type: `general`), UI-redress and navigation attack classes (subagent_type: `general`) (+8 more)
 
 ### Community 377 - "Motion Specification Template"
 Cohesion: 0.06
@@ -2089,7 +2429,7 @@ Nodes (23): byRoute(), gate(), metadata, ratioOverThreshold(), round2(), sumRows
 
 ### Community 386 - "connections.py"
 Cohesion: 0.07
-Nodes (5): create_connection(), MCPConnection, MCPConnectionHTTP, MCPConnectionSSE, MCPConnectionStdio
+Nodes (4): MCPConnection, MCPConnectionHTTP, MCPConnectionSSE, MCPConnectionStdio
 
 ### Community 387 - "Node/TypeScript MCP Server Implementation Guide"
 Cohesion: 0.07
@@ -2100,8 +2440,8 @@ Cohesion: 0.12
 Nodes (28): aggregateServicesByName(), baselineStack(), checkAuth(), checkCliVersion(), checkObservabilityPlusConfiguration(), classifyObservabilityPlusConfiguration(), detectNextCacheComponents(), detectStack() (+20 more)
 
 ### Community 389 - "React View Transitions"
-Cohesion: 0.08
-Nodes (26): Accessibility, Animation Triggers, Availability, Common Patterns, Composing Shared Elements with List Identity, Core Concepts, Critical Placement Rule, CSS Pseudo-Elements (+18 more)
+Cohesion: 0.06
+Nodes (32): Accessibility, Animation Triggers, Availability, Choosing Animation Style, Common Patterns, Composing Shared Elements with List Identity, Core Concepts, Critical Placement Rule (+24 more)
 
 ### Community 390 - "Vanity Engineering Detection Patterns"
 Cohesion: 0.08
@@ -2120,20 +2460,20 @@ Cohesion: 0.14
 Nodes (12): getMetricSemaphore, getMetricThrottle(), isDailyQuotaExceeded(), isRateLimited(), parsePositiveIntEnv(), resolveConcurrency(), resolveRateLimit(), retryOnRateLimit() (+4 more)
 
 ### Community 394 - "getOne"
-Cohesion: 0.21
+Cohesion: 0.20
 Nodes (25): clock(), credit(), creditRequired(), creditsPath(), dims(), esc(), getAll(), getOne() (+17 more)
 
 ### Community 395 - "React View Transitions"
-Cohesion: 0.08
-Nodes (25): Accessibility, Animation Triggers, Availability, Common Patterns, Composing Shared Elements with List Identity, Core Concepts, Critical Placement Rule, CSS Pseudo-Elements (+17 more)
+Cohesion: 0.06
+Nodes (31): Accessibility, Animation Triggers, Availability, Choosing Animation Style, Common Patterns, Composing Shared Elements with List Identity, Core Concepts, Critical Placement Rule (+23 more)
 
 ### Community 396 - "Components"
-Cohesion: 0.08
-Nodes (23): Badges & Status, Buttons, Cards & Containers, Code, Components, Documentation Components, Font Family, Hierarchy (+15 more)
+Cohesion: 0.20
+Nodes (10): Badges & Status, Buttons, Cards & Containers, Code, Components, Documentation Components, Inputs & Forms, Navigation (+2 more)
 
 ### Community 397 - "Human Architect Mindset - Examples"
-Cohesion: 0.08
-Nodes (23): AI Decomposition, AI Decomposition, AI Decomposition for Cross-Team Work, Architect Thinking Applied, Architect Thinking Applied, Architect Thinking Applied, Better Architecture, Constraint Navigation (+15 more)
+Cohesion: 0.06
+Nodes (34): AI Decomposition, AI Decomposition, AI Decomposition Done Right, AI Decomposition for Cross-Team Work, Architect Thinking Applied, Architect Thinking Applied, Architect Thinking Applied, Better Architecture (+26 more)
 
 ### Community 398 - "adapt.md"
 Cohesion: 0.08
@@ -2172,8 +2512,8 @@ Cohesion: 0.09
 Nodes (23): Async/Await Best Practices, Code Best Practices, Code Composability and Reusability, Complete Example, Error Handling, Key Imports, MCP Python SDK and FastMCP, Overview (+15 more)
 
 ### Community 407 - "evaluation.py"
-Cohesion: 0.15
-Nodes (8): agent_loop(), evaluate_single_task(), extract_xml_content(), main(), parse_env_vars(), parse_evaluation_file(), parse_headers(), run_evaluation()
+Cohesion: 0.14
+Nodes (9): create_connection(), agent_loop(), evaluate_single_task(), extract_xml_content(), main(), parse_env_vars(), parse_evaluation_file(), parse_headers() (+1 more)
 
 ### Community 408 - "Anti-Vanity Diagnostic Lenses"
 Cohesion: 0.09
@@ -2183,21 +2523,21 @@ Nodes (22): 1. The Deletion Test, 2. The Replacement Test, 3. The New Hire Test,
 Cohesion: 0.09
 Nodes (21): 1. Product Overview (50 words), 2. 15 FAQs with Schema, 3. Evidence Panels, 4. JSON-LD Schema, AEO Content Optimization Skill, Anti-Patterns (What to Avoid), Assessment Framework, Authority Level Determines Strategy (+13 more)
 
-### Community 410 - "text"
-Cohesion: 0.18
-Nodes (21): base(), first(), fromAic(), fromArchive(), fromMet(), fromNasa(), fromOpenverse(), getJson() (+13 more)
+### Community 410 - "Component Customization Guide"
+Cohesion: 0.04
+Nodes (44): Accessibility Customization, Advanced Customization Patterns, Animated Grid Pattern Timing, Animation Styles, ARIA Labels and Semantic HTML, BlurText Customization, Border Beam Customization, Breakpoint-Based Props (+36 more)
 
 ### Community 411 - "onAnnotDown"
-Cohesion: 0.14
-Nodes (22): applyPlaceholderDimensions(), beginEditPin(), buildAnnotationsForCapture(), buildPinElement(), cancelEditingPin(), clampPlaceholderSize(), finalizeEditingPin(), initAnnotOverlay() (+14 more)
+Cohesion: 0.15
+Nodes (21): applyPlaceholderDimensions(), beginEditPin(), buildAnnotationsForCapture(), buildPinElement(), cancelEditingPin(), clampPlaceholderSize(), finalizeEditingPin(), initAnnotOverlay() (+13 more)
 
 ### Community 412 - "Capabilities"
 Cohesion: 0.09
 Nodes (22): Accessibility & Inclusive Design, Advanced Design Techniques, Behavioral Traits, Capabilities, Collaboration & Communication, Cross-Platform Design Excellence, Design Research & Validation, Design System Implementation (+14 more)
 
 ### Community 413 - "route-normalize.mjs"
-Cohesion: 0.21
-Nodes (18): candidateKey(), canonicalizeBranchPrefix(), canonicalizeRoute(), decodeSegmentToken(), dedupeCandidates(), firstRouteSegment(), isBase64FlagState(), isDynamicPlaceholder() (+10 more)
+Cohesion: 0.19
+Nodes (20): canonicalRefOf(), enrichRecFromCandidates(), candidateKey(), canonicalizeBranchPrefix(), canonicalizeRoute(), decodeSegmentToken(), dedupeCandidates(), firstRouteSegment() (+12 more)
 
 ### Community 414 - "The Toolkit"
 Cohesion: 0.10
@@ -2220,16 +2560,16 @@ Cohesion: 0.09
 Nodes (21): Application Security Testing, Behavioral Traits, Capabilities, Cloud Security, Compliance & Governance, DevSecOps & Security Automation, Do not use this skill when, Emerging Security Technologies (+13 more)
 
 ### Community 419 - "scripts/render-report.mjs"
-Cohesion: 0.19
-Nodes (19): buildFinalReportMessage(), extractCoverageLine(), stripDetailsLink(), buildDebugArtifact(), candidateFamily(), candidateMatchesRef(), candidateTarget(), coerceOptionalString() (+11 more)
+Cohesion: 0.24
+Nodes (16): buildDebugArtifact(), candidateFamily(), candidateMatchesRef(), candidateTarget(), coerceOptionalString(), flattenObservations(), HARD_REGEN_TRIGGERS, log() (+8 more)
 
 ### Community 420 - "algorithmic-art/SKILL.md"
 Cohesion: 0.11
 Nodes (18): ALGORITHMIC PHILOSOPHY CREATION, CRAFTSMANSHIP REQUIREMENTS, CRITICAL: WHAT'S FIXED VS VARIABLE, DEDUCING THE CONCEPTUAL SEED, ESSENTIAL PRINCIPLES, HOW TO GENERATE AN ALGORITHMIC PHILOSOPHY, INTERACTIVE ARTIFACT CREATION, OUTPUT FORMAT (+10 more)
 
 ### Community 421 - "actOnAgentTarget"
-Cohesion: 0.24
-Nodes (19): actOnAgentTarget(), agentTargetBusyReason(), agentTargetOverlayGone(), agentTargetTaken(), claimAgentTarget(), claimAndActOnAgentTarget(), declineAgentTargetBusy(), declineAgentTargetUnresolvable() (+11 more)
+Cohesion: 0.19
+Nodes (22): actOnAgentTarget(), agentTargetBusyReason(), agentTargetOverlayGone(), agentTargetTaken(), buildPlaceholderResizeHandles(), claimAgentTarget(), claimAndActOnAgentTarget(), cursorForPlaceholderEdge() (+14 more)
 
 ### Community 422 - "createLiveBrowserDomHelpers"
 Cohesion: 0.16
@@ -2248,8 +2588,8 @@ Cohesion: 0.22
 Nodes (15): createLiveBrowserSessionState(), clearHandled(), clearScrollY(), clearSession(), isHandled(), loadSession(), markHandled(), nextCheckpointRevision() (+7 more)
 
 ### Community 426 - "modern-screenshot.umd.js"
-Cohesion: 0.22
-Nodes (16): Ct(), dt(), _e(), Et(), ft(), Gt(), It(), J() (+8 more)
+Cohesion: 0.09
+Nodes (57): ae(), be(), bt(), Ce(), s(), Ct(), de(), dt() (+49 more)
 
 ### Community 427 - "CSS Animation Recipes"
 Cohesion: 0.11
@@ -2304,12 +2644,12 @@ Cohesion: 0.23
 Nodes (16): annotateCodebaseScan(), annotateFinding(), assertObject(), bestRouteSummary(), buildRouteMetricIndex(), exists(), formatRouteSignal(), hasTraffic() (+8 more)
 
 ### Community 440 - "generator_template.js"
-Cohesion: 0.14
+Cohesion: 0.15
 Nodes (4): initializeSeed(), params, regenerate(), setup()
 
 ### Community 441 - "Scan mode (approach C: auto-extract, then confirm descriptive language)"
-Cohesion: 0.12
-Nodes (15): Component translation rules, Narrative mapping, Scan mode (approach C: auto-extract, then confirm descriptive language), Schema, Step 1: Find the design assets, Step 2: Auto-extract what can be auto-extracted, Step 2b: Stage the frontmatter, Step 3: Ask the user for qualitative language (+7 more)
+Cohesion: 0.17
+Nodes (12): Component translation rules, Narrative mapping, Scan mode (approach C: auto-extract, then confirm descriptive language), Schema, Step 1: Find the design assets, Step 2: Auto-extract what can be auto-extracted, Step 3: Ask the user for qualitative language, Step 4: Write DESIGN.md (+4 more)
 
 ### Community 442 - "AEO Content Generation Guide"
 Cohesion: 0.12
@@ -2336,12 +2676,12 @@ Cohesion: 0.12
 Nodes (16): Agentic UX Design - Relationship-Centric Interfaces, Collaborative Planning Components, Design Patterns Library, Memory-Aware Interface Components, Overview, Phase 1: Understand the Relationship Context, Phase 2: Map Trust Evolution, Phase 3: Design Memory Architecture (+8 more)
 
 ### Community 448 - "display-labels.mjs"
-Cohesion: 0.18
-Nodes (15): formatNumberLike(), formatPublicText(), formatSignal(), formatSignalPart(), formatSignalValue(), humanizeKey(), KIND_LABELS, normalizeObservedWindowUnits() (+7 more)
-
-### Community 449 - "ref_node_fs"
 Cohesion: 0.12
-Nodes (14): _resetClientForTests(), _setAdapterForTests(), decryptDataGCM(), defaultBackupStore, encryptDataGCM(), EncryptedBackupStore, getBackupKey(), MAGIC_HEADER (+6 more)
+Nodes (26): buildBudgetSummary(), buildChatPreview(), buildExactChatMessage(), buildOptions(), buildPrintCheck(), buildQuestionPayload(), buildQuestionText(), renderBudgetSummaryMarkdown() (+18 more)
+
+### Community 449 - "backupService.js"
+Cohesion: 0.19
+Nodes (8): decryptDataGCM(), defaultBackupStore, encryptDataGCM(), EncryptedBackupStore, getBackupKey(), MAGIC_HEADER, _resetBackupStoreForTests(), restoreFile()
 
 ### Community 450 - "Article 50: interaction, marking, and disclosure"
 Cohesion: 0.13
@@ -2367,9 +2707,9 @@ Nodes (14): 1. Eliminating Waterfalls (CRITICAL), 2. Bundle Size Optimization (C
 Cohesion: 0.13
 Nodes (14): Blind Comparator Agent, Field Descriptions, Guidelines, Inputs, Output Format, Process, Role, Step 1: Read Both Outputs (+6 more)
 
-### Community 456 - "test_skill_script_paths.py"
-Cohesion: 0.38
-Nodes (3): resolve(), shipped_invocations(), SkillScriptPathsTest
+### Community 456 - "GSAP ScrollTrigger Examples"
+Cohesion: 0.04
+Nodes (44): 1. Fade & Entrance Animations, 2. Pinning Animations, 3. Horizontal Scrolling, 4. Parallax Effects, 5. Text Animations, 6. Image Reveals, 🔗 Additional Resources, Adjust Timing (+36 more)
 
 ### Community 457 - "vercel-optimize"
 Cohesion: 0.13
@@ -2432,20 +2772,20 @@ Cohesion: 0.15
 Nodes (12): After Implementation, Audit Protocol, Before You Start, Design Audit Skill, Rules, Scope Discipline, Step 1: Full Audit, Step 2: Apply the Reduction Filter (+4 more)
 
 ### Community 472 - "Init flow"
-Cohesion: 0.15
-Nodes (13): fits(), shape(), Completion gate, Init flow, Step 1: Load current state, Step 2: Explore the project, Step 3: Interview for product truth, Step 4: Write PRODUCT.md (+5 more)
+Cohesion: 0.17
+Nodes (12): fits(), shape(), Completion gate, Init flow, Step 1: Load current state, Step 2: Explore the project, Step 3: Interview for product truth, Step 4: Write PRODUCT.md (+4 more)
 
 ### Community 473 - "New visual work"
-Cohesion: 0.15
-Nodes (13): 1. Decide what is already true, 2. Ask what will change the work, 3. Choose the right amount of invention, 4. Commit the world, 6. Build with full commitment, 7. Inspect and finish, Both paths, Code-led (+5 more)
+Cohesion: 0.20
+Nodes (10): 1. Decide what is already true, 2. Ask what will change the work, 4. Commit the world, 5. Record the decision, 6. Build with full commitment, 7. Inspect and finish, Both paths, Code-led (+2 more)
 
 ### Community 474 - "Kill Criteria Template"
 Cohesion: 0.15
 Nodes (12): Common Failure Modes of Kill Criteria, Day-0 Setup (Before First Commit), Enforcement Calendar, Implementation Requirements for Hard Kills, Instructions for Generation, Kill Criteria Template, Review Meeting Protocol, Soft-Go Graduation (+4 more)
 
-### Community 475 - "confirmed"
-Cohesion: 0.24
-Nodes (17): Structured hunter result, Cost budget, Coverage and prior runs, Full audit planning, Full audit workflow, Run profiles and scope, confirmed(), evidence() (+9 more)
+### Community 475 - "validate-findings.test.cjs"
+Cohesion: 0.09
+Nodes (31): Structured hunter result, Cost budget, Coverage and prior runs, Full audit planning, Run profiles and scope, LIMITS, assert, confirmed() (+23 more)
 
 ### Community 476 - "Innovative UX Designer V3"
 Cohesion: 0.17
@@ -2467,13 +2807,13 @@ Nodes (11): Assess Current State, Code Simplification, Content Simplification, D
 Cohesion: 0.17
 Nodes (11): Accessibility Resilience, Assess Hardening Needs, Edge Cases & Boundary Conditions, Error Handling, Hardening Dimensions, Input Validation & Sanitization, Internationalization (i18n), Performance Resilience (+3 more)
 
-### Community 481 - "k"
-Cohesion: 0.26
-Nodes (12): ae(), er(), fe(), jt(), k(), Kt(), P(), tr() (+4 more)
+### Community 481 - "Individual Hooks"
+Cohesion: 0.05
+Nodes (43): 1. Always Return Promises or Use Async/Await, 1. Global Hooks, 2. Transition Hooks, 2. Use Global Hooks for Universal Behavior, 3. Use View Hooks for Page-Specific Logic, 3. View Hooks, 4. Clean Up in beforeLeave, Not afterLeave, 5. Set Initial States in beforeEnter, Not enter (+35 more)
 
-### Community 482 - "L"
-Cohesion: 0.21
-Nodes (12): bt(), Ce(), s(), Ee(), L(), l(), me(), pt() (+4 more)
+### Community 482 - "PixiJS Performance Optimization Guide"
+Cohesion: 0.05
+Nodes (43): 1. Destroy Display Objects Properly, 1. Destroy Unused Textures, 1. Disable Anti-Aliasing, 1. Disable Unnecessary Features, 1. Limit Filter Usage, 1. Use BitmapText for Dynamic Text, 1. Use ParticleContainer for Large Sprite Counts, 1. Use WebWorkers for Heavy Calculations (+35 more)
 
 ### Community 483 - "Channel Tier Stack"
 Cohesion: 0.17
@@ -2496,37 +2836,32 @@ Cohesion: 0.17
 Nodes (12): Adding a Vendored NPM Dependency, Bundle-Level Externalization (onResolve plugins), Bundle Sidecars, check_deps.js, DEPS.list, In-tree Third-Party Helpers, Per-file emits (no bundle), playwright (+4 more)
 
 ### Community 488 - "dashboard/js/config.js"
-Cohesion: 0.27
-Nodes (7): 4.4 Version and Minimize localStorage Data, Version and Minimize localStorage Data, DEFAULTS, getItem(), loadConfig(), setItem(), STORAGE_KEYS
+Cohesion: 0.25
+Nodes (8): 4.4 Version and Minimize localStorage Data, Version and Minimize localStorage Data, DEFAULTS, getItem(), loadConfig(), setItem(), STORAGE_KEYS, updateConfig()
 
 ### Community 489 - "6. Rendering Performance"
 Cohesion: 0.17
 Nodes (12): 6.10 Use React DOM Resource Hints, 6.11 Use useTransition Over Manual Loading States, 6.1 Animate SVG Wrapper Instead of SVG Element, 6.2 CSS content-visibility for Long Lists, 6.3 Hoist Static JSX Elements, 6.4 Optimize SVG Precision, 6.5 Prevent Hydration Mismatch Without Flickering, 6.6 Suppress Expected Hydration Mismatches (+4 more)
 
 ### Community 490 - "Patterns and Guidelines"
-Cohesion: 0.17
-Nodes (12): Animation Timing, Card Expand/Collapse with `startTransition`, Composing with Activity, Cross-Fade Without Remount, Exclude Elements with `useOptimistic`, Patterns and Guidelines, Reusable Animated Collapse, Searchable Grid with `useDeferredValue` (+4 more)
+Cohesion: 0.15
+Nodes (13): Animation Timing, Card Expand/Collapse with `startTransition`, Composing with Activity, Cross-Fade Without Remount, Exclude Elements with `useOptimistic`, Layout Displacement Morph, Patterns and Guidelines, Reusable Animated Collapse (+5 more)
 
-### Community 491 - "View Transitions in Next.js"
-Cohesion: 0.17
-Nodes (12): Layout-Level ViewTransition, `loading.tsx` as Suspense Boundary, Programmatic Navigation, Routing-Driven Tabs, Server Components, Server-Side Filtering with `router.replace`, Setup, Shared Elements Across Routes (+4 more)
+### Community 491 - "name"
+Cohesion: 0.08
+Nodes (27): name(), Seed mode, Step 1: Route through new-work's workshop, Step 2: Write seed DESIGN.md, Step 3: Confirm, Component Methods, Constructor, Entity (+19 more)
 
 ### Community 492 - "View Transitions in Next.js"
-Cohesion: 0.17
-Nodes (12): Layout-Level ViewTransition, `loading.tsx` as Suspense Boundary, Programmatic Navigation, Routing-Driven Tabs, Server Components, Server-Side Filtering with `router.replace`, Setup, Shared Elements Across Routes (+4 more)
+Cohesion: 0.14
+Nodes (14): Layout-Level ViewTransition, `loading.tsx` as Suspense Boundary, Next.js Implementation Additions, Programmatic Navigation, Routing-Driven Tabs, Same-Route Dynamic Segment Transitions, Server Components, Server-Side Filtering with `router.replace` (+6 more)
 
 ### Community 493 - "Patterns and Guidelines"
-Cohesion: 0.17
-Nodes (12): Animation Timing, Card Expand/Collapse with `startTransition`, Composing with Activity, Cross-Fade Without Remount, Exclude Elements with `useOptimistic`, Patterns and Guidelines, Reusable Animated Collapse, Searchable Grid with `useDeferredValue` (+4 more)
+Cohesion: 0.15
+Nodes (13): Animation Timing, Card Expand/Collapse with `startTransition`, Composing with Activity, Cross-Fade Without Remount, Exclude Elements with `useOptimistic`, Layout Displacement Morph, Patterns and Guidelines, Reusable Animated Collapse (+5 more)
 
-### Community 494 - "validate-findings.test.cjs"
-Cohesion: 0.12
-Nodes (11): LIMITS, assert, fs, {
-  LIMITS,
-  collect,
-  collectSchemaErrors,
-  validateDocument,
-}, os, path, schema, { spawnSync } (+3 more)
+### Community 494 - "Anime.js"
+Cohesion: 0.05
+Nodes (42): 1. Forgetting Unit Types, 1. Stagger Animation (Sequential Reveal), 2. Stagger from Center, 2. Using CSS transform Property Directly, 3. Not Handling Animation Cleanup, 3. SVG Line Drawing, 4. Animating Too Many Elements, 4. SVG Morphing (+34 more)
 
 ### Community 495 - "Doctrine"
 Cohesion: 0.17
@@ -2600,9 +2935,9 @@ Nodes (9): Component Architecture (CRITICAL), Core Principles, Creating a New Ru
 Cohesion: 0.20
 Nodes (9): Alignment Is Precision, Consistency Is Non-Negotiable, Design Principles, Design the Feeling, Hierarchy Drives Everything, No Cosmetic Fixes Without Structural Thinking, Responsive Is the Real Design, Simplicity Is Architecture (+1 more)
 
-### Community 513 - "Responsive Design"
-Cohesion: 0.20
-Nodes (10): Breakpoints: Content-Driven, Detect Input Method, Not Just Screen Size, Layout Adaptation Patterns, Mobile-First: Write It Right, Picture Element for Art Direction, Responsive Design, Responsive Images: Get It Right, Safe Areas: Handle the Notch (+2 more)
+### Community 513 - "sound.mjs"
+Cohesion: 0.11
+Nodes (19): bandNoise(), env(), mix(), R, readWav(), SFX, tone(), 7. Content stops at the notch (+11 more)
 
 ### Community 514 - "Sector Riders"
 Cohesion: 0.20
@@ -2684,9 +3019,9 @@ Nodes (9): Color, Components, Layout, Motion, Operate mode depth (and Read notes
 Cohesion: 0.22
 Nodes (8): Cadence, Confirm and stop, Phase 1: Discovery interview, Phase 2: Resolve the design direction, Phase 3: Write the brief, Round 1: purpose, people, and outcome, Round 2: material, behavior, and boundaries, Shape
 
-### Community 534 - "qt"
-Cohesion: 0.31
-Nodes (9): de(), Ie(), Lt(), Mt(), oe(), Ot(), qt(), Re() (+1 more)
+### Community 534 - "Babylon.js Engine Skill"
+Cohesion: 0.05
+Nodes (42): 1. Custom Shaders, 1. Engine and Scene Initialization, 1. Mesh Optimization, 2. Camera Systems, 2. Compute Shaders, 2. Scene Optimization, 3. Lighting Systems, 3. Procedural Textures (+34 more)
 
 ### Community 535 - "Asymmetry Audit Table"
 Cohesion: 0.22
@@ -2717,8 +3052,8 @@ Cohesion: 0.25
 Nodes (8): Completion record, Composition integrity, Interface verification, Proof levels, Round 1 source verification, Round 2 graphic production checks, SVG invariant, Verification
 
 ### Community 542 - "Playwright Test Results (DuckDB)"
-Cohesion: 0.25
-Nodes (7): line(), Example queries, Fetching the full detail, Generate a linked emoji run history, Get the database, Playwright Test Results (DuckDB), Schema
+Cohesion: 0.29
+Nodes (6): Example queries, Fetching the full detail, Generate a linked emoji run history, Get the database, Playwright Test Results (DuckDB), Schema
 
 ### Community 543 - "Human Architect Mindset - Checklists"
 Cohesion: 0.25
@@ -2756,13 +3091,13 @@ Nodes (8): Android platform, Color & theming, Components & motion, Layout & stru
 Cohesion: 0.25
 Nodes (8): 1. Impatient Power User: "Alex", 2. Confused First-Timer: "Jordan", 3. Accessibility-Dependent User: "Sam", 4. Deliberate Stress Tester: "Riley", 5. Distracted Mobile User: "Casey", Persona-Based Design Testing, Project-Specific Personas, Selecting Personas
 
-### Community 552 - "sys"
-Cohesion: 0.09
-Nodes (11): main(), aggregate_results(), calculate_stats(), generate_benchmark(), generate_markdown(), load_run_results(), main(), main() (+3 more)
+### Community 552 - "package_skill.py"
+Cohesion: 0.20
+Nodes (4): main(), package_skill(), should_exclude(), validate_skill()
 
-### Community 553 - "undeclared-dep.mjs"
-Cohesion: 0.47
-Nodes (5): apply(), extractCodeBlocks(), metadata, NODE_BUILTINS, pkgRoot()
+### Community 553 - "stroke"
+Cohesion: 0.21
+Nodes (37): cocoon(), egg(), fungus(), larva(), leaf(), leafPiece(), nestCanvas(), roots() (+29 more)
 
 ### Community 554 - "Quality Checklist"
 Cohesion: 0.25
@@ -2893,8 +3228,8 @@ Cohesion: 0.29
 Nodes (6): After The User Chooses, Blocker Copy, Observability Plus Stop-And-Ask, Scanner-Only Mode, User Template, Why This Check Exists
 
 ### Community 587 - "Verification"
-Cohesion: 0.29
-Nodes (6): Claim types, Dispositions, Re-gen trigger and accept criteria, Table of contents, Verification, Why mechanical verification
+Cohesion: 0.25
+Nodes (7): Claim types, Dispositions, Re-gen trigger and accept criteria, Table of contents, Verification, Verifier implementation, Why mechanical verification
 
 ### Community 588 - "AEO Content Generation Guide for Claude Code"
 Cohesion: 0.33
@@ -2960,9 +3295,9 @@ Nodes (6): Dependency Mapping, External Dependency Audit, Failure Mode Analysis,
 Cohesion: 0.33
 Nodes (6): Domain Learning, Post-Mortem Checklist, Process Improvement, Systems Learning, What broke?, Why didn't we see it coming?
 
-### Community 604 - "Example 6: The Framework Migration Temptation"
-Cohesion: 0.33
-Nodes (6): Example 6: The Framework Migration Temptation, The Architect's Response, The Loyalty Analysis, The Optimization Argument, The Pattern, When Migration IS Justified
+### Community 604 - "PixiJS Starter Template"
+Cohesion: 0.05
+Nodes (42): 1. Local Development, 2. Live Server (VS Code), 3. Production Deployment, Add Custom Shaders, Add Filters and Effects, Add Particle Effects, Add Sprite Textures from Images, Adjust Sprite Size (+34 more)
 
 ### Community 605 - "The Five Pillars"
 Cohesion: 0.33
@@ -2980,17 +3315,17 @@ Nodes (6): Loyalty in Architecture, The AI Perfection Trap, The Foundation: Loya
 Cohesion: 0.33
 Nodes (6): Phase 1: Domain Discovery, Phase 2: Systems Analysis, Phase 3: Constraint Mapping, Phase 4: AI Decomposition Planning, Phase 5: Solution Synthesis, The Architect Process
 
-### Community 609 - "CloudRDR — Risk Register v1 & Asset Classification"
-Cohesion: 0.29
-Nodes (6): 1. Asset Classification Framework, 2. Asset Inventory & Criticality Assessment, 3. Risk Assessment Methodology, 4. Risk Register v1, 5. Risk Treatment & Monitoring Summary, CloudRDR — Risk Register v1 & Asset Classification
+### Community 609 - "Awesome Claude Video Skills"
+Cohesion: 0.05
+Nodes (39): Preview images, Add a repo, 🧑‍💼 Avatars, Awesome Claude Video Skills, Contents, ✂️ Editing, 🎓 Explainers, 🧱 Frameworks & toolkits (+31 more)
 
 ### Community 610 - "Visualize: Direction Comps & Asset Production"
 Cohesion: 0.33
 Nodes (5): After approval: the comp becomes a spec, Generate three compositional options, One approval point, Plates and provenance, Visualize: Direction Comps & Asset Production
 
-### Community 612 - "ye"
-Cohesion: 0.33
-Nodes (6): be(), ht(), q(), ut(), wt(), ye()
+### Community 612 - "Spline Interactive - Browser-Based 3D Design and Animation"
+Cohesion: 0.05
+Nodes (41): 1. Enable On-Demand Rendering, 1. Scene Structure, 2. Components System, 2. Optimize Scene in Spline Editor, 3. Lazy Load Heavy Scenes, 3. State-Based Animation, 4. Interactivity Model, 4. Preload Critical Scenes (+33 more)
 
 ### Community 613 - "Evaluation Process"
 Cohesion: 0.33
@@ -3004,9 +3339,9 @@ Nodes (6): Advanced MCP Features, Notification Support, Resource Registration, s
 Cohesion: 0.33
 Nodes (6): Advanced FastMCP Features, Context Parameter Injection, Lifespan Management, Resource Registration, Structured Output Types, Transport Options
 
-### Community 616 - ".update"
-Cohesion: 0.13
-Nodes (13): Entity, How Multiple VTs Interact, Layout Displacement Morph, Nested VT Limitation, Troubleshooting, Two Patterns Coexist, Use `default="none"` Deliberately, Layout Displacement Morph (+5 more)
+### Community 616 - ".display"
+Cohesion: 0.25
+Nodes (5): Entity, What You Animate, Step 2b: Stage the frontmatter, Isolate Elements from Parent Animations, Isolate Elements from Parent Animations
 
 ### Community 617 - "Adding CLI Commands"
 Cohesion: 0.33
@@ -3036,17 +3371,17 @@ Nodes (6): Common Implementation Pitfalls, ❌ Pitfall 1: Remembering Too Much, 
 Cohesion: 0.33
 Nodes (6): 1. Memory Revolution: From Static Preferences to Contextual Intelligence, 2. Trust as a Design Material: The Three-Stage Evolution, 3. Relationship-Centric Architecture, 4. Systems That Plan Their Own Path, 5. New Success Metrics: Beyond Conversion Rates, The Five Pillars of Agentic UX
 
-### Community 624 - "unoptimized-image.mjs"
-Cohesion: 0.53
-Nodes (5): isJsxLike(), isNextConfig(), metadata, scan(), snippet()
+### Community 624 - "A-Frame WebXR Skill"
+Cohesion: 0.05
+Nodes (39): 1. Entity-Component-System (ECS), 1. Use Asset Management, 2. Pool Entities, 2. Scene Setup, 3. Camera Systems, 3. Optimize Geometry, 4. Lighting, 4. Limit Draw Calls (+31 more)
 
 ### Community 625 - "Security Audit"
-Cohesion: 0.15
-Nodes (13): Anti-patterns, Core principles, Full audit setup, Operating modes, Platform terminology, Recommend the smallest effective source fix, Require a boundary and result, Respect source visibility (+5 more)
+Cohesion: 0.14
+Nodes (14): Anti-patterns, Core principles, Full audit setup, Full audit workflow, Operating modes, Platform terminology, Recommend the smallest effective source fix, Require a boundary and result (+6 more)
 
-### Community 626 - "dashboard/js/components/detectionChart.js"
-Cohesion: 0.47
-Nodes (3): buildChartData(), initDetectionChart(), updateDetectionChart()
+### Community 626 - "core.mjs"
+Cohesion: 0.11
+Nodes (34): burst(), catmull(), clamp(), densify(), eBack(), eBounce(), eElastic(), eExpo() (+26 more)
 
 ### Community 627 - "queries.mjs"
 Cohesion: 0.43
@@ -3093,8 +3428,8 @@ Cohesion: 0.40
 Nodes (5): Content Quality, Schema Markup, Structure, Technical, Validation Checklist
 
 ### Community 639 - "verify-and-regen.mjs"
-Cohesion: 0.27
-Nodes (12): summarizeClaimResults(), applyQualityFloor(), deriveProjectFacts(), deriveRootFromSignals(), detectRepoRoot(), fileResolvesAt(), pickProbeFile(), resolveRepoRoot() (+4 more)
+Cohesion: 0.17
+Nodes (23): summarizeClaimResults(), applyQualityFloor(), grade(), gradeRecommendation(), isAccountScope(), roundTo(), scoreActionability(), scoreEvidence() (+15 more)
 
 ### Community 640 - "AI, LLM, and Agent Hunting"
 Cohesion: 0.20
@@ -3104,21 +3439,21 @@ Nodes (9): AI, LLM, and Agent Hunting, Context, retrieval, and memory attack cla
 Cohesion: 0.40
 Nodes (5): Before I agree to anything:, Before I choose tools/patterns:, Before I decompose for AI:, Before I propose anything:, Quick Pre-Meeting Checklist
 
-### Community 642 - "Example 4: AI-Assisted Legacy Refactoring"
-Cohesion: 0.40
-Nodes (5): AI Decomposition Done Right, Example 4: AI-Assisted Legacy Refactoring, Good vs Bad Task Examples, Verification Strategy, Why "Refactor This" Fails
+### Community 642 - "Lightweight 3D Effects Skill"
+Cohesion: 0.05
+Nodes (39): Advanced Examples, Available Effects, Basic Setup, Basic Setup, Basic Setup, Common Patterns, Common Pitfalls, Configuration Options (+31 more)
 
 ### Community 643 - "AI Operational Loyalty"
 Cohesion: 0.40
 Nodes (5): AI Operational Loyalty, How to Operationalize AI Loyalty, The Honest Truth, What AI CAN Commit To, What AI CANNOT Commit To
 
-### Community 644 - "Region map"
-Cohesion: 0.40
-Nodes (4): Containment, Painted material, Region map, What varies independently
+### Community 644 - "Pen"
+Cohesion: 0.08
+Nodes (22): centroid(), noise1(), Pen, Not taken, Prior art: what other animation skills do, and what this one took, Taken (and where it lives here), 1. Textured editorial (the storybook look), 2. Brush ink + watercolour (the history recap v2 look) (+14 more)
 
-### Community 645 - "lib/budget-summary.mjs"
-Cohesion: 0.31
-Nodes (11): buildBudgetSummary(), buildChatPreview(), buildExactChatMessage(), buildOptions(), buildPrintCheck(), buildQuestionPayload(), buildQuestionText(), renderBudgetSummaryMarkdown() (+3 more)
+### Community 645 - "Barba.js"
+Cohesion: 0.05
+Nodes (38): 1. Basic Setup, 1. Forgetting to Return Promises, 1. Prefetching, 1. Wrapper, Container, and Namespace, 2. Fade Transition (Async), 2. Not Preventing Default Link Behavior, 2. Prevent Layout Shift, 2. Transition Lifecycle (+30 more)
 
 ### Community 646 - "Flipping the Switch: From Decay to Growth"
 Cohesion: 0.40
@@ -3136,9 +3471,9 @@ Nodes (4): extractHighColdRoutes(), extractSlowHotRoutes(), gate(), metadata
 Cohesion: 0.40
 Nodes (5): 8. Trace Loading (traceLoader.ts), Built-in Backends, Load Process, Output: ContextEntry[], TraceLoaderBackend Interface
 
-### Community 650 - "grade-recommendation.mjs"
-Cohesion: 0.39
-Nodes (11): grade(), gradeRecommendation(), isAccountScope(), roundTo(), scoreActionability(), scoreEvidence(), scoreEvidenceAccount(), scoreGrounding() (+3 more)
+### Community 650 - "Design Engineering"
+Cohesion: 0.05
+Nodes (38): 1. Should this animate at all?, 2. What is the purpose?, 3. What easing should it use?, 3D transforms for depth, 4. How fast should it be?, Accessibility, Asymmetric enter/exit timing, Beauty is leverage (+30 more)
 
 ### Community 651 - "Example 1: EU B2B Relationship Cockpit (Automotive Service Networks)"
 Cohesion: 0.40
@@ -3348,6 +3683,10 @@ Nodes (4): Do Not Recommend When, Evidence To Check, Investigation Brief, Verifi
 Cohesion: 0.40
 Nodes (5): Avoid, Product names, Recommendation shape, Rules, Voice
 
+### Community 703 - "os"
+Cohesion: 0.03
+Nodes (35): cli_mode(), generate_explosion_particles(), generate_fire_particles(), generate_fountain_particles(), generate_snow_particles(), generate_stars_particles(), interactive_mode(), main() (+27 more)
+
 ### Community 704 - "Quick Testing Protocol"
 Cohesion: 0.50
 Nodes (4): Check for:, Manual Prompt Testing, Quick Testing Protocol, Track Results:
@@ -3433,7 +3772,7 @@ Cohesion: 0.20
 Nodes (10): Application-state and device-lifecycle attack classes (subagent_type: `general`), Core discipline (include in every agent prompt for this domain), Deep-link, callback, and navigation attack classes (subagent_type: `general`), Desktop, Mobile, and Local IPC Hunting, Local IPC and exported-component attack classes (subagent_type: `general`), Privileged-helper and local-file attack classes (subagent_type: `general`), Universal moves (apply across the above), Validation rules (apply before reporting ANY finding here) (+2 more)
 
 ### Community 729 - "Protocols, RPC, and Messaging Hunting"
-Cohesion: 0.22
+Cohesion: 0.20
 Nodes (9): Broker and queue isolation attack classes (subagent_type: `general`), Core discipline (include in every agent prompt for this domain), Framing, schema, and interpretation attack classes (subagent_type: `general`), Protocols, RPC, and Messaging Hunting, Replay, ordering, and transaction attack classes (subagent_type: `general`), RPC identity and authorization attack classes (subagent_type: `general`), Universal moves (apply across the above), Validation rules (apply before reporting ANY finding here) (+1 more)
 
 ### Community 730 - "Resource Exhaustion and Availability Hunting"
@@ -3473,8 +3812,8 @@ Cohesion: 0.25
 Nodes (7): Extract Flow, Step 1: Discover the Design System, Step 2: Identify Patterns, Step 3: Plan Extraction, Step 4: Extract & Enrich, Step 5: Migrate, Step 6: Document
 
 ### Community 818 - "gates/index.mjs"
-Cohesion: 0.11
-Nodes (21): GATE_VERSION, gates, MAX_CODE_CANDIDATES, metadata, scanners, isApplicable(), metadata, scan() (+13 more)
+Cohesion: 0.06
+Nodes (35): gate(), metadata, unique(), extractColdStarts(), gate(), metadata, extractCallCounts(), extractExternalApis() (+27 more)
 
 ### Community 819 - "Threat Modeling Expert"
 Cohesion: 0.25
@@ -3488,25 +3827,25 @@ Nodes (7): formatBytes(), metadata, scan(), shouldSkip(), SKIP_EXTENSIONS, SKIP_
 Cohesion: 0.25
 Nodes (8): 2.4.11 Focus Not Obscured (Level AA) - WCAG 2.2, 2.4.1 Bypass Blocks (Level A), 2.4.2 Page Titled (Level A), 2.4.3 Focus Order (Level A), 2.4.4 Link Purpose (In Context) (Level A), 2.4.6 Headings and Labels (Level AA), 2.4.7 Focus Visible (Level AA), 2.4 Navigable
 
-### Community 823 - "dashboard/js/components/incidentDetail.js"
-Cohesion: 0.70
-Nodes (4): formatDate(), isCanaryPath(), triggerRestore(), updateIncidentDetail()
+### Community 823 - "Micro-Interaction Patterns Catalog"
+Cohesion: 0.05
+Nodes (38): 10.1 Toast Notification, 1.1 Hover Lift, 1.2 Ripple Effect, 1.3 Magnetic Button, 1.4 Loading Button State, 2.1 Floating Label, 2.2 Input Validation Feedback, 2.3 Password Strength Indicator (+30 more)
 
-### Community 824 - "Phase 6: Produce target-neutral reports from final records"
-Cohesion: 0.50
-Nodes (4): `FINDINGS-DETAIL.md`, `NEEDS-VALIDATION.md`, Phase 6: Produce target-neutral reports from final records, `REPORT.md`
+### Community 824 - "PixiJS Filters & Visual Effects Guide"
+Cohesion: 0.05
+Nodes (38): 1. Minimize Filter Count, 2. Set Filter Area, 3. Bake Static Filters, 4. Use Lower Quality, 5. Toggle Filters Based on Performance, AlphaFilter, Applying Filters, BlurFilter (+30 more)
 
-### Community 825 - "isr-overrevalidation.mjs"
-Cohesion: 0.67
-Nodes (3): extractRows(), gate(), metadata
+### Community 825 - "PixiJS 2D Rendering Skill"
+Cohesion: 0.05
+Nodes (38): 1. Application & Renderer, 1. Use ParticleContainer for Large Sprite Counts, 2. Optimize Filter Usage, 2. Sprites & Textures, 3. Graphics API, 3. Manage Texture Memory, 4. Enable Culling for Off-Screen Objects, 4. ParticleContainer (+30 more)
 
-### Community 826 - "observability-events-attribution.mjs"
-Cohesion: 0.67
-Nodes (3): gate(), metadata, sumBilled()
+### Community 826 - "Substance 3D Painter Python API Reference"
+Cohesion: 0.05
+Nodes (38): API Overview, Available Events, Classes, Classes, Common Issues, Complete Examples, Core Modules, Creating a Plugin (+30 more)
 
-### Community 827 - "select-candidates.mjs"
-Cohesion: 0.36
-Nodes (8): candidateIdentity(), DEFAULT_KIND_CAPS, DIVERSITY_ELIGIBILITY, durationMsFromSignal(), isDiversityEligible(), numberFromEvidence(), numberFromSignal(), selectLaunchCandidates()
+### Community 827 - "Blender Web Pipeline"
+Cohesion: 0.05
+Nodes (37): 1. Basic glTF Export (Manual), 1. Geometry Optimization, 1. Large File Sizes, 2. Missing Textures in Export, 2. Python Script for Batch Export, 2. Texture Optimization, 3. Animations Not Playing, 3. Material Simplification (+29 more)
 
 ### Community 828 - "1.4 Distinguishable"
 Cohesion: 0.29
@@ -3525,8 +3864,8 @@ Cohesion: 0.33
 Nodes (5): Do not use this skill when, Instructions, Resources, Tailwind Design System, Use this skill when
 
 ### Community 832 - "middleware-broad-matcher.mjs"
-Cohesion: 0.67
-Nodes (3): isApplicable(), metadata, scan()
+Cohesion: 0.18
+Nodes (7): isApplicable(), metadata, scan(), isApplicable(), metadata, scan(), metadata
 
 ### Community 833 - "$type"
 Cohesion: 0.60
@@ -3612,41 +3951,1325 @@ Nodes (5): Report honestly, Run it, Test against the OWASP Top 10, Then fix and 
 Cohesion: 0.33
 Nodes (5): 1. Confirm authorization and scope, 2. Run the scan, 3. Review results, 4. Fix and verify, Pentest a web application
 
-### Community 854 - "cost-coverage.mjs"
-Cohesion: 0.47
-Nodes (5): classifyService(), computeCostCoverage(), escapeCell(), renderCostCoverageMarkdown(), SERVICE_DIMENSION
+### Community 854 - "Lightweight 3D Effects - Starter Template"
+Cohesion: 0.05
+Nodes (37): 1. View Locally, 2. Customize Colors, 3. Change Vanta Effect, Add New Zdog Icon, Advanced Examples, Browser Support, Build for Production (Optional), CDN Dependencies (+29 more)
 
-### Community 855 - "Impeccable Documenter"
+### Community 855 - "After Effects to Lottie Export Guide"
+Cohesion: 0.05
+Nodes (37): 1. Composition Setup, 1. Export & Preview, 2. Integration Testing, 2. Shape Layer Optimization, 3. Image Optimization, 3. Performance Testing, 4. Text Optimization, 5. Animation Optimization (+29 more)
+
+### Community 856 - "Web Design Trends 2024-2025"
+Cohesion: 0.05
+Nodes (37): 10. Cursor Effects & Custom Cursors, 11. 3D Elements & WebGL, 12. Voice & Conversational UI, 13. Performance-First Design, 14. Component-Driven Design Systems, 15. AI-Enhanced Design, 16. Progressive Web Apps (PWAs), 17. Color Palette Trends (2024-2025) (+29 more)
+
+### Community 857 - "restorePanel.js"
 Cohesion: 0.40
-Nodes (4): Impeccable Documenter, Input Contract, Output Contract, Workflow
+Nodes (4): shortenHash(), updateRestorePanel(), formatTime(), updateStatusBar()
 
-### Community 856 - "external-api-slow.mjs"
-Cohesion: 0.60
-Nodes (4): extractCallCounts(), extractExternalApis(), gate(), metadata
+### Community 858 - "PlayCanvas Engine API Reference"
+Cohesion: 0.05
+Nodes (37): Animation Component, Application, Asset Types, Assets, Audio, Camera Component, Collision Component, Components (+29 more)
 
-### Community 858 - "cold-start.mjs"
+### Community 860 - "Spring Physics Deep Dive"
+Cohesion: 0.05
+Nodes (37): Advanced Techniques, Animation Never Completes, Animation Too Fast, Animation Too Slow, Best Practices, By Animation Feel, By Use Case, Calculating Velocity from Gestures (+29 more)
+
+### Community 865 - "renderDesignVisual"
+Cohesion: 0.08
+Nodes (37): buildCollapsible(), buildDesignHeader(), buildListHtml(), buildRadiiModels(), copyToClipboard(), cssSafe(), designEmptyMessage(), designPanelCss() (+29 more)
+
+### Community 866 - "PlayCanvas Engine Skill"
+Cohesion: 0.05
+Nodes (36): 1. Application, 1. Object Pooling, 2. Entity-Component System, 2. LOD (Level of Detail), 3. Batching, 3. Update Loop, 4. Components, 4. Texture Compression (+28 more)
+
+### Community 867 - "Babylon.js Real-World Examples"
+Cohesion: 0.06
+Nodes (35): 3D Menu System, Advanced Materials, Babylon.js Real-World Examples, Batch Model Loading, Bloom + DOF + Color Grading, Cloth Simulation, Custom Post-Process, Dynamic Material Switching (+27 more)
+
+### Community 868 - "Barba.js + GSAP Integration Guide"
+Cohesion: 0.06
+Nodes (35): 1. Use GPU-Accelerated Properties, 2. Use will-change with Caution, 3. Kill Running Animations, 4. Batch DOM Queries, 5. Use force3D for Mobile, Advanced Patterns, Barba.js + GSAP Integration Guide, Basic Import (+27 more)
+
+### Community 869 - "React Spring API Reference"
+Cohesion: 0.06
+Nodes (32): Advanced Patterns, animated, API Methods, api.set(values), api.start(config), Async to Function, Chaining Animations, Components (+24 more)
+
+### Community 870 - "Animated Component Libraries"
+Cohesion: 0.06
+Nodes (34): 1. Magic UI: Animated Background Patterns, 1. Missing Dependencies, 2. CSS Animations Not Applied, 2. React Bits: Text Reveal Animations, 3. Magic UI: Button Components with Effects, 3. Z-Index Conflicts, 4. Performance Issues with Multiple Animated Components, 4. React Bits: Interactive Dock Navigation (+26 more)
+
+### Community 871 - "Expo Animation Recipes"
+Cohesion: 0.06
+Nodes (33): Bottom sheet you can drag to dismiss, Collapsing header on scroll, Expo Animation Recipes, Firing something once at a threshold, Keyboard-synced UI, List entrances, Press feedback, Screen transitions (Expo Router) (+25 more)
+
+### Community 872 - "GSAP ScrollTrigger Integration with Locomotive Scroll"
+Cohesion: 0.06
+Nodes (34): 1. Fade In on Scroll, 1. Installation, 1. Refresh Strategy, 2. Complete Integration Setup, 2. Lazy Initialization, 2. Pin Section While Scrolling, 3. Kill ScrollTriggers, 3. Scrubbed Timeline Animation (+26 more)
+
+### Community 873 - "Lottie Animations"
+Cohesion: 0.06
+Nodes (34): 1. Basic HTML Integration with dotLottie-web, 1. Memory Leaks from Improper Cleanup, 2. Event Listener Cleanup, 2. React Component with Controls, 3. Event Listeners and Lifecycle Hooks, 3. Large File Sizes, 4. Animation Performance Issues, 4. Scroll-Driven Animation with lottie-react (+26 more)
+
+### Community 874 - "Motion Starter Template"
+Cohesion: 0.06
+Nodes (34): 1. Hover Animations (HoverCard), 2. Drag Interactions (DraggableBox), 3. Staggered Animations (StaggerList), 4. Exit Animations (Modal), Add New Components, Add Scroll Animations, Animations Not Working, Basic Animation (+26 more)
+
+### Community 875 - "React Spring Physics"
+Cohesion: 0.06
+Nodes (34): 1. Click-Triggered Spring Animation, 1. Forgetting Dependencies Array, 2. Multi-Element Trail Animation, 2. Mutating Spring Values, 3. Ignoring Config Precision, 3. List Transitions (Enter/Exit), 4. Not Handling Velocity, 4. Scroll-Based Spring Animation (+26 more)
+
+### Community 876 - "Drei Helpers"
+Cohesion: 0.06
+Nodes (34): AdaptiveDpr, AdaptiveEvents, Canvas Component, Center & Bounds, ContactShadows, Drei Helpers, Environment, Events (+26 more)
+
+### Community 877 - "Rive Interactive - State Machine-Based Vector Animation"
+Cohesion: 0.06
+Nodes (34): 1. State Machines, 1. Use Off-Screen Renderer, 2. Inputs, 2. Optimize Rive Files, 3. Preload Critical Animations, 3. ViewModels, 4. Disable Automatic Event Handling, 4. Events (+26 more)
+
+### Community 878 - "AOS Examples and Integration Patterns"
+Cohesion: 0.06
+Nodes (34): Accessibility Patterns, Additional Resources, Alternating Content Pattern, AOS Examples and Integration Patterns, ARIA-friendly Animations, Basic React Setup, Best Practices Summary, Common Patterns (+26 more)
+
+### Community 879 - "Lottie Performance Optimization Guide"
+Cohesion: 0.06
+Nodes (33): 1. CDN Hosting, 1. FPS Monitoring, 1. Proper Cleanup, 1. Reduce Quality on Mobile, 1. Renderer Selection, 1. Use dotLottie Format, 2. Event Listener Cleanup, 2. Memory Usage Tracking (+25 more)
+
+### Community 880 - "PlayCanvas Examples"
+Cohesion: 0.06
+Nodes (33): 1. 2D UI Elements, 1. Background Music, 1. Basic Physics, 1. Hello Cube, 1. Materials & Textures, 1. Object Pooling, 1. Property Animation (Tween), 1. React Integration (+25 more)
+
+### Community 881 - "Substance 3D Painter Export Presets"
+Cohesion: 0.06
+Nodes (33): Arnold (AiStandard), Babylon.js PBR, Best Practices, Built-in Presets, By Platform, By Texture Count, By Use Case, Channel Packing Strategies (+25 more)
+
+### Community 883 - "Substance 3D Texturing"
+Cohesion: 0.06
+Nodes (32): 1. Basic Web Export (Three.js/Babylon.js), 1. Wrong Color Space for BaseColor, 2. Batch Export with Python API, 2. Normal Map Baking Issues, 3. Metallic/Roughness Channel Order, 3. Resolution Override per Asset, 4. Custom Export Preset (Separate Channels), 4. Padding Artifacts at UV Seams (+24 more)
+
+### Community 884 - "Three.js Materials Comprehensive Guide"
+Cohesion: 0.06
+Nodes (32): 1. Texture Atlas, 2. Share Materials, 3. Texture Size, 4. Disable Unnecessary Features, 5. Use InstancedMesh with Materials, Car Paint, Common Properties (All Materials), Custom Shaders (ShaderMaterial) (+24 more)
+
+### Community 885 - "A-Frame Starter Template"
+Cohesion: 0.06
+Nodes (31): A-Frame Inspector, A-Frame Starter Template, Add Environment, Add New Objects, Add Particles, Add Physics, Add Textures, Adding VR Controllers (+23 more)
+
+### Community 886 - "Babylon.js Starter Template"
+Cohesion: 0.06
+Nodes (31): Add Animations, Add GUI, Add More Lights, Add Particles, Add Post-Processing, Babylon.js Starter Template, Build, Change Camera (+23 more)
+
+### Community 887 - "Motion & Framer Motion"
+Cohesion: 0.06
+Nodes (31): 1. Hover Animations, 1. Use Transform Properties, 2. Individual Transform Properties, 2. Tap/Press Animations, 3. Drag Interactions, 3. Reduce Motion for Accessibility, 4. Exit Animations (AnimatePresence), 4. Layout Animations Performance (+23 more)
+
+### Community 888 - "Locomotive Scroll Starter Template"
+Cohesion: 0.06
+Nodes (30): 1. Parallax Effects, 2. Sticky Element, 3. Scroll Call Events, 4. Progress Tracking, 5. Programmatic Scrolling, Accessibility, Accessibility concerns?, Build for Production (+22 more)
+
+### Community 890 - "aggregate_benchmark.py"
+Cohesion: 0.11
+Nodes (13): calculate_critical_friction(), calculate_damping_ratio(), classify_damping(), display_config(), estimate_settle_time(), interactive_mode(), main(), aggregate_results() (+5 more)
+
+### Community 891 - "Hooks"
+Cohesion: 0.07
+Nodes (29): Common Patterns, Components, Dynamic Animation Switching, Error Handling, Event Listening, Events, EventType, Hooks (+21 more)
+
+### Community 892 - "generate_review.py"
+Cohesion: 0.11
+Nodes (10): build_run(), embed_file(), find_runs(), _find_runs_recursive(), generate_html(), get_mime_type(), _kill_port(), load_previous_iteration() (+2 more)
+
+### Community 893 - "PBR Texture Channel Guide"
+Cohesion: 0.07
+Nodes (29): Additional Channels, Ambient Occlusion (AO), Base Color (Albedo), Brushed Metal, Channel Best Practices, Color Space Management, Common Material Types, Core Channels (+21 more)
+
+### Community 894 - "Three.js Performance Optimization Checklist"
+Cohesion: 0.07
+Nodes (29): Advanced Optimizations, 🔧 Animation Optimization, 🔍 Common Performance Bottlenecks, 🔧 Culling & Visibility, ⚙️ Custom Shaders, 🎯 Desktop, 🔧 Draw Call Reduction, ✅ Geometry Optimization (+21 more)
+
+### Community 895 - "GSAP & ScrollTrigger API Quick Reference"
+Cohesion: 0.07
+Nodes (24): Adding Animations, Advanced Stagger, Animation Control, Callbacks, Common Patterns, Common Tween Properties, Core GSAP Methods, Core Properties (+16 more)
+
+### Community 897 - "Vanta.js Effects Reference"
+Cohesion: 0.07
+Nodes (26): Angular, Basic Setup, Color Format, Color Not Changing, Common Options, Control Options, Effect Not Responsive, Effect Performance Ranking (+18 more)
+
+### Community 898 - "setup_vanta.py"
+Cohesion: 0.08
+Nodes (13): create_html_template(), generate_birds(), generate_cells(), generate_clouds(), generate_effect(), generate_globe(), generate_rings(), generate_topology() (+5 more)
+
+### Community 899 - "Modern Web Design Assets"
+Cohesion: 0.07
+Nodes (28): 1. Design Tokens, 1. Mobile-First, 2. Accessibility First, 2. Component Library, 3. Layout Templates, 3. Performance Optimized, 4. Animation Presets, 4. Design Token Driven (+20 more)
+
+### Community 900 - "Web 3D Integration Patterns"
+Cohesion: 0.07
+Nodes (28): 1. Animation Conflicts, 1. Render Loop Optimization, 1. Scroll-Driven Camera Movement, 1. Zustand for Global 3D State, 2. Gesture-Driven 3D Manipulation, 2. On-Demand Rendering (R3F), 2. State Synchronization Issues, 3. Memory Leaks from Abandoned Animations (+20 more)
+
+### Community 901 - "Magic UI Component Catalog"
+Cohesion: 0.07
+Nodes (27): 3D & Visual Effects, Animated Grid Pattern, Background Patterns, Bento Grid, Border Beam, Browser Compatibility, Buttons & Interactive Elements, Common Component Combinations (+19 more)
+
+### Community 902 - "React Bits Component Library Reference"
+Cohesion: 0.07
+Nodes (27): AnimatedList, Aurora, Background & Visual Effects, BlobCursor, BlurText, Browser Compatibility, CircularText, Common Component Combinations (+19 more)
+
+### Community 903 - "Barba.js Transition Patterns Library"
+Cohesion: 0.07
+Nodes (27): Agency Site with Parallax Layers, Barba.js Transition Patterns Library, Blog with Staggered Content, Complete Starter Template, Conditional Transitions, Creative Transitions, Crossfade (Sync), Curtain Effect (+19 more)
+
+### Community 904 - "Locomotive Scroll"
+Cohesion: 0.07
+Nodes (27): 1. Basic Smooth Scrolling, 1. Fixed Positioning Issues, 1. HTML Structure, 2. Images Not Lazy Loading, 2. Initialization, 2. Parallax Effects, 3. Data Attributes, 3. Scroll Position Not Updating (+19 more)
+
+### Community 905 - "R3FSceneSetup"
+Cohesion: 0.11
+Nodes (3): interactive_mode(), main(), R3FSceneSetup
+
+### Community 906 - "Lightweight 3D Effects - Production Examples"
+Cohesion: 0.07
+Nodes (26): 1. Hero Sections, 2. Product Cards, 3. Portfolio Layouts, 4. Interactive Dashboards, 5. Marketing Pages, 6. E-Commerce, 7. SaaS Landing Pages, 8. Performance Patterns (+18 more)
+
+### Community 907 - "React Three Fiber Starter Template"
+Cohesion: 0.07
+Nodes (26): Add Leva Controls, Add New Components, Add Post-Processing, Build, Canvas Not Rendering, Change Environment Preset, Common Patterns, Components (+18 more)
+
+### Community 908 - "Spline React API Reference"
+Cohesion: 0.07
+Nodes (26): Color Reference, Complete Component Example, `emitEvent(eventName, nameOrUuid)`, `emitEventReverse(eventName, nameOrUuid)`, Events Not Firing, `findObjectById(uuid)`, `findObjectByName(name)`, Installation (+18 more)
+
+### Community 909 - "starter_babylon/package.json"
+Cohesion: 0.08
+Nodes (21): dependencies, @babylonjs/core, @babylonjs/havok, @babylonjs/loaders, description, devDependencies, vite, vite (+13 more)
+
+### Community 910 - "chiptune.mjs"
+Cohesion: 0.17
+Nodes (24): add(), alarm(), boss(), BOSS_CH, BOSS_MEL, BPM, buf, DUR (+16 more)
+
+### Community 912 - "ant.mjs"
+Cohesion: 0.17
+Nodes (23): ant(), antGuides(), C, chitin(), fill(), hatch(), kind(), leg() (+15 more)
+
+### Community 913 - "Animation Audit Playbook"
+Cohesion: 0.08
+Nodes (22): 1. Purpose & frequency, 2. Easing & duration, 3. Physicality & origin, 4. Interruptibility, 5. Performance, 6. Accessibility, 7. Cohesion & tokens, 8. Missed opportunities (+14 more)
+
+### Community 914 - "React Three Fiber - Real-World Component Examples"
+Cohesion: 0.08
+Nodes (24): 10. Performance Monitoring, 1. GLTF Model Loading, 2. Interactive Product Viewer, 3. Scroll-Based Animations, 4. Particle System, 5. Text 3D, 6. Post-Processing Effects, 7. Physics Simulation (+16 more)
+
+### Community 915 - "Locomotive Scroll API Reference"
+Cohesion: 0.08
+Nodes (23): `call`, Complete Usage Example, Constructor Options, Container Attributes, Data Attributes, `data-scroll-call`, `data-scroll-direction`, `data-scroll-offset` (+15 more)
+
+### Community 916 - "starter_motion/package.json"
+Cohesion: 0.08
+Nodes (23): dependencies, framer-motion, react, react-dom, devDependencies, @types/react, @types/react-dom, vite (+15 more)
+
+### Community 917 - "Substance 3D Texturing Assets"
+Cohesion: 0.08
+Nodes (23): Add Custom Channels, Additional Resources, Babylon.js with PBR Preset, babylonjs_pbr.json, Change File Format, Change Resolution, Customization, Directory Structure (+15 more)
+
+### Community 918 - "aframe-webxr/scripts/component_builder.py"
+Cohesion: 0.13
+Nodes (11): generate_animation_component(), generate_basic_component(), generate_component(), generate_controller_component(), generate_interactive_component(), generate_loader_component(), generate_networked_component(), generate_physics_component() (+3 more)
+
+### Community 919 - "textures.mjs"
+Cohesion: 0.18
+Nodes (21): fibre(), grainCanvas(), grainOver(), rng(), fibrePaper(), filmFinish(), fleshCells(), grass() (+13 more)
+
+### Community 920 - "Write Swift"
+Cohesion: 0.09
+Nodes (22): 10. ARC and object lifetime, 11. Testing — Swift Testing by default, 12. Macros, 13. Logging and debugging, 14. Unsafe code and interop, 15. Modern syntax you should be using, 16. Migrating an existing codebase to Swift 6, 1. Model data with value types (+14 more)
+
+### Community 922 - "AOS API Reference"
+Cohesion: 0.09
+Nodes (22): Accessibility, Animations not triggering, Animations not working in React, AOS API Reference, `aos:in`, `AOS.init(options)`, `aos:out`, `AOS.refresh()` (+14 more)
+
+### Community 923 - "starter_scene/main.js"
+Cohesion: 0.09
+Nodes (22): ambientLight, camera, clock, controls, cube, cubeGeometry, cubeMaterial, directionalLight (+14 more)
+
+### Community 924 - "A-Frame WebXR Examples"
+Cohesion: 0.09
+Nodes (21): 360° Experiences, 360° Photo Tour with Transitions, A-Frame WebXR Examples, Advanced AR Hit Testing with Rotation, Advanced Controllers, AR Measurement Tool, AR Object Placement, Custom Gesture Recognition (+13 more)
+
+### Community 925 - "Anime.js - Assets"
+Cohesion: 0.09
+Nodes (21): Additional Resources, Anime.js - Assets, Common Patterns, Contents, Framework Integration, index.html, main.js, Official Examples (+13 more)
+
+### Community 926 - "music.mjs"
+Cohesion: 0.13
+Nodes (19): add(), bell(), BPM, buf, CH, DUR, END, hz() (+11 more)
+
+### Community 927 - "Framer Motion Reference"
+Cohesion: 0.09
+Nodes (21): AnimatePresence, AnimatePresence Props, Basic Usage, Common Props, Drag, Drag Info Object, Framer Motion Reference, Gestures (+13 more)
+
+### Community 928 - "Apple Design"
+Cohesion: 0.09
+Nodes (21): 10. Gesture design details (the "feel" checklist), 11. Frame-level smoothness, 12. Materials & depth — translucency conveys hierarchy, 13. Multimodal feedback — motion + sound + haptics, 14. Reduced motion & accessibility, 15. Typography — optical sizing, tracking, leading, 16. Design foundations — the eight principles, 17. Process (+13 more)
+
+### Community 929 - "generate_zdog.py"
+Cohesion: 0.11
+Nodes (11): create_html_template(), generate_3d_cube(), generate_basic_shapes(), generate_icon_grid(), generate_illustration(), generate_particle_system(), generate_robot(), generate_spiral() (+3 more)
+
+### Community 930 - "A-Frame API Reference"
+Cohesion: 0.10
+Nodes (20): A-Frame API Reference, Accessing Systems, ar-hit-test, Complete Scene, Events, Examples, Geometry System, hand-controls (+12 more)
+
+### Community 931 - "aframe-webxr/scripts/scene_generator.py"
+Cohesion: 0.14
+Nodes (10): generate_360_scene(), generate_ar_scene(), generate_basic_scene(), generate_environment_scene(), generate_networked_scene(), generate_physics_scene(), generate_scene(), generate_vr_scene() (+2 more)
+
+### Community 932 - "number"
+Cohesion: 0.11
+Nodes (19): barba.history, barba.hooks, barba.init(), barba.url, Core API, number(), Functions, Sonner API Reference (+11 more)
+
+### Community 933 - "Prototyping Variants"
+Cohesion: 0.10
+Nodes (19): Behavior contract, Markup, Reference wiring, Rules, Styles, The Picker, Hard Rules, Initial Response (+11 more)
+
+### Community 934 - "Lottie API Reference"
+Cohesion: 0.10
+Nodes (19): Best Practices, DotLottie Constructor, DotLottie Events, DotLottie Methods, DotLottie Properties, dotlottie-react API, dotlottie-web API, DotLottieReact Component (+11 more)
+
+### Community 935 - "Spline Interactive - Assets"
+Cohesion: 0.10
+Nodes (20): Additional Resources, Available Component Types, Common Use Cases, Component Templates, Events Not Working, Example Integrations, Getting Your Spline Scene URL, Interactive Portfolio (+12 more)
+
+### Community 936 - "scan-codebase.mjs"
+Cohesion: 0.17
+Nodes (20): buildResolver(), detectMonorepoRoot(), fileExists(), listWorkspacePackages(), parsePnpmWorkspaceYaml(), readWorkspaceGlobs(), resolveWorkspaceImports(), tryReadJson() (+12 more)
+
+### Community 937 - "size"
+Cohesion: 0.12
+Nodes (20): Component Library & Tools, Layout Implementation, Responsive Design, Styling Implementation, size(), 10. TRUNK, 11. TOPOLOGY, 12. DOTS (+12 more)
+
+### Community 938 - "dashboard.js"
+Cohesion: 0.11
+Nodes (14): c, LIB, x, z, zx, HERE, DASHBOARD_DIR, dashboardRoutes() (+6 more)
+
+### Community 939 - "DesignAuditor"
+Cohesion: 0.13
+Nodes (4): Command guidance, No-argument routing: the context-aware menu, Workflow questions, DesignAuditor
+
+### Community 940 - "playcanvas-engine/scripts/project_generator.py"
+Cohesion: 0.13
+Nodes (10): create_html_template(), generate_basic_scene(), generate_first_person(), generate_model_viewer(), generate_particle_system(), generate_physics_scene(), generate_project(), interactive_mode() (+2 more)
+
+### Community 941 - "Popmotion API Reference"
+Cohesion: 0.10
+Nodes (19): animate, Animation Control, Boundary Constraints, Common Patterns, Core Animations, decay, Drag with Inertia, Easing Functions (+11 more)
+
+### Community 942 - "Event Handler Props"
+Cohesion: 0.10
+Nodes (20): `className`, Event Handler Props, `id`, Import, `onLoad`, `onSplineFollow`, `onSplineKeyDown`, `onSplineKeyUp` (+12 more)
+
+### Community 943 - "Performance"
+Cohesion: 0.11
+Nodes (18): Accessibility, Accessible Animation Guidelines, Common Performance Issues, CSS Implementation, Focus Management with Animations, Global Configuration with MotionConfig, GPU-Accelerated Properties, Hardware Acceleration Hack (+10 more)
+
+### Community 944 - "Glossary"
+Cohesion: 0.11
+Nodes (18): Animation Vocabulary, Easing — how speed changes over an animation, Entrances & Exits — how elements appear and disappear, Examples, Feedback & Interaction — responding to the user's actions, Glossary, Initial Response, Instructions (+10 more)
+
+### Community 945 - "Breaking UI"
+Cohesion: 0.11
+Nodes (19): Breaking UI, Failure signatures, Hard Rules, Initial Response, Invocation Variants, Operating Posture, Part 1 — What broke, Part 2 — Decisions for you (+11 more)
+
+### Community 946 - "The Fixes"
+Cohesion: 0.11
+Nodes (18): 10. Status bar color doesn't match, 11. Right in Chrome, wrong on phone, 1. Hover state stuck after tap, 2. Gray/blue flash on tap, 3. Layout has the wrong height, 4. Page zooms into the input, 6. Pull-to-refresh hijacks scroll, 8. Long-press selects button text (+10 more)
+
+### Community 947 - "starter_lightweight/main.js"
+Cohesion: 0.11
+Nodes (13): centerSphere, demoIllo, demoModel, globe1, heroCube, heroIllo, icon1, icon2 (+5 more)
+
+### Community 948 - "Shape Types"
+Cohesion: 0.11
+Nodes (19): Bezier, Box, Cone, Cylinder, Ellipse, Hemisphere, Line, Polygon (+11 more)
+
+### Community 949 - "generate_config.py"
+Cohesion: 0.16
+Nodes (10): format_config_object(), generate_html_template(), generate_js_code(), get_bool_input(), get_number_input(), get_user_choice(), interactive_config(), main() (+2 more)
+
+### Community 950 - "starter_r3f/package.json"
+Cohesion: 0.11
+Nodes (18): react, react-dom, @types/react, @types/react-dom, vite, @vitejs/plugin-react, name, private (+10 more)
+
+### Community 951 - "Three.js Starter Scene"
+Cohesion: 0.11
+Nodes (18): Add Your Own Objects, Adjust Performance, Browser Compatibility, Built-in Demo, Change Background Color, Controls, Customization, Features (+10 more)
+
+### Community 952 - "test_relevance_evaluator.py"
+Cohesion: 0.12
+Nodes (3): TestFixtureValidation, TestMetricMath, TestThresholdGate
+
+### Community 953 - "Core Components"
+Cohesion: 0.11
+Nodes (18): Camera, Core Components, Example, Flat Shader, Geometry, Light, Material, Position (+10 more)
+
+### Community 954 - "Animated Component Libraries - Assets"
+Cohesion: 0.11
+Nodes (17): Accessibility-First Implementation, Additional Resources, Animated Component Libraries - Assets, Combining Libraries, Complete examples are available at:, Component Showcase Examples, Example Implementations, Integration Examples (+9 more)
+
+### Community 955 - "CSS Animations Reference"
+Cohesion: 0.11
+Nodes (17): 3D Transforms, Animation Properties, Basic Syntax, Clip-Path Animation Example (Image Comparison Slider), Clip-Path Animations, Common Shapes, Common Transition Patterns, CSS Animations Reference (+9 more)
+
+### Community 956 - "Next.js Animations"
+Cohesion: 0.11
+Nodes (17): 1. Hover Lift Effect, 2. Button Press, 3. Fade In on Mount (Framer Motion), 4. Modal with Exit Animation, 5. Tab Indicator (Shared Layout), 6. Staggered List Animation, Common Animation Patterns, CSS Custom Properties (Recommended) (+9 more)
+
+### Community 957 - "PlayCanvas Starter Template"
+Cohesion: 0.11
+Nodes (17): Browser Compatibility, Build for Production, Camera Controller API, Camera Controls, Deployment, Features, Hosting Options, Input Manager API (+9 more)
+
+### Community 958 - "React Spring Physics - Assets"
+Cohesion: 0.11
+Nodes (17): Additional Resources, Common Patterns, Contents, Official Examples, package.json, Pattern 1: Scroll-Triggered Animation, Pattern 2: List Transitions, Pattern 3: Gesture-Driven Drag (+9 more)
+
+### Community 959 - "Starter Templates"
+Cohesion: 0.12
+Nodes (16): 1. Install Dependencies, 2. Create HTML Structure, 3. Initialize Barba, 4. Add to HTML, Additional Examples, Available Transition Types, Barba.js Assets, Customization (+8 more)
+
+### Community 960 - "lerp"
+Cohesion: 0.24
+Nodes (15): hash(), lerp(), taper(), facetCloud(), facetMass(), fbm(), hexRgb(), mix() (+7 more)
+
+### Community 961 - "Animation Recipes"
+Cohesion: 0.12
+Nodes (15): Accordion / collapse, Animation Recipes, Button press, Drag to dismiss, Drawer / sheet, Dropdown, popover, menu, select, Hold to confirm, Masking a crossfade that won't settle (+7 more)
+
+### Community 962 - "Finding Animation Opportunities"
+Cohesion: 0.12
+Nodes (16): 1. Frequency — how often will a user see this?, 2. Purpose — why does this animate?, 3. Speed — can it stay inside budget?, 4. Function — does motion help or hinder here?, Finding Animation Opportunities, Hard Rules, Initial Response, Operating Posture (+8 more)
+
+### Community 963 - "Building Animations"
+Cohesion: 0.12
+Nodes (16): 1. Should this animate at all?, 2. What is the purpose?, 3. Pick the tool — cheapest that works, 4. Pick the properties, 5. Easing and duration — or a spring, 6. Interruption and exit, 7. Reduced motion and pointer gating, Building Animations (+8 more)
+
+### Community 964 - "Animation Standards Reference"
+Cohesion: 0.12
+Nodes (16): Accessibility, Animation Standards Reference, Asymmetric timing, Cohesion, Debugging (recommend in reviews when feel is uncertain), Duration, Easing, Gestures & drag (+8 more)
+
+### Community 965 - "bean.mjs"
+Cohesion: 0.25
+Nodes (13): ellPts(), rrect(), arm(), bubble(), bust(), flagCloth(), hat(), person() (+5 more)
+
+### Community 966 - "ref_react"
+Cohesion: 0.26
+Nodes (6): App(), Box(), Sphere(), Experience(), Scene(), @react-three/fiber
+
+### Community 967 - "Easing and Timing Reference"
+Cohesion: 0.13
+Nodes (14): Core Principles, Cubic Bezier Explained, Custom Easing Variables, Duration-Based Springs (Framer Motion), Duration Sweet Spots, Easing and Timing Reference, Easing Functions, Framer Motion Spring Config (+6 more)
+
+### Community 968 - "starter_scroll/main.js"
+Cohesion: 0.25
+Nodes (13): animateContactForm(), animateFeatures(), animateGallery(), animateHero(), animateTextReveal(), initAnimations(), setupHorizontalScroll(), setupNavigation() (+5 more)
+
+### Community 969 - "starter_locomotive/package.json"
+Cohesion: 0.13
+Nodes (14): dependencies, locomotive-scroll, description, devDependencies, vite, vite, name, scripts (+6 more)
+
+### Community 970 - "integration_helper.py"
+Cohesion: 0.20
+Nodes (8): generate_base_integration(), generate_react_integration(), generate_vue_integration(), get_bool_input(), get_user_choice(), main(), print_header(), print_patterns()
+
+### Community 971 - "starter_motion/src/App.jsx"
+Cohesion: 0.25
+Nodes (7): App(), DraggableBox(), HoverCard(), container, item, StaggerList(), framer-motion
+
+### Community 972 - "PixiJS API Reference"
+Cohesion: 0.14
+Nodes (13): Blend Modes, CacheAsBitmap, Constants, Methods, Official API Documentation, Performance APIs, PixiJS API Reference, Properties (+5 more)
+
+### Community 973 - "substance-3d-texturing/scripts/batch_export.py"
+Cohesion: 0.16
+Nodes (4): export_all_web(), export_mobile_optimized(), main(), print_texture_sets()
+
+### Community 974 - "props_generator.py"
+Cohesion: 0.26
+Nodes (6): format_prop_value(), generate_jsx_code(), generate_tsx_code(), interactive_mode(), list_available_components(), main()
+
+### Community 975 - "babylonjs-engine/scripts/scene_generator.py"
+Cohesion: 0.23
+Nodes (6): generate_camera_code(), generate_imports(), generate_scene_code(), generate_scene_file(), interactive_mode(), main()
+
+### Community 976 - "ambient.mjs"
+Cohesion: 0.15
+Nodes (9): BAR, buf, CH, DUR, L, N, PENT, R (+1 more)
+
+### Community 977 - "Lottie Starter Template"
+Cohesion: 0.15
+Nodes (12): Basic Animation, Configuration, Deployment, Features, Installation, Interactive Animation, License, Lottie Starter Template (+4 more)
+
+### Community 978 - "config_builder.py"
+Cohesion: 0.27
+Nodes (6): format_value(), generate_js_config(), generate_react_config(), interactive_mode(), list_presets(), main()
+
+### Community 979 - "3D Model Optimization Strategies"
+Cohesion: 0.17
+Nodes (11): 1. Decimate Modifier (Automatic), 1. Texture Atlasing, 2. Manual Retopology, 2. Texture Compression, 3. MIP Mapping, 3. Normal Map Baking, 3D Model Optimization Strategies, File Size Reduction (+3 more)
+
+### Community 980 - "Worst-Case Catalog"
+Cohesion: 0.17
+Nodes (10): Collections, Emails, URLs, identifiers, Environment, Images and media, Labels, titles, and copy from data, Numbers and money, People and names, States (+2 more)
+
+### Community 981 - "Reviewing Animations"
+Cohesion: 0.17
+Nodes (10): Aggressive Escalation Triggers, Guidelines, Initial Response, Operating Posture, Part 1 — Findings table (REQUIRED), Part 2 — Verdict (REQUIRED), Remedial Preference Hierarchy, Required Output Format (+2 more)
+
+### Community 982 - "Configuration Options Details"
+Cohesion: 0.17
+Nodes (12): Configuration Options Details, easing, full-page-listening, gyroscope, Gyroscope Options, mouse-event-element, Mouse/Touch Options, scale (+4 more)
+
+### Community 983 - "Primitives"
+Cohesion: 0.18
+Nodes (11): a-box, a-camera, a-cursor, a-cylinder, a-gltf-model, a-light, a-plane, a-sky (+3 more)
+
+### Community 984 - "Babylon.js API Reference"
+Cohesion: 0.18
+Nodes (10): BABYLON.DefaultRenderingPipeline, BABYLON.GUI.AdvancedDynamicTexture, Babylon.js API Reference, Common Controls, Constants Reference, GUI, Material Constants, Post-Processing (+2 more)
+
+### Community 985 - "Memory Safety, Binary, and Kernel Hunting"
+Cohesion: 0.18
+Nodes (10): Binary loading and runtime attack classes (subagent_type: `general`), Bounds, integer, and representation attack classes (subagent_type: `general`), Core discipline (include in every agent prompt for this domain), FFI and ABI attack classes (subagent_type: `general`), Kernel and privileged-interface attack classes (subagent_type: `general`), Lifetime, type, and concurrency attack classes (subagent_type: `general`), Memory Safety, Binary, and Kernel Hunting, Universal moves (apply across the above) (+2 more)
+
+### Community 986 - "embed-tokens.cjs"
+Cohesion: 0.18
+Nodes (8): args, fs, minimal, MINIMAL_TOKENS, path, projectRoot, tokensPath, wrapStyle
+
+### Community 987 - "The list"
+Cohesion: 0.18
+Nodes (10): Charts, Common mismatches to catch, How to use this, Initial Response, Interaction & performance, Motion & visuals, Picking The Right Library, State & styling (+2 more)
+
+### Community 988 - "Zdog API Reference"
+Cohesion: 0.18
+Nodes (10): Browser Support, Clickable Shapes, Common Patterns, License, Particle Systems, Resources, Sprite Sheets, Table of Contents (+2 more)
+
+### Community 989 - "Advanced Techniques"
+Cohesion: 0.18
+Nodes (11): Advanced Techniques, Arc Curves, Bezier Curves, Complex Models, Coordinate System, Custom Paths, Instancing, Performance Optimization (+3 more)
+
+### Community 990 - "Appearance Properties"
+Cohesion: 0.18
+Nodes (11): Appearance Properties, backface, color, fill, Properties, rotate, scale, stroke (+3 more)
+
+### Community 991 - "Motion / Framer Motion Examples"
+Cohesion: 0.18
+Nodes (10): Additional Resources, Carousel with Swipe, Custom Route Transition with Direction Detection, Image Galleries, License, Lightbox Gallery, Motion / Framer Motion Examples, Multi-Stage Route Transition (+2 more)
+
+### Community 992 - "Data Attributes"
+Cohesion: 0.18
+Nodes (11): `data-aos`, `data-aos-anchor`, `data-aos-anchor-placement`, `data-aos-delay`, `data-aos-duration`, `data-aos-easing`, `data-aos-id`, `data-aos-mirror` (+3 more)
+
+### Community 993 - "Properties"
+Cohesion: 0.18
+Nodes (11): `emitEvent(eventName)`, `id`, `material`, Methods, `name`, `position`, Properties, `rotation` (+3 more)
+
+### Community 994 - "app-store-card.tsx"
+Cohesion: 0.24
+Nodes (5): ActiveCard(), AppStoreCards(), Card, CARDS, FeedbackPopover()
+
+### Community 995 - "GSAP & ScrollTrigger Common Patterns"
+Cohesion: 0.20
+Nodes (9): 10.1 Basic Page Transition (Overlay), 10.2 Fade Page Transition, 12.1 Canvas Image Sequence on Scroll, GSAP & ScrollTrigger Common Patterns, Image Sequences, Page Transitions, Quick Copy-Paste Starter, Resources (+1 more)
+
+### Community 996 - "Hierarchy"
+Cohesion: 0.20
+Nodes (8): addChild(shape), copy(options), copyGraph(options), Copying, Hierarchy, Methods, removeChild(shape), Rendering
+
+### Community 997 - "Motion & Framer Motion - Complete API Reference"
+Cohesion: 0.20
+Nodes (9): Common Patterns Quick Reference, Core Animation Props, Custom Component with Motion, Import Types, Motion Component Props, Motion & Framer Motion - Complete API Reference, Performance Tips, Table of Contents (+1 more)
+
+### Community 998 - "Hooks"
+Cohesion: 0.20
+Nodes (10): Hooks, useAnimate, useAnimationControls, useInView, useMotionValue, usePresence, useReducedMotion, useScroll (+2 more)
+
+### Community 999 - "Built-in Filters"
+Cohesion: 0.20
+Nodes (10): AlphaFilter, BlurFilter, Built-in Filters, ColorMatrixFilter, Custom Filters, DisplacementFilter, Filter Optimization, Filters (+2 more)
+
+### Community 1000 - "Graphics"
+Cohesion: 0.20
+Nodes (10): Constructor, Example, Fill & Stroke, Graphics, Holes, Other Methods, Path Methods, Properties (+2 more)
+
+### Community 1001 - "Global Configuration Options"
+Cohesion: 0.20
+Nodes (10): `anchor`, `anchorPlacement`, Behavior Settings, Device Settings, `disable`, Global Configuration Options, `mirror`, `offset` (+2 more)
+
+### Community 1002 - "JavaScript API"
+Cohesion: 0.22
+Nodes (9): Accessing Components, Animation Control, Creating Entities, Event Handling, JavaScript API, Removing Entities, States, Three.js Integration (+1 more)
+
+### Community 1003 - "Anime.js API Reference"
+Cohesion: 0.22
+Nodes (8): Animation Parameters, anime() Function, Anime.js API Reference, Built-in Easings, Custom Easings, Easing Functions, Table of Contents, Targets
+
+### Community 1005 - "claude-animation/package.json"
+Cohesion: 0.22
+Nodes (8): dependencies, @napi-rs/canvas, description, name, private, type, version, @napi-rs/canvas
+
+### Community 1006 - "Terminal mode (flag-triggered fallback)"
+Cohesion: 0.22
+Nodes (8): Combined Recommendations, Lens Reference Summary, Mode selection, Output Format, Overall Assessment, Per-Designer Sections, Quick Summary (show first), Terminal mode (flag-triggered fallback)
+
+### Community 1007 - "Working With Sonner"
+Cohesion: 0.22
+Nodes (7): Initial Response, Picking the right call, Recipes, Setup, Styling — the escalation ladder, Troubleshooting, Working With Sonner
+
+### Community 1008 - "Vanilla-Tilt.js Patterns Reference"
+Cohesion: 0.22
+Nodes (8): Complete Options Reference, Configuration Options, License, Optimization Tips, Performance, Resources, Table of Contents, Vanilla-Tilt.js Patterns Reference
+
+### Community 1009 - "Core Classes"
+Cohesion: 0.22
+Nodes (9): Common Shape Properties, Core Classes, Methods, Methods, Properties, Properties, Zdog.Anchor, Zdog.Illustration (+1 more)
+
+### Community 1010 - "Directional Zoom Out"
+Cohesion: 0.22
+Nodes (9): Basic Zoom, Directional Zoom Out, Zoom Animations, `zoom-in`, `zoom-out`, `zoom-out-down`, `zoom-out-left`, `zoom-out-right` (+1 more)
+
+### Community 1011 - "Guidelines & Rules"
+Cohesion: 0.22
+Nodes (8): 1. Accessibility (a11y), 2. Focus States, 3. Forms & Inputs, 4. Animation & Motion, 5. Typography & Micro-copy, 6. Performance & Images, Guidelines & Rules, Web Interface Guidelines (Vercel)
+
+### Community 1012 - "A-Frame WebXR Integration Guide"
+Cohesion: 0.25
+Nodes (7): A-Frame WebXR Integration Guide, Basic WebXR Scene, Reference Space Types, Resources, Table of Contents, WebXR Component Properties, WebXR Overview
+
+### Community 1013 - "Examples"
+Cohesion: 0.25
+Nodes (8): Basic Animation, Examples, From-To Animation, JavaScript Object Animation, Keyframe Animation, Stagger Animation, SVG Path Animation, Timeline Animation
+
+### Community 1014 - "BABYLON.StandardMaterial"
+Cohesion: 0.25
+Nodes (8): BABYLON.PBRMaterial, BABYLON.StandardMaterial, Constructor, Constructor, Materials, Methods, Properties, Properties
+
+### Community 1015 - "Blender glTF Export Complete Guide"
+Cohesion: 0.25
+Nodes (7): All Export Parameters, Blender glTF Export Complete Guide, Export Format Options, High Quality (Larger Files), Minimal (Smallest File), Recommended Presets, Standard (Balanced)
+
+### Community 1016 - "Motion: timing, acting, camera"
+Cohesion: 0.25
+Nodes (7): Action and game feel (from the game short), Boil, Camera, Effects vocabulary, Exposure (ones, twos, holds), Motion: timing, acting, camera, Principles that made the difference
+
+### Community 1017 - "Component Building Principles"
+Cohesion: 0.25
+Nodes (8): Animate enter states with @starting-style, Buttons must feel responsive, Component Building Principles, Make popovers origin-aware, Never animate from scale(0), Tooltips: skip delay on subsequent hovers, Use blur to mask imperfect transitions, Use CSS transitions over keyframes for interruptible UI
+
+### Community 1018 - "Animation"
+Cohesion: 0.25
+Nodes (8): Animation, Basic Animation Loop, Color Animation, Easing, Interactive Animation, Position Animation, Rotation Animation, Scale Animation
+
+### Community 1019 - "Core Design Principles (2024-2025)"
+Cohesion: 0.25
+Nodes (8): 1. Performance-First Design, 2. Bold Minimalism, 3. Micro-Interactions, 4. Scrollytelling, 5. Cursor UX, 6. Glassmorphism & Depth, 7. AI-Enhanced Personalization, Core Design Principles (2024-2025)
+
+### Community 1020 - "Resources"
+Cohesion: 0.25
+Nodes (8): 3D & WebGL, Animation & Interaction, Assets, Component Libraries, Detailed References, Page Transitions & Scroll, Resources, Scripts
+
+### Community 1021 - "Common Design Patterns"
+Cohesion: 0.25
+Nodes (8): Common Design Patterns, Pattern 1: Immersive Hero Section, Pattern 2: Horizontal Scroll Gallery, Pattern 3: 3D Product Viewer, Pattern 4: Animated Data Visualization, Pattern 5: Page Transitions, Pattern 6: Interactive Cursor Effects, Pattern 7: Staggered Content Reveals
+
+### Community 1022 - "Application"
+Cohesion: 0.25
+Nodes (8): Application, Constructor, `destroy(removeView, stageOptions)`, `init(options)`, Methods, Plugins, Properties, `resizeCanvas()`
+
+### Community 1023 - "update"
+Cohesion: 0.54
+Nodes (6): createDemoObjects(), initApp(), setupScene(), setupUI(), update(), updateStats()
+
+### Community 1024 - "Integration with Drei Helpers"
+Cohesion: 0.25
+Nodes (8): Center & Bounds, Environment & Lighting, HTML Overlay, Integration with Drei Helpers, OrbitControls, Scroll Controls, Text, useGLTF Hook (Drei)
+
+### Community 1025 - "Common Patterns"
+Cohesion: 0.25
+Nodes (8): Common Patterns, Pattern 1: Basic Scene Setup, Pattern 2: Interactive Objects (Click, Hover), Pattern 3: Animated Component with useFrame, Pattern 4: Loading GLTF Models, Pattern 5: Multiple Lights, Pattern 6: Instancing (Many Objects), Pattern 7: Groups and Nesting
+
+### Community 1026 - "Diagonal Fades"
+Cohesion: 0.25
+Nodes (8): Basic Fade, Diagonal Fades, Fade Animations, `fade-down-left`, `fade-down-right`, `fade-in`, `fade-up-left`, `fade-up-right`
+
+### Community 1027 - "Easing Functions"
+Cohesion: 0.25
+Nodes (8): Back Easing, Cubic Easing, Easing Functions, Quad Easing, Quart Easing, Sine Easing, Standard Easing, Usage Example
+
+### Community 1028 - "Core Classes"
+Cohesion: 0.25
+Nodes (8): Camera, Core Classes, OrthographicCamera, PerspectiveCamera, Renderer, Scene, WebGLRenderer, WebGPURenderer
+
+### Community 1029 - "rendering-mode-mislabel.mjs"
+Cohesion: 0.32
+Nodes (6): apply(), metadata, apply(), metadata, MODE_PATTERNS, extractRoute()
+
+### Community 1030 - "Testing and Debugging"
 Cohesion: 0.29
-Nodes (6): extractColdStarts(), gate(), metadata, gate(), metadata, sumRows()
+Nodes (7): Console Logging, Desktop Testing, Mobile Testing, Performance Profiling, Remote Debugging, Stats and Debugging, Testing and Debugging
+
+### Community 1031 - "BABYLON.Texture"
+Cohesion: 0.29
+Nodes (7): BABYLON.CubeTexture, BABYLON.RenderTargetTexture, BABYLON.Texture, Constructor, Methods, Properties, Textures
+
+### Community 1032 - "Blender Web Pipeline Assets"
+Cohesion: 0.29
+Nodes (6): Blender Web Pipeline Assets, export_template.blend, Included Assets, Quick Start, shader_library/, Usage
+
+### Community 1034 - "Animate Skill for Claude Code"
+Cohesion: 0.29
+Nodes (6): Animate Skill for Claude Code, Dependencies, Examples Included, Installation, Usage, What's Included
+
+### Community 1035 - "Anti-Checklist"
+Cohesion: 0.29
+Nodes (6): Anti-Checklist, From Emil's Perspective (Purposeful Restraint), From Jakub's Perspective (Production Polish), From Jhey's Perspective (Creative Learning), General Motion Design Mistakes, Red Flags in Code Review
+
+### Community 1036 - "document.md"
+Cohesion: 0.29
+Nodes (6): Pitfalls, Style guidelines, The frontmatter: token schema, The markdown body: eight sections (canonical order), Two paths, When to run
+
+### Community 1037 - "Common Pitfalls"
+Cohesion: 0.29
+Nodes (7): Common Pitfalls, Pitfall 1: Over-Animation, Pitfall 2: Ignoring Mobile Performance, Pitfall 3: Missing Fallbacks, Pitfall 4: Accessibility Oversight, Pitfall 5: Ignoring Loading States, Pitfall 6: Scroll Hijacking
+
+### Community 1038 - "Performance Optimization"
+Cohesion: 0.29
+Nodes (7): Exit Before Enter (Reduce Simultaneous Animations), Lazy Motion Component, Performance Optimization, Reuse Variant Objects, Throttle Scroll Events, useReducedMotion Hook, will-change Optimization
+
+### Community 1039 - "Common Pitfalls"
+Cohesion: 0.29
+Nodes (7): 1. Forgetting AnimatePresence for Exit Animations, 2. Missing key Prop in Lists, 3. Animating Non-Transform Properties, 4. Overusing Layout Animations, 5. Not Using Variants for Complex Animations, 6. Incorrect Transition Timing, Common Pitfalls
+
+### Community 1040 - "PixiJS Examples and Patterns"
+Cohesion: 0.29
+Nodes (6): 1. Touch Controls, 2. Device Detection and Adaptive Settings, Conclusion, Mobile Optimization, PixiJS Examples and Patterns, Table of Contents
+
+### Community 1041 - "Container"
+Cohesion: 0.29
+Nodes (7): Children Management, Constructor, Container, Example, Filters, Iteration, Properties
+
+### Community 1042 - "Events"
+Cohesion: 0.29
+Nodes (7): Custom Cursor, Event Modes, Event Object, Events, Hit Area, Mouse Events, Touch Events
+
+### Community 1043 - "PlayCanvas Editor Workflow Guide"
+Cohesion: 0.29
+Nodes (6): Collaboration, Editor Collaboration, PlayCanvas Editor Workflow Guide, Resources, Table of Contents, Team Workflow
+
+### Community 1044 - "dependencies"
+Cohesion: 0.29
+Nodes (7): dependencies, leva, react, react-dom, @react-three/drei, @react-three/fiber, three
+
+### Community 1045 - "React Three Fiber"
+Cohesion: 0.29
+Nodes (6): Integration with Other Libraries, Overview, React Three Fiber, With Framer Motion, With GSAP, With Zustand (State Management)
+
+### Community 1046 - "Performance Optimization"
+Cohesion: 0.29
+Nodes (7): 1. On-Demand Rendering, 2. Instancing, 3. Frustum Culling, 4. LOD (Level of Detail), 5. Adaptive Performance, 6. Selective Re-renders, Performance Optimization
+
+### Community 1047 - "Common Pitfalls & Solutions"
+Cohesion: 0.29
+Nodes (7): Common Pitfalls & Solutions, ❌ Pitfall 1: setState in useFrame, ❌ Pitfall 2: Creating Objects in Render, ❌ Pitfall 3: Not Using useLoader Cache, ❌ Pitfall 4: Conditional Mounting (Expensive), ❌ Pitfall 5: useThree Outside Canvas, ❌ Pitfall 6: Not Disposing Resources
+
+### Community 1048 - "Rive Interactive - Assets"
+Cohesion: 0.29
+Nodes (6): Basic Usage, Quick Start, Resources, Rive Interactive - Assets, State Machine Example, ViewModel Example
+
+### Community 1049 - "AOS Animation Catalog"
+Cohesion: 0.29
+Nodes (6): Animation Selection Guide, AOS Animation Catalog, Best Practices, By Content Type, By User Experience Goal, Table of Contents
+
+### Community 1050 - "Optimization Tips"
+Cohesion: 0.29
+Nodes (7): 1. Prefer Simpler Animations, 2. Limit Animation Count, 3. Use Shorter Durations, 4. Disable on Mobile (Optional), Animation Performance Guide, Optimization Tips, Performance Ranking (Best to Worst)
+
+### Community 1051 - "Disable Options"
+Cohesion: 0.29
+Nodes (7): Boolean, Disable Options, Function, `"mobile"`, `"phone"`, String Values, `"tablet"`
+
+### Community 1052 - "Three.js API Quick Reference"
+Cohesion: 0.29
+Nodes (6): Common Gotchas, Groups, Helpers, Performance Tips, Raycaster, Three.js API Quick Reference
+
+### Community 1053 - "Lights"
+Cohesion: 0.29
+Nodes (7): AmbientLight, DirectionalLight, HemisphereLight, Light Properties, Lights, PointLight, SpotLight
+
+### Community 1054 - "cache-components-suspense-dedupe.mjs"
+Cohesion: 0.48
+Nodes (6): countMatches(), findRepeated(), metadata, record(), scan(), truncate()
+
+### Community 1055 - "AR Mode Configuration"
+Cohesion: 0.33
+Nodes (6): AR Hit Test Component, AR Hit Test Events, AR Lighting Estimation, AR Mode Configuration, AR Real-World Meshing, Basic AR Scene Setup
+
+### Community 1056 - "Common Issues"
+Cohesion: 0.33
+Nodes (6): Common Issues, Issue: AR not working on mobile, Issue: Controllers not tracking, Issue: Hand tracking not working, Issue: Low FPS in VR, Issue: VR button not appearing
+
+### Community 1057 - "Controller Systems"
+Cohesion: 0.33
+Nodes (6): Controller Events, Controller Systems, Generic Hand Controls, Grabbable Objects Component, Laser Controls, Platform-Specific Controllers
+
+### Community 1058 - "VR Mode Configuration"
+Cohesion: 0.33
+Nodes (6): Enable/Disable VR Mode UI, Programmatic VR Entry/Exit, VR Camera Rig Setup, VR Mode Configuration, VR Session Events, VR-Specific Optimizations
+
+### Community 1059 - "Hand Tracking"
+Cohesion: 0.33
+Nodes (6): Enable Hand Tracking, Hand Tracking, Hand Tracking Events, Hand Tracking Grab Controls, Hand Tracking Properties, Visualize Hand Tracking Colliders (Debug)
+
+### Community 1060 - "Performance Optimization"
+Cohesion: 0.33
+Nodes (6): Limit Physics, Optimize Geometry, Performance Optimization, Reduce Draw Calls, Texture Optimization, Throttle Updates
+
+### Community 1061 - "Timeline"
+Cohesion: 0.33
+Nodes (6): Add Animations, Create Timeline, Offset, Timeline, Timeline Methods, Timeline Parameters
+
+### Community 1062 - "Helpers"
+Cohesion: 0.33
+Nodes (6): anime.get(targets, prop), anime.path(path), anime.random(min, max), anime.set(targets, prop), anime.setDashoffset(el), Helpers
+
+### Community 1063 - "Colors"
+Cohesion: 0.33
+Nodes (6): Brand & Accent, Colors, Hero Atmospheric, Semantic, Surface, Text
+
+### Community 1064 - "Cameras"
+Cohesion: 0.33
+Nodes (6): BABYLON.ArcRotateCamera, BABYLON.FollowCamera, BABYLON.FreeCamera, BABYLON.UniversalCamera, Base Camera Properties, Cameras
+
+### Community 1065 - "Lights"
+Cohesion: 0.33
+Nodes (6): BABYLON.DirectionalLight, BABYLON.HemisphericLight, BABYLON.PointLight, BABYLON.SpotLight, Base Light Properties, Lights
+
+### Community 1066 - "BABYLON.Mesh"
+Cohesion: 0.33
+Nodes (6): BABYLON.Mesh, Constructor, MeshBuilder, Meshes, Methods, Properties
+
+### Community 1067 - "BABYLON.Scene"
+Cohesion: 0.33
+Nodes (6): BABYLON.Scene, Constructor, Events (Observables), Methods, Properties, Scene
+
+### Community 1068 - "Blender Python API Quick Reference"
+Cohesion: 0.33
+Nodes (5): Accessing Data, Blender Python API Quick Reference, File Operations, Mesh Editing, Object Operations
+
+### Community 1069 - "clip-path for Animation"
+Cohesion: 0.33
+Nodes (6): clip-path for Animation, Comparison sliders, Hold-to-delete pattern, Image reveals on scroll, Tabs with perfect color transitions, The inset shape
+
+### Community 1070 - "Performance Rules"
+Cohesion: 0.33
+Nodes (6): CSS animations beat JS under load, CSS variables are inheritable, Framer Motion hardware acceleration caveat, Only animate transform and opacity, Performance Rules, Use WAAPI for programmatic CSS animations
+
+### Community 1071 - "Scroll-Triggered Animations"
+Cohesion: 0.33
+Nodes (6): 1.1 Basic Fade In on Scroll, 1.2 Fade In with Scrub (Scroll-Controlled), 1.3 Batch Fade In Multiple Elements, 1.4 Fade In from Different Directions, 1.5 Toggle Classes on Scroll, Scroll-Triggered Animations
+
+### Community 1072 - "Pinning Patterns"
+Cohesion: 0.33
+Nodes (6): 2.1 Basic Pin (Fixed Position While Scrolling), 2.2 Pin with Content Animation, 2.3 Pin Until Another Element, 2.4 Multiple Pinned Sections (Stacked Cards), 2.5 Pin with Snap Points, Pinning Patterns
+
+### Community 1073 - "Advanced Techniques"
+Cohesion: 0.33
+Nodes (6): Advanced Techniques, Conditional Tilt, Custom Glare Colors, Dynamic Tilt Values, Sync Multiple Elements, Tilt with Scroll
+
+### Community 1074 - "Common Patterns"
+Cohesion: 0.33
+Nodes (6): Common Patterns, Pattern 1: Card Gallery, Pattern 2: Parallax Layers, Pattern 3: Hover Reveal, Pattern 4: 3D Button, Pattern 5: Product Showcase
+
+### Community 1075 - "Modern Web Design"
+Cohesion: 0.33
+Nodes (5): Component Architecture, Design System Architecture, Modern Web Design, Overview, Token Structure
+
+### Community 1076 - "Performance Optimization"
+Cohesion: 0.33
+Nodes (6): 1. Animation Performance, 2. Loading Strategies, 3. Image Optimization, 4. 3D Content Optimization, 5. JavaScript Bundle Size, Performance Optimization
+
+### Community 1077 - "Accessibility Best Practices"
+Cohesion: 0.33
+Nodes (6): 1. Motion & Animation, 2. Color Contrast, 3. Keyboard Navigation, 4. Screen Reader Support, 5. Touch Targets, Accessibility Best Practices
+
+### Community 1078 - "Best Practices Summary"
+Cohesion: 0.33
+Nodes (6): 1. Use Transform Properties, 2. Respect Accessibility, 3. Optimize Bundle Size, 4. Clean Up Animations, 5. Debounce/Throttle Expensive Operations, Best Practices Summary
+
+### Community 1079 - "Scroll-Based Animations"
+Cohesion: 0.33
+Nodes (6): Parallax Scrolling, Scroll-Based Animations, Scroll-Based Counter, Scroll Progress Indicator, Scroll-Triggered Animation Sequence, Sticky Scroll Sections
+
+### Community 1080 - "Utilities"
+Cohesion: 0.33
+Nodes (6): animate (standalone), clamp, mix, stagger, transform, Utilities
+
+### Community 1081 - "Gesture Props"
+Cohesion: 0.33
+Nodes (6): Gesture Props, whileDrag, whileFocus, whileHover, whileInView, whileTap
+
+### Community 1082 - "Transition Options"
+Cohesion: 0.33
+Nodes (6): Inertia Transitions (Decelerating), Orchestration, Spring Transitions (Physics-based), Transition Interface, Transition Options, Tween Transitions (Duration-based)
+
+### Community 1083 - "DisplayObject"
+Cohesion: 0.33
+Nodes (6): Bounds, DisplayObject, Hierarchy, Interaction, Transform Properties, Visibility
+
+### Community 1084 - "ParticleContainer"
+Cohesion: 0.33
+Nodes (6): Constructor, Example, Methods, Particle Interface, ParticleContainer, Properties
+
+### Community 1085 - "Customization"
+Cohesion: 0.33
+Nodes (6): Add New Objects, Add Physics, Change Scene Background, Custom Scripts, Customization, Load 3D Models
+
+### Community 1086 - "devDependencies"
+Cohesion: 0.33
+Nodes (6): devDependencies, @types/react, @types/react-dom, @types/three, vite, @vitejs/plugin-react
+
+### Community 1087 - "Best Practices"
+Cohesion: 0.33
+Nodes (6): 1. Component Composition, 2. Suspend Heavy Assets, 3. Use TypeScript, 4. Organize by Feature, 5. Test with React DevTools Profiler, Best Practices
+
+### Community 1088 - "Anchor Placement Values"
+Cohesion: 0.33
+Nodes (6): All Combinations, Anchor Placement Values, Element Positions, Usage, Viewport Positions, Visual Examples
+
+### Community 1089 - "Constants"
+Cohesion: 0.33
+Nodes (6): Blending Modes, Color Spaces, Constants, Shadow Map Types, Side, Tone Mapping
+
+### Community 1090 - "Animation"
+Cohesion: 0.40
+Nodes (5): Animation, Easing Functions, Examples, Properties, easeInOutCubic()
+
+### Community 1091 - "Component API"
+Cohesion: 0.40
+Nodes (5): Basic Component, Component API, Multi-Property Components, Schema Types, Single-Property Components
+
+### Community 1092 - "AR Hit Testing"
+Cohesion: 0.40
+Nodes (5): AR Hit Testing, AR with DOM Overlay, Basic AR Hit Test, Custom Reticle, Multiple Object Placement
+
+### Community 1093 - "Platform Support"
+Cohesion: 0.40
+Nodes (5): Desktop VR (PC + Headset), Feature Detection, Meta Quest (Standalone), Mobile AR (iOS/Android), Platform Support
+
+### Community 1094 - "Stagger"
+Cohesion: 0.40
+Nodes (5): Basic Stagger, Grid Stagger, Stagger, Stagger Options, Stagger Values
+
+### Community 1095 - "Property Parameters"
+Cohesion: 0.40
+Nodes (5): Colors, Property Parameters, Relative Values, Units, Value Formats
+
+### Community 1096 - "Properties"
+Cohesion: 0.40
+Nodes (5): CSS Properties, DOM Attributes, JavaScript Object Properties, Properties, SVG Attributes
+
+### Community 1098 - "Animations"
+Cohesion: 0.40
+Nodes (5): Animations, BABYLON.Animation, BABYLON.AnimationGroup, Constructor, Methods
+
+### Community 1099 - "BABYLON.Engine"
+Cohesion: 0.40
+Nodes (5): BABYLON.Engine, Constructor, Engine, Methods, Properties
+
+### Community 1100 - "Physics"
+Cohesion: 0.40
+Nodes (5): BABYLON.PhysicsAggregate, BABYLON.PhysicsBody, BABYLON.PhysicsRaycastResult, Physics, Physics Engine Setup
+
+### Community 1101 - "10. Button & Interactive Feedback (Emil)"
+Cohesion: 0.40
+Nodes (5): 10. Button & Interactive Feedback (Emil), Blur as a Bridge, Don't Animate from scale(0), Scale on Press, Tooltip Delay Pattern
+
+### Community 1102 - "11. CSS Transitions vs Keyframes (Emil)"
+Cohesion: 0.40
+Nodes (5): 11. CSS Transitions vs Keyframes (Emil), Damping for Natural Boundaries, Direct Style Updates for Performance, Interruptibility Problem, Momentum-Based Dismissal
+
+### Community 1103 - "Spring Animations"
+Cohesion: 0.40
+Nodes (5): Interruptibility advantage, Spring Animations, Spring-based mouse interactions, Spring configuration, When to use springs
+
+### Community 1104 - "Stagger Animations"
+Cohesion: 0.40
+Nodes (5): 5.1 Basic Stagger, 5.2 Stagger from Center, 5.3 Grid Stagger, 5.4 Text Stagger (Words/Characters), Stagger Animations
+
+### Community 1105 - "Text Animations"
+Cohesion: 0.40
+Nodes (5): 7.1 Text Reveal (Line by Line), 7.2 Scrambled Text Effect, 7.3 Typewriter Effect, 7.4 Text Highlight on Scroll, Text Animations
+
+### Community 1106 - "Navigation & UI"
+Cohesion: 0.40
+Nodes (5): 9.1 Sticky Header with Hide/Show, 9.2 Active Nav Item Based on Section, 9.3 Smooth Scroll to Anchor, 9.4 Drawer/Sidebar Animation, Navigation & UI
+
+### Community 1107 - "Framework Integration"
+Cohesion: 0.40
+Nodes (5): Angular, Framework Integration, React, Svelte, Vue 3
+
+### Community 1109 - "Rotation Options"
+Cohesion: 0.40
+Nodes (5): max, perspective, reverse, Rotation Options, startX / startY
+
+### Community 1110 - "Advanced Layout Animations"
+Cohesion: 0.40
+Nodes (5): Accordion with Layout Animation, Advanced Layout Animations, Expandable Card, Grid to List View Toggle, Masonry Grid with Layout Animation
+
+### Community 1111 - "Modal & Dialog Patterns"
+Cohesion: 0.40
+Nodes (5): Bottom Sheet (Mobile), Confirmation Dialog with Shake, Drawer / Side Panel, Modal & Dialog Patterns, Smooth Modal with Backdrop
+
+### Community 1112 - "Loading States"
+Cohesion: 0.40
+Nodes (5): Content Fade In, Loading States, Progress Bar with Pulse, Skeleton Loading, Spinner with Variants
+
+### Community 1113 - "Page Transitions"
+Cohesion: 0.40
+Nodes (5): Depth Transition (Scale + Blur), Full Page Fade, Page Transitions, Slide Transition, Stack Navigation
+
+### Community 1114 - "AnimatePresence"
+Cohesion: 0.40
+Nodes (5): AnimatePresence, Basic Usage, Custom Data, Mode Options, Props
+
+### Community 1115 - "Particle Systems"
+Cohesion: 0.40
+Nodes (5): 1. Basic Particle Emitter, 2. Fire Effect, 3. Trail Effect, 4. Explosion Effect, Particle Systems
+
+### Community 1116 - "Interactive Elements"
+Cohesion: 0.40
+Nodes (5): 1. Draggable Sprites, 2. Hover Effects, 3. Button Component, 4. Click Detection with Shapes, Interactive Elements
+
+### Community 1117 - "Filters and Effects"
+Cohesion: 0.40
+Nodes (5): 1. Glow Effect, 2. Chromatic Aberration, 3. CRT Monitor Effect, 4. Displacement Map Effect, Filters and Effects
+
+### Community 1118 - "Basic Applications"
+Cohesion: 0.40
+Nodes (5): 1. Minimal PixiJS Application, 2. Responsive Canvas Application, 3. Asset Loading with Progress, 4. Multi-Scene Application, Basic Applications
+
+### Community 1119 - "Performance Optimization"
+Cohesion: 0.40
+Nodes (5): 1. Object Pooling System, 2. Viewport Culling, 3. Texture Atlases, 4. Spatial Hashing for Collisions, Performance Optimization
+
+### Community 1120 - "Game Development"
+Cohesion: 0.40
+Nodes (5): 1. Simple Platformer Physics, 2. Top-Down Movement, 3. Health Bar Component, 4. State Machine for Game Logic, Game Development
+
+### Community 1121 - "Animation Patterns"
+Cohesion: 0.40
+Nodes (5): 1. Sprite Sheet Animation, 2. Tweening Library Integration (GSAP), 3. Custom Easing Functions, 4. Path Following Animation, Animation Patterns
+
+### Community 1122 - "Custom Shaders"
+Cohesion: 0.40
+Nodes (5): 1. Wave Distortion Shader, 2. Pixelate Shader, 3. Color Grading Shader, 4. Outline Shader, Custom Shaders
+
+### Community 1123 - "starter_pixijs/main.js"
+Cohesion: 0.60
+Nodes (3): addSprites(), clearSprites(), updateSpriteCount()
+
+### Community 1124 - "Assets"
+Cohesion: 0.40
+Nodes (5): Assets, Background Loading, Loading Assets, Progress Tracking, Unloading Assets
+
+### Community 1125 - "Utility Classes"
+Cohesion: 0.40
+Nodes (5): Circle, ObservablePoint, Point, Rectangle, Utility Classes
+
+### Community 1126 - "Sprite"
+Cohesion: 0.40
+Nodes (5): Constructor, Example, Methods, Properties, Sprite
+
+### Community 1127 - "Texture"
+Cohesion: 0.40
+Nodes (5): Example, Methods, Properties, Static Methods, Texture
+
+### Community 1128 - "Performance Optimization"
+Cohesion: 0.40
+Nodes (5): Frustum Culling, Performance Optimization, Reduce Draw Calls, Texture Compression, Use LOD (Level of Detail)
+
+### Community 1129 - "Editor-Code Integration"
+Cohesion: 0.40
+Nodes (5): Accessing Editor Attributes in Code, Editor-Code Integration, Exporting Editor Scenes, Hybrid Workflow, Loading Editor Scenes in Code
+
+### Community 1130 - "Script Workflow"
+Cohesion: 0.40
+Nodes (5): Attaching Scripts, Creating Scripts in Editor, Debugging Scripts, Script Communication, Script Workflow
+
+### Community 1131 - "Core Concepts"
+Cohesion: 0.40
+Nodes (5): 1. Canvas Component, 2. Declarative 3D Objects, 3. useFrame Hook, 5. useLoader Hook, Core Concepts
+
+### Community 1132 - "Resources"
+Cohesion: 0.40
+Nodes (5): Assets, External Resources, References, Resources, Scripts
+
+### Community 1133 - "Directional Fades"
+Cohesion: 0.40
+Nodes (5): Directional Fades, `fade-down`, `fade-left`, `fade-right`, `fade-up`
+
+### Community 1134 - "Directional Zoom In"
+Cohesion: 0.40
+Nodes (5): Directional Zoom In, `zoom-in-down`, `zoom-in-left`, `zoom-in-right`, `zoom-in-up`
+
+### Community 1135 - "Quick Reference"
+Cohesion: 0.40
+Nodes (5): Fade Animations (9), Flip Animations (4), Quick Reference, Slide Animations (4), Zoom Animations (11)
+
+### Community 1136 - "Flip Animations"
+Cohesion: 0.40
+Nodes (5): Flip Animations, `flip-down`, `flip-left`, `flip-right`, `flip-up`
+
+### Community 1137 - "Slide Animations"
+Cohesion: 0.40
+Nodes (5): Slide Animations, `slide-down`, `slide-left`, `slide-right`, `slide-up`
+
+### Community 1138 - "Constants"
+Cohesion: 0.50
+Nodes (4): Constants, Easing Functions, Key Codes, Side Constants
+
+### Community 1139 - "Controls"
+Cohesion: 0.50
+Nodes (4): Controls, cursor, look-controls, wasd-controls
+
+### Community 1140 - "Entity"
+Cohesion: 0.50
+Nodes (4): Core Attributes, Entity, HTML Usage, JavaScript API
+
+### Community 1141 - "1. Enter & Exit Animations"
+Cohesion: 0.50
+Nodes (4): 1. Enter & Exit Animations, Enter Animation Recipe (Jakub), Exit Animation Subtlety (Jakub), Fill Mode for Persistence (Jhey)
+
+### Community 1142 - "Scroll Progress Indicators"
+Cohesion: 0.50
+Nodes (4): 11.1 Horizontal Progress Bar, 11.2 Circular Progress Indicator, 11.3 Section Progress (Multi-step), Scroll Progress Indicators
+
+### Community 1143 - "Integration Patterns"
+Cohesion: 0.50
+Nodes (4): 14.1 GSAP + React (useGSAP hook), 14.2 GSAP + Three.js, 14.3 GSAP + Locomotive Scroll, Integration Patterns
+
+### Community 1144 - "Horizontal Scrolling"
+Cohesion: 0.50
+Nodes (4): 3.1 Basic Horizontal Scroll, 3.2 Horizontal Scroll with Multiple Sections, 3.3 Horizontal Scroll with Snap, Horizontal Scrolling
+
+### Community 1145 - "Parallax Effects"
+Cohesion: 0.50
+Nodes (4): 4.1 Simple Parallax (Different Speeds), 4.2 Multi-Layer Parallax, 4.3 Parallax Hero Section, Parallax Effects
+
+### Community 1146 - "Timeline Sequences"
+Cohesion: 0.50
+Nodes (4): 6.1 Basic Timeline Sequence, 6.2 Timeline with Labels, 6.3 Scrubbed Timeline, Timeline Sequences
+
+### Community 1147 - "Image Reveals"
+Cohesion: 0.50
+Nodes (4): 8.1 Image Curtain Reveal, 8.2 Image Scale Reveal, 8.3 Image Parallax Zoom, Image Reveals
+
+### Community 1148 - "Common Gotchas"
+Cohesion: 0.50
+Nodes (4): ❌ Animating Before DOM Ready, Common Gotchas, ❌ Forgetting to Register Plugins, ❌ Not Refreshing After Layout Changes
+
+### Community 1149 - "Best Practices"
+Cohesion: 0.50
+Nodes (4): Best Practices, Clean Up on Unmount (React/Vue), Performance Optimization, Refresh After DOM Changes
+
+### Community 1150 - "Axis Control"
+Cohesion: 0.50
+Nodes (4): axis, Axis Control, reset, reset-to-start
+
+### Community 1151 - "Getting Started"
+Cohesion: 0.50
+Nodes (4): Basic Usage, CDN Installation, Getting Started, NPM Installation
+
+### Community 1152 - "Events"
+Cohesion: 0.50
+Nodes (4): Events, mouseEnter, mouseLeave, tiltChange
+
+### Community 1153 - "Glare Effect"
+Cohesion: 0.50
+Nodes (4): glare, Glare Effect, glare-prerender, max-glare
+
+### Community 1154 - "Troubleshooting"
+Cohesion: 0.50
+Nodes (4): Glare Not Showing, Memory Leaks in SPAs, Tilt Not Working, Troubleshooting
+
+### Community 1155 - "Integration with Other Skills"
+Cohesion: 0.50
+Nodes (4): 3D Skills Integration, Animation Skills Integration, Component Libraries, Integration with Other Skills
+
+### Community 1156 - "Navigation Menus"
+Cohesion: 0.50
+Nodes (4): Animated Dropdown Menu, Mega Menu, Mobile Hamburger Menu, Navigation Menus
+
+### Community 1157 - "List Animations"
+Cohesion: 0.50
+Nodes (4): Animated List with Add/Remove, List Animations, Reorderable List (Drag to Reorder), Staggered Grid
+
+### Community 1158 - "Shared Element Transitions"
+Cohesion: 0.50
+Nodes (4): Card Expansion with Shared Layout, Image Gallery with Shared Layout, Shared Element Transitions, Tab Indicator
+
+### Community 1159 - "Complex Gestures"
+Cohesion: 0.50
+Nodes (4): Complex Gestures, Long Press Gesture, Multi-Direction Swipe Handler, Pinch to Zoom
+
+### Community 1160 - "Form Animations"
+Cohesion: 0.50
+Nodes (4): Floating Label Input, Form Animations, Form Validation with Animation, Multi-Step Form with Progress
+
+### Community 1161 - "Animation Props"
+Cohesion: 0.50
+Nodes (4): animate, Animation Props, exit, initial
+
+### Community 1162 - "Variants"
+Cohesion: 0.50
+Nodes (4): Dynamic Variants, Variant Definition, Variant Propagation, Variants
+
+### Community 1163 - "Event Info Types"
+Cohesion: 0.50
+Nodes (4): Event Info Types, PanInfo (Drag events), Point, TapInfo
+
+### Community 1164 - "Layout Props"
+Cohesion: 0.50
+Nodes (4): layout, Layout Props, layoutDependency, layoutId
+
+### Community 1165 - "Advanced Techniques"
+Cohesion: 0.50
+Nodes (4): 1. Custom Render Texture, 2. Multi-Pass Shader Effects, 3. WebWorker Integration, Advanced Techniques
+
+### Community 1166 - "UI Components"
+Cohesion: 0.50
+Nodes (4): 1. Progress Bar, 2. Modal Dialog, 3. Slider Component, UI Components
+
+### Community 1167 - "Text"
+Cohesion: 0.50
+Nodes (4): BitmapText, Text, Text, TextStyle Options
+
+### Community 1168 - "Quick Start"
+Cohesion: 0.50
+Nodes (4): 1. Download Template, 2. Serve Locally, 3. Open in Browser, Quick Start
+
+### Community 1169 - "Asset Pipeline"
+Cohesion: 0.50
+Nodes (4): Asset Import Settings, Asset Pipeline, Creating Materials, Uploading Assets
+
+### Community 1170 - "Tips & Best Practices"
+Cohesion: 0.50
+Nodes (4): Asset Management, Editor Shortcuts, Performance, Tips & Best Practices
+
+### Community 1171 - "Scene Management"
+Cohesion: 0.50
+Nodes (4): Components in Editor, Scene Hierarchy, Scene Management, Tags and Layers
+
+### Community 1172 - "Project Setup"
+Cohesion: 0.50
+Nodes (4): Creating Editor Project, Editor Interface Overview, Project Setup, Project Structure
+
+### Community 1173 - "Quick Reference"
+Cohesion: 0.50
+Nodes (4): Editor Workflow, Publishing Workflow, Quick Reference, Script Workflow
+
+### Community 1174 - "Publishing & Deployment"
+Cohesion: 0.50
+Nodes (4): Hosting Options, Optimization for Production, Publishing & Deployment, Publishing from Editor
+
+### Community 1175 - "Animation Combinations"
+Cohesion: 0.50
+Nodes (4): Alternating Patterns, Animation Combinations, Mixed Animations, Staggered Animations
+
+### Community 1176 - "Custom Animations"
+Cohesion: 0.50
+Nodes (4): Custom Animations, Example: Custom Bounce, Example: Custom Rotate, Example: Custom Slide Bounce
+
+### Community 1177 - "Geometry"
+Cohesion: 0.50
+Nodes (4): BufferGeometry (Custom), Built-in Geometries, Geometry, Geometry Operations
+
+### Community 1178 - "Math Utilities"
+Cohesion: 0.50
+Nodes (4): Clock, Math Utilities, Quaternion, Vector3
+
+### Community 1179 - "Mesh"
+Cohesion: 0.50
+Nodes (4): Creation, Matrix Operations, Mesh, Transformations
+
+### Community 1180 - "Loaders"
+Cohesion: 0.50
+Nodes (4): DRACOLoader, GLTFLoader, Loaders, OBJLoader, FBXLoader
+
+### Community 1181 - "Callbacks"
+Cohesion: 0.67
+Nodes (3): Animation Callbacks, Callback Parameters, Callbacks
+
+### Community 1182 - "Animation Instance"
+Cohesion: 0.67
+Nodes (3): Animation Instance, Methods, Properties
+
+### Community 1184 - "Responsive Patterns"
+Cohesion: 0.67
+Nodes (3): 13.1 Different Animations per Breakpoint, 13.2 Kill Animations on Mobile, Responsive Patterns
+
+### Community 1186 - "Framework Integration"
+Cohesion: 0.67
+Nodes (3): 1. React Integration with @pixi/react, 2. Vue Integration, Framework Integration
+
+### Community 1187 - "Debugging in Editor"
+Cohesion: 0.67
+Nodes (3): Debugging in Editor, Editor Console, Launch & Debug
+
+### Community 1188 - "Version Control"
+Cohesion: 0.67
+Nodes (3): Editor Projects, Engine-Only Projects, Version Control
+
+### Community 1189 - "Editor vs Engine-Only"
+Cohesion: 0.67
+Nodes (3): Editor vs Engine-Only, Engine-Only (Code-First), PlayCanvas Editor (Online)
+
+### Community 1190 - "Animation"
+Cohesion: 0.67
+Nodes (3): Animation, AnimationAction Methods, AnimationMixer
+
+### Community 1191 - "Post-Processing"
+Cohesion: 0.67
+Nodes (3): Common Passes, EffectComposer, Post-Processing
+
+### Community 1192 - "Materials"
+Cohesion: 0.67
+Nodes (3): Common Properties, Material Types, Materials
+
+### Community 1193 - "Controls"
+Cohesion: 0.67
+Nodes (3): Controls, MapControls, TrackballControls, FlyControls, OrbitControls
+
+### Community 1194 - "Textures"
+Cohesion: 0.67
+Nodes (3): Texture Types, TextureLoader, Textures
 
 ## Knowledge Gaps
-- **14 isolated node(s):** `@modelcontextprotocol/sdk`, `axios`, `dotenv`, `@types/node`, `shx` (+9 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 7446 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **183 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **32 isolated node(s):** `@babylonjs/loaders`, `vite`, `locomotive-scroll`, `vite`, `react` (+27 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 11518 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **198 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `name()` connect `name` to `React View Transitions`, `DesignSystemGenerator`, `.update`, `React View Transitions`, `Implementation Workflow`, `Skill Creator`, `Client-Side and Browser Hunting`, `Workflow: Audit Mode`, `inspect.mjs`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **What connects `@modelcontextprotocol/sdk`, `axios`, `dotenv` to the rest of the system?**
-  _14 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `name()` connect `name` to `lerp`, `Properties`, `Pen`, `Magic UI Component Catalog`, `react-view-transitions/AGENTS.md`, `React View Transitions`, `React View Transitions`, `View Transitions in Next.js`, `Implementation Workflow`, `Spline React API Reference`, `Substance 3D Painter Python API Reference`, `Implementation Workflow`, `Breaking UI`, `Skill Creator`, `Workflow: Audit Mode`, `ATTACK-CLASSES.md`, `inspect.mjs`, `Individual Hook Reference`?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Are the 11 inferred relationships involving `clamp()` (e.g. with `2. Margins and the grid` and `2. The scale: few sizes, far apart`) actually correct?**
+  _`clamp()` has 11 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `@babylonjs/loaders`, `vite`, `locomotive-scroll` to the rest of the system?**
+  _32 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `assets.mjs` be split into smaller, more focused modules?**
-  _Cohesion score 0.08408408408408409 - nodes in this community are weakly interconnected._
-- **Why does `shape()` connect `Init flow` to `assets.mjs`, `getOne`, `impeccable/SKILL.md`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _Cohesion score 0.07562008469449485 - nodes in this community are weakly interconnected._
+- **Why does `Global Options` connect `lerp` to `stroke`, `el`, `Locomotive Scroll API Reference`, `name`?**
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **Should `validate_data.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.07115384615384615 - nodes in this community are weakly interconnected._
-- **Why does `main()` connect `json` to `sys`, `getSupabaseClient`, `design_system.py`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Should `gray` be split into smaller, more focused modules?**
-  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06559356136820925 - nodes in this community are weakly interconnected._
+- **Why does `el()` connect `el` to `lerp`, `actOnAgentTarget`, `initPageChat`, `live-browser.js`, `connectSSE`, `initGlobalBar`?**
+  _High betweenness centrality (0.028) - this node is a cross-community bridge._

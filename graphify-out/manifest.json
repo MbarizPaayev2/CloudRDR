@@ -5332,5 +5332,2591 @@
     "seen": 1791980656.7257822,
     "ast_hash": "55b3cbf993a46520a425b8cd4935fb7b",
     "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/assets/starter_aframe/main.js": {
+    "mtime": 1791980706.1243753,
+    "seen": 1791980958.7235155,
+    "ast_hash": "2ce29080ed0432e16fa5ef27ad344537",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/scripts/component_builder.py": {
+    "mtime": 1791980706.127375,
+    "seen": 1791980958.7235262,
+    "ast_hash": "76c994a9298152e8d3c4662fc61e693c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/scripts/scene_generator.py": {
+    "mtime": 1791980706.1283767,
+    "seen": 1791980958.7235308,
+    "ast_hash": "12519c36be861d119650fd0ab3556e68",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animated-component-libraries/scripts/component_importer.py": {
+    "mtime": 1791980706.1334472,
+    "seen": 1791980958.7242007,
+    "ast_hash": "8c2c8957577ef74fb40fc4ab6c7f816f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animated-component-libraries/scripts/props_generator.py": {
+    "mtime": 1791980706.1334472,
+    "seen": 1791980958.724207,
+    "ast_hash": "5a0e4abb8821af7a4e9acd1f12196830",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animejs/scripts/animation_generator.py": {
+    "mtime": 1791980706.1384435,
+    "seen": 1791980958.7242122,
+    "ast_hash": "2ffc192e8b896cc16726c2a62e418ce9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animejs/scripts/timeline_builder.py": {
+    "mtime": 1791980706.1384435,
+    "seen": 1791980958.724217,
+    "ast_hash": "65b25033c7d7fe077eeee8e5aecfabdb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/index.json": {
+    "mtime": 1791980704.0828283,
+    "seen": 1791980958.7242215,
+    "ast_hash": "7692af0dec6a8ac6287a56d905208750",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/assets/starter_babylon/package.json": {
+    "mtime": 1791980706.1424425,
+    "seen": 1791980958.7242262,
+    "ast_hash": "a0523e8d53a5a69caf2178f00d690a48",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/assets/starter_babylon/src/main.js": {
+    "mtime": 1791980706.1434486,
+    "seen": 1791980958.724231,
+    "ast_hash": "1f1545a58b427eb4d9dfee7d933cdad0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/assets/starter_babylon/vite.config.js": {
+    "mtime": 1791980706.144444,
+    "seen": 1791980958.7242339,
+    "ast_hash": "c8dd0294ed04bfcd3a22c3467345f958",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/scripts/mesh_builder.py": {
+    "mtime": 1791980706.1454425,
+    "seen": 1791980958.724237,
+    "ast_hash": "111dcbc58d6fc65cfba2198a8b18cee1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/scripts/scene_generator.py": {
+    "mtime": 1791980706.1464448,
+    "seen": 1791980958.7242396,
+    "ast_hash": "2e0241a91e85411589d29265dff16d8a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/scripts/project_setup.py": {
+    "mtime": 1791980706.1514425,
+    "seen": 1791980958.7242422,
+    "ast_hash": "4f1979cf551632740c9986e5a688d5fe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/scripts/transition_generator.py": {
+    "mtime": 1791980706.1514425,
+    "seen": 1791980958.724244,
+    "ast_hash": "3d56e28ff11b0a585438391397ab9f9e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/scripts/batch_export.py": {
+    "mtime": 1791980706.156442,
+    "seen": 1791980958.7242463,
+    "ast_hash": "7f68606a414ed3e4db7160e2f011baaf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/scripts/generate_lods.py": {
+    "mtime": 1791980706.156442,
+    "seen": 1791980958.7242496,
+    "ast_hash": "1cdda1e487099b2ad6b8b12b422282c3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/scripts/optimize_model.py": {
+    "mtime": 1791980706.1574452,
+    "seen": 1791980958.7242527,
+    "ast_hash": "a146358abbcf37afea107c9c30a697be",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/colony.mjs": {
+    "mtime": 1791980708.8899658,
+    "seen": 1791980958.7242556,
+    "ast_hash": "da507c4e1b1d044669a2791dabba1848",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/core.mjs": {
+    "mtime": 1791980708.890976,
+    "seen": 1791980958.724259,
+    "ast_hash": "2e18f7d38d1263af07bf09609eb5953e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/film.mjs": {
+    "mtime": 1791980708.890976,
+    "seen": 1791980958.7242632,
+    "ast_hash": "f99f9244c979007f580ff6d006c0558e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/fx.mjs": {
+    "mtime": 1791980708.8919752,
+    "seen": 1791980958.7242668,
+    "ast_hash": "141229fb194e34ff6f19575ad7361bec",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/lowpoly.mjs": {
+    "mtime": 1791980708.8919752,
+    "seen": 1791980958.7242746,
+    "ast_hash": "6cc36e4a076a95de81a4bfe4a2a27f2d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/nature.mjs": {
+    "mtime": 1791980708.8931696,
+    "seen": 1791980958.7242804,
+    "ast_hash": "5c3213b151074e3af9b1f0d776afe0df",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/pen.mjs": {
+    "mtime": 1791980708.8931696,
+    "seen": 1791980958.7242844,
+    "ast_hash": "752bc4768545d5b019a69e748c1425e8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/rigs/ant.mjs": {
+    "mtime": 1791980708.8941698,
+    "seen": 1791980958.724289,
+    "ast_hash": "99831f7a30b096164447163fbb86ea24",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/rigs/bean.mjs": {
+    "mtime": 1791980708.895169,
+    "seen": 1791980958.7242935,
+    "ast_hash": "be11847f04603a4cd595e5e8d8802221",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/rigs/bug.mjs": {
+    "mtime": 1791980708.895169,
+    "seen": 1791980958.7242973,
+    "ast_hash": "9873d2fff8a310f010dbff6da3ab5af5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/rigs/chibi.mjs": {
+    "mtime": 1791980708.8966765,
+    "seen": 1791980958.7243004,
+    "ast_hash": "35178f9b30c94fa79c58e690c7e05f4b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/rigs/critter.mjs": {
+    "mtime": 1791980708.8966765,
+    "seen": 1791980958.7243044,
+    "ast_hash": "8158171c0894c79bf87a3cb491b93fcf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/lib/textures.mjs": {
+    "mtime": 1791980708.8976858,
+    "seen": 1791980958.7243083,
+    "ast_hash": "2da1775e69722e901aa91c9a5102f539",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/package.json": {
+    "mtime": 1791980708.8976858,
+    "seen": 1791980958.7243276,
+    "ast_hash": "66e73c59593ff139621e58a3c6992f5e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/scripts/ambient.mjs": {
+    "mtime": 1791980708.9042256,
+    "seen": 1791980958.724332,
+    "ast_hash": "a3a71d0acb767468006cf9dc8c7d4b7f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/scripts/chiptune.mjs": {
+    "mtime": 1791980708.9052289,
+    "seen": 1791980958.7243361,
+    "ast_hash": "58ac31596d747a288c19bc0943c02986",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/scripts/music.mjs": {
+    "mtime": 1791980708.905881,
+    "seen": 1791980958.7243402,
+    "ast_hash": "293bd2b20a6e188b8785d373bfb33cac",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/scripts/rig-sheet.mjs": {
+    "mtime": 1791980708.9063861,
+    "seen": 1791980958.7243457,
+    "ast_hash": "b0439d95c33078946422699b946f811b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/scripts/sound.mjs": {
+    "mtime": 1791980708.9063861,
+    "seen": 1791980958.724349,
+    "ast_hash": "423a1b1ba348ca01b39b29dffa5177b7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/templates/film-template.mjs": {
+    "mtime": 1791980708.9076278,
+    "seen": 1791980958.7243512,
+    "ast_hash": "626711924867a12dc2dfebf7c87e6bfc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/animate-height.tsx": {
+    "mtime": 1791980699.2904005,
+    "seen": 1791980958.726979,
+    "ast_hash": "a92803e3386d6ce0f8e2d6b267e67f92",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/app-store-card.tsx": {
+    "mtime": 1791980699.2904005,
+    "seen": 1791980958.7269828,
+    "ast_hash": "01395d0f875d8ccd88f93e848eb2e793",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/card-hover.tsx": {
+    "mtime": 1791980699.2915564,
+    "seen": 1791980958.7269857,
+    "ast_hash": "252ec9f2cba3fa02f4cb4e097a02a5c4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/feedback-popover.tsx": {
+    "mtime": 1791980699.2915564,
+    "seen": 1791980958.726988,
+    "ast_hash": "7aefbb4261f8764ea2decc05d913d740",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/multi-step-flow.tsx": {
+    "mtime": 1791980699.2926354,
+    "seen": 1791980958.7269912,
+    "ast_hash": "52535da3cb40507c35ebe7b29d2e1adb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/shared-layout.tsx": {
+    "mtime": 1791980699.2937183,
+    "seen": 1791980958.7269933,
+    "ast_hash": "1f22b7663fa966f4c11be0c756f625f8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/text-reveal.tsx": {
+    "mtime": 1791980699.2937183,
+    "seen": 1791980958.726996,
+    "ast_hash": "0fbbcfbf6cdf1dd060060e553358930c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/examples/toast-stacking.tsx": {
+    "mtime": 1791980699.2937183,
+    "seen": 1791980958.726999,
+    "ast_hash": "ce5cb18efd0990be59584b9fd0011a6d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/assets/starter_scroll/main.js": {
+    "mtime": 1791980706.161442,
+    "seen": 1791980958.738183,
+    "ast_hash": "16bb431a5094d58d51c34327c5dce365",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/scripts/generate_animation.py": {
+    "mtime": 1791980706.1649952,
+    "seen": 1791980958.7381883,
+    "ast_hash": "7153155630daa6f32badf531a4d3c520",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/scripts/timeline_builder.py": {
+    "mtime": 1791980706.166289,
+    "seen": 1791980958.738191,
+    "ast_hash": "d6005c164b2315155954679bd98d7b76",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/assets/starter_lightweight/main.js": {
+    "mtime": 1791980706.1693053,
+    "seen": 1791980958.7407148,
+    "ast_hash": "50ba45a9954596c69816bd4cd4e94824",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/scripts/generate_zdog.py": {
+    "mtime": 1791980706.1735828,
+    "seen": 1791980958.740719,
+    "ast_hash": "16d4fd7ce551b9fe6d3cd097dded7cd2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/scripts/setup_vanta.py": {
+    "mtime": 1791980706.1735828,
+    "seen": 1791980958.740722,
+    "ast_hash": "b383cacc8c3a2d096eba84ed2ba59477",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/assets/starter_locomotive/main.js": {
+    "mtime": 1791980706.1765833,
+    "seen": 1791980958.7407243,
+    "ast_hash": "15833b0109fa36217e6064da290ae838",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/assets/starter_locomotive/package.json": {
+    "mtime": 1791980706.1765833,
+    "seen": 1791980958.7407265,
+    "ast_hash": "9ce757d024b9c461ca44a07fba9f3dc0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/scripts/generate_config.py": {
+    "mtime": 1791980706.1793237,
+    "seen": 1791980958.7407296,
+    "ast_hash": "8e7152cfd7495314351ecaddfd98ad8e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/scripts/integration_helper.py": {
+    "mtime": 1791980706.1793237,
+    "seen": 1791980958.740732,
+    "ast_hash": "28a558d0e401ae266e68dfcf7b748f63",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lottie-animations/scripts/generate_lottie_component.py": {
+    "mtime": 1791980706.1833405,
+    "seen": 1791980958.7407339,
+    "ast_hash": "97be2b9a3a39933b3dcb1d6ae7eea7db",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lottie-animations/scripts/optimize_lottie.py": {
+    "mtime": 1791980706.1843438,
+    "seen": 1791980958.740736,
+    "ast_hash": "f02215c5ca223f283210f7b858a4a7da",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/scripts/design_audit.py": {
+    "mtime": 1791980706.1894362,
+    "seen": 1791980958.7414107,
+    "ast_hash": "42a782757d20291ca42d5aaeb61bf461",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/scripts/pattern_generator.py": {
+    "mtime": 1791980706.1904361,
+    "seen": 1791980958.7414143,
+    "ast_hash": "945ca0bfc043a0faaaa8b9e1a6209e6f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/package.json": {
+    "mtime": 1791980706.1944964,
+    "seen": 1791980958.741417,
+    "ast_hash": "2c076408aed41feafb7ee942d74b9fd7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/src/App.jsx": {
+    "mtime": 1791980706.195496,
+    "seen": 1791980958.7414198,
+    "ast_hash": "1ce98a2a6b82f7fc394b92c9ea2138be",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/src/components/DraggableBox.jsx": {
+    "mtime": 1791980706.196496,
+    "seen": 1791980958.7414227,
+    "ast_hash": "03638094380f7c5b14e759ae0723bbc3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/src/components/HoverCard.jsx": {
+    "mtime": 1791980706.196496,
+    "seen": 1791980958.7414246,
+    "ast_hash": "371f9b6cbadc27df788db7f7305975ff",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/src/components/StaggerList.jsx": {
+    "mtime": 1791980706.196496,
+    "seen": 1791980958.7414274,
+    "ast_hash": "dae9c73e6f4273264b6952a114492a68",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/src/main.jsx": {
+    "mtime": 1791980706.1974962,
+    "seen": 1791980958.7414296,
+    "ast_hash": "312c539f1a6e5d7d85cd5e4f54cc1e5e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/vite.config.js": {
+    "mtime": 1791980706.1974962,
+    "seen": 1791980958.7414315,
+    "ast_hash": "9ec6d225366923caed367230ea5efdc8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/scripts/animation_generator.py": {
+    "mtime": 1791980706.1994977,
+    "seen": 1791980958.7414336,
+    "ast_hash": "89202d0e3598a028d70be7b8ec9a3164",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/scripts/variant_builder.py": {
+    "mtime": 1791980706.1994977,
+    "seen": 1791980958.741436,
+    "ast_hash": "409aa5037aa4dfaff91bec89c043f8b9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/assets/starter_pixijs/main.js": {
+    "mtime": 1791980706.2035007,
+    "seen": 1791980958.7417722,
+    "ast_hash": "8306a7a373fb5106ce21afa8b1546457",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/scripts/particle_builder.py": {
+    "mtime": 1791980706.2075014,
+    "seen": 1791980958.741776,
+    "ast_hash": "3ae1855107192b4cbcab6e83e61cf67c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/scripts/sprite_generator.py": {
+    "mtime": 1791980706.2075014,
+    "seen": 1791980958.7417781,
+    "ast_hash": "96f85c840d3817de6718010e0f864db7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/assets/starter_playcanvas/scripts/app.js": {
+    "mtime": 1791980706.2126236,
+    "seen": 1791980958.741781,
+    "ast_hash": "9840202f255426684e62914a8acb1616",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/assets/starter_playcanvas/scripts/camera-controller.js": {
+    "mtime": 1791980706.213833,
+    "seen": 1791980958.7417836,
+    "ast_hash": "66192c3e4ae0a17c09e281e06ec24586",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/assets/starter_playcanvas/scripts/input-manager.js": {
+    "mtime": 1791980706.213833,
+    "seen": 1791980958.7417855,
+    "ast_hash": "fbf83a563a453fc4c884b8436fcc439a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/scripts/component_builder.py": {
+    "mtime": 1791980706.2168498,
+    "seen": 1791980958.7417886,
+    "ast_hash": "6fde1d76959134175b6cda0f00f3d317",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/scripts/project_generator.py": {
+    "mtime": 1791980706.2183566,
+    "seen": 1791980958.7417912,
+    "ast_hash": "d7d8ccd45537443a77b84e26b431f10d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-spring-physics/scripts/physics_calculator.py": {
+    "mtime": 1791980706.222385,
+    "seen": 1791980958.7428255,
+    "ast_hash": "933e2996e6d34e27b3192f376dde7cea",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-spring-physics/scripts/spring_generator.py": {
+    "mtime": 1791980706.222385,
+    "seen": 1791980958.7428293,
+    "ast_hash": "dfa7a5de20e4225ff0f11dccd75e534d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/package.json": {
+    "mtime": 1791980706.2263844,
+    "seen": 1791980958.742832,
+    "ast_hash": "e3440e49e94e5387e86a8aebbd9e657a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/src/App.jsx": {
+    "mtime": 1791980706.227384,
+    "seen": 1791980958.7428343,
+    "ast_hash": "1480a7693a742a90cb6b8f7147de440c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/src/Experience.jsx": {
+    "mtime": 1791980706.227384,
+    "seen": 1791980958.7428367,
+    "ast_hash": "3536dcf39d3576b38d4884a07bbb3c06",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/src/components/Box.jsx": {
+    "mtime": 1791980706.2283835,
+    "seen": 1791980958.7428393,
+    "ast_hash": "fa3277ab8d5b39826d6a1925a4fee9ec",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/src/components/Sphere.jsx": {
+    "mtime": 1791980706.2283835,
+    "seen": 1791980958.7428412,
+    "ast_hash": "860bbe5400f30878af37f563c94f7b40",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/src/main.jsx": {
+    "mtime": 1791980706.229383,
+    "seen": 1791980958.7428434,
+    "ast_hash": "312c539f1a6e5d7d85cd5e4f54cc1e5e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/vite.config.js": {
+    "mtime": 1791980706.229383,
+    "seen": 1791980958.7428458,
+    "ast_hash": "2dcf8dce27786680b1069334768efb5a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/scripts/component_generator.py": {
+    "mtime": 1791980706.2313845,
+    "seen": 1791980958.7428477,
+    "ast_hash": "42e880b11623a1db7fffa7fb59b8b102",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/scripts/scene_setup.py": {
+    "mtime": 1791980706.2313845,
+    "seen": 1791980958.7428496,
+    "ast_hash": "80b5b7e2a0d0e4abb96163573c927f76",
+    "semantic_hash": ""
+  },
+  ".agents/skills/rive-interactive/scripts/component_generator.py": {
+    "mtime": 1791980706.234555,
+    "seen": 1791980958.7431846,
+    "ast_hash": "4966e7befa8d5ad112e565b0de844987",
+    "semantic_hash": ""
+  },
+  ".agents/skills/rive-interactive/scripts/viewmodel_builder.py": {
+    "mtime": 1791980706.2355702,
+    "seen": 1791980958.743188,
+    "ast_hash": "249bcfdaaedbec05ceaa0a4ae7aa2a13",
+    "semantic_hash": ""
+  },
+  ".agents/skills/scroll-reveal-libraries/scripts/aos_generator.py": {
+    "mtime": 1791980706.2385724,
+    "seen": 1791980958.7431905,
+    "ast_hash": "02bc48ee7893c18b9d816f8c34caa8e3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/scroll-reveal-libraries/scripts/config_builder.py": {
+    "mtime": 1791980706.2395766,
+    "seen": 1791980958.7431934,
+    "ast_hash": "445f5aa36dcfabbda920d76ba2dcbc8b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/spline-interactive/scripts/component_builder.py": {
+    "mtime": 1791980706.2468512,
+    "seen": 1791980958.7473733,
+    "ast_hash": "726b629f0ece7df5b6c1136af4d2b22f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/spline-interactive/scripts/project_generator.py": {
+    "mtime": 1791980706.2478504,
+    "seen": 1791980958.7473779,
+    "ast_hash": "eef52406e2ac490461f18fe723c7edd4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/assets/export_templates/babylonjs_pbr.json": {
+    "mtime": 1791980706.250854,
+    "seen": 1791980958.7473807,
+    "ast_hash": "269dd8194aca23c7f28e4e2382821ac1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/assets/export_templates/gltf_standard.json": {
+    "mtime": 1791980706.250854,
+    "seen": 1791980958.747383,
+    "ast_hash": "b427500db4c9fe2843a1da44ae8ceff3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/assets/export_templates/mobile_webgl.json": {
+    "mtime": 1791980706.2518523,
+    "seen": 1791980958.747385,
+    "ast_hash": "2b5dd43e27fb87b2a3ac7a18ccf6f4c3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/assets/export_templates/threejs_optimized.json": {
+    "mtime": 1791980706.2518523,
+    "seen": 1791980958.7473872,
+    "ast_hash": "c2108753537fbcfed4e2e78b49590c84",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/assets/export_templates/web_orm_packed.json": {
+    "mtime": 1791980706.2528498,
+    "seen": 1791980958.7473896,
+    "ast_hash": "3c88a9d1c40085f973ad43d47dbbd80d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/scripts/batch_export.py": {
+    "mtime": 1791980706.2552176,
+    "seen": 1791980958.747392,
+    "ast_hash": "98b5cbeded47e14930e584e143426c75",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/scripts/generate_export_preset.py": {
+    "mtime": 1791980706.2565558,
+    "seen": 1791980958.7473943,
+    "ast_hash": "bbb0232b81363d72b2a5de1dd71329b5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/scripts/web_optimizer.py": {
+    "mtime": 1791980706.2575774,
+    "seen": 1791980958.7473967,
+    "ast_hash": "6babf13e52033fd4efa971caeaf83096",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/assets/starter_scene/main.js": {
+    "mtime": 1791980706.2605772,
+    "seen": 1791980958.7473989,
+    "ast_hash": "89c8693745007f60e4dee62326ea8cd5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/scripts/setup_scene.py": {
+    "mtime": 1791980706.262835,
+    "seen": 1791980958.747401,
+    "ast_hash": "39a2c6664c71aba7fd6729d50eedac53",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/SKILL.md": {
+    "mtime": 1791980706.1213493,
+    "seen": 1791980958.8312826,
+    "ast_hash": "6558f8f2ae72386c6149b815dbe5ac8d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/assets/examples/README.md": {
+    "mtime": 1791980706.122351,
+    "seen": 1791980958.8312879,
+    "ast_hash": "e4ec55d3cc17c95a4026eafa2e1c17d5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/assets/starter_aframe/README.md": {
+    "mtime": 1791980706.1233552,
+    "seen": 1791980958.83129,
+    "ast_hash": "3c0c5f7b30b715a0d4662990b5a7ba3c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/assets/starter_aframe/index.html": {
+    "mtime": 1791980706.1233552,
+    "seen": 1791980958.831293,
+    "ast_hash": "7250189332002d3a957c6be8f37c233a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/references/api_reference.md": {
+    "mtime": 1791980706.1253743,
+    "seen": 1791980958.831296,
+    "ast_hash": "1a46c8d910ac795fbb9fd49f5b55ec56",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/references/components_library.md": {
+    "mtime": 1791980706.126374,
+    "seen": 1791980958.8312986,
+    "ast_hash": "7ccf15eb3ea35a93abc93a329bc21d3d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/aframe-webxr/references/webxr_guide.md": {
+    "mtime": 1791980706.126374,
+    "seen": 1791980958.831301,
+    "ast_hash": "0981370ba4a39b47ab271ecb1b39c96a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animated-component-libraries/SKILL.md": {
+    "mtime": 1791980706.1283767,
+    "seen": 1791980958.8323863,
+    "ast_hash": "643df899429be91ce109870fb8312699",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animated-component-libraries/assets/README.md": {
+    "mtime": 1791980706.129376,
+    "seen": 1791980958.83239,
+    "ast_hash": "27ad42b84f23fa1df5cbbeddb5f543a5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animated-component-libraries/references/customization_guide.md": {
+    "mtime": 1791980706.1303782,
+    "seen": 1791980958.8323927,
+    "ast_hash": "d32aa4a56321885ef053b569c58f8ae7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animated-component-libraries/references/magic_ui_components.md": {
+    "mtime": 1791980706.1314454,
+    "seen": 1791980958.8323953,
+    "ast_hash": "689dfea2f3089489f479c95b00a808bb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animated-component-libraries/references/react_bits_components.md": {
+    "mtime": 1791980706.1324453,
+    "seen": 1791980958.8323987,
+    "ast_hash": "32a7d3e1283c6ee607b9e783974fc1c9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animejs/SKILL.md": {
+    "mtime": 1791980706.1344469,
+    "seen": 1791980958.832401,
+    "ast_hash": "afc9ebb6e9d856516d91a61b55a502b3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animejs/assets/README.md": {
+    "mtime": 1791980706.1354482,
+    "seen": 1791980958.8324034,
+    "ast_hash": "f123467d42f9a953720cb768a2a5b148",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animejs/references/api_reference.md": {
+    "mtime": 1791980706.136447,
+    "seen": 1791980958.8324063,
+    "ast_hash": "ecc69b897b7f0295d139e662e87feb01",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animejs/references/stagger_guide.md": {
+    "mtime": 1791980706.136447,
+    "seen": 1791980958.8324091,
+    "ast_hash": "b2def33cfc6f0e0a1ba179aea9ec1180",
+    "semantic_hash": ""
+  },
+  ".agents/skills/animejs/references/timeline_guide.md": {
+    "mtime": 1791980706.1374454,
+    "seen": 1791980958.8324113,
+    "ast_hash": "df12fa8249b4020c53e55bd843a0a613",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/.github/ISSUE_TEMPLATE/add-a-repo.yml": {
+    "mtime": 1791980703.892265,
+    "seen": 1791980958.8324134,
+    "ast_hash": "95075d427ca7ec630730936e12b1939e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/README.md": {
+    "mtime": 1791980703.8943381,
+    "seen": 1791980958.8324165,
+    "ast_hash": "4cf1e96e89cf57825d55341235e5d72b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/README.zh-CN.md": {
+    "mtime": 1791980703.8953376,
+    "seen": 1791980958.832419,
+    "ast_hash": "1ffc95d73b5bd006ae4c04cf775bf1f6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/SKILL.md": {
+    "mtime": 1791980876.3715935,
+    "seen": 1791980958.8324213,
+    "ast_hash": "1b54ad6806c07f093f9f1d107ca2a360",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/NOTICE.md": {
+    "mtime": 1791980703.9625645,
+    "seen": 1791980958.8324237,
+    "ast_hash": "87683ca514c8aac265bf18028d381c8d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/SKILL.md": {
+    "mtime": 1791980706.139443,
+    "seen": 1791980958.9046705,
+    "ast_hash": "7def3405b5ff6e3dd8b511f534bd8b13",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/assets/examples/README.md": {
+    "mtime": 1791980706.1404424,
+    "seen": 1791980958.9046757,
+    "ast_hash": "e5a636ec0bb1b56e95f40d0f852ab034",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/assets/starter_babylon/README.md": {
+    "mtime": 1791980706.1414425,
+    "seen": 1791980958.9046795,
+    "ast_hash": "7e2b75f447033a9cdc54820b95b21ee0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/assets/starter_babylon/index.html": {
+    "mtime": 1791980706.1414425,
+    "seen": 1791980958.904682,
+    "ast_hash": "6aeb234a9850d9ac1bbee395a324b135",
+    "semantic_hash": ""
+  },
+  ".agents/skills/babylonjs-engine/references/api_reference.md": {
+    "mtime": 1791980706.1454425,
+    "seen": 1791980958.9046848,
+    "ast_hash": "6622f0f3240b27b871833e35735e2c4d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/SKILL.md": {
+    "mtime": 1791980706.1474423,
+    "seen": 1791980958.9046872,
+    "ast_hash": "e547837f4824e7431e5ae39286a9bf0d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/assets/README.md": {
+    "mtime": 1791980706.1474423,
+    "seen": 1791980958.90469,
+    "ast_hash": "1ed2920d7007e98b2e9c4431496ae6ed",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/references/api_reference.md": {
+    "mtime": 1791980706.1484423,
+    "seen": 1791980958.9046922,
+    "ast_hash": "93f67cc25bb863574567559a70f794c5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/references/gsap_integration.md": {
+    "mtime": 1791980706.1494422,
+    "seen": 1791980958.9046948,
+    "ast_hash": "13a63fcccd1265be6683b3cce6b9171d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/references/hooks_guide.md": {
+    "mtime": 1791980706.1504467,
+    "seen": 1791980958.9046972,
+    "ast_hash": "f9f74ead126ff56b04d6dff8a4b8e3d2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/barba-js/references/transition_patterns.md": {
+    "mtime": 1791980706.1504467,
+    "seen": 1791980958.9046993,
+    "ast_hash": "e4b2985d499dc3d75cc2113186a7728c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/SKILL.md": {
+    "mtime": 1791980706.1534424,
+    "seen": 1791980958.9142103,
+    "ast_hash": "d63423e8d32de52919682dd3c5d7c522",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/assets/README.md": {
+    "mtime": 1791980706.154442,
+    "seen": 1791980958.914216,
+    "ast_hash": "026f9adb55847bcc188892b72d6627f5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/references/bpy_api_reference.md": {
+    "mtime": 1791980706.154442,
+    "seen": 1791980958.9142194,
+    "ast_hash": "2b73e2cd5bbd70f45e74d2f566c93610",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/references/gltf_export_guide.md": {
+    "mtime": 1791980706.1554422,
+    "seen": 1791980958.9142218,
+    "ast_hash": "4e345a8650e60f8b723aec3d9a6950fd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/blender-web-pipeline/references/optimization_strategies.md": {
+    "mtime": 1791980706.1554422,
+    "seen": 1791980958.9142246,
+    "ast_hash": "62f27fbfb531cf8a13a7479f499009f4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/SKILL.md": {
+    "mtime": 1791980708.8884099,
+    "seen": 1791980958.915346,
+    "ast_hash": "c6adc854c6b69024b6c1eff2a70ab126",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/characters.md": {
+    "mtime": 1791980708.8986857,
+    "seen": 1791980958.91535,
+    "ast_hash": "b144719a57fe3458a3eedb4b9e0962ab",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/detail.md": {
+    "mtime": 1791980708.8996854,
+    "seen": 1791980958.9153526,
+    "ast_hash": "36c2f3d6bda80ad2acc6e99d04929416",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/motion.md": {
+    "mtime": 1791980708.8996854,
+    "seen": 1791980958.915355,
+    "ast_hash": "dffe0a46c32c86c36491ef23cad0ee2a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/prior-art.md": {
+    "mtime": 1791980708.9006855,
+    "seen": 1791980958.915357,
+    "ast_hash": "33058ba4fe17035c80b693870ba5c68b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/sound.md": {
+    "mtime": 1791980708.9006855,
+    "seen": 1791980958.9153593,
+    "ast_hash": "8bcf0334b1106e92991c60afdea83818",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/styles.md": {
+    "mtime": 1791980708.901931,
+    "seen": 1791980958.9153616,
+    "ast_hash": "f7eac367d40c9c8e3e5f896ac5b2d5fa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/traps.md": {
+    "mtime": 1791980708.901931,
+    "seen": 1791980958.915364,
+    "ast_hash": "2a21137b999c38d2ea193f695d31e6cf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/references/workflow.md": {
+    "mtime": 1791980708.90293,
+    "seen": 1791980958.9153664,
+    "ast_hash": "0553ef65a65bf8c411313b7aa775d319",
+    "semantic_hash": ""
+  },
+  ".agents/skills/claude-animation/templates/beat-sheet.md": {
+    "mtime": 1791980708.9076278,
+    "seen": 1791980958.9153697,
+    "ast_hash": "20b0fa467acd9c5a0b47a5405a92bfd1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/README.md": {
+    "mtime": 1791980699.2892773,
+    "seen": 1791980958.9282196,
+    "ast_hash": "c7c48494387e370350a7e1008ffb871f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/SKILL.md": {
+    "mtime": 1791980875.5330744,
+    "seen": 1791980958.9282246,
+    "ast_hash": "7906e98ad7b3a61f8fc8cdff10513695",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/references/css-animations.md": {
+    "mtime": 1791980699.2950025,
+    "seen": 1791980958.928228,
+    "ast_hash": "b0febee3a52df8f59b028c415db1975e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/references/easing-and-timing.md": {
+    "mtime": 1791980699.2950025,
+    "seen": 1791980958.9282317,
+    "ast_hash": "7d232ace3d57ffe6016597706c9160a4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/references/framer-motion.md": {
+    "mtime": 1791980699.296115,
+    "seen": 1791980958.9282348,
+    "ast_hash": "f79d40b8236f34814accca8b0a76cdaa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/delphi-animate/references/performance-accessibility.md": {
+    "mtime": 1791980699.296115,
+    "seen": 1791980958.9282367,
+    "ast_hash": "6bbb22238eefca5a8b212a6e85c9974d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-animate-expo/RECIPES.md": {
+    "mtime": 1791980710.2565274,
+    "seen": 1791980958.9443853,
+    "ast_hash": "5e6c16577de658238695064a4b606fbe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-animate-expo/SKILL.md": {
+    "mtime": 1791980875.621031,
+    "seen": 1791980958.9443903,
+    "ast_hash": "a1bcaaf7684b11d7acb2137f947bf3c0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-animate/RECIPES.md": {
+    "mtime": 1791980710.258017,
+    "seen": 1791980958.9443936,
+    "ast_hash": "278b01cdc80a6ec30b97e35f2e046c28",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-animate/SKILL.md": {
+    "mtime": 1791980875.60467,
+    "seen": 1791980958.9443963,
+    "ast_hash": "56cca7596f925ce570ee9c013937a64f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-animation-performance/SKILL.md": {
+    "mtime": 1791980875.6325161,
+    "seen": 1791980958.9443986,
+    "ast_hash": "7bc21acde473a15a7c847b61d6ac84f1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-animation-vocabulary/SKILL.md": {
+    "mtime": 1791980875.6428835,
+    "seen": 1791980958.9444008,
+    "ast_hash": "5a995668c9bc801cc12702cbf6069e73",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-apple-design/SKILL.md": {
+    "mtime": 1791980875.6533184,
+    "seen": 1791980958.9444032,
+    "ast_hash": "3c81a5fe9be04ebf423e8fbfef5ddcd2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-ask-sonner/API.md": {
+    "mtime": 1791980710.262416,
+    "seen": 1791980958.9444056,
+    "ast_hash": "064a5fc55a21aa77c982b1e231e036bc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-ask-sonner/SKILL.md": {
+    "mtime": 1791980875.6614106,
+    "seen": 1791980958.9444075,
+    "ast_hash": "6fd3cd6c67f0d903af85612158d6a24b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-break-ui/CATALOG.md": {
+    "mtime": 1791980710.2644713,
+    "seen": 1791980958.9444096,
+    "ast_hash": "9c139cdf967d077550e8695ac7d2229f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-break-ui/SKILL.md": {
+    "mtime": 1791980875.672481,
+    "seen": 1791980958.944412,
+    "ast_hash": "2f14a6de769ef0c2a716b481863142d7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-emil-design-eng/SKILL.md": {
+    "mtime": 1791980875.6993165,
+    "seen": 1791980958.9444156,
+    "ast_hash": "3c2e735f2a73d067f9ca2a15500c9f72",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-find-animation-opportunities/SKILL.md": {
+    "mtime": 1791980875.7087042,
+    "seen": 1791980958.9444187,
+    "ast_hash": "c8cab6ce288403bcc4ebc6c9454de47d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-improve-animations/AUDIT.md": {
+    "mtime": 1791980710.2679894,
+    "seen": 1791980958.9444206,
+    "ast_hash": "feab993eb7a204985c7be06c1a2c5c87",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-improve-animations/PLAN-TEMPLATE.md": {
+    "mtime": 1791980710.268989,
+    "seen": 1791980958.9444227,
+    "ast_hash": "bde30d8893f5140f914a25d847a92887",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-improve-animations/SKILL.md": {
+    "mtime": 1791980875.717705,
+    "seen": 1791980958.944425,
+    "ast_hash": "f45a36573d10f1984f73fe9968ac38da",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-mobile-native/SKILL.md": {
+    "mtime": 1791980875.7346199,
+    "seen": 1791980958.944428,
+    "ast_hash": "06e9a09fd9ec7bf3e73fd3300d99fa35",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-pick-ui-library/SKILL.md": {
+    "mtime": 1791980875.7426207,
+    "seen": 1791980958.9444304,
+    "ast_hash": "7d083e05c390198ef856f433c7d30b2a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-prototype/PICKER.md": {
+    "mtime": 1791980710.2714305,
+    "seen": 1791980958.9444327,
+    "ast_hash": "47fc07814e8cc878ad67649897dfaed5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-prototype/SKILL.md": {
+    "mtime": 1791980875.7516782,
+    "seen": 1791980958.944435,
+    "ast_hash": "ba9db85c0e951f23db17c2fc0bdd1f76",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-review-animations/SKILL.md": {
+    "mtime": 1791980875.760516,
+    "seen": 1791980958.9444375,
+    "ast_hash": "f9f3fae511cb12429909cbe8f8d9ffe9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-review-animations/STANDARDS.md": {
+    "mtime": 1791980710.2734275,
+    "seen": 1791980958.9444404,
+    "ast_hash": "87d07efe01db0af87187e601f707198f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/emil-write-swift/SKILL.md": {
+    "mtime": 1791980875.775529,
+    "seen": 1791980958.9444425,
+    "ast_hash": "54d781ff040f12061e5df62279615ad3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/SKILL.md": {
+    "mtime": 1791980706.1574452,
+    "seen": 1791980958.9486737,
+    "ast_hash": "0de30c7081a816ed98eab8824093c5ef",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/assets/easings/easing_visualizer.html": {
+    "mtime": 1791980706.1584425,
+    "seen": 1791980958.9486785,
+    "ast_hash": "c532226b631b4dd085ab6437ad6f8606",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/assets/examples/README.md": {
+    "mtime": 1791980706.1594422,
+    "seen": 1791980958.948681,
+    "ast_hash": "13c229dc04ee5cec471a97008c7d18ea",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/assets/starter_scroll/README.md": {
+    "mtime": 1791980706.1604426,
+    "seen": 1791980958.948684,
+    "ast_hash": "e582997131105372621626a1b3caccec",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/assets/starter_scroll/index.html": {
+    "mtime": 1791980706.1604426,
+    "seen": 1791980958.9486861,
+    "ast_hash": "6f5e30117dde478854771ddcd96421e2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/references/api_reference.md": {
+    "mtime": 1791980706.1625779,
+    "seen": 1791980958.9486883,
+    "ast_hash": "b31a9c46469302fca9f85ca122853035",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/references/common_patterns.md": {
+    "mtime": 1791980706.1636007,
+    "seen": 1791980958.9486914,
+    "ast_hash": "66d284b934fae255b73d6dc2adb0743f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gsap-scrolltrigger/references/easing_guide.md": {
+    "mtime": 1791980706.1636007,
+    "seen": 1791980958.9486942,
+    "ast_hash": "641f7b95520fd47ad7441cc1a058b428",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/SKILL.md": {
+    "mtime": 1791980706.166289,
+    "seen": 1791980958.977487,
+    "ast_hash": "38c6632a4b7576a0a8a37406aaa18423",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/assets/examples/README.md": {
+    "mtime": 1791980706.168306,
+    "seen": 1791980958.9774919,
+    "ast_hash": "04b936ea8fe9ad3ccb104a2191c67c4d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/assets/starter_lightweight/README.md": {
+    "mtime": 1791980706.168306,
+    "seen": 1791980958.9774952,
+    "ast_hash": "ddf1b45887a8d264703da8e0517b96db",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/assets/starter_lightweight/index.html": {
+    "mtime": 1791980706.1693053,
+    "seen": 1791980958.9774992,
+    "ast_hash": "c684a5da4b3c90e18d131353a62615cf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/references/tilt_patterns.md": {
+    "mtime": 1791980706.1715646,
+    "seen": 1791980958.9775019,
+    "ast_hash": "37b5cd35f4663bc24fd20a7a447aa09d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/references/vantajs_effects.md": {
+    "mtime": 1791980706.1715646,
+    "seen": 1791980958.977505,
+    "ast_hash": "ea6affec271620f1090dac6313418ee7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lightweight-3d-effects/references/zdog_api.md": {
+    "mtime": 1791980706.172583,
+    "seen": 1791980958.9775078,
+    "ast_hash": "0efc43964649883dd49d753a4d7c4167",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/SKILL.md": {
+    "mtime": 1791980706.174583,
+    "seen": 1791980958.9775102,
+    "ast_hash": "b30f04dcfbffcea0f981eb5bf16d89fa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/assets/starter_locomotive/README.md": {
+    "mtime": 1791980706.1755826,
+    "seen": 1791980958.9775124,
+    "ast_hash": "29c9699ff428640a55ab24144ad153c1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/assets/starter_locomotive/index.html": {
+    "mtime": 1791980706.1755826,
+    "seen": 1791980958.9775147,
+    "ast_hash": "f2d922cd99cc7441c5a7c790c40c02ff",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/references/api_reference.md": {
+    "mtime": 1791980706.17809,
+    "seen": 1791980958.9775176,
+    "ast_hash": "b30d1414971d1f9a517897b97631dd75",
+    "semantic_hash": ""
+  },
+  ".agents/skills/locomotive-scroll/references/gsap_integration.md": {
+    "mtime": 1791980706.17809,
+    "seen": 1791980958.9775202,
+    "ast_hash": "6d798ac8cbbf75cfb3558f4c0b7c37c1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lottie-animations/SKILL.md": {
+    "mtime": 1791980706.1803408,
+    "seen": 1791980958.9775226,
+    "ast_hash": "422859ff3251ac8eb2091e6d0fbd0fed",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lottie-animations/assets/starter_lottie/README.md": {
+    "mtime": 1791980706.1813407,
+    "seen": 1791980958.9775257,
+    "ast_hash": "2e8f7df27dbc90918328c048d308a559",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lottie-animations/references/after_effects_export.md": {
+    "mtime": 1791980706.1823404,
+    "seen": 1791980958.9775283,
+    "ast_hash": "4f04f898ee805271fbc4071f0d65f623",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lottie-animations/references/api_reference.md": {
+    "mtime": 1791980706.1823404,
+    "seen": 1791980958.9775314,
+    "ast_hash": "bcede6b6846c92c3c73bfdfe29737234",
+    "semantic_hash": ""
+  },
+  ".agents/skills/lottie-animations/references/performance_guide.md": {
+    "mtime": 1791980706.1833405,
+    "seen": 1791980958.9775336,
+    "ast_hash": "b43a325d8fde9dd0a6ebe6fdd54f115c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/SKILL.md": {
+    "mtime": 1791980706.1854136,
+    "seen": 1791980958.9812503,
+    "ast_hash": "3b764e5fb2afbc459eed8eadbe53868d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/assets/README.md": {
+    "mtime": 1791980706.1864364,
+    "seen": 1791980958.9812555,
+    "ast_hash": "124cfb271965bc98ebcce6929a4ab2f7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/references/accessibility_guide.md": {
+    "mtime": 1791980706.1874363,
+    "seen": 1791980958.9812584,
+    "ast_hash": "72462643b7ef2bf284a9d50a145e29f4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/references/design_trends_2024.md": {
+    "mtime": 1791980706.1874363,
+    "seen": 1791980958.9812615,
+    "ast_hash": "613790f33dd36a5e38d6eec2d11d332f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/references/interaction_patterns.md": {
+    "mtime": 1791980706.188436,
+    "seen": 1791980958.9812639,
+    "ast_hash": "7c5e2821644913516f19ffda043d716d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/modern-web-design/references/performance_checklist.md": {
+    "mtime": 1791980706.188436,
+    "seen": 1791980958.9812663,
+    "ast_hash": "0f4a176581dba0853ea133d2e30ffe9b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/SKILL.md": {
+    "mtime": 1791980706.19144,
+    "seen": 1791980958.9812684,
+    "ast_hash": "3f76211f2aa665fa4f1a99e5bd1c4106",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/examples/README.md": {
+    "mtime": 1791980706.1928697,
+    "seen": 1791980958.9812713,
+    "ast_hash": "ed17382176d85a1b0ddecea50e19c3b8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/README.md": {
+    "mtime": 1791980706.1934896,
+    "seen": 1791980958.9812741,
+    "ast_hash": "0545e284298bd32678dc351858af625e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/assets/starter_motion/index.html": {
+    "mtime": 1791980706.1934896,
+    "seen": 1791980958.9812768,
+    "ast_hash": "9a76c746ada273c1e381363b13397885",
+    "semantic_hash": ""
+  },
+  ".agents/skills/motion-framer/references/api_reference.md": {
+    "mtime": 1791980706.1984985,
+    "seen": 1791980958.9812794,
+    "ast_hash": "fb987fd96885abe6009fc76ea8ad7f7f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/SKILL.md": {
+    "mtime": 1791980706.2004986,
+    "seen": 1791980958.982105,
+    "ast_hash": "a67b00f767684eafc7e0741735e0368f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/assets/examples/README.md": {
+    "mtime": 1791980706.2024963,
+    "seen": 1791980958.9821095,
+    "ast_hash": "4e3190286c325c3130444d1ca9b89329",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/assets/starter_pixijs/README.md": {
+    "mtime": 1791980706.2024963,
+    "seen": 1791980958.9821124,
+    "ast_hash": "b273bf148e88fdeac803440465415fc9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/assets/starter_pixijs/index.html": {
+    "mtime": 1791980706.2035007,
+    "seen": 1791980958.9821153,
+    "ast_hash": "3e55067931cb7e28d1a490a5c17470e7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/references/api_reference.md": {
+    "mtime": 1791980706.205506,
+    "seen": 1791980958.9821181,
+    "ast_hash": "fcab530a61a2326f78d655c204932b49",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/references/filters_effects.md": {
+    "mtime": 1791980706.205506,
+    "seen": 1791980958.9821208,
+    "ast_hash": "56dab1e0d56dd73e31dfa225ac544e77",
+    "semantic_hash": ""
+  },
+  ".agents/skills/pixijs-2d/references/performance_guide.md": {
+    "mtime": 1791980706.2065036,
+    "seen": 1791980958.9821224,
+    "ast_hash": "c815d8b6ab7450a202f9c7e7a4eb071a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/SKILL.md": {
+    "mtime": 1791980706.208501,
+    "seen": 1791980958.982125,
+    "ast_hash": "f0869d830809476cd2899ed1610ee8b7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/assets/examples/README.md": {
+    "mtime": 1791980706.2106237,
+    "seen": 1791980958.9821272,
+    "ast_hash": "72a616b15606b7df54c123069aea2397",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/assets/starter_playcanvas/README.md": {
+    "mtime": 1791980706.2106237,
+    "seen": 1791980958.9821296,
+    "ast_hash": "eef65a5e3457adaba9dad197fa45c17e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/assets/starter_playcanvas/index.html": {
+    "mtime": 1791980706.211623,
+    "seen": 1791980958.9821315,
+    "ast_hash": "583f4a9690b60fdf153d25d03f112de7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/references/api_reference.md": {
+    "mtime": 1791980706.2148504,
+    "seen": 1791980958.982134,
+    "ast_hash": "fc47afa992b2133c39ddce786592cb61",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/references/editor_workflow.md": {
+    "mtime": 1791980706.21585,
+    "seen": 1791980958.9821367,
+    "ast_hash": "fb1977c7007affc8ac98a33e11b10c32",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playcanvas-engine/references/optimization_guide.md": {
+    "mtime": 1791980706.2168498,
+    "seen": 1791980958.9821398,
+    "ast_hash": "f4c5e9ce397a98040c82c21a95ce7ef9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-spring-physics/SKILL.md": {
+    "mtime": 1791980706.2183566,
+    "seen": 1791980959.0277853,
+    "ast_hash": "123788f5637644fbdb8993607037a1e9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-spring-physics/assets/README.md": {
+    "mtime": 1791980706.21937,
+    "seen": 1791980959.0277925,
+    "ast_hash": "e80dde6ddc252166b686498996ec9570",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-spring-physics/references/physics_guide.md": {
+    "mtime": 1791980706.2203658,
+    "seen": 1791980959.027797,
+    "ast_hash": "34f8cb28dca9c4ae98f638a70e399cae",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-spring-physics/references/popmotion_api.md": {
+    "mtime": 1791980706.2213836,
+    "seen": 1791980959.027801,
+    "ast_hash": "709dcd5f521240cd9cbabf764eccf9b5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-spring-physics/references/react_spring_api.md": {
+    "mtime": 1791980706.2213836,
+    "seen": 1791980959.0278049,
+    "ast_hash": "b5af30941c3ee148cde0085f3ae33a02",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/SKILL.md": {
+    "mtime": 1791980706.2233832,
+    "seen": 1791980959.0278087,
+    "ast_hash": "af376ef698b76fe3db61bea04eef0c76",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/examples/README.md": {
+    "mtime": 1791980706.224384,
+    "seen": 1791980959.0278127,
+    "ast_hash": "cc3d198cbbb48e67bb135e616eecbae5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/README.md": {
+    "mtime": 1791980706.2253861,
+    "seen": 1791980959.0278172,
+    "ast_hash": "a61bd3b3f6c4d38b7acc50273e45a4ec",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/assets/starter_r3f/index.html": {
+    "mtime": 1791980706.2263844,
+    "seen": 1791980959.0278213,
+    "ast_hash": "8db3a381587b36c2815946de2204145e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/react-three-fiber/references/api_reference.md": {
+    "mtime": 1791980706.2303882,
+    "seen": 1791980959.027825,
+    "ast_hash": "44d7ca218fc62dc5df6e59ddabd05520",
+    "semantic_hash": ""
+  },
+  ".agents/skills/rive-interactive/SKILL.md": {
+    "mtime": 1791980706.2323835,
+    "seen": 1791980959.0338347,
+    "ast_hash": "2b735d1180d8d0795f085dabbb586f98",
+    "semantic_hash": ""
+  },
+  ".agents/skills/rive-interactive/assets/README.md": {
+    "mtime": 1791980706.2333837,
+    "seen": 1791980959.0338395,
+    "ast_hash": "45092e6c936ff7ee5aca3e6d1631ca10",
+    "semantic_hash": ""
+  },
+  ".agents/skills/rive-interactive/references/api_reference.md": {
+    "mtime": 1791980706.2333837,
+    "seen": 1791980959.0338423,
+    "ast_hash": "185e9ee18c439e9df4aa61ff625105c7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/scroll-reveal-libraries/SKILL.md": {
+    "mtime": 1791980706.236572,
+    "seen": 1791980959.033845,
+    "ast_hash": "4fa551f965faf1f120fa0fef83f47fc8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/scroll-reveal-libraries/assets/README.md": {
+    "mtime": 1791980706.236572,
+    "seen": 1791980959.0338478,
+    "ast_hash": "05150bea4564a6075c966f4bda6f7328",
+    "semantic_hash": ""
+  },
+  ".agents/skills/scroll-reveal-libraries/references/animation_catalog.md": {
+    "mtime": 1791980706.237573,
+    "seen": 1791980959.0338507,
+    "ast_hash": "0acfe1943e68e18464b9c185acadb88d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/scroll-reveal-libraries/references/aos_api.md": {
+    "mtime": 1791980706.2385724,
+    "seen": 1791980959.0338528,
+    "ast_hash": "08503306ae8db30fe563fec1de4abc1d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/spline-interactive/SKILL.md": {
+    "mtime": 1791980706.2438507,
+    "seen": 1791980959.039428,
+    "ast_hash": "e458955d28025629965d5f2a84028ffb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/spline-interactive/assets/README.md": {
+    "mtime": 1791980706.2448509,
+    "seen": 1791980959.039433,
+    "ast_hash": "de562db6b9c017fe03b35add6b73dac8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/spline-interactive/references/api_reference.md": {
+    "mtime": 1791980706.245851,
+    "seen": 1791980959.0394359,
+    "ast_hash": "fe79fe52cedd9754b27b8ef357dbbbca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/SKILL.md": {
+    "mtime": 1791980706.2488503,
+    "seen": 1791980959.0437548,
+    "ast_hash": "60f93a931473e0d8cd2ca368b4d33557",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/assets/README.md": {
+    "mtime": 1791980706.24985,
+    "seen": 1791980959.0437615,
+    "ast_hash": "10642f84b5c3df2a5fd4ba793ec755ec",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/references/export_presets.md": {
+    "mtime": 1791980706.253852,
+    "seen": 1791980959.0437658,
+    "ast_hash": "7ae52826e5d6225a0a806e9174d3eade",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/references/pbr_channel_guide.md": {
+    "mtime": 1791980706.253852,
+    "seen": 1791980959.0437691,
+    "ast_hash": "dba991d9383a995a9ae81a1a53c9923b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/substance-3d-texturing/references/python_api_reference.md": {
+    "mtime": 1791980706.253852,
+    "seen": 1791980959.043773,
+    "ast_hash": "69a0fea99a571d79a99b7a2b3624f720",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/SKILL.md": {
+    "mtime": 1791980706.258577,
+    "seen": 1791980959.0514176,
+    "ast_hash": "aec366ef53c8f39ad4ac542a1c179895",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/assets/starter_scene/README.md": {
+    "mtime": 1791980706.2595835,
+    "seen": 1791980959.0514245,
+    "ast_hash": "eebb0f3f9b9200a55bfd2bb596ceb16a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/assets/starter_scene/index.html": {
+    "mtime": 1791980706.2595835,
+    "seen": 1791980959.0514286,
+    "ast_hash": "61f90e528cd520f5b49327e772e5cd0c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/references/api_reference.md": {
+    "mtime": 1791980706.2605772,
+    "seen": 1791980959.051434,
+    "ast_hash": "fd6b4c5dc4c8f8a39d628095e530c31e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/references/materials_guide.md": {
+    "mtime": 1791980706.261814,
+    "seen": 1791980959.0514388,
+    "ast_hash": "9d1cc1611f745e9bf585bfc3a1eded20",
+    "semantic_hash": ""
+  },
+  ".agents/skills/threejs-webgl/references/optimization_checklist.md": {
+    "mtime": 1791980706.261814,
+    "seen": 1791980959.0514433,
+    "ast_hash": "3cf6acfde5a9c54e82d0cde95c2f2069",
+    "semantic_hash": ""
+  },
+  ".agents/skills/web3d-integration-patterns/SKILL.md": {
+    "mtime": 1791980706.2638767,
+    "seen": 1791980959.0866442,
+    "ast_hash": "feb86cae9bf40db8d53ab3378ba3b2e3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/0xS4N4TG__papercut-explainer.jpg": {
+    "mtime": 1791980703.896337,
+    "seen": 1791980959.0981693,
+    "ast_hash": "0d34d0a9b9bf11ade0588491b073c20a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/124zhe__xigua-msvideo-skill.jpg": {
+    "mtime": 1791980703.897355,
+    "seen": 1791980959.0981758,
+    "ast_hash": "5acf4155a3f85841b77da7f63dd1e51b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Aaryan-Kapoor__video-production-skill.gif": {
+    "mtime": 1791980703.898543,
+    "seen": 1791980959.0981798,
+    "ast_hash": "4214bcc6b6743539d67815608e3f59d9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Aaryan-Kapoor__video-production-skill.jpg": {
+    "mtime": 1791980703.8996315,
+    "seen": 1791980959.0981843,
+    "ast_hash": "63bee66d676d95cde6f2fbd8ab03c2cd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AbubakrChan__product-launch-motion.jpg": {
+    "mtime": 1791980703.9006307,
+    "seen": 1791980959.0981889,
+    "ast_hash": "43ddcf6b1d35c64f759081f3a7bad420",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AgriciDaniel__claude-shorts.jpg": {
+    "mtime": 1791980703.9006307,
+    "seen": 1791980959.0981927,
+    "ast_hash": "58fa04549908a98a4105853c25652ac3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Alisa0808__vox-director.jpg": {
+    "mtime": 1791980703.9016302,
+    "seen": 1791980959.0981972,
+    "ast_hash": "8765c5ddad7f8149287200a703befd36",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AmazingAng__ccvideo.gif": {
+    "mtime": 1791980703.90263,
+    "seen": 1791980959.098201,
+    "ast_hash": "bc43fb46315471b7edddd39b87955448",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AmazingAng__ccvideo.jpg": {
+    "mtime": 1791980703.9036303,
+    "seen": 1791980959.0982053,
+    "ast_hash": "59e0164d05dc863ba30a1a8f97c85e9b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AmirSbss__spotlight.gif": {
+    "mtime": 1791980703.9076273,
+    "seen": 1791980959.0982094,
+    "ast_hash": "433133b9775c8b8951e94852d5fa2cf5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AmirSbss__spotlight.jpg": {
+    "mtime": 1791980703.9086301,
+    "seen": 1791980959.0982134,
+    "ast_hash": "bd56abe511c69399088c0cb1b2222789",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AmitSubhash__3brown1blue.gif": {
+    "mtime": 1791980703.9096305,
+    "seen": 1791980959.0982172,
+    "ast_hash": "8a6c18436dda6e5c5feb5ac8722f7c88",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AmitSubhash__3brown1blue.jpg": {
+    "mtime": 1791980703.9106333,
+    "seen": 1791980959.0982213,
+    "ast_hash": "c31d80a1e905dea03ba04d8b5d3c9c95",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Arman-Luthra__aftr.gif": {
+    "mtime": 1791980703.9163404,
+    "seen": 1791980959.0982256,
+    "ast_hash": "ef833a9a38f8090eab44097812188c86",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Arman-Luthra__aftr.jpg": {
+    "mtime": 1791980703.9173396,
+    "seen": 1791980959.0982296,
+    "ast_hash": "8bfe799532e1b74651bc04938454d9cb",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/AsadMoulviDev__reel-video.jpg": {
+    "mtime": 1791980703.9173396,
+    "seen": 1791980959.098235,
+    "ast_hash": "c40204a4e10d0ea3cbaefcdf16ef6b9b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Cassette-Editor__oh-my-cassette.jpg": {
+    "mtime": 1791980703.9183369,
+    "seen": 1791980959.098239,
+    "ast_hash": "025cc8d21c35d5f5ee37709ddb38ad76",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Chamanrajragu__purffle-shorts.jpg": {
+    "mtime": 1791980703.919336,
+    "seen": 1791980959.0982425,
+    "ast_hash": "25251a9272f994ed344561389b35ca10",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Changroro__code-video.gif": {
+    "mtime": 1791980703.9203348,
+    "seen": 1791980959.098246,
+    "ast_hash": "2d38868aacbb4052069145bc8583cf51",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Changroro__code-video.jpg": {
+    "mtime": 1791980703.9203348,
+    "seen": 1791980959.0982504,
+    "ast_hash": "42f48ec6c9cdc47f167a3c47516b523d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Dancan254__voiceover-video-skill.gif": {
+    "mtime": 1791980703.9308524,
+    "seen": 1791980959.0982547,
+    "ast_hash": "893d7acf0ecd24d59b0e1cf02162b881",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Dancan254__voiceover-video-skill.jpg": {
+    "mtime": 1791980703.9318686,
+    "seen": 1791980959.0982583,
+    "ast_hash": "2954653be15c261c9839ed6de1fec608",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/EGSECDA__vocaloid-style-mv-pipeline.jpg": {
+    "mtime": 1791980703.9328666,
+    "seen": 1791980959.0982616,
+    "ast_hash": "8ea0c5f3775b4b82a33fd1bf2cbbf929",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Fagan1024__smart-video-editor.jpg": {
+    "mtime": 1791980703.9328666,
+    "seen": 1791980959.0982652,
+    "ast_hash": "98dfad31eea1eb868135118e20d9620d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/FavioVazquez__showtime.jpg": {
+    "mtime": 1791980703.933867,
+    "seen": 1791980959.0982685,
+    "ast_hash": "a382136aa3674a9e35dece27e1b4b921",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Finderchangchang__promo-video-skill.jpg": {
+    "mtime": 1791980703.9352555,
+    "seen": 1791980959.0982735,
+    "ast_hash": "1572378ec061db945c6f759bf5f1768f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/FireRedTeam__FireRed-OpenStoryline.jpg": {
+    "mtime": 1791980703.9352555,
+    "seen": 1791980959.0982778,
+    "ast_hash": "3471c5c5ed778c558f786659367ac79d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/IskakovDamir__apple-motion.gif": {
+    "mtime": 1791980703.9413002,
+    "seen": 1791980959.0982816,
+    "ast_hash": "b66226f0cda24ff44dd13bdcaf77c9a9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/IskakovDamir__apple-motion.jpg": {
+    "mtime": 1791980703.9423363,
+    "seen": 1791980959.0982857,
+    "ast_hash": "c0036e05531a53d6e1ee736a3e389848",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/JohnChow90__video-shotcraft.jpg": {
+    "mtime": 1791980703.9423363,
+    "seen": 1791980959.09829,
+    "ast_hash": "c11919eb59dc5f20fbc70ff841c87b21",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/JohnHeibel__ClaudeAnimationBase.jpg": {
+    "mtime": 1791980703.9434767,
+    "seen": 1791980959.0982938,
+    "ast_hash": "20beca82080cd26d242a879fc421e757",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Johnson-Jia__video-clipforge.jpg": {
+    "mtime": 1791980703.944477,
+    "seen": 1791980959.098298,
+    "ast_hash": "7e4e392867c3c2337a534e02a33e28b9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Kianzzz__xilo-opus-video.jpg": {
+    "mtime": 1791980703.944477,
+    "seen": 1791980959.0983021,
+    "ast_hash": "ebbfb4cdfb69beae3512a87543cf001a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Kimeur__motion-launch-videos.gif": {
+    "mtime": 1791980703.9484785,
+    "seen": 1791980959.0983064,
+    "ast_hash": "aa9b460dd21cf9fe5254df7ec8ad6b44",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Kimeur__motion-launch-videos.jpg": {
+    "mtime": 1791980703.9494767,
+    "seen": 1791980959.098311,
+    "ast_hash": "f7415fcc6c1e6a947b75cb06ca78fff6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Liamrjohnston__remotion-motion-graphics-skill.gif": {
+    "mtime": 1791980703.958474,
+    "seen": 1791980959.098315,
+    "ast_hash": "1a099a59fc8df118b418bc2526fdef20",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Liamrjohnston__remotion-motion-graphics-skill.jpg": {
+    "mtime": 1791980703.9594772,
+    "seen": 1791980959.0983186,
+    "ast_hash": "da149ef651dee8aa5a78b1057a62cee8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Matteoikarieth96__whiteboard-video-skill.gif": {
+    "mtime": 1791980703.9604776,
+    "seen": 1791980959.0983224,
+    "ast_hash": "45b1e179feb5842aec68e6d319b355b7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Matteoikarieth96__whiteboard-video-skill.jpg": {
+    "mtime": 1791980703.9614768,
+    "seen": 1791980959.098326,
+    "ast_hash": "7129a77ce1c8a867be068ce199a81fde",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Monet-AI-Editor__Monet.jpg": {
+    "mtime": 1791980703.9614768,
+    "seen": 1791980959.0983293,
+    "ast_hash": "41096a30892060b2392bc45708cecb5d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Neelshah1810__Claude-Video-Skills.gif": {
+    "mtime": 1791980703.967587,
+    "seen": 1791980959.0983336,
+    "ast_hash": "4a1cd8fa9d7f0e3c1705b20e89f8a104",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Neelshah1810__Claude-Video-Skills.jpg": {
+    "mtime": 1791980703.967587,
+    "seen": 1791980959.098338,
+    "ast_hash": "0abf376047eeae6fdb184d365868d3ec",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Tejashmakwana__motionmaxxing.gif": {
+    "mtime": 1791980703.968588,
+    "seen": 1791980959.098342,
+    "ast_hash": "813122f20d945833b8a4347f6572dc1b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Tejashmakwana__motionmaxxing.jpg": {
+    "mtime": 1791980703.969588,
+    "seen": 1791980959.0983458,
+    "ast_hash": "342a1ccd973e87d9e8337dd7c4f5ae2b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/WhiteTowerAI__cut-as-code.jpg": {
+    "mtime": 1791980703.969588,
+    "seen": 1791980959.09835,
+    "ast_hash": "5cc23e597c0d8adaa94b8660aca334e9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Yuuhann1999__agent-storyboard.gif": {
+    "mtime": 1791980703.971586,
+    "seen": 1791980959.0983539,
+    "ast_hash": "eb720322a03da0e7eae3944af6b7b61e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Yuuhann1999__agent-storyboard.jpg": {
+    "mtime": 1791980703.9725883,
+    "seen": 1791980959.0983574,
+    "ast_hash": "f649b75d0153f8ffcef4d6738fd090c5",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/ZLHad__OpenVideoHarness.jpg": {
+    "mtime": 1791980703.973588,
+    "seen": 1791980959.0983613,
+    "ast_hash": "c8b5434d1ff02cd1b8c386e4df1f1efe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/Zane-0x5a__remotion-director.jpg": {
+    "mtime": 1791980703.973588,
+    "seen": 1791980959.0983648,
+    "ast_hash": "bf521aee0c315f0e5a16bc06c5df9c2b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/acelera-agency__html-animation.gif": {
+    "mtime": 1791980703.976588,
+    "seen": 1791980959.0983684,
+    "ast_hash": "e3f3aed2f7eef4d4de3f0abcf3470bde",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/acelera-agency__html-animation.jpg": {
+    "mtime": 1791980703.978588,
+    "seen": 1791980959.098373,
+    "ast_hash": "89cfac3b582c868c86242e7efb994d8a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/adunext__adu-motion-video.gif": {
+    "mtime": 1791980703.9815853,
+    "seen": 1791980959.0983768,
+    "ast_hash": "f63da6490cff1a100bd510fe278f3d2b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/adunext__adu-motion-video.jpg": {
+    "mtime": 1791980703.9825914,
+    "seen": 1791980959.0983808,
+    "ast_hash": "d80e2f4c09143b30d10d611648ab1f91",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/ahmdd4vd__MotionCraft.gif": {
+    "mtime": 1791980703.9860477,
+    "seen": 1791980959.0983844,
+    "ast_hash": "b18d1088b28ae41af0eadf66d5a220d7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/ahmdd4vd__MotionCraft.jpg": {
+    "mtime": 1791980703.9860477,
+    "seen": 1791980959.0983882,
+    "ast_hash": "30626bb43b852a6b8c9a491e3baaec57",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/alexgreensh__anidoodle.gif": {
+    "mtime": 1791980703.9901094,
+    "seen": 1791980959.0983922,
+    "ast_hash": "485899b88fb35f09fd1c94ca20d3a684",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/alexgreensh__anidoodle.jpg": {
+    "mtime": 1791980703.9911063,
+    "seen": 1791980959.0983953,
+    "ast_hash": "d2a4e1d0e469c6fe1ccf9118ec9509b8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/alisadiq-ai__favstash-ai-video-editing-skills.jpg": {
+    "mtime": 1791980703.9911063,
+    "seen": 1791980959.0983994,
+    "ast_hash": "16615a754424425549fac4e94085e604",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/axtonliu__video-illustrator.jpg": {
+    "mtime": 1791980703.992482,
+    "seen": 1791980959.098404,
+    "ast_hash": "c36895a149f3e857ce60614931a0a576",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/bangtutorial__bang-motion.jpg": {
+    "mtime": 1791980703.992482,
+    "seen": 1791980959.098408,
+    "ast_hash": "347d01cbe7545a37242aafe297e5eb60",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/bbylw__hyperframes-cn.jpg": {
+    "mtime": 1791980703.9942935,
+    "seen": 1791980959.0984123,
+    "ast_hash": "b33e809ada2163fbee608e3925740c7d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/beriki770-ship-it__code-animations.jpg": {
+    "mtime": 1791980703.9942935,
+    "seen": 1791980959.098416,
+    "ast_hash": "c7f781971664928ddf81f1d95ce32b60",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/blixvip__easyedit.jpg": {
+    "mtime": 1791980703.9952993,
+    "seen": 1791980959.09842,
+    "ast_hash": "d80673edfa941fc2095590e71888ad88",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/buildwithhanif__claude-animation-skill.jpg": {
+    "mtime": 1791980703.9964273,
+    "seen": 1791980959.0984237,
+    "ast_hash": "788902fc48d4afb16cc625ab9027437f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/charlie947__motion-graphics-skills.gif": {
+    "mtime": 1791980703.9994254,
+    "seen": 1791980959.0984275,
+    "ast_hash": "b7c99ed27888e4f6447cdc699c48b536",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/charlie947__motion-graphics-skills.jpg": {
+    "mtime": 1791980703.9994254,
+    "seen": 1791980959.0984313,
+    "ast_hash": "5e78604198132a099c5eb1ee9bb00d47",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/chenyuxiaojin__cyxj-hyperframes.jpg": {
+    "mtime": 1791980704.0004306,
+    "seen": 1791980959.0984354,
+    "ast_hash": "4e603d743f09fa0e176801d7d75db75b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/crawfordxx__paper-cut-video-skill.jpg": {
+    "mtime": 1791980704.0014303,
+    "seen": 1791980959.0984392,
+    "ast_hash": "23b5ea485a74618ad32d2fafe65bb880",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/crimeacs__product-demo-director.gif": {
+    "mtime": 1791980704.004433,
+    "seen": 1791980959.0984423,
+    "ast_hash": "adcc650211c6a394364e3e44be290de7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/crimeacs__product-demo-director.jpg": {
+    "mtime": 1791980704.0054305,
+    "seen": 1791980959.0984461,
+    "ast_hash": "0f073fc365d2838b6bf0b1ccd2d6bd8f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/cymcymcymcym__notes-to-video.gif": {
+    "mtime": 1791980704.00743,
+    "seen": 1791980959.0984495,
+    "ast_hash": "5d766c6f0f86e6e5119bb690fd97a304",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/cymcymcymcym__notes-to-video.jpg": {
+    "mtime": 1791980704.00843,
+    "seen": 1791980959.0984535,
+    "ast_hash": "d794916282e347e98a3169b0a507e1c2",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/davidcervinka__vibe-editing.gif": {
+    "mtime": 1791980704.0105505,
+    "seen": 1791980959.0984576,
+    "ast_hash": "59c7c573700c43a7413177bc7aa7e090",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/davidcervinka__vibe-editing.jpg": {
+    "mtime": 1791980704.011917,
+    "seen": 1791980959.098461,
+    "ast_hash": "45d727eb71422094108e6f1e550d2a22",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/diffusionstudio__lottie.gif": {
+    "mtime": 1791980704.0129154,
+    "seen": 1791980959.0984645,
+    "ast_hash": "0255a2212dd043e0463a31813746f373",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/diffusionstudio__lottie.jpg": {
+    "mtime": 1791980704.013915,
+    "seen": 1791980959.0984683,
+    "ast_hash": "bb10f1f5b727f300382bc3f6f981fe19",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/digitalsamba__claude-code-video-toolkit.jpg": {
+    "mtime": 1791980704.013915,
+    "seen": 1791980959.0984716,
+    "ast_hash": "a22aa1bbdcdff71cd3e0343f34d81ead",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/dillydog580__animate-roblox-characters.gif": {
+    "mtime": 1791980704.0154219,
+    "seen": 1791980959.0984757,
+    "ast_hash": "a5d0656bf46ec047bf885240a57f5ef3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/dillydog580__animate-roblox-characters.jpg": {
+    "mtime": 1791980704.0164306,
+    "seen": 1791980959.0984793,
+    "ast_hash": "672b514fe6b99c7d0ef8b42329bcea6d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/edenfunf__reelmimic.gif": {
+    "mtime": 1791980704.02343,
+    "seen": 1791980959.0984828,
+    "ast_hash": "1222ed98ba9c6d868ef606738fcf5150",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/edenfunf__reelmimic.jpg": {
+    "mtime": 1791980704.0244353,
+    "seen": 1791980959.0984862,
+    "ast_hash": "8b8fd2afa9e89290cca0b8c662ad3c1d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/erduo1998-cell__erduo-broll-loop-engineering.gif": {
+    "mtime": 1791980704.0254338,
+    "seen": 1791980959.0984898,
+    "ast_hash": "a491b7420ad232a69a8f0a4418d62f44",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/erduo1998-cell__erduo-broll-loop-engineering.jpg": {
+    "mtime": 1791980704.0265217,
+    "seen": 1791980959.0984943,
+    "ast_hash": "2d2c68241f44790f525675fa1b3c4e0a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/erduo1998-cell__video-script-builder.jpg": {
+    "mtime": 1791980704.0265217,
+    "seen": 1791980959.098498,
+    "ast_hash": "a5331cb1018afee99864ef7644dbdeb3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/erduo1998-cell__vidmuse-video-creator.jpg": {
+    "mtime": 1791980704.0275214,
+    "seen": 1791980959.0985017,
+    "ast_hash": "2e4960d6a3992b0cf44363fa1eb42196",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/eternityspring__reelbench-skills.jpg": {
+    "mtime": 1791980704.0290294,
+    "seen": 1791980959.0985053,
+    "ast_hash": "94ecae4fe569d6a38d6afd82b8481335",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/gnipbao__story-to-handdrawn-video.jpg": {
+    "mtime": 1791980704.0300393,
+    "seen": 1791980959.098509,
+    "ast_hash": "bb2051ad67a0335d7f1fc3973007007b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/hahadu4520__newcut-video-clipping-skill.jpg": {
+    "mtime": 1791980704.0300393,
+    "seen": 1791980959.0985126,
+    "ast_hash": "4229e29dfe16203161020a12ecb13142",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/haiderfarooq3__khan-explainer.jpg": {
+    "mtime": 1791980704.0310404,
+    "seen": 1791980959.0985165,
+    "ast_hash": "a4136c117ed6e57b476cfc92b50eba92",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/hetpatel-11__Adobe_Premiere_Pro_MCP.jpg": {
+    "mtime": 1791980704.0321782,
+    "seen": 1791980959.09852,
+    "ast_hash": "bb68e0d133085fad2cb6caa845d196b7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/heygen-com__hyperframes.jpg": {
+    "mtime": 1791980704.0321782,
+    "seen": 1791980959.0985236,
+    "ast_hash": "b33e809ada2163fbee608e3925740c7d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/hi-nikola__hand-drawn-explainer-video-nikola.jpg": {
+    "mtime": 1791980704.033195,
+    "seen": 1791980959.0985272,
+    "ast_hash": "ec9a42209f07e2831534d41095c23a36",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/howseen-ai__claude-motion-design.gif": {
+    "mtime": 1791980704.038192,
+    "seen": 1791980959.098531,
+    "ast_hash": "60d9c68136782b9f60f98319e902c1c9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/howseen-ai__claude-motion-design.jpg": {
+    "mtime": 1791980704.039601,
+    "seen": 1791980959.0985363,
+    "ast_hash": "be6e9a2f9260719912b7a3a65de6f838",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/hraness__slopcamera.jpg": {
+    "mtime": 1791980704.039601,
+    "seen": 1791980959.0985405,
+    "ast_hash": "8b97daf63de5e15a9575e2318b7fc6d4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/hub-ki__video-generation.gif": {
+    "mtime": 1791980704.0423193,
+    "seen": 1791980959.0985446,
+    "ast_hash": "e3640986f55d02bedc85a3682327e65b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/hub-ki__video-generation.jpg": {
+    "mtime": 1791980704.04333,
+    "seen": 1791980959.0985487,
+    "ast_hash": "ad432a708e8240538cb6613ceab5b97d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__ad-video-skills.gif": {
+    "mtime": 1791980704.0463288,
+    "seen": 1791980959.0985522,
+    "ast_hash": "dfb83e3f4a83eaae92025fe19c1d9fad",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__ad-video-skills.jpg": {
+    "mtime": 1791980704.047331,
+    "seen": 1791980959.0985556,
+    "ast_hash": "3b2e22934384424a0032af24efd8b82d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__data-animation-skills.gif": {
+    "mtime": 1791980704.0513299,
+    "seen": 1791980959.09856,
+    "ast_hash": "09166e810b9c37875afcf6734d6dfc92",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__data-animation-skills.jpg": {
+    "mtime": 1791980704.0513299,
+    "seen": 1791980959.0985641,
+    "ast_hash": "c595d991226ef703217b98e11f0de460",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__explainer-video-skills.gif": {
+    "mtime": 1791980704.0543292,
+    "seen": 1791980959.0985677,
+    "ast_hash": "d79b6002ce6478665abdb13a973833d7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__explainer-video-skills.jpg": {
+    "mtime": 1791980704.0553324,
+    "seen": 1791980959.0985713,
+    "ast_hash": "718b7f2e479f99a91464678200c9ddba",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__kinetic-typography-skills.gif": {
+    "mtime": 1791980704.0585487,
+    "seen": 1791980959.0985749,
+    "ast_hash": "fb18d2f79c083bd22cbfdd6ff598f0f8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__kinetic-typography-skills.jpg": {
+    "mtime": 1791980704.0595636,
+    "seen": 1791980959.0985787,
+    "ast_hash": "ed27c40d57a206b55836849174e877d9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__map-animation-skills.gif": {
+    "mtime": 1791980704.0635831,
+    "seen": 1791980959.0985823,
+    "ast_hash": "574f9fd40fa3cf8b770c304fd64a9cf1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__map-animation-skills.jpg": {
+    "mtime": 1791980704.0645883,
+    "seen": 1791980959.0985856,
+    "ast_hash": "195502477716dcede445be5e14afbfff",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__motion-design-skills.gif": {
+    "mtime": 1791980704.0675838,
+    "seen": 1791980959.0985897,
+    "ast_hash": "240349d1123b074fe9102826c4e0b147",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__motion-design-skills.jpg": {
+    "mtime": 1791980704.0675838,
+    "seen": 1791980959.0985932,
+    "ast_hash": "cabce877af98cdd5931063b380a212aa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__motion-skills.gif": {
+    "mtime": 1791980704.0705867,
+    "seen": 1791980959.098597,
+    "ast_hash": "e15210582de3fe324198a2ad342aa74d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__motion-skills.jpg": {
+    "mtime": 1791980704.0715847,
+    "seen": 1791980959.0986001,
+    "ast_hash": "bbec8009f7fa3ad0066631deaf1038bc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__text-message-video-skills.gif": {
+    "mtime": 1791980704.0742865,
+    "seen": 1791980959.0986037,
+    "ast_hash": "a1b1f88d27df6e66b5c4e8e39b362e36",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__text-message-video-skills.jpg": {
+    "mtime": 1791980704.075301,
+    "seen": 1791980959.0986075,
+    "ast_hash": "42b6faa77529f21bb36bef90cd3a268c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__tiktok-video-skills.gif": {
+    "mtime": 1791980704.0773098,
+    "seen": 1791980959.098611,
+    "ast_hash": "296694a28abdaedc4093e651bdf97aee",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__tiktok-video-skills.jpg": {
+    "mtime": 1791980704.078312,
+    "seen": 1791980959.098615,
+    "ast_hash": "e39e56ac56c264d8f30cc934a414a2dc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__youtube-video-skills.gif": {
+    "mtime": 1791980704.08083,
+    "seen": 1791980959.098619,
+    "ast_hash": "7c132febda781bf23a36cba8cefb0190",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/iart-ai__youtube-video-skills.jpg": {
+    "mtime": 1791980704.0818312,
+    "seen": 1791980959.0986226,
+    "ast_hash": "2a4b685d974fd5b1b6656305047b189d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/intelligent-iterations__ii-content-engine.jpg": {
+    "mtime": 1791980704.0838304,
+    "seen": 1791980959.0986264,
+    "ast_hash": "88bd11d5117c7aa05ef6ef1c7e0e1163",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/isaachang__motion-video-workflow.gif": {
+    "mtime": 1791980704.0884056,
+    "seen": 1791980959.0986302,
+    "ast_hash": "3c38979944f223f991377efeca754420",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/isaachang__motion-video-workflow.jpg": {
+    "mtime": 1791980704.0894186,
+    "seen": 1791980959.0986342,
+    "ast_hash": "56516f0a6d5a77a24ce54fecbb67415b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/jammaru__launch-video-craft.jpg": {
+    "mtime": 1791980704.090419,
+    "seen": 1791980959.0986378,
+    "ast_hash": "f70f51cd80938df589c16904430c4740",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/jaxxchen003__book-video-factory.jpg": {
+    "mtime": 1791980704.0914161,
+    "seen": 1791980959.098642,
+    "ast_hash": "c2b48700335a263ad2e345e9a731fd36",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/klsoen__opus-js-animations.jpg": {
+    "mtime": 1791980704.0924203,
+    "seen": 1791980959.098647,
+    "ast_hash": "3c0bba2d5bdd93b6e9f9699416adda81",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/kvrancic__oneshot-video.jpg": {
+    "mtime": 1791980704.0924203,
+    "seen": 1791980959.0986512,
+    "ast_hash": "0f6c56cd4094f842e165ab8f00bd1acd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/latent-variable__deep-learning-birthday.jpg": {
+    "mtime": 1791980704.0944161,
+    "seen": 1791980959.098655,
+    "ast_hash": "1c085deaaf1ba93a4bfe6b4f779a1c68",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/ledbetterljoshua__functional-emotions-video.jpg": {
+    "mtime": 1791980704.0944161,
+    "seen": 1791980959.0986583,
+    "ast_hash": "90956c746c3f45e4d98449706d55fde4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/lemomo-ai__lemo-opuscar.jpg": {
+    "mtime": 1791980704.0954173,
+    "seen": 1791980959.098662,
+    "ast_hash": "9b849ddecf8e82efd604ba98a72b9eca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/liaojianquan9-source__ljq-broll-video-generator.gif": {
+    "mtime": 1791980704.1074207,
+    "seen": 1791980959.0986657,
+    "ast_hash": "b0634a6b0aa923aad4e8b7e48fff20ab",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/liaojianquan9-source__ljq-broll-video-generator.jpg": {
+    "mtime": 1791980704.1084218,
+    "seen": 1791980959.09867,
+    "ast_hash": "fb0ede9714e1ca1834b6494424bfb0c6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/magichourhq__skills.jpg": {
+    "mtime": 1791980704.1094222,
+    "seen": 1791980959.0986738,
+    "ast_hash": "f75a921c137ddf02c83fcdbc737aabb4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/memex-lab__product-launch-video-skill.jpg": {
+    "mtime": 1791980704.1104212,
+    "seen": 1791980959.0986772,
+    "ast_hash": "42657bcb9ee4450b24f8d4dd7a19c897",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/mikelix__gstack-tutorial-5-agi-race-v2.jpg": {
+    "mtime": 1791980704.1104212,
+    "seen": 1791980959.0986817,
+    "ast_hash": "7e90fb0a60bf590067b433da5e946ea3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/minosdevs__cinematic-film.jpg": {
+    "mtime": 1791980704.111422,
+    "seen": 1791980959.0986853,
+    "ast_hash": "b3048ae3162991a2dc8b204c807b951e",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/mrieck__demoday-claude-plugin.jpg": {
+    "mtime": 1791980704.111422,
+    "seen": 1791980959.0986898,
+    "ast_hash": "fa0f9e33f55f95cc5a31334c2629ffc3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/new-xp__ultrademo.gif": {
+    "mtime": 1791980704.112421,
+    "seen": 1791980959.0986931,
+    "ast_hash": "ac013fead8293d8ca1de0fce1f97220c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/new-xp__ultrademo.jpg": {
+    "mtime": 1791980704.1134224,
+    "seen": 1791980959.098697,
+    "ast_hash": "fbc7cad53fddaf5ddf7e1a67bfb2cb9f",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/nolangz__pixel2motion.gif": {
+    "mtime": 1791980704.1134224,
+    "seen": 1791980959.0987008,
+    "ast_hash": "b861d148f07b6d2f32cffd40bf71b8ce",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/nolangz__pixel2motion.jpg": {
+    "mtime": 1791980704.1144216,
+    "seen": 1791980959.0987046,
+    "ast_hash": "80f12a68e69f179467a9615a9848a85c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/ops120__video-recap-skills-plus.jpg": {
+    "mtime": 1791980704.115422,
+    "seen": 1791980959.0987082,
+    "ast_hash": "c5b025176c448140c0a773afcf813d02",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/pjecuacion__script-to-video-skill.jpg": {
+    "mtime": 1791980704.1159286,
+    "seen": 1791980959.098713,
+    "ast_hash": "3e3452356b48bd5397a47d3fc9e38d4a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/pyang5166__gbro-collage-broll.jpg": {
+    "mtime": 1791980704.1169384,
+    "seen": 1791980959.0987172,
+    "ast_hash": "e9ac019c08e39f242c24804c012140b8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/pyang5166__gbro-collage-info.gif": {
+    "mtime": 1791980704.1203308,
+    "seen": 1791980959.0987213,
+    "ast_hash": "b41630ca2aa87b518ff0d0f510409e7d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/pyang5166__gbro-collage-info.jpg": {
+    "mtime": 1791980704.1213462,
+    "seen": 1791980959.0987258,
+    "ast_hash": "652e7f0e2a114f5fa638479f187472a0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/revfactory__showreel.gif": {
+    "mtime": 1791980704.128407,
+    "seen": 1791980959.0987306,
+    "ast_hash": "13713ba206e1f332aa0171cd5ad0f383",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/revfactory__showreel.jpg": {
+    "mtime": 1791980704.129411,
+    "seen": 1791980959.0987341,
+    "ast_hash": "3d910caf43e72b94fb6a7848cef8a3cd",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/samuelstroschein__opus-video-generator.jpg": {
+    "mtime": 1791980704.1304095,
+    "seen": 1791980959.0987382,
+    "ast_hash": "2039a329fff3637d97bb494181150832",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/sharon-laicc__viral-video-decomposer.jpg": {
+    "mtime": 1791980704.1304095,
+    "seen": 1791980959.0987422,
+    "ast_hash": "a2828a121d7ba52e20d31a28f9fa8298",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/smit-vanani__claude-promo-video.jpg": {
+    "mtime": 1791980704.1314087,
+    "seen": 1791980959.098746,
+    "ast_hash": "b2cc88bdd34c7cfc2d3c4d653bb5206d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/smwbev__framewright.jpg": {
+    "mtime": 1791980704.1324081,
+    "seen": 1791980959.0987494,
+    "ast_hash": "5b0fa7e769cde727b5c1bfb600202882",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/surajshetty3416__demo-video-skill.jpg": {
+    "mtime": 1791980704.1324081,
+    "seen": 1791980959.0987532,
+    "ast_hash": "26617dc59bfce83ef2fd82a6a928aef8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/timscheuerai__launch-video-kit.gif": {
+    "mtime": 1791980704.1355293,
+    "seen": 1791980959.0987568,
+    "ast_hash": "94694d20e64aba857cf322007df456a0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/timscheuerai__launch-video-kit.jpg": {
+    "mtime": 1791980704.1365306,
+    "seen": 1791980959.0987606,
+    "ast_hash": "c9f1ca2860da8ae7574bc6d4d506c255",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/trunghaiy__appshot.gif": {
+    "mtime": 1791980704.1395302,
+    "seen": 1791980959.0987642,
+    "ast_hash": "49e41d2f40d9f40a07782df57f223b70",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/trunghaiy__appshot.jpg": {
+    "mtime": 1791980704.1395302,
+    "seen": 1791980959.0987685,
+    "ast_hash": "7f751895f9e7f738a62ee2639981202b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/unclejobs-ai__motion-video-skill.gif": {
+    "mtime": 1791980704.1415324,
+    "seen": 1791980959.098772,
+    "ast_hash": "cd59e63a7506b13bdbec8c10e9837b4b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/unclejobs-ai__motion-video-skill.jpg": {
+    "mtime": 1791980704.1415324,
+    "seen": 1791980959.0987759,
+    "ast_hash": "abb8c00115d7e6fc5a7c4bd0a6d92846",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/vibe-motion__remotion-code-motion-explainer.gif": {
+    "mtime": 1791980704.1465292,
+    "seen": 1791980959.0987797,
+    "ast_hash": "518eb12a57b323198eef7ac9550b78b9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/vibe-motion__remotion-code-motion-explainer.jpg": {
+    "mtime": 1791980704.1475334,
+    "seen": 1791980959.0987835,
+    "ast_hash": "fc852ff1b48da2719056c291a46251f4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/video-db__skills.jpg": {
+    "mtime": 1791980704.148531,
+    "seen": 1791980959.0987873,
+    "ast_hash": "c48a9538778be75d7106b1db561cd1fa",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/vincentsch__explainroo.jpg": {
+    "mtime": 1791980704.1495306,
+    "seen": 1791980959.098791,
+    "ast_hash": "5fb7d814b5c31cfdae5b6fe656c99ab9",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/wocha-xiaoli__video-shot-analysis-feishu.jpg": {
+    "mtime": 1791980704.150696,
+    "seen": 1791980959.0987947,
+    "ast_hash": "934d6c25ab389787311dd867735afd0d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/ymybxx__SoloMCN.jpg": {
+    "mtime": 1791980704.150696,
+    "seen": 1791980959.098798,
+    "ast_hash": "41001b973aace1222724d72694a6f8a0",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/zenstory-ai__video-recap-skills.jpg": {
+    "mtime": 1791980704.1516955,
+    "seen": 1791980959.0988016,
+    "ast_hash": "541aeb717f34c57c5efa4cb3f74082d7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/zhenwusw__orca-motion-skill.gif": {
+    "mtime": 1791980704.1536942,
+    "seen": 1791980959.098805,
+    "ast_hash": "15520f1165c03addaae698fbeed85f70",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/zhenwusw__orca-motion-skill.jpg": {
+    "mtime": 1791980704.1546967,
+    "seen": 1791980959.0988085,
+    "ast_hash": "9f4a630ea08fc3f48b929329acd6abaf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/zhouyuechuan2025-ui__ai-self-media-video-packaging-skill.jpg": {
+    "mtime": 1791980704.1546967,
+    "seen": 1791980959.0988123,
+    "ast_hash": "738be26ef47fc3ff25da9149bc58e099",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/znyupup__knowledge-explainer-skill.gif": {
+    "mtime": 1791980704.1566951,
+    "seen": 1791980959.098816,
+    "ast_hash": "b2bb3aa83802c3d28392b4aef9a88f15",
+    "semantic_hash": ""
+  },
+  ".agents/skills/awesome-claude-video-skills/assets/previews/znyupup__knowledge-explainer-skill.jpg": {
+    "mtime": 1791980704.157695,
+    "seen": 1791980959.0988202,
+    "ast_hash": "e6b8804d87e91d55977f56500dd964dc",
+    "semantic_hash": ""
   }
 }
