@@ -5,8 +5,8 @@
 
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { AuditLog } from '../../src/log/auditLog.js';
-import { verifyAuditChain } from '../../src/log/chainVerifier.js';
+import { AuditLog } from '../../backend/src/log/auditLog.js';
+import { verifyAuditChain } from '../../backend/src/log/chainVerifier.js';
 
 describe('Crypto & Audit - Hash-Chained Audit Log & Verifier', () => {
   let log;

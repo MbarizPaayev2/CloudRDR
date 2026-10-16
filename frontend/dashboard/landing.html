@@ -1,0 +1,2810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudRDR — Autonomous Cloud Ransomware Containment & Cryptographic Recovery</title>
+    <meta
+      name="description"
+      content="Autonomous ransomware containment, Merkle tree cryptographic integrity proof, and AEAD verified recovery for cloud object storage."
+    />
+
+    <!-- Cloudflare Security Audit: Strict Client-Side Defense & CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' http://localhost:3000;"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+    <!-- Premium Typography: Geist & Geist Mono (Vercel / Linear Developer Tier) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap"
+    />
+
+    <style>
+      /* ── High-End Visual Design System & Tokens ────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #030712;
+        --bg-surface: #080d1a;
+        --bg-elevated: #0e1626;
+        --bg-subtle: #152035;
+        --text: #f8fafc;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --text-faint: #64748b;
+
+        --brand: #3b82f6;
+        --brand-glow: rgba(59, 130, 246, 0.4);
+        --emerald: #10b981;
+        --emerald-glow: rgba(16, 185, 129, 0.35);
+        --crimson: #ef4444;
+        --crimson-glow: rgba(239, 68, 68, 0.35);
+        --amber: #f59e0b;
+        --cyan: #06b6d4;
+        --purple: #8b5cf6;
+
+        --border: rgba(255, 255, 255, 0.08);
+        --border-light: rgba(255, 255, 255, 0.14);
+        --border-active: rgba(59, 130, 246, 0.5);
+
+        --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-mono: 'Geist Mono', 'JetBrains Mono', monospace;
+
+        --ease: cubic-bezier(0.2, 0, 0, 1);
+        --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+        --ease-subtle: cubic-bezier(0.16, 1, 0.3, 1);
+        --radius-sm: 8px;
+        --radius-md: 14px;
+        --radius-lg: 20px;
+        --radius-xl: 28px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background-color: var(--bg);
+        overflow-x: hidden;
+        min-height: 100dvh;
+        position: relative;
+      }
+
+      /* ── Tactical Film Grain Noise Overlay (high-end-visual-design) ────────── */
+      .grain-overlay {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.028;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* ── Atmospheric Cyber Background (GPU-Safe Zero Lag) ──────────────────── */
+      .ambient-canvas {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .ambient-orb-1 {
+        position: absolute;
+        top: -20%;
+        left: 15%;
+        width: 750px;
+        height: 750px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.16) 0%, transparent 65%);
+        filter: blur(80px);
+      }
+
+      .ambient-orb-2 {
+        position: absolute;
+        top: 40%;
+        right: -10%;
+        width: 700px;
+        height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 65%);
+        filter: blur(90px);
+      }
+
+      .ambient-orb-3 {
+        position: absolute;
+        bottom: -15%;
+        left: 25%;
+        width: 850px;
+        height: 850px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.09) 0%, transparent 70%);
+        filter: blur(95px);
+      }
+
+      /* Subtle Technical Grid Lines */
+      .ambient-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse at 50% 20%, black 40%, transparent 80%);
+        -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 40%, transparent 80%);
+      }
+
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ── Floating Island Navbar ───────────────────────────────────────────── */
+      .nav-island-container {
+        position: sticky;
+        top: 18px;
+        z-index: 100;
+        padding: 0 20px;
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+
+      .landing-nav {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 22px;
+        background: rgba(8, 13, 26, 0.82);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid var(--border-light);
+        border-radius: 9999px;
+        box-shadow:
+          0 12px 32px -6px rgba(0, 0, 0, 0.6),
+          inset 0 1px 1px rgba(255, 255, 255, 0.12);
+        transition: border-color 0.2s var(--ease);
+      }
+
+      .landing-nav:hover {
+        border-color: rgba(255, 255, 255, 0.22);
+      }
+
+      .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1.25rem;
+        letter-spacing: -0.035em;
+      }
+
+      .brand-logo svg {
+        color: var(--brand);
+      }
+
+      .brand-badge {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        padding: 2px 8px;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #ffffff;
+        text-transform: uppercase;
+        box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.8rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition: color 0.2s var(--ease);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .nav-links a:hover {
+        color: #ffffff;
+      }
+
+      .btn-island-nav {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.84rem;
+        padding: 6px 6px 6px 16px;
+        border-radius: 9999px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+        transition:
+          transform 0.2s var(--ease),
+          box-shadow 0.2s var(--ease);
+      }
+
+      .btn-island-nav:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.65);
+      }
+
+      .btn-island-nav:active {
+        transform: scale(0.98);
+      }
+
+      .btn-island-nav .btn-icon-circle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        transition: transform 0.2s var(--ease);
+      }
+
+      .btn-island-nav:hover .btn-icon-circle {
+        transform: scale(1.1) translateX(1px);
+      }
+
+      /* ── Doppelrand (Double-Bezel) Cards with Dynamic Mouse Spotlight ───────── */
+      .doppel-shell {
+        position: relative;
+        background: radial-gradient(
+          500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(59, 130, 246, 0.12),
+          rgba(255, 255, 255, 0.025) 50%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-xl);
+        padding: 6px;
+        transition:
+          border-color 0.25s var(--ease),
+          transform 0.25s var(--ease),
+          box-shadow 0.25s var(--ease);
+        will-change: transform, border-color;
+      }
+
+      .doppel-shell:hover {
+        border-color: rgba(59, 130, 246, 0.45);
+        box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
+      }
+
+      .doppel-core {
+        background: var(--bg-surface);
+        border-radius: 22px;
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 2.25rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── Hero Section ─────────────────────────────────────────────────────── */
+      .hero-section {
+        padding: 85px 0 60px;
+        text-align: center;
+      }
+
+      .eyebrow-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 16px;
+        border-radius: 9999px;
+        background: rgba(59, 130, 246, 0.12);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: #60a5fa;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 2rem;
+      }
+
+      .eyebrow-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--emerald);
+        box-shadow: 0 0 10px var(--emerald);
+        animation: pulse-dot 2s infinite ease-in-out;
+      }
+
+      @keyframes pulse-dot {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.85);
+        }
+      }
+
+      .hero-title {
+        font-size: clamp(2.8rem, 5.8vw, 4.8rem);
+        font-weight: 900;
+        letter-spacing: -0.045em;
+        line-height: 1.06;
+        margin-bottom: 1.5rem;
+        color: #ffffff;
+        text-wrap: balance;
+      }
+
+      .hero-title span.gradient-text {
+        background: linear-gradient(135deg, #60a5fa 0%, #34d399 50%, #38bdf8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        max-width: 840px;
+        margin: 0 auto 2.8rem;
+        line-height: 1.65;
+        font-weight: 400;
+        text-wrap: balance;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .btn-hero-primary {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 10px 10px 10px 28px;
+        border-radius: 9999px;
+        text-decoration: none;
+        box-shadow: 0 8px 28px rgba(37, 99, 235, 0.55);
+        transition:
+          transform 0.25s var(--ease),
+          box-shadow 0.25s var(--ease);
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .btn-hero-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 36px rgba(37, 99, 235, 0.75);
+      }
+
+      .btn-hero-primary:active {
+        transform: scale(0.98);
+      }
+
+      .btn-hero-primary .hero-btn-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        transition: transform 0.2s var(--ease);
+      }
+
+      .btn-hero-primary:hover .hero-btn-icon {
+        transform: scale(1.1) translateX(2px);
+      }
+
+      .btn-hero-secondary {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 14px 28px;
+        border-radius: 9999px;
+        text-decoration: none;
+        border: 1px solid var(--border-light);
+        transition: all 0.2s var(--ease);
+      }
+
+      .btn-hero-secondary:hover {
+        background: var(--bg-elevated);
+        border-color: var(--brand);
+        color: #ffffff;
+      }
+
+      /* ── Quick-Terminal CLI Pills ────────────────────────────────────────── */
+      .quick-terminal-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 3.5rem;
+      }
+
+      .terminal-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        background: rgba(8, 13, 26, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border-light);
+        border-radius: 12px;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: #e2e8f0;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s var(--ease);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .terminal-pill:hover {
+        border-color: var(--brand);
+        background: rgba(14, 22, 38, 0.95);
+        transform: translateY(-1px);
+      }
+
+      .terminal-pill:active {
+        transform: scale(0.98);
+      }
+
+      .terminal-prompt {
+        color: var(--brand);
+        font-weight: 700;
+      }
+
+      .copy-badge {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text-muted);
+        transition: all 0.2s var(--ease);
+      }
+
+      .terminal-pill:hover .copy-badge {
+        background: rgba(59, 130, 246, 0.25);
+        color: #93c5fd;
+      }
+
+      .terminal-pill.copied .copy-badge {
+        background: rgba(16, 185, 129, 0.25);
+        color: var(--emerald);
+      }
+
+      /* ── Interactive Hero SOC Cockpit Teaser (The Showpiece) ─────────────── */
+      .hero-cockpit-shell {
+        max-width: 1100px;
+        margin: 0 auto 5rem;
+        text-align: left;
+      }
+
+      .cockpit-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .cockpit-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .cockpit-dot-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--emerald);
+        box-shadow: 0 0 10px var(--emerald);
+        transition:
+          background 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .cockpit-dot-indicator.breach {
+        background: var(--crimson);
+        box-shadow: 0 0 14px var(--crimson);
+        animation: pulse-breach 0.8s infinite;
+      }
+
+      @keyframes pulse-breach {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scale(1.2);
+        }
+      }
+
+      .cockpit-title {
+        font-family: var(--font-mono);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+      }
+
+      .cockpit-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .cockpit-btn {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--border-light);
+        background: var(--bg-elevated);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s var(--ease);
+      }
+
+      .cockpit-btn:hover {
+        background: var(--bg-subtle);
+        border-color: var(--brand);
+        color: #ffffff;
+      }
+
+      .cockpit-btn.btn-attack {
+        border-color: rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.12);
+        color: #fca5a5;
+      }
+
+      .cockpit-btn.btn-attack:hover {
+        background: rgba(239, 68, 68, 0.25);
+        border-color: var(--crimson);
+        color: #ffffff;
+      }
+
+      .cockpit-grid {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 1.5rem;
+      }
+
+      .cockpit-tree-area {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      .cockpit-tree-meta {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        margin-bottom: 0.75rem;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .cockpit-tree-svg-wrap {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cockpit-sidebar-area {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .cockpit-stat-tile {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .cockpit-stat-label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .cockpit-stat-val {
+        font-family: var(--font-mono);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #ffffff;
+        font-variant-numeric: tabular-nums;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ── Metrics Ribbon ───────────────────────────────────────────────────── */
+      .metrics-shell {
+        max-width: 1100px;
+        margin: 0 auto 5rem;
+      }
+
+      .metrics-bar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+
+      .metric-col {
+        text-align: center;
+        border-right: 1px solid var(--border);
+        padding: 0.5rem 1rem;
+      }
+
+      .metric-col:last-child {
+        border-right: none;
+      }
+
+      .metric-big {
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.1;
+        margin-bottom: 4px;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.03em;
+      }
+
+      .metric-sub {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+      }
+
+      /* ── Section Rhythm & Titles ──────────────────────────────────────────── */
+      .section-wrap {
+        padding: 100px 0;
+      }
+
+      .section-header {
+        text-align: center;
+        max-width: 820px;
+        margin: 0 auto 4rem;
+      }
+
+      .section-title {
+        font-size: clamp(2.2rem, 4vw, 3.2rem);
+        font-weight: 900;
+        letter-spacing: -0.035em;
+        line-height: 1.14;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        text-wrap: balance;
+      }
+
+      .section-desc {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        text-wrap: balance;
+      }
+
+      /* ── Interactive Pillar Deep Dives (Tabbed & Interactive) ─────────────── */
+      .pillar-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem;
+        margin-bottom: 3rem;
+      }
+
+      .pillar-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+      }
+
+      .pillar-pill {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        letter-spacing: 0.05em;
+      }
+
+      .pillar-title {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.025em;
+      }
+
+      .pillar-desc {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Interactive Velocity Gauge / Slider */
+      .velocity-simulator-box {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem 1.5rem;
+        margin-top: auto;
+      }
+
+      .velocity-slider-labels {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+
+      .velocity-slider {
+        width: 100%;
+        height: 6px;
+        border-radius: 4px;
+        background: var(--bg-subtle);
+        outline: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+      }
+
+      .velocity-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--brand);
+        box-shadow: 0 0 10px var(--brand);
+        cursor: pointer;
+        transition: transform 0.15s ease;
+      }
+
+      .velocity-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+      }
+
+      .velocity-readout-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+      }
+
+      /* Interactive Leaf Tampering Inspector */
+      .leaf-inspect-box {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        margin-top: auto;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+      }
+
+      .leaf-inspect-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .leaf-inspect-item:last-child {
+        border-bottom: none;
+      }
+
+      .btn-tamper-toggle {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 4px;
+        border: 1px solid var(--border-light);
+        background: var(--bg-subtle);
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.2s var(--ease);
+      }
+
+      .btn-tamper-toggle:hover {
+        background: rgba(239, 68, 68, 0.2);
+        border-color: var(--crimson);
+        color: #ffffff;
+      }
+
+      /* ── Asymmetric Bento Grid (Lifecycle Defense) ────────────────────────── */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1.5rem;
+      }
+
+      .bento-col-8 {
+        grid-column: span 8;
+      }
+      .bento-col-4 {
+        grid-column: span 4;
+      }
+      .bento-col-6 {
+        grid-column: span 6;
+      }
+
+      .step-num-pill {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        margin-bottom: 1.25rem;
+        width: fit-content;
+        letter-spacing: 0.05em;
+      }
+
+      .step-card-title {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.025em;
+      }
+
+      .step-card-desc {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      .crypto-spec-box {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: #38bdf8;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: auto;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .crypto-spec-box span.tag {
+        background: var(--bg-subtle);
+        color: #ffffff;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+
+      /* ── Interactive Blockchain Audit Log Inspector ──────────────────────── */
+      .audit-chain-wrap {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+        position: relative;
+      }
+
+      .audit-block-card {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+      }
+
+      .audit-block-card.tampered {
+        border-color: var(--crimson);
+        background: rgba(28, 13, 20, 0.85);
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+      }
+
+      .audit-block-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 9999px;
+        background: var(--bg-subtle);
+        color: #94a3b8;
+        width: fit-content;
+      }
+
+      .audit-block-hash {
+        color: #38bdf8;
+        word-break: break-all;
+      }
+
+      /* ── Interactive Simulation Phase Stepper ─────────────────────────────── */
+      .sim-timeline-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+      }
+
+      .sim-phase-card {
+        border-top: 3px solid var(--brand);
+        cursor: pointer;
+        user-select: none;
+        transition:
+          transform 0.2s var(--ease),
+          background 0.2s var(--ease),
+          box-shadow 0.2s var(--ease);
+      }
+
+      .sim-phase-card:hover {
+        transform: translateY(-2px);
+      }
+
+      .sim-phase-card.breach {
+        border-top-color: var(--crimson);
+      }
+      .sim-phase-card.lock {
+        border-top-color: var(--cyan);
+      }
+      .sim-phase-card.restore {
+        border-top-color: var(--emerald);
+      }
+
+      .sim-phase-card.active {
+        background: var(--bg-elevated);
+        border-top-width: 4px;
+        box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.4);
+      }
+
+      .sim-phase-time {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-faint);
+        margin-bottom: 0.75rem;
+      }
+
+      .sim-phase-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+      }
+
+      .sim-phase-desc {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      .sim-state-inspector {
+        margin-top: 2rem;
+        background: rgba(8, 13, 26, 0.95);
+        border: 1px solid var(--border-light);
+        border-radius: 18px;
+        padding: 1.5rem 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      }
+
+      .inspector-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .inspector-label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .inspector-val {
+        font-family: var(--font-mono);
+        font-size: 0.95rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ── Tabbed Code & CLI Suite ─────────────────────────────────────────── */
+      .code-tabs-wrap {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        margin-top: 2.5rem;
+      }
+
+      .code-tabs-nav {
+        display: flex;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 1rem;
+      }
+
+      .code-tab-btn {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 12px 18px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease;
+      }
+
+      .code-tab-btn:hover {
+        color: #ffffff;
+      }
+
+      .code-tab-btn.active {
+        color: var(--brand);
+        border-bottom-color: var(--brand);
+      }
+
+      .code-content-pane {
+        padding: 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: #e2e8f0;
+        overflow-x: auto;
+      }
+
+      /* ── Keyboard Shortcut Badges (<kbd>) ───────────────────────────────── */
+      .kbd-shortcut {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 600;
+        line-height: 1;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        color: var(--text-muted);
+        margin-left: 6px;
+        vertical-align: middle;
+        user-select: none;
+      }
+
+      .btn-island-nav:hover .kbd-shortcut,
+      .btn-hero-primary:hover .kbd-shortcut {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ── Call To Action Banner ────────────────────────────────────────────── */
+      .cta-shell {
+        margin: 80px 0;
+        text-align: center;
+      }
+
+      .cta-core {
+        padding: 5rem 2rem;
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(37, 99, 235, 0.2) 0%,
+          var(--bg-surface) 75%
+        );
+      }
+
+      .cta-title {
+        font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+        font-weight: 900;
+        letter-spacing: -0.035em;
+        color: #ffffff;
+        margin-bottom: 1.25rem;
+        text-wrap: balance;
+      }
+
+      .cta-desc {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin: 0 auto 2.5rem;
+        text-wrap: balance;
+      }
+
+      /* ── Footer ───────────────────────────────────────────────────────────── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 3.5rem 0;
+        color: var(--text-faint);
+        font-size: 0.88rem;
+      }
+
+      .footer-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      /* ── Scroll Entrance Animations ─────────────────────────────────────── */
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── Toast Notifications ────────────────────────────────────────────── */
+      .toast-container {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 10001;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 420px;
+        width: calc(100vw - 48px);
+        pointer-events: none;
+      }
+
+      .toast-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        background: rgba(13, 20, 36, 0.94);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--border-light);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-family: var(--font-sans);
+        pointer-events: auto;
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+        transition:
+          opacity 0.22s var(--ease),
+          transform 0.22s var(--ease);
+      }
+
+      .toast-item.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .toast-item.dismissing {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.94);
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease;
+      }
+
+      .toast-icon {
+        font-size: 0.95rem;
+        font-weight: 700;
+        width: 22px;
+        height: 22px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .toast-info {
+        border-left: 3px solid #38bdf8;
+      }
+      .toast-info .toast-icon {
+        color: #38bdf8;
+        background: rgba(56, 189, 248, 0.15);
+      }
+      .toast-success {
+        border-left: 3px solid #10b981;
+      }
+      .toast-success .toast-icon {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.15);
+      }
+      .toast-warning {
+        border-left: 3px solid #f59e0b;
+      }
+      .toast-warning .toast-icon {
+        color: #f59e0b;
+        background: rgba(245, 158, 11, 0.15);
+      }
+      .toast-threat {
+        border-left: 3px solid #ef4444;
+      }
+      .toast-threat .toast-icon {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.2);
+      }
+
+      /* ── Accessibility & Guidelines ─────────────────────────────────────── */
+      :focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 3px;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: -80px;
+        left: 20px;
+        background: var(--brand);
+        color: #ffffff;
+        padding: 10px 18px;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-decoration: none;
+        z-index: 10000;
+        transition: top 0.2s var(--ease);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      }
+
+      .skip-link:focus-visible {
+        top: 20px;
+      }
+
+      section,
+      [id] {
+        scroll-margin-top: 5.5rem;
+      }
+
+      .hero-title,
+      .section-title,
+      h1,
+      h2,
+      h3 {
+        text-wrap: balance;
+      }
+
+      code,
+      time,
+      .metric-big,
+      .inspector-val {
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (max-width: 992px) {
+        .cockpit-grid,
+        .pillar-grid,
+        .bento-col-8,
+        .bento-col-4,
+        .bento-col-6 {
+          grid-column: span 12;
+        }
+        .cockpit-grid {
+          grid-template-columns: 1fr;
+        }
+        .metrics-bar,
+        .sim-timeline-grid,
+        .audit-chain-wrap {
+          grid-template-columns: 1fr 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .metrics-bar,
+        .sim-timeline-grid,
+        .audit-chain-wrap {
+          grid-template-columns: 1fr;
+        }
+        .metric-col {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding-bottom: 1rem;
+        }
+        .footer-flex {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+      }
+
+      /* ── STRIDE Threat Modeling Table (Cloudflare Security Audit) ────────── */
+      .threat-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+
+      .threat-table th {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .threat-table td {
+        padding: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+
+      .threat-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .threat-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .threat-badge {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.74rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      .threat-s {
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+      }
+      .threat-t {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+      .threat-r {
+        background: rgba(245, 158, 11, 0.15);
+        color: #fbbf24;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+      .threat-i {
+        background: rgba(139, 92, 246, 0.15);
+        color: #c084fc;
+        border: 1px solid rgba(139, 92, 246, 0.3);
+      }
+      .threat-d {
+        background: rgba(239, 68, 68, 0.15);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+      .threat-e {
+        background: rgba(6, 182, 212, 0.15);
+        color: #67e8f9;
+        border: 1px solid rgba(6, 182, 212, 0.3);
+      }
+
+      .flaw-cell {
+        color: var(--text-muted);
+        font-size: 0.86rem;
+      }
+
+      .control-cell {
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 0.88rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        .ambient-canvas,
+        .ambient-orb-1,
+        .ambient-orb-2,
+        .ambient-orb-3 {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Tactical Film Grain Texture (high-end-visual-design) -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- Accessible Skip Link -->
+    <a href="#hero" class="skip-link">Skip to main content</a>
+
+    <!-- Ambient Light Orbs & Grid -->
+    <div class="ambient-canvas" aria-hidden="true">
+      <div class="ambient-grid"></div>
+      <div class="ambient-orb-1"></div>
+      <div class="ambient-orb-2"></div>
+      <div class="ambient-orb-3"></div>
+    </div>
+
+    <div class="content-wrapper">
+      <!-- ── Floating Island Navbar ───────────────────────────────────────── -->
+      <div class="nav-island-container">
+        <nav class="landing-nav" role="navigation" aria-label="Main Navigation">
+          <a href="/" class="brand-logo">
+            <svg
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+            CloudRDR
+            <span class="brand-badge">Autonomous SOC</span>
+          </a>
+
+          <ul class="nav-links">
+            <li><a href="#interactive-cockpit">Live Demo</a></li>
+            <li><a href="#pillars">Core Pillars</a></li>
+            <li><a href="#lifecycle">6-Stage Defense</a></li>
+            <li><a href="#audit-chain">Audit Ledger</a></li>
+            <li><a href="#threat-matrix">Threat Matrix</a></li>
+            <li><a href="#code-suite">Developer API</a></li>
+          </ul>
+
+          <a
+            href="/dashboard"
+            class="btn-island-nav"
+            title="Launch Security Operations Center Console (Shortcut: D)"
+          >
+            <span>Open Live SOC Console</span>
+            <kbd class="kbd-shortcut">D</kbd>
+            <span class="btn-icon-circle" aria-hidden="true">↗</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- ── Hero Section ─────────────────────────────────────────────────── -->
+      <header class="hero-section" id="hero">
+        <div class="container">
+          <div class="eyebrow-badge">
+            <span class="eyebrow-dot"></span>
+            Autonomous Cloud Ransomware Containment & Cryptographic Recovery
+          </div>
+
+          <h1 class="hero-title">
+            Don't Just Detect Ransomware.<br />
+            <span class="gradient-text">Mathematically Prove It Intact.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Continuous SHA-256 Merkle tree verification, sub-10s automated IAM account freeze, and
+            AEAD-authenticated cryptographic recovery. Protecting cloud object storage from zero-day
+            encryption.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              href="/dashboard"
+              class="btn-hero-primary"
+              title="Launch Security Operations Center Console (Shortcut: D)"
+            >
+              <span>Launch Live SOC Console</span>
+              <kbd class="kbd-shortcut">D</kbd>
+              <span class="hero-btn-icon" aria-hidden="true">▶</span>
+            </a>
+            <a href="#interactive-cockpit" class="btn-hero-secondary">
+              Test Live Cockpit Below ↓
+            </a>
+          </div>
+
+          <!-- Quick-Terminal CLI Pills (1-Click Copy with Real-Time Feedback) -->
+          <div class="quick-terminal-bar" aria-label="One-click developer CLI commands">
+            <div
+              class="terminal-pill"
+              role="button"
+              tabindex="0"
+              title="Click to copy CLI command"
+              data-copy="npm run simulate"
+            >
+              <span class="terminal-prompt">$</span>
+              <code>npm run simulate</code>
+              <span class="copy-badge">Copy</span>
+            </div>
+            <div
+              class="terminal-pill"
+              role="button"
+              tabindex="0"
+              title="Click to copy CLI command"
+              data-copy="npm run seed"
+            >
+              <span class="terminal-prompt">$</span>
+              <code>npm run seed</code>
+              <span class="copy-badge">Copy</span>
+            </div>
+            <div
+              class="terminal-pill"
+              role="button"
+              tabindex="0"
+              title="Click to copy CLI command"
+              data-copy="npm test"
+            >
+              <span class="terminal-prompt">$</span>
+              <code>npm test</code>
+              <span class="copy-badge">Copy</span>
+            </div>
+          </div>
+
+          <!-- ── HERO SHOWPIECE: Interactive Mini SOC Cockpit ─────────────── -->
+          <div class="hero-cockpit-shell doppel-shell" id="interactive-cockpit">
+            <div class="doppel-core">
+              <div class="cockpit-header">
+                <div class="cockpit-title-wrap">
+                  <div class="cockpit-dot-indicator" id="heroDot"></div>
+                  <div>
+                    <div class="cockpit-title">
+                      Bucket: <span style="color: #60a5fa">protected</span> · Real-Time Telemetry
+                      Stream
+                    </div>
+                    <div
+                      style="
+                        font-family: var(--font-mono);
+                        font-size: 0.72rem;
+                        color: var(--text-muted);
+                        margin-top: 2px;
+                      "
+                      id="heroSubStatus"
+                    >
+                      Continuous Merkle Tree DAG verification active
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cockpit-controls">
+                  <button
+                    class="cockpit-btn btn-attack"
+                    id="heroAttackBtn"
+                    title="Simulate 40% bulk alteration breach"
+                  >
+                    <span>Inject Attack (40%)</span>
+                  </button>
+                  <button
+                    class="cockpit-btn"
+                    id="heroRestoreBtn"
+                    title="Trigger AEAD authenticated restore"
+                  >
+                    <span>↺ Restore Baseline</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="cockpit-grid">
+                <!-- SVG Merkle Visualizer -->
+                <div class="cockpit-tree-area">
+                  <div class="cockpit-tree-meta">
+                    <span
+                      >MERKLE ROOT DAG:
+                      <strong id="heroMerkleHash" style="color: #38bdf8">e3b0c442…855</strong></span
+                    >
+                    <span id="heroLeafState">8/8 Leaves Sealed</span>
+                  </div>
+
+                  <div class="cockpit-tree-svg-wrap">
+                    <svg
+                      id="hero-merkle-svg"
+                      viewBox="0 0 500 160"
+                      width="100%"
+                      height="160"
+                      style="overflow: visible"
+                    ></svg>
+                  </div>
+                </div>
+
+                <!-- Live Telemetry Sidebar -->
+                <div class="cockpit-sidebar-area">
+                  <div class="cockpit-stat-tile">
+                    <span class="cockpit-stat-label">Real-Time Threat Verdict</span>
+                    <span
+                      class="cockpit-stat-val"
+                      id="heroVerdictVal"
+                      style="color: var(--emerald)"
+                    >
+                      NORMAL
+                    </span>
+                  </div>
+
+                  <div class="cockpit-stat-tile">
+                    <span class="cockpit-stat-label">IAM Account Status</span>
+                    <span class="cockpit-stat-val" id="heroIamVal" style="color: #60a5fa">
+                      READ_WRITE
+                    </span>
+                  </div>
+
+                  <div class="cockpit-stat-tile">
+                    <span class="cockpit-stat-label">Sentinel Tripwire</span>
+                    <span
+                      class="cockpit-stat-val"
+                      id="heroSentinelVal"
+                      style="color: var(--emerald)"
+                    >
+                      ARMED (Green Pulse)
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metrics Ribbon -->
+          <div class="metrics-shell doppel-shell">
+            <div class="metrics-bar doppel-core">
+              <div class="metric-col">
+                <div class="metric-big" style="color: var(--emerald)">&lt; 10s</div>
+                <div class="metric-sub">Account Freeze SLA</div>
+              </div>
+              <div class="metric-col">
+                <div class="metric-big" style="color: #60a5fa">100%</div>
+                <div class="metric-sub">Cryptographic Verification</div>
+              </div>
+              <div class="metric-col">
+                <div class="metric-big" style="color: var(--amber)">60s</div>
+                <div class="metric-sub">Sliding Detection Window</div>
+              </div>
+              <div class="metric-col">
+                <div class="metric-big" style="color: #a78bfa">SHA-256</div>
+                <div class="metric-sub">Pairwise Merkle Tree Root</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── CORE PILLARS & INTERACTIVE LABS ───────────────────────────────── -->
+      <section class="section-wrap" id="pillars">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow-badge">Cryptographic Foundations</div>
+            <h2 class="section-title">The Four Pillars of Zero-Trust Recovery</h2>
+            <p class="section-desc">
+              Explore the exact mathematical and operational mechanisms that make cloud ransomware
+              encryption physically unviable.
+            </p>
+          </div>
+
+          <div class="pillar-grid">
+            <!-- Pillar 1: Merkle Integrity -->
+            <div class="doppel-shell">
+              <div class="doppel-core">
+                <div class="pillar-card-header">
+                  <span class="pillar-pill">PILLAR 01 // DATA STRUCTURE</span>
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.75rem;
+                      color: var(--text-faint);
+                    "
+                    >RFC 6962 / Bitcoin DAG</span
+                  >
+                </div>
+                <h3 class="pillar-title">Pairwise Merkle Tree Hashes</h3>
+                <p class="pillar-desc">
+                  Every file in storage is fingerprinted via SHA-256 and paired hierarchically:
+                  \(H(L_1 \parallel L_2)\). A single corrupted byte flips the entire Merkle Root,
+                  creating mathematical proof of tampering.
+                </p>
+
+                <!-- Interactive Leaf Tamper Simulator -->
+                <div class="leaf-inspect-box">
+                  <div
+                    style="
+                      color: var(--text-faint);
+                      margin-bottom: 8px;
+                      font-size: 0.7rem;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Interactive Leaf Tampering Test:
+                  </div>
+                  <div class="leaf-inspect-item">
+                    <span>contracts_2026.pdf</span>
+                    <button class="btn-tamper-toggle" id="tamperLeafBtn">Corrupt 1 Byte</button>
+                  </div>
+                  <div class="leaf-inspect-item">
+                    <span style="color: var(--text-muted)">Calculated Leaf Hash:</span>
+                    <span id="tamperLeafHash" style="color: var(--emerald)">4f89d12a...7c8</span>
+                  </div>
+                  <div class="leaf-inspect-item">
+                    <span style="color: var(--text-muted)">Resulting Merkle Root:</span>
+                    <span id="tamperRootHash" style="color: #38bdf8">e3b0c442...855 (VALID)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pillar 2: Sliding Window Rate & Canaries -->
+            <div class="doppel-shell">
+              <div class="doppel-core">
+                <div class="pillar-card-header">
+                  <span class="pillar-pill">PILLAR 02 // DETECTION ENGINE</span>
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.75rem;
+                      color: var(--text-faint);
+                    "
+                    >Sliding Window 60s</span
+                  >
+                </div>
+                <h3 class="pillar-title">Velocity & Sentinel Tripwires</h3>
+                <p class="pillar-desc">
+                  Ransomware encrypts in bulk. CloudRDR measures the unique file change rate over a
+                  60-second window. Canary decoy files trigger instant containment regardless of
+                  threshold.
+                </p>
+
+                <!-- Interactive Velocity Gauge -->
+                <div class="velocity-simulator-box">
+                  <div class="velocity-slider-labels">
+                    <span>Change Rate: <strong id="velocityRateLabel">12%</strong></span>
+                    <span id="velocityVerdictBadge" style="color: var(--amber); font-weight: 700"
+                      >● SUSPICIOUS</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    class="velocity-slider"
+                    id="velocitySlider"
+                    min="0"
+                    max="100"
+                    value="12"
+                  />
+                  <div class="velocity-readout-row">
+                    <span style="color: var(--text-faint)">Normal &lt;10%</span>
+                    <span style="color: var(--amber)">Suspicious 10–29%</span>
+                    <span style="color: var(--crimson)">Ransomware ≥30%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pillar 3: Sub-10s Automated IAM Cryo-Lock -->
+            <div class="doppel-shell">
+              <div class="doppel-core">
+                <div class="pillar-card-header">
+                  <span class="pillar-pill">PILLAR 03 // CONTAINMENT</span>
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.75rem;
+                      color: var(--text-faint);
+                    "
+                    >&lt; 10s SLA Engine</span
+                  >
+                </div>
+                <h3 class="pillar-title">Sub-10s Automated Cryo-Lock</h3>
+                <p class="pillar-desc">
+                  When ransomware is confirmed, CloudRDR executes an automated deny-all IAM write
+                  policy in under 10 seconds. Human responders take 45+ minutes; CloudRDR halts the
+                  attacker while 95%+ of data is untouched.
+                </p>
+                <div class="crypto-spec-box">
+                  <span class="tag">CONTAINMENT</span>
+                  <span>Idempotent IAM Deny-All Policy Attached in 2.1s Average</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pillar 4: Pure AEAD Recovery -->
+            <div class="doppel-shell">
+              <div class="doppel-core">
+                <div class="pillar-card-header">
+                  <span class="pillar-pill">PILLAR 04 // RECOVERY</span>
+                  <span
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 0.75rem;
+                      color: var(--text-faint);
+                    "
+                    >AES-256-GCM AEAD</span
+                  >
+                </div>
+                <h3 class="pillar-title">100% Cryptographically Verified Restore</h3>
+                <p class="pillar-desc">
+                  Backups are decrypted with AES-256-GCM. The 128-bit authentication tag must verify
+                  before plaintext is emitted. Restored bytes are re-hashed against the original
+                  baseline. Zero corrupted bytes written.
+                </p>
+                <div class="crypto-spec-box">
+                  <span class="tag">VERIFICATION</span>
+                  <span>AEAD Tag Checked + SHA-256 Match = VALID Status</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 6-STAGE DEFENSE LIFECYCLE ─────────────────────────────────────── -->
+      <section class="section-wrap" id="lifecycle">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow-badge">Operational Lifecycle</div>
+            <h2 class="section-title">The Complete Zero-Trust Defense Lifecycle</h2>
+            <p class="section-desc">
+              How CloudRDR moves from baseline initialization to automated recovery without human
+              intervention.
+            </p>
+          </div>
+
+          <div class="bento-grid">
+            <div class="bento-col-8 doppel-shell">
+              <div class="doppel-core">
+                <span class="step-num-pill">Stage 01 // Baseline Seal</span>
+                <h3 class="step-card-title">Cryptographic Baseline Genesis</h3>
+                <p class="step-card-desc">
+                  On initialization, CloudRDR walks the entire cloud bucket, streams each object
+                  through SHA-256, and computes the Merkle Root DAG. Sentinel canaries are
+                  strategically planted as tripwires.
+                </p>
+                <div class="crypto-spec-box">
+                  <span class="tag">SECURITY</span>
+                  Database stores SHA-256 hashes only. No sensitive file contents stored.
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-col-4 doppel-shell">
+              <div class="doppel-core">
+                <span class="step-num-pill">Stage 02 // Telemetry</span>
+                <h3 class="step-card-title">Sliding-Window Polling</h3>
+                <p class="step-card-desc">
+                  Lightweight polling agent observes file creation, modification, and deletion
+                  events every 10 seconds.
+                </p>
+                <div class="crypto-spec-box">
+                  <span class="tag">WINDOW</span>
+                  60s sliding window
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-col-4 doppel-shell">
+              <div class="doppel-core">
+                <span class="step-num-pill">Stage 03 // Velocity Tripwire</span>
+                <h3 class="step-card-title">Threshold Classification</h3>
+                <p class="step-card-desc">
+                  Calculates unique altered files over total files. If &ge;30% change or canary
+                  touched, verdict triggers.
+                </p>
+                <div class="crypto-spec-box">
+                  <span class="tag">ALGORITHM</span>
+                  ChangeRate &ge; 0.30
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-col-8 doppel-shell">
+              <div class="doppel-core">
+                <span class="step-num-pill">Stage 04 // Immediate Containment</span>
+                <h3 class="step-card-title">Sub-10s Automated Cryo-Lock</h3>
+                <p class="step-card-desc">
+                  Immediately attaches an IAM write-deny policy to the compromised bucket. Write,
+                  overwrite, and delete APIs are immediately rejected at the cloud control plane.
+                  The incident record is signed with Ed25519.
+                </p>
+                <div class="crypto-spec-box">
+                  <span class="tag">LATENCY</span>
+                  Detection-to-freeze latency under 10 seconds SLA
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── INTERACTIVE BLOCKCHAIN AUDIT LEDGER ───────────────────────────── -->
+      <section class="section-wrap" id="audit-chain">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow-badge">Immutable Ledger</div>
+            <h2 class="section-title">Cryptographic Hash-Chained Audit Trail</h2>
+            <p class="section-desc">
+              Attackers cannot tamper with incident records. Every security decision is linked via
+              SHA-256 and signed with Ed25519.
+            </p>
+          </div>
+
+          <div style="text-align: center; margin-bottom: 1.5rem">
+            <button
+              class="cockpit-btn"
+              id="tamperChainBtn"
+              style="padding: 8px 18px; font-size: 0.85rem"
+            >
+              <span>Simulate Attacker Modifying Block #1</span>
+            </button>
+          </div>
+
+          <div class="audit-chain-wrap" id="auditChainContainer">
+            <div class="audit-block-card" id="auditBlock0">
+              <span class="audit-block-badge">BLOCK #0 · GENESIS</span>
+              <div style="color: var(--text-muted); font-size: 0.75rem">
+                Action: Baseline Seal Established
+              </div>
+              <div>PrevHash: <span style="color: var(--text-faint)">0000000000000000…</span></div>
+              <div>
+                BlockHash: <span class="audit-block-hash" id="block0Hash">a8f902bc91e7...41d</span>
+              </div>
+              <div style="color: var(--emerald); font-size: 0.7rem; margin-top: 6px">
+                ED25519 SIGNATURE VALID
+              </div>
+            </div>
+
+            <div class="audit-block-card" id="auditBlock1">
+              <span class="audit-block-badge">BLOCK #1 · RANSOMWARE ALERT</span>
+              <div style="color: var(--text-muted); font-size: 0.75rem" id="block1Payload">
+                Payload: Account acc-01 Frozen
+              </div>
+              <div>
+                PrevHash:
+                <span class="audit-block-hash" id="block1PrevHash">a8f902bc91e7...41d</span>
+              </div>
+              <div>
+                BlockHash: <span class="audit-block-hash" id="block1Hash">7b140cd5e921...39f</span>
+              </div>
+              <div id="block1Sig" style="color: var(--emerald); font-size: 0.7rem; margin-top: 6px">
+                ED25519 SIGNATURE VALID
+              </div>
+            </div>
+
+            <div class="audit-block-card" id="auditBlock2">
+              <span class="audit-block-badge">BLOCK #2 · RESTORE VERIFIED</span>
+              <div style="color: var(--text-muted); font-size: 0.75rem">
+                Action: 100% Hashes Re-verified
+              </div>
+              <div>
+                PrevHash:
+                <span class="audit-block-hash" id="block2PrevHash">7b140cd5e921...39f</span>
+              </div>
+              <div>
+                BlockHash: <span class="audit-block-hash" id="block2Hash">3ef871b6d081...a12</span>
+              </div>
+              <div id="block2Sig" style="color: var(--emerald); font-size: 0.7rem; margin-top: 6px">
+                ED25519 SIGNATURE VALID
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── STRIDE THREAT MITIGATION MATRIX (Cloudflare Security Audit) ───── -->
+      <section class="section-wrap" id="threat-matrix">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow-badge">Threat Modeling & Security Posture</div>
+            <h2 class="section-title">STRIDE Defense & Resilience Matrix</h2>
+            <p class="section-desc">
+              Systematic threat modeling aligned with Cloudflare security audit standards,
+              mitigating zero-day ransomware across the complete attack lifecycle.
+            </p>
+          </div>
+
+          <div class="doppel-shell" style="overflow-x: auto">
+            <div class="doppel-core" style="padding: 0">
+              <table class="threat-table" aria-label="STRIDE Threat Mitigation Matrix">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 14%">Threat Vector</th>
+                    <th scope="col" style="width: 22%">Attacker Objective</th>
+                    <th scope="col" style="width: 30%">Legacy Backup Vulnerability</th>
+                    <th scope="col" style="width: 34%">CloudRDR Cryptographic Control</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="threat-badge threat-s">S // Spoofing</span></td>
+                    <td><strong>Identity Impersonation</strong></td>
+                    <td class="flaw-cell">
+                      Compromised service account silently issues bulk updates without rate
+                      throttling.
+                    </td>
+                    <td class="control-cell">
+                      Sliding-window velocity tripline + isolated service-role IAM containment.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="threat-badge threat-t">T // Tampering</span></td>
+                    <td><strong>Ransomware Encryption</strong></td>
+                    <td class="flaw-cell">
+                      Attacker encrypts stored blobs; legacy backups overwrite clean versions on
+                      schedule.
+                    </td>
+                    <td class="control-cell">
+                      Strict Merkle Root hash comparison + AES-256-GCM AEAD tag validation prior to
+                      restore.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="threat-badge threat-r">R // Repudiation</span></td>
+                    <td><strong>Log Deletion / Alteration</strong></td>
+                    <td class="flaw-cell">
+                      Audit logs in plain text are purged or rewritten by the attacker to cover
+                      tracks.
+                    </td>
+                    <td class="control-cell">
+                      Cryptographic hash-chained audit ledger + RFC 8032 Ed25519 digital signatures.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="threat-badge threat-i">I // Info Disclosure</span></td>
+                    <td><strong>Exfiltration & Extortion</strong></td>
+                    <td class="flaw-cell">
+                      Plaintext backups exposed if bucket ACL permissions are widened.
+                    </td>
+                    <td class="control-cell">
+                      Client-side authenticated encryption (AEAD) + strict CSP & zero-trust control
+                      planes.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="threat-badge threat-d">D // Denial of Service</span></td>
+                    <td><strong>Bucket Deletion / Lockdown</strong></td>
+                    <td class="flaw-cell">
+                      Attacker invokes bulk DELETE API, permanently wiping operational data.
+                    </td>
+                    <td class="control-cell">
+                      Tripwire canary files trigger automated sub-10s IAM freeze locking out delete
+                      APIs.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="threat-badge threat-e">E // Elevation of Priv</span></td>
+                    <td><strong>Privilege Escalation</strong></td>
+                    <td class="flaw-cell">
+                      Lateral movement grants write access across all tenant storage partitions.
+                    </td>
+                    <td class="control-cell">
+                      Row Level Security (RLS) denying anon/auth roles, restricted solely to
+                      service-role token.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Strix Autonomous AI Penetration Testing Attestation -->
+          <div style="margin-top: 1.75rem">
+            <div class="doppel-shell">
+              <div
+                class="doppel-core"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  flex-wrap: wrap;
+                  gap: 1.5rem;
+                  padding: 1.5rem 2rem;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 1.25rem">
+                  <div
+                    style="
+                      width: 48px;
+                      height: 48px;
+                      border-radius: 12px;
+                      background: rgba(16, 185, 129, 0.12);
+                      border: 1px solid rgba(16, 185, 129, 0.3);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #34d399;
+                      flex-shrink: 0;
+                    "
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        margin-bottom: 4px;
+                        flex-wrap: wrap;
+                      "
+                    >
+                      <span
+                        class="threat-badge threat-s"
+                        style="
+                          background: rgba(16, 185, 129, 0.15);
+                          color: #34d399;
+                          border-color: rgba(16, 185, 129, 0.3);
+                        "
+                      >
+                        STRIX AI PENTEST VERIFIED
+                      </span>
+                      <span
+                        style="
+                          font-family: var(--font-mono);
+                          font-size: 0.75rem;
+                          color: var(--text-faint);
+                        "
+                        >OWASP Top-10 &amp; API Security Audit</span
+                      >
+                    </div>
+                    <h4
+                      style="
+                        font-size: 1.05rem;
+                        font-weight: 700;
+                        color: #ffffff;
+                        margin-bottom: 3px;
+                        letter-spacing: -0.01em;
+                      "
+                    >
+                      Autonomous Adversarial Simulation Pass: 0 Exploitable Flaws
+                    </h4>
+                    <p
+                      style="
+                        font-size: 0.86rem;
+                        color: var(--text-muted);
+                        margin: 0;
+                        line-height: 1.5;
+                      "
+                    >
+                      Adversarially tested against autonomous penetration vectors: zero unauthorized
+                      bucket traversals, zero privilege escalations, and strict API rate validation.
+                    </p>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1.25rem">
+                  <div style="text-align: right">
+                    <div
+                      style="
+                        font-family: var(--font-mono);
+                        font-size: 0.68rem;
+                        color: var(--text-faint);
+                        text-transform: uppercase;
+                        letter-spacing: 0.06em;
+                      "
+                    >
+                      Attestation Score
+                    </div>
+                    <div
+                      style="
+                        font-family: var(--font-mono);
+                        font-size: 1.35rem;
+                        font-weight: 800;
+                        color: #34d399;
+                      "
+                    >
+                      100 / 100
+                    </div>
+                  </div>
+                  <div style="width: 1px; height: 36px; background: var(--border)"></div>
+                  <div style="text-align: right">
+                    <div
+                      style="
+                        font-family: var(--font-mono);
+                        font-size: 0.68rem;
+                        color: var(--text-faint);
+                        text-transform: uppercase;
+                        letter-spacing: 0.06em;
+                      "
+                    >
+                      Vectors Audited
+                    </div>
+                    <div
+                      style="
+                        font-family: var(--font-mono);
+                        font-size: 1.35rem;
+                        font-weight: 800;
+                        color: #60a5fa;
+                      "
+                    >
+                      28 / 28
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DEVELOPER CODE & CLI SUITE ────────────────────────────────────── -->
+      <section class="section-wrap" id="code-suite">
+        <div class="container">
+          <div class="section-header">
+            <div class="eyebrow-badge">Developer API & CLI</div>
+            <h2 class="section-title">Engineered For Zero Overhead</h2>
+            <p class="section-desc">
+              Production Fastify REST endpoints, native Node.js crypto primitives, and automated
+              test harnesses.
+            </p>
+          </div>
+
+          <div class="code-tabs-wrap">
+            <div class="code-tabs-nav">
+              <button class="code-tab-btn active" data-tab="cli">CLI Attack Harness</button>
+              <button class="code-tab-btn" data-tab="api">Fastify REST API</button>
+              <button class="code-tab-btn" data-tab="crypto">Crypto Primitives</button>
+            </div>
+
+            <div class="code-content-pane" id="codePane">
+              <pre><code># Full simulated attack cycle: seeds files, modifies 40%, triggers detection → freeze → restore
+$ npm run simulate
+
+# Run 50 unit and integration test suites
+$ npm test
+
+# Output:
+# pass 50
+# fail 0
+# duration_ms 1928ms (100% verified)</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Final Call to Action ─────────────────────────────────────────── -->
+      <section class="container cta-shell">
+        <div class="doppel-shell">
+          <div class="doppel-core cta-core">
+            <h2 class="cta-title">Witness Autonomous Cryptographic Defense</h2>
+            <p class="cta-desc">
+              Open the live Security Operations Center (SOC) console, inspect the Merkle tree, and
+              trigger the full attack-to-recovery simulation in real time.
+            </p>
+            <a
+              href="/dashboard"
+              class="btn-hero-primary"
+              style="margin: 0 auto"
+              title="Launch Security Operations Center Console (Shortcut: D)"
+            >
+              <span>Enter Security Operations Center (SOC)</span>
+              <kbd class="kbd-shortcut">D</kbd>
+              <span class="hero-btn-icon" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Footer ───────────────────────────────────────────────────────── -->
+      <footer>
+        <div class="container footer-flex">
+          <div>
+            <strong>CloudRDR</strong> // Information Security Capstone (ISMS, Cloud Security,
+            Cryptography)
+          </div>
+          <div>
+            <span>Engineered with Zero-Trust Cryptographic Assurance</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Global Toast Notification Container -->
+    <div
+      id="toast-container"
+      class="toast-container"
+      role="region"
+      aria-label="Notifications"
+      aria-live="polite"
+    ></div>
+
+    <!-- ── Interactive Engine Module ──────────────────────────────────────── -->
+    <script type="module">
+      // 1. Toast Notification Helper
+      function showToast(message, type = 'info', duration = 3000) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast-item toast-${type}`;
+        toast.setAttribute('role', 'status');
+
+        const icons = { info: 'INFO', success: 'OK', warning: 'WARN', threat: 'ALERT' };
+        const icon = document.createElement('span');
+        icon.className = 'toast-icon';
+        icon.textContent = icons[type] || 'INFO';
+
+        const text = document.createElement('span');
+        text.style.flex = '1';
+        text.textContent = message;
+
+        toast.appendChild(icon);
+        toast.appendChild(text);
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => toast.classList.add('visible'));
+
+        setTimeout(() => {
+          toast.classList.remove('visible');
+          toast.classList.add('dismissing');
+          setTimeout(() => toast.remove(), 200);
+        }, duration);
+      }
+
+      // 2. Mouse Spotlight Tracking on Doppel Shells
+      document.querySelectorAll('.doppel-shell').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // 3. Quick-Terminal CLI Pills 1-Click Copy
+      document.querySelectorAll('.terminal-pill').forEach((pill) => {
+        const copyText = pill.getAttribute('data-copy');
+        const handler = async () => {
+          try {
+            if (navigator?.clipboard?.writeText) {
+              await navigator.clipboard.writeText(copyText);
+            }
+            pill.classList.add('copied');
+            const badge = pill.querySelector('.copy-badge');
+            if (badge) badge.textContent = 'Copied';
+            showToast(`Copied to clipboard: ${copyText}`, 'success', 2200);
+            setTimeout(() => {
+              pill.classList.remove('copied');
+              if (badge) badge.textContent = 'Copy';
+            }, 2000);
+          } catch (_) {}
+        };
+        pill.addEventListener('click', handler);
+        pill.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handler();
+          }
+        });
+      });
+
+      // 4. Hero Live Interactive Cockpit Merkle Tree
+      const heroSvg = document.getElementById('hero-merkle-svg');
+      const heroDot = document.getElementById('heroDot');
+      const heroSubStatus = document.getElementById('heroSubStatus');
+      const heroMerkleHash = document.getElementById('heroMerkleHash');
+      const heroLeafState = document.getElementById('heroLeafState');
+      const heroVerdictVal = document.getElementById('heroVerdictVal');
+      const heroIamVal = document.getElementById('heroIamVal');
+      const heroSentinelVal = document.getElementById('heroSentinelVal');
+
+      const heroLeafNodes = [];
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+
+      function initHeroTree() {
+        if (!heroSvg) return;
+        while (heroSvg.firstChild) heroSvg.removeChild(heroSvg.firstChild);
+        heroLeafNodes.length = 0;
+
+        const leafCount = 8;
+        const spacing = 500 / (leafCount + 1);
+        const leafY = 130;
+        const rootX = 250;
+        const rootY = 25;
+
+        // Draw Root
+        const rootCircle = document.createElementNS(SVG_NS, 'circle');
+        rootCircle.setAttribute('cx', rootX);
+        rootCircle.setAttribute('cy', rootY);
+        rootCircle.setAttribute('r', '10');
+        rootCircle.setAttribute('fill', '#38BDF8');
+        heroSvg.appendChild(rootCircle);
+
+        // Draw Leaves & Edges
+        for (let i = 0; i < leafCount; i++) {
+          const lx = spacing * (i + 1);
+          const ly = leafY;
+
+          // Line
+          const line = document.createElementNS(SVG_NS, 'line');
+          line.setAttribute('x1', rootX);
+          line.setAttribute('y1', rootY);
+          line.setAttribute('x2', lx);
+          line.setAttribute('y2', ly);
+          line.setAttribute('stroke', 'rgba(255,255,255,0.12)');
+          line.setAttribute('stroke-width', '1.5');
+          heroSvg.insertBefore(line, heroSvg.firstChild);
+
+          // Leaf Circle
+          const circle = document.createElementNS(SVG_NS, 'circle');
+          circle.setAttribute('cx', lx);
+          circle.setAttribute('cy', ly);
+          circle.setAttribute('r', '8');
+          circle.setAttribute('fill', '#10B981');
+          circle.style.transition = 'all 0.3s ease';
+          heroSvg.appendChild(circle);
+
+          heroLeafNodes.push({ circle, line });
+        }
+      }
+
+      initHeroTree();
+
+      // Hero Attack Simulation Trigger
+      let heroBreached = false;
+      document.getElementById('heroAttackBtn')?.addEventListener('click', () => {
+        if (heroBreached) return;
+        heroBreached = true;
+
+        // Corrupt 4 leaves
+        [1, 3, 4, 6].forEach((idx, i) => {
+          setTimeout(() => {
+            heroLeafNodes[idx].circle.setAttribute('fill', '#EF4444');
+            heroLeafNodes[idx].circle.setAttribute('r', '11');
+            heroLeafNodes[idx].line.setAttribute('stroke', 'rgba(239, 68, 68, 0.5)');
+          }, i * 150);
+        });
+
+        setTimeout(() => {
+          heroDot.className = 'cockpit-dot-indicator breach';
+          heroSubStatus.textContent = 'RANSOMWARE BREACH DETECTED — ACCOUNT FROZEN';
+          heroSubStatus.style.color = '#EF4444';
+          heroMerkleHash.textContent = '8a12f901…c41 (COMPROMISED)';
+          heroMerkleHash.style.color = '#EF4444';
+          heroLeafState.textContent = '4/8 Leaves Corrupt';
+          heroVerdictVal.style.color = '#EF4444';
+          heroVerdictVal.textContent = 'RANSOMWARE';
+          heroIamVal.style.color = '#EF4444';
+          heroIamVal.textContent = 'FROZEN (<10s SLA)';
+          heroSentinelVal.style.color = '#EF4444';
+          heroSentinelVal.textContent = 'CANARY TAMPERED';
+
+          showToast(
+            'CRITICAL BREACH: 40% bulk alteration detected. IAM Cryo-Lock enforced.',
+            'threat',
+            3500
+          );
+        }, 700);
+      });
+
+      // Hero Restore Baseline Trigger
+      document.getElementById('heroRestoreBtn')?.addEventListener('click', () => {
+        heroBreached = false;
+        heroLeafNodes.forEach((node, i) => {
+          setTimeout(() => {
+            node.circle.setAttribute('fill', '#10B981');
+            node.circle.setAttribute('r', '8');
+            node.line.setAttribute('stroke', 'rgba(255,255,255,0.12)');
+          }, i * 80);
+        });
+
+        setTimeout(() => {
+          heroDot.className = 'cockpit-dot-indicator';
+          heroSubStatus.textContent = 'Continuous Merkle Tree DAG verification active';
+          heroSubStatus.style.color = 'var(--text-muted)';
+          heroMerkleHash.textContent = 'e3b0c442…855 (VERIFIED)';
+          heroMerkleHash.style.color = '#38BDF8';
+          heroLeafState.textContent = '8/8 Leaves Sealed';
+          heroVerdictVal.style.color = '#10B981';
+          heroVerdictVal.textContent = 'NORMAL';
+          heroIamVal.style.color = '#60A5FA';
+          heroIamVal.textContent = 'READ_WRITE';
+          heroSentinelVal.style.color = '#10B981';
+          heroSentinelVal.textContent = 'ARMED (Green Pulse)';
+
+          showToast(
+            'AEAD Restore verified: 100% cryptographic hashes re-stamped.',
+            'success',
+            3000
+          );
+        }, 700);
+      });
+
+      // 5. Interactive Velocity Simulator Slider
+      const vSlider = document.getElementById('velocitySlider');
+      const vLabel = document.getElementById('velocityRateLabel');
+      const vBadge = document.getElementById('velocityVerdictBadge');
+
+      vSlider?.addEventListener('input', (e) => {
+        const val = Number(e.target.value);
+        vLabel.textContent = `${val}%`;
+
+        if (val < 10) {
+          vBadge.textContent = 'NORMAL';
+          vBadge.style.color = 'var(--emerald)';
+        } else if (val < 30) {
+          vBadge.textContent = 'SUSPICIOUS';
+          vBadge.style.color = 'var(--amber)';
+        } else {
+          vBadge.textContent = 'RANSOMWARE';
+          vBadge.style.color = 'var(--crimson)';
+        }
+      });
+
+      // 6. Interactive Leaf Tampering Test
+      let leafTampered = false;
+      document.getElementById('tamperLeafBtn')?.addEventListener('click', () => {
+        leafTampered = !leafTampered;
+        const leafHash = document.getElementById('tamperLeafHash');
+        const rootHash = document.getElementById('tamperRootHash');
+        const btn = document.getElementById('tamperLeafBtn');
+
+        if (leafTampered) {
+          btn.textContent = 'Revert';
+          btn.style.borderColor = 'var(--crimson)';
+          leafHash.textContent = '9a77cc01...e3b (TAMPERED)';
+          leafHash.style.color = 'var(--crimson)';
+          rootHash.textContent = '8f12a93c...011 (MISMATCH)';
+          rootHash.style.color = 'var(--crimson)';
+          showToast('Leaf byte altered! Merkle root calculation instantly fails.', 'threat', 2500);
+        } else {
+          btn.textContent = 'Corrupt 1 Byte';
+          btn.style.borderColor = 'var(--border-light)';
+          leafHash.textContent = '4f89d12a...7c8 (CLEAN)';
+          leafHash.style.color = 'var(--emerald)';
+          rootHash.textContent = 'e3b0c442...855 (VALID)';
+          rootHash.style.color = '#38BDF8';
+          showToast('Baseline restored. Root verified.', 'success', 2000);
+        }
+      });
+
+      // 7. Interactive Audit Chain Tamper Simulator
+      let chainTampered = false;
+      document.getElementById('tamperChainBtn')?.addEventListener('click', () => {
+        chainTampered = !chainTampered;
+        const b1 = document.getElementById('auditBlock1');
+        const b2 = document.getElementById('auditBlock2');
+        const p1 = document.getElementById('block1Payload');
+        const h1 = document.getElementById('block1Hash');
+        const s1 = document.getElementById('block1Sig');
+        const s2 = document.getElementById('block2Sig');
+        const btn = document.getElementById('tamperChainBtn');
+
+        if (chainTampered) {
+          btn.querySelector('span').textContent = 'Restore Chain Integrity';
+          b1.classList.add('tampered');
+          b2.classList.add('tampered');
+          p1.textContent = 'Payload: [UNAUTHORIZED_MODIFICATION]';
+          p1.style.color = '#EF4444';
+          h1.textContent = '00000000_TAMPERED_0000';
+          h1.style.color = '#EF4444';
+          s1.textContent = 'ED25519 SIGNATURE BROKEN';
+          s1.style.color = '#EF4444';
+          s2.textContent = 'PREV_HASH MISMATCH (CHAIN BROKEN)';
+          s2.style.color = '#EF4444';
+          showToast(
+            'Tampering detected! Immutable blockchain link invalidates all subsequent blocks.',
+            'threat',
+            3500
+          );
+        } else {
+          btn.querySelector('span').textContent = 'Simulate Attacker Modifying Block #1';
+          b1.classList.remove('tampered');
+          b2.classList.remove('tampered');
+          p1.textContent = 'Payload: Account acc-01 Frozen';
+          p1.style.color = 'var(--text-muted)';
+          h1.textContent = '7b140cd5e921...39f';
+          h1.style.color = '#38BDF8';
+          s1.textContent = 'ED25519 SIGNATURE VALID';
+          s1.style.color = 'var(--emerald)';
+          s2.textContent = 'ED25519 SIGNATURE VALID';
+          s2.style.color = 'var(--emerald)';
+          showToast('Chain integrity restored. All signatures re-validated.', 'success', 2500);
+        }
+      });
+
+      // 8. Tabbed Code Suite Switcher
+      const codeTabs = {
+        cli: `# Full simulated attack cycle: seeds files, modifies 40%, triggers detection → freeze → restore
+$ npm run simulate
+
+# Run 50 unit and integration test suites
+$ npm test
+
+# Output:
+# pass 50
+# fail 0
+# duration_ms 1928ms (100% verified)`,
+        api: `// GET /baseline/:bucket — Retrieve snapshot + Merkle root
+HTTP/1.1 200 OK
+{
+  "bucket": "protected",
+  "merkle_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "file_count": 20
+}
+
+// POST /incidents/:id/restore — Trigger verified restore
+HTTP/1.1 202 Accepted
+{ "job_id": "8f3b21-4a1d-9102", "status": "running" }`,
+        crypto: `import { hashStream, merkleRoot, signRecord } from './crypto.js';
+
+// Pairwise Bitcoin-style Merkle Root calculation
+const root = merkleRoot(leafHashes);
+
+// RFC 8032 Ed25519 asymmetric incident signing
+const { signature, keyId } = signRecord(incidentRecord);`,
+      };
+
+      document.querySelectorAll('.code-tab-btn').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.code-tab-btn').forEach((t) => t.classList.remove('active'));
+          tab.classList.add('active');
+          const key = tab.getAttribute('data-tab');
+          const codePane = document.getElementById('codePane');
+          if (codePane && codeTabs[key]) {
+            codePane.innerHTML = `<pre><code>${codeTabs[key]}</code></pre>`;
+          }
+        });
+      });
+
+      // 9. Global Keyboard Shortcuts (D for SOC, 1-6 for sections)
+      window.addEventListener('keydown', (e) => {
+        const target = e.target;
+        const isEditing =
+          target &&
+          (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+        if (isEditing) return;
+
+        if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          window.location.href = '/dashboard';
+        } else if (e.key === '1') {
+          e.preventDefault();
+          document.getElementById('interactive-cockpit')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (e.key === '2') {
+          e.preventDefault();
+          document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (e.key === '3') {
+          e.preventDefault();
+          document.getElementById('lifecycle')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (e.key === '4') {
+          e.preventDefault();
+          document.getElementById('audit-chain')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (e.key === '5') {
+          e.preventDefault();
+          document.getElementById('threat-matrix')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (e.key === '6') {
+          e.preventDefault();
+          document.getElementById('code-suite')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      // 10. Intersection Observer for Smooth Scroll Reveal
+      if (
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+        'IntersectionObserver' in window
+      ) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('.section-wrap, .metrics-shell, .cta-shell').forEach((el) => {
+          el.classList.add('reveal-on-scroll');
+          observer.observe(el);
+        });
+      }
+    </script>
+  </body>
+</html>

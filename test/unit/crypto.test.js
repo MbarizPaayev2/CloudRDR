@@ -11,7 +11,7 @@ import {
   generateEd25519KeyPair,
   canonicalJson,
   _resetKeysForTests,
-} from '../../src/crypto/ed25519.js';
+} from '../../backend/src/crypto/ed25519.js';
 
 describe('Crypto - Ed25519 Digital Signatures', () => {
   beforeEach(() => {

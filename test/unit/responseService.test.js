@@ -5,8 +5,8 @@
 
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { freezeWithRetry } from '../../src/response/responseService.js';
-import * as freeze from '../../src/contracts/freeze.contract.js';
+import { freezeWithRetry } from '../../backend/src/response/responseService.js';
+import * as freeze from '../../backend/src/contracts/freeze.contract.js';
 
 describe('Response - Freeze retries and escalation', () => {
   beforeEach(() => {

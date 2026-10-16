@@ -9,7 +9,7 @@ import {
   encryptDataGCM,
   decryptDataGCM,
   EncryptedBackupStore,
-} from '../../src/backup/backupService.js';
+} from '../../backend/src/backup/backupService.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';

@@ -6,9 +6,9 @@
 
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildServer } from '../../src/api/server.js';
-import { hashPassword, verifyPassword } from '../../src/auth/password.js';
-import { _resetClientForTests } from '../../src/adapters/db/supabaseClient.js';
+import { buildServer } from '../../backend/src/api/server.js';
+import { hashPassword, verifyPassword } from '../../backend/src/auth/password.js';
+import { _resetClientForTests } from '../../backend/src/adapters/db/supabaseClient.js';
 
 describe('CloudRDR Authentication & User Management', () => {
   let app;

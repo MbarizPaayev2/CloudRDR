@@ -5,10 +5,10 @@
 
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { createBaseline, getBaseline } from '../../src/baseline/baselineService.js';
-import { _resetClientForTests } from '../../src/adapters/db/supabaseClient.js';
-import { _setAdapterForTests } from '../../src/adapters/storage/index.js';
-import { LocalFsStorage } from '../../src/adapters/storage/localFsStorage.js';
+import { createBaseline, getBaseline } from '../../backend/src/baseline/baselineService.js';
+import { _resetClientForTests } from '../../backend/src/adapters/db/supabaseClient.js';
+import { _setAdapterForTests } from '../../backend/src/adapters/storage/index.js';
+import { LocalFsStorage } from '../../backend/src/adapters/storage/localFsStorage.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';

@@ -5,11 +5,11 @@
 
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { PollingEventSource } from '../../src/monitor/eventSource.js';
-import { MonitorAgent } from '../../src/monitor/monitorAgent.js';
-import { LocalFsStorage } from '../../src/adapters/storage/localFsStorage.js';
-import { _resetClientForTests } from '../../src/adapters/db/supabaseClient.js';
-import { _setAdapterForTests } from '../../src/adapters/storage/index.js';
+import { PollingEventSource } from '../../backend/src/monitor/eventSource.js';
+import { MonitorAgent } from '../../backend/src/monitor/monitorAgent.js';
+import { LocalFsStorage } from '../../backend/src/adapters/storage/localFsStorage.js';
+import { _resetClientForTests } from '../../backend/src/adapters/db/supabaseClient.js';
+import { _setAdapterForTests } from '../../backend/src/adapters/storage/index.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';

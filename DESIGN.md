@@ -1,123 +1,97 @@
-# CloudRDR — Design System & Visual Specification (DESIGN.md)
+# DESIGN.md — CloudRDR Autonomous Ransomware Defense & Recovery Platform
 
-> Official design specification for CloudRDR — Autonomous Cloud Ransomware Containment & Cryptographic Recovery Console.  
-> Adheres to: **Vercel Web Interface Guidelines**, **Design Motion Principles** (Emil Kowalski & Jakub Krehel lenses), and **Awesome DESIGN.md** standards.
+<!-- hallmark: preset=dark-technical; palette=void-obsidian; fonts=Space Grotesk+IBM Plex Sans+JetBrains Mono; layout=soc-command-grid; motion=compositor-spring-gsap; density=high; score=P5 H5 E5 S5 R5 V5 -->
 
----
+## 1. Brand & Product Essence
 
-## 1. Brand Identity & Aesthetic Direction
-
-- **Category**: Enterprise Cloud Security Operations Center (SOC) & Cryptographic Recovery.
-- **Design Metaphor**: **Deep Space Cyber Command**. Ultra-clean, high-density, authoritative. Gives security operators and executives instant clarity and cryptographic certainty during high-stakes security incidents.
-- **Surface Language**: **Doppelrand (Double-Bezel Architecture)**. Outer translucent boundary ring (`rgba(255, 255, 255, 0.08)`) with an inner OLED container (`#0B101D`) creating an authentic physical hardware console feel.
-- **Accent Philosophy**: Strict semantic assignment. No arbitrary neon colors. Every color indicates a verified security state.
+**Product Category**: Enterprise Cloud Security Operations Center (SOC) & Cryptographic Ransomware Recovery Command Plane  
+**Aesthetic Direction**: Industrial Precision / Void-Obsidian Telemetry Grid (`hallmark` + `baseline-ui` + `industrial-brutalist-ui`)  
+**Core Philosophy**: Every pixel in a live ransomware incident console must communicate verified state, cryptographic provenance, or actionable containment controls. Decorative chrome, fake terminal traffic-light dots, animated backdrop blurs, and unverified static mock indicators are strictly prohibited.
 
 ---
 
-## 2. Color Palette & Design Tokens
+## 2. Color & Surface Tokens
 
-### Base Surfaces
+All colors are defined in [`dashboard/css/styles.css`](file:///d:/Users/007/Desktop/CloudRDR/dashboard/css/styles.css) via CSS custom properties on `:root`.
 
+### Surfaces & Backgrounds
+| Token | Value | Purpose |
+| :--- | :--- | :--- |
+| `--bg-void` | `#050507` | Root canvas background (`body`) |
+| `--bg-surface-1` | `#0b0c10` | Primary panel & table surface |
+| `--bg-surface-2` | `#11131a` | Elevated card, modal, and interactive control background |
+| `--bg-surface-3` | `#181b24` | Hover state surface and active row highlight |
+
+### Semantic Status & Accent Palette
+| Token | Value | Semantic Role |
+| :--- | :--- | :--- |
+| `--accent-cyan` | `#06b6d4` | Primary interactive focus, active telemetry, and baseline verification |
+| `--status-safe` | `#10b981` | Normal state, verified SHA-256 digests, active heartbeats, intact hash chains |
+| `--status-warn` | `#f59e0b` | Elevated entropy, canary access triggers, or degraded node latency |
+| `--status-danger` | `#ef4444` | Active ransomware containment (`FROZEN`), hash mismatches, or broken chains |
+
+### Borders & Hairlines
+- **Default Structural Hairline**: `1px solid rgba(255, 255, 255, 0.07)` (`--border-subtle`)
+- **Interactive / Focus Border**: `1px solid rgba(6, 182, 212, 0.45)`
+- **Containment Alert Border**: `1px solid rgba(239, 68, 68, 0.45)`
+
+---
+
+## 3. Typography & Numeric Discipline
+
+### Font Stack
+- **Display & Section Headings (`--font-display`)**: `'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif`
+  - Enforces `text-wrap: balance` and tight tracking (`-0.02em`).
+- **UI Body & Operational Copy (`--font-sans`)**: `'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif`
+  - Enforces `text-wrap: pretty` and `max-width: 68ch` on descriptive prose.
+- **Telemetry, Digests, & Logs (`--font-mono`)**: `'JetBrains Mono', monospace`
+  - Used for all SHA-256 hashes, timestamps, latencies, entropy scores, and CLI snippets.
+
+### Tabular Numerics (`tabular-nums`)
+Every counter, KPI value, table cell, badge, latency readout, and countdown timer enforces:
 ```css
---bg-app: #050811; /* Deep OLED black canvas */
---bg-surface: #0b101d; /* Primary card and panel surface */
---bg-surface-elev: #11182b; /* Elevated interactive panels and modal popovers */
---bg-subtle: #18223b; /* Monospace code blocks, inputs, and chip pills */
---bg-glass: rgba(11, 16, 29, 0.82); /* Glassmorphism floating navbar */
+font-variant-numeric: tabular-nums;
 ```
-
-### Borders & Doppelrand
-
-```css
---border-subtle: rgba(255, 255, 255, 0.07);
---border-medium: rgba(255, 255, 255, 0.12);
---border-active: #3b82f6;
-```
-
-### Typography Tones
-
-```css
---text-primary: #f8fafc; /* 98% pure heading white */
---text-secondary: #94a3b8; /* Slate-400 crisp reading text */
---text-muted: #64748b; /* Slate-500 subtle telemetry metadata */
-```
-
-### Security Status Accents
-
-| Status                  | Hex       | Token       | Usage                                                              |
-| ----------------------- | --------- | ----------- | ------------------------------------------------------------------ |
-| **Ransomware / Breach** | `#EF4444` | `--threat`  | Laser Crimson. Critical alerts, freeze trigger, affected file tags |
-| **Normal / Verified**   | `#10B981` | `--normal`  | Cyber Emerald. Clean baseline, Merkle root match, AEAD PASS        |
-| **Suspicious Activity** | `#F59E0B` | `--warning` | Warm Amber. High change-rate warning (10%–30%)                     |
-| **IAM Cryo-Lock**       | `#06B6D4` | `--frost`   | Cryo Cyan. IAM bucket freeze, immutable quarantine state           |
-| **Enterprise Brand**    | `#3B82F6` | `--brand`   | Electric Cobalt. Primary CTAs, active tab indicators, focus rings  |
+This prevents horizontal layout jitter during high-frequency SSE telemetry updates (`1s–5s` polling and live event streams).
 
 ---
 
-## 3. Typography & Micro-Copy Rules
+## 4. Layout, Spatial Architecture & Responsive Rules
 
-- **Headings & Body UI**: `Geist`, `-apple-system`, `BlinkMacSystemFont`, `sans-serif`.
-- **Telemetry, Hashes & Numbers**: `Geist Mono`, `JetBrains Mono`, `monospace`.
-- **Vercel Guidelines Compliance**:
-  - `font-variant-numeric: tabular-nums`: Applied across all counters, change rates, timestamps, and hashes to prevent jitter.
-  - `text-wrap: balance`: Applied to `h1`, `h2`, `h3`, `.hero-title`, and `.section-label` to prevent orphan words.
-  - Ellipsis: Character `…` (`\u2026`) used for loading states (`"Connecting…"`, `"Restoring…"`) rather than `...`.
-  - Units: Non-breaking space `&nbsp;` before units (`10&nbsp;MB`, `30&nbsp;%`, `10&nbsp;s`).
-
----
-
-## 4. Motion Principles (Restraint & Production Polish)
-
-Derived from **Design Motion Principles** (Emil Kowalski + Jakub Krehel lenses):
-
-1. **Restraint & Speed**: Animations exist to explain state transitions, never to distract. Default durations are snappy (140ms–240ms).
-2. **Spring Physics**:
-   ```css
-   --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1); /* Rapid button presses & badge reveals */
-   --ease-subtle: cubic-bezier(0.25, 1, 0.5, 1); /* Modal entries & accordion expansion */
-   ```
-3. **Compositor Only**: Animate `transform` and `opacity` exclusively. Never animate `width`, `height`, or `top/left` in loops.
-4. **Active Feedback**: Interactive buttons scale to `0.98` on `:active` with immediate tactile recovery.
-5. **Accessibility Requirement**: Full `@media (prefers-reduced-motion: reduce)` support:
-   ```css
-   @media (prefers-reduced-motion: reduce) {
-     *,
-     *::before,
-     *::after {
-       animation-duration: 0.01ms !important;
-       transition-duration: 0.01ms !important;
-       scroll-behavior: auto !important;
-     }
-   }
-   ```
+- **Viewport Overflow**: `html, body { overflow-x: clip; }` prevents horizontal scrollbar bleed across all viewports.
+- **Navigation Architecture**:
+  - Single unified top command bar (`.top-bar`) housing brand identity, live protection state badge, primary view tabs (`role="tab"`), action dropdowns (`aria-expanded`, `aria-controls`), and operator session controls.
+  - Sub-views switch cleanly inside `.main-workspace` without nested scrollbars.
+- **Responsive Breakpoints**:
+  - `<= 1280px`: Secondary telemetry columns collapse into stacked 2-column grids.
+  - `<= 768px`: Top bar wraps cleanly, navigation tabs scroll horizontally with hidden scrollbars, and KPI/fleet cards stack into a single full-width column (`1fr`).
 
 ---
 
-## 5. Web Interface & Accessibility Guidelines (WCAG 2.2 AA)
+## 5. Interactive States & Accessibility (`fixing-accessibility`)
 
-- **Focus Rings**: `:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }`. Never `outline: none` without replacement.
-- **Skip Link**: `<a href="#merkle-hero" class="skip-link">Skip to main console content</a>` pinned at top of both console and landing page.
-- **Icon Buttons**: Every icon-only button must include a descriptive `aria-label`. Decorative icons must have `aria-hidden="true"`.
-- **Dynamic Updates**: Asynchronous live updates (verdict banner, telemetry updates) carry `aria-live="polite"`.
-- **Scroll Margin**: All heading/section anchors include `scroll-margin-top: 5rem` to prevent collision with sticky navigation bars.
+Every interactive control (`.btn`, `.cmd-tab`, `.fleet-filter-btn`, `.os-card`, form inputs) implements the 8-state lifecycle:
+1. **Default**: Crisp 1px border, `white-space: nowrap` (never wraps button labels onto two lines).
+2. **Hover**: Subtle surface elevation (`translateY(-1px)`) and border luminance increase.
+3. **Focus-Visible**: High-contrast keyboard ring (`outline: 2px solid var(--accent-cyan); outline-offset: 2px`).
+4. **Active / Pressed**: `transform: translateY(0) scale(0.99)` tactile feedback.
+5. **Disabled / Busy**: `opacity: 0.55; cursor: not-allowed; pointer-events: none` during in-flight API calls.
+6. **Loading**: Inline text update (`SCANNING...`, `VERIFYING...`, `PINGING...`) bound to live `Promise` execution.
+7. **Error**: Semantic danger border + `role="status" aria-live="polite"` error banner linked via `aria-describedby`.
+8. **Success**: Verified status toast + immediate state store synchronization (`refreshAll()`).
+
+### ARIA & Semantic Requirements
+- All icon-only or decorative `<svg>` elements carry `aria-hidden="true"`.
+- Tab strips use `role="tablist"` and buttons use `role="tab"` with synchronized `aria-selected="true|false"`.
+- Dropdown triggers declare `aria-haspopup="true"`, `aria-expanded`, and `aria-controls`.
+- Authentication forms (`login.html`, `register.html`) bind inputs to error containers via `aria-describedby`.
 
 ---
 
-## 6. Console Layout Blueprint (3-Zone SOC Architecture)
+## 6. Motion & Animation Performance (`gsap-core`, `gsap-performance`, `fixing-motion-performance`)
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│  Floating Island Header: Wordmark | Bucket | Health | Demo | Actions   │
-├───────────────┬────────────────────────────────────────┬───────────────┤
-│ Left Rail     │ Center Command Deck                    │ Right Rail    │
-│ (330px)       │ (Fluid Canvas)                         │ (330px)       │
-│               │                                        │               │
-│ - Threat      │ - Merkle Tree Integrity Core           │ - Incident    │
-│   Verdict     │ - Real-time Sliding Detection Window   │   History     │
-│   Widget      │   (Chart.js with 10% & 30% thresholds) │ - Active Case │
-│ - Canary      │ - Containment Action Controls          │   File        │
-│   Sentinels   │ - Verified Restore Panel               │ - Tamper-proof│
-│ - Hash-Chained│   (AES-256-GCM AEAD Tag & SHA Checks)  │   Audit Log   │
-│   Baseline    │                                        │   Ledger      │
-└───────────────┴────────────────────────────────────────┴───────────────┘
-```
+- **Compositor-Only Properties**: Animations are restricted to `transform` (`x`, `y`, `scale`, `rotation`) and `opacity` (`autoAlpha`).
+- **Banned Properties**: Animating `backdrop-filter: blur()`, `box-shadow`, `width`, `height`, `top`, or `left` in CSS `@keyframes` or JS loops is forbidden.
+- **GSAP View Transitions**:
+  - View switching (`switchMainView`) uses `gsap.fromTo()` with `overwrite: 'auto'`, `duration: 0.24`, `ease: 'power2.out'`, `stagger: 0.03`, and `clearProps: 'transform,opacity,visibility'` on completion so residual inline transforms never trap fixed modals or stacking contexts.
+- **Reduced Motion**: All JS and CSS animations respect `@media (prefers-reduced-motion: reduce)` and `window.matchMedia('(prefers-reduced-motion: no-preference)')`.

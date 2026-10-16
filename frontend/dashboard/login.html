@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In — CloudRDR Security Operations</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/dashboard/css/tokens.css" />
+    <link rel="stylesheet" href="/dashboard/css/styles.css" />
+  </head>
+  <body class="auth-page-canvas">
+    <!-- Back to Main Product Link -->
+    <a
+      href="/"
+      style="
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        text-decoration: none;
+        margin-bottom: 20px;
+        transition: color var(--dur-fast) var(--ease);
+      "
+      onmouseover="this.style.color='var(--text-primary)'"
+      onmouseout="this.style.color='var(--text-muted)'"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      <span>Back to CloudRDR Overview</span>
+    </a>
+
+    <!-- Double-Bezel Hardware Card Shell -->
+    <div class="auth-double-bezel">
+      <div class="auth-card-core">
+        <div class="auth-card-header">
+          <a
+            href="/"
+            class="auth-brand-logo"
+            title="CloudRDR Overview"
+            style="
+              display: inline-flex;
+              flex-direction: column;
+              align-items: center;
+              text-decoration: none;
+              gap: 8px;
+            "
+          >
+            <svg width="52" height="52" viewBox="0 0 240 240" style="flex-shrink: 0">
+              <defs>
+                <linearGradient id="auth_tfD" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38BDF8" />
+                  <stop offset="100%" stop-color="#0284C7" />
+                </linearGradient>
+                <linearGradient id="auth_lfD" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#0284C7" />
+                  <stop offset="100%" stop-color="#1E3A8A" />
+                </linearGradient>
+                <linearGradient id="auth_rfD" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#10B981" />
+                  <stop offset="100%" stop-color="#047857" />
+                </linearGradient>
+                <linearGradient id="auth_rgD" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38BDF8" />
+                  <stop offset="50%" stop-color="#6366F1" />
+                  <stop offset="100%" stop-color="#10B981" />
+                </linearGradient>
+              </defs>
+              <g transform="translate(120, 124)">
+                <path
+                  d="M 65,-55 A 85,85 0 1,0 75,40"
+                  fill="none"
+                  stroke="url(#auth_rgD)"
+                  stroke-width="12"
+                  stroke-linecap="round"
+                />
+                <polygon points="84,22 86,52 58,42" fill="#10B981" />
+                <circle
+                  cx="0"
+                  cy="0"
+                  r="66"
+                  fill="none"
+                  stroke="var(--border)"
+                  stroke-width="2.5"
+                  stroke-dasharray="3 6"
+                />
+                <path
+                  d="M -22,-25 V -44 A 22,22 0 0,1 22,-44 V -25"
+                  fill="none"
+                  stroke="#E2E8F0"
+                  stroke-width="9"
+                  stroke-linecap="round"
+                />
+                <polygon points="0,-42 42,-18 0,6 -42,-18" fill="url(#auth_tfD)" />
+                <polygon points="-42,-18 0,6 0,54 -42,30" fill="url(#auth_lfD)" />
+                <polygon points="0,6 42,-18 42,30 0,54" fill="url(#auth_rfD)" />
+                <polyline
+                  points="-20,-18 0,-30 20,-18"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  stroke-width="3.5"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="0"
+                  y1="6"
+                  x2="0"
+                  y2="36"
+                  stroke="#FFFFFF"
+                  stroke-width="3.5"
+                  stroke-linecap="round"
+                />
+                <circle cx="0" cy="6" r="6" fill="#FFFFFF" />
+                <circle cx="0" cy="-30" r="4.5" fill="#FFFFFF" />
+                <circle cx="-20" cy="-18" r="4.5" fill="#FFFFFF" />
+                <circle cx="20" cy="-18" r="4.5" fill="#FFFFFF" />
+              </g>
+            </svg>
+            <span
+              style="
+                font-size: 1.45rem;
+                font-weight: 800;
+                color: var(--text-primary);
+                letter-spacing: -0.5px;
+              "
+              >Cloud<span style="color: #38bdf8">R</span><span style="color: #0ea5e9">D</span
+              ><span style="color: #10b981">R</span></span
+            >
+          </a>
+          <h1 class="auth-title" style="margin-top: 4px; font-size: 1.35rem">Sign In to CloudRDR</h1>
+          <p class="auth-subtitle" style="letter-spacing: 0.05em">SECURITY OPERATIONS CONSOLE</p>
+        </div>
+
+        <!-- Feedback alert box -->
+        <div id="authAlert" class="auth-alert" role="alert" aria-live="assertive">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            style="flex-shrink: 0; margin-top: 1px"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <span id="authAlertText">Invalid credentials. Please try again.</span>
+        </div>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <!-- Email field -->
+          <div class="form-group">
+            <label for="emailInput" class="form-label">Email Address</label>
+            <div class="form-input-wrapper">
+              <span class="form-input-icon" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L1 7" />
+                </svg>
+              </span>
+              <input
+                type="email"
+                id="emailInput"
+                name="email"
+                class="form-input"
+                placeholder="operator@cloudrdr.internal"
+                autocomplete="email"
+                required
+                aria-required="true"
+                aria-describedby="emailError"
+              />
+            </div>
+            <div id="emailError" class="form-field-error" role="status" aria-live="polite"></div>
+          </div>
+
+          <!-- Password field -->
+          <div class="form-group">
+            <div class="form-label">
+              <label for="passwordInput">Password</label>
+              <button
+                type="button"
+                id="resetPwdBtn"
+                style="
+                  background: none;
+                  border: none;
+                  color: var(--text-muted);
+                  font-size: 0.72rem;
+                  cursor: pointer;
+                  padding: 0;
+                  transition: color var(--dur-fast);
+                "
+                onmouseover="this.style.color='var(--accent-cyan)'"
+                onmouseout="this.style.color='var(--text-muted)'"
+                title="Reset password for entered email to Password123!"
+              >
+                Forgot or reset password?
+              </button>
+            </div>
+            <div class="form-input-wrapper">
+              <span class="form-input-icon" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </span>
+              <input
+                type="password"
+                id="passwordInput"
+                name="password"
+                class="form-input has-toggle"
+                placeholder="••••••••••••"
+                autocomplete="current-password"
+                required
+                aria-required="true"
+                aria-describedby="passwordError"
+              />
+              <button
+                type="button"
+                id="togglePasswordBtn"
+                class="form-toggle-pwd"
+                aria-label="Toggle password visibility"
+                title="Show password"
+              >
+                <svg
+                  id="eyeIcon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+            <div id="passwordError" class="form-field-error" role="status" aria-live="polite"></div>
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" id="submitBtn" class="btn-auth-submit">
+            <span id="btnText">Sign In</span>
+            <svg
+              id="btnSpinner"
+              class="anim-spin"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              style="display: none"
+            >
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+          </button>
+        </form>
+
+        <div class="auth-card-footer">
+          Don't have an account?
+          <a href="/register" id="toRegisterLink">Register organization</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script type="module">
+      const form = document.getElementById('loginForm');
+      const emailInput = document.getElementById('emailInput');
+      const passwordInput = document.getElementById('passwordInput');
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+      const alertBox = document.getElementById('authAlert');
+      const alertText = document.getElementById('authAlertText');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnSpinner = document.getElementById('btnSpinner');
+      const togglePwdBtn = document.getElementById('togglePasswordBtn');
+      const resetPwdBtn = document.getElementById('resetPwdBtn');
+
+      // Check URL parameters (e.g. from registration redirect)
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlEmail = urlParams.get('email');
+      if (urlEmail) {
+        emailInput.value = urlEmail;
+        if (urlParams.get('registered')) {
+          showAlert(
+            `Account registered! You can log in with your chosen password.`,
+            true
+          );
+        }
+      }
+
+      // Reset password button
+      resetPwdBtn?.addEventListener('click', async () => {
+        const email = emailInput.value.trim();
+        if (!email) {
+          showAlert('Please enter an email address above before requesting a password reset.');
+          emailInput.focus();
+          return;
+        }
+        try {
+          showAlert('Resetting password to Password123!...', true);
+          const res = await fetch('/api/auth/reset-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, newPassword: 'Password123!' }),
+          });
+          const data = await res.json();
+          if (res.ok) {
+            passwordInput.value = 'Password123!';
+            showAlert(
+              `Password for ${email} has been reset to Password123!. Click Sign In to continue.`,
+              true
+            );
+          } else {
+            showAlert(data.error?.message || 'Password reset failed.');
+          }
+        } catch {
+          showAlert('Connection error during password reset.');
+        }
+      });
+
+      // Toggle password visibility
+      togglePwdBtn?.addEventListener('click', () => {
+        const isPwd = passwordInput.type === 'password';
+        passwordInput.type = isPwd ? 'text' : 'password';
+        togglePwdBtn.title = isPwd ? 'Hide password' : 'Show password';
+      });
+
+      function showAlert(msg, isSuccess = false) {
+        alertText.textContent = msg;
+        alertBox.className = `auth-alert show ${isSuccess ? 'success' : 'error'}`;
+      }
+
+      function clearErrors() {
+        alertBox.className = 'auth-alert';
+        emailError.textContent = '';
+        passwordError.textContent = '';
+        emailInput.classList.remove('is-invalid');
+        passwordInput.classList.remove('is-invalid');
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearErrors();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        let hasError = false;
+        if (!email) {
+          emailError.textContent = 'Please enter your email address.';
+          emailInput.classList.add('is-invalid');
+          hasError = true;
+        }
+        if (!password) {
+          passwordError.textContent = 'Please enter your password.';
+          passwordInput.classList.add('is-invalid');
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Loading state
+        submitBtn.disabled = true;
+        btnText.textContent = 'Authenticating...';
+        btnSpinner.style.display = 'inline-block';
+
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            showAlert(
+              data.error?.message || 'Authentication failed. Please verify your credentials.'
+            );
+            return;
+          }
+
+          showAlert('Authentication verified. Redirecting to SOC dashboard...', true);
+
+          // Store user in localStorage
+          if (data.user) {
+            localStorage.setItem('cloudrdr_user', JSON.stringify(data.user));
+            if (data.token) localStorage.setItem('cloudrdr_token', data.token);
+          }
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const destination = urlParams.get('redirect') || '/dashboard';
+
+          setTimeout(() => {
+            window.location.href = destination;
+          }, 300);
+        } catch {
+          showAlert('Network or server connection error. Please try again.');
+        } finally {
+          submitBtn.disabled = false;
+          btnText.textContent = 'Sign In';
+          btnSpinner.style.display = 'none';
+        }
+      });
+    </script>
+  </body>
+</html>

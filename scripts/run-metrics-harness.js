@@ -22,18 +22,18 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
-import { getStorageAdapter } from '../src/adapters/storage/index.js';
-import { createBaseline } from '../src/baseline/baselineService.js';
-import { MonitorAgent } from '../src/monitor/monitorAgent.js';
-import { evaluateSynthetic } from '../src/detection/detectionEngine.js';
-import { freezeAccount } from '../src/contracts/freeze.contract.js';
-import { encryptDataGCM, decryptDataGCM } from '../src/backup/backupService.js';
-import { appendAuditLog } from '../src/contracts/crypto.contract.js';
-import { defaultAuditLog } from '../src/log/auditLog.js';
-import { verifyAuditChain } from '../src/log/chainVerifier.js';
-import { startRestore } from '../src/restore/restoreService.js';
-import { listIncidents } from '../src/response/incidentService.js';
-import { sleep } from '../src/utils/time.js';
+import { getStorageAdapter } from '../backend/src/adapters/storage/index.js';
+import { createBaseline } from '../backend/src/baseline/baselineService.js';
+import { MonitorAgent } from '../backend/src/monitor/monitorAgent.js';
+import { evaluateSynthetic } from '../backend/src/detection/detectionEngine.js';
+import { freezeAccount } from '../backend/src/contracts/freeze.contract.js';
+import { encryptDataGCM, decryptDataGCM } from '../backend/src/backup/backupService.js';
+import { appendAuditLog } from '../backend/src/contracts/crypto.contract.js';
+import { defaultAuditLog } from '../backend/src/log/auditLog.js';
+import { verifyAuditChain } from '../backend/src/log/chainVerifier.js';
+import { startRestore } from '../backend/src/restore/restoreService.js';
+import { listIncidents } from '../backend/src/response/incidentService.js';
+import { sleep } from '../backend/src/utils/time.js';
 
 async function runMetricsHarness() {
   console.log('\n===============================================================');
@@ -49,8 +49,8 @@ async function runMetricsHarness() {
   // Reset audit log and test bucket state for isolated test measurement
   defaultAuditLog.clear();
 
-  const { getSupabaseClient } = await import('../src/adapters/db/supabaseClient.js');
-  const { defaultBackupStore } = await import('../src/backup/backupService.js');
+  const { getSupabaseClient } = await import('../backend/src/adapters/db/supabaseClient.js');
+  const { defaultBackupStore } = await import('../backend/src/backup/backupService.js');
   const db = getSupabaseClient();
   await db.from('protected_files').delete().eq('bucket', bucket);
   await db.from('baseline_snapshots').delete().eq('bucket', bucket);
@@ -60,7 +60,7 @@ async function runMetricsHarness() {
   const initialMemory = process.memoryUsage().heapUsed;
 
   // ── M8: Baseline Creation & Hashing Throughput ──────────────────────────────
-  console.log('⏱️ [M8] Benchmarking Baseline Hashing Throughput...');
+  console.log('[BENCHMARK] [M8] Benchmarking Baseline Hashing Throughput...');
   const fileCount = 50;
   const samplePayload = 'A'.repeat(1024 * 64); // 64 KB per file = 3.2 MB total
   for (let i = 1; i <= fileCount; i++) {
@@ -87,7 +87,7 @@ async function runMetricsHarness() {
   );
 
   // ── M4: Canary Trap Detection Latency ───────────────────────────────────────
-  console.log('\n⏱️ [M4] Measuring Canary Trap Detection Latency...');
+  console.log('\n[BENCHMARK] [M4] Measuring Canary Trap Detection Latency...');
   const m4Start = performance.now();
   const canaryEvaluation = evaluateSynthetic({
     events: [
@@ -116,7 +116,7 @@ async function runMetricsHarness() {
   console.log(`   ✓ M4 Measured: ${m4LatencyMs} ms (Verdict: ${canaryEvaluation.verdict})`);
 
   // ── M2: IAM Account Freeze Latency ─────────────────────────────────────────
-  console.log('\n⏱️ [M2] Measuring Automated Account Freeze Latency...');
+  console.log('\n[BENCHMARK] [M2] Measuring Automated Account Freeze Latency...');
   const m2Start = performance.now();
   const freezeRes = await freezeAccount(accountId);
   const m2End = performance.now();
@@ -133,7 +133,7 @@ async function runMetricsHarness() {
   console.log(`   ✓ M2 Measured: ${m2LatencyMs} ms (Target: < 10s)`);
 
   // ── M3: False Positive Rate under Benign Bulk Load ─────────────────────────
-  console.log('\n⏱️ [M3] Measuring False Positive Rate under Allowlisted Bulk Operations...');
+  console.log('\n[BENCHMARK] [M3] Measuring False Positive Rate under Allowlisted Bulk Operations...');
   const m3Evaluation = evaluateSynthetic({
     events: Array.from({ length: 70 }, (_, i) => ({
       path: `bulk/data_${i}.bin`,
@@ -163,7 +163,7 @@ async function runMetricsHarness() {
   console.log(`   ✓ M3 Measured: 0.00% (70% bulk change correctly exempted for allowlisted agent)`);
 
   // ── M1: Detection Latency under Mass Attack ────────────────────────────────
-  console.log('\n⏱️ [M1] Measuring End-to-End Detection Latency under Attack...');
+  console.log('\n[BENCHMARK] [M1] Measuring End-to-End Detection Latency under Attack...');
   const monitor = new MonitorAgent({ bucket, accountId, intervalSeconds: 60 });
   await monitor.runCycle(); // calibrate
 
@@ -189,7 +189,7 @@ async function runMetricsHarness() {
   console.log(`   ✓ M1 Measured: ${m1LatencyMs} ms (Well within 60s SLA)`);
 
   // ── M5: AEAD Backup Tamper Detection Rate ──────────────────────────────────
-  console.log('\n⏱️ [M5] Measuring AEAD Tamper Detection Rate...');
+  console.log('\n[BENCHMARK] [M5] Measuring AEAD Tamper Detection Rate...');
   const plaintext = Buffer.from('Highly confidential corporate intellectual property');
   const metadata = { bucket, path: 'finance/secret.doc', versionRef: 'v1' };
   const encryptedPackage = encryptDataGCM(plaintext, metadata);
@@ -211,7 +211,7 @@ async function runMetricsHarness() {
   console.log(`   ✓ M5 Measured: 100.00% (Cryptographic integrity check rejected tampered byte)`);
 
   // ── M6: Verified Recovery Accuracy (100% VALID) ───────────────────────────
-  console.log('\n⏱️ [M6] Measuring End-to-End Verified Recovery Accuracy...');
+  console.log('\n[BENCHMARK] [M6] Measuring End-to-End Verified Recovery Accuracy...');
   const incidents = await listIncidents({ accountId });
   const activeIncident = incidents[0];
   const restoreReport = await startRestore(activeIncident.id);
@@ -229,7 +229,7 @@ async function runMetricsHarness() {
   );
 
   // ── M7: Audit Log Hash Chain Verification ──────────────────────────────────
-  console.log('\n⏱️ [M7] Measuring Audit Log Hash Chain Verification & Tamper Resistance...');
+  console.log('\n[BENCHMARK] [M7] Measuring Audit Log Hash Chain Verification & Tamper Resistance...');
   await appendAuditLog({ event: 'BENCHMARK_PROBE', timestamp: new Date().toISOString() });
   const chainValidation = verifyAuditChain(defaultAuditLog.getEntries());
   const m7Passed = chainValidation.valid === true;
@@ -248,7 +248,7 @@ async function runMetricsHarness() {
   );
 
   // ── M9: Memory Footprint & Resource Overhead ───────────────────────────────
-  console.log('\n⏱️ [M9] Measuring Process Memory Footprint...');
+  console.log('\n[BENCHMARK] [M9] Measuring Process Memory Footprint...');
   const finalMemory = process.memoryUsage().heapUsed;
   const heapDeltaMb = ((finalMemory - initialMemory) / (1024 * 1024)).toFixed(2);
   const totalHeapMb = (finalMemory / (1024 * 1024)).toFixed(2);
@@ -350,7 +350,7 @@ The CloudRDR system demonstrates complete compliance with all academic and indus
 `;
 
   await fs.writeFile(reportPath, markdown, 'utf8');
-  console.log(`\n✅ Generated Benchmark Metrics Report at: ${reportPath}\n`);
+  console.log(`\n[OK] Generated Benchmark Metrics Report at: ${reportPath}\n`);
 }
 
 runMetricsHarness().catch((err) => {

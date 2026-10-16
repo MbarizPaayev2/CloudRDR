@@ -5,10 +5,10 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyRate } from '../../src/detection/thresholds.js';
-import { filterEventsInWindow, computeChangeMetrics } from '../../src/detection/rateWindow.js';
-import { isCanaryPath, isCanaryTriggered } from '../../src/detection/canary.js';
-import { evaluateSynthetic } from '../../src/detection/detectionEngine.js';
+import { classifyRate } from '../../backend/src/detection/thresholds.js';
+import { filterEventsInWindow, computeChangeMetrics } from '../../backend/src/detection/rateWindow.js';
+import { isCanaryPath, isCanaryTriggered } from '../../backend/src/detection/canary.js';
+import { evaluateSynthetic } from '../../backend/src/detection/detectionEngine.js';
 
 describe('Detection - Thresholds & Boundary Values', () => {
   it('classifies 0.0999 as normal (just below 0.10)', () => {

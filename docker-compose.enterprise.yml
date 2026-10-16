@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  # ── 1. Enterprise PostgreSQL 16 (Auto-Initialized) ──────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: cloudrdr-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: cloudrdr
+      POSTGRES_USER: cloudrdr_admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cloudrdr_secure_password_2026}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloudrdr_admin -d cloudrdr"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cloudrdr-enterprise-net
+
+  # ── 2. Redis Event & Sliding-Window Cache ──────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: cloudrdr-redis
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - redisdata:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - cloudrdr-enterprise-net
+
+  # ── 3. CloudRDR SOC Manager & Detection Engine Backend ─────────────────────
+  manager:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cloudrdr-manager
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - STORAGE_PROVIDER=local
+      - STORAGE_BUCKET=protected
+      - LOCAL_STORAGE_PATH=/app/data/local-storage
+      - API_KEY=${CLOUDRDR_API_KEY:-cloudrdr-enterprise-api-key}
+      - DATABASE_URL=postgres://cloudrdr_admin:${DB_PASSWORD:-cloudrdr_secure_password_2026}@postgres:5432/cloudrdr
+      - REDIS_URL=redis://redis:6379
+      - ALERT_WEBHOOK_URL=${ALERT_WEBHOOK_URL:-}
+      - ALERT_SLACK_WEBHOOK_URL=${ALERT_SLACK_WEBHOOK_URL:-}
+      - ALERT_TELEGRAM_BOT_TOKEN=${ALERT_TELEGRAM_BOT_TOKEN:-}
+      - ALERT_TELEGRAM_CHAT_ID=${ALERT_TELEGRAM_CHAT_ID:-}
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "3000:3000"
+    networks:
+      - cloudrdr-enterprise-net
+
+  # ── 4. Standalone High-Performance Go Agent ────────────────────────────────
+  agent:
+    build:
+      context: ./agent-go
+      dockerfile: Dockerfile
+    container_name: cloudrdr-agent
+    restart: always
+    depends_on:
+      - manager
+    environment:
+      - CLOUDRDR_MANAGER_URL=http://manager:3000
+      - CLOUDRDR_WATCH_DIR=/data/protected
+      - CLOUDRDR_BUCKET=protected
+      - CLOUDRDR_ACCOUNT_ID=enterprise-cloud-acc
+      - CLOUDRDR_ENTROPY_THRESHOLD=7.2
+      - CLOUDRDR_HEARTBEAT_SEC=10
+      - CLOUDRDR_POLL_INTERVAL_SEC=3
+    volumes:
+      - ./data/local-storage/protected:/data/protected
+      - agent-spool:/opt/cloudrdr/spool
+    networks:
+      - cloudrdr-enterprise-net
+
+  # ── 5. Nginx Production Gateway & Reverse Proxy ────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: cloudrdr-gateway
+    restart: always
+    depends_on:
+      - manager
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - cloudrdr-enterprise-net
+
+volumes:
+  pgdata:
+  redisdata:
+  agent-spool:
+
+networks:
+  cloudrdr-enterprise-net:
+    driver: bridge

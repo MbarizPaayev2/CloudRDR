@@ -1,0 +1,27 @@
+[Unit]
+Description=CloudRDR Autonomous Storage Monitoring C Daemon
+Documentation=https://cloudrdr.internal
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/var/lib/cloudrdr
+EnvironmentFile=-/etc/cloudrdr/agent.env
+ExecStart=/usr/local/bin/cloudrdr-agent --manager ${MANAGER_URL} --bucket ${BUCKET} --dir ${WATCH_DIR} --interval ${INTERVAL_SEC}
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+KillMode=process
+
+# Sandboxing and security hardening
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

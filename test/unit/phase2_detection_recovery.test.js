@@ -17,27 +17,27 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 
-import { buildServer } from '../../src/api/server.js';
-import cfg from '../../src/config/index.js';
+import { buildServer } from '../../backend/src/api/server.js';
+import cfg from '../../backend/src/config/index.js';
 import {
   _resetClientForTests,
   getSupabaseClient,
   supaQuery,
-} from '../../src/adapters/db/supabaseClient.js';
-import { LocalFsStorage } from '../../src/adapters/storage/localFsStorage.js';
-import { _setAdapterForTests } from '../../src/adapters/storage/index.js';
-import { createBaseline } from '../../src/baseline/baselineService.js';
+} from '../../backend/src/adapters/db/supabaseClient.js';
+import { LocalFsStorage } from '../../backend/src/adapters/storage/localFsStorage.js';
+import { _setAdapterForTests } from '../../backend/src/adapters/storage/index.js';
+import { createBaseline } from '../../backend/src/baseline/baselineService.js';
 import {
   _resetFreezeStateForTests,
   _isFrozenForTests,
-} from '../../src/contracts/freeze.contract.js';
-import { _resetBackupStoreForTests, storeBackup } from '../../src/contracts/backup.contract.js';
-import { _resetAuditLogForTests } from '../../src/contracts/crypto.contract.js';
-import { defaultAuditLog } from '../../src/log/auditLog.js';
-import { resetThresholdsForTests } from '../../src/detection/thresholds.js';
-import { startRestore, promoteStagedRestore } from '../../src/restore/restoreService.js';
-import { createIncident, getIncident } from '../../src/response/incidentService.js';
-import { verifyAuditChain } from '../../src/log/chainVerifier.js';
+} from '../../backend/src/contracts/freeze.contract.js';
+import { _resetBackupStoreForTests, storeBackup } from '../../backend/src/contracts/backup.contract.js';
+import { _resetAuditLogForTests } from '../../backend/src/contracts/crypto.contract.js';
+import { defaultAuditLog } from '../../backend/src/log/auditLog.js';
+import { resetThresholdsForTests } from '../../backend/src/detection/thresholds.js';
+import { startRestore, promoteStagedRestore } from '../../backend/src/restore/restoreService.js';
+import { createIncident, getIncident } from '../../backend/src/response/incidentService.js';
+import { verifyAuditChain } from '../../backend/src/log/chainVerifier.js';
 
 describe('Phase 2 — Core Ransomware Detection, Safe Containment & Verified Recovery', () => {
   let app;

@@ -14,7 +14,7 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { evaluateSynthetic } from '../src/detection/detectionEngine.js';
+import { evaluateSynthetic } from '../backend/src/detection/detectionEngine.js';
 
 // ── Synthetic Workload Generator ─────────────────────────────────────────────
 
@@ -343,7 +343,7 @@ ${results
     (r) =>
       `| **${r.thresholdPct}** | ${r.tp} | ${r.fp} | ${r.tn} | ${r.fn} | ${(r.precision * 100).toFixed(1)}% | ${(r.recall * 100).toFixed(1)}% | ${(r.specificity * 100).toFixed(1)}% | **${r.f1Score.toFixed(3)}** | ${
         r.threshold === 0.3
-          ? '⭐ **Optimal Balance (Default)**'
+          ? '**Optimal Balance (Default)**'
           : r.fp > 0
             ? 'High False Positives'
             : 'Suboptimal Recall'
@@ -375,7 +375,7 @@ ${results
 `;
 
   await fs.writeFile(reportPath, markdown, 'utf8');
-  console.log(`\n✅ Generated Threshold Sweep Report at: ${reportPath}\n`);
+  console.log(`\n[OK] Generated Threshold Sweep Report at: ${reportPath}\n`);
 }
 
 runSweep().catch((err) => {

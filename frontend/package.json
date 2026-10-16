@@ -1,0 +1,11 @@
+{
+  "name": "@cloudrdr/frontend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CloudRDR Forensic Security Operations Center & Web Frontend",
+  "type": "module",
+  "scripts": {
+    "serve:dashboard": "npx serve dashboard -p 3001",
+    "serve:site": "npx serve site -p 3002"
+  }
+}

@@ -11,10 +11,10 @@
  */
 
 import crypto from 'node:crypto';
-import { encryptDataGCM, decryptDataGCM } from '../src/backup/backupService.js';
-import { signRecord, verifyRecord, generateEd25519KeyPair } from '../src/crypto/index.js';
-import { AuditLog } from '../src/log/auditLog.js';
-import { verifyAuditChain } from '../src/log/chainVerifier.js';
+import { encryptDataGCM, decryptDataGCM } from '../backend/src/backup/backupService.js';
+import { signRecord, verifyRecord, generateEd25519KeyPair } from '../backend/src/crypto/index.js';
+import { AuditLog } from '../backend/src/log/auditLog.js';
+import { verifyAuditChain } from '../backend/src/log/chainVerifier.js';
 
 console.log('\n========================================================================');
 console.log('   CloudRDR — CRYPTOGRAPHIC TAMPERING EXPERIMENTS (FOR UNIVERSITY REPORT)');
@@ -23,7 +23,7 @@ console.log('   Academic Supervisor: Xatirə Həsənli | ADNSU Rəqəmsal Texnol
 console.log('========================================================================\n');
 
 // ── EXPERIMENT 1: AES-256-GCM AEAD AUTHENTICATION TAG TAMPER TEST ───────────
-console.log('🧪 [EXPERIMENT 1] AES-256-GCM AEAD Tamper Detection');
+console.log('[EXPERIMENT 1] AES-256-GCM AEAD Tamper Detection');
 console.log('------------------------------------------------------------------------');
 const originalPlaintext = Buffer.from('CONFIDENTIAL CORPORATE REPORT: Q3 REVENUE $1.2M');
 const masterKey = crypto.randomBytes(32);
@@ -44,15 +44,15 @@ console.log('\n[!] ATTACK SIMULATION: Attacker modified 1 byte at offset 40 in c
 
 const decryptResult = decryptDataGCM(tamperedPackage, metadata, masterKey);
 if (!decryptResult.aeadVerified) {
-  console.log('✅ DEFENSE SUCCESS: AES-256-GCM AEAD rejected modified data:');
+  console.log('[OK] DEFENSE SUCCESS: AES-256-GCM AEAD rejected modified data:');
   console.log('   Status: aeadVerified = FALSE, bytes = NULL');
   console.log('   Zero plaintext bytes leaked to untrusted memory.');
 } else {
-  console.log('❌ CRITICAL FAILURE: Decryption succeeded with tampered ciphertext!');
+  console.log('[FAIL] CRITICAL FAILURE: Decryption succeeded with tampered ciphertext!');
 }
 
 // ── EXPERIMENT 2: RFC 8032 ED25519 DIGITAL SIGNATURE TAMPER TEST ─────────────
-console.log('\n\n🧪 [EXPERIMENT 2] RFC 8032 Ed25519 Incident Record Integrity Test');
+console.log('\n\n[EXPERIMENT 2] RFC 8032 Ed25519 Incident Record Integrity Test');
 console.log('------------------------------------------------------------------------');
 const { publicKey, privateKey, keyId } = generateEd25519KeyPair();
 const incidentRecord = {
@@ -77,14 +77,14 @@ console.log('\n[!] ATTACK SIMULATION: Attacker modified "freezeStatus" to "unfro
 
 const tamperedVerification = verifyRecord(tamperedRecord, sigResult.signature, publicKey);
 if (!tamperedVerification) {
-  console.log('✅ DEFENSE SUCCESS: Ed25519 signature verification FAILED as expected:');
+  console.log('[OK] DEFENSE SUCCESS: Ed25519 signature verification FAILED as expected:');
   console.log('   Verdict: Signature is INVALID. Tampering detected in forensic record.');
 } else {
-  console.log('❌ CRITICAL FAILURE: Signature verified despite tampering!');
+  console.log('[FAIL] CRITICAL FAILURE: Signature verified despite tampering!');
 }
 
 // ── EXPERIMENT 3: HASH-CHAINED AUDIT LOG INTEGRITY TEST ───────────────────────
-console.log('\n\n🧪 [EXPERIMENT 3] Hash-Chained Audit Ledger Tamper Resistance Test');
+console.log('\n\n[EXPERIMENT 3] Hash-Chained Audit Ledger Tamper Resistance Test');
 console.log('------------------------------------------------------------------------');
 const testLog = new AuditLog(); // in-memory isolated instance
 await testLog.append({ event: 'BASELINE_CREATED', fileCount: 50 });
@@ -107,15 +107,15 @@ tamperedEntries[1].data.affectedRatio = 0.05; // silent modification
 
 const chainAfter = verifyAuditChain(tamperedEntries);
 if (!chainAfter.valid) {
-  console.log('✅ DEFENSE SUCCESS: Tamper detected in hash-chained audit ledger:');
+  console.log('[OK] DEFENSE SUCCESS: Tamper detected in hash-chained audit ledger:');
   console.log('   Broken Block Index:  #%d', chainAfter.brokenIndex);
   console.log('   Error Reason:        %s', chainAfter.reason);
   console.log('   Expected Hash:       %s...', chainAfter.expectedHash?.slice(0, 24) || chainAfter.expectedPrev?.slice(0, 24));
   console.log('   Got Hash:            %s...', chainAfter.actualHash?.slice(0, 24) || chainAfter.gotPrev?.slice(0, 24));
 } else {
-  console.log('❌ CRITICAL FAILURE: Audit chain accepted tampered block!');
+  console.log('[FAIL] CRITICAL FAILURE: Audit chain accepted tampered block!');
 }
 
 console.log('\n========================================================================');
-console.log('✅ ALL 3 CRYPTOGRAPHIC TAMPER EXPERIMENTS CONFIRMED 100% SECURE');
+console.log('[OK] ALL 3 CRYPTOGRAPHIC TAMPER EXPERIMENTS CONFIRMED 100% SECURE');
 console.log('========================================================================\n');

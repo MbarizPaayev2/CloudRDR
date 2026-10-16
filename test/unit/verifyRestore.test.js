@@ -5,8 +5,8 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { verifyFileBytes } from '../../src/restore/verifyRestore.js';
-import * as crypto from '../../src/contracts/crypto.contract.js';
+import { verifyFileBytes } from '../../backend/src/restore/verifyRestore.js';
+import * as crypto from '../../backend/src/contracts/crypto.contract.js';
 
 describe('verifyRestore - Pure verification', () => {
   const content = Buffer.from('Original Protected Document Content');

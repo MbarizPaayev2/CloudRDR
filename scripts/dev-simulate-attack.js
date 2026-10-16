@@ -15,12 +15,12 @@
  *   npm run simulate
  */
 
-import { getStorageAdapter } from '../src/adapters/storage/index.js';
-import { createBaseline } from '../src/baseline/baselineService.js';
-import { MonitorAgent } from '../src/monitor/monitorAgent.js';
-import { startRestore } from '../src/restore/restoreService.js';
-import { listIncidents } from '../src/response/incidentService.js';
-import { sleep } from '../src/utils/time.js';
+import { getStorageAdapter } from '../backend/src/adapters/storage/index.js';
+import { createBaseline } from '../backend/src/baseline/baselineService.js';
+import { MonitorAgent } from '../backend/src/monitor/monitorAgent.js';
+import { startRestore } from '../backend/src/restore/restoreService.js';
+import { listIncidents } from '../backend/src/response/incidentService.js';
+import { sleep } from '../backend/src/utils/time.js';
 
 async function main() {
   const bucket = 'simulation-bucket';
@@ -32,7 +32,7 @@ async function main() {
   console.log('===============================================================\n');
 
   // STEP 1: Seed Clean Files
-  console.log('📦 Step 1: Seeding 20 protected files in bucket...');
+  console.log('[STEP 1] Seeding 20 protected files in bucket...');
   const totalFiles = 20;
   for (let i = 1; i <= totalFiles; i++) {
     await storage.write(
@@ -41,23 +41,23 @@ async function main() {
       `Original Confidential Document #${i} — Confidentiality Level: HIGH`
     );
   }
-  console.log(`   ✓ Created ${totalFiles} clean files in storage`);
+  console.log(`   [OK] Created ${totalFiles} clean files in storage`);
 
   // STEP 2: Baseline Capture
-  console.log('\n🔒 Step 2: Capturing cryptographic SHA-256 baseline & Merkle root...');
+  console.log('\n[STEP 2] Capturing cryptographic SHA-256 baseline & Merkle root...');
   const baseline = await createBaseline(bucket);
-  console.log(`   ✓ Baseline version: v${baseline.version}`);
-  console.log(`   ✓ Files baselined:  ${baseline.fileCount}`);
-  console.log(`   ✓ Merkle Root:      ${baseline.merkleRoot}`);
+  console.log(`   [OK] Baseline version: v${baseline.version}`);
+  console.log(`   [OK] Files baselined:  ${baseline.fileCount}`);
+  console.log(`   [OK] Merkle Root:      ${baseline.merkleRoot}`);
 
   // STEP 3: Initialise Monitor Agent
-  console.log('\n📡 Step 3: Starting Monitor Agent cycle to calibrate initial state...');
+  console.log('\n[STEP 3] Starting Monitor Agent cycle to calibrate initial state...');
   const monitor = new MonitorAgent({ bucket, accountId, intervalSeconds: 60 });
   await monitor.runCycle();
-  console.log('   ✓ Monitor agent calibrated against baseline');
+  console.log('   [OK] Monitor agent calibrated against baseline');
 
   // STEP 4: Simulate Ransomware Attack
-  console.log('\n💀 Step 4: [ATTACK IN PROGRESS] Simulating ransomware payload...');
+  console.log('\n[STEP 4] [ATTACK IN PROGRESS] Simulating ransomware payload...');
   const attackCount = 10; // 10 / 20 = 50% > 30% threshold
   for (let i = 1; i <= attackCount; i++) {
     await storage.write(
@@ -67,32 +67,32 @@ async function main() {
     );
   }
   console.log(
-    `   ⚠️ Attacker modified ${attackCount} files (${(attackCount / totalFiles) * 100}% of protected data)`
+    `   [WARN] Attacker modified ${attackCount} files (${(attackCount / totalFiles) * 100}% of protected data)`
   );
 
   // STEP 5: Monitor & Detection Cycle
-  console.log('\n🔍 Step 5: Monitor agent polling storage for changes...');
+  console.log('\n[STEP 5] Monitor agent polling storage for changes...');
   const changeEvents = await monitor.runCycle();
-  console.log(`   ✓ Monitor detected ${changeEvents.length} modified files`);
+  console.log(`   [OK] Monitor detected ${changeEvents.length} modified files`);
 
   // Allow async response handler queue to process
   await sleep(150);
 
   // STEP 6: Verify Incident & Freeze
-  console.log('\n🚨 Step 6: Verifying automated response actions...');
+  console.log('\n[STEP 6] Verifying automated response actions...');
   const incidents = await listIncidents({ accountId });
   if (incidents.length === 0) {
     throw new Error('FAILED: No incident was generated!');
   }
   const incident = incidents[0];
-  console.log(`   ✓ Incident ID:     ${incident.id}`);
-  console.log(`   ✓ Account Status:  ${incident.status.toUpperCase()} (IAM write freeze active)`);
-  console.log(`   ✓ Digital Sign:    ${incident.record_signature?.slice(0, 32)}...`);
-  console.log(`   ✓ Signing Key ID:  ${incident.signing_key_id}`);
-  console.log(`   ✓ Affected Files:  ${incident.affected_paths.length}`);
+  console.log(`   [OK] Incident ID:     ${incident.id}`);
+  console.log(`   [OK] Account Status:  ${incident.status.toUpperCase()} (IAM write freeze active)`);
+  console.log(`   [OK] Digital Sign:    ${incident.record_signature?.slice(0, 32)}...`);
+  console.log(`   [OK] Signing Key ID:  ${incident.signing_key_id}`);
+  console.log(`   [OK] Affected Files:  ${incident.affected_paths.length}`);
 
   // STEP 7: Verified Restore
-  console.log('\n🛡️ Step 7: Initiating verified restore from encrypted backup...');
+  console.log('\n[STEP 7] Initiating verified restore from encrypted backup...');
   const restoreReport = await startRestore(incident.id);
 
   console.log('\n===============================================================');
@@ -112,11 +112,11 @@ async function main() {
   const fileRestoredProperly = restoredFile.startsWith('Original Confidential Document #1');
 
   if (restoreReport.isFullyRestored && fileRestoredProperly) {
-    console.log('🎉 SUCCESS: Entire CloudRDR lifecycle passed perfectly!');
+    console.log('[OK] SUCCESS: Entire CloudRDR lifecycle passed perfectly!');
     console.log('   All files restored and proven identical to pre-attack baseline.');
     console.log('===============================================================\n');
   } else {
-    console.error('❌ FAILURE: Restored file verification failed!');
+    console.error('[FAIL] FAILURE: Restored file verification failed!');
     process.exit(1);
   }
 }

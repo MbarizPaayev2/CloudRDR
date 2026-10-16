@@ -7,16 +7,19 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "dev": "node --watch src/api/server.js",
-    "start": "node src/api/server.js",
+    "dev": "node --watch backend/src/api/server.js",
+    "start": "node backend/src/api/server.js",
+    "build:c": "powershell -ExecutionPolicy Bypass -File agent-c/build.ps1",
     "monitor": "node scripts/run-monitor.js",
     "seed": "node scripts/seed-baseline.js",
     "simulate": "node scripts/dev-simulate-attack.js",
     "sweep": "node scripts/run-threshold-sweep.js",
     "metrics": "node scripts/run-metrics-harness.js",
-    "test": "node --experimental-vm-modules --test",
-    "lint": "eslint src scripts test",
-    "lint:fix": "eslint src scripts test --fix",
+    "test": "node --experimental-vm-modules --test \"test/**/*.test.js\"",
+    "test:qa": "node test/qa-audit.js",
+    "test:all": "npm test && npm run test:qa",
+    "lint": "eslint backend/src scripts test",
+    "lint:fix": "eslint backend/src scripts test --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -26,6 +29,7 @@
     "@supabase/supabase-js": "^2.43.0",
     "dotenv": "^16.4.5",
     "fastify": "^4.27.0",
+    "pg": "^8.23.1",
     "pino": "^9.2.0",
     "pino-pretty": "^11.2.0"
   },

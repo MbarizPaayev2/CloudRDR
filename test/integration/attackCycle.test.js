@@ -10,18 +10,18 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
-import { LocalFsStorage } from '../../src/adapters/storage/localFsStorage.js';
-import { _setAdapterForTests } from '../../src/adapters/storage/index.js';
-import { _resetClientForTests } from '../../src/adapters/db/supabaseClient.js';
+import { LocalFsStorage } from '../../backend/src/adapters/storage/localFsStorage.js';
+import { _setAdapterForTests } from '../../backend/src/adapters/storage/index.js';
+import { _resetClientForTests } from '../../backend/src/adapters/db/supabaseClient.js';
 import {
   _resetFreezeStateForTests,
   _isFrozenForTests,
-} from '../../src/contracts/freeze.contract.js';
-import { _resetBackupStoreForTests } from '../../src/contracts/backup.contract.js';
-import { createBaseline } from '../../src/baseline/baselineService.js';
-import { MonitorAgent } from '../../src/monitor/monitorAgent.js';
-import { startRestore, getRestoreJob } from '../../src/restore/restoreService.js';
-import { listIncidents } from '../../src/response/incidentService.js';
+} from '../../backend/src/contracts/freeze.contract.js';
+import { _resetBackupStoreForTests } from '../../backend/src/contracts/backup.contract.js';
+import { createBaseline } from '../../backend/src/baseline/baselineService.js';
+import { MonitorAgent } from '../../backend/src/monitor/monitorAgent.js';
+import { startRestore, getRestoreJob } from '../../backend/src/restore/restoreService.js';
+import { listIncidents } from '../../backend/src/response/incidentService.js';
 
 describe('Integration - Full Attack, Detection, Freeze, and Restore Cycle', () => {
   let tmpDir;

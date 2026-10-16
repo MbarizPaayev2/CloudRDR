@@ -4,7 +4,7 @@
   <p>
     <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-v18%2B-339933?logo=node.js&logoColor=white" alt="Node Version" /></a>
     <a href="https://fastify.dev"><img src="https://img.shields.io/badge/Fastify-v4.27-000000?logo=fastify&logoColor=white" alt="Fastify" /></a>
-    <img src="https://img.shields.io/badge/Tests-74%2F74%20Passing-27B97F?logo=checkmarx&logoColor=white" alt="Tests" />
+    <img src="https://img.shields.io/badge/Tests-84%2F84%20Passing-27B97F?logo=checkmarx&logoColor=white" alt="Tests" />
     <img src="https://img.shields.io/badge/Zero--Trust-RFC%208032%20Ed25519-4360FF" alt="Ed25519" />
     <img src="https://img.shields.io/badge/Encryption-AES--256--GCM-008080" alt="AES-256-GCM" />
     <img src="https://img.shields.io/badge/Audit-Hash--Chained%20Ledger-58B3DA" alt="Audit Chain" />
@@ -35,24 +35,24 @@ Modern cloud ransomware attacks rarely announce themselves with desktop ransom n
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        CloudRDR Platform Core                          │
 │                                                                        │
-│  ┌──────────┐    Change Events    ┌───────────────┐                    │
-│  │  Monitor │────────────────────▶│   Detection   │                    │
-│  │  Agent   │                     │    Engine     │                    │
-│  └────┬─────┘                     └───────┬───────┘                    │
-│       │                                   │ Ransomware Verdict         │
-│       │ Poll Storage                      ▼                            │
-│       ▼                           ┌───────────────┐                    │
-│  ┌──────────┐                     │   Response    │──▶ Freeze IAM      │
-│  │ Storage  │                     │    Service    │──▶ Ed25519 Sign    │
-│  │ Adapter  │                     └───────┬───────┘──▶ Hash Audit Log  │
-│  └────┬─────┘                             │                            │
-│       │                                   ▼                            │
-│       ▼                           ┌───────────────┐                    │
-│  ┌──────────┐                     │   Verified    │◀── AES-256-GCM     │
-│  │ Baseline │                     │    Restore    │──▶ Quarantine Stage│
-│  │ Service  │                     └───────┬───────┘──▶ Promote Gate    │
-│  └──────────┘                             │                            │
-│                                           ▼                            │
+│  ┌──────────────┐   Change & Entropy Events  ┌───────────────┐         │
+│  │ Cloud & Host │───────────────────────────▶│   Detection   │         │
+│  │ Agent (Go/JS)│                            │    Engine     │         │
+│  └──────┬───────┘                            └───────┬───────┘         │
+│         │                                            │ Ransomware      │
+│         │ Poll Storage / FIM                         ▼ Verdict         │
+│         ▼                                    ┌───────────────┐         │
+│  ┌──────────────┐                            │   Response    │──▶ Freeze IAM
+│  │ Storage      │                            │    Service    │──▶ Ed25519 Sign
+│  │ Adapter      │                            └───────┬───────┘──▶ Hash Audit Log
+│  └──────┬───────┘                                    │                 │
+│         │                                            ▼                 │
+│         ▼                                    ┌───────────────┐         │
+│  ┌──────────────┐                            │   Verified    │◀── AES-256-GCM
+│  │ Baseline     │                            │    Restore    │──▶ Quarantine Stage
+│  │ Service      │                            └───────┬───────┘──▶ Promote Gate
+│  └──────────────┘                                    │                 │
+│                                                      ▼                 │
 │  ┌──────────────────────────────────────────────────────────────────┐  │
 │  │                       HTTP REST & SOC API                        │  │
 │  │  /status/system   /metrics/kpis   /incidents   /evidence/verify  │  │
@@ -64,7 +64,7 @@ Modern cloud ransomware attacks rarely announce themselves with desktop ransom n
 ┌─────────────────────┐                           ┌─────────────────────┐
 │  Public Showcase &  │                           │   SOC Operational   │
 │   Landing Portal    │                           │   Admin Dashboard   │
-│   (http://.../site) │                           │ (http://.../dashboard)│
+│   (http://.../)     │                           │ (http://.../dashboard)│
 └─────────────────────┘                           └─────────────────────┘
 ```
 
@@ -162,7 +162,7 @@ Open in your browser:
 
 ```bash
 npm test
-# Executes all 74 automated unit & integration tests across 23 test suites
+# Executes all 83 automated unit & integration tests across 25 test suites
 ```
 
 ---
@@ -262,17 +262,67 @@ All protected endpoints require authentication via session cookie or `Authorizat
 | `GET`  | `/api/auth/me`       | Fetch authenticated operator profile                            |
 | `POST` | `/api/auth/logout`   | Terminate active operator session                               |
 
+### Agent Deployment & Telemetry Gateway
+
+| Method | Endpoint                        | Description                                                                     |
+| ------ | ------------------------------- | ------------------------------------------------------------------------------- |
+| `GET`  | `/api/agent/status`             | Live status of connected monitoring agents and telemetry overview               |
+| `POST` | `/api/agent/register`           | Dynamic agent enrollment; issues session token and parameters                   |
+| `POST` | `/api/agent/heartbeat`          | Ingests agent keepalive, CPU/RAM utilization, and monitored file metrics        |
+| `POST` | `/api/agent/events`             | Real-time batch change and Shannon entropy event ingestion (triggers freeze)   |
+| `GET`  | `/api/agent/install.sh`         | Automated bash installer for Linux/macOS cloud instances (`curl -sSL ... \| bash`)|
+| `GET`  | `/api/agent/install.ps1`        | Automated PowerShell installer for Windows Server instances                     |
+| `GET`  | `/api/agent/docker-compose.yml` | Containerized agent deployment definition for Docker & Kubernetes DaemonSets    |
+
+### Attack Simulation & Verification
+
+| Method | Endpoint                | Description                                                                     |
+| ------ | ----------------------- | ------------------------------------------------------------------------------- |
+| `POST` | `/api/simulate/attack`  | Simulates high-velocity mass encryption attack across 50% of protected files    |
+| `POST` | `/api/simulate/canary`  | Simulates targeted tampering of sentinel/canary tripwires                       |
+| `POST` | `/api/simulate/reset`   | Resets storage bucket, incidents, and detection state to clean baseline         |
+
+---
+
+## High-Performance Cloud Agent (`agent-go/`)
+
+For production cloud VMs (AWS EC2, Google Cloud Compute, Azure VMs, Kubernetes nodes) requiring minimal resource overhead (<20MB RAM, sub-1% CPU), CloudRDR provides a standalone **Go Agent**:
+
+```bash
+# 1. Compile static binary (zero external CGo dependencies):
+cd agent-go
+go build -ldflags="-s -w" -o cloudrdr-agent .
+
+# 2. Launch monitoring daemon:
+./cloudrdr-agent -manager="http://<MANAGER_IP>:3000" -watch="/var/data/protected"
+```
+
+Features:
+- **Wazuh-style Enrollment & Heartbeat**: Registers dynamically with Manager and sends health telemetry every 10s.
+- **Edge Shannon Entropy**: Analyzes byte distribution ($H(X) > 7.2$) on file sample buffers to flag encrypted objects locally.
+- **Offline Resilient Spooling**: Spools unacknowledged events to local disk queue (`/opt/cloudrdr/spool`) during network partition.
+- **Active Containment Response**: Receives and executes immediate `FREEZE` lockdown orders issued by the Manager.
+
 ---
 
 ## Quality & Verification Benchmarks
 
 | Metric                       | Target        | Verified Value                        | Status   |
 | ---------------------------- | ------------- | ------------------------------------- | -------- |
-| **Unit & Integration Tests** | 100% Pass     | **74 / 74 Passing** (23 Suites)       | Verified |
+| **Unit & Integration Tests** | 100% Pass     | **83 / 83 Passing** (25 Suites)       | Verified |
 | **ESLint Quality**           | 0 Errors      | **0 Errors, 0 Warnings**              | Verified |
 | **Tamper Detection (M7)**    | Instant       | 100% Detected (Broken chain rejected) | Verified |
 | **AEAD Authentication**      | Unconditional | 100% Corrupted blocks rejected        | Verified |
 | **Baseline Accuracy (M9)**   | Deterministic | 100% Pre-attack SHA-256 match gate    | Verified |
+
+---
+
+## Security & Information Protection
+
+CloudRDR strictly enforces zero-trust credential hygiene:
+- **Zero Committed Secrets**: Production API keys and service tokens must be injected via runtime environment variables (`.env`).
+- **Sanitized Telemetry**: Error responses return standardized error envelopes (`{ error: { code, message } }`) without exposing internal stack traces or server paths.
+- **Tamper-Evident Ledger**: All administrative actions and incident containments are immutably logged in an Ed25519-signed, hash-chained ledger.
 
 ---
 

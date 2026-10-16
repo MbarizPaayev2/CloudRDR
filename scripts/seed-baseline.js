@@ -9,16 +9,16 @@
  *   npm run seed
  */
 
-import { getStorageAdapter } from '../src/adapters/storage/index.js';
-import { createBaseline } from '../src/baseline/baselineService.js';
-import cfg from '../src/config/index.js';
-import logger from '../src/utils/logger.js';
+import { getStorageAdapter } from '../backend/src/adapters/storage/index.js';
+import { createBaseline } from '../backend/src/baseline/baselineService.js';
+import cfg from '../backend/src/config/index.js';
+import logger from '../backend/src/utils/logger.js';
 
 async function main() {
   const bucket = cfg.storage.bucket;
   const storage = await getStorageAdapter();
 
-  console.log(`\n🌱 Seeding protected storage bucket: "${bucket}"...`);
+  console.log(`\n[SEED] Seeding protected storage bucket: "${bucket}"...`);
 
   // Write protected sample documents
   const sampleFiles = [
@@ -36,15 +36,15 @@ async function main() {
 
   for (const file of sampleFiles) {
     await storage.write(bucket, file.path, file.content);
-    console.log(`  ✓ Written: ${file.path}`);
+    console.log(`  [OK] Written: ${file.path}`);
   }
 
   // Create baseline snapshot
-  console.log('\n🔒 Creating cryptographic baseline snapshot...');
+  console.log('\n[BASELINE] Creating cryptographic baseline snapshot...');
   const baseline = await createBaseline(bucket);
 
   console.log('\n======================================================');
-  console.log('✅ BASELINE CREATION SUCCESSFUL');
+  console.log('[OK] BASELINE CREATION SUCCESSFUL');
   console.log('======================================================');
   console.log(`Bucket:      ${baseline.bucket}`);
   console.log(`Version:     v${baseline.version}`);

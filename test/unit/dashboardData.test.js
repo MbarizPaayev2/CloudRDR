@@ -5,16 +5,16 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { mockApi } from '../../dashboard/js/mock/mockApi.js';
-import { api } from '../../dashboard/js/api.js';
+import { mockApi } from '../../frontend/dashboard/js/mock/mockApi.js';
+import { api } from '../../frontend/dashboard/js/api.js';
 import {
   getState,
   setState,
   subscribe,
   refreshAll,
   selectIncident,
-} from '../../dashboard/js/state.js';
-import { CONFIG } from '../../dashboard/js/config.js';
+} from '../../frontend/dashboard/js/state.js';
+import { CONFIG } from '../../frontend/dashboard/js/config.js';
 
 describe('Dashboard Data Layer - Mock API & State Store', () => {
   it('mockApi provides complete baseline, runs, incidents, and audit log', async () => {
