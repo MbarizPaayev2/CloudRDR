@@ -66,6 +66,9 @@ function loadConfig() {
     return isNaN(n) ? fallback : n;
   };
 
+  // Strictly enforce real production backend data; purge any stale mock setting
+  storage.removeItem(STORAGE_KEYS.USE_MOCK);
+
   return {
     API_BASE_URL: (storage.getItem(STORAGE_KEYS.API_BASE_URL) || DEFAULTS.API_BASE_URL).replace(
       /\/+$/,
@@ -73,7 +76,7 @@ function loadConfig() {
     ),
     API_KEY: storage.getItem(STORAGE_KEYS.API_KEY) || DEFAULTS.API_KEY,
     POLL_INTERVAL_MS: getStoredNum(STORAGE_KEYS.POLL_INTERVAL_MS, DEFAULTS.POLL_INTERVAL_MS),
-    USE_MOCK: getStoredBool(STORAGE_KEYS.USE_MOCK, DEFAULTS.USE_MOCK),
+    USE_MOCK: false,
     THEME: storage.getItem(STORAGE_KEYS.THEME) || DEFAULTS.THEME,
     BUCKET_NAME: storage.getItem(STORAGE_KEYS.BUCKET_NAME) || DEFAULTS.BUCKET_NAME,
   };

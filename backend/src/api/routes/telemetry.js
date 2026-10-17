@@ -189,11 +189,6 @@ export async function telemetryRoutes(fastify) {
       let normalCount = bucketEvents.filter((e) => e.matched_baseline).length;
       const suspiciousCount = bucketEvents.filter((e) => !e.matched_baseline).length;
 
-      // Ensure minimal chart aesthetic if no live changes recorded yet
-      if (events.length === 0) {
-        normalCount = i % 3 === 0 ? 1 : 0;
-      }
-
       points.push({
         timestamp: t.toISOString(),
         timeLabel: t.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -421,7 +416,7 @@ export async function telemetryRoutes(fastify) {
     const baselineStatus = activeThreat ? 'MODIFIED' : 'Verified';
     const baselineDetail = activeThreat
       ? 'Tampered objects detected in active incident; awaiting verified recovery.'
-      : `${totalBaselined || 50}/${totalBaselined || 50} monitored files match immutable baseline digests.`;
+      : `${totalBaselined}/${totalBaselined} monitored files match immutable baseline digests.`;
 
     return reply.status(200).send({
       lastSealedAt: latestIncident?.frozen_at || latestSnapshot?.created_at || now,

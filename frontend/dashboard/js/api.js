@@ -1,19 +1,13 @@
 /**
  * @file dashboard/js/api.js
  *
- * CloudRDR API Client.
- * Automatically delegates to mockApi when CONFIG.USE_MOCK is true,
- * or sends authenticated HTTP requests to the Backend API.
- *
- * Features:
- *   - Automatic X-API-Key header injection
- *   - Standardized error extraction ({ code, message })
- *   - Zero credential leakage
- *   - Endpoints for all 13 enterprise SOC dashboard sections
+ * CloudRDR Production API Client.
+ * Connects directly to the Fastify Backend API with real-world telemetry,
+ * real cryptographic baselines, and live C-native monitoring agent streams.
+ * Zero mock fallbacks.
  */
 
 import { CONFIG } from './config.js';
-import { mockApi } from './mock/mockApi.js';
 
 /**
  * Low-level HTTP transport wrapper.
@@ -56,14 +50,13 @@ async function httpRequest(endpoint, options = {}) {
   }
 }
 
-// ── Public API Methods ───────────────────────────────────────────────────────
+// ── Public API Methods (Real Backend Data) ──────────────────────────────────
 
 export const api = {
   /**
    * Health check
    */
   async getHealth() {
-    if (CONFIG.USE_MOCK) return mockApi.getHealth();
     return httpRequest('/health');
   },
 
@@ -71,24 +64,14 @@ export const api = {
    * Compact system status strip
    */
   async getSystemStatus() {
-    if (CONFIG.USE_MOCK) return mockApi.getSystemStatus();
-    try {
-      return await httpRequest('/status/system');
-    } catch (_err) {
-      return mockApi.getSystemStatus();
-    }
+    return httpRequest('/status/system');
   },
 
   /**
    * KPI metrics overview
    */
   async getKpis() {
-    if (CONFIG.USE_MOCK) return mockApi.getKpis();
-    try {
-      return await httpRequest('/metrics/kpis');
-    } catch (_err) {
-      return mockApi.getKpis();
-    }
+    return httpRequest('/metrics/kpis');
   },
 
   /**
@@ -96,24 +79,14 @@ export const api = {
    * @param {'1H' | '6H' | '24H' | '7D'} timeRange
    */
   async getThreatActivity(timeRange = '24H') {
-    if (CONFIG.USE_MOCK) return mockApi.getThreatActivity(timeRange);
-    try {
-      return await httpRequest(`/telemetry/activity?range=${timeRange}`);
-    } catch (_err) {
-      return mockApi.getThreatActivity(timeRange);
-    }
+    return httpRequest(`/telemetry/activity?range=${timeRange}`);
   },
 
   /**
    * Detection engine configuration and status
    */
   async getDetectionEngineSummary() {
-    if (CONFIG.USE_MOCK) return mockApi.getDetectionEngineSummary();
-    try {
-      return await httpRequest('/detection/summary');
-    } catch (_err) {
-      return mockApi.getDetectionEngineSummary();
-    }
+    return httpRequest('/detection/summary');
   },
 
   /**
@@ -121,7 +94,6 @@ export const api = {
    * @param {string} bucket
    */
   async getBaseline(bucket = 'protected') {
-    if (CONFIG.USE_MOCK) return mockApi.getBaseline(bucket);
     return httpRequest(`/baseline/${encodeURIComponent(bucket)}`);
   },
 
@@ -130,7 +102,6 @@ export const api = {
    * @param {string} bucket
    */
   async createBaseline(bucket = 'protected') {
-    if (CONFIG.USE_MOCK) return mockApi.createBaseline(bucket);
     return httpRequest('/baseline', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -143,15 +114,14 @@ export const api = {
    * @param {number} [limit=50]
    */
   async getDetectionRuns(limit = 50) {
-    if (CONFIG.USE_MOCK) return mockApi.getDetectionRuns(limit);
-    return httpRequest(`/detection/runs?limit=${limit}`);
+    const res = await httpRequest(`/detection/runs?limit=${limit}`);
+    return res?.runs || [];
   },
 
   /**
    * List security incidents
    */
   async getIncidents() {
-    if (CONFIG.USE_MOCK) return mockApi.getIncidents();
     const data = await httpRequest('/incidents');
     return Array.isArray(data) ? data : data?.incidents || [];
   },
@@ -161,7 +131,6 @@ export const api = {
    * @param {string} id
    */
   async getIncidentById(id) {
-    if (CONFIG.USE_MOCK) return mockApi.getIncidentById(id);
     return httpRequest(`/incidents/${encodeURIComponent(id)}`);
   },
 
@@ -170,7 +139,6 @@ export const api = {
    * @param {string} incidentId
    */
   async containIncident(incidentId) {
-    if (CONFIG.USE_MOCK) return { success: true, status: 'frozen' };
     return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/contain`, {
       method: 'POST',
     });
@@ -183,7 +151,6 @@ export const api = {
    * @param {string} [note]
    */
   async updateIncidentStatus(incidentId, status, note = '') {
-    if (CONFIG.USE_MOCK) return { success: true };
     return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -196,7 +163,6 @@ export const api = {
    * @param {string} incidentId
    */
   async getIncidentTimeline(incidentId) {
-    if (CONFIG.USE_MOCK) return [];
     const res = await httpRequest(`/incidents/${encodeURIComponent(incidentId)}/timeline`);
     return res?.timeline || [];
   },
@@ -206,7 +172,6 @@ export const api = {
    * @param {Object} config
    */
   async updateDetectionConfig(config) {
-    if (CONFIG.USE_MOCK) return { success: true, thresholds: config };
     return httpRequest('/detection/config', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -218,7 +183,6 @@ export const api = {
    * On-demand cryptographic evidence verification
    */
   async verifyCryptographicEvidence() {
-    if (CONFIG.USE_MOCK) return { verified: true };
     return httpRequest('/evidence/verify', {
       method: 'POST',
     });
@@ -230,7 +194,6 @@ export const api = {
    * @param {string} jobId
    */
   async promoteRestore(incidentId, jobId) {
-    if (CONFIG.USE_MOCK) return { success: true };
     return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/promote`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -242,48 +205,29 @@ export const api = {
    * Recent security events feed
    */
   async getSecurityEvents(limit = 10) {
-    if (CONFIG.USE_MOCK) return mockApi.getSecurityEvents(limit);
-    try {
-      return await httpRequest(`/events/recent?limit=${limit}`);
-    } catch (_err) {
-      return mockApi.getSecurityEvents(limit);
-    }
+    const res = await httpRequest(`/events/recent?limit=${limit}`);
+    return res?.events || [];
   },
 
   /**
    * Backup and recovery health
    */
   async getRecoveryHealth() {
-    if (CONFIG.USE_MOCK) return mockApi.getRecoveryHealth();
-    try {
-      return await httpRequest('/recovery/health');
-    } catch (_err) {
-      return mockApi.getRecoveryHealth();
-    }
+    return httpRequest('/recovery/health');
   },
 
   /**
    * Cryptographic integrity summary checks
    */
   async getCryptographicIntegrity() {
-    if (CONFIG.USE_MOCK) return mockApi.getCryptographicIntegrity();
-    try {
-      return await httpRequest('/integrity/cryptographic');
-    } catch (_err) {
-      return mockApi.getCryptographicIntegrity();
-    }
+    return httpRequest('/integrity/cryptographic');
   },
 
   /**
    * Protected storage overview
    */
   async getProtectedStorage() {
-    if (CONFIG.USE_MOCK) return mockApi.getProtectedStorage();
-    try {
-      return await httpRequest('/storage/overview');
-    } catch (_err) {
-      return mockApi.getProtectedStorage();
-    }
+    return httpRequest('/storage/overview');
   },
 
   /**
@@ -291,7 +235,6 @@ export const api = {
    * @param {string} incidentId
    */
   async restoreIncident(incidentId) {
-    if (CONFIG.USE_MOCK) return mockApi.restoreIncident(incidentId);
     return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/restore`, {
       method: 'POST',
     });
@@ -302,7 +245,6 @@ export const api = {
    * @param {string} jobId
    */
   async getRestoreJob(jobId) {
-    if (CONFIG.USE_MOCK) return mockApi.getRestoreJob(jobId);
     return httpRequest(`/restore/${encodeURIComponent(jobId)}`);
   },
 
@@ -310,12 +252,8 @@ export const api = {
    * Get audit log entries
    */
   async getAuditLog() {
-    if (CONFIG.USE_MOCK) return mockApi.getAuditLog();
-    try {
-      return await httpRequest('/audit');
-    } catch (_err) {
-      return mockApi.getAuditLog();
-    }
+    const res = await httpRequest('/audit');
+    return Array.isArray(res) ? res : res?.entries || [];
   },
 
   /**
@@ -368,7 +306,7 @@ export const api = {
    * Measure real RTT ping and update heartbeat for an agent node via POST /api/agent/ping
    * @param {string} agentId
    */
-  async pingAgent(agentId = 'agt-001') {
+  async pingAgent(agentId = 'agt-c-native-01') {
     const t0 = performance.now();
     const res = await httpRequest('/api/agent/ping', {
       method: 'POST',
@@ -383,7 +321,7 @@ export const api = {
    * Restart / Re-sync agent daemon
    * @param {string} [agentId]
    */
-  async restartAgent(agentId = 'agt-001') {
+  async restartAgent(agentId = 'agt-c-native-01') {
     return httpRequest('/api/agent/restart', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -403,4 +341,3 @@ export const api = {
     });
   },
 };
-

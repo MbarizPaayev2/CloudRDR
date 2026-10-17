@@ -87,7 +87,6 @@ function cacheDom() {
     qaVerifyBtn: document.getElementById('qaVerifyBtn'),
     qaIncidentsBtn: document.getElementById('qaIncidentsBtn'),
     qaAuditBtn: document.getElementById('qaAuditBtn'),
-    qaSimulateBtn: document.getElementById('qaSimulateBtn'),
 
     // Modals
     incidentModalBackdrop: document.getElementById('incidentModalBackdrop'),
@@ -166,7 +165,6 @@ function populateIcons() {
     ['qaIconVerify', 'shieldCheck'],
     ['qaIconIncidents', 'alert'],
     ['qaIconAudit', 'link'],
-    ['qaIconSimulate', 'play'],
   ];
 
   for (const [id, iconName] of iconMounts) {
@@ -357,6 +355,48 @@ function openIncidentModal(incident) {
   _dom.incidentModalBackdrop.classList.add('show');
 }
 
+/* ─── Dynamic Unread Alerts Dropdown ────────────────────────────────────────── */
+function updateNotificationBadge(incidents = []) {
+  const unreadBadge = document.getElementById('unreadBadge');
+  const dropdown = document.getElementById('notificationDropdown');
+  if (!dropdown) return;
+  const activeThreats = (incidents || []).filter((i) => i.status === 'open' || i.status === 'frozen');
+  if (unreadBadge) {
+    unreadBadge.style.display = activeThreats.length > 0 ? 'block' : 'none';
+  }
+  dropdown.innerHTML = `
+    <div style="padding: 8px 14px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+      Unread Security Alerts
+    </div>
+  `;
+  if (activeThreats.length === 0) {
+    const emptyItem = document.createElement('div');
+    emptyItem.className = 'dropdown-item';
+    emptyItem.id = 'notificationEmptyItem';
+    emptyItem.style.cssText = 'font-size: 0.8rem; flex-direction: column; align-items: flex-start; color: var(--text-muted);';
+    emptyItem.innerHTML = `
+      <span class="text-teal font-semibold">All Systems Nominal</span>
+      <span style="font-size: 0.7rem">0 unread alerts (zero active threats)</span>
+    `;
+    dropdown.appendChild(emptyItem);
+  } else {
+    for (const inc of activeThreats) {
+      const item = document.createElement('div');
+      item.className = 'dropdown-item';
+      item.style.cssText = 'font-size: 0.8rem; flex-direction: column; align-items: flex-start; cursor: pointer;';
+      item.innerHTML = `
+        <span class="text-red font-semibold">${(inc.severity || 'HIGH').toUpperCase()}: ${inc.reason || inc.detection_reason || 'Threat Detected'}</span>
+        <span class="text-muted" style="font-size: 0.7rem">ID: ${inc.id} • ${inc.affected_objects?.length || 0} objects</span>
+      `;
+      item.addEventListener('click', () => {
+        switchView('incidents');
+        highlightIncidentRow(inc.id);
+      });
+      dropdown.appendChild(item);
+    }
+  }
+}
+
 /* ─── Render Incidents Table (Section 7) ──────────────────────────────────── */
 function renderIncidentsTable(
   incidents = [],
@@ -364,6 +404,7 @@ function renderIncidentsTable(
   severityFilter = 'all',
   statusFilter = 'all'
 ) {
+  updateNotificationBadge(incidents);
   if (!_dom.incidentsTableBody) return;
   _dom.incidentsTableBody.replaceChildren();
 
@@ -569,9 +610,9 @@ function renderDetectionRunsTable(runs = []) {
 
     tr.innerHTML = `
       <td class="mono font-semibold text-primary">${shortId}</td>
-      <td class="mono text-muted">${run.account_id || 'finance-prod-01'}</td>
+      <td class="mono text-muted">${run.account_id || 'production'}</td>
       <td class="mono">${run.window_seconds || 30}s</td>
-      <td class="mono">${run.total_files || 50}</td>
+      <td class="mono">${run.total_files || 33}</td>
       <td class="mono ${run.changed_files > 0 ? 'text-amber font-semibold' : ''}">${run.changed_files || 0}</td>
       <td class="mono font-semibold ${ratePct >= threshPct ? 'text-red' : 'text-teal'}">${ratePct}%</td>
       <td>
@@ -787,9 +828,9 @@ function renderCryptographicEvidence(integrity, incidents = [], baseline = null)
     const rootHash =
       baseline?.merkle_root ||
       baseline?.snapshot?.merkle_root ||
-      'f7bbb36aa01a64a15ccf3ebfebfc51487263b6528994a5e128913...';
+      '4c4dbee23eb22ae684d736ba11842217356cc8a69e8336de7246b4e44d965639';
     const fileCount =
-      baseline?.file_count || baseline?.snapshot?.file_count || baseline?.files?.length || 50;
+      baseline?.file_count || baseline?.snapshot?.file_count || baseline?.files?.length || 33;
     const manifestPayload = {
       bundle_id: latestInc ? `bundle-${latestInc.id.slice(0, 8)}` : 'bundle-baseline-active',
       signing_key_id: latestInc?.signing_key_id || 'ed25519-hsm-soc-key-01',
@@ -989,7 +1030,7 @@ function updateUI(state) {
       _dom.overviewBaselineVersion.textContent = `v${state.baseline.version || 1} (Active Manifest)`;
     }
     if (_dom.overviewBaselineCount) {
-      const count = state.baseline.file_count || state.baseline.files?.length || 50;
+      const count = state.baseline.file_count || state.baseline.files?.length || 33;
       _dom.overviewBaselineCount.textContent = `${count} verified objects`;
     }
     if (_dom.overviewMerkleRoot && state.baseline.merkle_root) {
@@ -1277,7 +1318,7 @@ function wireEvents() {
             api.verifyCryptographicEvidence(),
           ]);
           await refreshAll();
-          const count = snap?.fileCount || getState().baseline?.file_count || 50;
+          const count = snap?.fileCount || getState().baseline?.file_count || 33;
           const rootShort = (snap?.merkleRoot || verifyRes?.merkleRoot || '').slice(0, 12);
           showToast(
             `Integrity scan passed: ${count} objects verified (Merkle root ${rootShort || 'valid'}...).`,
@@ -1300,8 +1341,6 @@ function wireEvents() {
       () => launchSimulation()
     );
   });
-
-  _dom.qaSimulateBtn?.addEventListener('click', () => _dom.simulateAttackBtn?.click());
 
   _dom.qaVerifyBtn?.addEventListener('click', async () => {
     switchView('recovery');
@@ -1336,7 +1375,7 @@ function wireEvents() {
     try {
       const res = await api.verifyCryptographicEvidence();
       await refreshAll();
-      const rootSnippet = (res?.merkleRoot || 'f7bbb36aa01a').slice(0, 16);
+      const rootSnippet = (res?.merkleRoot || '4c4dbee23eb2').slice(0, 16);
       showToast(
         `Evidence verified (${res?.entriesCount ?? 0} audit blocks intact • Merkle root: ${rootSnippet}...)`,
         res?.verified !== false ? 'success' : 'threat'
@@ -1419,8 +1458,8 @@ function wireEvents() {
         const cleanRoot =
           res?.merkleRoot ||
           getState().baseline?.merkle_root ||
-          'f7bbb36aa01a64a15ccf3ebfebfc51487263b6528994a5e128913...';
-        const cleanLeafHash = res?.observedSha256 || '7e41...90cc';
+          '4c4dbee23eb22ae684d736ba11842217356cc8a69e8336de7246b4e44d965639';
+        const cleanLeafHash = res?.observedSha256 || '8420...ccd4';
         if (leafText) {
           leafText.textContent =
             cleanLeafHash.length > 10
@@ -1555,44 +1594,7 @@ function wireEvents() {
     group: 'production',
   };
 
-  let _fleetNodes = [
-    {
-      id: 'agt-001',
-      name: 'prod-storage-node-01',
-      os: 'Linux (Ubuntu 24.04 LTS)',
-      arch: 'x86_64',
-      ip: '10.24.18.104',
-      group: 'production',
-      engine: 'Node.js v2.4.0',
-      watchPath: './data/local-storage',
-      latencyMs: 11,
-      status: 'active',
-    },
-    {
-      id: 'agt-002',
-      name: 's3-gateway-eu-central-1',
-      os: 'Linux (Amazon Linux 2023)',
-      arch: 'arm64',
-      ip: '10.24.42.19',
-      group: 'cloud-s3',
-      engine: 'Go Native v2.4.0',
-      watchPath: 's3://protected-enterprise-vault',
-      latencyMs: 18,
-      status: 'active',
-    },
-    {
-      id: 'agt-003',
-      name: 'win-finance-vault-02',
-      os: 'Windows Server 2022',
-      arch: 'x86_64',
-      ip: '10.24.80.55',
-      group: 'finance-vault',
-      engine: 'Node.js v2.4.0',
-      watchPath: 'D:\\Finance\\Ledger2026',
-      latencyMs: 14,
-      status: 'active',
-    },
-  ];
+  let _fleetNodes = [];
 
   const renderAgentFleetTable = () => {
     const tbody = document.getElementById('agentFleetTableBody');
@@ -1703,21 +1705,19 @@ function wireEvents() {
     }
 
     const remoteList = agentData.connectedAgents || agentData.agents || [];
-    if (Array.isArray(remoteList) && remoteList.length > 0) {
-      _fleetNodes = remoteList.map((remoteAgt, idx) => ({
-        id: remoteAgt.agentId || remoteAgt.id || `agt-00${idx + 1}`,
-        name: remoteAgt.hostname || remoteAgt.name || remoteAgt.agentId || 'enrolled-node',
-        os: remoteAgt.platform || 'Linux (Ubuntu 24.04 LTS)',
-        arch: remoteAgt.arch || 'x86_64',
-        ip: remoteAgt.ip || '127.0.0.1',
-        group: remoteAgt.group || 'production',
-        engine: remoteAgt.engine || `Node.js v${remoteAgt.version || '2.4.0'}`,
-        watchPath: remoteAgt.watchPath || remoteAgt.bucket || './data/local-storage',
-        latencyMs: remoteAgt.latencyMs || lat,
-        status: remoteAgt.status === 'online' || remoteAgt.status === 'active' ? 'active' : 'standby',
-      }));
-      renderAgentFleetTable();
-    }
+    _fleetNodes = (Array.isArray(remoteList) ? remoteList : []).map((remoteAgt, idx) => ({
+      id: remoteAgt.agentId || remoteAgt.id || `node-${String(idx + 1).padStart(2, '0')}`,
+      name: remoteAgt.hostname || remoteAgt.name || remoteAgt.agentId || 'enrolled-node',
+      os: remoteAgt.platform || 'Linux',
+      arch: remoteAgt.arch || 'x86_64',
+      ip: remoteAgt.ip || '127.0.0.1',
+      group: remoteAgt.group || 'production',
+      engine: remoteAgt.engine || `C-Native v${remoteAgt.version || '2.4.0'}`,
+      watchPath: remoteAgt.watchPath || remoteAgt.bucket || '/data/local-storage/protected',
+      latencyMs: remoteAgt.latencyMs || lat,
+      status: remoteAgt.status === 'online' || remoteAgt.status === 'active' ? 'active' : 'standby',
+    }));
+    renderAgentFleetTable();
   };
 
   const updateWizardCommandPreview = () => {
@@ -1900,7 +1900,7 @@ function wireEvents() {
     };
     const archLabel = arch === 'arm64' ? 'arm64' : 'x86_64';
     const engineLabel = engine === 'go' ? 'Go Native v2.4.0' : 'Node.js v2.4.0';
-    let enrolledId = `agt-00${_fleetNodes.length + 1}`;
+    let enrolledId = `agt-${Date.now().toString(36)}`;
     const t0 = performance.now();
 
     try {

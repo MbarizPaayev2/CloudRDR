@@ -235,7 +235,7 @@
                 title="View Security Notifications"
               >
                 <span id="headerBellIcon" aria-hidden="true"></span>
-                <span class="unread-dot" id="unreadBadge" aria-hidden="true"></span>
+                <span class="unread-dot" id="unreadBadge" aria-hidden="true" style="display: none;"></span>
               </button>
               <div class="dropdown-menu" id="notificationDropdown" role="menu">
                 <div
@@ -251,19 +251,11 @@
                 </div>
                 <div
                   class="dropdown-item"
-                  style="font-size: 0.8rem; flex-direction: column; align-items: flex-start"
+                  id="notificationEmptyItem"
+                  style="font-size: 0.8rem; flex-direction: column; align-items: flex-start; color: var(--text-muted);"
                 >
-                  <span class="text-red font-semibold">Ransomware Spike Tripped</span>
-                  <span class="text-muted" style="font-size: 0.7rem"
-                    >canary/tripwire_sentinel.docx modified</span
-                  >
-                </div>
-                <div
-                  class="dropdown-item"
-                  style="font-size: 0.8rem; flex-direction: column; align-items: flex-start"
-                >
-                  <span class="text-amber font-semibold">IAM Write-Freeze Active</span>
-                  <span class="text-muted" style="font-size: 0.7rem">Account: finance-prod-01</span>
+                  <span class="text-teal font-semibold">All Systems Nominal</span>
+                  <span style="font-size: 0.7rem">0 unread alerts (zero active threats)</span>
                 </div>
               </div>
             </div>
@@ -459,21 +451,21 @@
                   <span class="kpi-card-label">Protected Files</span>
                   <div class="kpi-card-icon" id="kpiIconFiles"></div>
                 </div>
-                <div class="kpi-card-metric" id="kpiValFiles">50</div>
+                <div class="kpi-card-metric" id="kpiValFiles">33</div>
                 <div class="kpi-card-secondary" id="kpiSubFiles">
-                  100% covered by valid baseline
+                  33 baselined (2 canary tripwires)
                 </div>
               </div>
 
               <!-- Card 2: Active Incidents -->
-              <div class="kpi-card has-threat" id="kpiCardIncidents">
+              <div class="kpi-card" id="kpiCardIncidents">
                 <div class="kpi-card-top">
                   <span class="kpi-card-label">Active Incidents</span>
                   <div class="kpi-card-icon" id="kpiIconIncidents"></div>
                 </div>
-                <div class="kpi-card-metric" id="kpiValIncidents">1</div>
+                <div class="kpi-card-metric" id="kpiValIncidents">0</div>
                 <div class="kpi-card-secondary" id="kpiSubIncidents">
-                  1 Critical (CANARY_MODIFIED)
+                  Zero active threats (all systems normal)
                 </div>
               </div>
 
@@ -483,8 +475,8 @@
                   <span class="kpi-card-label">Detection Events</span>
                   <div class="kpi-card-icon" id="kpiIconEvents"></div>
                 </div>
-                <div class="kpi-card-metric" id="kpiValEvents">24</div>
-                <div class="kpi-card-secondary" id="kpiSubEvents">+18 vs previous 1H window</div>
+                <div class="kpi-card-metric" id="kpiValEvents">0</div>
+                <div class="kpi-card-secondary" id="kpiSubEvents">0 events logged in last 24H</div>
               </div>
 
               <!-- Card 4: Backup Integrity -->
@@ -494,13 +486,14 @@
                   <div class="kpi-card-icon" id="kpiIconBackup"></div>
                 </div>
                 <div class="kpi-card-metric" id="kpiValBackup">100%</div>
-                <div class="kpi-card-secondary" id="kpiSubBackup">10/10 verified (0 failed)</div>
+                <div class="kpi-card-secondary" id="kpiSubBackup">0 verified valid (0 failed)</div>
               </div>
             </section>
 
             <!-- ── Section 5: Main Threat Activity Chart & Live Overview ───────── -->
             <section
               class="threat-section-grid"
+              style="grid-template-columns: 1fr;"
               aria-label="Threat Activity and Incident Spotlight"
             >
               <!-- Threat Activity Chart -->
@@ -528,46 +521,6 @@
                   ></canvas>
                 </div>
               </div>
-
-              <!-- Rapid Response & System Readiness Panel -->
-              <div class="panel-card">
-                <div class="panel-card-header">
-                  <div class="panel-card-titles">
-                    <h2>Response Readiness</h2>
-                    <p>Containment mechanisms &amp; SLA compliance</p>
-                  </div>
-                  <span class="signal-chip normal">READY</span>
-                </div>
-
-                <div class="detection-summary-rows">
-                  <div class="summary-row">
-                    <span class="text-secondary">Containment Method</span>
-                    <span class="mono font-semibold text-primary">Automated IAM Write-Deny</span>
-                  </div>
-                  <div class="summary-row">
-                    <span class="text-secondary">Automated Freeze SLA</span>
-                    <span class="mono font-semibold text-teal"
-                      >&lt; 10 Seconds (Observed: 4.2s)</span
-                    >
-                  </div>
-                  <div class="summary-row">
-                    <span class="text-secondary">Zero-Trust Verification</span>
-                    <span class="mono font-semibold text-green">AEAD + SHA-256 + Merkle</span>
-                  </div>
-                  <div class="summary-row">
-                    <span class="text-secondary">Evidence Integrity</span>
-                    <span class="mono font-semibold text-primary">Ed25519 HSM Key-Signed</span>
-                  </div>
-                  <div class="summary-row">
-                    <span class="text-secondary">Canary Sentinel Decoys</span>
-                    <span class="mono font-semibold text-teal">2 Armed Tripwires</span>
-                  </div>
-                  <div class="summary-row">
-                    <span class="text-secondary">Immutability (WORM)</span>
-                    <span class="mono font-semibold text-green">Strict Retention Active</span>
-                  </div>
-                </div>
-              </div>
             </section>
 
             <!-- ── Section 12: Quick Actions ───────────────────────────────────── -->
@@ -589,10 +542,6 @@
                 <button type="button" class="btn btn-secondary btn-sm" id="qaAuditBtn">
                   <span id="qaIconAudit"></span>
                   <span>Open Audit Logs</span>
-                </button>
-                <button type="button" class="btn btn-primary btn-sm" id="qaSimulateBtn">
-                  <span id="qaIconSimulate"></span>
-                  <span>Launch Demo Simulation</span>
                 </button>
               </div>
             </section>
@@ -864,27 +813,27 @@
                 <div class="merkle-root-display" id="merkleRootDisplay">
                   Root Hash:
                   <span id="merkleRootHashText"
-                    >f7bbb36aa01a64a15ccf3ebfebfc51487263b6528994a5e128913...</span
+                    >4c4dbee23eb22ae684d736ba11842217356cc8a69e8336de7246b4e44d965639</span
                   >
                   (VALID)
                 </div>
 
                 <div class="merkle-leaf-grid" id="merkleLeafGrid">
                   <div class="merkle-leaf-card" id="leaf-1">
-                    <span class="mono text-xs">files/financials_q2.pdf</span>
-                    <span class="mono text-muted text-xs">d2b4...8f1a</span>
+                    <span class="mono text-xs">blueprints/patents_cad.dwg</span>
+                    <span class="mono text-muted text-xs">743e...eab0</span>
                   </div>
                   <div class="merkle-leaf-card" id="leaf-2">
-                    <span class="mono text-xs">files/payroll_q3.xlsx</span>
-                    <span class="mono text-muted text-xs">7e41...90cc</span>
+                    <span class="mono text-xs">corporate/doc_1.txt</span>
+                    <span class="mono text-muted text-xs">8420...ccd4</span>
                   </div>
                   <div class="merkle-leaf-card" id="leaf-3">
-                    <span class="mono text-xs">files/nda_templates.docx</span>
-                    <span class="mono text-muted text-xs">3a99...b2ee</span>
+                    <span class="mono text-xs">canaries/sentinel.canary</span>
+                    <span class="mono text-muted text-xs">baa2...cc28</span>
                   </div>
                   <div class="merkle-leaf-card" id="leaf-4">
                     <span class="mono text-xs">canary/tripwire_sentinel.docx</span>
-                    <span class="mono text-muted text-xs">88fe...c014</span>
+                    <span class="mono text-muted text-xs">e627...6082</span>
                   </div>
                 </div>
               </div>
@@ -951,8 +900,8 @@
                     <h2>Velocity &amp; Sentinel Status</h2>
                     <p>Real-time telemetry analysis</p>
                   </div>
-                  <span class="signal-chip threat" id="detectionStatusBadge"
-                    >POTENTIAL RANSOMWARE</span
+                  <span class="signal-chip normal" id="detectionStatusBadge"
+                    >NORMAL</span
                   >
                 </div>
 
@@ -962,14 +911,14 @@
                     <div class="gauge-header">
                       <span>Modification Velocity</span>
                       <span class="mono font-semibold" id="gaugeVelocityText"
-                        >44% observed (Threshold: 30%)</span
+                        >0% observed (Threshold: 30%)</span
                       >
                     </div>
                     <div class="gauge-track">
                       <div
-                        class="gauge-fill threat"
+                        class="gauge-fill healthy"
                         id="gaugeVelocityFill"
-                        style="width: 44%"
+                        style="width: 0%"
                       ></div>
                       <div
                         class="gauge-marker"
@@ -991,8 +940,8 @@
 
                   <div class="summary-row">
                     <span class="text-secondary">Canary Sentinel Alert</span>
-                    <span class="mono text-red font-semibold" id="cfgCanaryAlert"
-                      >Tripped (tripwire_sentinel.docx)</span
+                    <span class="mono text-green font-semibold" id="cfgCanaryAlert"
+                      >Armed (Clean)</span
                     >
                   </div>
 
@@ -1042,7 +991,7 @@
                   >
                     <div style="display: flex; justify-content: space-between; width: 100%">
                       <span class="text-secondary">Ransomware Rate Threshold</span>
-                      <span class="mono font-semibold text-primary">30% (15 / 50 files)</span>
+                      <span class="mono font-semibold text-primary">30% (10 / 33 files)</span>
                     </div>
                     <span class="text-muted" style="font-size: 0.72rem"
                       >Triggers automatic containment freeze when exceeded.</span
@@ -1393,7 +1342,7 @@
                           Baseline SHA-256 Digests
                         </div>
                         <div class="text-muted" style="font-size: 0.75rem">
-                          50/50 monitored files match snapshot hashes
+                          33/33 monitored files match snapshot hashes
                         </div>
                       </td>
                       <td style="text-align: right">
@@ -1406,7 +1355,7 @@
                           Trusted Merkle Root
                         </div>
                         <div class="text-muted mono" style="font-size: 0.72rem">
-                          f7bbb36aa01a64a15ccf3ebfebfc5148...
+                          4c4dbee23eb22ae684d736ba11842217...
                         </div>
                       </td>
                       <td style="text-align: right">
@@ -1483,14 +1432,13 @@
                     font-family: var(--font-mono);
                   "
                 ><code>{
-  "bundle_id": "bundle-99f2b8-2026-q3",
+  "bundle_id": "bundle-cloudrdr-genesis-v1",
   "signing_key_id": "ed25519-hsm-soc-key-01",
-  "merkle_root": "f7bbb36aa01a64a15ccf3ebfebfc51487263b6528994a5e128913...",
-  "verified_baseline_count": 50,
-  "incident_ref": "inc-c194b301-7299-4a91-a189-918237491028",
-  "containment_action": "IAM_DENY_WRITE_ATTACHED",
-  "rfc3161_timestamp": "2026-10-14T21:30:00.000Z",
-  "signature": "4a7e91bd8f26c3b88950d8847cb5c83f98c6d123e4b78912304918230948120938471928374918273491827349182734"
+  "merkle_root": "4c4dbee23eb22ae684d736ba11842217356cc8a69e8336de7246b4e44d965639",
+  "verified_baseline_count": 33,
+  "incident_ref": null,
+  "containment_action": "NONE",
+  "status": "NOMINAL_VERIFIED"
 }</code></pre>
               </div>
             </section>

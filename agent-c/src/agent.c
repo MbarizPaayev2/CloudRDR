@@ -23,6 +23,8 @@
   #include <windows.h>
   #include <direct.h>
   #define sleep_sec(s) Sleep((s) * 1000)
+  #define popen _popen
+  #define pclose _pclose
 #else
   #include <unistd.h>
   #include <sys/types.h>
@@ -165,6 +167,40 @@ static int http_post_json(const char *host, int port, const char *endpoint, cons
     return 0;
 }
 
+static int send_manager_request(const agent_config_t *cfg, const char *endpoint, const char *json_body, char *res_out, size_t max_res) {
+    if (strncmp(cfg->manager_url, "https://", 8) == 0) {
+        char cmd[4096];
+        char tmp_file[256];
+#ifdef _WIN32
+        const char *tmp_dir = getenv("TEMP") ? getenv("TEMP") : ".";
+        snprintf(tmp_file, sizeof(tmp_file), "%s\\cloudrdr_%u.tmp", tmp_dir, (unsigned)GetCurrentProcessId());
+#else
+        snprintf(tmp_file, sizeof(tmp_file), "/tmp/cloudrdr_%u.tmp", (unsigned)getpid());
+#endif
+        FILE *tf = fopen(tmp_file, "wb");
+        if (tf) {
+            fputs(json_body, tf);
+            fclose(tf);
+            snprintf(cmd, sizeof(cmd),
+                     "curl -s -m 8 -X POST -H \"Content-Type: application/json\" -d @\"%s\" \"%s%s\"",
+                     tmp_file, cfg->manager_url, endpoint);
+            FILE *fp = popen(cmd, "r");
+            if (fp) {
+                if (res_out && max_res > 0) {
+                    size_t n = fread(res_out, 1, max_res - 1, fp);
+                    res_out[n] = '\0';
+                }
+                pclose(fp);
+                unlink(tmp_file);
+                return 0;
+            }
+            unlink(tmp_file);
+        }
+        return -5;
+    }
+    return http_post_json(cfg->manager_host, cfg->manager_port, endpoint, json_body, res_out, max_res);
+}
+
 static size_t scan_directory_recursive(const char *base_dir, const char *rel_prefix, file_record_t *records, size_t max_records, size_t current_count) {
     char search_path[MAX_PATH_LEN];
 
@@ -264,7 +300,14 @@ static size_t scan_directory_recursive(const char *base_dir, const char *rel_pre
     return current_count;
 }
 
+static int compare_file_records(const void *a, const void *b) {
+    const file_record_t *ra = (const file_record_t *)a;
+    const file_record_t *rb = (const file_record_t *)b;
+    return strcmp(ra->path, rb->path);
+}
+
 int main(int argc, char **argv) {
+    setvbuf(stdout, NULL, _IONBF, 0);
     agent_config_t cfg;
     memset(&cfg, 0, sizeof(cfg));
 
@@ -275,6 +318,20 @@ int main(int argc, char **argv) {
     cfg.interval_sec = 10;
     cfg.run_once = false;
     cfg.verbose = false;
+
+    /* Read environment variables if available */
+    const char *env_mgr = getenv("MANAGER_URL");
+    if (env_mgr && env_mgr[0]) strncpy(cfg.manager_url, env_mgr, sizeof(cfg.manager_url) - 1);
+    const char *env_bkt = getenv("BUCKET");
+    if (env_bkt && env_bkt[0]) strncpy(cfg.bucket, env_bkt, sizeof(cfg.bucket) - 1);
+    const char *env_dir = getenv("WATCH_DIR");
+    if (env_dir && env_dir[0]) strncpy(cfg.watch_dir, env_dir, sizeof(cfg.watch_dir) - 1);
+    const char *env_id = getenv("AGENT_ID");
+    if (env_id && env_id[0]) strncpy(cfg.agent_id, env_id, sizeof(cfg.agent_id) - 1);
+    const char *env_int = getenv("INTERVAL_SEC");
+    if (env_int && env_int[0]) cfg.interval_sec = atoi(env_int);
+    const char *env_verb = getenv("VERBOSE");
+    if (env_verb && (strcmp(env_verb, "1") == 0 || strcmp(env_verb, "true") == 0)) cfg.verbose = true;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
@@ -333,7 +390,7 @@ int main(int argc, char **argv) {
 
     char reg_resp[2048];
     printf("[*] Registering with CloudRDR Manager...\n");
-    int reg_stat = http_post_json(cfg.manager_host, cfg.manager_port, "/api/agent/register", reg_payload, reg_resp, sizeof(reg_resp));
+    int reg_stat = send_manager_request(&cfg, "/api/agent/register", reg_payload, reg_resp, sizeof(reg_resp));
     if (reg_stat == 0) {
         printf("[+] Agent registered successfully.\n");
     } else {
@@ -362,6 +419,9 @@ int main(int argc, char **argv) {
         printf("\n[*] Cycle #%d: Scanning target storage...\n", cycle++);
 
         size_t current_count = scan_directory_recursive(cfg.watch_dir, "", current_records, MAX_ENTRIES, 0);
+        if (current_count > 1) {
+            qsort(current_records, current_count, sizeof(file_record_t), compare_file_records);
+        }
 
         printf("    Objects Indexed: %zu\n", current_count);
 
@@ -424,7 +484,7 @@ int main(int argc, char **argv) {
                  "{\"agentId\":\"%s\",\"cpuUsage\":1,\"ramUsageMb\":4,\"filesMonitored\":%zu,\"status\":\"online\"}",
                  cfg.agent_id, current_count);
         char hb_resp[1024];
-        http_post_json(cfg.manager_host, cfg.manager_port, "/api/agent/heartbeat", hb_payload, hb_resp, sizeof(hb_resp));
+        send_manager_request(&cfg, "/api/agent/heartbeat", hb_payload, hb_resp, sizeof(hb_resp));
 
         /* If threat detected, print alert */
         if (eval_res.action == CLOUDRDR_ACTION_FREEZE) {

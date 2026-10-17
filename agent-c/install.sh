@@ -31,10 +31,12 @@ mkdir -p /var/lib/cloudrdr
 mkdir -p /etc/cloudrdr
 mkdir -p /data/local-storage/protected
 
-# 4. Install native ELF binary
-echo "[*] Installing binary to ${DEST_BIN}..."
-cp -f "${BIN_SRC}" "${DEST_BIN}"
-chmod 0755 "${DEST_BIN}"
+# 4. Install native ELF binaries
+echo "[*] Installing binaries to /usr/local/bin/..."
+cp -f "${SCRIPT_DIR}/bin/cloudrdr-agent" /usr/local/bin/cloudrdr-agent
+cp -f "${SCRIPT_DIR}/bin/cloudrdr-entropy" /usr/local/bin/cloudrdr-entropy
+cp -f "${SCRIPT_DIR}/bin/cloudrdr-merkle" /usr/local/bin/cloudrdr-merkle
+chmod 0755 /usr/local/bin/cloudrdr-agent /usr/local/bin/cloudrdr-entropy /usr/local/bin/cloudrdr-merkle
 
 # 5. Install environment config
 if [[ ! -f "${ENV_DEST}" ]]; then

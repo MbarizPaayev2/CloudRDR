@@ -28,63 +28,6 @@ const ROOT_DIR = fsSync.existsSync(path.resolve(__dirname, '../../../../scripts'
 const agentRegistry = new Map();
 let _agentsHydrated = false;
 
-const DEFAULT_FLEET_AGENTS = [
-  {
-    id: 'agt-001',
-    agentId: 'agt-001',
-    hostname: 'prod-storage-node-01',
-    platform: 'Linux (Ubuntu 24.04 LTS)',
-    arch: 'x86_64',
-    ip: '127.0.0.1',
-    group: 'production',
-    engine: 'Node.js v2.4.0',
-    version: '2.4.0',
-    watchPath: './data/local-storage',
-    bucket: cfg.storage.bucket || 'protected',
-    latencyMs: 9,
-    status: 'online',
-    filesMonitored: 50,
-    registeredAt: new Date().toISOString(),
-    lastPingAt: new Date().toISOString(),
-  },
-  {
-    id: 'agt-002',
-    agentId: 'agt-002',
-    hostname: 's3-gateway-eu-central-1',
-    platform: 'Linux (Amazon Linux 2023)',
-    arch: 'arm64',
-    ip: '127.0.0.1',
-    group: 'cloud-s3',
-    engine: 'Go Native v2.4.0',
-    version: '2.4.0',
-    watchPath: 's3://protected-enterprise-vault',
-    bucket: cfg.storage.bucket || 'protected',
-    latencyMs: 12,
-    status: 'online',
-    filesMonitored: 50,
-    registeredAt: new Date().toISOString(),
-    lastPingAt: new Date().toISOString(),
-  },
-  {
-    id: 'agt-003',
-    agentId: 'agt-003',
-    hostname: 'win-finance-vault-02',
-    platform: 'Windows Server 2022',
-    arch: 'x86_64',
-    ip: '127.0.0.1',
-    group: 'finance-vault',
-    engine: 'Node.js v2.4.0',
-    version: '2.4.0',
-    watchPath: 'D:\\Finance\\Ledger2026',
-    bucket: cfg.storage.bucket || 'protected',
-    latencyMs: 11,
-    status: 'online',
-    filesMonitored: 50,
-    registeredAt: new Date().toISOString(),
-    lastPingAt: new Date().toISOString(),
-  },
-];
-
 async function ensureAgentsHydrated() {
   if (_agentsHydrated) return;
   _agentsHydrated = true;
@@ -96,18 +39,9 @@ async function ensureAgentsHydrated() {
         const key = r.agentId || r.id;
         if (key) agentRegistry.set(key, r);
       }
-    } else {
-      for (const seed of DEFAULT_FLEET_AGENTS) {
-        agentRegistry.set(seed.agentId, { ...seed });
-      }
-      await supaQuery(db.from('registered_agents').insert(DEFAULT_FLEET_AGENTS));
     }
   } catch {
-    if (agentRegistry.size === 0) {
-      for (const seed of DEFAULT_FLEET_AGENTS) {
-        agentRegistry.set(seed.agentId, { ...seed });
-      }
-    }
+    // Non-fatal in headless environments
   }
 }
 
@@ -139,19 +73,20 @@ export async function agentRoutes(fastify) {
   fastify.get('/api/agent/status', async (_request, reply) => {
     await ensureAgentsHydrated();
     const connectedAgents = Array.from(agentRegistry.values());
+    const totalMonitored = connectedAgents.reduce((acc, a) => acc + (a.filesMonitored || 0), 0);
     return reply.send({
-      status: 'online',
-      agentId: 'cloudrdr-monitor-node-01',
+      status: connectedAgents.length > 0 ? 'online' : 'standby',
+      agentId: connectedAgents[0]?.agentId || 'none',
       version: '2.4.0',
       bucket: cfg.storage.bucket || 'protected',
       provider: cfg.storage.provider || 'local',
       intervalSeconds: cfg.monitor.intervalSeconds || 10,
       detectionWindow: cfg.detection.windowSeconds || 30,
       ransomwareThreshold: `${(cfg.detection.ransomwareRate || 0.3) * 100}%`,
-      lastPingAt: new Date().toISOString(),
+      lastPingAt: connectedAgents[0]?.lastPingAt || new Date().toISOString(),
       latencyMs: connectedAgents[0]?.latencyMs || 9,
-      objectsMonitored: connectedAgents.reduce((acc, a) => acc + (a.filesMonitored || 0), 0) || 50,
-      canarySentinelsArmed: Math.max(2, connectedAgents.length * 2),
+      objectsMonitored: totalMonitored,
+      canarySentinelsArmed: 2,
       platform: process.platform,
       nodeVersion: process.version,
       connectedAgentsCount: connectedAgents.length,
