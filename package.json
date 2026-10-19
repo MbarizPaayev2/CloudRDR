@@ -20,6 +20,8 @@
     "test:all": "npm test && npm run test:qa",
     "lint": "eslint backend/src scripts test",
     "lint:fix": "eslint backend/src scripts test --fix",
+    "build:css": "tailwindcss -i frontend/site/css/tailwind-input.css -o frontend/site/css/tailwind.css --minify",
+    "dev:css": "tailwindcss -i frontend/site/css/tailwind-input.css -o frontend/site/css/tailwind.css --watch",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -35,8 +37,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@tailwindcss/cli": "^4.3.3",
     "eslint": "^9.9.0",
     "playwright": "^1.64.1",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }

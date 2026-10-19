@@ -3,6 +3,7 @@
  * CloudRDR Base Styles & Layout Foundations
  */
 
+@layer base {
 *,
 *::before,
 *::after {
@@ -41,24 +42,46 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  background: var(--brand);
+}
+
+::selection {
+  background: rgba(51, 92, 255, 0.28);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) #080b12;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
 }
 
 body {
   background-color: var(--bg);
   color: var(--text);
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   transition:
     background-color var(--dur-mid) var(--ease),
     color var(--dur-mid) var(--ease);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  letter-spacing: -0.025em;
+}
+
+p, .section-desc, .lead {
+  text-wrap: pretty;
+}
+
+.tabular, code, pre, .mono {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Attack State indicator: subtle top border */
@@ -135,7 +158,7 @@ pre,
   outline-offset: 2px;
 }
 
-main:focus {
+main:focus:not(:focus-visible) {
   outline: none;
 }
 
@@ -155,6 +178,20 @@ main:focus {
 
 .skip-to-content:focus {
   top: 16px;
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ── Accessible Keyboard Focus Rings (WCAG 2.2 AA / UI-UX Pro Max) ───────── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role='button']:focus-visible,
+[tabindex='0']:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
 
 /* ── Layout Containers ───────────────────────────────────────────────────── */
@@ -192,3 +229,5 @@ main:focus {
     scroll-behavior: auto !important;
   }
 }
+}
+

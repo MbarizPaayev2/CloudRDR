@@ -8,45 +8,45 @@
 
 :root,
 :root[data-theme='dark'] {
-  /* ── Cyber Dark Palette (Default — Zero Eye Strain SOC Aesthetic) ─────────── */
-  --bg: #0c0e14;
-  --surface: #141822;
-  --surface-subtle: #1b2130;
+  /* ── High-End Aerospace Obsidian Palette (Calm, Organic, High-Depth) ────────── */
+  --bg: #090a0d;
+  --surface: #111317;
+  --surface-subtle: #171a20;
 
-  --text: #f4f6fb;
-  --text-muted: #8e95a5;
-  --border: rgba(255, 255, 255, 0.09);
+  --text: #f1f3f7;
+  --text-muted: #8a94a6;
+  --border: rgba(255, 255, 255, 0.08);
 
-  /* ONE brand accent — vibrant indigo-blue with high contrast */
-  --brand: #4360ff;
-  --brand-hover: #5d76ff;
-  --brand-subtle: rgba(67, 96, 255, 0.16);
+  /* ONE brand accent — calibrated sapphire blue (Linear / Apple precision) */
+  --brand: #335cff;
+  --brand-hover: #4a6fff;
+  --brand-subtle: rgba(51, 92, 255, 0.12);
 
-  /* Status colors — strictly reserved for status, WCAG AA/AAA compliant */
-  --status-healthy: #27b97f;
-  --status-healthy-subtle: rgba(39, 185, 127, 0.18);
+  /* Status colors — calibrated, organic tones, WCAG AA/AAA compliant */
+  --status-healthy: #10b981;
+  --status-healthy-subtle: rgba(16, 185, 129, 0.12);
 
-  --status-suspicious: #f0b11a;
-  --status-suspicious-subtle: rgba(240, 177, 26, 0.18);
+  --status-suspicious: #f59e0b;
+  --status-suspicious-subtle: rgba(245, 158, 11, 0.12);
 
-  --status-ransomware: #e64545;
-  --status-ransomware-subtle: rgba(230, 69, 69, 0.22);
+  --status-ransomware: #ef4444;
+  --status-ransomware-subtle: rgba(239, 68, 68, 0.14);
 
-  --status-frozen: #58b3da;
-  --status-frozen-subtle: rgba(88, 179, 218, 0.18);
+  --status-frozen: #0ea5e9;
+  --status-frozen-subtle: rgba(14, 165, 233, 0.12);
 
   /* Semantic component tokens for adaptive mode support */
   --logo-shackle: #e2e8f0;
-  --rail-bg: rgba(10, 15, 26, 0.88);
-  --diagram-bg: rgba(10, 15, 26, 0.85);
-  --diagram-border: rgba(255, 255, 255, 0.08);
-  --code-bg: rgba(0, 0, 0, 0.35);
+  --rail-bg: rgba(9, 10, 13, 0.92);
+  --diagram-bg: rgba(17, 19, 23, 0.9);
+  --diagram-border: rgba(255, 255, 255, 0.07);
+  --code-bg: rgba(0, 0, 0, 0.4);
   --code-border: rgba(255, 255, 255, 0.06);
-  --code-text: #dde2ec;
-  --modal-bg: #0b0f19;
-  --modal-header-bg: #111726;
+  --code-text: #e2e8f0;
+  --modal-bg: #0d0e12;
+  --modal-header-bg: #121419;
   --modal-text: #f8fafc;
-  --modal-border: rgba(56, 189, 248, 0.35);
+  --modal-border: rgba(255, 255, 255, 0.1);
 
   /* ── Typography Families ─────────────────────────────────────────────────── */
   --font-display:
@@ -85,7 +85,7 @@
   --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.02);
   --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
 
-  --grid-dots: rgba(255, 255, 255, 0.04);
+  --grid-dots: rgba(148, 163, 184, 0.16);
   --merkle-link-stroke: rgba(255, 255, 255, 0.14);
   --merkle-link-width: 1.5px;
   --icon-stroke-width: 1.5px;
@@ -129,7 +129,7 @@
   --status-frozen: #0369a1; /* Deep ocean */
   --status-frozen-subtle: rgba(3, 105, 161, 0.12);
 
-  --grid-dots: rgba(30, 41, 59, 0.03); /* Tranquil 0.03 opacity */
+  --grid-dots: rgba(15, 23, 42, 0.11);
   --merkle-link-stroke: #94a3b8;
   --merkle-link-width: 1.8px;
   --icon-stroke-width: 1.8px;
@@ -149,3 +149,4 @@
   --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
   --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
 }
+

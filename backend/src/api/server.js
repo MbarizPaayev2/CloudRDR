@@ -29,6 +29,7 @@ import { authRoutes, extractSessionToken } from './routes/auth.js';
 import { telemetryRoutes } from './routes/telemetry.js';
 import { agentRoutes } from './routes/agent.js';
 import { simulationRoutes } from './routes/simulation.js';
+import { complianceRoutes } from './routes/compliance.js';
 import { validateSession } from '../auth/authService.js';
 
 /**
@@ -51,10 +52,17 @@ export async function buildServer(options = {}) {
     credentials: true,
   });
 
-  // 2. Rate limiting
+  // 2. Rate limiting (Production-grade enterprise limits with loopback/fleet allowList)
   await app.register(rateLimit, {
-    max: 100,
+    max: 2000,
     timeWindow: '1 minute',
+    allowList: ['127.0.0.1', '::1', 'localhost', '192.168.152.148'],
+    errorResponseBuilder: (request, context) => ({
+      error: {
+        code: 'rate_limit_exceeded',
+        message: `Rate limit exceeded, retry in ${context.after}`,
+      },
+    }),
   });
 
   // 3. API Key Authentication Hook (except /health)
@@ -148,11 +156,20 @@ export async function buildServer(options = {}) {
       });
     }
 
+    if (error.statusCode === 429) {
+      return reply.status(429).send({
+        error: {
+          code: 'rate_limit_exceeded',
+          message: error.message || 'Rate limit exceeded, retry in 1 minute',
+        },
+      });
+    }
+
     // Generic fallback
     const status = error.statusCode || 500;
     return reply.status(status).send({
       error: {
-        code: error.code || 'internal_server_error',
+        code: error.code || (status === 500 ? 'internal_server_error' : 'request_error'),
         message: status === 500 ? 'An unexpected error occurred' : error.message,
       },
     });
@@ -168,10 +185,20 @@ export async function buildServer(options = {}) {
   await app.register(telemetryRoutes);
   await app.register(agentRoutes);
   await app.register(simulationRoutes);
+  await app.register(complianceRoutes);
   await app.register(dashboardRoutes);
 
   return app;
 }
+
+// Process-level crash prevention guards for continuous 12+ hour monitoring runs
+process.on('unhandledRejection', (reason) => {
+  logger.error({ reason: reason?.message || reason }, 'Unhandled Rejection caught — preventing process crash');
+});
+
+process.on('uncaughtException', (err) => {
+  logger.error({ err: err.message, stack: err.stack }, 'Uncaught Exception caught — preventing process crash');
+});
 
 // Start server if executed directly
 if (process.argv[1] && process.argv[1].endsWith('server.js')) {

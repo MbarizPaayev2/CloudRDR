@@ -15,6 +15,17 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages.css" />
+
+    <!-- Immediate Theme Resolution to Prevent FOUC -->
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem('cloudrdr-theme');
+          var t = (s === 'dark' || s === 'light') ? s : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -23,17 +34,7 @@
     <main id="main-content" class="section-pad" tabindex="-1">
       <div class="container" style="max-width: 1060px">
         <div style="margin-bottom: var(--space-10)">
-          <span
-            style="
-              font-family: var(--font-mono);
-              font-size: var(--text-xs);
-              color: var(--brand);
-              text-transform: uppercase;
-              letter-spacing: 1.5px;
-            "
-            >Cryptographic Pipeline Walkthrough</span
-          >
-          <h1 style="font-size: var(--text-2xl); font-weight: 600; margin-top: var(--space-2)">
+          <h1 style="font-size: var(--text-2xl); font-weight: 600">
             How CloudRDR defends cloud storage
           </h1>
           <p

@@ -55,7 +55,7 @@ $$F_1\text{-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text
 | **5%** | 7 | 3 | 4 | 0 | 70.0% | 100.0% | 57.1% | **0.824** | High False Positives |
 | **10%** | 7 | 2 | 5 | 0 | 77.8% | 100.0% | 71.4% | **0.875** | High False Positives |
 | **20%** | 6 | 1 | 6 | 1 | 85.7% | 85.7% | 85.7% | **0.857** | High False Positives |
-| **30%** | 6 | 0 | 7 | 1 | 100.0% | 85.7% | 100.0% | **0.923** | ⭐ **Optimal Balance (Default)** |
+| **30%** | 6 | 0 | 7 | 1 | 100.0% | 85.7% | 100.0% | **0.923** | **Optimal Balance (Default)** |
 | **50%** | 4 | 0 | 7 | 3 | 100.0% | 57.1% | 100.0% | **0.727** | Suboptimal Recall |
 | **80%** | 3 | 0 | 7 | 4 | 100.0% | 42.9% | 100.0% | **0.600** | Suboptimal Recall |
 

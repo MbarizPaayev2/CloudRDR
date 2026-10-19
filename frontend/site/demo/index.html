@@ -16,13 +16,18 @@
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/pages.css" />
 
-    <!-- Pinned Chart.js from cdnjs -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.3/chart.umd.min.js"
-      integrity="sha512-VwSvzTMCLaHLMuY19fYH5oPFBONYXw+4MNEPUrqHB7r+GEpKZNveMbY0F/VfxLQzBLDI5b7WiJZ0aqdLJeNA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+
+
+    <!-- Immediate Theme Resolution to Prevent FOUC -->
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem('cloudrdr-theme');
+          var t = (s === 'dark' || s === 'light') ? s : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <a href="#main-content" class="skip-to-content">Skip to console</a>
@@ -573,30 +578,53 @@
       // Interactive Action Triggers
       document.getElementById('btnActionCanary')?.addEventListener('click', () => {
         document.body.classList.add('attack-active');
+        const runs = getState().detectionRuns ? [...getState().detectionRuns] : [];
+        runs.push({
+          id: `run-${Date.now()}`,
+          created_at: new Date().toISOString(),
+          change_rate: 0.18,
+          threshold: 0.3,
+          canary_triggered: true,
+          verdict: 'ransomware',
+        });
         setState({
+          isStoryPlaying: true,
           canaryTriggered: true,
           canaryTriggeredAt: new Date().toISOString(),
           verdict: 'ransomware',
-          corruptedLeaves: new Set([7, 8]),
-          storyStep: 'Canary tripped',
+          changeRate: 0.18,
+          detectionRuns: runs,
+          corruptedLeaves: new Set([0, 7]),
+          storyStep: 'Canary decoy tripped',
         });
         appendDemoEvent('TRIPWIRE', 'red', 'CANARY DECOY TRIPPED: canary/tripwire_sentinel.docx modified. Immediate ransomware alert!');
       });
 
       document.getElementById('btnActionMassBurst')?.addEventListener('click', () => {
         document.body.classList.add('attack-active');
+        const runs = getState().detectionRuns ? [...getState().detectionRuns] : [];
+        const now = Date.now();
+        runs.push(
+          { id: `run-${now - 30000}`, created_at: new Date(now - 30000).toISOString(), change_rate: 0.08, canary_triggered: false, verdict: 'normal' },
+          { id: `run-${now - 20000}`, created_at: new Date(now - 20000).toISOString(), change_rate: 0.16, canary_triggered: false, verdict: 'suspicious' },
+          { id: `run-${now - 10000}`, created_at: new Date(now - 10000).toISOString(), change_rate: 0.32, canary_triggered: false, verdict: 'ransomware' },
+          { id: `run-${now}`, created_at: new Date(now).toISOString(), change_rate: 0.45, canary_triggered: true, verdict: 'ransomware' }
+        );
         setState({
+          isStoryPlaying: true,
           changeRate: 0.45,
           verdict: 'ransomware',
+          detectionRuns: runs,
           corruptedLeaves: new Set([0, 1, 4, 7, 8, 11, 14]),
-          currentRootHash: '00000000_TAMPERED_ROOT_HASH_' + Math.random().toString(16).slice(2, 10),
+          currentRootHash: 'a8f9c1b34e62d590e8b211f49a2cd7081bc598e213ad459bc76319802d354aef',
           storyStep: 'Mass modification surge',
         });
-        appendDemoEvent('VELOCITY', 'red', 'Mass burst encryption detected: 45.0% change rate in sliding window (> 30% threshold).');
+        appendDemoEvent('VELOCITY', 'red', 'Mass burst encryption detected: 45.0% change rate in sliding window (> 30% SLA threshold).');
       });
 
       document.getElementById('btnActionFreeze')?.addEventListener('click', () => {
         setState({
+          isStoryPlaying: true,
           accountFrozen: true,
           frozenAt: new Date().toISOString(),
           storyStep: 'IAM Freeze enforced',
@@ -606,14 +634,25 @@
 
       document.getElementById('btnActionRestore')?.addEventListener('click', () => {
         document.body.classList.remove('attack-active');
-        setState({
+        const runs = getState().detectionRuns ? [...getState().detectionRuns] : [];
+        runs.push({
+          id: `run-${Date.now()}`,
+          created_at: new Date().toISOString(),
+          change_rate: 0.0,
+          threshold: 0.3,
+          canary_triggered: false,
           verdict: 'normal',
-          changeRate: 0.02,
+        });
+        setState({
+          isStoryPlaying: true,
+          verdict: 'normal',
+          changeRate: 0.0,
+          detectionRuns: runs,
           canaryTriggered: false,
           accountFrozen: false,
           corruptedLeaves: new Set(),
           restoredLeaves: new Set([0, 1, 4, 7, 8, 11, 14]),
-          currentRootHash: getState().baseline.merkle_root,
+          currentRootHash: getState().baseline?.merkle_root || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
           storyStep: 'AEAD recovery verified',
         });
         appendDemoEvent('RESTORE', 'green', 'All 16 objects 100% verified via AES-256-GCM AEAD tags and matched against pre-attack SHA-256 baseline.');
@@ -622,13 +661,14 @@
       document.getElementById('btnActionReset')?.addEventListener('click', () => {
         document.body.classList.remove('attack-active');
         setState({
+          isStoryPlaying: false,
           verdict: 'normal',
           changeRate: 0.0,
           canaryTriggered: false,
           accountFrozen: false,
           corruptedLeaves: new Set(),
           restoredLeaves: new Set(),
-          currentRootHash: getState().baseline.merkle_root,
+          currentRootHash: getState().baseline?.merkle_root || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
           storyStep: 'Reset to clean baseline',
         });
         appendDemoEvent('SYSTEM', 'green', 'Console reset to clean operational baseline. Active monitoring running.');

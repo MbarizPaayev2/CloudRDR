@@ -9,6 +9,11 @@
       content="Enterprise cloud security operations platform detecting ransomware-like mass modifications, isolating compromised identities, and verifying cryptographic recovery."
     />
 
+    <!-- Resource Hints for High-Performance Asset Loading (Web Design Guidelines) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="alternate icon" href="favicon.ico" />
 
@@ -31,22 +36,8 @@
   </head>
 
   <body>
-    <!-- Accessible Skip Link (WCAG 2.2 AA) -->
-    <a
-      href="#main-overview"
-      class="skip-link"
-      style="
-        position: absolute;
-        top: -40px;
-        left: 0;
-        background: var(--brand);
-        color: #ffffff;
-        padding: 8px;
-        z-index: 100;
-        transition: top 0.2s;
-      "
-      >Skip to main content</a
-    >
+    <!-- Accessible Skip Link (WCAG 2.2 AA / UI-UX Pro Max) -->
+    <a href="#main-overview" class="skip-link">Skip to main content</a>
 
     <div class="soc-layout">
       <!-- ── Left Sidebar (Section 2.A) ────────────────────────────────────── -->
@@ -139,35 +130,35 @@
 
         <!-- Navigation Links -->
         <nav class="sidebar-nav" aria-label="Primary Navigation">
-          <button type="button" class="nav-item active" data-nav="overview" title="Overview">
+          <button type="button" class="nav-item active" data-nav="overview" data-tour-id="tour-nav-overview" title="Overview">
             <span class="nav-icon" id="navIconOverview"></span>
             <span class="nav-text">Overview</span>
           </button>
-          <button type="button" class="nav-item" data-nav="storage" title="Cloud Storage">
+          <button type="button" class="nav-item" data-nav="storage" data-tour-id="tour-nav-storage" title="Cloud Storage">
             <span class="nav-icon" id="navIconStorage"></span>
             <span class="nav-text">Cloud Storage</span>
           </button>
-          <button type="button" class="nav-item" data-nav="detection" title="Threat Detection">
+          <button type="button" class="nav-item" data-nav="detection" data-tour-id="tour-nav-detection" title="Findings & Checks">
             <span class="nav-icon" id="navIconDetection"></span>
-            <span class="nav-text">Threat Detection</span>
+            <span class="nav-text">Findings &amp; Checks</span>
           </button>
-          <button type="button" class="nav-item" data-nav="incidents" title="Incidents">
+          <button type="button" class="nav-item" data-nav="incidents" data-tour-id="tour-nav-incidents" title="Forensic Cases">
             <span class="nav-icon" id="navIconIncidents"></span>
-            <span class="nav-text">Incidents</span>
+            <span class="nav-text">Forensic Cases</span>
           </button>
-          <button type="button" class="nav-item" data-nav="recovery" title="Backup & Recovery">
+          <button type="button" class="nav-item" data-nav="recovery" data-tour-id="tour-nav-recovery" title="Backup & Recovery">
             <span class="nav-icon" id="navIconRecovery"></span>
             <span class="nav-text">Backup &amp; Recovery</span>
           </button>
-          <button type="button" class="nav-item" data-nav="evidence" title="Cryptographic Evidence">
+          <button type="button" class="nav-item" data-nav="evidence" data-tour-id="tour-nav-evidence" title="Cryptographic Evidence">
             <span class="nav-icon" id="navIconEvidence"></span>
             <span class="nav-text">Cryptographic Evidence</span>
           </button>
-          <button type="button" class="nav-item" data-nav="audit" title="Audit Logs">
+          <button type="button" class="nav-item" data-nav="audit" data-tour-id="tour-nav-audit" title="Audit Logs">
             <span class="nav-icon" id="navIconAudit"></span>
             <span class="nav-text">Audit Logs</span>
           </button>
-          <button type="button" class="nav-item" data-nav="agent" title="Deploy Monitoring Agent">
+          <button type="button" class="nav-item" data-nav="agent" data-tour-id="tour-nav-agent" title="Deploy Monitoring Agent">
             <span class="nav-icon" id="navIconAgent"></span>
             <span class="nav-text">Deploy Agent</span>
           </button>
@@ -207,6 +198,12 @@
             <div class="header-breadcrumb" aria-label="Breadcrumb">
               <span class="current">Overview</span>
             </div>
+            <div class="prowler-header-env-pill" style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 9999px; font-size: 0.72rem; color: var(--text-secondary); margin-left: 12px;">
+              <span class="status-dot healthy" style="width: 6px; height: 6px; background: #10B981; border-radius: 50%;"></span>
+              <span style="font-weight: 600; color: var(--text-primary);">Go Core Engine Active</span>
+              <span style="color: var(--text-muted);">&bull;</span>
+              <span class="mono text-teal">kali@192.168.152.148:4455</span>
+            </div>
           </div>
 
           <div class="header-right">
@@ -217,8 +214,11 @@
                 type="text"
                 id="headerSearchInput"
                 class="header-search-input"
-                placeholder="Search incidents or objects..."
+                placeholder="Search incidents or objects…"
                 aria-label="Search incidents or protected objects"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off"
               />
               <kbd class="search-kbd">Ctrl+K</kbd>
             </div>
@@ -267,7 +267,6 @@
                 type="button"
                 class="header-icon-btn"
                 id="headerRefreshBtn"
-                style="width: 26px; height: 26px"
                 aria-label="Refresh telemetry data"
               >
                 <span id="headerRefreshIcon" aria-hidden="true"></span>
@@ -349,7 +348,19 @@
                 <button
                   type="button"
                   class="btn btn-secondary"
+                  id="tourStartBtn"
+                  data-tour-id="tour-start-btn"
+                  aria-label="Start SOC Product Tour"
+                  title="Interactive Walkthrough of CloudRDR Controls"
+                >
+                  <span id="iconTourBtn"></span>
+                  <span>SOC Tour</span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
                   id="runIntegrityScanBtn"
+                  data-tour-id="tour-run-scan"
                   aria-label="Run Integrity Scan"
                 >
                   <span id="iconScanBtn"></span>
@@ -359,6 +370,7 @@
                   type="button"
                   class="btn btn-primary"
                   id="simulateAttackBtn"
+                  data-tour-id="tour-simulate-attack"
                   aria-label="Simulate Attack Demo"
                 >
                   <span id="iconSimulateBtn"></span>
@@ -367,9 +379,15 @@
                 </button>
               </div>
             </section>
+ 
+            <!-- Critical Threat Alarm Banner (Prowler standard) -->
+            <div class="prowler-alarm-banner" id="prowlerAlarmBanner" role="alert"></div>
+
+            <!-- Executive Security Posture Hero Banner (Prowler standard) -->
+            <section class="prowler-posture-hero" id="prowlerPostureHero" aria-label="Executive Security Posture"></section>
 
             <!-- ── System Status Strip (Section 3) ────────────────────────────── -->
-            <section class="status-strip-grid" aria-label="System Components Health">
+            <section class="status-strip-grid" id="status-strip" data-tour-id="tour-status-strip" aria-label="System Components Health">
               <!-- Item 1: Detection Engine -->
               <div class="status-strip-card">
                 <div class="status-strip-icon" id="statusIconDetection"></div>
@@ -546,38 +564,43 @@
               </div>
             </section>
 
-            <!-- Active Incidents & Containment Queue Spotlight -->
-            <section class="table-card" aria-label="Active Security Incidents Spotlight" style="margin-top: 16px;">
-              <div class="table-controls-bar">
-                <div class="panel-card-titles">
-                  <h2>Active Incidents &amp; Containment Queue</h2>
-                  <p>Real-time ransomware alerts, IAM freeze states, and cryptographic recovery</p>
+            <!-- Prowler Enterprise Security Findings Spotlight -->
+            <section class="prowler-findings-card" id="prowlerFindingsSection" aria-label="Enterprise Security Findings">
+              <div class="prowler-toolbar">
+                <div class="prowler-toolbar-left">
+                  <h2 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Security Findings &amp; Threat Detections</h2>
+                  <p style="margin: 2px 0 0; font-size: 0.78rem; color: var(--text-secondary);">Real-time continuous evaluation across 48 cloud security checks &amp; behavioral heuristics</p>
                 </div>
-                <div class="filter-group">
+                <div class="prowler-toolbar-right">
+                  <input
+                    type="text"
+                    id="findingsSearchInput"
+                    class="prowler-filter-select"
+                    placeholder="Search checks, resources, MITRE IDs..."
+                    style="width: 250px;"
+                    aria-label="Search security findings"
+                  />
+                  <select id="findingsSeverityFilter" class="prowler-filter-select" aria-label="Filter by severity">
+                    <option value="all">All Severities</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                    <option value="passed">Passed</option>
+                  </select>
+                  <select id="findingsStatusFilter" class="prowler-filter-select" aria-label="Filter by status">
+                    <option value="all">All Statuses</option>
+                    <option value="fail">Fail (Action Required)</option>
+                    <option value="pass">Pass (Healthy)</option>
+                  </select>
                   <button type="button" class="btn btn-secondary btn-sm" id="btnGoToIncidentsFromOverview">
-                    View Full Incident Queue &rarr;
+                    View Case Files &rarr;
                   </button>
                 </div>
               </div>
 
-              <div class="table-responsive">
-                <table class="soc-table" id="overviewIncidentsTable">
-                  <thead>
-                    <tr>
-                      <th>Incident ID</th>
-                      <th>Severity</th>
-                      <th>Detection Reason</th>
-                      <th>Affected Objects</th>
-                      <th>Detected At</th>
-                      <th>Response Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="overviewIncidentsTableBody">
-                    <!-- Populated dynamically -->
-                  </tbody>
-                </table>
-              </div>
+              <!-- Container rendered by prowlerFindings.js -->
+              <div id="prowlerFindingsContainer"></div>
             </section>
 
             <!-- Storage & Cryptographic Baseline Quick Inspection Grid -->
@@ -852,8 +875,11 @@
                     id="storageFilesSearch"
                     class="header-search-input"
                     style="width: 220px; padding: 4px 10px"
-                    placeholder="Search file path or hash..."
+                    placeholder="Search file path or hash…"
                     aria-label="Filter storage files"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
                   />
                 </div>
               </div>
@@ -884,12 +910,45 @@
           <div class="dashboard-view" id="view-detection" data-view="detection">
             <section class="page-title-strip">
               <div class="page-title-block">
-                <h1>Threat Detection Engine &amp; Heuristics</h1>
+                <h1>Security Findings &amp; Threat Detections</h1>
                 <p>
-                  Sliding-window velocity algorithms, anomaly change rates, and automated verdict
-                  triggers.
+                  Comprehensive compliance checks, Shannon entropy heuristics, zero-touch canary sentinels, and MITRE ATT&amp;CK matrix attribution.
                 </p>
               </div>
+            </section>
+
+            <!-- Full-Page Prowler Findings Explorer -->
+            <section class="prowler-findings-card" aria-label="Enterprise Security Findings Full Page" style="margin-top: 0; margin-bottom: 20px;">
+              <div class="prowler-toolbar">
+                <div class="prowler-toolbar-left">
+                  <h2 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Evaluated Security Checks &amp; Threat Rules</h2>
+                  <p style="margin: 2px 0 0; font-size: 0.78rem; color: var(--text-secondary);">Real-time continuous evaluation across 48 automated checks on AWS S3, Azure Blob, and Linux Edge Node</p>
+                </div>
+                <div class="prowler-toolbar-right">
+                  <input
+                    type="text"
+                    id="findingsSearchInput2"
+                    class="prowler-filter-select"
+                    placeholder="Search checks, resources, MITRE IDs..."
+                    style="width: 260px;"
+                    aria-label="Search security findings"
+                  />
+                  <select id="findingsSeverityFilter2" class="prowler-filter-select" aria-label="Filter by severity">
+                    <option value="all">All Severities</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                    <option value="passed">Passed</option>
+                  </select>
+                  <select id="findingsStatusFilter2" class="prowler-filter-select" aria-label="Filter by status">
+                    <option value="all">All Statuses</option>
+                    <option value="fail">Fail (Action Required)</option>
+                    <option value="pass">Pass (Healthy)</option>
+                  </select>
+                </div>
+              </div>
+              <div id="prowlerFindingsContainer2"></div>
             </section>
 
             <section class="two-col-grid">
@@ -1083,8 +1142,11 @@
                     id="incidentTableSearch"
                     class="header-search-input"
                     style="width: 180px; padding: 4px 10px"
-                    placeholder="Filter by ID or Reason..."
+                    placeholder="Filter by ID or Reason…"
                     aria-label="Filter incidents table"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
                   />
 
                   <select
@@ -2243,8 +2305,11 @@
                     type="search"
                     id="agentFleetSearchInput"
                     class="header-search-input"
-                    placeholder="Filter by node name, IP, OS, or group..."
+                    placeholder="Filter by node name, IP, OS, or group…"
                     aria-label="Filter deployed agents"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
                     style="width: 240px"
                   />
                   <select id="agentFleetStatusFilter" class="select-filter" aria-label="Filter by agent status">
@@ -2383,6 +2448,10 @@
         </div>
       </div>
     </div>
+
+    <!-- Prowler Slide-Over Detail Drawer Backdrop & Panel -->
+    <div class="prowler-drawer-backdrop" id="prowlerDrawerBackdrop"></div>
+    <aside class="prowler-drawer" id="prowlerSlideDrawer" role="dialog" aria-modal="true" tabindex="-1"></aside>
 
     <!-- Global Toast Notification Container -->
     <div

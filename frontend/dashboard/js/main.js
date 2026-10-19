@@ -11,6 +11,11 @@ import { api } from './api.js';
 import { getState, setState, subscribe, refreshAll, selectIncident } from './state.js';
 import { createIcon } from './icons.js';
 import { initDetectionChart, updateDetectionChart } from './components/detectionChart.js';
+import { startProductTour } from './components/tour.js';
+import { renderProwlerPostureHero } from './components/prowlerPosture.js';
+import { renderProwlerFindingsTable } from './components/prowlerFindings.js';
+import { triggerProwlerAttackSimulation } from './components/prowlerSimulator.js';
+import { closeProwlerDrawer } from './components/prowlerDrawer.js';
 
 /* ─── DOM References Cache ────────────────────────────────────────────────── */
 let _dom = {};
@@ -33,6 +38,7 @@ function cacheDom() {
     lastRefreshedLabel: document.getElementById('lastRefreshedLabel'),
     headerRefreshBtn: document.getElementById('headerRefreshBtn'),
 
+    tourStartBtn: document.getElementById('tourStartBtn'),
     runIntegrityScanBtn: document.getElementById('runIntegrityScanBtn'),
     simulateAttackBtn: document.getElementById('simulateAttackBtn'),
 
@@ -148,6 +154,7 @@ function populateIcons() {
     ['headerBellIcon', 'bell'],
     ['headerRefreshIcon', 'refresh'],
 
+    ['iconTourBtn', 'compass'],
     ['iconScanBtn', 'check'],
     ['iconSimulateBtn', 'play'],
 
@@ -219,12 +226,26 @@ function closeConfirmModal() {
 
 /* ─── Incident Detail Modal ───────────────────────────────────────────────── */
 function openIncidentModal(incident) {
-  if (!incident || !_dom.incidentModalBody) return;
+  if (!incident) return;
+  const isResolved = incident.status === 'resolved';
+  const finding = {
+    id: incident.id,
+    checkId: 'CLOUDRDR-DET-001',
+    title: `Ransomware Incident (${incident.detection_reason || 'Mass Modification'})`,
+    severity: incident.severity || 'Critical',
+    status: isResolved ? 'PASS' : 'FAIL',
+    resource: incident.account_id ? `linux:/var/protected (${incident.account_id})` : 'linux:/var/protected (192.168.152.148)',
+    provider: 'Linux Node (Go Engine)',
+    mitre: 'T1486 Data Encrypted for Impact',
+    vector: incident.detection_reason || 'Shannon Entropy Spike',
+    sealKey: incident.record_signature ? incident.record_signature.slice(0, 16) + '...' : 'key-a1a02a08...',
+    incidentRef: incident,
+    isIncident: true,
+    updatedAt: incident.created_at || new Date().toISOString(),
+  };
+  openProwlerDrawer(finding, getState(), incident.status === 'frozen' ? 'restore' : 'overview');
+  return;
   _dom.incidentModalBody.replaceChildren();
-
-  const headerBox = document.createElement('div');
-  headerBox.style.cssText =
-    'display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-sm);';
   headerBox.innerHTML = `
     <div>
       <div style="font-weight:700;color:var(--text-primary);font-family:var(--font-mono);">${incident.id}</div>
@@ -919,6 +940,22 @@ function renderRecoveryHealth(recoveryHealth) {
 
 /* ─── UI Update Subscriber ────────────────────────────────────────────────── */
 function updateUI(state) {
+  // Prowler Executive Security Posture Hero
+  const postureContainer = document.getElementById('prowlerPostureHero');
+  if (postureContainer) {
+    renderProwlerPostureHero(postureContainer, state);
+  }
+
+  // Prowler Enterprise Security Findings Table (Overview & Findings View)
+  const findingsContainer = document.getElementById('prowlerFindingsContainer');
+  if (findingsContainer) {
+    renderProwlerFindingsTable(findingsContainer, state);
+  }
+  const findingsContainer2 = document.getElementById('prowlerFindingsContainer2');
+  if (findingsContainer2) {
+    renderProwlerFindingsTable(findingsContainer2, state);
+  }
+
   // 1. Status Strip
   const sys = state.systemStatus;
   if (sys) {
@@ -1123,12 +1160,12 @@ export function switchView(viewName) {
     const titles = {
       overview: 'Overview',
       storage: 'Cloud Storage & Canaries',
-      detection: 'Threat Detection Engine',
-      incidents: 'Security Incidents',
+      detection: 'Findings & Checks',
+      incidents: 'Forensic Cases & Containment',
       recovery: 'Backup & Recovery Health',
       evidence: 'Cryptographic Evidence',
       audit: 'Forensic Audit Logs',
-      agent: 'Agent Deployment & Setup',
+      agent: 'Agent Deployment & Fleet',
       settings: 'Settings & Config',
     };
     breadcrumbCurrent.textContent =
@@ -1332,15 +1369,46 @@ function wireEvents() {
     );
   });
 
+  _dom.tourStartBtn?.addEventListener('click', () => {
+    startProductTour();
+  });
+
   _dom.qaScanBtn?.addEventListener('click', () => _dom.runIntegrityScanBtn?.click());
 
   _dom.simulateAttackBtn?.addEventListener('click', () => {
-    openConfirmModal(
-      'Launch Demo Attack Simulation?',
-      'This simulation operates exclusively on designated test data to safely demonstrate mass modifications, canary alert tripwires, automated IAM freeze, and recovery verification.',
-      () => launchSimulation()
-    );
+    triggerProwlerAttackSimulation();
   });
+
+  // Prowler Findings Table Filters
+  const findingsSearch = document.getElementById('findingsSearchInput');
+  const findingsSev = document.getElementById('findingsSeverityFilter');
+  const findingsStat = document.getElementById('findingsStatusFilter');
+  const findingsCont = document.getElementById('prowlerFindingsContainer');
+
+  const reFilterFindings = () => {
+    if (findingsCont) renderProwlerFindingsTable(findingsCont, getState());
+  };
+
+  findingsSearch?.addEventListener('input', reFilterFindings);
+  findingsSev?.addEventListener('change', reFilterFindings);
+  findingsStat?.addEventListener('change', reFilterFindings);
+
+  // Prowler Findings View (Page 2) Filters
+  const findingsSearch2 = document.getElementById('findingsSearchInput2');
+  const findingsSev2 = document.getElementById('findingsSeverityFilter2');
+  const findingsStat2 = document.getElementById('findingsStatusFilter2');
+  const findingsCont2 = document.getElementById('prowlerFindingsContainer2');
+
+  const reFilterFindings2 = () => {
+    if (findingsCont2) renderProwlerFindingsTable(findingsCont2, getState());
+  };
+
+  findingsSearch2?.addEventListener('input', reFilterFindings2);
+  findingsSev2?.addEventListener('change', reFilterFindings2);
+  findingsStat2?.addEventListener('change', reFilterFindings2);
+
+  // Prowler Drawer Backdrop Click
+  document.getElementById('prowlerDrawerBackdrop')?.addEventListener('click', closeProwlerDrawer);
 
   _dom.qaVerifyBtn?.addEventListener('click', async () => {
     switchView('recovery');

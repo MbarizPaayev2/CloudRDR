@@ -23,6 +23,12 @@ temp_design_skills/
 # Build & cache
 .eslintcache
 *.log
+*.key
+agent-go/bin/
+backend-go/bin/
+backend-go/**/data/
+.taste-skill/
+scripts/ig-login.js
 
 # OS metadata
 .DS_Store

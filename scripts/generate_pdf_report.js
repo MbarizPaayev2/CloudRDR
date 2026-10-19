@@ -4,6 +4,7 @@
  */
 
 import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
 
@@ -24,10 +25,15 @@ async function main() {
 
   const page = await browser.newPage();
 
-  // Read images as base64 or file URIs
+  // Read images as base64 data URIs
   const getImgUri = (filename) => {
-    const full = path.join(SCREENSHOT_DIR, filename).replace(/\\/g, '/');
-    return `file:///${full}`;
+    const full = path.join(SCREENSHOT_DIR, filename);
+    if (!fsSync.existsSync(full)) {
+      console.warn(`Warning: Image ${full} not found.`);
+      return '';
+    }
+    const b64 = fsSync.readFileSync(full).toString('base64');
+    return `data:image/png;base64,${b64}`;
   };
 
   const html = `<!DOCTYPE html>

@@ -142,10 +142,55 @@ export function animatePresenceEnter(el) {
 }
 
 /**
+ * Global Micro-Parallax Dotted Architectural Grid Controller
+ */
+export function initArchitecturalGridParallax() {
+  if (prefersReducedMotion || typeof window === 'undefined') return;
+  if (window.__cloudrdrGridParallaxBound) return;
+  window.__cloudrdrGridParallaxBound = true;
+
+  let pointerX = 0;
+  let pointerY = 0;
+  let ticking = false;
+
+  const update = () => {
+    const scrollOffsetY = -(window.scrollY * 0.14) % 24;
+    document.documentElement.style.setProperty('--grid-offset-x', `${pointerX.toFixed(1)}px`);
+    document.documentElement.style.setProperty('--grid-offset-y', `${(pointerY + scrollOffsetY).toFixed(1)}px`);
+    ticking = false;
+  };
+
+  window.addEventListener(
+    'mousemove',
+    (e) => {
+      pointerX = (e.clientX / window.innerWidth - 0.5) * 18;
+      pointerY = (e.clientY / window.innerHeight - 0.5) * 18;
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+}
+
+/**
  * Global Motion Engine Initializer
  */
 export function initMotionEngine() {
   initGestures();
+  initArchitecturalGridParallax();
   initSharedLayoutTabs('#heroTreeControls', '.tree-tab-btn');
   initSharedLayoutTabs('.tab-nav', '.tab-btn');
 

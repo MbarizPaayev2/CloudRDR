@@ -8,6 +8,7 @@
  */
 
 import { CONFIG } from './config.js';
+import { mockApi } from './mock/mockApi.js';
 
 /**
  * Low-level HTTP transport wrapper.
@@ -57,6 +58,7 @@ export const api = {
    * Health check
    */
   async getHealth() {
+    if (CONFIG.USE_MOCK) return mockApi.getHealth();
     return httpRequest('/health');
   },
 
@@ -64,6 +66,7 @@ export const api = {
    * Compact system status strip
    */
   async getSystemStatus() {
+    if (CONFIG.USE_MOCK) return mockApi.getSystemStatus();
     return httpRequest('/status/system');
   },
 
@@ -71,6 +74,7 @@ export const api = {
    * KPI metrics overview
    */
   async getKpis() {
+    if (CONFIG.USE_MOCK) return mockApi.getKpis();
     return httpRequest('/metrics/kpis');
   },
 
@@ -79,6 +83,7 @@ export const api = {
    * @param {'1H' | '6H' | '24H' | '7D'} timeRange
    */
   async getThreatActivity(timeRange = '24H') {
+    if (CONFIG.USE_MOCK) return mockApi.getThreatActivity(timeRange);
     return httpRequest(`/telemetry/activity?range=${timeRange}`);
   },
 
@@ -86,6 +91,7 @@ export const api = {
    * Detection engine configuration and status
    */
   async getDetectionEngineSummary() {
+    if (CONFIG.USE_MOCK) return mockApi.getDetectionEngineSummary();
     return httpRequest('/detection/summary');
   },
 
@@ -94,6 +100,7 @@ export const api = {
    * @param {string} bucket
    */
   async getBaseline(bucket = 'protected') {
+    if (CONFIG.USE_MOCK) return mockApi.getBaseline(bucket);
     return httpRequest(`/baseline/${encodeURIComponent(bucket)}`);
   },
 
@@ -102,6 +109,7 @@ export const api = {
    * @param {string} bucket
    */
   async createBaseline(bucket = 'protected') {
+    if (CONFIG.USE_MOCK) return mockApi.createBaseline(bucket);
     return httpRequest('/baseline', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -114,6 +122,7 @@ export const api = {
    * @param {number} [limit=50]
    */
   async getDetectionRuns(limit = 50) {
+    if (CONFIG.USE_MOCK) return mockApi.getDetectionRuns(limit);
     const res = await httpRequest(`/detection/runs?limit=${limit}`);
     return res?.runs || [];
   },
@@ -122,6 +131,7 @@ export const api = {
    * List security incidents
    */
   async getIncidents() {
+    if (CONFIG.USE_MOCK) return mockApi.getIncidents();
     const data = await httpRequest('/incidents');
     return Array.isArray(data) ? data : data?.incidents || [];
   },
@@ -131,6 +141,7 @@ export const api = {
    * @param {string} id
    */
   async getIncidentById(id) {
+    if (CONFIG.USE_MOCK) return mockApi.getIncidentById(id);
     return httpRequest(`/incidents/${encodeURIComponent(id)}`);
   },
 
@@ -205,6 +216,7 @@ export const api = {
    * Recent security events feed
    */
   async getSecurityEvents(limit = 10) {
+    if (CONFIG.USE_MOCK) return mockApi.getSecurityEvents(limit);
     const res = await httpRequest(`/events/recent?limit=${limit}`);
     return res?.events || [];
   },
@@ -213,6 +225,7 @@ export const api = {
    * Backup and recovery health
    */
   async getRecoveryHealth() {
+    if (CONFIG.USE_MOCK) return mockApi.getRecoveryHealth();
     return httpRequest('/recovery/health');
   },
 
@@ -220,6 +233,7 @@ export const api = {
    * Cryptographic integrity summary checks
    */
   async getCryptographicIntegrity() {
+    if (CONFIG.USE_MOCK) return mockApi.getCryptographicIntegrity();
     return httpRequest('/integrity/cryptographic');
   },
 
@@ -227,6 +241,7 @@ export const api = {
    * Protected storage overview
    */
   async getProtectedStorage() {
+    if (CONFIG.USE_MOCK) return mockApi.getProtectedStorage();
     return httpRequest('/storage/overview');
   },
 
@@ -235,6 +250,7 @@ export const api = {
    * @param {string} incidentId
    */
   async restoreIncident(incidentId) {
+    if (CONFIG.USE_MOCK) return mockApi.restoreIncident(incidentId);
     return httpRequest(`/incidents/${encodeURIComponent(incidentId)}/restore`, {
       method: 'POST',
     });
@@ -245,6 +261,7 @@ export const api = {
    * @param {string} jobId
    */
   async getRestoreJob(jobId) {
+    if (CONFIG.USE_MOCK) return mockApi.getRestoreJob(jobId);
     return httpRequest(`/restore/${encodeURIComponent(jobId)}`);
   },
 
@@ -252,6 +269,7 @@ export const api = {
    * Get audit log entries
    */
   async getAuditLog() {
+    if (CONFIG.USE_MOCK) return mockApi.getAuditLog();
     const res = await httpRequest('/audit');
     return Array.isArray(res) ? res : res?.entries || [];
   },

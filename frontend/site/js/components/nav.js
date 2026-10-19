@@ -121,11 +121,17 @@ export function initSharedNav(options = {}) {
     `;
   }
 
-  // 3. Theme Toggle & State Management
+  // 3. Theme Toggle & State Management (Aerospace Dark Obsidian Default)
+  function getSystemPreferredTheme() {
+    return 'dark'; // High-contrast Aerospace Dark Obsidian as baseline default
+  }
+
   function getEffectiveTheme() {
     const explicit = document.documentElement.getAttribute('data-theme');
     if (explicit === 'dark' || explicit === 'light') return explicit;
-    return 'dark'; // Cyber SOC Obsidian as default
+    const saved = localStorage.getItem('cloudrdr-theme');
+    if (saved === 'dark' || saved === 'light') return saved;
+    return getSystemPreferredTheme();
   }
 
   function renderThemeToggle(theme) {
@@ -141,7 +147,10 @@ export function initSharedNav(options = {}) {
   }
 
   const savedTheme = localStorage.getItem('cloudrdr-theme');
-  const initialTheme = savedTheme || 'dark'; // Always default to Cyber Dark for maximum eye comfort
+  const initialTheme = (savedTheme === 'dark' || savedTheme === 'light')
+    ? savedTheme
+    : 'dark';
+
   document.documentElement.setAttribute('data-theme', initialTheme);
   renderThemeToggle(initialTheme);
 
