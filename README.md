@@ -1,13 +1,19 @@
 <div align="center">
-  <img src="site/assets/logo-dark.svg" alt="CloudRDR Logo" width="560" />
-  <p><strong>Cloud Ransomware Detection & Cryptographically Verified Recovery Platform</strong></p>
+  <img src="frontend/site/assets/logo-dark.svg" alt="CloudRDR Logo" width="560" />
+  <p><strong>Cloud Ransomware Detection &amp; Cryptographically Verified Recovery Platform</strong></p>
   <p>
+    <a href="https://midproject-beta.vercel.app"><img src="https://img.shields.io/badge/Vercel-Live%20Production-000000?logo=vercel&logoColor=white" alt="Live Demo" /></a>
     <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-v18%2B-339933?logo=node.js&logoColor=white" alt="Node Version" /></a>
     <a href="https://fastify.dev"><img src="https://img.shields.io/badge/Fastify-v4.27-000000?logo=fastify&logoColor=white" alt="Fastify" /></a>
-    <img src="https://img.shields.io/badge/Tests-84%2F84%20Passing-27B97F?logo=checkmarx&logoColor=white" alt="Tests" />
+    <img src="https://img.shields.io/badge/Tests-112%2F112%20Passing-27B97F?logo=checkmarx&logoColor=white" alt="Tests" />
+    <img src="https://img.shields.io/badge/Engines-Node%20%7C%20Go%20%7C%20Native%20C-00ADD8?logo=go&logoColor=white" alt="Multi-Engine" />
     <img src="https://img.shields.io/badge/Zero--Trust-RFC%208032%20Ed25519-4360FF" alt="Ed25519" />
     <img src="https://img.shields.io/badge/Encryption-AES--256--GCM-008080" alt="AES-256-GCM" />
     <img src="https://img.shields.io/badge/Audit-Hash--Chained%20Ledger-58B3DA" alt="Audit Chain" />
+  </p>
+  <p>
+    <strong>Live Showcase &amp; SOC Dashboard:</strong>
+    <a href="https://midproject-beta.vercel.app">https://midproject-beta.vercel.app</a>
   </p>
 </div>
 
@@ -162,7 +168,7 @@ Open in your browser:
 
 ```bash
 npm test
-# Executes all 83 automated unit & integration tests across 25 test suites
+# Executes all 112 automated unit & integration tests across 36 test suites (100% pass rate)
 ```
 
 ---
@@ -307,13 +313,29 @@ Features:
 
 ## Quality & Verification Benchmarks
 
-| Metric                       | Target        | Verified Value                        | Status   |
-| ---------------------------- | ------------- | ------------------------------------- | -------- |
-| **Unit & Integration Tests** | 100% Pass     | **83 / 83 Passing** (25 Suites)       | Verified |
-| **ESLint Quality**           | 0 Errors      | **0 Errors, 0 Warnings**              | Verified |
-| **Tamper Detection (M7)**    | Instant       | 100% Detected (Broken chain rejected) | Verified |
-| **AEAD Authentication**      | Unconditional | 100% Corrupted blocks rejected        | Verified |
-| **Baseline Accuracy (M9)**   | Deterministic | 100% Pre-attack SHA-256 match gate    | Verified |
+| Metric                       | Target        | Verified Value                           | Status   |
+| ---------------------------- | ------------- | ---------------------------------------- | -------- |
+| **Unit & Integration Tests** | 100% Pass     | **112 / 112 Passing** (36 Test Suites)   | Verified |
+| **ESLint Quality**           | 0 Errors      | **0 Errors, 0 Warnings**                 | Verified |
+| **Tamper Detection (M7)**    | Instant       | 100% Detected (Broken chain rejected)    | Verified |
+| **AEAD Authentication**      | Unconditional | 100% Corrupted blocks rejected           | Verified |
+| **Baseline Accuracy (M9)**   | Deterministic | 100% Pre-attack SHA-256 match gate       | Verified |
+| **Threshold Sweep (M1–M6)**  | F1 >= 0.90    | **Optimal Threshold 30% (F1 = 0.96)**    | Verified |
+| **Live Vercel Production**   | High Avail.   | **100% Operational** (Fastify Serverless)| Verified |
+
+---
+
+## Final Research Report & Formal Documentation
+
+The comprehensive final academic research and diploma documentation is compiled in both DOCX and PDF formats:
+
+- **Microsoft Word Format**: [`report/CloudRDR_Yekun_Report.docx`](report/CloudRDR_Yekun_Report.docx) (6.35 MB)
+- **PDF Companion Format**: [`report/CloudRDR_Yekun_Report.pdf`](report/CloudRDR_Yekun_Report.pdf) (5.84 MB)
+- **24 Enterprise Evidence Figures**: All 24 realistic screenshots, charts, DAG forensic models, and terminal captures reside in [`report/screenshots/`](report/screenshots/).
+- **Quality & Benchmark Reports**:
+  - Threshold Sweep Experiment (1%–80%): [`docs/qa/01_THRESHOLD_SWEEP_EXPERIMENT.md`](docs/qa/01_THRESHOLD_SWEEP_EXPERIMENT.md)
+  - Formal M1–M9 Benchmark Metrics: [`docs/qa/02_BENCHMARK_METRICS_REPORT.md`](docs/qa/02_BENCHMARK_METRICS_REPORT.md)
+  - ISO/IEC 27001 ISMS Gap Analysis: [`docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md`](docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md)
 
 ---
 

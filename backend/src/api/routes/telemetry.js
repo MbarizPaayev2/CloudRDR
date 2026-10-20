@@ -186,7 +186,7 @@ export async function telemetryRoutes(fastify) {
       const hasRansomware = bucketRuns.some((r) => r.verdict === 'ransomware');
       const hasSuspicious = bucketRuns.some((r) => r.verdict === 'suspicious');
 
-      let normalCount = bucketEvents.filter((e) => e.matched_baseline).length;
+      const normalCount = bucketEvents.filter((e) => e.matched_baseline).length;
       const suspiciousCount = bucketEvents.filter((e) => !e.matched_baseline).length;
 
       points.push({

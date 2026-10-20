@@ -8,7 +8,6 @@ if (!query) {
 }
 
 const categoriesDir = path.resolve('.agents/categories');
-const skillsDir = path.resolve('.agents/skills');
 
 const categoryFolders = fs.readdirSync(categoriesDir).filter(f => {
   const p = path.join(categoriesDir, f);
@@ -35,7 +34,6 @@ for (const cat of categoryFolders) {
         const link = match[3].trim();
         
         let score = 0;
-        const text = `${name} ${desc} ${cat}`.toLowerCase();
         for (const tok of tokens) {
           if (name.toLowerCase().includes(tok)) score += 5;
           if (desc.toLowerCase().includes(tok)) score += 2;

@@ -9,6 +9,8 @@
  * Every screenshot is tailored to its exact natural aspect ratio and content density.
  */
 
+/* global document */
+
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { chromium } from 'playwright';

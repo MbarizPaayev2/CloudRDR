@@ -7,7 +7,7 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { evaluateCompliance, COMPLIANCE_FRAMEWORKS } from '../../backend/src/compliance/frameworks.js';
+import { evaluateCompliance } from '../../backend/src/compliance/frameworks.js';
 import { ATTACK_PATHS, getAttackPathsCypher } from '../../backend/src/contracts/attackPaths.js';
 import { buildServer } from '../../backend/src/api/server.js';
 
