@@ -7,8 +7,11 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "dev": "node --watch backend/src/api/server.js",
-    "start": "node backend/src/api/server.js",
+    "dev": "python app.py",
+    "start": "python app.py",
+    "start:node": "node backend/src/api/server.js",
+    "start:py": "python app.py",
+    "test:py": "python test_flask_backend.py",
     "build:c": "powershell -ExecutionPolicy Bypass -File agent-c/build.ps1",
     "monitor": "node scripts/run-monitor.js",
     "seed": "node scripts/seed-baseline.js",

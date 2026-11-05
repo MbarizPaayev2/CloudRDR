@@ -347,7 +347,7 @@ add_p(
 
 add_callout(
     "Bulud anbarlarını ransomware təhlükəsindən qorumaq üçün kriptoqrafik, bulud və idarəetmə mexanizmlərini vahid sistemdə birləşdirmək.",
-    "Node.js, Fastify, Supabase və kriptoqrafik alqoritmlər vasitəsilə 6 mərhələli müdafiə konveyerini qurdum və test etdim."
+    "Python, Flask, Supabase və kriptoqrafik alqoritmlər vasitəsilə 6 mərhələli müdafiə konveyerini qurdum və test etdim."
 )
 
 # ── 2. PROBLEM VƏ TƏDQİQAT KONTEKSTİ ──────────────────────────────────────────
@@ -555,7 +555,7 @@ add_p(
     "**Nə edir:** Baş vermiş ransomware insidentinin bütün detallarını (vaxt, təcavüzkarın hesabı, zədələnmiş fayllar) "
     "Eliptik Əyri Kriptoqrafiyası (Ed25519) ilə imzalayır və hüquqi məhkəmə sübutuna çevirir.\n"
     "Nümunə: Rəqəmsal imzanı notariat tərəfindən təsdiqlənmiş və heç cür saxtalaşdırılması mümkün olmayan elektron möhür kimi qəbul etmək olar.\n"
-    "**Necə etdim:** Node.js `crypto.generateKeyPairSync('ed25519')` ilə açar cütlüyü yaratdım. "
+    "**Necə etdim:** Python `cryptography.hazmat.primitives.asymmetric.ed25519` ilə açar cütlüyü yaratdım. "
     "İnsident JSON obyektini kanonik şəkildə sıralayıb 64 baytlıq imza hasil etdim.\n"
     "**Yoxla:** İmzalanmış insident qeydində 'freezeStatus' dəyərini dəyişdirib imzanı yenidən yoxla.\n"
     "**Gözlənilən nəticə:** `verifyRecord()` funksiyası `false` qaytarır və sənədin saxtalaşdırıldığını bildirir."
@@ -610,7 +610,7 @@ add_callout(
 add_heading_1("7. Backend Mühərriki, Sürüşən Zaman Pəncərəsi və Canary Tələləri")
 
 add_p(
-    "Backend arxitekturası yüksək performanslı Fastify HTTP çərçivəsində qurulmuşdur. "
+    "Backend arxitekturası yüksək performanslı Python Flask çərçivəsində qurulmuşdur. "
     "Aşkarlama mühərriki (Detection Engine) faylların dəyişmə intensivliyini izləmək üçün "
     "60 saniyəlik sürüşən zaman pəncərəsi (Sliding Time Window) modelindən istifadə edir."
 )
@@ -851,7 +851,7 @@ add_p(
     "• Mübariz Paşayev (Project Manager & GRC Lead): Layihənin planlaşdırılması, ISO 27001/NIST CSF uyğunluğu, risk reyestri və yekun tədqiqat hesabatı.\n"
     "• Nigar Əliyeva (Crypto Developer): SHA-256 axın heşlənməsi, Merkle DAG ağacı, AES-256-GCM AEAD və Ed25519 modulunun yazılması.\n"
     "• Rəşad Məmmədov (DevOps Engineer): Supabase verilənlər bazası miqrasiyaları, IAM Freeze siyasəti və GitHub Actions CI/CD boru kəməri.\n"
-    "• Elmir Qasımov (Backend Developer): Fastify HTTP API servisi, sliding-window monitorinq agenti və karantin bərpa mühərriki.\n"
+    "• Elmir Qasımov (Backend Developer): Python Flask HTTP API servisi, sliding-window monitorinq agenti və karantin bərpa mühərriki.\n"
     "• Aysel Kərimova (Frontend Developer): SOC nəzarət paneli, real vaxt Merkle SVG vizuallaşdırması və interaktiv hadisə axını jurnalı.\n"
     "• Tural Səfərov (QA & Benchmark Lead): Vahid və inteqrasiya testləri (74 test), M1–M9 metrik harnessi və threshold sweep sınaqları."
 )

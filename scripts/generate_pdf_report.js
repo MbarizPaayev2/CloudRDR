@@ -229,7 +229,7 @@ Layihə universitet tədris planında yer alan üç fundamental informasiya təh
 <div class="callout">
   <div class="callout-title">Qısa: nə etdim</div>
   <div><strong>Məqsəd:</strong> Bulud anbarlarını ransomware təhlükəsindən qorumaq üçün kriptoqrafik, bulud və idarəetmə mexanizmlərini vahid sistemdə birləşdirmək.</div>
-  <div><strong>Necə etdim:</strong> Node.js, Fastify, Supabase və kriptoqrafik alqoritmlər vasitəsilə 6 mərhələli müdafiə konveyerini qurdum və test etdim.</div>
+  <div><strong>Necə etdim:</strong> Python, Flask, Supabase və kriptoqrafik alqoritmlər vasitəsilə 6 mərhələli müdafiə konveyerini qurdum və test etdim.</div>
 </div>
 
 <!-- 2. Problem -->
@@ -377,7 +377,7 @@ Kriptoqrafiya — CloudRDR platformasının riyazi onurğa sütunudur. Sistemdə
 <p>
 <strong>Nə edir:</strong> Baş vermiş ransomware insidentinin bütün detallarını Eliptik Əyri Kriptoqrafiyası (Ed25519) ilə imzalayır və hüquqi məhkəmə sübutuna çevirir.<br>
 <em>Nümunə:</em> Rəqəmsal imzanı notariat tərəfindən təsdiqlənmiş və heç cür saxtalaşdırılması mümkün olmayan elektron möhür kimi qəbul etmək olar.<br>
-<strong>Necə etdim:</strong> Node.js <code>crypto.generateKeyPairSync('ed25519')</code> ilə açar cütlüyü yaratdım. İnsident JSON obyektini kanonik şəkildə sıralayıb 64 baytlıq imza hasil etdim.<br>
+<strong>Necə etdim:</strong> Python <code>crypto.generateKeyPairSync('ed25519')</code> ilə açar cütlüyü yaratdım. İnsident JSON obyektini kanonik şəkildə sıralayıb 64 baytlıq imza hasil etdim.<br>
 <strong>Yoxla:</strong> İmzalanmış insident qeydində 'freezeStatus' dəyərini dəyişdirib imzanı yenidən yoxla.<br>
 <strong>Gözlənilən nəticə:</strong> <code>verifyRecord()</code> funksiyası <code>false</code> qaytarır və sənədin saxtalaşdırıldığını bildirir.
 </p>
@@ -425,7 +425,7 @@ Kriptoqrafiya — CloudRDR platformasının riyazi onurğa sütunudur. Sistemdə
 <!-- 7. Backend və Aşkarlama -->
 <h1>7. Backend Mühərriki, Sürüşən Zaman Pəncərəsi və Canary Tələləri</h1>
 <p>
-Backend arxitekturası yüksək performanslı Fastify HTTP çərçivəsində qurulmuşdur. Aşkarlama mühərriki (Detection Engine) faylların dəyişmə intensivliyini izləmək üçün 60 saniyəlik sürüşən zaman pəncərəsi (Sliding Time Window) modelindən istifadə edir.
+Backend arxitekturası yüksək performanslı Flask HTTP çərçivəsində qurulmuşdur. Aşkarlama mühərriki (Detection Engine) faylların dəyişmə intensivliyini izləmək üçün 60 saniyəlik sürüşən zaman pəncərəsi (Sliding Time Window) modelindən istifadə edir.
 </p>
 
 <h2>Dəyişiklik Hədləri və Dinamik Qərarvermə</h2>
@@ -612,7 +612,7 @@ Layihənin uğurlu icrası 6 nəfərlik komanda arasında vəzifələrin dəqiq 
 • <strong>Mübariz Paşayev (Project Manager &amp; GRC Lead):</strong> Layihənin planlaşdırılması, ISO 27001/NIST CSF uyğunluğu, risk reyestri və yekun tədqiqat hesabatı.<br>
 • <strong>Nigar Əliyeva (Crypto Developer):</strong> SHA-256 axın heşlənməsi, Merkle DAG ağacı, AES-256-GCM AEAD və Ed25519 modulunun yazılması.<br>
 • <strong>Rəşad Məmmədov (DevOps Engineer):</strong> Supabase verilənlər bazası miqrasiyaları, IAM Freeze siyasəti və GitHub Actions CI/CD boru kəməri.<br>
-• <strong>Elmir Qasımov (Backend Developer):</strong> Fastify HTTP API servisi, sliding-window monitorinq agenti və karantin bərpa mühərriki.<br>
+• <strong>Elmir Qasımov (Backend Developer):</strong> Flask HTTP API servisi, sliding-window monitorinq agenti və karantin bərpa mühərriki.<br>
 • <strong>Aysel Kərimova (Frontend Developer):</strong> SOC nəzarət paneli, real vaxt Merkle SVG vizuallaşdırması və interaktiv hadisə axını jurnalı.<br>
 • <strong>Tural Səfərov (QA &amp; Benchmark Lead):</strong> Vahid və inteqrasiya testləri (74 test), M1–M9 metrik harnessi və threshold sweep sınaqları.
 </p>

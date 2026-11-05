@@ -94,7 +94,7 @@ Ransomware targeting cloud infrastructure increasingly encrypts unstructured dat
 ├─────────────────────────┼──────────────────────────────────────────────┤
 │ Backend                 │ DB Schema (RLS), Monitoring Agent, Detection │
 │ (Elnur Hüseynov)        │ Engine, Incident Service, Verified Restore,  │
-│                         │ Fastify REST API, Contract Interfaces.       │
+│                         │ Flask REST API, Contract Interfaces.       │
 ├─────────────────────────┼──────────────────────────────────────────────┤
 │ Cryptography            │ SHA-256 Hashing, Pairwise Merkle Tree,       │
 │ (Nigar Əliyeva)         │ Ed25519 Signing, Hash-Chained Audit Ledger,  │
@@ -121,7 +121,7 @@ Ransomware targeting cloud infrastructure increasingly encrypts unstructured dat
 - Immutable hash-chained audit logging with tamper detection.
 - AES-256-GCM authenticated encrypted backup store.
 - Verified file restoration comparing pre-attack baselines with live state.
-- Fastify REST API with API key security and error standardization.
+- Flask REST API with API key security and error standardization.
 
 ### 4.2 Out-of-Scope (Deferred to Phase 2)
 

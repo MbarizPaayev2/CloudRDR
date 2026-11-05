@@ -47,7 +47,7 @@ Assets within the CloudRDR operational ecosystem are classified according to a 4
 | **AST-05** | **Postgres DB (Supabase)**    | Relational database containing baselines, detection telemetry, and incident records. | Backend (Elnur) | CONFIDENTIAL |           4           |        5        |         5          |    **Critical**     |
 | **AST-06** | **Merkle Tree Roots**         | Cryptographic roots proving integrity of baseline catalog snapshots.                 | Crypto (Nigar)  | CONFIDENTIAL |           3           |        5        |         4          |      **High**       |
 | **AST-07** | **Audit Log Ledger**          | Append-only SHA-256 hash-chained log preserving chronological system events.         | Crypto (Nigar)  | CONFIDENTIAL |           3           |        5        |         4          |      **High**       |
-| **AST-08** | **Management REST API**       | Fastify server orchestrating baseline creation, detection monitoring, and restore.   | Backend (Elnur) |   INTERNAL   |           3           |        4        |         5          |      **High**       |
+| **AST-08** | **Management REST API**       | Flask server orchestrating baseline creation, detection monitoring, and restore.   | Backend (Elnur) |   INTERNAL   |           3           |        4        |         5          |      **High**       |
 
 ---
 

@@ -24,6 +24,10 @@ temp_design_skills/
 .eslintcache
 *.log
 *.key
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
 agent-go/bin/
 backend-go/bin/
 backend-go/**/data/

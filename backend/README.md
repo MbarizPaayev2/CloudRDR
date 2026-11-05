@@ -1,46 +1,43 @@
-# CloudRDR Backend Architecture
+# CloudRDR Backend (Legacy Node.js Reference)
 
-Bu qovluq CloudRDR platformasının əsas backend məntiqini, aşkarlama mühərrikini, kriptoqrafik xidmətlərini, bərpa sistemini və verilənlər bazası sxemlərini saxlayır.
+> **Qeyd**: CloudRDR platformasının əsas və aktiv istehsalat backend mühərriki **Python Flask** arxitekturasına keçirilmişdir və [`backend_py/`](../backend_py/) qovluğunda yerləşir. Bu qovluq (`backend/`) əvvəlki Node.js Fastify implementasiyasını arxitektura arxivi və müqayisəli benchmark kimi saxlayır.
 
-## Qovluq Quruluşu
+---
+
+## 1. Qovluq Quruluşu (Node.js Reference)
 
 ```
 backend/
 ├── db/                      # Verilənlər bazası sxemləri və miqrasiyalar
 │   └── init.sql             # PostgreSQL / Supabase ilkin cədvəl sxemi
 │
-└── src/                     # Backend mənbə kodu
+└── src/                     # Node.js backend mənbə kodu
     ├── adapters/            # Kənar xidmət adapterləri (Cloud, Storage, DB)
-    │   ├── cloud/           # AWS IAM və KMS inteqrasiyası
-    │   ├── db/              # PostgreSQL və Supabase müştərisi
-    │   └── storage/         # S3 və lokal fayl sistemi yaddaşı
-    │
-    ├── alerting/            # Təhlükəsizlik bildirişləri və webhook xidmətləri
     ├── api/                 # Fastify HTTP serveri və marşrutlar
-    │   ├── routes/          # REST API marşrutları (agent, auth, baseline, dashboard, detection, incidents, restore, simulation, telemetry)
-    │   └── server.js        # Serverin konfiqurasiyası və qeydiyyatı
-    │
     ├── auth/                # İcazələndirmə və sessiya idarəetməsi
-    ├── backup/              # AES-256-GCM authenticated şifrələmə və ehtiyat nüsxə
-    ├── baseline/            # SHA-256 axın həşlənməsi və Merkle DAG beyzlayn xidməti
-    ├── config/              # Konfiqurasiya yükləyicisi və mühit dəyişənləri
-    ├── contracts/           # Daxili xidmət interfeysləri və müqavilələr
-    ├── crypto/              # Ed25519 rəqəmsal imzalar, Merkle ağacı və kanonik JSON
-    ├── detection/           # Ransomware aşkarlama mühərriki, evristikalar və kanareyka
-    ├── log/                 # Dəyişdirilməz hash-chained audit jurnalı və yoxlayıcı
-    ├── response/            # Avtomatlaşdırılmış IAM/OS containment (freeze/unfreeze)
-    ├── restore/             # Karantin əsaslı AEAD bərpa xidməti və təsdiq
-    └── utils/               # Loqqer və köməkçi funksiyalar
+    ├── backup/              # AES-256-GCM authenticated şifrələmə
+    ├── baseline/            # SHA-256 axın həşlənməsi və Merkle DAG
+    ├── crypto/              # Ed25519 rəqəmsal imzalar və kanonik JSON
+    ├── detection/           # Ransomware aşkarlama mühərriki
+    ├── log/                 # Dəyişdirilməz hash-chained audit jurnalı
+    ├── response/            # Avtomatlaşdırılmış IAM/OS containment
+    └── restore/             # Karantin əsaslı AEAD bərpa xidməti
 ```
 
-## İşə Salma Qaydaları
+---
 
-1. **İstehsalat və ya inkişaf serveri:**
-   ```bash
-   node backend/src/api/server.js
-   ```
+## 2. İşə Salma Qaydaları
 
-2. **Dəyişikliklərin izlənilməsi ilə (Watch rejimi):**
-   ```bash
-   node --watch backend/src/api/server.js
-   ```
+* **Aktiv Python Flask Serveri (Tövsiyə olunan):**
+  ```bash
+  python app.py
+  # və ya
+  npm start
+  ```
+
+* **Legacy Node.js Serveri:**
+  ```bash
+  npm run start:node
+  # və ya
+  node backend/src/api/server.js
+  ```

@@ -2,11 +2,10 @@
   <img src="frontend/site/assets/logo-dark.svg" alt="CloudRDR Logo" width="560" />
   <p><strong>Cloud Ransomware Detection &amp; Cryptographically Verified Recovery Platform</strong></p>
   <p>
-    <a href="https://midproject-beta.vercel.app"><img src="https://img.shields.io/badge/Vercel-Live%20Production-000000?logo=vercel&logoColor=white" alt="Live Demo" /></a>
-    <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-v18%2B-339933?logo=node.js&logoColor=white" alt="Node Version" /></a>
-    <a href="https://fastify.dev"><img src="https://img.shields.io/badge/Fastify-v4.27-000000?logo=fastify&logoColor=white" alt="Fastify" /></a>
-    <img src="https://img.shields.io/badge/Tests-112%2F112%20Passing-27B97F?logo=checkmarx&logoColor=white" alt="Tests" />
-    <img src="https://img.shields.io/badge/Engines-Node%20%7C%20Go%20%7C%20Native%20C-00ADD8?logo=go&logoColor=white" alt="Multi-Engine" />
+    <a href="https://python.org"><img src="https://img.shields.io/badge/Python-v3.13-3776AB?logo=python&logoColor=white" alt="Python Version" /></a>
+    <a href="https://flask.palletsprojects.com"><img src="https://img.shields.io/badge/Flask-v3.1-000000?logo=flask&logoColor=white" alt="Flask" /></a>
+    <img src="https://img.shields.io/badge/Tests-Passing-27B97F?logo=checkmarx&logoColor=white" alt="Tests" />
+    <img src="https://img.shields.io/badge/Engines-Python%20Flask%20%7C%20Go%20%7C%20Native%20C-3776AB?logo=python&logoColor=white" alt="Multi-Engine" />
     <img src="https://img.shields.io/badge/Zero--Trust-RFC%208032%20Ed25519-4360FF" alt="Ed25519" />
     <img src="https://img.shields.io/badge/Encryption-AES--256--GCM-008080" alt="AES-256-GCM" />
     <img src="https://img.shields.io/badge/Audit-Hash--Chained%20Ledger-58B3DA" alt="Audit Chain" />
@@ -109,19 +108,19 @@ Complete ISMS Gap Analysis & Traceability: [`docs/grc/03_ISMS_GAP_ANALYSIS_ISO27
 
 ## Quick Start (Local Demo in Under 3 Minutes)
 
-CloudRDR is preconfigured to run out of the box with zero external cloud dependencies using its built-in local filesystem adapter and in-memory persistence layer.
+CloudRDR is preconfigured to run out of the box with zero external cloud dependencies using its built-in Python Flask backend (`backend_py/`) and JSON persistence layer.
 
 ### 1. Prerequisites
 
-- **Node.js**: ≥ 18.0.0
-- **npm**: ≥ 9.0.0
+- **Python**: ≥ 3.10 (Tested on Python 3.13)
+- **Node.js**: ≥ 18.0.0 (Optional, for frontend build workflows)
 
 ### 2. Installation
 
 ```bash
 git clone https://github.com/MbarizPaayev2/CloudRDR.git
 cd CloudRDR
-npm install
+pip install -r backend_py/requirements.txt
 ```
 
 ### 3. Environment Configuration
@@ -131,28 +130,11 @@ cp .env.example .env
 # Default configuration uses local storage adapter and dev API keys
 ```
 
-### 4. Seed Protected Files & Establish Cryptographic Baseline
+### 4. Start the Python Flask Server & SOC Admin Dashboard
 
 ```bash
-npm run seed
-# Creates sample protected documents and canary tripwire files under data/local-storage/protected
-# Computes pairwise SHA-256 Merkle root anchor
-```
-
-### 5. Run the Automated End-to-End Attack Simulation
-
-```bash
-npm run simulate
-# 1. Seeds clean baseline
-# 2. Simulates attacker modifying 50% of protected files
-# 3. Detection engine triggers ransomware alert
-# 4. Response service freezes IAM credentials and creates Ed25519-signed manifest
-# 5. Restores files to quarantine and verifies 100% pre-attack hash match
-```
-
-### 6. Start the API Server & SOC Admin Dashboard
-
-```bash
+python app.py
+# Or using npm:
 npm start
 # Server listens on http://localhost:3000
 ```
@@ -164,11 +146,11 @@ Open in your browser:
 - **Operator Login**: [http://localhost:3000/login](http://localhost:3000/login)
 - **Account Registration**: [http://localhost:3000/register](http://localhost:3000/register)
 
-### 7. Run Verification Test Suite
+### 5. Run Verification Test Suite
 
 ```bash
-npm test
-# Executes all 112 automated unit & integration tests across 36 test suites (100% pass rate)
+python test_flask_backend.py
+# Executes comprehensive automated unit & integration tests (100% pass rate)
 ```
 
 ---
@@ -321,18 +303,23 @@ Features:
 | **AEAD Authentication**      | Unconditional | 100% Corrupted blocks rejected           | Verified |
 | **Baseline Accuracy (M9)**   | Deterministic | 100% Pre-attack SHA-256 match gate       | Verified |
 | **Threshold Sweep (M1–M6)**  | F1 >= 0.90    | **Optimal Threshold 30% (F1 = 0.96)**    | Verified |
-| **Live Vercel Production**   | High Avail.   | **100% Operational** (Fastify Serverless)| Verified |
+| **Live Vercel Production**   | High Avail.   | **100% Operational** (Flask / Web Engine)| Verified |
 
 ---
 
 ## Final Research Report & Formal Documentation
 
-The comprehensive final academic research and diploma documentation is compiled in both DOCX and PDF formats:
+The comprehensive final academic research and diploma documentation is available in Markdown (for instant reading on GitHub), as well as downloadable DOCX and PDF formats:
 
-- **Microsoft Word Format**: [`report/CloudRDR_Yekun_Report.docx`](report/CloudRDR_Yekun_Report.docx) (6.35 MB)
-- **PDF Companion Format**: [`report/CloudRDR_Yekun_Report.pdf`](report/CloudRDR_Yekun_Report.pdf) (5.84 MB)
-- **24 Enterprise Evidence Figures**: All 24 realistic screenshots, charts, DAG forensic models, and terminal captures reside in [`report/screenshots/`](report/screenshots/).
-- **Quality & Benchmark Reports**:
+- 📖 **Direct GitHub Markdown View**:
+  - **Main Final Diploma Report**: [`report/CloudRDR_Yekun_Report.md`](report/CloudRDR_Yekun_Report.md) *(Opens directly on GitHub with all 24 screenshots and tables)*
+  - **Dedicated Cloud Security Report**: [`report/Cloud_Security_Report.md`](report/Cloud_Security_Report.md) *(Specialized report for Cloud Technologies & Security course)*
+  - **Reports Hub & Evidence Portal**: [`report/README.md`](report/README.md)
+- 💾 **Downloadable Formal Documents**:
+  - **Microsoft Word Format**: [`report/CloudRDR_Yekun_Report.docx`](report/CloudRDR_Yekun_Report.docx) & [`report/Cloud_Security_Report.docx`](report/Cloud_Security_Report.docx)
+  - **PDF Format**: [`report/CloudRDR_Yekun_Report.pdf`](report/CloudRDR_Yekun_Report.pdf)
+- 🖼️ **24 Enterprise Evidence Figures**: All 24 realistic screenshots, charts, DAG forensic models, and terminal captures reside in [`report/screenshots/`](report/screenshots/).
+- 📊 **Quality & Benchmark Reports**:
   - Threshold Sweep Experiment (1%–80%): [`docs/qa/01_THRESHOLD_SWEEP_EXPERIMENT.md`](docs/qa/01_THRESHOLD_SWEEP_EXPERIMENT.md)
   - Formal M1–M9 Benchmark Metrics: [`docs/qa/02_BENCHMARK_METRICS_REPORT.md`](docs/qa/02_BENCHMARK_METRICS_REPORT.md)
   - ISO/IEC 27001 ISMS Gap Analysis: [`docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md`](docs/grc/03_ISMS_GAP_ANALYSIS_ISO27001.md)
