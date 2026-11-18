@@ -26,6 +26,8 @@ function cacheDom() {
   _dom = {
     sidebar: document.getElementById('socSidebar'),
     sidebarCollapseBtn: document.getElementById('sidebarCollapseBtn'),
+    sidebarMobileToggleBtn: document.getElementById('sidebarMobileToggleBtn'),
+    sidebarBackdrop: document.getElementById('socSidebarBackdrop'),
     navItems: document.querySelectorAll('.nav-item'),
     connectivityDot: document.getElementById('connectivityDot'),
     connectivityText: document.getElementById('connectivityText'),
@@ -1211,6 +1213,22 @@ async function launchSimulation() {
 
 /* ─── Wire Event Handlers ─────────────────────────────────────────────────── */
 function wireEvents() {
+  // Mobile Sidebar Drawer Toggle & Backdrop
+  if (_dom.sidebarMobileToggleBtn && _dom.sidebar) {
+    _dom.sidebarMobileToggleBtn.addEventListener('click', () => {
+      _dom.sidebar.classList.toggle('mobile-open');
+      if (_dom.sidebarBackdrop) {
+        _dom.sidebarBackdrop.classList.toggle('active', _dom.sidebar.classList.contains('mobile-open'));
+      }
+    });
+  }
+  if (_dom.sidebarBackdrop && _dom.sidebar) {
+    _dom.sidebarBackdrop.addEventListener('click', () => {
+      _dom.sidebar.classList.remove('mobile-open');
+      _dom.sidebarBackdrop.classList.remove('active');
+    });
+  }
+
   // Sidebar Collapse
   if (_dom.sidebarCollapseBtn && _dom.sidebar) {
     _dom.sidebarCollapseBtn.addEventListener('click', () => {
@@ -1226,6 +1244,10 @@ function wireEvents() {
       btn.addEventListener('click', () => {
         const navTarget = btn.getAttribute('data-nav');
         if (navTarget) switchView(navTarget);
+        if (_dom.sidebar && _dom.sidebar.classList.contains('mobile-open')) {
+          _dom.sidebar.classList.remove('mobile-open');
+          if (_dom.sidebarBackdrop) _dom.sidebarBackdrop.classList.remove('active');
+        }
       });
     });
   }
